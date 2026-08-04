@@ -3,7 +3,6 @@ export type SecurityCertification = {
   shortLabel: string;
   fullLabel: string;
   summary: string;
-  badgeSrc: string;
   /** Official framework / standards site (same destinations Harvey uses). */
   externalHref: string;
 };
@@ -16,7 +15,6 @@ export const SECURITY_CERTIFICATIONS: SecurityCertification[] = [
     fullLabel: "SOC 2 Type II",
     summary:
       "Annual independent audit of security, availability, and confidentiality controls across the Lysp platform and operations.",
-    badgeSrc: "/images/security/soc-2.svg",
     externalHref:
       "https://www.aicpa-cima.com/topic/audit-assurance/audit-and-assurance-greater-than-soc-2",
   },
@@ -26,7 +24,6 @@ export const SECURITY_CERTIFICATIONS: SecurityCertification[] = [
     fullLabel: "CCPA",
     summary:
       "California privacy commitments for applicable personal information processed through Lysp on behalf of the firm.",
-    badgeSrc: "/images/security/ccpa.svg",
     externalHref: "https://oag.ca.gov/privacy/ccpa",
   },
   {
@@ -35,7 +32,6 @@ export const SECURITY_CERTIFICATIONS: SecurityCertification[] = [
     fullLabel: "ISO 27001",
     summary:
       "Information security management system covering risk assessment, access control, cryptography, and continuous improvement.",
-    badgeSrc: "/images/security/iso-27001.svg",
     externalHref: "https://www.iso.org/standard/27001",
   },
   {
@@ -44,7 +40,6 @@ export const SECURITY_CERTIFICATIONS: SecurityCertification[] = [
     fullLabel: "GDPR",
     summary:
       "European data-protection obligations: lawful processing, data subject rights, subprocessors, and transfer safeguards.",
-    badgeSrc: "/images/security/gdpr.svg",
     externalHref: "https://commission.europa.eu/law/law-topic/data-protection_en",
   },
   {
@@ -53,7 +48,6 @@ export const SECURITY_CERTIFICATIONS: SecurityCertification[] = [
     fullLabel: "ISO 27701",
     summary:
       "Privacy extension to ISO 27001 - how we govern personal data processing for firm users and client-facing workflows.",
-    badgeSrc: "/images/security/iso-27701.svg",
     externalHref: "https://www.iso.org/standard/27701",
   },
   {
@@ -62,7 +56,6 @@ export const SECURITY_CERTIFICATIONS: SecurityCertification[] = [
     fullLabel: "ISO 42001",
     summary:
       "AI management system controls for responsible development, deployment, and oversight of AI used in pricing workflows.",
-    badgeSrc: "/images/security/iso-42001.svg",
     externalHref: "https://www.iso.org/standard/42001",
   },
 ];

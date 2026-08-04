@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { HiArrowRight, HiCheck, HiChevronDown, HiLockClosed, HiShieldCheck } from "react-icons/hi";
 import { SECURITY_CERTIFICATIONS } from "@/components/landing/security/certifications";
+import { SecurityBadge } from "@/components/landing/security/SecurityBadge";
 
 const TRUST_STRIP = [
   { label: "Encryption", value: "AES-256 · TLS 1.2+" },
@@ -451,14 +452,9 @@ export function SecurityPageContent() {
                 rel="noopener noreferrer"
                 className="scroll-mt-28 rounded-2xl border border-black/[0.08] bg-white p-6 sm:p-7 flex gap-5 transition-all hover:bg-[#fafaf8] hover:-translate-y-0.5 cursor-pointer"
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={cert.badgeSrc}
-                  alt={`${cert.fullLabel} badge`}
-                  width={72}
-                  height={72}
-                  className="h-[72px] w-[72px] shrink-0 object-contain"
-                />
+                <span className="flex h-[72px] w-[72px] shrink-0 items-center justify-center">
+                  <SecurityBadge id={cert.id} title={cert.fullLabel} />
+                </span>
                 <div className="min-w-0">
                   <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#0a0a0a]/30">
                     Framework

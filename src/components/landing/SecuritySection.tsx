@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { HiArrowRight } from "react-icons/hi";
 import { SECURITY_CERTIFICATIONS } from "@/components/landing/security/certifications";
+import { SecurityBadge } from "@/components/landing/security/SecurityBadge";
 
 /**
  * Brief landing security - Harvey-style enterprise strip:
@@ -33,7 +33,6 @@ export function SecuritySection() {
           </p>
         </div>
 
-        {/* Badge logo row - Harvey-style */}
         <div className="mt-12 sm:mt-14 grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-6 gap-x-4 gap-y-8 sm:gap-x-6 lg:gap-8 place-items-center">
           {SECURITY_CERTIFICATIONS.map((cert) => (
             <a
@@ -45,13 +44,7 @@ export function SecuritySection() {
               aria-label={`${cert.fullLabel} - official site (opens in new tab)`}
             >
               <span className="relative flex h-[76px] w-[76px] sm:h-[92px] sm:w-[92px] items-center justify-center overflow-hidden rounded-full bg-white p-3 shadow-[0_12px_40px_-20px_rgba(10,10,10,0.35)] ring-1 ring-black/[0.06] transition-shadow group-hover:shadow-[0_18px_48px_-18px_rgba(10,10,10,0.4)]">
-                <Image
-                  src={cert.badgeSrc}
-                  alt={`${cert.fullLabel} certification badge`}
-                  width={72}
-                  height={72}
-                  className="h-full w-full object-contain"
-                />
+                <SecurityBadge id={cert.id} title={cert.fullLabel} />
               </span>
               <span className="text-[11px] sm:text-[13px] font-semibold tracking-tight text-center text-[#0a0a0a]/70 group-hover:text-[#0a0a0a] group-hover:underline underline-offset-4 decoration-black/20 max-w-[5.5rem] sm:max-w-none">
                 {cert.shortLabel}
