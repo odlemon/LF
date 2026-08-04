@@ -1,0 +1,242 @@
+"use client";
+
+import React, { useState } from "react";
+import Link from "next/link";
+import { useDatasets } from "@/modules/data-room/hooks/useDataRoom";
+import { DatasetFormModal } from "@/modules/data-room/components/DatasetFormModal";
+import { DatasetStatusBadge } from "@/modules/data-room/components/DocumentStatusBadge";
+import { Button } from "@/components/ui/Button";
+import { Pagination } from "@/components/ui/Pagination";
+import toast from "react-hot-toast";
+import { HiPlus, HiDatabase, HiTrash, HiFolderOpen } from "react-icons/hi";
+
+export default function DatasetsIndexPage() {
+  const [page, setPage] = useState(0);
+  const [filters, setFilters] = useState({
+    category: "ALL",
+    status: "ALL",
+  });
+
+  const {
+    datasets,
+    totalPages,
+    isLoading,
+    createDataset,
+    deleteDataset,
+    refetch,
+  } = useDatasets(filters, page);
+
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [confirmDeleteUid, setConfirmDeleteUid] = useState<string | null>(null);
+
+  const handleCreate = async (cmd: any) => {
+    await createDataset(cmd);
+    toast.success("Dataset created successfully.");
+    refetch();
+  };
+
+  const handleDelete = async (uid: string) => {
+    try {
+      await deleteDataset(uid);
+      toast.success("Dataset deleted successfully.");
+      setConfirmDeleteUid(null);
+    } catch (err: any) {
+      toast.error(err.message || "Failed to delete dataset.");
+    }
+  };
+
+  const formatDate = (dateString?: string) => {
+    if (!dateString) return "";
+    const parsed = new Date(dateString);
+    if (isNaN(parsed.getTime())) return "";
+    return parsed.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+  };
+
+  const renderPeriod = (start?: string, end?: string) => {
+    const formattedStart = formatDate(start);
+    const formattedEnd = formatDate(end);
+    if (formattedStart && formattedEnd) {
+      return `${formattedStart} - ${formattedEnd}`;
+    }
+    if (formattedStart) {
+      return `From ${formattedStart}`;
+    }
+    if (formattedEnd) {
+      return `Until ${formattedEnd}`;
+    }
+    return "N/A";
+  };
+
+  return (
+    <div className="p-8 max-w-6xl w-full mx-auto flex flex-col gap-6 text-gray-800">
+      {/* Page Title */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900 tracking-tight flex items-center gap-2">
+            <HiDatabase className="w-7 h-7 text-primary" /> Datasets Batches
+          </h1>
+          <p className="text-sm text-gray-500 mt-1">
+            Group your uploaded files by named ingestion batches to isolate data and track processing states.
+          </p>
+        </div>
+        <Button variant="primary" onClick={() => setIsFormOpen(true)}>
+          <HiPlus className="w-4 h-4" /> New Dataset
+        </Button>
+      </div>
+
+      {/* Filter Options Bar */}
+      <div className="bg-gray-50/50 border border-gray-200/40 rounded-3xl p-5 shadow-sm flex flex-col sm:flex-row gap-4">
+        <div className="flex flex-col gap-1 flex-1">
+          <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wider pl-1">Category</label>
+          <select
+            value={filters.category}
+            onChange={(e) => {
+              setFilters((prev) => ({ ...prev, category: e.target.value }));
+              setPage(0);
+            }}
+            className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-full text-xs font-semibold focus:outline-none"
+          >
+            <option value="ALL">All Categories</option>
+            <option value="PAST_MATTERS">Past Matters</option>
+            <option value="TIME_ENTRIES">Time Entries</option>
+            <option value="BILLING_HISTORY">Billing History</option>
+            <option value="RATE_CARD_HISTORY">Rate Card History</option>
+            <option value="MARKET_BENCHMARKS">Market Benchmarks</option>
+            <option value="CLIENT_OCG">Client OCG Guidelines</option>
+            <option value="MATTER_ASSUMPTIONS">Matter Assumptions</option>
+            <option value="OTHER">Other</option>
+          </select>
+        </div>
+
+        <div className="flex flex-col gap-1 flex-1">
+          <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wider pl-1">Batch Ingestion Status</label>
+          <select
+            value={filters.status}
+            onChange={(e) => {
+              setFilters((prev) => ({ ...prev, status: e.target.value }));
+              setPage(0);
+            }}
+            className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-full text-xs font-semibold focus:outline-none"
+          >
+            <option value="ALL">All Statuses</option>
+            <option value="PENDING">Pending</option>
+            <option value="PROCESSING">Processing</option>
+            <option value="COMPLETE">Complete</option>
+            <option value="PARTIAL">Partial</option>
+            <option value="FAILED">Failed</option>
+          </select>
+        </div>
+      </div>
+
+      {/* Main Datasets Grid Table */}
+      <div className="bg-white border border-gray-200/60 rounded-3xl overflow-hidden shadow-sm shrink-0">
+        <div className="overflow-x-auto rates-scrollable">
+          <table className="min-w-full divide-y divide-gray-100 text-xs">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-5 py-4 text-left font-bold text-gray-500 uppercase tracking-wider">Dataset Name</th>
+                <th className="px-5 py-4 text-left font-bold text-gray-500 uppercase tracking-wider">Category</th>
+                <th className="px-5 py-4 text-left font-bold text-gray-500 uppercase tracking-wider">Source System</th>
+                <th className="px-5 py-4 text-left font-bold text-gray-500 uppercase tracking-wider">Files Count</th>
+                <th className="px-5 py-4 text-left font-bold text-gray-500 uppercase tracking-wider">Period Range</th>
+                <th className="px-5 py-4 text-left font-bold text-gray-500 uppercase tracking-wider">Status</th>
+                <th className="px-5 py-4 text-left font-bold text-gray-500 uppercase tracking-wider">Extracted Records</th>
+                <th className="px-5 py-4 text-right font-bold text-gray-500 uppercase tracking-wider w-20">Actions</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-100 font-semibold text-gray-700">
+              {isLoading ? (
+                Array.from({ length: 5 }).map((_, idx) => (
+                  <tr key={idx} className="animate-pulse bg-gray-50/20">
+                    <td colSpan={8} className="px-5 py-4 text-center">
+                      <div className="h-4 bg-gray-155 rounded w-5/6 mx-auto" />
+                    </td>
+                  </tr>
+                ))
+              ) : datasets.length === 0 ? (
+                <tr>
+                  <td colSpan={8} className="px-5 py-12 text-center text-gray-400">
+                    No datasets batches matched this criteria. Click &quot;New Dataset&quot; to define a new one.
+                  </td>
+                </tr>
+              ) : (
+                datasets.map((dataset) => (
+                  <tr key={dataset.uid} className="hover:bg-gray-50/30 transition-colors">
+                    <td className="px-5 py-4">
+                      <Link
+                        href={`/settings/data-room/datasets/${dataset.uid}`}
+                        className="text-gray-900 font-extrabold hover:text-primary hover:underline flex items-center gap-1.5"
+                      >
+                        <HiFolderOpen className="w-4.5 h-4.5 text-gray-400" />
+                        {dataset.name}
+                      </Link>
+                    </td>
+                    <td className="px-5 py-4">
+                      <span className="px-2 py-0.5 border border-gray-200/80 rounded bg-gray-50 text-gray-655 font-bold text-[10px] uppercase">
+                        {dataset.category}
+                      </span>
+                    </td>
+                    <td className="px-5 py-4 text-gray-800">{dataset.sourceSystem || "Manual Upload"}</td>
+                    <td className="px-5 py-4 text-gray-900">
+                      {dataset.processedDocuments} / {dataset.totalDocuments}
+                    </td>
+                    <td className="px-5 py-4 text-gray-600">
+                      {renderPeriod(dataset.periodStart, dataset.periodEnd)}
+                    </td>
+                    <td className="px-5 py-4">
+                      <DatasetStatusBadge status={dataset.status} />
+                    </td>
+                    <td className="px-5 py-4 text-gray-900 font-extrabold">{dataset.totalRecords}</td>
+                    <td className="px-5 py-4 text-right">
+                      {confirmDeleteUid === dataset.uid ? (
+                        <div className="flex gap-2 justify-end items-center">
+                          <button
+                            onClick={() => handleDelete(dataset.uid)}
+                            className="px-2 py-1 text-[10px] font-bold text-white bg-rose-600 rounded-full hover:bg-rose-700"
+                          >
+                            Confirm
+                          </button>
+                          <button
+                            onClick={() => setConfirmDeleteUid(null)}
+                            className="px-2 py-1 text-[10px] font-bold text-gray-600 bg-gray-100 rounded-full hover:bg-gray-200"
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      ) : (
+                        <button
+                          onClick={() => setConfirmDeleteUid(dataset.uid)}
+                          className="p-1.5 hover:bg-rose-50 rounded-lg text-gray-400 hover:text-rose-600 transition-colors"
+                        >
+                          <HiTrash className="w-4.5 h-4.5" />
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Pagination bar */}
+        {totalPages > 1 && (
+          <div className="p-4 border-t border-gray-100 flex items-center justify-center shrink-0">
+            <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
+          </div>
+        )}
+      </div>
+
+      {/* Dataset creation Modal */}
+      <DatasetFormModal
+        isOpen={isFormOpen}
+        onClose={() => setIsFormOpen(false)}
+        onSave={handleCreate}
+      />
+    </div>
+  );
+}

@@ -1,0 +1,105 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
+
+import React, { useState } from "react";
+import { useFeeEarnerLevels } from "@/modules/firm/hooks/useFirm";
+import { Button } from "@/components/ui/Button";
+import { FeeEarnerLevelFormModal } from "@/modules/firm/components/FeeEarnerLevelFormModal";
+import toast from "react-hot-toast";
+import { HiPlus, HiScale } from "react-icons/hi";
+
+export default function FeeEarnerLevelsPage() {
+  const { levels, isLoading, error, createLevel } = useFeeEarnerLevels();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleSave = async (data: { name: string; code: string; sortOrder: number }) => {
+    try {
+      await createLevel(data);
+      toast.success("Seniority level added successfully.");
+      setIsModalOpen(false);
+    } catch (err: any) {
+      throw err;
+    }
+  };
+
+  return (
+    <div className="p-8 max-w-4xl w-full mx-auto flex flex-col gap-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Fee Earner Levels</h1>
+          <p className="text-sm text-gray-500 mt-1">Configure seniority rankings and billing levels for lawyers in the firm.</p>
+        </div>
+        <Button
+          variant="primary"
+          onClick={() => setIsModalOpen(true)}
+          className="self-start sm:self-center"
+        >
+          <HiPlus className="w-4 h-4" />
+          Add Level
+        </Button>
+      </div>
+
+      {error && (
+        <div className="p-4 bg-red-50 border border-red-200 text-red-600 rounded-xl text-sm font-medium">
+          {error}
+        </div>
+      )}
+
+      {isLoading && levels.length === 0 ? (
+        <div className="flex flex-col gap-3 animate-pulse">
+          <div className="h-16 bg-gray-200 rounded-xl" />
+          <div className="h-16 bg-gray-200 rounded-xl" />
+          <div className="h-16 bg-gray-200 rounded-xl" />
+        </div>
+      ) : levels.length === 0 ? (
+        <div className="text-center py-12 bg-white rounded-2xl border border-gray-200/60 p-8 shadow-sm flex flex-col items-center justify-center gap-3">
+          <span className="text-sm text-gray-500">No levels registered yet. Click &apos;Add Level&apos; to define one.</span>
+        </div>
+      ) : (
+        <div className="bg-white rounded-2xl border border-gray-200/60 overflow-hidden shadow-sm">
+          <div className="divide-y divide-gray-100">
+            {levels.map((level, idx) => (
+              <div
+                key={level.uid}
+                className="p-5 flex items-center justify-between hover:bg-gray-50/50 transition-colors"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center font-bold text-sm">
+                    {level.sortOrder}
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-gray-900 leading-tight">
+                      {level.name}
+                    </h3>
+                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mt-1">
+                      Code: {level.code}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-6">
+                  <span className="text-xs text-gray-500 font-medium flex items-center gap-1.5 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-150">
+                    <HiScale className="w-3.5 h-3.5 text-gray-400" />
+                    Rank #{idx + 1}
+                  </span>
+                  
+                  {idx === 0 && (
+                    <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded uppercase tracking-wide border border-emerald-100">
+                      Highest Seniority
+                    </span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <FeeEarnerLevelFormModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSave={handleSave}
+      />
+    </div>
+  );
+}

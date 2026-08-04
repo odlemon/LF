@@ -1,0 +1,234 @@
+"use client";
+
+import React, { useState } from "react";
+import { useDatasets } from "@/modules/data-room/hooks/useDataRoom";
+import { DatasetStatusBadge } from "@/modules/data-room/components/DocumentStatusBadge";
+import { Button } from "@/components/ui/Button";
+import { Pagination } from "@/components/ui/Pagination";
+import { Select } from "@/components/ui/Select";
+import toast from "react-hot-toast";
+import { HiPlus, HiTrash, HiFolderOpen } from "react-icons/hi";
+
+interface DatasetsListDrawerContentProps {
+  onSelectDataset: (uid: string) => void;
+  onOpenCreateModal: () => void;
+}
+
+export function DatasetsListDrawerContent({
+  onSelectDataset,
+  onOpenCreateModal,
+}: DatasetsListDrawerContentProps) {
+  const [page, setPage] = useState(0);
+  const [filters, setFilters] = useState({
+    category: "ALL",
+    status: "ALL",
+  });
+
+  const {
+    datasets,
+    totalPages,
+    isLoading,
+    deleteDataset,
+    refetch,
+  } = useDatasets(filters, page);
+
+  const [confirmDeleteUid, setConfirmDeleteUid] = useState<string | null>(null);
+
+  const handleDelete = async (uid: string) => {
+    try {
+      await deleteDataset(uid);
+      toast.success("Dataset deleted successfully.");
+      setConfirmDeleteUid(null);
+      refetch();
+    } catch (err: any) {
+      toast.error(err.message || "Failed to delete dataset.");
+    }
+  };
+
+  const formatDate = (dateString?: string) => {
+    if (!dateString) return "";
+    const parsed = new Date(dateString);
+    if (isNaN(parsed.getTime())) return "";
+    return parsed.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+  };
+
+  const renderPeriod = (start?: string, end?: string) => {
+    const formattedStart = formatDate(start);
+    const formattedEnd = formatDate(end);
+    if (formattedStart && formattedEnd) {
+      return `${formattedStart} - ${formattedEnd}`;
+    }
+    if (formattedStart) {
+      return `From ${formattedStart}`;
+    }
+    if (formattedEnd) {
+      return `Until ${formattedEnd}`;
+    }
+    return "N/A";
+  };
+
+  return (
+    <div className="flex flex-col gap-6 text-gray-800">
+      {/* Header bar within drawer context */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <p className="text-xs text-gray-500 font-medium">
+            Group your uploaded files by named ingestion batches to isolate data and track processing states.
+          </p>
+        </div>
+        <Button variant="primary" onClick={onOpenCreateModal}>
+          <HiPlus className="w-4 h-4" /> New Dataset
+        </Button>
+      </div>
+
+      {/* Filter Options Bar (Custom selectors!) */}
+      <div className="bg-gray-50/50 border border-gray-200/40 rounded-3xl p-5 shadow-sm flex flex-col sm:flex-row gap-4">
+        <div className="flex-1">
+          <Select
+            label="Category"
+            placeholder="All Categories"
+            options={[
+              { value: "ALL", label: "All Categories" },
+              { value: "PAST_MATTERS", label: "Past Matters" },
+              { value: "TIME_ENTRIES", label: "Time Entries" },
+              { value: "BILLING_HISTORY", label: "Billing History" },
+              { value: "RATE_CARD_HISTORY", label: "Rate Card History" },
+              { value: "MARKET_BENCHMARKS", label: "Market Benchmarks" },
+              { value: "CLIENT_OCG", label: "Client OCG Guidelines" },
+              { value: "MATTER_ASSUMPTIONS", label: "Matter Assumptions" },
+              { value: "OTHER", label: "Other" },
+            ]}
+            value={filters.category}
+            onChange={(val) => {
+              setFilters((prev) => ({ ...prev, category: val }));
+              setPage(0);
+            }}
+          />
+        </div>
+
+        <div className="flex-1">
+          <Select
+            label="Batch Ingestion Status"
+            placeholder="All Statuses"
+            options={[
+              { value: "ALL", label: "All Statuses" },
+              { value: "PENDING", label: "Pending" },
+              { value: "PROCESSING", label: "Processing" },
+              { value: "COMPLETE", label: "Complete" },
+              { value: "PARTIAL", label: "Partial" },
+              { value: "FAILED", label: "Failed" },
+            ]}
+            value={filters.status}
+            onChange={(val) => {
+              setFilters((prev) => ({ ...prev, status: val }));
+              setPage(0);
+            }}
+          />
+        </div>
+      </div>
+
+      {/* Main Datasets Grid Table */}
+      <div className="bg-white border border-gray-200/60 rounded-3xl overflow-hidden shadow-sm shrink-0">
+        <div className="overflow-x-auto rates-scrollable">
+          <table className="min-w-full divide-y divide-gray-100 text-xs">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-5 py-4 text-left font-bold text-gray-500 uppercase tracking-wider">Dataset Name</th>
+                <th className="px-5 py-4 text-left font-bold text-gray-500 uppercase tracking-wider">Category</th>
+                <th className="px-5 py-4 text-left font-bold text-gray-500 uppercase tracking-wider">Source System</th>
+                <th className="px-5 py-4 text-left font-bold text-gray-500 uppercase tracking-wider">Files Count</th>
+                <th className="px-5 py-4 text-left font-bold text-gray-500 uppercase tracking-wider">Period Range</th>
+                <th className="px-5 py-4 text-left font-bold text-gray-500 uppercase tracking-wider">Status</th>
+                <th className="px-5 py-4 text-left font-bold text-gray-500 uppercase tracking-wider">Extracted Records</th>
+                <th className="px-5 py-4 text-right font-bold text-gray-500 uppercase tracking-wider w-20">Actions</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-100 font-semibold text-gray-700">
+              {isLoading ? (
+                Array.from({ length: 5 }).map((_, idx) => (
+                  <tr key={idx} className="animate-pulse bg-gray-50/20">
+                    <td colSpan={8} className="px-5 py-4 text-center">
+                      <div className="h-4 bg-gray-150 rounded w-5/6 mx-auto" />
+                    </td>
+                  </tr>
+                ))
+              ) : datasets.length === 0 ? (
+                <tr>
+                  <td colSpan={8} className="px-5 py-12 text-center text-gray-400">
+                    No datasets batches matched this criteria. Click &quot;New Dataset&quot; to define a new one.
+                  </td>
+                </tr>
+              ) : (
+                datasets.map((dataset) => (
+                  <tr key={dataset.uid} className="hover:bg-gray-50/30 transition-colors">
+                    <td className="px-5 py-4">
+                      <button
+                        onClick={() => onSelectDataset(dataset.uid)}
+                        className="text-gray-900 font-extrabold hover:text-primary hover:underline flex items-center gap-1.5 text-left cursor-pointer focus:outline-none"
+                      >
+                        <HiFolderOpen className="w-4.5 h-4.5 text-gray-400 shrink-0" />
+                        <span>{dataset.name}</span>
+                      </button>
+                    </td>
+                    <td className="px-5 py-4">
+                      <span className="px-2 py-0.5 border border-gray-200/80 rounded bg-gray-50 text-gray-655 font-bold text-[10px] uppercase">
+                        {dataset.category}
+                      </span>
+                    </td>
+                    <td className="px-5 py-4 text-gray-800">{dataset.sourceSystem || "Manual Upload"}</td>
+                    <td className="px-5 py-4 text-gray-900">
+                      {dataset.processedDocuments} / {dataset.totalDocuments}
+                    </td>
+                    <td className="px-5 py-4 text-gray-600">
+                      {renderPeriod(dataset.periodStart, dataset.periodEnd)}
+                    </td>
+                    <td className="px-5 py-4">
+                      <DatasetStatusBadge status={dataset.status} />
+                    </td>
+                    <td className="px-5 py-4 text-gray-900 font-extrabold">{dataset.totalRecords}</td>
+                    <td className="px-5 py-4 text-right">
+                      {confirmDeleteUid === dataset.uid ? (
+                        <div className="flex gap-2 justify-end items-center">
+                          <button
+                            onClick={() => handleDelete(dataset.uid)}
+                            className="px-2 py-1 text-[10px] font-bold text-white bg-rose-600 rounded-full hover:bg-rose-700 cursor-pointer"
+                          >
+                            Confirm
+                          </button>
+                          <button
+                            onClick={() => setConfirmDeleteUid(null)}
+                            className="px-2 py-1 text-[10px] font-bold text-gray-600 bg-gray-100 rounded-full hover:bg-gray-200 cursor-pointer"
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      ) : (
+                        <button
+                          onClick={() => setConfirmDeleteUid(dataset.uid)}
+                          className="p-1.5 hover:bg-rose-50 rounded-lg text-gray-400 hover:text-rose-600 transition-colors cursor-pointer"
+                        >
+                          <HiTrash className="w-4.5 h-4.5" />
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Pagination bar */}
+      {totalPages > 1 && (
+        <div className="p-4 border-t border-gray-100 flex items-center justify-center shrink-0">
+          <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
+        </div>
+      )}
+    </div>
+  );
+}
