@@ -1,4 +1,4 @@
-# Lysp Landing Page — V1 Snapshot
+# Lysp Landing Page - V1 Snapshot
 
 Archived before Legora-style hero redesign.  
 Source components (full React): `_archive/components/`.  
@@ -9,7 +9,7 @@ Live components still live in `src/components/landing/`.
 ## Design system
 
 ### Typography
-- **Font:** Quicksand (Google Font) — weights 400, 500, 600, 700
+- **Font:** Quicksand (Google Font) - weights 400, 500, 600, 700
 - Applied via `(landing)/layout.tsx` on the page wrapper
 - Body: `antialiased`, layout bg `bg-gray-100`, page stack `bg-white`
 
@@ -45,7 +45,7 @@ Live components still live in `src/components/landing/`.
 - Nav: “Sign In” → `/auth`
 
 ### Metadata
-- Title: `Lysp — Enterprise Pricing Intelligence for Law Firms`
+- Title: `Lysp - Enterprise Pricing Intelligence for Law Firms`
 - Description: `Consolidate billing, rate, and matter data to deliver consistent, realization-improving pricing models.`
 
 ### Page composition order
@@ -88,13 +88,13 @@ Note: We integrate and sync data automatically which keeps matters updated every
 
 **Mock workspace UI**
 - URL chrome: `lysp.io/workspace`
-- Matter Pricing — Harrison & Clarke LLP
+- Matter Pricing - Harrison & Clarke LLP
 - Badge: +9.4% Uplift
 - Realization Rate: 92.4%
 - Estimated Value: $450,000
 - Recommended Playbook: Fixed Fee Structure Approved
 
-**Layout note:** Split hero — copy left (~50%), tilted product mock right (~50%). White background, min-h-screen.
+**Layout note:** Split hero - copy left (~50%), tilted product mock right (~50%). White background, min-h-screen.
 
 ---
 
@@ -111,8 +111,8 @@ Lysp gives lawyers a guided path to compliant fee structures in minutes so comme
 **Pipeline mock**
 - Title: Active Intake Pipeline
 - Badge: 4 Requests Delayed
-- Card 1: Acquisition Proposal — Aderant Partners — $45M deal risk / Bypassed review
-- Card 2: Fixed Fee Validation — Clio Integration — Stalled 4.2 days / Waiting on BDM
+- Card 1: Acquisition Proposal - Aderant Partners - $45M deal risk / Bypassed review
+- Card 2: Fixed Fee Validation - Clio Integration - Stalled 4.2 days / Waiting on BDM
 
 ### Pain cards
 
@@ -139,30 +139,30 @@ Impact: Billing Rejections +22% · Cycle Delay +14 Days
 **Headline:** How legal teams use Lysp  
 **Subcopy:** No more back-and-forth tickets. Lysp guides lawyers through the firm-approved playbook while giving pricing teams full visibility and control.
 
-### Step 1 — Capture matter context
+### Step 1 - Capture matter context
 - Structured prompts gather matter scope, deal size, risk, and client expectations...
 - Lysp preloads similar matters and firm policy guidance...
 - Pricing directors see the same briefing draft inside Lysp...
 
-### Step 2 — Compare pricing structures
+### Step 2 - Compare pricing structures
 - Compare multiple options based on firm realization historic targets.
 - Assess margins under different client discount or success scenario models.
 - Select the recommended fee playbook that aligns with firm realization goals.
 
 **Fee tabs copy**
-- Fixed Fee Structure — $450,000 — 87% Confidence — Low matter variation / Scope creep terms needed
-- Standard Blended Hourly — $425 / Hour
-- Success-Based Contingency — $75k + 20% Success
-- Capped Hourly with Collar — $520,000 Max Cap
+- Fixed Fee Structure - $450,000 - 87% Confidence - Low matter variation / Scope creep terms needed
+- Standard Blended Hourly - $425 / Hour
+- Success-Based Contingency - $75k + 20% Success
+- Capped Hourly with Collar - $520,000 Max Cap
 
-### Step 3 — Generate client-ready proposals
+### Step 3 - Generate client-ready proposals
 - Lysp produces proposals with approved structures...
 - Partners see discount logic, FX guardrails, and margin alerts side by side...
 - Clients receive proposals with optional client portal login...
 
 **Proposal mock:** FutureLink Acquisition Proposal · Fixed Fee Plan · Ready to Send · $450,000 · 6–12 Months · Medium Risk
 
-### After the proposal — Client intelligence & rate control
+### After the proposal - Client intelligence & rate control
 Consolidate rate agreements and active workflows into a live control panel. Ingest invoices, track active matter status, and apply correct volume tier rules automatically.
 
 Callout: The platform ingests invoices, normalizes FX currencies, and auto-applies volume discounts to historical invoices.
@@ -207,7 +207,7 @@ Footer note: Outcomes measured across connected billing, practice management, an
 | Salesforce | Client intelligence and pipeline health |
 | Thomson Reuters | Rate benchmarks and guidance |
 
-**Data control:** You control your data — Lysp never trains AI on your internal billing, rate negotiations, or OCG compliance guidelines.
+**Data control:** You control your data - Lysp never trains AI on your internal billing, rate negotiations, or OCG compliance guidelines.
 
 ---
 
@@ -217,7 +217,7 @@ Footer note: Outcomes measured across connected billing, practice management, an
 **Subcopy:** A predictable platform fee covers your pricing, finance, and client teams, with optional usage bundles.
 
 ### Base plan
-- Seat-Based Base Subscription — ~$299/seat/mo (10-seat min) · Annual ~$265/seat (−11%)
+- Seat-Based Base Subscription - ~$299/seat/mo (10-seat min) · Annual ~$265/seat (−11%)
 - Features: Unlimited pricing proposals · Live Clio & billing integration · Custom OCG · Unlimited client viewer portals · Weekly compliance audit digests
 - Allowances: 5 concurrent client proposal briefs · 3 multi-scenario rate models · 2 custom client volume discounts · 1 global firm practice area card
 - Constraints: Max 10 users in base plan · API rate limited · Standard email support
@@ -273,7 +273,7 @@ Footer note: Outcomes measured across connected billing, practice management, an
 - +1 (415) 555-0198
 - LinkedIn: https://www.linkedin.com/company/lyspio
 
-**Newsletter:** Stay current — Get bi-weekly updates on legal pricing benchmarks and guidelines direct to your inbox.
+**Newsletter:** Stay current - Get bi-weekly updates on legal pricing benchmarks and guidelines direct to your inbox.
 
 **Legal links:** Privacy Policy · Terms of Service · Security Standards  
 **Copyright:** © {year} Lysp. Pricing intelligence for legal teams.

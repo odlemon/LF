@@ -8,7 +8,7 @@ import { HeroVideo } from "./HeroVideo";
 export function HeroSection() {
   return (
     <section id="home" className="relative min-h-[100svh] w-full overflow-hidden bg-[#0a0f0d]">
-      {/* Full-bleed media — z-0, extends behind transparent navbar */}
+      {/* Full-bleed media - z-0, extends behind transparent navbar */}
       <div className="absolute inset-0 z-0">
         <HeroVideo />
       </div>

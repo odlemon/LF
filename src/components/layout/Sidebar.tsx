@@ -93,8 +93,18 @@ export function Sidebar() {
   return (
     <aside className="w-64 bg-white border-r border-gray-200/50 flex flex-col h-screen sticky top-0 p-4 shadow-2xl shadow-black/5">
       <div className="mb-8 px-4 flex items-center justify-between">
-        <span className="text-xl font-bold text-gray-900 tracking-tight">Lysp</span>
-        <Link href="/settings/firm" className="text-xs font-semibold text-primary hover:underline">
+        <Link href="/dashboard" className="flex items-center gap-2.5 min-w-0">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/logo/lysp-logo.png"
+            alt="Lysp"
+            width={36}
+            height={36}
+            className="h-9 w-9 object-contain shrink-0"
+          />
+          <span className="text-xl font-bold text-gray-900 tracking-tight">Lysp</span>
+        </Link>
+        <Link href="/settings/firm" className="text-xs font-semibold text-primary hover:underline shrink-0">
           Firm Settings
         </Link>
       </div>

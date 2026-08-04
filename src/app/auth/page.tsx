@@ -35,6 +35,14 @@ function LoginForm() {
   return (
     <div className="w-full max-w-md bg-white rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-200/50 p-8">
       <div className="text-center mb-8">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/logo/lysp-logo.png"
+          alt="Lysp"
+          width={72}
+          height={72}
+          className="mx-auto h-[72px] w-[72px] object-contain mb-3"
+        />
         <h1 className="text-2xl font-bold text-gray-900 mb-2">Lysp Platform</h1>
         <p className="text-sm text-gray-500">Firm-side Pricing Intelligence</p>
       </div>

@@ -2,24 +2,22 @@ import React from "react";
 import { HeroSection } from "@/components/landing/HeroSection";
 import { CustomersSection } from "@/components/landing/CustomersSection";
 import { PlatformSection } from "@/components/landing/PlatformSection";
-import { PainSection } from "@/components/landing/PainSection";
-import { KnowledgeComplianceSection } from "@/components/landing/KnowledgeComplianceSection";
-import { IntegrationsCTASection } from "@/components/landing/IntegrationsCTASection";
+import { PracticeAreasSection } from "@/components/landing/PracticeAreasSection";
+import { OutcomesSection } from "@/components/landing/OutcomesSection";
 import { PricingSection } from "@/components/landing/PricingSection";
-import { FAQSection } from "@/components/landing/FAQSection";
+import { SecuritySection } from "@/components/landing/SecuritySection";
 import { FooterSection } from "@/components/landing/FooterSection";
 
 export default function LandingPage() {
   return (
-    <div className="flex flex-col w-full bg-white overflow-hidden">
+    <div className="flex flex-col w-full bg-white">
       <HeroSection />
       <CustomersSection />
       <PlatformSection />
-      <PainSection />
-      <KnowledgeComplianceSection />
-      <IntegrationsCTASection />
+      <PracticeAreasSection />
+      <OutcomesSection />
       <PricingSection />
-      <FAQSection />
+      <SecuritySection />
       <FooterSection />
     </div>
   );

@@ -105,7 +105,7 @@ function AuditTrailContent() {
   };
 
   const formatDate = (dateStr: string, includeSeconds = false) => {
-    if (!dateStr) return "—";
+    if (!dateStr) return "-";
     const d = new Date(dateStr);
     if (isNaN(d.getTime())) return dateStr;
     return d.toLocaleDateString("en-GB", {
@@ -321,7 +321,7 @@ function AuditTrailContent() {
                             </button>
                           </div>
                         ) : (
-                          <span className="text-gray-400">—</span>
+                          <span className="text-gray-400">-</span>
                         )}
                       </td>
                       <td className="px-6 py-4.5 text-center">
@@ -415,7 +415,7 @@ function AuditTrailContent() {
                     </button>
                   </div>
                 ) : (
-                  <span className="text-gray-400 mt-0.5">—</span>
+                  <span className="text-gray-400 mt-0.5">-</span>
                 )}
               </div>
 

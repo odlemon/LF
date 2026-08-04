@@ -129,7 +129,7 @@ export function FixMappingModal({ isOpen, onClose, document, onSuccess }: FixMap
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title={`Fix Column Mapping — ${document.originalFilename}`} size="2xl">
+    <Modal isOpen={isOpen} onClose={onClose} title={`Fix Column Mapping - ${document.originalFilename}`} size="2xl">
       <div className="flex flex-col gap-5 text-gray-800">
         <p className="text-xs font-semibold text-gray-500 leading-relaxed">
           The system could not automatically map all columns in this file. Review the mapping below and correct any mismatches, then re-process.

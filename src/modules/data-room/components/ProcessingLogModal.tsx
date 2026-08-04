@@ -34,7 +34,7 @@ export function ProcessingLogModal({ isOpen, onClose, documentUid, fileName }: P
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title={`${fileName} — Ingestion Log`}>
+    <Modal isOpen={isOpen} onClose={onClose} title={`${fileName} - Ingestion Log`}>
       <div className="flex flex-col gap-6 w-full text-gray-800">
         {isLoading ? (
           <div className="flex flex-col gap-4 animate-pulse">

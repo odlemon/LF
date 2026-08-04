@@ -43,7 +43,7 @@ export function TaskRow({
 
   const level = feeEarnerLevels.find((l) => l.uid === task.feeEarnerLevelUid);
   const levelIndex = feeEarnerLevels.findIndex((l) => l.uid === task.feeEarnerLevelUid);
-  const levelCode = task.feeEarnerLevelCode ?? level?.code ?? "—";
+  const levelCode = task.feeEarnerLevelCode ?? level?.code ?? "-";
 
   const save = async () => {
     setIsSaving(true);

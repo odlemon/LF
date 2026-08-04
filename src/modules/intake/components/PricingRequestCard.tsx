@@ -10,8 +10,8 @@ interface PricingRequestCardProps {
 }
 
 export function PricingRequestCard({ request, clientName }: PricingRequestCardProps) {
-  const displayClient = clientName ?? request.clientName ?? "—";
-  const practiceArea = request.practiceAreaName ?? "—";
+  const displayClient = clientName ?? request.clientName ?? "-";
+  const practiceArea = request.practiceAreaName ?? "-";
 
   return (
     <Link

@@ -8,7 +8,7 @@ const quicksand = Quicksand({
 });
 
 export const metadata: Metadata = {
-  title: "Lysp — Enterprise Pricing Intelligence for Law Firms",
+  title: "Lysp - Enterprise Pricing Intelligence for Law Firms",
   description: "Consolidate billing, rate, and matter data to deliver consistent, realization-improving pricing models.",
 };
 

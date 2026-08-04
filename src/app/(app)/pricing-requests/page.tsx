@@ -42,7 +42,7 @@ export default function PricingRequestsPage() {
             const client = await getClient(req.clientProfileUid);
             map[req.uid] = client.name;
           } catch {
-            map[req.uid] = "—";
+            map[req.uid] = "-";
           }
         })
       );

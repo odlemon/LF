@@ -19,24 +19,29 @@ const NAV_ITEMS: NavItem[] = [
     label: "Product",
     children: [
       {
-        label: "Matter Scoping",
-        description: "Conversational intake and structured scopes",
-        href: "#platform",
+        label: "Overview",
+        description: "How firms use Lysp end to end",
+        href: "/#platform",
       },
       {
-        label: "Fee Pricing",
-        description: "Benchmarks, confidence scores, and margins",
-        href: "#platform",
+        label: "Scope → Price → Propose",
+        description: "One flow from RFP to client-ready proposal",
+        href: "/product#flow",
       },
       {
-        label: "Proposals",
-        description: "Firm-branded proposals and client portal",
-        href: "#platform",
+        label: "Rate Negotiation",
+        description: "Client portal counters and acceptances",
+        href: "/product#negotiation",
       },
       {
-        label: "Data Room",
-        description: "Historical matters, billing, and benchmarks",
-        href: "#platform",
+        label: "Volume Discounts",
+        description: "Automatic tier tracking and savings",
+        href: "/product#discounts",
+      },
+      {
+        label: "Pricing Analytics",
+        description: "Win rates, margins, and benchmarks",
+        href: "/product#analytics",
       },
     ],
   },
@@ -44,46 +49,46 @@ const NAV_ITEMS: NavItem[] = [
     label: "Solutions",
     children: [
       {
-        label: "Law Firms",
-        description: "Realization and proposal speed at scale",
-        href: "#platform",
+        label: "Corporate M&A",
+        description: "Fixed fees for diligence-to-close",
+        href: "/#practices",
       },
       {
-        label: "Pricing Teams",
-        description: "Playbook control without becoming the bottleneck",
-        href: "#platform",
+        label: "Banking & Finance",
+        description: "Panel rates, caps, and volume tiers",
+        href: "/#practices",
       },
       {
-        label: "Legal Finance",
-        description: "Rate sheets, FX, and profitability insight",
-        href: "#pricing",
+        label: "Litigation",
+        description: "Phased budgets with confidence bands",
+        href: "/#practices",
       },
       {
-        label: "Partners",
-        description: "Compliant fee structures in minutes",
-        href: "#platform",
+        label: "All practice areas",
+        description: "How each practice prices with Lysp",
+        href: "/#practices",
       },
     ],
   },
-  { label: "Security", href: "#faq" },
-  { label: "Customers", href: "#customers" },
+  { label: "Security", href: "/security" },
+  { label: "Customers", href: "/#customers" },
   {
     label: "Company",
     children: [
       {
         label: "About",
         description: "Pricing intelligence for elite law firms",
-        href: "#home",
+        href: "/#home",
       },
       {
         label: "Contact",
         description: "Talk to the Lysp team",
-        href: "#contact",
+        href: "/#contact",
       },
       {
         label: "Pricing",
-        description: "Seats, credits, and firm snapshots",
-        href: "#pricing",
+        description: "Custom, usage-based - estimate your spend",
+        href: "/#pricing",
       },
     ],
   },
@@ -134,14 +139,14 @@ export function HeroNavbar({ variant = "default" }: HeroNavbarProps) {
       <div className="mx-auto flex h-14 sm:h-16 max-w-[1400px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-10">
         {/* Brand */}
         <Link
-          href="#home"
+          href="/"
           className="relative z-10 flex shrink-0 items-center gap-2"
           onClick={() => setIsMenuOpen(false)}
         >
           <span className="text-[17px] sm:text-lg font-semibold tracking-tight">Lysp</span>
         </Link>
 
-        {/* Center nav — Legora pattern */}
+        {/* Center nav - Legora pattern */}
         <nav className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 lg:flex items-center gap-1">
           {NAV_ITEMS.map((item) => {
             const hasChildren = Boolean(item.children?.length);

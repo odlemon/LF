@@ -121,7 +121,7 @@ export function PhaseSection({
                   <Select
                     value={taskLevelUid}
                     onChange={setTaskLevelUid}
-                    options={feeEarnerLevels.map((l) => ({ value: l.uid, label: `${l.code} — ${l.name}` }))}
+                    options={feeEarnerLevels.map((l) => ({ value: l.uid, label: `${l.code} - ${l.name}` }))}
                   />
                 </div>
                 <input

@@ -8,7 +8,7 @@ export const HERO_VIDEO = {
   desktopWebm: "/videos/golden-hour-desktop.webm",
   desktopMp4: "/videos/golden-hour-desktop.mp4",
   retina: "/videos/golden-hour-retina.webm",
-  /** Original upload — fallback while optimized assets encode */
+  /** Original upload - fallback while optimized assets encode */
   fallback: "/videos/golden-hour.webm",
 } as const;
 
@@ -57,7 +57,7 @@ export function HeroVideo() {
 
     const tryPlay = (video: HTMLVideoElement) => {
       void video.play().catch(() => {
-        /* Autoplay blocked — poster remains visible until user interaction */
+        /* Autoplay blocked - poster remains visible until user interaction */
       });
     };
 
@@ -133,7 +133,7 @@ export function HeroVideo() {
 
   return (
     <div className="absolute inset-0 bg-[#0a0f0d]" aria-hidden>
-      {/* Poster — instant first paint while video buffers */}
+      {/* Poster - instant first paint while video buffers */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={HERO_VIDEO.poster}
@@ -145,7 +145,7 @@ export function HeroVideo() {
         decoding="async"
       />
 
-      {/* Dual-buffer: swap z-index before the end — no fade, no native loop flash */}
+      {/* Dual-buffer: swap z-index before the end - no fade, no native loop flash */}
       <video
         ref={primaryRef}
         className={`${videoClass} ${videoReady ? "opacity-100" : "opacity-0"} ${

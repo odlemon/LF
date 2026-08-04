@@ -22,7 +22,7 @@ export default function PricingWorkspacePlaceholderPage() {
       </button>
       <div className="bg-white rounded-2xl border border-gray-200/60 p-8 shadow-sm text-center">
         <h1 className="text-xl font-bold text-gray-900">Pricing Workspace</h1>
-        <p className="text-sm text-gray-500 mt-2">Coming soon — AI pricing scenarios will be generated here.</p>
+        <p className="text-sm text-gray-500 mt-2">Coming soon - AI pricing scenarios will be generated here.</p>
         <Button
           variant="secondary"
           className="mt-6"

@@ -82,7 +82,7 @@ export function DatasetFormModal({ isOpen, onClose, onSave }: DatasetFormModalPr
           <input
             type="text"
             required
-            placeholder="e.g. Ingestion 2024 — Corporate Matters"
+            placeholder="e.g. Ingestion 2024 - Corporate Matters"
             value={name}
             onChange={(e) => setName(e.target.value)}
             className="w-full px-5 py-3 bg-gray-50 border border-gray-250 rounded-full text-sm font-semibold text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/80 transition-all duration-200"
