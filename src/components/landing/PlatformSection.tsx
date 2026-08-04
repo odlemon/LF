@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { HiArrowRight } from "react-icons/hi";
 import { USE_CASES } from "./platform/useCases";
@@ -10,6 +10,7 @@ const STEP_VH = 90;
 const SETTLE_MS = 140;
 const LERP = 0.18;
 const SNAP_EPSILON = 0.03;
+const SWIPE_THRESHOLD = 42;
 
 function clamp(n: number, min: number, max: number) {
   return Math.min(max, Math.max(min, n));
@@ -29,11 +30,199 @@ function isSectionPinned(section: HTMLElement) {
 function scrollToIndex(section: HTMLElement, index: number, count: number) {
   const scrollable = section.offsetHeight - window.innerHeight;
   if (scrollable <= 0) return;
-  const top = section.offsetTop + (index / Math.max(1, count - 1)) * scrollable;
+  const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+  const top = sectionTop + (index / Math.max(1, count - 1)) * scrollable;
   window.scrollTo({ top, behavior: "smooth" });
 }
 
-export function PlatformSection() {
+function UseCaseCopy({
+  index,
+  label,
+  brief,
+  id,
+  active,
+}: {
+  index: number;
+  label: string;
+  brief: string;
+  id: string;
+  active: boolean;
+}) {
+  return (
+    <div className="relative flex flex-col justify-center min-w-0">
+      <p className="text-[12px] sm:text-[13px] font-semibold tracking-[0.2em] uppercase text-[#0a0a0a]/40">
+        {String(index + 1).padStart(2, "0")}
+      </p>
+      <h3 className="mt-2 sm:mt-3 lg:mt-4 text-balance text-[1.45rem] sm:text-3xl lg:text-[2.35rem] xl:text-[2.6rem] font-semibold tracking-tight text-[#0a0a0a] leading-[1.1]">
+        {label}
+      </h3>
+      <p className="mt-2 sm:mt-3 lg:mt-4 max-w-sm text-[14px] sm:text-[15px] text-[#0a0a0a]/60 leading-relaxed">
+        {brief}
+      </p>
+      <Link
+        href={`/product#${id}`}
+        className="mt-4 sm:mt-5 lg:mt-6 inline-flex items-center gap-1.5 self-start text-[13px] sm:text-[14px] font-semibold text-[#0a0a0a] hover:opacity-70 transition-opacity"
+        tabIndex={active ? 0 : -1}
+        onClick={(e) => e.stopPropagation()}
+      >
+        See how it works
+        <HiArrowRight className="h-4 w-4" />
+      </Link>
+    </div>
+  );
+}
+
+function StepDots({
+  activeIndex,
+  onSelect,
+}: {
+  activeIndex: number;
+  onSelect: (i: number) => void;
+}) {
+  return (
+    <div className="flex items-center gap-2" role="tablist" aria-label="Product steps">
+      {USE_CASES.map((uc, i) => (
+        <button
+          key={uc.id}
+          type="button"
+          role="tab"
+          aria-selected={i === activeIndex}
+          aria-label={uc.label}
+          onClick={() => onSelect(i)}
+          className={`h-1.5 rounded-full transition-all duration-300 ${
+            i === activeIndex
+              ? "w-8 bg-[#0a0a0a]"
+              : "w-1.5 bg-[#0a0a0a]/20 hover:bg-[#0a0a0a]/40"
+          }`}
+        />
+      ))}
+    </div>
+  );
+}
+
+function ExploreCta() {
+  return (
+    <Link
+      href="/product"
+      className="inline-flex items-center justify-center gap-2 self-start sm:self-auto rounded-full bg-[#0a0a0a] px-7 py-3.5 text-[14px] font-semibold text-[#fefefc] transition-colors hover:bg-black"
+    >
+      Explore Product
+      <HiArrowRight className="h-4 w-4" />
+    </Link>
+  );
+}
+
+/** Mobile: compact swipe carousel - no sticky scroll-jack whitespace. */
+function MobilePlatform() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [reduceMotion, setReduceMotion] = useState(false);
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+  const lockAxis = useRef<"x" | "y" | null>(null);
+  const dragging = useRef(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduceMotion(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setReduceMotion(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  const goTo = useCallback((i: number) => {
+    setActiveIndex(clamp(i, 0, USE_CASES.length - 1));
+  }, []);
+
+  const onPointerDown = (e: React.PointerEvent) => {
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    const target = e.target as HTMLElement;
+    if (target.closest("a, button, input, textarea, select, [role='tab']")) return;
+    touchStartX.current = e.clientX;
+    touchStartY.current = e.clientY;
+    lockAxis.current = null;
+    dragging.current = true;
+  };
+
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (!dragging.current || touchStartX.current === null || touchStartY.current === null) return;
+    const dx = e.clientX - touchStartX.current;
+    const dy = e.clientY - touchStartY.current;
+    if (!lockAxis.current && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
+      lockAxis.current = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
+    }
+  };
+
+  const onPointerUp = (e: React.PointerEvent) => {
+    if (!dragging.current || touchStartX.current === null) {
+      dragging.current = false;
+      return;
+    }
+    const dx = e.clientX - touchStartX.current;
+    const axis = lockAxis.current;
+    dragging.current = false;
+    touchStartX.current = null;
+    touchStartY.current = null;
+    lockAxis.current = null;
+
+    if (axis === "y") return;
+    if (dx <= -SWIPE_THRESHOLD) goTo(activeIndex + 1);
+    else if (dx >= SWIPE_THRESHOLD) goTo(activeIndex - 1);
+  };
+
+  const active = USE_CASES[activeIndex];
+
+  return (
+    <section id="platform-mobile" className="relative w-full bg-[#fefefc] lg:hidden">
+      <div className="mx-auto w-full max-w-[1280px] px-5 sm:px-8 pt-12 sm:pt-16 pb-3">
+        <p className="text-[12px] font-medium tracking-[0.22em] uppercase text-[#0a0a0a]/40">
+          Product
+        </p>
+        <h2 className="mt-3 max-w-3xl text-balance text-[1.5rem] sm:text-3xl font-semibold leading-[1.12] tracking-tight text-[#0a0a0a]">
+          How elite firms use Lysp - from RFP to accepted fee.
+        </h2>
+      </div>
+
+      <div
+        className="touch-pan-y select-none"
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerUp}
+        role="region"
+        aria-roledescription="carousel"
+        aria-label="Product capabilities"
+      >
+        <div className="mx-auto w-full max-w-[1280px] px-5 sm:px-8 pt-4">
+          <div
+            className={`h-[240px] sm:h-[300px] ${reduceMotion ? "" : "transition-opacity duration-200"}`}
+            key={active.id}
+          >
+            <FeaturePreview id={active.id} />
+          </div>
+        </div>
+
+        <div className="mx-auto w-full max-w-[1280px] px-5 sm:px-8 pt-5 pb-2">
+          <UseCaseCopy
+            index={activeIndex}
+            label={active.label}
+            brief={active.brief}
+            id={active.id}
+            active
+          />
+          <p className="mt-4 text-[12px] text-[#0a0a0a]/35">Swipe left or right to explore</p>
+        </div>
+      </div>
+
+      <div className="mx-auto w-full max-w-[1280px] px-5 sm:px-8 pb-10 pt-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <StepDots activeIndex={activeIndex} onSelect={goTo} />
+        <ExploreCta />
+      </div>
+    </section>
+  );
+}
+
+/** Desktop: sticky scroll-jack stack. */
+function DesktopPlatform() {
   const sectionRef = useRef<HTMLElement>(null);
   const targetProgressRef = useRef(0);
   const displayProgressRef = useRef(0);
@@ -66,9 +255,7 @@ export function PlatformSection() {
       lerpRaf = 0;
       const target = targetProgressRef.current;
       const current = displayProgressRef.current;
-      const next = reduceMotion
-        ? target
-        : current + (target - current) * LERP;
+      const next = reduceMotion ? target : current + (target - current) * LERP;
 
       if (Math.abs(target - next) < 0.0004) {
         displayProgressRef.current = target;
@@ -154,9 +341,9 @@ export function PlatformSection() {
 
   return (
     <section
-      id="platform"
+      id="platform-desktop"
       ref={sectionRef}
-      className="relative w-full bg-[#fefefc]"
+      className="relative hidden w-full bg-[#fefefc] lg:block"
       style={{ height: `${count * STEP_VH}vh` }}
     >
       <div className="sticky top-0 flex h-screen flex-col overflow-hidden">
@@ -171,7 +358,7 @@ export function PlatformSection() {
 
         <div className="relative flex min-h-0 flex-1 items-center overflow-hidden px-5 sm:px-8 lg:px-10 py-2">
           <div
-            className="relative mx-auto w-full max-w-[1280px] h-full max-h-[min(52vh,480px)] sm:max-h-[min(54vh,520px)] lg:max-h-[min(56vh,540px)] overflow-hidden"
+            className="relative mx-auto w-full max-w-[1280px] h-full max-h-[min(56vh,540px)] overflow-hidden"
             aria-live="polite"
             aria-atomic="true"
           >
@@ -201,40 +388,26 @@ export function PlatformSection() {
                     pointerEvents: isActive ? "auto" : "none",
                   }}
                 >
-                  <div className="relative grid h-full grid-cols-1 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.2fr)] gap-6 lg:gap-10 xl:gap-14 items-center">
+                  <div className="relative grid h-full grid-cols-[minmax(0,0.85fr)_minmax(0,1.2fr)] gap-10 xl:gap-14 items-center">
                     {isFocused ? (
                       <div
                         aria-hidden
-                        className="pointer-events-none absolute inset-y-[6%] left-0 right-[48%] rounded-3xl bg-[#fefefc] max-lg:right-0 max-lg:inset-y-0"
+                        className="pointer-events-none absolute inset-y-[6%] left-0 right-[48%] rounded-3xl bg-[#fefefc]"
                       />
                     ) : null}
 
-                    <div
-                      className={`relative flex flex-col justify-center order-2 lg:order-1 min-w-0 ${
-                        isFocused ? "z-10" : ""
-                      }`}
-                    >
-                      <p className="text-[12px] sm:text-[13px] font-semibold tracking-[0.2em] uppercase text-[#0a0a0a]/40">
-                        {String(i + 1).padStart(2, "0")}
-                      </p>
-                      <h3 className="mt-3 sm:mt-4 text-balance text-[1.75rem] sm:text-3xl lg:text-[2.35rem] xl:text-[2.6rem] font-semibold tracking-tight text-[#0a0a0a] leading-[1.1]">
-                        {uc.label}
-                      </h3>
-                      <p className="mt-3 sm:mt-4 max-w-sm text-[14px] sm:text-[15px] text-[#0a0a0a]/55 leading-relaxed">
-                        {uc.brief}
-                      </p>
-                      <Link
-                        href={`/product#${uc.id}`}
-                        className="mt-5 sm:mt-6 inline-flex items-center gap-1.5 self-start text-[13px] sm:text-[14px] font-semibold text-[#0a0a0a] hover:opacity-70 transition-opacity"
-                        tabIndex={isActive ? 0 : -1}
-                      >
-                        See how it works
-                        <HiArrowRight className="h-4 w-4" />
-                      </Link>
+                    <div className={`relative order-1 min-w-0 ${isFocused ? "z-10" : ""}`}>
+                      <UseCaseCopy
+                        index={i}
+                        label={uc.label}
+                        brief={uc.brief}
+                        id={uc.id}
+                        active={isActive}
+                      />
                     </div>
 
                     <div
-                      className={`relative order-1 lg:order-2 min-w-0 h-[220px] sm:h-[280px] lg:h-full overflow-hidden ${
+                      className={`relative order-2 min-w-0 h-full overflow-hidden ${
                         isFocused ? "z-10" : ""
                       }`}
                     >
@@ -250,35 +423,21 @@ export function PlatformSection() {
         </div>
 
         <div className="relative z-20 mx-auto w-full max-w-[1280px] shrink-0 bg-[#fefefc] px-5 sm:px-8 lg:px-10 pb-8 sm:pb-10 pt-5 sm:pt-6">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <div className="flex items-center gap-2" role="tablist" aria-label="Product steps">
-              {USE_CASES.map((uc, i) => (
-                <button
-                  key={uc.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={i === activeIndex}
-                  aria-label={uc.label}
-                  onClick={() => goToIndex(i)}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${
-                    i === activeIndex
-                      ? "w-8 bg-[#0a0a0a]"
-                      : "w-1.5 bg-[#0a0a0a]/20 hover:bg-[#0a0a0a]/40"
-                  }`}
-                />
-              ))}
-            </div>
-
-            <Link
-              href="/product"
-              className="inline-flex items-center justify-center gap-2 self-start sm:self-auto rounded-full bg-[#0a0a0a] px-7 py-3.5 text-[14px] font-semibold text-[#fefefc] transition-colors hover:bg-black"
-            >
-              Explore Product
-              <HiArrowRight className="h-4 w-4" />
-            </Link>
+          <div className="flex flex-row items-center justify-between gap-4">
+            <StepDots activeIndex={activeIndex} onSelect={goToIndex} />
+            <ExploreCta />
           </div>
         </div>
       </div>
     </section>
+  );
+}
+
+export function PlatformSection() {
+  return (
+    <div id="platform">
+      <MobilePlatform />
+      <DesktopPlatform />
+    </div>
   );
 }

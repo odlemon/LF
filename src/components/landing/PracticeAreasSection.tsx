@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { HiArrowRight } from "react-icons/hi";
 
@@ -142,26 +141,26 @@ export function PracticeAreasSection() {
                   transition: reduceMotion ? undefined : `flex-grow 900ms ${EASE}`,
                 }}
               >
-                <Image
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
                   src={p.image}
                   alt={p.imageAlt}
-                  fill
-                  sizes={isActive ? "(min-width:1280px) 55vw, 50vw" : "14vw"}
-                  quality={90}
-                  className={`object-cover will-change-transform ${
+                  className={`absolute inset-0 h-full w-full object-cover will-change-transform ${
                     isActive ? "scale-100" : "scale-[1.08]"
                   }`}
                   style={{
                     transition: reduceMotion ? undefined : `transform 1.6s ${EASE}`,
                   }}
-                  priority={i === 0}
+                  loading={i === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                  fetchPriority={i === 0 ? "high" : "auto"}
                 />
 
                 <div
                   className={`absolute inset-0 ${
                     isActive
-                      ? "bg-gradient-to-t from-black/85 via-black/30 to-black/10"
-                      : "bg-black/55 group-hover:bg-black/40"
+                      ? "bg-gradient-to-t from-black/75 via-black/25 to-black/5"
+                      : "bg-black/45 group-hover:bg-black/30"
                   }`}
                   style={{
                     transition: reduceMotion ? undefined : `background-color 700ms ${EASE}`,
@@ -216,13 +215,13 @@ export function PracticeAreasSection() {
                         </span>
                         <span className="h-px w-10 bg-white/25" />
                       </div>
-                      <h3 className="text-[2rem] xl:text-[2.75rem] 2xl:text-[3.1rem] font-semibold tracking-tight leading-[1.05] text-white">
+                      <h3 className="text-[2rem] xl:text-[2.75rem] 2xl:text-[3.1rem] font-semibold tracking-tight leading-[1.05] text-white drop-shadow-sm">
                         {p.label}
                       </h3>
-                      <p className="mt-3 xl:mt-4 text-[15px] xl:text-base font-medium leading-snug text-white/85 text-balance max-w-xl">
+                      <p className="mt-3 xl:mt-4 text-[15px] xl:text-base font-medium leading-snug text-white text-balance max-w-xl">
                         {p.headline}
                       </p>
-                      <p className="mt-2 xl:mt-3 text-[13px] xl:text-[14px] leading-relaxed text-white/50 max-w-md">
+                      <p className="mt-2 xl:mt-3 text-[13px] xl:text-[14px] leading-relaxed text-white/80 max-w-md">
                         {p.line}
                       </p>
                     </div>
@@ -266,46 +265,47 @@ export function PracticeAreasSection() {
                   transition: reduceMotion ? undefined : `height 700ms ${EASE}`,
                 }}
               >
-                <Image
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
                   src={p.image}
                   alt={p.imageAlt}
-                  fill
-                  sizes="100vw"
-                  quality={90}
-                  className="object-cover"
+                  className="absolute inset-0 h-full w-full object-cover"
+                  loading={i === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                  fetchPriority={i === 0 ? "high" : "auto"}
                 />
                 <div
                   className={`absolute inset-0 transition-colors duration-500 ${
                     isActive
-                      ? "bg-gradient-to-t from-black/90 via-black/40 to-black/20"
-                      : "bg-black/60"
+                      ? "bg-gradient-to-t from-black/80 via-black/35 to-black/10"
+                      : "bg-black/50"
                   }`}
                 />
 
                 {!isActive ? (
                   <div className="absolute inset-0 flex items-center justify-between gap-3 px-4 sm:px-5">
                     <div className="flex items-center gap-3 sm:gap-4 min-w-0">
-                      <span className="text-[12px] font-semibold tracking-[0.24em] text-white/45 tabular-nums shrink-0">
+                      <span className="text-[12px] font-semibold tracking-[0.24em] text-white/70 tabular-nums shrink-0">
                         {String(i + 1).padStart(2, "0")}
                       </span>
-                      <span className="text-[1.15rem] sm:text-[1.35rem] md:text-[1.5rem] font-semibold text-white truncate">
+                      <span className="text-[1.15rem] sm:text-[1.35rem] md:text-[1.5rem] font-semibold text-white truncate drop-shadow-sm">
                         {p.label}
                       </span>
                     </div>
-                    <span className="text-white/40 text-xl leading-none shrink-0">+</span>
+                    <span className="text-white/60 text-xl leading-none shrink-0">+</span>
                   </div>
                 ) : (
                   <div className="absolute inset-x-0 bottom-0 p-4 sm:p-6">
-                    <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-white/45">
+                    <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-white/70">
                       {String(i + 1).padStart(2, "0")}
                     </p>
-                    <h3 className="mt-2 text-[1.75rem] sm:text-[2.15rem] font-semibold tracking-tight text-white leading-[1.05]">
+                    <h3 className="mt-2 text-[1.75rem] sm:text-[2.15rem] font-semibold tracking-tight text-white leading-[1.05] drop-shadow-sm">
                       {p.label}
                     </h3>
-                    <p className="mt-2.5 text-[14px] sm:text-[15px] font-medium text-white/85 leading-snug text-balance">
+                    <p className="mt-2.5 text-[14px] sm:text-[15px] font-medium text-white leading-snug text-balance">
                       {p.headline}
                     </p>
-                    <p className="mt-2 text-[13px] text-white/55 leading-relaxed max-w-lg">
+                    <p className="mt-2 text-[13px] text-white/80 leading-relaxed max-w-lg">
                       {p.line}
                     </p>
                     <Link

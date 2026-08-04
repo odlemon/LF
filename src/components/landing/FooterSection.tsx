@@ -28,6 +28,8 @@ const COLUMNS = [
     title: "Company",
     links: [
       { label: "Security", href: "/security" },
+      { label: "Certifications", href: "/security#certifications" },
+      { label: "Data residency", href: "/security#residency" },
       { label: "Contact", href: "/#contact" },
       { label: "Book a demo", href: "/auth" },
     ],

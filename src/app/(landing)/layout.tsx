@@ -20,6 +20,11 @@ export default function LandingLayout({
 }) {
   preload("/videos/golden-hour-poster.jpg", { as: "image", fetchPriority: "high" });
   preload("/videos/golden-hour-desktop.mp4", { as: "video", fetchPriority: "high" });
+  preload("/images/practices/ma-glass.jpg", { as: "image", fetchPriority: "high" });
+  preload("/images/practices/banking-glass.jpg", { as: "image" });
+  preload("/images/practices/litigation-glass.jpg", { as: "image" });
+  preload("/images/practices/realestate-glass.jpg", { as: "image" });
+  preload("/images/practices/employment-glass.jpg", { as: "image" });
 
   return (
     <div className={`${quicksand.className} min-h-screen bg-gray-100 antialiased`}>
