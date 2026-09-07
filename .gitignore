@@ -33,6 +33,10 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 !.env.example
+# Committed on purpose — see the header inside it. It holds no secrets, and without it in the
+# repository a fresh clone builds a subtly wrong application: the surfaces lose the URLs they
+# use to redirect between each other, and nothing fails loudly enough to notice.
+!.env.production
 
 # local deploy secrets (host/password). Safe script may be committed; secrets stay out.
 scripts/deploy.local.env
