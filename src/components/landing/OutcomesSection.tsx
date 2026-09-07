@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { HiArrowRight } from "react-icons/hi";
+import { MARKETING_SHELL, SectionHeader } from "@/components/landing/editorial";
 
 /**
  * Single generalized large-matter scenario for elite commercial firms.
@@ -16,9 +17,9 @@ const SCENARIO = {
   leakRate: "7%",
   firmMatters: 40,
   firmAnnual: "$6.7M",
-  quoteWithout: "3–5 days",
+  quoteWithout: "3 to 5 days",
   quoteWith: "same day",
-  realizationLift: "+6–8 pts",
+  realizationLift: "+6 to 8 pts",
 };
 
 export function OutcomesSection() {
@@ -29,24 +30,17 @@ export function OutcomesSection() {
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_0%_0%,rgba(10,10,10,0.03),transparent_40%),radial-gradient(ellipse_at_100%_100%,rgba(10,10,10,0.025),transparent_45%)]"
       />
 
-      <div className="relative mx-auto max-w-[1280px] px-4 sm:px-8 lg:px-10 pt-20 sm:pt-28 pb-20 sm:pb-28">
-        <div className="max-w-3xl">
-          <div className="flex items-center gap-3">
-            <span className="h-px w-8 bg-[#0a0a0a]/25" />
-            <p className="text-[11px] sm:text-[12px] font-medium tracking-[0.28em] uppercase text-[#0a0a0a]/40">
-              Firm outcomes
-            </p>
-          </div>
-          <h2 className="mt-5 text-balance text-[1.85rem] sm:text-4xl lg:text-[3rem] font-semibold leading-[1.06] tracking-tight">
-            On a large matter, a few points of leakage
-            <span className="text-[#0a0a0a]/40"> is a seven-figure story.</span>
-          </h2>
-          <p className="mt-5 max-w-2xl text-[15px] sm:text-lg text-[#0a0a0a]/55 leading-relaxed">
-            Am Law 100 overall realization sits near 78%, and most firms still expect write-offs to
-            climb. Here is what that looks like on one common large matter - then across a year of
-            them.
-          </p>
-        </div>
+      <div className={`${MARKETING_SHELL} pt-20 sm:pt-28 pb-20 sm:pb-28`}>
+        <SectionHeader
+          eyebrow="Firm outcomes"
+          title={
+            <>
+              On a large matter, a few points of leakage
+              <span className="text-[#0a0a0a]/40"> is a seven-figure story.</span>
+            </>
+          }
+          description="Am Law 100 overall realization sits near 78%, and most firms still expect write-offs to climb. Here is what that looks like on one common large matter - then across a year of them."
+        />
 
         <div className="mt-12 sm:mt-16 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-5">
           {/* One matter */}
@@ -177,13 +171,22 @@ export function OutcomesSection() {
             Illustrative for a typical elite large-matter book. In a demo we run the same math on
             your last twenty deals.
           </p>
-          <Link
-            href="/auth"
-            className="inline-flex items-center justify-center gap-2 self-start sm:self-auto rounded-full bg-[#0a0a0a] px-6 py-3.5 text-[14px] font-semibold text-[#fefefc] hover:bg-black transition-colors cursor-pointer"
-          >
-            Book a demo
-            <HiArrowRight className="h-4 w-4" />
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-3 self-start sm:self-auto">
+            <Link
+              href="/roi-calculator"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-black/15 bg-white px-6 py-3.5 text-[14px] font-semibold text-[#0a0a0a] hover:bg-black/[0.03] transition-colors cursor-pointer"
+            >
+              Model your firm’s impact
+              <HiArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              href="/auth"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#0a0a0a] px-6 py-3.5 text-[14px] font-semibold text-[#fefefc] hover:bg-black transition-colors cursor-pointer"
+            >
+              Book a demo
+              <HiArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
         </div>
       </div>
     </section>

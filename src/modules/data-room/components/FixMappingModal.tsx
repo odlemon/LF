@@ -130,19 +130,19 @@ export function FixMappingModal({ isOpen, onClose, document, onSuccess }: FixMap
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} title={`Fix Column Mapping - ${document.originalFilename}`} size="2xl">
-      <div className="flex flex-col gap-5 text-gray-800">
-        <p className="text-xs font-semibold text-gray-500 leading-relaxed">
+      <div className="flex flex-col gap-5 text-ink/90">
+        <p className="text-xs font-semibold text-ink/55 leading-relaxed">
           The system could not automatically map all columns in this file. Review the mapping below and correct any mismatches, then re-process.
         </p>
 
         {/* Mappings Table */}
-        <div className="border border-gray-200/80 rounded-2xl overflow-hidden bg-white shadow-sm shrink-0">
+        <div className="border border-border/80 rounded-2xl overflow-hidden bg-surface shadow-sm shrink-0">
           <table className="min-w-full divide-y divide-gray-100 text-xs">
-            <thead className="bg-gray-50">
+            <thead className="bg-field">
               <tr>
-                <th className="px-4 py-2.5 text-left font-bold text-gray-500 uppercase tracking-wider">System Field</th>
-                <th className="px-4 py-2.5 text-left font-bold text-gray-500 uppercase tracking-wider">File Column Match</th>
-                <th className="px-4 py-2.5 text-left font-bold text-gray-500 uppercase tracking-wider w-20">Status</th>
+                <th className="px-4 py-2.5 text-left font-bold text-ink/55 uppercase tracking-wider">System Field</th>
+                <th className="px-4 py-2.5 text-left font-bold text-ink/55 uppercase tracking-wider">File Column Match</th>
+                <th className="px-4 py-2.5 text-left font-bold text-ink/55 uppercase tracking-wider w-20">Status</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 font-semibold">
@@ -160,7 +160,7 @@ export function FixMappingModal({ isOpen, onClose, document, onSuccess }: FixMap
 
                 return (
                   <tr key={sysField}>
-                    <td className="px-4 py-3 text-gray-700 font-bold max-w-[120px] truncate">{sysField}</td>
+                    <td className="px-4 py-3 text-ink/80 font-bold max-w-[120px] truncate">{sysField}</td>
                     <td className="px-4 py-3 flex flex-col gap-1.5">
                       <Select
                         placeholder="-- Choose Header --"
@@ -176,13 +176,13 @@ export function FixMappingModal({ isOpen, onClose, document, onSuccess }: FixMap
                           placeholder="Type headers manually..."
                           value={manualFields[sysField] || ""}
                           onChange={(e) => handleManualTextChange(sysField, e.target.value)}
-                          className="w-full px-3.5 py-1.5 bg-white border border-gray-250 rounded-full text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all"
+                          className="w-full px-3.5 py-1.5 bg-surface border border-border rounded-full text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all"
                         />
                       )}
                     </td>
                     <td className="px-4 py-3">
                       {isMapped || (isManualSelected && manualFields[sysField]?.trim()) ? (
-                        <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                        <span className="text-[10px] font-bold text-ink/80 bg-hover px-2 py-0.5 rounded-full border border-border">
                           Mapped
                         </span>
                       ) : (
@@ -205,14 +205,14 @@ export function FixMappingModal({ isOpen, onClose, document, onSuccess }: FixMap
             id="saveTemplate"
             checked={saveTemplate}
             onChange={(e) => setSaveTemplate(e.target.checked)}
-            className="w-4 h-4 text-primary bg-gray-100 border-gray-250 rounded focus:ring-primary/20 cursor-pointer"
+            className="w-4 h-4 text-primary bg-canvas border-border rounded focus:ring-primary/20 cursor-pointer"
           />
-          <label htmlFor="saveTemplate" className="text-xs font-bold text-gray-500 cursor-pointer">
+          <label htmlFor="saveTemplate" className="text-xs font-bold text-ink/55 cursor-pointer">
             Save this mapping as a template for future uploads of this category
           </label>
         </div>
 
-        <div className="flex items-center justify-end gap-3 pt-3 border-t border-gray-100 shrink-0">
+        <div className="flex items-center justify-end gap-3 pt-3 border-t border-border shrink-0">
           <Button type="button" variant="secondary" onClick={onClose} disabled={isSaving}>
             Cancel
           </Button>

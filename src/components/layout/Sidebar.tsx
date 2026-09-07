@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
 import { PERMISSIONS, Permission } from "@/lib/utils/permissions";
+import { PlatformLogo } from "@/components/layout/PlatformLogo";
 import {
   HiHome,
   HiClipboardList,
@@ -14,7 +15,6 @@ import {
   HiScale,
   HiChartBar,
   HiUserGroup,
-  HiViewList,
   HiUsers,
   HiLockClosed,
   HiDatabase,
@@ -23,6 +23,14 @@ import {
   HiChevronDown,
   HiChevronUp,
   HiChip,
+  HiOutlineTrendingDown,
+  HiReceiptRefund,
+  HiOutlineSwitchHorizontal,
+  HiOutlineClipboardCheck,
+  HiOutlineCloudUpload,
+  HiOutlineKey,
+  HiOutlineChartBar,
+  HiOutlineOfficeBuilding,
 } from "react-icons/hi";
 
 interface NavItem {
@@ -32,7 +40,12 @@ interface NavItem {
   icon: React.ComponentType<{ className?: string }>;
 }
 
-export function Sidebar() {
+interface SidebarProps {
+  isMobileOpen?: boolean;
+  onMobileClose?: () => void;
+}
+
+export function Sidebar({ isMobileOpen = false, onMobileClose }: SidebarProps = {}) {
   const pathname = usePathname();
   const { user } = useAuth();
   const [isSettingsOpen, setIsSettingsOpen] = useState(true);
@@ -40,10 +53,13 @@ export function Sidebar() {
   const mainNavItems: NavItem[] = [
     { label: "Dashboard", route: "/dashboard", icon: HiHome },
     { label: "Pricing Requests", route: "/pricing-requests", permission: PERMISSIONS.REQUEST_READ, icon: HiDocumentText },
-    { label: "Approvals", route: "/approvals", permission: PERMISSIONS.APPROVAL_READ, icon: HiCheckCircle },
+    { label: "Approvals", route: "/approvals", permission: PERMISSIONS.SCENARIO_APPROVE, icon: HiCheckCircle },
     { label: "Negotiations", route: "/negotiations", permission: PERMISSIONS.NEGOTIATION_READ, icon: HiScale },
     { label: "Analytics", route: "/analytics", permission: PERMISSIONS.ANALYTICS_READ, icon: HiChartBar },
-    { label: "Knowledge Base", route: "/knowledge", permission: PERMISSIONS.KNOWLEDGE_READ, icon: HiDocumentText },
+    // Knowledge Base: the backend module exists (/v1/knowledge-articles) but no
+    // frontend page was ever built, so this link 404'd for every user. Hidden
+    // until the page exists rather than shipping a dead nav item.
+    // { label: "Knowledge Base", route: "/knowledge", permission: PERMISSIONS.KNOWLEDGE_READ, icon: HiDocumentText },
     { label: "Clients", route: "/clients", permission: PERMISSIONS.CLIENT_READ, icon: HiUserGroup },
   ];
 
@@ -51,25 +67,34 @@ export function Sidebar() {
     { label: "Practice Areas", route: "/settings/practice-areas", permission: PERMISSIONS.PRACTICE_AREA_READ, icon: HiFolder },
     { label: "Fee Earner Levels", route: "/settings/fee-earner-levels", permission: "FEE_EARNER_READ", icon: HiScale },
     { label: "Rate Cards", route: "/settings/rate-cards", permission: PERMISSIONS.RATE_CARD_READ, icon: HiDatabase },
+    { label: "FX Rates", route: "/settings/fx-rates", permission: PERMISSIONS.FIRM_READ, icon: HiOutlineSwitchHorizontal },
+    { label: "Approval Matrix", route: "/settings/approval-matrix", permission: PERMISSIONS.FIRM_READ, icon: HiOutlineClipboardCheck },
+    { label: "Volume Discounts", route: "/settings/volume-discounts", permission: "VOLUME_DISCOUNT_PROGRAM_READ", icon: HiOutlineTrendingDown },
+    { label: "Billing", route: "/settings/billing", permission: PERMISSIONS.BILLING_ACCOUNT_READ, icon: HiReceiptRefund },
+    { label: "Usage & Billing", route: "/settings/usage", permission: PERMISSIONS.USAGE_READ, icon: HiOutlineChartBar },
+    { label: "Firm Consumption", route: "/settings/usage/firms", permission: PERMISSIONS.USAGE_CROSS_FIRM_READ, icon: HiOutlineOfficeBuilding },
     { label: "Guardrails", route: "/settings/guardrails", permission: PERMISSIONS.FIRM_READ, icon: HiShieldCheck },
-    { label: "Data Room", route: "/settings/data-room", permission: "DATA_ROOM_READ", icon: HiDatabase },
+    { label: "Data Room", route: "/settings/data-room", permission: "DATAROOM_READ", icon: HiDatabase },
+    { label: "PMS Connectors", route: "/settings/data-room/pms-connectors", permission: "DATAROOM_READ", icon: HiOutlineCloudUpload },
     { label: "Users", route: "/settings/users", permission: PERMISSIONS.USER_READ, icon: HiUsers },
     { label: "Roles", route: "/settings/roles", permission: PERMISSIONS.ROLE_READ, icon: HiLockClosed },
     { label: "AI Configuration", route: "/settings/ai-config", permission: "AI_CONFIG_READ", icon: HiChip },
+    { label: "SSO Admin", route: "/settings/sso", permission: PERMISSIONS.FIRM_READ, icon: HiOutlineKey },
   ];
 
   const renderItem = (item: NavItem) => {
-    const isActive = pathname === item.route;
+    const isActive = pathname === item.route || pathname.startsWith(item.route + "/");
     const Icon = item.icon;
 
     return (
       <Link
         key={item.route}
         href={item.route}
-        className={`flex items-center gap-3 px-4 py-2.5 text-sm font-medium transition-all ${
+        onClick={onMobileClose}
+        className={`flex items-center gap-3 px-4 py-2.5 text-sm font-semibold transition-all ${
           isActive
-            ? "bg-primary text-white shadow-md shadow-primary/30 rounded-xl"
-            : "text-gray-700 hover:bg-gray-100/80 rounded-lg"
+            ? "bg-primary text-on-primary rounded-full"
+            : "text-ink/65 hover:bg-hover hover:text-ink rounded-full"
         }`}
       >
         <Icon className="w-5 h-5" />
@@ -85,64 +110,113 @@ export function Sidebar() {
     if (roles.includes("SUPER_ADMIN") || roles.includes("ADMIN")) {
       return true;
     }
+    // Partners own client relationships, approvals, and rate negotiation.
+    if (roles.includes("PARTNER")) {
+      if (
+        permission === PERMISSIONS.SCENARIO_APPROVE ||
+        permission === PERMISSIONS.NEGOTIATION_READ ||
+        permission === PERMISSIONS.NEGOTIATION_UPDATE ||
+        permission === PERMISSIONS.NEGOTIATION_WRITE ||
+        permission === PERMISSIONS.CLIENT_READ ||
+        permission === PERMISSIONS.REQUEST_READ ||
+        permission === PERMISSIONS.SCENARIO_READ
+      ) {
+        return true;
+      }
+    }
     return user.permissions.includes(permission as any);
   };
 
-  const visibleSettingsItems = settingsNavItems.filter((i) => checkPermission(i.permission));
+  const isPartnerOnly =
+    (user?.roles || []).includes("PARTNER") &&
+    !(user?.roles || []).includes("SUPER_ADMIN") &&
+    !(user?.roles || []).includes("ADMIN");
+
+  const partnerRoutes = new Set([
+    "/dashboard",
+    "/approvals",
+    "/negotiations",
+    "/clients",
+  ]);
+
+  const visibleMainItems = mainNavItems.filter((i) => {
+    if (isPartnerOnly) {
+      return partnerRoutes.has(i.route);
+    }
+    return checkPermission(i.permission);
+  });
+  const visibleSettingsItems = isPartnerOnly
+    ? []
+    : settingsNavItems.filter((i) => checkPermission(i.permission));
 
   return (
-    <aside className="w-64 bg-white border-r border-gray-200/50 flex flex-col h-screen sticky top-0 p-4 shadow-2xl shadow-black/5">
-      <div className="mb-8 px-4 flex items-center justify-between">
-        <Link href="/dashboard" className="flex items-center gap-2.5 min-w-0">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/logo/lysp-logo.png"
-            alt="Lysp"
-            width={36}
-            height={36}
-            className="h-9 w-9 object-contain shrink-0"
-          />
-          <span className="text-xl font-bold text-gray-900 tracking-tight">Lysp</span>
+    <>
+      {isMobileOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/40 md:hidden"
+          onClick={onMobileClose}
+          aria-hidden="true"
+        />
+      )}
+      <aside
+        className={`w-64 bg-surface border-r border-border flex flex-col h-screen p-4 fixed inset-y-0 left-0 z-50 transition-transform duration-200 ease-out md:sticky md:top-0 md:translate-x-0 ${
+          isMobileOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+      <div className="mb-8 px-3 flex items-center justify-between gap-2">
+        <Link href="/dashboard" className="inline-flex items-center shrink-0" aria-label="Lysp home" onClick={onMobileClose}>
+          <PlatformLogo size={40} />
         </Link>
-        <Link href="/settings/firm" className="text-xs font-semibold text-primary hover:underline shrink-0">
-          Firm Settings
-        </Link>
+        {!isPartnerOnly && (
+          <Link
+            href="/settings/firm"
+            onClick={onMobileClose}
+            className="text-[11px] font-semibold text-ink/45 hover:text-ink shrink-0"
+          >
+            Firm
+          </Link>
+        )}
       </div>
 
       <nav className="flex-1 flex flex-col gap-6 overflow-y-auto rates-scrollable">
-        <div className="flex flex-col gap-1">
-          {mainNavItems.filter((i) => checkPermission(i.permission)).map(renderItem)}
+        <div className="flex flex-col gap-0.5">
+          {visibleMainItems.map(renderItem)}
         </div>
 
         {visibleSettingsItems.length > 0 && (
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-0.5">
             <button
               onClick={() => setIsSettingsOpen(!isSettingsOpen)}
-              className="flex items-center justify-between px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider hover:text-gray-900 transition-colors w-full text-left"
+              className="flex items-center justify-between px-4 py-2 text-[11px] font-semibold text-ink/35 uppercase tracking-[0.18em] hover:text-ink/70 transition-colors w-full text-left cursor-pointer"
             >
               <span>Settings</span>
-              {isSettingsOpen ? <HiChevronUp className="w-3.5 h-3.5" /> : <HiChevronDown className="w-3.5 h-3.5" />}
+              {isSettingsOpen ? (
+                <HiChevronUp className="w-3.5 h-3.5" />
+              ) : (
+                <HiChevronDown className="w-3.5 h-3.5" />
+              )}
             </button>
-            
+
             {isSettingsOpen && (
-              <div className="flex flex-col gap-1 pl-1 transition-all duration-300 animate-fade-in">
+              <div className="flex flex-col gap-0.5 pl-1 transition-all duration-300 animate-fade-in">
                 {visibleSettingsItems.map(renderItem)}
               </div>
             )}
           </div>
         )}
 
-        {checkPermission(PERMISSIONS.AUDIT_READ) && (
-          <div className="flex flex-col gap-1 border-t border-gray-100 pt-4 mt-2">
-            <span className="px-4 py-2 text-xs font-semibold text-gray-550 uppercase tracking-wider block">
-              Audit Logs
+        {!isPartnerOnly && checkPermission(PERMISSIONS.AUDIT_READ) && (
+          <div className="flex flex-col gap-0.5 border-t border-border pt-4 mt-2">
+            <span className="px-4 py-2 text-[11px] font-semibold text-ink/35 uppercase tracking-[0.18em] block">
+              Audit
             </span>
             <Link
               href="/audit-trail"
-              className={`flex items-center gap-3 px-4 py-2.5 text-sm font-medium transition-all ${
+              onClick={onMobileClose}
+              className={`flex items-center gap-3 px-4 py-2.5 text-sm font-semibold transition-all ${
                 pathname === "/audit-trail"
-                  ? "bg-primary text-white shadow-md shadow-primary/30 rounded-xl"
-                  : "text-gray-700 hover:bg-gray-100/80 rounded-lg"
+                  ? "bg-primary text-on-primary rounded-full"
+                  : "text-ink/65 hover:bg-hover hover:text-ink rounded-full"
               }`}
             >
               <HiClipboardList className="w-5 h-5" />
@@ -151,6 +225,7 @@ export function Sidebar() {
           </div>
         )}
       </nav>
-    </aside>
+      </aside>
+    </>
   );
 }

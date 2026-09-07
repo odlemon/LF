@@ -13,6 +13,8 @@ export interface User {
   lastName: string;
   roles: string[];
   permissions: string[];
+  userType?: "FIRM_USER" | "CLIENT_USER" | string;
+  clientProfileUid?: string;
 }
 
 export interface ClientUser {
@@ -20,6 +22,11 @@ export interface ClientUser {
   email: string;
   clientName: string;
   contactName: string;
+  mustChangePassword?: boolean;
+  firmUid?: string | null;
+  clientProfileUid?: string | null;
+  country?: string | null;
+  roleLabel?: string | null;
 }
 
 export interface ApiError {

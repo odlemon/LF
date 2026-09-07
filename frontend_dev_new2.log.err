@@ -1,0 +1,12 @@
+[browser] Cannot update a component (`PricingRequestWorkspacePage`) while rendering a different component (`PricingRequestWorkspaceLoaded`). To locate the bad setState() call inside `PricingRequestWorkspaceLoaded`, follow the stack trace as described in https://react.dev/link/setstate-in-render 
+    at PricingRequestWorkspaceLoaded.useCallback[handleScopeChange] (src/app/(app)/pricing-requests/[uid]/page.tsx:98:7)
+    at useScope.useCallback[updatePhase] (src/modules/intake/hooks/useIntake.ts:295:9)
+    at useScope (src/modules/intake/hooks/useIntake.ts:259:37)
+    at PricingRequestWorkspaceLoaded (src/app/(app)/pricing-requests/[uid]/page.tsx:104:29)
+   96 |     (next: MatterScope | null) => {
+   97 |       rememberScope(next);
+>  98 |       setScope(next);
+      |       ^
+   99 |     },
+  100 |     [rememberScope, setScope]
+  101 |   ); (src/app/(app)

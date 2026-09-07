@@ -26,7 +26,7 @@ export interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  login: (credentials: Record<string, unknown>) => Promise<void>;
+  login: (credentials: Record<string, unknown>) => Promise<User>;
   logout: () => Promise<void>;
 }
 
@@ -38,14 +38,33 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const fetchCurrentUser = useCallback(async () => {
     const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
-    if (!token) {
+    if (!token || token === "mock-client-token") {
+      if (token === "mock-client-token" && typeof window !== "undefined") {
+        localStorage.removeItem("token");
+      }
       setUser(null);
       setIsLoading(false);
       return;
     }
 
     try {
-      const userResponse = await apiClient.get<BackendUser>("/v1/auth/me");
+      const payload = JSON.parse(atob(token.split(".")[1].replace(/-/g, "+").replace(/_/g, "/")));
+      if (payload?.type === "CLIENT_USER" || payload?.type === "PORTAL") {
+        setUser({
+          id: payload.userUid || payload.sub || "client",
+          email: payload.sub || payload.email || "",
+          firstName: "Client",
+          lastName: "",
+          roles: ["CLIENT_USER"],
+          permissions: [],
+          userType: "CLIENT_USER",
+          clientProfileUid: payload.clientProfileUid,
+        });
+        setIsLoading(false);
+        return;
+      }
+
+      const userResponse = await apiClient.get<BackendUser>(ENDPOINTS.AUTH.ME);
       const backendUser = userResponse.data;
       const mappedUser: User = {
         id: backendUser.uid,
@@ -54,8 +73,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         lastName: backendUser.lastName,
         roles: backendUser.roles ? backendUser.roles.map((r) => r.name) : [],
         permissions: backendUser.roles
-          ? backendUser.roles.flatMap((r) => r.permissions ? r.permissions.map((p) => p.name) : [])
+          ? backendUser.roles.flatMap((r) => (r.permissions ? r.permissions.map((p) => p.name) : []))
           : [],
+        userType: "FIRM_USER",
       };
       setUser(mappedUser);
     } catch {
@@ -68,20 +88,42 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  const login = async (credentials: Record<string, unknown>) => {
+  const login = async (credentials: Record<string, unknown>): Promise<User> => {
     setIsLoading(true);
     try {
-      const loginResponse = await apiClient.post<{ token: string; email: string }>(
-        ENDPOINTS.AUTH.LOGIN,
-        credentials
-      );
-      const { token } = loginResponse.data;
+      const loginResponse = await apiClient.post<{
+        token: string;
+        email: string;
+        userUid?: string;
+        userType?: string;
+        clientProfileUid?: string;
+      }>(ENDPOINTS.AUTH.LOGIN, credentials);
+      const { token, email, userUid, userType, clientProfileUid } = loginResponse.data;
+
+      if (!token || token === "mock-client-token") {
+        throw new Error("Invalid authentication response.");
+      }
 
       if (typeof window !== "undefined") {
         localStorage.setItem("token", token);
       }
 
-      const userResponse = await apiClient.get<BackendUser>("/v1/auth/me");
+      if (userType === "CLIENT_USER") {
+        const mappedUser: User = {
+          id: userUid || email,
+          email: email || String(credentials.email || ""),
+          firstName: "Client",
+          lastName: "",
+          roles: ["CLIENT_USER"],
+          permissions: [],
+          userType: "CLIENT_USER",
+          clientProfileUid,
+        };
+        setUser(mappedUser);
+        return mappedUser;
+      }
+
+      const userResponse = await apiClient.get<BackendUser>(ENDPOINTS.AUTH.ME);
       const backendUser = userResponse.data;
       const mappedUser: User = {
         id: backendUser.uid,
@@ -90,10 +132,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         lastName: backendUser.lastName,
         roles: backendUser.roles ? backendUser.roles.map((r) => r.name) : [],
         permissions: backendUser.roles
-          ? backendUser.roles.flatMap((r) => r.permissions ? r.permissions.map((p) => p.name) : [])
+          ? backendUser.roles.flatMap((r) => (r.permissions ? r.permissions.map((p) => p.name) : []))
           : [],
+        userType: "FIRM_USER",
       };
       setUser(mappedUser);
+      return mappedUser;
     } catch (error) {
       if (typeof window !== "undefined") {
         localStorage.removeItem("token");
@@ -112,6 +156,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         localStorage.removeItem("token");
       }
       setUser(null);
+      try {
+        await fetch(ENDPOINTS.AUTH.LOGOUT, { method: "POST", credentials: "include" });
+      } catch {
+        // ignore network errors on logout
+      }
     } finally {
       setIsLoading(false);
     }
@@ -128,6 +177,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const handleUnauthorized = () => {
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("token");
+      }
       setUser(null);
     };
 

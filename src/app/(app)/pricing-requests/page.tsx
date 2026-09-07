@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { HiPlus } from "react-icons/hi";
 import toast from "react-hot-toast";
@@ -11,7 +11,6 @@ import { PERMISSIONS } from "@/lib/utils/permissions";
 import { usePricingRequests, ListFilterTab } from "@/modules/intake/hooks/useIntake";
 import { PricingRequestCard } from "@/modules/intake/components/PricingRequestCard";
 import { NewRequestModal } from "@/modules/intake/components/NewRequestModal";
-import { getClient } from "@/lib/api/modules/firm.api";
 
 const TABS: { id: ListFilterTab; label: string }[] = [
   { id: "all", label: "All" },
@@ -20,36 +19,29 @@ const TABS: { id: ListFilterTab; label: string }[] = [
   { id: "cancelled", label: "Cancelled" },
 ];
 
+function PricingRequestCardSkeleton() {
+  return (
+    <div className="bg-surface rounded-2xl border border-border/60 p-5 shadow-sm animate-pulse">
+      <div className="flex items-start justify-between gap-3 mb-3">
+        <div className="h-5 bg-field rounded-md w-2/3" />
+        <div className="h-6 bg-field rounded-full w-24 shrink-0" />
+      </div>
+      <div className="flex flex-col gap-2 mt-4">
+        <div className="h-3.5 bg-field rounded w-1/2" />
+        <div className="h-3.5 bg-field rounded w-2/5" />
+      </div>
+      <div className="h-3 bg-field rounded w-16 mt-4" />
+    </div>
+  );
+}
+
 export default function PricingRequestsPage() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<ListFilterTab>("all");
   const [page] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [clientNames, setClientNames] = useState<Record<string, string>>({});
 
   const { requests, isLoading, error, createRequest } = usePricingRequests(activeTab, page);
-
-  useEffect(() => {
-    const loadNames = async () => {
-      const map: Record<string, string> = {};
-      await Promise.all(
-        requests.map(async (req) => {
-          if (req.clientName) {
-            map[req.uid] = req.clientName;
-            return;
-          }
-          try {
-            const client = await getClient(req.clientProfileUid);
-            map[req.uid] = client.name;
-          } catch {
-            map[req.uid] = "-";
-          }
-        })
-      );
-      setClientNames(map);
-    };
-    if (requests.length > 0) loadNames();
-  }, [requests]);
 
   const handleCreate = async (command: Parameters<typeof createRequest>[0]) => {
     const created = await createRequest(command);
@@ -61,8 +53,8 @@ export default function PricingRequestsPage() {
     <div className="p-8 max-w-6xl w-full mx-auto flex flex-col gap-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Pricing Requests</h1>
-          <p className="text-sm text-gray-500 mt-1">
+          <h1 className="text-2xl font-bold text-ink tracking-tight">Pricing Requests</h1>
+          <p className="text-sm text-ink/55 mt-1">
             Scope matters with AI-assisted conversational intake.
           </p>
         </div>
@@ -74,7 +66,7 @@ export default function PricingRequestsPage() {
         </PermissionGate>
       </div>
 
-      <div className="flex flex-wrap gap-2 border-b border-gray-200/60 pb-1">
+      <div className="flex flex-wrap gap-2 border-b border-border/60 pb-1">
         {TABS.map((tab) => (
           <button
             key={tab.id}
@@ -83,7 +75,7 @@ export default function PricingRequestsPage() {
             className={`px-4 py-2 text-sm font-semibold rounded-t-lg transition-colors ${
               activeTab === tab.id
                 ? "text-primary border-b-2 border-primary"
-                : "text-gray-500 hover:text-gray-800"
+                : "text-ink/55 hover:text-ink/90"
             }`}
           >
             {tab.label}
@@ -98,10 +90,10 @@ export default function PricingRequestsPage() {
       )}
 
       {isLoading ? (
-        <div className="flex flex-col gap-3 animate-pulse">
-          <div className="h-28 bg-gray-200 rounded-2xl" />
-          <div className="h-28 bg-gray-200 rounded-2xl" />
-          <div className="h-28 bg-gray-200 rounded-2xl" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <PricingRequestCardSkeleton key={i} />
+          ))}
         </div>
       ) : requests.length === 0 ? (
         <EmptyState
@@ -111,11 +103,7 @@ export default function PricingRequestsPage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {requests.map((req) => (
-            <PricingRequestCard
-              key={req.uid}
-              request={req}
-              clientName={clientNames[req.uid]}
-            />
+            <PricingRequestCard key={req.uid} request={req} />
           ))}
         </div>
       )}

@@ -39,20 +39,20 @@ export function Modal({ isOpen, onClose, title, children, size = "lg" }: ModalPr
       {/* Backdrop click dismisser */}
       <div className="absolute inset-0 cursor-default" onClick={onClose} />
 
-      <div className={`bg-white rounded-2xl ${widthClass} w-full shadow-2xl relative animate-fade-in-up border border-gray-150/40 z-50 overflow-hidden flex flex-col max-h-[85vh]`}>
-        <div className="p-5 border-b border-gray-100 flex items-center justify-between shrink-0">
-          <h3 className="text-base font-bold text-gray-900 leading-tight">
+      <div className={`bg-surface rounded-2xl ${widthClass} w-full shadow-2xl relative animate-fade-in-up border border-border/40 z-50 overflow-hidden flex flex-col max-h-[85vh]`}>
+        <div className="p-5 border-b border-border flex items-center justify-between shrink-0">
+          <h3 className="text-base font-bold text-ink leading-tight">
             {title}
           </h3>
           <button
             onClick={onClose}
             type="button"
-            className="p-1.5 text-gray-400 hover:text-gray-655 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer"
+            className="p-1.5 text-ink/40 hover:text-gray-655 rounded-lg hover:bg-field transition-colors cursor-pointer"
           >
             <HiX className="w-4.5 h-4.5" />
           </button>
         </div>
-        <div className="p-6 overflow-y-auto rates-scrollable flex-1 text-sm text-gray-800 leading-relaxed">
+        <div className="p-6 overflow-y-auto rates-scrollable flex-1 text-sm text-ink/90 leading-relaxed">
           {children}
         </div>
       </div>

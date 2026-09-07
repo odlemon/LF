@@ -92,30 +92,30 @@ export default function AiConfigPage() {
       <div className="p-8 max-w-5xl w-full mx-auto flex flex-col gap-6">
         {/* Page Header */}
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 tracking-tight">AI Configuration</h1>
-          <p className="text-sm text-gray-500 mt-1">
+          <h1 className="text-2xl font-bold text-ink tracking-tight">AI Configuration</h1>
+          <p className="text-sm text-ink/55 mt-1">
             Configure the AI provider that powers Lysp&apos;s pricing intelligence. Only one provider can be active at a time.
           </p>
         </div>
 
         {/* Active Provider Banner */}
         {isGlobalLoading ? (
-          <div className="h-[90px] bg-gray-200 rounded-2xl animate-pulse" />
+          <div className="h-[90px] bg-field rounded-2xl animate-pulse" />
         ) : activeProvider ? (
-          <div className="bg-green-50 border border-green-200 rounded-2xl p-5 flex items-center gap-4 animate-fade-in shadow-sm shadow-emerald-500/5">
-            <HiCheckCircle className="w-8 h-8 text-green-500 shrink-0" />
+          <div className="bg-hover border border-border rounded-2xl p-5 flex items-center gap-4 animate-fade-in shadow-sm shadow-black/5">
+            <HiCheckCircle className="w-8 h-8 text-ink/70 shrink-0" />
             <div className="flex-1 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               <div>
-                <h4 className="text-sm font-bold text-green-900">
+                <h4 className="text-sm font-bold text-ink">
                   Active Provider: {activeProvider.displayName}
                 </h4>
-                <p className="text-xs text-green-700 font-semibold mt-0.5">
+                <p className="text-xs text-ink/80 font-semibold mt-0.5">
                   Model: {activeProvider.modelName}
                 </p>
               </div>
               <div className="shrink-0">
                 {activeProvider.lastTestResult === "SUCCESS" ? (
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-lg text-[10px] font-bold bg-green-100 text-green-800 border border-green-200 tracking-wide uppercase">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-lg text-[10px] font-bold bg-hover text-ink border border-border tracking-wide uppercase">
                     Last tested: {formatTestedDate(activeProvider.lastTestedAt)}
                   </span>
                 ) : activeProvider.lastTestResult === "FAILED" ? (
@@ -123,7 +123,7 @@ export default function AiConfigPage() {
                     Last test failed: {formatTestedDate(activeProvider.lastTestedAt)}
                   </span>
                 ) : (
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-lg text-[10px] font-bold bg-gray-100 text-gray-550 border border-gray-200 tracking-wide uppercase">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-lg text-[10px] font-bold bg-canvas text-ink/55 border border-border tracking-wide uppercase">
                     Not yet tested
                   </span>
                 )}
@@ -145,10 +145,10 @@ export default function AiConfigPage() {
         {/* Providers Grid */}
         {isGlobalLoading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-            <div className="h-44 bg-gray-200 rounded-2xl animate-pulse" />
-            <div className="h-44 bg-gray-200 rounded-2xl animate-pulse" />
-            <div className="h-44 bg-gray-200 rounded-2xl animate-pulse" />
-            <div className="h-44 bg-gray-200 rounded-2xl animate-pulse" />
+            <div className="h-44 bg-field rounded-2xl animate-pulse" />
+            <div className="h-44 bg-field rounded-2xl animate-pulse" />
+            <div className="h-44 bg-field rounded-2xl animate-pulse" />
+            <div className="h-44 bg-field rounded-2xl animate-pulse" />
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">

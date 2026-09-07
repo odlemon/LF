@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { HiSparkles, HiPlus } from "react-icons/hi";
+import { HiPlus, HiChevronDoubleRight } from "react-icons/hi";
 import {
   MatterScope,
   ChatMode,
@@ -11,17 +11,25 @@ import {
   UpdateTaskCommand,
   CreateAssumptionCommand,
 } from "../types";
-import { FeeEarnerLevel } from "@/modules/firm/types";
+import { FeeEarnerLevel, PracticeArea } from "@/modules/firm/types";
 import { ScopeConfidenceCard } from "./ScopeConfidenceCard";
 import { PhaseSection } from "./PhaseSection";
 import { AssumptionSection } from "./AssumptionSection";
+import { ScopeBuildProgress } from "./ScopeBuildProgress";
 import { Button } from "@/components/ui/Button";
+import { ScopeProgressStepId } from "../constants/scopeProgress";
 
 interface ScopePanelProps {
   scope: MatterScope | null;
   scopeGenerated: boolean;
   chatMode?: ChatMode;
   feeEarnerLevels: FeeEarnerLevel[];
+  practiceAreas?: PracticeArea[];
+  onCollapse?: () => void;
+  /** Live build progress while Lysp is generating / editing scope */
+  buildProgressStep?: ScopeProgressStepId | null;
+  buildProgressLabel?: string | null;
+  isBuilding?: boolean;
   onUpdatePhase: (phaseUid: string, command: UpdatePhaseCommand) => Promise<unknown>;
   onAddPhase: (command: CreatePhaseCommand) => Promise<unknown>;
   onDeletePhase: (phaseUid: string) => Promise<unknown>;
@@ -37,6 +45,11 @@ export function ScopePanel({
   scopeGenerated,
   chatMode,
   feeEarnerLevels,
+  practiceAreas = [],
+  onCollapse,
+  buildProgressStep = null,
+  buildProgressLabel = null,
+  isBuilding = false,
   onUpdatePhase,
   onAddPhase,
   onDeletePhase,
@@ -53,24 +66,119 @@ export function ScopePanel({
   const [justUpdated, setJustUpdated] = useState(false);
 
   const readOnly = chatMode === "SCOPE_CONFIRMED";
+  const hasPhases = Boolean(scope?.phases?.length);
+  const showBuildProgress = isBuilding && !hasPhases;
 
   useEffect(() => {
-    if (scope) {
+    if (scope && hasPhases) {
       setJustUpdated(true);
       const timer = setTimeout(() => setJustUpdated(false), 1000);
       return () => clearTimeout(timer);
     }
-  }, [scope]);
+  }, [scope, hasPhases]);
 
-  if (!scopeGenerated || !scope) {
+  if (showBuildProgress) {
     return (
-      <div className="flex-1 flex flex-col items-center justify-center p-8 text-center min-h-0">
-        <HiSparkles className="w-10 h-10 text-gray-300 mb-4" />
-        <h3 className="text-base font-bold text-gray-700">Your scope will appear here</h3>
-        <p className="text-sm text-gray-500 mt-2 max-w-xs leading-relaxed">
-          Chat with Lysp to scope this matter. You can describe the work, ask questions,
-          or attach documents. When you&apos;re ready, ask Lysp to generate the scope.
-        </p>
+      <div className="flex-1 flex flex-col min-h-0 relative overflow-hidden">
+        <div className="relative px-6 py-4 border-b border-border/60 shrink-0 flex items-center justify-between gap-3">
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35">
+              Matter scope
+            </p>
+            <p className="text-sm text-ink/50 mt-0.5">Building your plan…</p>
+          </div>
+          {onCollapse && (
+            <button
+              type="button"
+              onClick={onCollapse}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-[11px] font-semibold text-ink/45 hover:text-ink hover:bg-hover border border-transparent hover:border-border transition-colors"
+              aria-label="Collapse scope panel"
+              title="Collapse scope"
+            >
+              <HiChevronDoubleRight className="w-4 h-4" />
+              Hide
+            </button>
+          )}
+        </div>
+        <ScopeBuildProgress
+          activeStep={buildProgressStep ?? "listening"}
+          statusLabel={buildProgressLabel ?? undefined}
+        />
+      </div>
+    );
+  }
+
+  if (!scopeGenerated || !scope || !hasPhases) {
+    return (
+      <div className="flex-1 flex flex-col min-h-0 relative overflow-hidden">
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(165deg, var(--color-surface) 0%, var(--color-field) 50%, var(--color-surface) 100%)",
+          }}
+        />
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.04] mix-blend-multiply dark:opacity-[0.08] dark:mix-blend-soft-light"
+          style={{
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+          }}
+        />
+
+        <div className="relative px-6 py-4 border-b border-border/60 shrink-0 flex items-center justify-between gap-3">
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35">
+              Matter scope
+            </p>
+            <p className="text-sm text-ink/50 mt-0.5">Waiting for a plan</p>
+          </div>
+          {onCollapse && (
+            <button
+              type="button"
+              onClick={onCollapse}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-[11px] font-semibold text-ink/45 hover:text-ink hover:bg-hover border border-transparent hover:border-border transition-colors"
+              aria-label="Collapse scope panel"
+              title="Collapse scope"
+            >
+              <HiChevronDoubleRight className="w-4 h-4" />
+              Hide
+            </button>
+          )}
+        </div>
+
+        <div className="relative flex-1 flex flex-col items-center justify-center p-8 text-center">
+          <div className="w-full max-w-sm">
+            <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35 mb-3">
+              Matter scope
+            </p>
+            <h3 className="text-xl font-semibold text-ink tracking-tight">
+              Your engagement plan
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-ink/45">
+              Chat with Lysp about the matter. When you&apos;re ready, ask it to
+              generate the scope — phases, hours, and assumptions will appear here.
+            </p>
+
+            <div className="mt-8 space-y-2.5 text-left">
+              {[
+                "Describe the deal or attach an RFP",
+                "Ask for comparable past matters",
+                "Say “generate the scope” when ready",
+              ].map((step, i) => (
+                <div
+                  key={step}
+                  className="flex items-center gap-3 rounded-2xl border border-border/80 bg-surface/80 px-4 py-3"
+                >
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ink text-[10px] font-bold text-on-primary tabular-nums">
+                    {i + 1}
+                  </span>
+                  <span className="text-[13px] text-ink/70">{step}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -92,47 +200,111 @@ export function ScopePanel({
   };
 
   const sortedPhases = [...scope.phases].sort((a, b) => a.sortOrder - b.sortOrder);
+  const totalHours = sortedPhases.reduce(
+    (sum, phase) =>
+      sum +
+      phase.tasks.reduce((taskSum, task) => taskSum + (task.estimatedHours || 0), 0),
+    0
+  );
 
   return (
     <div
-      className={`flex-1 flex flex-col overflow-hidden min-h-0 transition-all duration-300 ${
-        justUpdated ? "ring-2 ring-primary/50" : ""
+      className={`flex-1 flex flex-col overflow-hidden min-h-0 relative transition-[box-shadow] duration-500 ${
+        justUpdated ? "ring-1 ring-inset ring-ink/10" : ""
       }`}
     >
-      <div className="flex-1 overflow-y-auto rates-scrollable p-4 min-h-0">
-        <ScopeConfidenceCard scope={scope} />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-80"
+        style={{
+          background:
+            "linear-gradient(165deg, var(--color-surface) 0%, var(--color-field) 48%, var(--color-surface) 100%)",
+        }}
+      />
+      {/* subtle paper grain */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.035] mix-blend-multiply dark:mix-blend-soft-light dark:opacity-[0.07]"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+        }}
+      />
 
-        {sortedPhases.map((phase, index) => (
-          <PhaseSection
-            key={phase.uid}
-            phase={phase}
-            index={index}
-            feeEarnerLevels={feeEarnerLevels}
-            readOnly={readOnly}
-            onUpdatePhase={onUpdatePhase}
-            onDeletePhase={onDeletePhase}
-            onAddTask={onAddTask}
-            onUpdateTask={onUpdateTask}
-            onDeleteTask={onDeleteTask}
-          />
-        ))}
+      <div className="relative px-6 py-4 border-b border-border/60 shrink-0 flex items-center justify-between gap-3 backdrop-blur-[2px]">
+        <div>
+          <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35">
+            Matter scope
+          </p>
+          <p className="text-sm text-ink/55 mt-0.5">
+            Review, refine, then confirm
+          </p>
+        </div>
+        <div className="flex items-center gap-2 shrink-0">
+          {readOnly && (
+            <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-ink/50 bg-surface/80 px-3 py-1.5 rounded-full border border-border">
+              Locked
+            </span>
+          )}
+          {onCollapse && (
+            <button
+              type="button"
+              onClick={onCollapse}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-[11px] font-semibold text-ink/45 hover:text-ink hover:bg-hover border border-transparent hover:border-border transition-colors"
+              aria-label="Collapse scope panel"
+              title="Collapse scope"
+            >
+              <HiChevronDoubleRight className="w-4 h-4" />
+              Hide
+            </button>
+          )}
+        </div>
+      </div>
+
+      <div className="relative flex-1 overflow-y-auto rates-scrollable px-5 sm:px-6 py-6 min-h-0">
+        <ScopeConfidenceCard
+          scope={scope}
+          totalHours={totalHours}
+          phaseCount={sortedPhases.length}
+        />
+
+        <div className="mb-2">
+          <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35 mb-4">
+            Work plan
+          </p>
+          {sortedPhases.map((phase, index) => (
+            <PhaseSection
+              key={phase.uid || `phase-${index}`}
+              phase={phase}
+              index={index}
+              isLast={index === sortedPhases.length - 1}
+              feeEarnerLevels={feeEarnerLevels}
+              practiceAreas={practiceAreas}
+              readOnly={readOnly}
+              onUpdatePhase={onUpdatePhase}
+              onDeletePhase={onDeletePhase}
+              onAddTask={onAddTask}
+              onUpdateTask={onUpdateTask}
+              onDeleteTask={onDeleteTask}
+            />
+          ))}
+        </div>
 
         {!readOnly &&
           (showAddPhase ? (
-            <div className="p-3 border border-gray-200 rounded-xl bg-gray-50/50 flex flex-col gap-2 mb-4">
+            <div className="ml-10 mb-6 p-4 border border-border rounded-2xl bg-surface/90 flex flex-col gap-2.5 shadow-sm">
               <input
                 type="text"
                 value={phaseName}
                 onChange={(e) => setPhaseName(e.target.value)}
                 placeholder="Phase name"
-                className="px-3 py-2 text-sm border border-gray-200 rounded-lg"
+                className="px-4 py-2.5 text-sm border border-border rounded-full bg-field focus:outline-none focus:ring-2 focus:ring-primary/20"
+                autoFocus
               />
               <input
                 type="text"
                 value={phaseDescription}
                 onChange={(e) => setPhaseDescription(e.target.value)}
                 placeholder="Description (optional)"
-                className="px-3 py-2 text-sm border border-gray-200 rounded-lg"
+                className="px-4 py-2.5 text-sm border border-border rounded-full bg-field focus:outline-none focus:ring-2 focus:ring-primary/20"
               />
               <div className="flex gap-2">
                 <Button
@@ -158,9 +330,9 @@ export function ScopePanel({
             <button
               type="button"
               onClick={() => setShowAddPhase(true)}
-              className="flex items-center gap-1.5 text-sm font-bold text-primary hover:underline mb-4"
+              className="ml-10 mb-4 inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-ink/40 hover:text-ink transition-colors"
             >
-              <HiPlus className="w-4 h-4" />
+              <HiPlus className="w-3.5 h-3.5" />
               Add Phase
             </button>
           ))}

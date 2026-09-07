@@ -1,0 +1,111 @@
+---
+description: Lysp agentic AI engineering — RAG, tool use, context engineering, memory, guardrails. Apply when building or changing backend AI, intake agents, tools, StreamingAiClient, DataRoomContextService, or AI config.
+alwaysApply: false
+---
+
+# Lysp — AI Engineering Guide
+
+Lysp is an **agentic AI system**, not a chatbot. The AI reasons, decides, calls tools, reads data, and writes to the DB without a human clicking. Think Harvey for pricing and BD.
+
+Every AI feature must be a production-grade agentic pipeline — not a one-shot OpenAI call.
+
+Canonical copy also lives in `lysp-backend/.cursor/rules/ai-engineering.mdc`.
+
+## Four Pillars
+
+### 1. RAG (always before pricing/scoping/recommendations)
+
+- Retrieval layer: `DataRoomContextService`
+- Sources: `past_matter_records`, `time_entry_records`, `market_benchmark_records` (+ knowledge learnings when available)
+- Inject retrieved firm data into the system prompt before every relevant AI call
+- **Never call the AI cold** for pricing, scoping, or recommendations
+
+### 2. Tool Use (agentic loop)
+
+- Intake agent exposes named tools (`update_task`, `add_phase`, `generate_scope`, `query_past_matters`, …)
+- Send tool definitions with every call; AI returns text **or** a tool call
+- On tool call: execute → inject result → call AI again until plain text
+- **Max 10 iterations**; then stop with a recoverable user message
+- Tool descriptions must be specific — vague descriptions cause wrong tool picks
+
+### 3. Context Engineering (more important than prompt wording)
+
+Every call’s system prompt should include:
+- Firm name/config, practice areas, fee earner levels
+- Client details for this matter
+- **Current scope state always fresh from DB** (never from conversation memory)
+- RAG past matters / benchmarks / learnings
+- Extracted text from attachments
+- Available tools list
+
+Message history:
+- Sliding window **last 20 messages**
+- If longer: summarise older, keep last ~18
+- Include tool-call history (what ran + results)
+
+Prioritise fresh DB state over chat memory. Never let history grow unbounded.
+
+### 4. Memory
+
+| Type | Store | Behavior |
+|---|---|---|
+| Short-term | `intake_messages` | Load/trim to last 20 per pricing request |
+| Long-term | `matter_learnings` (Knowledge) | Human-written after matter closes; retrieved via RAG |
+
+**Not yet (Phase 2):** auto memory extraction, vector embeddings, graph memory.
+
+## Agentic Loop (intake)
+
+```
+User message
+  → save user message
+  → RAG retrieve context
+  → build system prompt (firm + fresh scope + RAG + tools)
+  → load last 20 messages
+  → call AI with tools
+      → text → save AI message → SSE to user → done
+      → tool call → execute → log → inject → loop (max 10)
+  → scope mutations emit scope_updated SSE
+```
+
+## Model-Agnostic Layer
+
+- **No domain module calls a provider directly.** Use `ai-engine` / `IntakeAiClient` / `StreamingAiClient`
+- Active config: `AiProviderConfigService.getActiveConfig(firmUid)` (ANTHROPIC | OPENAI | GEMINI | DEEPSEEK)
+- Provider tool/message format differences stay inside `StreamingAiClient`
+- New provider = one switch case, not scattered SDK calls
+
+## Observability
+
+Log every tool call to `tool_call_logs`: tool name, input, result, success/fail, timestamp.
+
+## Guardrails (enforce in `IntakeChatServiceImpl` / loop)
+
+1. **Max 10 iterations** — then stop with a clear user-facing error
+2. **Validate tool inputs** — bad/missing UIDs return tool errors (agent recovers); do not crash
+3. **SCOPE_CONFIRMED lock** — remove scope-modifying tools from the tools list at context level (not just prompt text); keep read tools only
+4. **Firm isolation** — every tool validates entity belongs to caller’s firm
+5. **No raw SQL tools** — only named, schema-bound functions
+
+## Where Patterns Live
+
+| What | Where | Pattern |
+|---|---|---|
+| Historical retrieval | `DataRoomContextService` | RAG |
+| Scope gen/modify | `IntakeChatService` + `ToolRegistry` | Tool use + loop |
+| Streaming | `StreamingAiClient` + SSE | Streaming |
+| Short-term memory | `intake_messages` | Last 20 |
+| Long-term memory | `matter_learnings` | RAG |
+| Provider switch | `AiProviderConfigService` | Model-agnostic |
+| Safety | Agentic loop | Guardrails |
+| Transparency | `tool_call_logs` | Observability |
+
+## Before Changing AI Code
+
+Read Anthropic’s Building Effective Agents, tool-use docs for Anthropic/OpenAI/Gemini, and context-engineering practices (plan → act → observe → repeat).
+
+## Implementation status (as of Aug 2026)
+
+**Done in intake:** agentic loop (`IntakeAgentService`, max 10), 13 tools, `tool_call_logs`, RAG injection of past matters + time benchmarks + market benchmarks + `matter_learnings`, scope always fresh from DB, history window with older-message summary, SCOPE_CONFIRMED strips mutating tools from the advertised tool list, firm isolation on tools, tool input validation returning `ToolResult.fail`.
+
+**Still open:** move `IntakeAgentAiClient` into `ai-engine` as shared `StreamingAiClient`; remove unused `IntakeAiClient` / `IntakeAiStreamingClient`; persist cross-turn tool history into subsequent prompts; Phase 2 embeddings / auto memory.

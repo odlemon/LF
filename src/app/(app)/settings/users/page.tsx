@@ -6,6 +6,7 @@ import { useRoles } from "@/modules/roles/hooks/useRoles";
 import { PermissionGate } from "@/components/shared/PermissionGate";
 import { PERMISSIONS } from "@/lib/utils/permissions";
 import { Button } from "@/components/ui/Button";
+import { Input } from "@/components/ui/Input";
 import { User } from "@/modules/users/types";
 import { useAuth } from "@/hooks/useAuth";
 import toast from "react-hot-toast";
@@ -136,8 +137,8 @@ export default function UsersPage() {
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Users</h1>
-            <p className="text-sm text-gray-500 mt-1">
+            <h1 className="text-2xl font-bold text-ink">Users</h1>
+            <p className="text-sm text-ink/55 mt-1">
               Manage law firm team members, assign operational roles, and set access status
             </p>
           </div>
@@ -154,24 +155,24 @@ export default function UsersPage() {
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
           </div>
         ) : (
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-200/50 overflow-hidden">
+          <div className="bg-surface rounded-2xl shadow-sm border border-border/50 overflow-hidden">
             <div className="overflow-x-auto rates-scrollable">
               <table className={`w-full text-left border-collapse transition-all duration-300 ${processingUserUid ? "blur-[2px] pointer-events-none select-none opacity-80" : ""}`}>
                 <thead>
-                  <tr className="border-b border-gray-200/50 bg-gray-50/50">
-                    <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  <tr className="border-b border-border/50 bg-field/50">
+                    <th className="px-6 py-4 text-xs font-semibold text-ink/55 uppercase tracking-wider">
                       Name
                     </th>
-                    <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-xs font-semibold text-ink/55 uppercase tracking-wider">
                       Email
                     </th>
-                    <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-xs font-semibold text-ink/55 uppercase tracking-wider">
                       Roles
                     </th>
-                    <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-xs font-semibold text-ink/55 uppercase tracking-wider">
                       Status
                     </th>
-                    <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider text-right">
+                    <th className="px-6 py-4 text-xs font-semibold text-ink/55 uppercase tracking-wider text-right">
                       Actions
                     </th>
                   </tr>
@@ -179,17 +180,17 @@ export default function UsersPage() {
                 <tbody className="divide-y divide-gray-100">
                   {users.length === 0 ? (
                     <tr>
-                      <td colSpan={5} className="px-6 py-12 text-center text-gray-500">
+                      <td colSpan={5} className="px-6 py-12 text-center text-ink/55">
                         No users registered in the workspace
                       </td>
                     </tr>
                   ) : (
                     users.map((user) => (
-                      <tr key={user.uid} className="hover:bg-gray-50/50 transition-colors">
-                        <td className="px-6 py-4.5 font-medium text-gray-900">
+                      <tr key={user.uid} className="hover:bg-field/50 transition-colors">
+                        <td className="px-6 py-4.5 font-medium text-ink">
                           {user.firstName} {user.lastName}
                         </td>
-                        <td className="px-6 py-4.5 text-gray-600">
+                        <td className="px-6 py-4.5 text-ink/65">
                           {user.email}
                         </td>
                         <td className="px-6 py-4.5">
@@ -204,7 +205,7 @@ export default function UsersPage() {
                                 </span>
                               ))
                             ) : (
-                              <span className="text-xs text-gray-400 font-medium">No roles</span>
+                              <span className="text-xs text-ink/40 font-medium">No roles</span>
                             )}
                           </div>
                         </td>
@@ -212,7 +213,7 @@ export default function UsersPage() {
                           <span
                             className={`inline-flex items-center px-3 py-1 rounded-lg text-xs font-semibold ${
                               user.active
-                                ? "bg-green-100 text-green-800 border border-green-200"
+                                ? "bg-hover text-ink border border-border"
                                 : "bg-red-50 text-red-600 border border-red-100"
                             }`}
                           >
@@ -226,7 +227,7 @@ export default function UsersPage() {
                                 setActiveUserUid(user.uid);
                                 setIsRoleModalOpen(true);
                               }}
-                              className="inline-flex items-center justify-center p-1.5 text-gray-500 hover:text-primary hover:bg-primary/5 rounded-lg transition-all cursor-pointer"
+                              className="inline-flex items-center justify-center p-1.5 text-ink/55 hover:text-primary hover:bg-primary/5 rounded-lg transition-all cursor-pointer"
                             >
                               <HiUserGroup className="w-4.5 h-4.5" />
                             </button>
@@ -234,7 +235,7 @@ export default function UsersPage() {
                           <PermissionGate permission={PERMISSIONS.USER_UPDATE}>
                             <button
                               onClick={() => openEditModal(user)}
-                              className="inline-flex items-center justify-center p-1.5 text-gray-500 hover:text-primary hover:bg-primary/5 rounded-lg transition-all cursor-pointer"
+                              className="inline-flex items-center justify-center p-1.5 text-ink/55 hover:text-primary hover:bg-primary/5 rounded-lg transition-all cursor-pointer"
                             >
                               <HiPencil className="w-4.5 h-4.5" />
                             </button>
@@ -250,16 +251,16 @@ export default function UsersPage() {
                               className={`inline-flex items-center justify-center p-1.5 rounded-lg transition-all ${
                                 currentUser?.id === user.uid
                                   ? "text-gray-300 cursor-not-allowed opacity-40"
-                                  : "text-gray-500 hover:text-primary hover:bg-primary/5 cursor-pointer"
+                                  : "text-ink/55 hover:text-primary hover:bg-primary/5 cursor-pointer"
                               }`}
                               title={currentUser?.id === user.uid ? "Cannot deactivate own account" : undefined}
                             >
                               {processingUserUid === user.uid && processingAction === "deactivate" ? (
-                                <div className={`w-4.5 h-4.5 animate-spin rounded-full border-2 ${user.active ? "border-yellow-600/20 border-b-yellow-600" : "border-green-600/20 border-b-green-600"}`} />
+                                <div className={`w-4.5 h-4.5 animate-spin rounded-full border-2 ${user.active ? "border-yellow-600/20 border-b-yellow-600" : "border-primary/20 border-b-primary"}`} />
                               ) : user.active ? (
                                 <HiX className={`w-4.5 h-4.5 ${currentUser?.id === user.uid ? "text-gray-300" : "text-yellow-600"}`} />
                               ) : (
-                                <HiCheck className={`w-4.5 h-4.5 ${currentUser?.id === user.uid ? "text-gray-300" : "text-green-600"}`} />
+                                <HiCheck className={`w-4.5 h-4.5 ${currentUser?.id === user.uid ? "text-gray-300" : "text-ink/70"}`} />
                               )}
                             </button>
                           </PermissionGate>
@@ -276,7 +277,7 @@ export default function UsersPage() {
                               className={`inline-flex items-center justify-center p-1.5 rounded-lg transition-all ${
                                 currentUser?.id === user.uid
                                   ? "text-gray-300 cursor-not-allowed opacity-40"
-                                  : "text-gray-550 hover:text-red-650 hover:bg-red-50 cursor-pointer"
+                                  : "text-ink/55 hover:text-red-650 hover:bg-red-50 cursor-pointer"
                               }`}
                               title={currentUser?.id === user.uid ? "Cannot delete own account" : undefined}
                             >
@@ -299,14 +300,14 @@ export default function UsersPage() {
 
         {isFormOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm animate-fade-in">
-            <div className="bg-white rounded-2xl shadow-xl w-full max-w-xl max-h-[90vh] overflow-hidden flex flex-col border border-gray-200/50">
-              <div className="px-6 py-4.5 border-b border-gray-100 flex items-center justify-between">
-                <h3 className="text-lg font-semibold text-gray-900">
+            <div className="bg-surface rounded-2xl shadow-xl w-full max-w-xl max-h-[90vh] overflow-hidden flex flex-col border border-border/50">
+              <div className="px-6 py-4.5 border-b border-border flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-ink">
                   {editingUserUid ? "Edit User Details" : "Create New User"}
                 </h3>
                 <button
                   onClick={() => setIsFormOpen(false)}
-                  className="text-gray-400 hover:text-gray-600 p-1 hover:bg-gray-50 rounded-full"
+                  className="text-ink/40 hover:text-ink/65 p-1 hover:bg-field rounded-full"
                 >
                   <HiX className="w-5 h-5" />
                 </button>
@@ -315,82 +316,77 @@ export default function UsersPage() {
               <form onSubmit={handleFormSubmit} className="flex-1 overflow-y-auto p-6 space-y-5">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                    <label className="text-xs font-semibold text-ink/55 uppercase tracking-wider">
                       First Name
                     </label>
-                    <input
+                    <Input
                       type="text"
                       required
                       value={formState.firstName}
                       onChange={(e) =>
                         setFormState({ ...formState, firstName: e.target.value })
                       }
-                      className="w-full px-4 py-2.5 border border-gray-200 rounded-lg bg-white/50 focus:ring-2 focus:ring-primary/30 focus:border-primary/50 text-[15px] transition-all"
                     />
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                    <label className="text-xs font-semibold text-ink/55 uppercase tracking-wider">
                       Last Name
                     </label>
-                    <input
+                    <Input
                       type="text"
                       required
                       value={formState.lastName}
                       onChange={(e) =>
                         setFormState({ ...formState, lastName: e.target.value })
                       }
-                      className="w-full px-4 py-2.5 border border-gray-200 rounded-lg bg-white/50 focus:ring-2 focus:ring-primary/30 focus:border-primary/50 text-[15px] transition-all"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  <label className="text-xs font-semibold text-ink/55 uppercase tracking-wider">
                     Email Address
                   </label>
-                  <input
+                  <Input
                     type="email"
                     required
                     value={formState.email}
                     onChange={(e) =>
                       setFormState({ ...formState, email: e.target.value })
                     }
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-lg bg-white/50 focus:ring-2 focus:ring-primary/30 focus:border-primary/50 text-[15px] transition-all"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  <label className="text-xs font-semibold text-ink/55 uppercase tracking-wider">
                     Phone Number
                   </label>
-                  <input
+                  <Input
                     type="text"
                     value={formState.phoneNumber}
                     onChange={(e) =>
                       setFormState({ ...formState, phoneNumber: e.target.value })
                     }
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-lg bg-white/50 focus:ring-2 focus:ring-primary/30 focus:border-primary/50 text-[15px] transition-all"
                   />
                 </div>
 
                 {!editingUserUid && (
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                    <label className="text-xs font-semibold text-ink/55 uppercase tracking-wider">
                       Initial Password
                     </label>
-                    <input
+                    <Input
                       type="password"
                       required
                       value={formState.password || ""}
                       onChange={(e) =>
                         setFormState({ ...formState, password: e.target.value })
                       }
-                      className="w-full px-4 py-2.5 border border-gray-200 rounded-lg bg-white/50 focus:ring-2 focus:ring-primary/30 focus:border-primary/50 text-[15px] transition-all"
                     />
                   </div>
                 )}
 
-                <div className="pt-4 border-t border-gray-100 flex items-center justify-end gap-3">
+                <div className="pt-4 border-t border-border flex items-center justify-end gap-3">
                   <Button
                     type="button"
                     variant="secondary"
@@ -410,14 +406,14 @@ export default function UsersPage() {
 
         {isRoleModalOpen && activeUser && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm animate-fade-in">
-            <div className="bg-white rounded-2xl shadow-xl w-full max-w-md border border-gray-200/50 overflow-hidden">
-              <div className="px-6 py-4.5 border-b border-gray-100 flex items-center justify-between">
-                <h3 className="text-lg font-semibold text-gray-900">
+            <div className="bg-surface rounded-2xl shadow-xl w-full max-w-md border border-border/50 overflow-hidden">
+              <div className="px-6 py-4.5 border-b border-border flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-ink">
                   Manage User Roles
                 </h3>
                 <button
                   onClick={() => setIsRoleModalOpen(false)}
-                  className="text-gray-400 hover:text-gray-600 p-1 hover:bg-gray-50 rounded-full"
+                  className="text-ink/40 hover:text-ink/65 p-1 hover:bg-field rounded-full"
                 >
                   <HiX className="w-5 h-5" />
                 </button>
@@ -429,10 +425,10 @@ export default function UsersPage() {
                     <HiUser className="text-primary w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900">
+                    <h4 className="font-semibold text-ink">
                       {activeUser.firstName} {activeUser.lastName}
                     </h4>
-                    <p className="text-xs text-gray-500">{activeUser.email}</p>
+                    <p className="text-xs text-ink/55">{activeUser.email}</p>
                   </div>
                 </div>
 
@@ -442,12 +438,12 @@ export default function UsersPage() {
                   </div>
                 ) : (
                   <div className="space-y-3">
-                    <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider block">
+                    <span className="text-xs font-semibold text-ink/55 uppercase tracking-wider block">
                       Assign System Roles
                     </span>
                     <div className="space-y-2.5 max-h-[40vh] overflow-y-auto pr-1 rates-scrollable">
                       {roles.length === 0 ? (
-                        <div className="p-4 text-center text-sm text-gray-500 bg-gray-50/50 border border-gray-200/50 rounded-xl">
+                        <div className="p-4 text-center text-sm text-ink/55 bg-field/50 border border-border/50 rounded-xl">
                           No roles defined in the system
                         </div>
                       ) : (
@@ -462,21 +458,21 @@ export default function UsersPage() {
                               className={`group flex items-center justify-between p-4 rounded-xl border transition-all duration-200 cursor-pointer ${
                                 hasRole
                                   ? "border-primary bg-primary/[0.02] shadow-sm"
-                                  : "border-gray-200/80 bg-white hover:border-gray-300 hover:bg-gray-50/30"
+                                  : "border-border/80 bg-surface hover:border-gray-300 hover:bg-field/30"
                               }`}
                             >
                               <div className="flex-1 pr-4">
-                                <span className={`text-sm font-semibold block transition-colors ${hasRole ? "text-primary" : "text-gray-900"}`}>
+                                <span className={`text-sm font-semibold block transition-colors ${hasRole ? "text-primary" : "text-ink"}`}>
                                   {role.name}
                                 </span>
-                                <span className="text-xs text-gray-500 mt-1 block leading-normal">
+                                <span className="text-xs text-ink/55 mt-1 block leading-normal">
                                   {role.description || "No description provided"}
                                 </span>
                               </div>
                               <div className={`w-5 h-5 rounded-md border flex items-center justify-center transition-all duration-200 shrink-0 ${
                                 hasRole
                                   ? "bg-primary border-primary text-white"
-                                  : "border-gray-350 bg-white group-hover:border-primary"
+                                  : "border-gray-350 bg-surface group-hover:border-primary"
                               }`}>
                                 {hasRole && <HiCheck className="w-3.5 h-3.5 stroke-[2.5]" />}
                               </div>

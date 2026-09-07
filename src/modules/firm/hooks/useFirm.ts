@@ -16,6 +16,9 @@ import {
   AddRateCardEntryCommand,
   CreateClientProfileCommand,
   UpdateGuardrailsCommand,
+  ExchangeRate,
+  CreateExchangeRateCommand,
+  ApprovalStageDefinition,
 } from "../types";
 
 export function useFirmDetails(uid: string = "firm_acme_123") {
@@ -358,7 +361,8 @@ export function useClients(filters?: { query?: string }) {
     } finally {
       setIsLoading(false);
     }
-  }, [filters]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filters?.query]);
 
   const createClient = useCallback(async (data: CreateClientProfileCommand) => {
     setIsLoading(true);
@@ -520,4 +524,129 @@ export function useGuardrails() {
   }, [fetchGuardrails]);
 
   return { guardrails, isLoading, error, updateGuardrails, refetch: fetchGuardrails };
+}
+
+export function useFxRates() {
+  const [rates, setRates] = useState<ExchangeRate[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchRates = useCallback(async () => {
+    await Promise.resolve();
+    setIsLoading(true);
+    setError(null);
+    try {
+      const data = await api.getFxRates();
+      setRates(data);
+    } catch (err: any) {
+      setError(err.response?.data?.message || err.message || "Failed to load exchange rates");
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  const createRate = useCallback(async (data: CreateExchangeRateCommand) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const created = await api.createFxRate(data);
+      setRates((prev) => [created, ...prev]);
+      return created;
+    } catch (err: any) {
+      const msg = err.response?.data?.message || err.message || "Failed to create exchange rate";
+      setError(msg);
+      throw new Error(msg);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  const updateRate = useCallback(async (uid: string, data: CreateExchangeRateCommand) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const updated = await api.updateFxRate(uid, data);
+      setRates((prev) => prev.map((r) => (r.uid === uid ? updated : r)));
+      return updated;
+    } catch (err: any) {
+      const msg = err.response?.data?.message || err.message || "Failed to update exchange rate";
+      setError(msg);
+      throw new Error(msg);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  const deleteRate = useCallback(async (uid: string) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      await api.deleteFxRate(uid);
+      setRates((prev) => prev.filter((r) => r.uid !== uid));
+    } catch (err: any) {
+      const msg = err.response?.data?.message || err.message || "Failed to remove exchange rate";
+      setError(msg);
+      throw new Error(msg);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      fetchRates();
+    }, 0);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [fetchRates]);
+
+  return { rates, isLoading, error, createRate, updateRate, deleteRate, refetch: fetchRates };
+}
+
+export function useApprovalMatrix() {
+  const [stages, setStages] = useState<ApprovalStageDefinition[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchStages = useCallback(async () => {
+    await Promise.resolve();
+    setIsLoading(true);
+    setError(null);
+    try {
+      const data = await api.getApprovalMatrix();
+      setStages(data.sort((a, b) => a.sequenceNo - b.sequenceNo));
+    } catch (err: any) {
+      setError(err.response?.data?.message || err.message || "Failed to load approval matrix");
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  const saveStages = useCallback(async (newStages: ApprovalStageDefinition[]) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const saved = await api.saveApprovalMatrix(newStages);
+      setStages(saved.sort((a, b) => a.sequenceNo - b.sequenceNo));
+      return saved;
+    } catch (err: any) {
+      const msg = err.response?.data?.message || err.message || "Failed to save approval matrix";
+      setError(msg);
+      throw new Error(msg);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      fetchStages();
+    }, 0);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [fetchStages]);
+
+  return { stages, isLoading, error, saveStages, refetch: fetchStages };
 }

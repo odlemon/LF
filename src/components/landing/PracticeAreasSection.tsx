@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { HiArrowRight } from "react-icons/hi";
+import { MARKETING_SHELL, SectionHeader } from "@/components/landing/editorial";
 
 type PracticeId = "ma" | "banking" | "litigation" | "realestate" | "employment";
 
@@ -99,24 +100,23 @@ export function PracticeAreasSection() {
         }}
       />
 
-      <div className="relative mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-10 pt-16 sm:pt-24 lg:pt-28 pb-14 sm:pb-20 lg:pb-24">
+      <div className={`${MARKETING_SHELL} pt-16 sm:pt-24 lg:pt-28 pb-14 sm:pb-20 lg:pb-24`}>
         <div className="flex flex-col xl:flex-row xl:items-end xl:justify-between gap-6 sm:gap-8 xl:gap-16">
-          <div className="max-w-2xl">
-            <div className="flex items-center gap-3">
-              <span className="h-px w-8 bg-white/30" />
-              <p className="text-[11px] sm:text-[12px] font-medium tracking-[0.28em] uppercase text-white/45">
-                Chambers of practice
-              </p>
-            </div>
-            <h2 className="mt-4 sm:mt-5 text-balance text-[1.75rem] sm:text-4xl md:text-5xl lg:text-[3.35rem] font-semibold leading-[1.05] tracking-tight text-[#fefefc]">
-              Every practice prices differently.
-              <span className="block text-white/45 mt-2 sm:mt-3">
-                Lysp meets each one where it wins.
-              </span>
-            </h2>
-          </div>
+          <SectionHeader
+            tone="dark"
+            eyebrow="Chambers of practice"
+            title={
+              <>
+                Every practice prices differently.
+                <span className="block text-white/45 mt-2 sm:mt-3">
+                  Lysp meets each one where it wins.
+                </span>
+              </>
+            }
+            className="max-w-2xl"
+          />
 
-          <p className="max-w-sm xl:max-w-xs text-[13px] sm:text-[15px] leading-relaxed text-white/40 xl:pb-2">
+          <p className="max-w-sm xl:max-w-xs text-[13px] sm:text-[15px] leading-relaxed text-white/40 xl:pb-2 text-left">
             Open a chamber. The building holds the atmosphere - the pricing motion is yours.
           </p>
         </div>

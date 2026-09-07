@@ -71,16 +71,16 @@ export const ACTION_SENTENCE_MAP: Record<ActionType, (resource: string) => strin
 
 // Action colors map for timeline icons
 export const ACTION_COLOR_MAP: Record<ActionType, string> = {
-  CREATE: "bg-emerald-500",
-  ACTIVATE: "bg-emerald-500",
-  APPROVE: "bg-emerald-500",
+  CREATE: "bg-primary",
+  ACTIVATE: "bg-primary",
+  APPROVE: "bg-primary",
   UPDATE: "bg-primary",
   SUBMIT: "bg-primary",
   SEND: "bg-primary",
   INVITE: "bg-primary",
-  EXPORT: "bg-gray-400",
-  LOGIN: "bg-gray-400",
-  LOGOUT: "bg-gray-400",
+  EXPORT: "bg-ink/35",
+  LOGIN: "bg-ink/35",
+  LOGOUT: "bg-ink/35",
   DEACTIVATE: "bg-yellow-500",
   REJECT: "bg-red-500",
   DELETE: "bg-red-500",

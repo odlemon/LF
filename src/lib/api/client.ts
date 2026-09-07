@@ -1,7 +1,8 @@
 import axios from "axios";
+import { resolveBackendUrl } from "./baseUrl";
 
 export const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "",
+  baseURL: "",
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
@@ -10,18 +11,19 @@ export const apiClient = axios.create({
 
 apiClient.interceptors.request.use((config) => {
   if (config.url) {
-    if (config.url === "/api/auth/login") {
-      config.url = "http://localhost:8080/api/v1/auth/login";
-    } else if (config.url.startsWith("/api/v1/")) {
-      config.url = `http://localhost:8080/api/v1/${config.url.substring(8)}`;
-    } else if (config.url.startsWith("/v1/")) {
-      config.url = `http://localhost:8080/api/v1/${config.url.substring(4)}`;
+    const url = config.url;
+    // Same-origin Next.js BFF auth routes stay relative (cookies work).
+    const isBffAuth =
+      url.startsWith("/api/auth") || url.startsWith("/api/client-auth");
+
+    if (!isBffAuth && (url.startsWith("/api/v1/") || url.startsWith("/v1/"))) {
+      config.url = resolveBackendUrl(url);
     }
   }
 
   if (typeof window !== "undefined") {
     const token = localStorage.getItem("token");
-    if (token) {
+    if (token && token !== "mock-client-token") {
       config.headers.Authorization = `Bearer ${token}`;
     }
   }

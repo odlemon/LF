@@ -3,6 +3,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { HiArrowRight, HiCheck } from "react-icons/hi";
+import { MARKETING_SHELL, SectionHeader } from "@/components/landing/editorial";
 
 /** Illustrative public rate - firm rate cards are custom. */
 const CREDIT_USD = 32;
@@ -46,7 +47,7 @@ const PACE: Record<
 const PLAIN_EXAMPLES = [
   {
     action: "Price one matter",
-    detail: "Scope → fee → proposal",
+    detail: "Request → fee → proposal",
     credits: ACTION_COST.matter,
   },
   {
@@ -172,23 +173,17 @@ export function PricingSection() {
         }}
       />
 
-      <div className="relative mx-auto max-w-[1200px] px-4 sm:px-8 lg:px-10 pt-20 sm:pt-28 pb-20 sm:pb-28">
-        <div className="max-w-2xl">
-          <div className="flex items-center gap-3">
-            <span className="h-px w-8 bg-[#0a0a0a]/25" />
-            <p className="text-[11px] sm:text-[12px] font-medium tracking-[0.28em] uppercase text-[#0a0a0a]/40">
-              Pricing · usage-based
-            </p>
-          </div>
-          <h2 className="mt-5 text-balance text-[1.85rem] sm:text-4xl lg:text-[3.15rem] font-semibold leading-[1.05] tracking-tight">
-            One credit.
-            <span className="text-[#0a0a0a]/38"> One clear price.</span>
-          </h2>
-          <p className="mt-5 max-w-xl text-[15px] sm:text-lg text-[#0a0a0a]/55 leading-relaxed">
-            No seats. No opaque tiers. You buy credits; Lysp spends them when your firm prices,
-            negotiates, and reports. Your rate card is custom - this is the public reference.
-          </p>
-        </div>
+      <div className={`${MARKETING_SHELL} pt-20 sm:pt-28 pb-20 sm:pb-28`}>
+        <SectionHeader
+          eyebrow="Pricing · usage-based"
+          title={
+            <>
+              One credit.
+              <span className="text-[#0a0a0a]/38"> One clear price.</span>
+            </>
+          }
+          description="No seats. No opaque tiers. You buy credits; Lysp spends them when your firm prices, negotiates, and reports. Your rate card is custom - this is the public reference."
+        />
 
         {/* Credit hero + examples */}
         <div className="mt-14 sm:mt-16 grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-stretch">
@@ -386,7 +381,7 @@ export function PricingSection() {
                 <p className="relative mt-3 text-[14px] text-white/45">
                   Range{" "}
                   <span className="text-white/75 tabular-nums font-medium">
-                    {formatUsd(estimate.low)} – {formatUsd(estimate.high)}
+                    {formatUsd(estimate.low)} to {formatUsd(estimate.high)}
                   </span>
                 </p>
 
@@ -394,7 +389,7 @@ export function PricingSection() {
                   <div className="flex justify-between">
                     <span className="text-white/40">Credits used</span>
                     <span className="font-semibold tabular-nums">
-                      {animatedCredits.toLocaleString()} × ${CREDIT_USD}
+                      {animatedCredits.toLocaleString()} x ${CREDIT_USD}
                     </span>
                   </div>
                   <div className="flex justify-between">

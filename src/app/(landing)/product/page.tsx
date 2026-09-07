@@ -4,9 +4,9 @@ import { FooterSection } from "@/components/landing/FooterSection";
 import { ProductPageContent } from "@/components/landing/platform/ProductPageContent";
 
 export const metadata: Metadata = {
-  title: "Product - Lysp",
+  title: "Product | Lysp",
   description:
-    "Explore Lysp: scope-to-propose pricing flow, rate negotiation, volume discounts, and firm-wide pricing analytics.",
+    "Explore Lysp pricing intelligence: pricing requests, rate negotiation, volume discounts, and firm-wide analytics.",
 };
 
 export default function ProductPage() {

@@ -54,9 +54,9 @@ export function AuditTrailPanel({
 
   return (
     <div className="flex flex-col gap-4 animate-fade-in w-full">
-      <div className="flex items-center justify-between gap-3 border-b border-gray-100 pb-2.5">
-        <h3 className="text-sm font-bold text-gray-900 flex items-center gap-1.5">
-          <HiOutlineClock className="w-4 h-4 text-gray-500" />
+      <div className="flex items-center justify-between gap-3 border-b border-border pb-2.5">
+        <h3 className="text-sm font-bold text-ink flex items-center gap-1.5">
+          <HiOutlineClock className="w-4 h-4 text-ink/55" />
           {title}
         </h3>
       </div>
@@ -73,27 +73,27 @@ export function AuditTrailPanel({
         </p>
       ) : (
         <div className="flex flex-col gap-0.5 pl-2">
-          <div className="relative border-l border-gray-150/80 ml-2.5 pl-6 pb-2 flex flex-col gap-5.5">
+          <div className="relative border-l border-border/80 ml-2.5 pl-6 pb-2 flex flex-col gap-5.5">
             {displayedEvents.map((event) => {
               const sentenceTemplate = ACTION_SENTENCE_MAP[event.actionType];
               const sentence = sentenceTemplate
                 ? sentenceTemplate(event.resourceName)
                 : `interacted with this ${event.resourceName || "resource"}`;
               
-              const circleBgColor = ACTION_COLOR_MAP[event.actionType] || "bg-gray-400";
+              const circleBgColor = ACTION_COLOR_MAP[event.actionType] || "bg-ink/35";
 
               return (
                 <div key={event.id} className="relative text-xs leading-normal">
                   {/* Timeline Circle Bullet */}
                   <span className={`absolute -left-[30px] top-1 w-2.5 h-2.5 rounded-full ring-4 ring-white ${circleBgColor}`} />
                   
-                  <div className="text-gray-600">
-                    <strong className="font-bold text-gray-900 pr-1 hover:text-primary transition-colors">
+                  <div className="text-ink/65">
+                    <strong className="font-bold text-ink pr-1 hover:text-primary transition-colors">
                       {event.actorName}
                     </strong>
                     {sentence}
                   </div>
-                  <span className="text-[10px] text-gray-400 mt-1 block">
+                  <span className="text-[10px] text-ink/40 mt-1 block">
                     {getRelativeTime(event.createdAt)}
                   </span>
                 </div>

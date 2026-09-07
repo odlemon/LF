@@ -1,0 +1,164 @@
+[browser] In HTML, <div> cannot be a descendant of <p>.
+This will cause a hydration error.
+
+  ...
+    <RedirectBoundary>
+      <RedirectErrorBoundary router={{...}}>
+        <InnerLayoutRouter url="/pricing-r..." tree={[...]} params={{uid:"pr_se..."}} cacheNode={{rsc:{...}, ...}} ...>
+          <SegmentViewNode type="page" pagePath="(app)/pric...">
+            <SegmentTrieNode>
+            <ClientPageRoot Component={function PricingWorkspacePage} serverProvidedParams={{...}}>
+              <PricingWorkspacePage params={Promise} searchParams={Promise}>
+                <PartnerReviewView matterTitle={"Project ..."} clientName="Helix Ther..." ...>
+                  <div className="h-[calc(10...">
+                    <div>
+                    <div>
+                    <div className="relative f...">
+                      <div className="max-w-3xl ...">
+                        <div className="rounded-[1...">
+                          <div>
+                          <p>
+                          <p>
+                          <div className="mt-6 grid ...">
+                            <div>
+                            <div>
+                            <div>
+                              <p>
+>                             <p className="mt-1 text-lg font-semibold tabular-nums">
+                                <ConfidenceBreakdown confidence={76} drivers={null} method={null} onDark={true}>
+                                  <span className="relative i...">
+                                    <button>
+>                                   <div className="fixed inset-0 z-40" onClick={function onClick}>
+                                    ...
+                          ...
+                        ...
+                    ...
+                ...
+          ...
+        ...
+ 
+[browser] <p> cannot contain a nested <div>.
+See this log for the ancestor stack trace. 
+[browser] In HTML, <p> cannot be a descendant of <p>.
+This will cause a hydration error.
+
+  ...
+    <RedirectBoundary>
+      <RedirectErrorBoundary router={{...}}>
+        <InnerLayoutRouter url="/pricing-r..." tree={[...]} params={{uid:"pr_se..."}} cacheNode={{rsc:{...}, ...}} ...>
+          <SegmentViewNode type="page" pagePath="(app)/pric...">
+            <SegmentTrieNode>
+            <ClientPageRoot Component={function PricingWorkspacePage} serverProvidedParams={{...}}>
+              <PricingWorkspacePage params={Promise} searchParams={Promise}>
+                <PartnerReviewView matterTitle={"Project ..."} clientName="Helix Ther..." ...>
+                  <div className="h-[calc(10...">
+                    <div>
+                    <div>
+                    <div className="relative f...">
+                      <div className="max-w-3xl ...">
+                        <div className="rounded-[1...">
+                          <div>
+                          <p>
+                          <p>
+                          <div className="mt-6 grid ...">
+                            <div>
+                            <div>
+                            <div>
+                              <p>
+>                             <p className="mt-1 text-lg font-semibold tabular-nums">
+                                <ConfidenceBreakdown confidence={76} drivers={null} method={null} onDark={true}>
+                                  <span className="relative i...">
+                                    <button>
+                                    <div>
+                                    <div className="absolute z..." onClick={function onClick}>
+>                                     <p className="text-xs font-bold text-ink/80">
+                                      ...
+                          ...
+                        ...
+                    ...
+                ...
+          ...
+        ...
+ 
+[browser] <p> cannot contain a nested <p>.
+See this log for the ancestor stack trace. 
+⨯ ./src/modules/pricing/components/ConfidenceBreakdown.tsx:137:7
+Expected corresponding JSX closing tag for <div>
+  [90m135 |[0m         </>
+  [90m136 |[0m       )}
+[31m[1m>[0m [90m137 |[0m     </span>
+  [90m    |[0m       [31m[1m^^^^[0m
+  [90m138 |[0m   );
+  [90m139 |[0m }
+  [90m140 |[0m
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/modules/pricing/components/ConfidenceBreakdown.tsx [Client Component Browser]
+    ./src/modules/pricing/components/ScenarioDetail.tsx [Client Component Browser]
+    ./src/app/(app)/pricing-requests/[uid]/pricing/page.tsx [Client Component Browser]
+    ./src/app/(app)/pricing-requests/[uid]/pricing/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/modules/pricing/components/ConfidenceBreakdown.tsx [Client Component SSR]
+    ./src/modules/pricing/components/ScenarioDetail.tsx [Client Component SSR]
+    ./src/app/(app)/pricing-requests/[uid]/pricing/page.tsx [Client Component SSR]
+    ./src/app/(app)/pricing-requests/[uid]/pricing/page.tsx [Server Component]
+
+
+⨯ ./src/modules/pricing/components/ConfidenceBreakdown.tsx:137:7
+Expected corresponding JSX closing tag for <div>
+  [90m135 |[0m         </>
+  [90m136 |[0m       )}
+[31m[1m>[0m [90m137 |[0m     </span>
+  [90m    |[0m       [31m[1m^^^^[0m
+  [90m138 |[0m   );
+  [90m139 |[0m }
+  [90m140 |[0m
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/modules/pricing/components/ConfidenceBreakdown.tsx [Client Component Browser]
+    ./src/modules/pricing/components/ScenarioDetail.tsx [Client Component Browser]
+    ./src/app/(app)/pricing-requests/[uid]/pricing/page.tsx [Client Component Browser]
+    ./src/app/(app)/pricing-requests/[uid]/pricing/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/modules/pricing/components/ConfidenceBreakdown.tsx [Client Component SSR]
+    ./src/modules/pricing/components/ScenarioDetail.tsx [Client Component SSR]
+    ./src/app/(app)/pricing-requests/[uid]/pricing/page.tsx [Client Component SSR]
+    ./src/app/(app)/pricing-requests/[uid]/pricing/page.tsx [Server Component]
+
+
+[browser] Uncaught Error: ./src/modules/pricing/components/ConfidenceBreakdown.tsx:137:7
+Expected corresponding JSX closing tag for <div>
+  135 |         </>
+  136 |       )}
+> 137 |     </span>
+      |       ^^^^
+  138 |   );
+  139 | }
+  140 |
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/modules/pricing/components/ConfidenceBreakdown.tsx [Client Component Browser]
+    ./src/modules/pricing/components/ScenarioDetail.tsx [Client Component Browser]
+    ./src/app/(app)/pricing-requests/[uid]/pricing/page.tsx [Client Component Browser]
+    ./src/app/(app)/pricing-requests/[uid]/pricing/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/modules/pricing/components/ConfidenceBreakdown.tsx [Client Component SSR]
+    ./src/modules/pricing/components/ScenarioDetail.tsx [Client Component SSR]
+    ./src/app/(app)/pricing-requests/[uid]/pricing/page.tsx [Client Component SSR]
+    ./src/app/(app)/pricing-requests/[uid]/pricing/page.tsx [Server Component]
+
+
+    at <unknown> (Error: ./src/modules/pricing/components/ConfidenceBreakdown.tsx:137:7)
+    at <unknown> (Error: (./src/modules/pricing/components/ConfidenceBreakdown.tsx:137:7)

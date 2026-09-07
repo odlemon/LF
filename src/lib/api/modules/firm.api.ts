@@ -17,6 +17,9 @@ import {
   AddRateCardEntryCommand,
   CreateClientProfileCommand,
   UpdateGuardrailsCommand,
+  ExchangeRate,
+  CreateExchangeRateCommand,
+  ApprovalStageDefinition,
 } from "@/modules/firm/types";
 
 export async function getFirm(uid: string): Promise<Firm> {
@@ -50,8 +53,23 @@ export async function deactivatePracticeArea(uid: string): Promise<PracticeArea>
 }
 
 export async function getFeeEarnerLevels(): Promise<FeeEarnerLevel[]> {
-  const res = await apiClient.get<FeeEarnerLevel[]>(ENDPOINTS.FIRM.FEE_EARNER_LEVELS);
-  return res.data;
+  const res = await apiClient.get(ENDPOINTS.FIRM.FEE_EARNER_LEVELS);
+  const data = res.data;
+  const items: unknown[] = Array.isArray(data)
+    ? data
+    : data && typeof data === "object" && Array.isArray((data as { content: unknown[] }).content)
+      ? (data as { content: unknown[] }).content
+      : [];
+  return items.map((item) => {
+    const raw = item as Record<string, unknown>;
+    return {
+      uid: String(raw.id ?? raw.uid ?? ""),
+      firmUid: String(raw.firmUid ?? ""),
+      name: String(raw.name ?? ""),
+      code: String(raw.code ?? ""),
+      sortOrder: raw.sortOrder != null ? Number(raw.sortOrder) : 0,
+    } as FeeEarnerLevel;
+  });
 }
 
 export async function createFeeEarnerLevel(data: CreateFeeEarnerLevelCommand): Promise<FeeEarnerLevel> {
@@ -97,6 +115,56 @@ export async function getRateCardEntries(rateCardUid: string): Promise<RateCardE
 
 export async function deleteRateCardEntry(uid: string): Promise<void> {
   await apiClient.delete(`/v1/rate-cards/entries/${uid}`);
+}
+
+export async function getRateCardsByOffice(officeCode?: string): Promise<RateCard[]> {
+  const res = await apiClient.get<any>(ENDPOINTS.FIRM.RATE_CARDS, {
+    params: officeCode ? { officeCode } : undefined,
+  });
+  if (res.data && Array.isArray(res.data)) {
+    return res.data;
+  }
+  if (res.data && res.data.content && Array.isArray(res.data.content)) {
+    return res.data.content;
+  }
+  return [];
+}
+
+export async function getFxRates(): Promise<ExchangeRate[]> {
+  const res = await apiClient.get<any>(ENDPOINTS.FIRM.FX_RATES);
+  if (res.data && Array.isArray(res.data)) {
+    return res.data;
+  }
+  if (res.data && res.data.content && Array.isArray(res.data.content)) {
+    return res.data.content;
+  }
+  return [];
+}
+
+export async function createFxRate(data: CreateExchangeRateCommand): Promise<ExchangeRate> {
+  const res = await apiClient.post<ExchangeRate>(ENDPOINTS.FIRM.FX_RATES, data);
+  return res.data;
+}
+
+export async function updateFxRate(uid: string, data: CreateExchangeRateCommand): Promise<ExchangeRate> {
+  const res = await apiClient.put<ExchangeRate>(ENDPOINTS.FIRM.FX_RATE_DETAIL(uid), data);
+  return res.data;
+}
+
+export async function deleteFxRate(uid: string): Promise<void> {
+  await apiClient.delete(ENDPOINTS.FIRM.FX_RATE_DETAIL(uid));
+}
+
+export async function getApprovalMatrix(): Promise<ApprovalStageDefinition[]> {
+  const res = await apiClient.get<ApprovalStageDefinition[]>(ENDPOINTS.FIRM.APPROVAL_MATRIX);
+  return res.data;
+}
+
+export async function saveApprovalMatrix(
+  stages: ApprovalStageDefinition[]
+): Promise<ApprovalStageDefinition[]> {
+  const res = await apiClient.put<ApprovalStageDefinition[]>(ENDPOINTS.FIRM.APPROVAL_MATRIX, stages);
+  return res.data;
 }
 
 export interface ListClientsParams {

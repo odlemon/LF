@@ -212,3 +212,28 @@ export interface FileMetadata {
   updatedBy: string;
   deleted: boolean;
 }
+
+export type PmsSystemType = "ADERANT" | "ELITE_3E" | "INTAPP" | "GENERIC_REST";
+
+export interface PmsConnectorConfig {
+  uid: string;
+  firmUid: string;
+  datasetUid: string;
+  systemType: PmsSystemType;
+  displayName: string;
+  baseUrl: string;
+  syncIntervalHours: number;
+  active: boolean;
+  lastSyncedAt?: string;
+  lastSyncStatus?: string;
+  lastSyncMessage?: string;
+}
+
+export interface CreatePmsConnectorCommand {
+  datasetUid: string;
+  systemType: PmsSystemType;
+  displayName: string;
+  baseUrl: string;
+  apiKey?: string;
+  syncIntervalHours?: number;
+}

@@ -37,6 +37,7 @@ export interface RateCard {
   effectiveDate: string;
   expiryDate?: string;
   status: "DRAFT" | "ACTIVE" | "ARCHIVED";
+  officeCode?: string | null;
 }
 
 export interface RateCardEntry {
@@ -46,6 +47,31 @@ export interface RateCardEntry {
   practiceAreaUid?: string | null;
   hourlyRate: number;
   currency: string;
+}
+
+export interface ExchangeRate {
+  uid: string;
+  firmUid: string;
+  baseCurrency: string;
+  quoteCurrency: string;
+  rate: number;
+  asOfDate: string;
+}
+
+export interface CreateExchangeRateCommand {
+  baseCurrency: string;
+  quoteCurrency: string;
+  rate: number;
+  asOfDate: string;
+}
+
+export interface ApprovalStageDefinition {
+  uid?: string;
+  sequenceNo: number;
+  stageName: string;
+  approverPermission: string;
+  triggerMinDiscountPct?: number | null;
+  triggerMinAmount?: number | null;
 }
 
 export interface ClientProfile {
@@ -66,6 +92,7 @@ export interface ClientPortalUser {
   email: string;
   name: string;
   active: boolean;
+  inviteToken?: string | null;
 }
 
 export interface FirmGuardrails {
@@ -94,6 +121,7 @@ export interface CreateRateCardCommand {
   currency: string;
   effectiveDate: string;
   expiryDate?: string;
+  officeCode?: string;
 }
 
 export interface AddRateCardEntryCommand {

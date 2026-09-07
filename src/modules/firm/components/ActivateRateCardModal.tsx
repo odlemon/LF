@@ -39,19 +39,19 @@ export function ActivateRateCardModal({
 
   return (
     <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in">
-        <div className="bg-white rounded-xl max-w-sm w-full shadow-2xl p-6 relative animate-fade-in-up z-50 border border-red-100">
+        <div className="bg-surface rounded-xl max-w-sm w-full shadow-2xl p-6 relative animate-fade-in-up z-50 border border-red-100">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+          className="absolute top-4 right-4 text-ink/40 hover:text-ink/65 transition-colors"
         >
           <HiX size={20} />
         </button>
-        <h3 className="text-lg font-bold text-gray-900 mb-2">
+        <h3 className="text-lg font-bold text-ink mb-2">
           Activate Rate Card?
         </h3>
         
-        <p className="text-sm text-gray-600 mb-4">
-          Are you sure you want to activate <span className="font-semibold text-gray-900">&quot;{rateCard.name}&quot;</span>? 
+        <p className="text-sm text-ink/65 mb-4">
+          Are you sure you want to activate <span className="font-semibold text-ink">&quot;{rateCard.name}&quot;</span>? 
           Any currently active rate card will be automatically archived.
         </p>
 
@@ -61,7 +61,7 @@ export function ActivateRateCardModal({
             </div>
           )}
 
-          <div className="flex justify-end gap-3 mt-6 pt-4 border-t border-gray-100">
+          <div className="flex justify-end gap-3 mt-6 pt-4 border-t border-border">
             <Button type="button" variant="secondary" onClick={onClose} disabled={isSubmitting}>
               Cancel
             </Button>

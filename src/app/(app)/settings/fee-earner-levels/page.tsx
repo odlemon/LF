@@ -26,8 +26,8 @@ export default function FeeEarnerLevelsPage() {
     <div className="p-8 max-w-4xl w-full mx-auto flex flex-col gap-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Fee Earner Levels</h1>
-          <p className="text-sm text-gray-500 mt-1">Configure seniority rankings and billing levels for lawyers in the firm.</p>
+          <h1 className="text-2xl font-bold text-ink tracking-tight">Fee Earner Levels</h1>
+          <p className="text-sm text-ink/55 mt-1">Configure seniority rankings and billing levels for lawyers in the firm.</p>
         </div>
         <Button
           variant="primary"
@@ -47,44 +47,44 @@ export default function FeeEarnerLevelsPage() {
 
       {isLoading && levels.length === 0 ? (
         <div className="flex flex-col gap-3 animate-pulse">
-          <div className="h-16 bg-gray-200 rounded-xl" />
-          <div className="h-16 bg-gray-200 rounded-xl" />
-          <div className="h-16 bg-gray-200 rounded-xl" />
+          <div className="h-16 bg-field rounded-xl" />
+          <div className="h-16 bg-field rounded-xl" />
+          <div className="h-16 bg-field rounded-xl" />
         </div>
       ) : levels.length === 0 ? (
-        <div className="text-center py-12 bg-white rounded-2xl border border-gray-200/60 p-8 shadow-sm flex flex-col items-center justify-center gap-3">
-          <span className="text-sm text-gray-500">No levels registered yet. Click &apos;Add Level&apos; to define one.</span>
+        <div className="text-center py-12 bg-surface rounded-2xl border border-border/60 p-8 shadow-sm flex flex-col items-center justify-center gap-3">
+          <span className="text-sm text-ink/55">No levels registered yet. Click &apos;Add Level&apos; to define one.</span>
         </div>
       ) : (
-        <div className="bg-white rounded-2xl border border-gray-200/60 overflow-hidden shadow-sm">
+        <div className="bg-surface rounded-2xl border border-border/60 overflow-hidden shadow-sm">
           <div className="divide-y divide-gray-100">
             {levels.map((level, idx) => (
               <div
                 key={level.uid}
-                className="p-5 flex items-center justify-between hover:bg-gray-50/50 transition-colors"
+                className="p-5 flex items-center justify-between hover:bg-field/50 transition-colors"
               >
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center font-bold text-sm">
                     {level.sortOrder}
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-gray-900 leading-tight">
+                    <h3 className="text-sm font-bold text-ink leading-tight">
                       {level.name}
                     </h3>
-                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mt-1">
+                    <span className="text-[10px] font-bold text-ink/40 uppercase tracking-wider block mt-1">
                       Code: {level.code}
                     </span>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-6">
-                  <span className="text-xs text-gray-500 font-medium flex items-center gap-1.5 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-150">
-                    <HiScale className="w-3.5 h-3.5 text-gray-400" />
+                  <span className="text-xs text-ink/55 font-medium flex items-center gap-1.5 bg-field px-3 py-1.5 rounded-lg border border-border">
+                    <HiScale className="w-3.5 h-3.5 text-ink/40" />
                     Rank #{idx + 1}
                   </span>
                   
                   {idx === 0 && (
-                    <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded uppercase tracking-wide border border-emerald-100">
+                    <span className="text-[10px] font-bold text-ink/80 bg-hover px-2 py-0.5 rounded uppercase tracking-wide border border-border">
                       Highest Seniority
                     </span>
                   )}

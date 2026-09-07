@@ -1,82 +1,158 @@
 export type UseCaseId = "flow" | "negotiation" | "discounts" | "analytics";
 
+export type OutcomeBeat = {
+  n: string;
+  title: string;
+  body: string;
+};
+
 export type UseCase = {
   id: UseCaseId;
+  /** Anchor id on /product (flow kept for backward-compatible #flow links). */
+  anchor: string;
   label: string;
+  jumpLabel: string;
+  /** Short line for homepage platform carousel. */
   brief: string;
   title: string;
   description: string;
-  outcome: string;
-  features: string[];
+  foundation?: string;
+  /** Business outcomes, not product feature checklists. */
+  outcomes: OutcomeBeat[];
 };
+
+/** @deprecated Alias for homepage carousel compatibility. */
+export type WorkflowStep = OutcomeBeat;
 
 export const USE_CASES: UseCase[] = [
   {
     id: "flow",
-    label: "Scope → Price → Propose",
-    brief: "One conversation becomes a scoped, priced, ready-to-send proposal.",
-    title: "From RFP to client-ready proposal - one continuous flow.",
+    anchor: "flow",
+    label: "Pricing",
+    jumpLabel: "Pricing",
+    brief: "One conversation becomes a fee your firm will stand behind.",
+    title: "Stop pricing from memory and hope.",
     description:
-      "Describe the matter, attach the RFP, and talk it through. Lysp builds the scope, recommends fees from your firm’s own history, and generates a branded proposal - no forms, no spreadsheets, no handoffs.",
-    outcome: "Hours of pricing work compressed into a single guided session.",
-    features: [
-      "AI matter scoping from RFP, email, or conversation",
-      "Phase plans with hours, staffing mix, and fee allocation",
-      "Fee recommendations grounded in your comparable matters",
-      "Margin and realization guardrails before you send",
-      "Branded proposals generated from approved scope",
-      "OCG and rate-card checks inline - not after the fact",
+      "When an RFP lands, the firm should know what similar work actually cost, what margin it protected, and what fee to put in front of the client. Lysp turns that into one continuous commercial judgment, not a week of handoffs.",
+    foundation:
+      "Every recommendation is grounded in your matter history, rate cards, and OCGs. Your commercial data stays yours.",
+    outcomes: [
+      {
+        n: "01",
+        title: "The brief becomes a priced matter",
+        body: "Partners stop rebuilding the same scope in Word. The work is named, phased, and staffed once, with exclusions that survive client review.",
+      },
+      {
+        n: "02",
+        title: "The fee has a reason",
+        body: "Comps, rate cards, and margin floors sit next to the number. You can defend it in the room, not invent the rationale after the client pushes back.",
+      },
+      {
+        n: "03",
+        title: "The proposal leaves ready",
+        body: "What finance approved is what the client sees. No last-minute spreadsheet version, no silent discount buried in an email.",
+      },
+      {
+        n: "04",
+        title: "Why it matters",
+        body: "Underpricing and write-downs usually start here, before negotiation. Getting this desk right is where leakage is prevented, not audited later.",
+      },
     ],
   },
   {
     id: "negotiation",
+    anchor: "negotiation",
     label: "Rate Negotiation",
-    brief: "Clients counter and accept in a dedicated portal - every round tracked.",
-    title: "Negotiate rates without the email chain.",
+    jumpLabel: "Negotiation",
+    brief: "Counters and acceptances with an attributable trail.",
+    title: "Negotiation without the inbox theater.",
     description:
-      "Clients receive proposals, submit counter-offers, and accept rates through a dedicated portal. Every round is attributable. Partners and pricing stay in control.",
-    outcome: "Full audit trail from first offer to accepted fee.",
-    features: [
-      "Client portal for counters, comments, and acceptance",
-      "Round-by-round negotiation log with timestamps",
-      "Partner and finance approval gates on margin floors",
-      "Attributable actions - who countered, who approved",
-      "No side-channel rate deals buried in email",
-      "Revised offers shared instantly back to the client",
+      "Clients will push. That is the job. Lysp keeps the push inside a portal where partners and finance stay in control, and leadership can reconstruct every round without hunting threads.",
+    outcomes: [
+      {
+        n: "01",
+        title: "The client answers in one place",
+        body: "Counters arrive as numbers and notes, not side deals in a partner’s personal inbox.",
+      },
+      {
+        n: "02",
+        title: "Margin floors hold",
+        body: "Revised offers that threaten the floor route to the people who own P&L before anything goes back out.",
+      },
+      {
+        n: "03",
+        title: "Acceptance closes cleanly",
+        body: "When the fee is done, the trail is done with it. Who offered, who cleared, who accepted.",
+      },
+      {
+        n: "04",
+        title: "Why it matters",
+        body: "Most margin erosion in elite work happens after the first fee, in the scramble to keep the relationship. This is how you keep the relationship without giving the firm away.",
+      },
     ],
   },
   {
     id: "discounts",
+    anchor: "discounts",
     label: "Volume Discounts",
-    brief: "Automatic tier tracking across the client relationship.",
-    title: "Volume discounts that run themselves.",
+    jumpLabel: "Discounts",
+    brief: "Relationship economics that stay true as matters close.",
+    title: "Volume promises that match the books.",
     description:
-      "Tier progress updates as matters close. Clients see savings in real time. Your team stops rebuilding discount math in spreadsheets.",
-    outcome: "Relationship economics that stay accurate without manual rebuilds.",
-    features: [
-      "Automatic YTD spend and tier progression",
-      "Configurable volume bands per client relationship",
-      "Live client-visible savings in the portal",
-      "Matters counted as they close - not quarter-end catch-up",
-      "Clear distance-to-next-tier for BD conversations",
-      "Consistent application across practices and offices",
+      "Strategic clients expect tiers. Finance expects truth. Lysp keeps both on the same number as matters close, so BD never sells a discount finance cannot recognize.",
+    outcomes: [
+      {
+        n: "01",
+        title: "Tiers live on the relationship",
+        body: "Bands and percentages are set once. They do not get reinvented in a pitch deck every quarter.",
+      },
+      {
+        n: "02",
+        title: "Progress moves with closed work",
+        body: "YTD spend and savings update when matters finish. No catch-up spreadsheet at quarter end.",
+      },
+      {
+        n: "03",
+        title: "Clients see the same truth",
+        body: "Distance to the next tier is visible in the portal. The conversation stays commercial, not forensic.",
+      },
+      {
+        n: "04",
+        title: "Why it matters",
+        body: "Broken volume math burns trust twice: once with the client, once with finance. Accurate tiers protect both.",
+      },
     ],
   },
   {
     id: "analytics",
+    anchor: "analytics",
     label: "Pricing Analytics",
-    brief: "Win rates, margins, and benchmarks across every practice.",
-    title: "Firm-wide pricing intelligence, finally visible.",
+    jumpLabel: "Analytics",
+    brief: "Where the firm wins fees, and where it leaks them.",
+    title: "See leakage before the write-down.",
     description:
-      "Win rates, margin trends, rate benchmarks, and anomaly detection - across practice areas and client types. See where pricing is winning and where it’s leaking.",
-    outcome: "Leadership sees leakage and wins before they compound.",
-    features: [
-      "Win rate, margin, and realization by practice",
-      "Trend views against peer and internal benchmarks",
-      "Anomaly flags on underpricing and write-off risk",
-      "Filters by practice, client type, and period",
-      "Exportable digests for pricing committees",
-      "Matter-level drill-down from firm rollups",
+      "Pricing committees should not run on anecdotes. Lysp puts win rate, margin, and realization where leaders can act, practice by practice, before soft pricing becomes a pattern.",
+    outcomes: [
+      {
+        n: "01",
+        title: "The firm number is visible",
+        body: "Win rate, margin, and realization for the period you care about, without waiting for a deck.",
+      },
+      {
+        n: "02",
+        title: "Desks that need attention surface",
+        body: "Watch and alert statuses show which practices are underpricing or giving away realization.",
+      },
+      {
+        n: "03",
+        title: "The committee gets evidence",
+        body: "Drill from the rollup to the matters that moved the number. Decisions stop being stories.",
+      },
+      {
+        n: "04",
+        title: "Why it matters",
+        body: "Elite firms do not lose money in one dramatic deal. They lose it in quiet patterns. This is how you see the pattern in time.",
+      },
     ],
   },
 ];
@@ -84,37 +160,18 @@ export const USE_CASES: UseCase[] = [
 export const PRODUCT_ROLES = [
   {
     role: "Pricing & finance",
-    body: "Set guardrails, approve exceptions, and see realization before the fee leaves the building.",
+    body: "Hold the floor before the fee leaves. See realization while there is still time to act.",
   },
   {
     role: "Partners & BD",
-    body: "Price from firm history in the moment - then negotiate with a clean audit trail.",
+    body: "Price from firm history in the moment. Negotiate without losing the trail.",
   },
   {
     role: "Practice leaders",
-    body: "Compare win rates and margins across desks. Spot leakage early.",
+    body: "Compare desks. Catch leakage early, not in next year’s write-off review.",
   },
   {
     role: "Clients",
-    body: "Receive proposals, counter rates, and track volume savings in one portal.",
-  },
-] as const;
-
-export const PRODUCT_FOUNDATIONS = [
-  {
-    title: "Your matter history",
-    body: "Comparable fees, staffing, write-offs, and outcomes - the basis for every recommendation.",
-  },
-  {
-    title: "Rate cards & OCGs",
-    body: "Approved rates and outside counsel guidelines enforced before a proposal is sent.",
-  },
-  {
-    title: "Billing & PMS",
-    body: "Connect the systems where hours and invoices already live so pricing stays grounded.",
-  },
-  {
-    title: "Ethical walls",
-    body: "Restricted pricing content stays behind your firm’s existing wall policies.",
+    body: "Receive fees, counter cleanly, and track volume savings without PDF tennis.",
   },
 ] as const;

@@ -10,6 +10,8 @@ import {
   ProcessingLog,
   CreateDatasetCommand,
   UpdateColumnMappingCommand,
+  PmsConnectorConfig,
+  CreatePmsConnectorCommand,
 } from "../types";
 
 export function useDataRoomSummary() {
@@ -106,6 +108,69 @@ export function useDatasets(filters: { category?: string; status?: string } = {}
     createDataset,
     deleteDataset,
     refetch: fetchDatasets,
+  };
+}
+
+export function usePmsConnectors() {
+  const [connectors, setConnectors] = useState<PmsConnectorConfig[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchConnectors = useCallback(async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const data = await dataRoomApi.listPmsConnectors();
+      setConnectors(data || []);
+    } catch (err: any) {
+      setError(err.response?.data?.message || err.message || "Failed to load PMS connectors");
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  const createConnector = useCallback(async (command: CreatePmsConnectorCommand) => {
+    setError(null);
+    try {
+      const created = await dataRoomApi.createPmsConnector(command);
+      setConnectors((prev) => [created, ...prev]);
+      return created;
+    } catch (err: any) {
+      const msg = err.response?.data?.message || err.message || "Failed to create PMS connector";
+      setError(msg);
+      throw new Error(msg);
+    }
+  }, []);
+
+  const syncNow = useCallback(async (uid: string) => {
+    setError(null);
+    try {
+      const updated = await dataRoomApi.syncPmsConnectorNow(uid);
+      setConnectors((prev) => prev.map((c) => (c.uid === uid ? updated : c)));
+      return updated;
+    } catch (err: any) {
+      const msg = err.response?.data?.message || err.message || "Sync failed";
+      setError(msg);
+      throw new Error(msg);
+    }
+  }, []);
+
+  const testConnection = useCallback(async (uid: string) => {
+    return dataRoomApi.testPmsConnector(uid);
+  }, []);
+
+  useEffect(() => {
+    fetchConnectors();
+  }, [fetchConnectors]);
+
+  return {
+    connectors,
+    isLoading,
+    error,
+    createConnector,
+    syncNow,
+    testConnection,
+    refetch: fetchConnectors,
   };
 }
 

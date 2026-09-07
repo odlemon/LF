@@ -10,8 +10,16 @@ import {
 } from "@/lib/api/normalize";
 import {
   TOOL_LABELS,
-  TOOL_SUCCESS_LABELS,
 } from "../constants/toolLabels";
+import { thinkingCopyFor } from "../constants/toolThinking";
+import {
+  FRIENDLY_TOOL_LABELS,
+  TOOL_PROGRESS_STEP,
+  SCOPE_GENERATION_TOOLS,
+  ScopeProgressStepId,
+  stepIndex,
+} from "../constants/scopeProgress";
+import { detectChatIntent } from "../utils/chatIntents";
 import {
   ChatBubble,
   ChatMode,
@@ -22,10 +30,22 @@ import {
 
 const FLUSH_INTERVAL_MS = 30;
 
+interface QueuedMessage {
+  id: string;
+  content: string;
+}
+
 export interface UseIntakeChatInitialState {
   scope?: MatterScope | null;
   scopeGenerated?: boolean;
   chatMode?: ChatMode;
+}
+
+export interface UseIntakeChatLocalActions {
+  /** Clear scope and return to empty scoping state. */
+  onResetScope?: () => Promise<void>;
+  /** Restore previous scope snapshot. Returns false if nothing to undo. */
+  onUndoScope?: () => Promise<boolean>;
 }
 
 function intakeMessageToBubble(msg: IntakeMessage): ChatBubble {
@@ -65,6 +85,24 @@ function initialBubblesFromMessages(messages: IntakeMessage[]): ChatBubble[] {
   return messages.map(intakeMessageToBubble);
 }
 
+/** Partner-facing tool errors — never dump SQL / stack fragments into chat. */
+export function friendlyToolError(raw?: string | null): string | undefined {
+  if (!raw) return undefined;
+  const lower = raw.toLowerCase();
+  if (lower.includes("duplicate key") || lower.includes("unique constraint")) {
+    return "Couldn't replace the existing plan";
+  }
+  if (lower.includes("rollback-only")) {
+    return "Couldn't save the plan — try again";
+  }
+  if (lower.includes("failed to generate scope:")) {
+    const inner = raw.replace(/^Failed to generate scope:\s*/i, "");
+    return friendlyToolError(inner) ?? "Couldn't draft the plan";
+  }
+  if (raw.length > 100) return `${raw.slice(0, 97)}…`;
+  return raw;
+}
+
 function messagesFingerprint(messages: IntakeMessage[]): string {
   if (messages.length === 0) return "";
   return messages
@@ -77,7 +115,8 @@ export function useIntakeChat(
   initialMessages: IntakeMessage[],
   onScopeGenerated?: (scope: MatterScope) => void,
   onMessagesUpdated?: (messages: IntakeMessage[]) => void,
-  initialState?: UseIntakeChatInitialState
+  initialState?: UseIntakeChatInitialState,
+  localActions?: UseIntakeChatLocalActions
 ) {
   const [messages, setMessages] = useState<ChatBubble[]>(() =>
     initialBubblesFromMessages(initialMessages)
@@ -97,6 +136,19 @@ export function useIntakeChat(
   const [streamingMessageId, setStreamingMessageId] = useState<string | null>(
     null
   );
+  const [scopeProgressStep, setScopeProgressStep] =
+    useState<ScopeProgressStepId | null>(null);
+  const [scopeProgressLabel, setScopeProgressLabel] = useState<string | null>(
+    null
+  );
+  /** True only while Lysp is building the *first* plan (not casual chat / later edits). */
+  const [scopeBuildActive, setScopeBuildActive] = useState(false);
+  const scopeGeneratedRef = useRef(initialState?.scopeGenerated ?? false);
+
+  useEffect(() => {
+    scopeGeneratedRef.current = scopeGenerated;
+  }, [scopeGenerated]);
+  const [queueCount, setQueueCount] = useState(0);
 
   const optimisticIdRef = useRef(0);
   const abortControllerRef = useRef<AbortController | null>(null);
@@ -110,13 +162,20 @@ export function useIntakeChat(
   const requestUidRef = useRef(uid);
   const hasLocalMessagesRef = useRef(false);
   const lastSyncedFingerprintRef = useRef("");
+  const isBusyRef = useRef(false);
+  const messageQueueRef = useRef<QueuedMessage[]>([]);
+  const drainScheduledRef = useRef(false);
+  const progressPeakRef = useRef(-1);
 
   const syncMessages = useCallback(
     (next: ChatBubble[] | ((prev: ChatBubble[]) => ChatBubble[])) => {
       setMessages((prev) => {
         const resolved = typeof next === "function" ? next(prev) : next;
         const deduped = dedupeChatBubbles(resolved);
-        onMessagesUpdated?.(bubblesToIntakeMessages(deduped, uid));
+        // Defer parent sync — calling setState on parent during this updater causes React warnings
+        queueMicrotask(() => {
+          onMessagesUpdated?.(bubblesToIntakeMessages(deduped, uid));
+        });
         return deduped;
       });
     },
@@ -144,13 +203,26 @@ export function useIntakeChat(
   }, [uid, initialMessages, isAiThinking, syncMessages]);
 
   useEffect(() => {
-    if (initialState?.scope !== undefined && !hasLocalMessagesRef.current) {
+    // Always allow clearing scope from parent (e.g. after reset), even mid-chat.
+    if (initialState?.scope === null) {
+      setScope(null);
+    } else if (initialState?.scope !== undefined && !hasLocalMessagesRef.current) {
       setScope(initialState.scope);
     }
-    if (initialState?.scopeGenerated !== undefined) {
+
+    if (initialState?.scopeGenerated === false) {
+      setScopeGenerated(false);
+    } else if (initialState?.scopeGenerated !== undefined && !hasLocalMessagesRef.current) {
       setScopeGenerated(initialState.scopeGenerated);
     }
-    if (initialState?.chatMode) {
+
+    if (initialState?.chatMode && !hasLocalMessagesRef.current) {
+      setChatMode(initialState.chatMode);
+    } else if (
+      initialState?.chatMode === "SCOPING" ||
+      initialState?.chatMode === "GENERAL"
+    ) {
+      // Reset / start-over must move chat mode even with local messages
       setChatMode(initialState.chatMode);
     }
   }, [
@@ -168,7 +240,9 @@ export function useIntakeChat(
       setMessages((prev) => {
         const toolBubbles = prev.filter((m) => m.type === "tool");
         const merged = dedupeChatBubbles([...persisted, ...toolBubbles]);
-        onMessagesUpdated?.(bubblesToIntakeMessages(merged, uid));
+        queueMicrotask(() => {
+          onMessagesUpdated?.(bubblesToIntakeMessages(merged, uid));
+        });
         return merged;
       });
       lastSyncedFingerprintRef.current = messagesFingerprint(serverMessages);
@@ -241,13 +315,30 @@ export function useIntakeChat(
     setShowTypingIndicator(false);
     setHasActiveToolCall(false);
     setStreamingMessageId(null);
+    setScopeProgressStep(null);
+    setScopeProgressLabel(null);
+    setScopeBuildActive(false);
+    progressPeakRef.current = -1;
     aiMessagePlaceholderIdRef.current = null;
     userOptimisticIdRef.current = null;
     currentAiTextRef.current = "";
     firstTokenReceivedRef.current = false;
     activeToolBubbles.current = {};
     abortControllerRef.current = null;
+    isBusyRef.current = false;
   }, [flushTokenBuffer, clearFlushInterval]);
+
+  const advanceScopeProgress = useCallback((toolName: string) => {
+    const step = TOOL_PROGRESS_STEP[toolName];
+    if (!step) return;
+    const idx = stepIndex(step);
+    if (idx < progressPeakRef.current) return;
+    progressPeakRef.current = idx;
+    setScopeProgressStep(step);
+    setScopeProgressLabel(
+      FRIENDLY_TOOL_LABELS[toolName] || TOOL_LABELS[toolName] || null
+    );
+  }, []);
 
   const freezeAiPlaceholderAndStartNew = useCallback(() => {
     const placeholderId = aiMessagePlaceholderIdRef.current;
@@ -320,6 +411,9 @@ export function useIntakeChat(
     (nextScope: MatterScope) => {
       setScope(nextScope);
       setScopeGenerated(true);
+      setChatMode((prev) =>
+        prev === "SCOPE_CONFIRMED" ? prev : "SCOPE_GENERATED"
+      );
       onScopeGenerated?.(nextScope);
     },
     [onScopeGenerated]
@@ -364,14 +458,13 @@ export function useIntakeChat(
     [uid, applyScopeUpdate, finalizeStream, syncMessages, refreshMessagesFromServer]
   );
 
-  const sendMessage = useCallback(
-    async (content: string) => {
-      const trimmed = content.trim();
-      if (!trimmed || isAiThinking) return;
-
+  const executeSend = useCallback(
+    async (trimmed: string, existingUserBubbleId?: string) => {
       hasLocalMessagesRef.current = true;
+      isBusyRef.current = true;
 
-      const optimisticUserId = `temp-${Date.now()}-${++optimisticIdRef.current}`;
+      const optimisticUserId =
+        existingUserBubbleId ?? `temp-${Date.now()}-${++optimisticIdRef.current}`;
       const aiPlaceholderId = `ai-streaming-${Date.now()}`;
 
       userOptimisticIdRef.current = optimisticUserId;
@@ -380,22 +473,38 @@ export function useIntakeChat(
       firstTokenReceivedRef.current = false;
       tokenBufferRef.current = "";
       activeToolBubbles.current = {};
+      progressPeakRef.current = -1;
+      // Do not start BUILDING SCOPE on every message — only when generation tools run
 
-      syncMessages((prev) => [
-        ...prev,
-        {
-          id: optimisticUserId,
-          type: "user",
-          role: "USER",
-          content: trimmed,
-        },
-        {
-          id: aiPlaceholderId,
-          type: "ai",
-          role: "AI",
-          content: "",
-        },
-      ]);
+      if (existingUserBubbleId) {
+        syncMessages((prev) => [
+          ...prev.map((m) =>
+            m.id === existingUserBubbleId ? { ...m, queued: false } : m
+          ),
+          {
+            id: aiPlaceholderId,
+            type: "ai",
+            role: "AI",
+            content: "",
+          },
+        ]);
+      } else {
+        syncMessages((prev) => [
+          ...prev,
+          {
+            id: optimisticUserId,
+            type: "user",
+            role: "USER",
+            content: trimmed,
+          },
+          {
+            id: aiPlaceholderId,
+            type: "ai",
+            role: "AI",
+            content: "",
+          },
+        ]);
+      }
 
       setStreamingMessageId(aiPlaceholderId);
       setShowTypingIndicator(true);
@@ -407,6 +516,8 @@ export function useIntakeChat(
 
       let streamSucceeded = false;
       let doneApplied = false;
+      let wasAborted = false;
+      let receivedStreamActivity = false;
 
       try {
         await streamMessage(
@@ -414,6 +525,7 @@ export function useIntakeChat(
           trimmed,
           {
             onStart: (data) => {
+              receivedStreamActivity = true;
               const aiId = data.messageUid || aiPlaceholderId;
               aiMessagePlaceholderIdRef.current = aiId;
               setStreamingMessageId(aiId);
@@ -436,6 +548,7 @@ export function useIntakeChat(
               }
             },
             onUserMessage: (data) => {
+              receivedStreamActivity = true;
               if (!data.id) return;
               syncMessages((prev) =>
                 prev.map((m) =>
@@ -446,6 +559,7 @@ export function useIntakeChat(
               );
             },
             onToken: (data) => {
+              receivedStreamActivity = true;
               const chunk = data.content ?? "";
               if (!chunk) return;
 
@@ -457,7 +571,22 @@ export function useIntakeChat(
               tokenBufferRef.current += chunk;
             },
             onToolStart: (data) => {
+              receivedStreamActivity = true;
               flushTokenBuffer();
+
+              // Full-panel BUILDING SCOPE only for first-plan generation tools
+              if (
+                !scopeGeneratedRef.current &&
+                SCOPE_GENERATION_TOOLS.has(data.toolName)
+              ) {
+                setScopeBuildActive(true);
+                if (progressPeakRef.current < 0) {
+                  setScopeProgressStep("listening");
+                  setScopeProgressLabel("Understanding the matter…");
+                  progressPeakRef.current = 0;
+                }
+                advanceScopeProgress(data.toolName);
+              }
 
               if (currentAiTextRef.current.trim()) {
                 freezeAiPlaceholderAndStartNew();
@@ -472,8 +601,10 @@ export function useIntakeChat(
                   toolName: data.toolName,
                   humanLabel:
                     data.humanLabel ||
+                    thinkingCopyFor(data.toolName).running ||
+                    FRIENDLY_TOOL_LABELS[data.toolName] ||
                     TOOL_LABELS[data.toolName] ||
-                    "Working...",
+                    "Working…",
                   toolStatus: "running",
                 },
               ]);
@@ -490,9 +621,11 @@ export function useIntakeChat(
                           ...m,
                           toolStatus: data.success ? "success" : "failed",
                           humanLabel: data.success
-                            ? TOOL_SUCCESS_LABELS[data.toolName] || "Done"
+                            ? thinkingCopyFor(data.toolName).done
                             : m.humanLabel,
-                          toolError: data.success ? undefined : data.error,
+                          toolError: data.success
+                            ? undefined
+                            : friendlyToolError(data.error),
                         }
                       : m
                   )
@@ -501,14 +634,22 @@ export function useIntakeChat(
               setHasActiveToolCall(false);
             },
             onScopeGenerated: (data) => {
+              receivedStreamActivity = true;
               flushTokenBuffer();
+              setScopeProgressStep("ready");
+              setScopeProgressLabel("Scope ready");
               applyScopeUpdate(data.scope);
             },
             onScopeUpdated: (data) => {
+              receivedStreamActivity = true;
               flushTokenBuffer();
               applyScopeUpdate(data.scope);
+              setChatMode((prev) =>
+                prev === "SCOPE_CONFIRMED" ? prev : "SCOPE_GENERATED"
+              );
             },
             onDone: (data) => {
+              receivedStreamActivity = true;
               flushTokenBuffer();
               streamSucceeded = true;
               setShowTypingIndicator(false);
@@ -532,6 +673,10 @@ export function useIntakeChat(
 
               if (data.chatMode) {
                 setChatMode(data.chatMode);
+              } else if (data.scopeGenerated || data.scope) {
+                setChatMode((prev) =>
+                  prev === "SCOPE_CONFIRMED" ? prev : "SCOPE_GENERATED"
+                );
               }
             },
             onError: (data) => {
@@ -547,19 +692,68 @@ export function useIntakeChat(
           (err.name === "AbortError" || err.message.includes("aborted"));
 
         if (isAbort) {
+          wasAborted = true;
+          const placeholderId = aiMessagePlaceholderIdRef.current;
+          if (placeholderId) {
+            syncMessages((prev) =>
+              prev.map((m) =>
+                m.id === placeholderId ? { ...m, cancelled: true } : m
+              )
+            );
+          }
+          syncMessages((prev) =>
+            prev.map((m) =>
+              m.type === "tool" && m.toolStatus === "running"
+                ? {
+                    ...m,
+                    toolStatus: "failed",
+                    toolError: "Stopped",
+                    humanLabel: "Stopped",
+                  }
+                : m
+            )
+          );
           finalizeStream();
+          toast("Stopped — next queued message will send");
           return;
         }
 
         if (!streamSucceeded) {
+          const message =
+            err instanceof Error
+              ? err.message
+              : "Connection error. Please try again.";
+          toast.error(message);
+
+          // Mid-stream failure (tools / progress already ran): keep UI, refresh
+          // from server, do NOT re-send — that would duplicate the agent run.
+          if (receivedStreamActivity) {
+            syncMessages((prev) =>
+              prev.map((m) =>
+                m.type === "tool" && m.toolStatus === "running"
+                  ? {
+                      ...m,
+                      toolStatus: "failed",
+                      toolError: friendlyToolError(message) || message,
+                      humanLabel: "Interrupted",
+                    }
+                  : m
+              )
+            );
+            finalizeStream();
+            try {
+              await refreshMessagesFromServer();
+            } catch {
+              // ignore refresh errors
+            }
+            return;
+          }
+
           const placeholderId = aiMessagePlaceholderIdRef.current;
           syncMessages((prev) =>
             prev.filter(
               (m) => m.id !== optimisticUserId && m.id !== placeholderId
             )
-          );
-          toast.error(
-            err instanceof Error ? err.message : "Connection error. Please try again."
           );
           await fallbackSendMessage(trimmed, optimisticUserId);
           return;
@@ -568,7 +762,7 @@ export function useIntakeChat(
 
       finalizeStream();
 
-      if (streamSucceeded) {
+      if (streamSucceeded && !wasAborted) {
         await refreshMessagesFromServer();
         if (!doneApplied) {
           hasLocalMessagesRef.current = true;
@@ -577,7 +771,6 @@ export function useIntakeChat(
     },
     [
       uid,
-      isAiThinking,
       startFlushInterval,
       flushTokenBuffer,
       finalizeStream,
@@ -588,16 +781,178 @@ export function useIntakeChat(
       refreshMessagesFromServer,
       freezeAiPlaceholderAndStartNew,
       applyScopeUpdate,
+      advanceScopeProgress,
     ]
+  );
+
+  const drainQueue = useCallback(async () => {
+    if (drainScheduledRef.current || isBusyRef.current) return;
+    const next = messageQueueRef.current.shift();
+    setQueueCount(messageQueueRef.current.length);
+    if (!next) return;
+
+    drainScheduledRef.current = true;
+    try {
+      await executeSend(next.content, next.id);
+    } finally {
+      drainScheduledRef.current = false;
+      if (messageQueueRef.current.length > 0 && !isBusyRef.current) {
+        void drainQueue();
+      }
+    }
+  }, [executeSend]);
+
+  const sendMessage = useCallback(
+    async (content: string) => {
+      const trimmed = content.trim();
+      if (!trimmed) return;
+
+      const intent = detectChatIntent(trimmed);
+
+      // Queue follow-ups while Lysp is busy (except reset/undo which wait for idle)
+      if (isBusyRef.current || isAiThinking) {
+        if (intent === "reset" || intent === "undo") {
+          toast("Wait for Lysp to finish, or press Stop first");
+          return;
+        }
+        const queuedId = `queued-${Date.now()}-${++optimisticIdRef.current}`;
+        messageQueueRef.current.push({ id: queuedId, content: trimmed });
+        setQueueCount(messageQueueRef.current.length);
+        hasLocalMessagesRef.current = true;
+        syncMessages((prev) => [
+          ...prev,
+          {
+            id: queuedId,
+            type: "user",
+            role: "USER",
+            content: trimmed,
+            queued: true,
+            createdAt: new Date().toISOString(),
+          },
+        ]);
+        return;
+      }
+
+      if (intent === "reset" || intent === "undo") {
+        hasLocalMessagesRef.current = true;
+        isBusyRef.current = true;
+        const optimisticUserId = `temp-${Date.now()}-${++optimisticIdRef.current}`;
+        const ackId = `local-ack-${Date.now()}`;
+
+        syncMessages((prev) => [
+          ...prev,
+          {
+            id: optimisticUserId,
+            type: "user",
+            role: "USER",
+            content: trimmed,
+            createdAt: new Date().toISOString(),
+          },
+        ]);
+
+        setIsAiThinking(true);
+        setShowTypingIndicator(true);
+        try {
+          if (intent === "reset") {
+            if (!localActions?.onResetScope) {
+              toast.error("Unable to reset scope right now");
+              return;
+            }
+            await localActions.onResetScope();
+            messageQueueRef.current = [];
+            setQueueCount(0);
+            syncMessages((prev) => [
+              ...prev.filter((m) => !m.queued),
+              {
+                id: ackId,
+                type: "ai",
+                role: "AI",
+                content:
+                  "All clear — I've wiped the scope. Tell me about the matter again and I'll build a fresh plan.",
+                createdAt: new Date().toISOString(),
+              },
+            ]);
+            toast.success("Scope cleared");
+          } else {
+            if (!localActions?.onUndoScope) {
+              toast.error("Unable to undo right now");
+              return;
+            }
+            const ok = await localActions.onUndoScope();
+            if (!ok) {
+              syncMessages((prev) => [
+                ...prev,
+                {
+                  id: ackId,
+                  type: "ai",
+                  role: "AI",
+                  content:
+                    "There's nothing left to undo. Make a change first, or ask me to adjust something in chat.",
+                  createdAt: new Date().toISOString(),
+                },
+              ]);
+            } else {
+              syncMessages((prev) => [
+                ...prev,
+                {
+                  id: ackId,
+                  type: "ai",
+                  role: "AI",
+                  content:
+                    "Undone — I restored the previous version of the scope. You can keep editing or ask for another change.",
+                  createdAt: new Date().toISOString(),
+                },
+              ]);
+              toast.success("Last scope change undone");
+            }
+          }
+        } catch (err: unknown) {
+          const e = err as { response?: { data?: { message?: string } }; message?: string };
+          toast.error(e.response?.data?.message || e.message || "Action failed");
+          syncMessages((prev) =>
+            prev.filter((m) => m.id !== optimisticUserId)
+          );
+        } finally {
+          setIsAiThinking(false);
+          setShowTypingIndicator(false);
+          isBusyRef.current = false;
+          void drainQueue();
+        }
+        return;
+      }
+
+      await executeSend(trimmed);
+      void drainQueue();
+    },
+    [
+      isAiThinking,
+      localActions,
+      syncMessages,
+      executeSend,
+      drainQueue,
+    ]
+  );
+
+  const removeQueuedMessage = useCallback(
+    (messageId: string) => {
+      messageQueueRef.current = messageQueueRef.current.filter(
+        (m) => m.id !== messageId
+      );
+      setQueueCount(messageQueueRef.current.length);
+      syncMessages((prev) => prev.filter((m) => m.id !== messageId));
+    },
+    [syncMessages]
   );
 
   const stopStreaming = useCallback(() => {
     if (abortControllerRef.current) {
       abortControllerRef.current.abort();
+    } else {
+      flushTokenBuffer();
+      finalizeStream();
+      void drainQueue();
     }
-    flushTokenBuffer();
-    finalizeStream();
-  }, [flushTokenBuffer, finalizeStream]);
+  }, [flushTokenBuffer, finalizeStream, drainQueue]);
 
   useEffect(() => {
     return () => {
@@ -614,6 +969,11 @@ export function useIntakeChat(
     streamingMessageId,
     sendMessage,
     stopStreaming,
+    removeQueuedMessage,
+    queueCount,
+    scopeProgressStep,
+    scopeProgressLabel,
+    scopeBuildActive,
     scopeGenerated,
     scope,
     setScope,

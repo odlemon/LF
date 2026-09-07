@@ -1,0 +1,24 @@
+---
+description: Agent owns backend/frontend restarts — never ask the user to restart
+alwaysApply: true
+---
+
+# Own runtime restarts — never ask the user
+
+The user gave full control over the Lysp stack. **Do not tell the user to restart the backend, frontend, or any server.**
+
+## Required behavior
+
+1. **You** change code in the correct repo/directory (`lysp-frontend`, `lysp-backend`, etc.).
+2. **You** compile/build and fix failures until green.
+3. **You** stop and restart the affected process (Spring Boot, Next.js, etc.) when changes need a restart.
+4. **You** verify the process is healthy (boot logs, `/actuator/health` or equivalent, no startup errors).
+5. Only then tell the user the work is done and they can test in the browser.
+
+## Forbidden
+
+- "Restart the backend"
+- "You'll need to restart for this to take effect"
+- "Please restart your server"
+
+If a restart is needed, do it yourself in this session. If you cannot (missing credentials, port locked with no kill rights, etc.), say what blocked you and what you already tried — still do not dump the restart on the user as the plan.

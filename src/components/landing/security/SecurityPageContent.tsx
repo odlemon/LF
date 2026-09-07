@@ -5,6 +5,7 @@ import Link from "next/link";
 import { HiArrowRight, HiCheck, HiChevronDown, HiLockClosed, HiShieldCheck } from "react-icons/hi";
 import { SECURITY_CERTIFICATIONS } from "@/components/landing/security/certifications";
 import { SecurityBadge } from "@/components/landing/security/SecurityBadge";
+import { MARKETING_SHELL, PageHeroHeader } from "@/components/landing/editorial";
 
 const TRUST_STRIP = [
   { label: "Encryption", value: "AES-256 · TLS 1.2+" },
@@ -171,20 +172,17 @@ export function SecurityPageContent() {
 
       {/* Hero */}
       <section className="relative border-b border-black/[0.06]">
-        <div className="relative mx-auto max-w-[1200px] px-4 sm:px-8 lg:px-10 pt-16 sm:pt-24 pb-12 sm:pb-16">
-          <div className="max-w-3xl">
-            <p className="text-[12px] font-medium tracking-[0.22em] uppercase text-[#0a0a0a]/40">
-              Enterprise security
-            </p>
-            <h1 className="mt-5 text-balance text-[2.25rem] sm:text-5xl lg:text-[3.25rem] font-semibold leading-[1.06] tracking-tight">
-              Enterprise-grade security
-              <span className="text-[#0a0a0a]/40"> for privileged pricing data.</span>
-            </h1>
-            <p className="mt-5 text-[15px] sm:text-lg text-[#0a0a0a]/55 leading-relaxed max-w-2xl">
-              Rates, OCGs, realization, and negotiation history are among the most sensitive assets
-              in a firm. Lysp is built so that information stays yours - encrypted, isolated,
-              auditable, and never used to train models.
-            </p>
+        <div className={`${MARKETING_SHELL} pt-16 sm:pt-24 pb-12 sm:pb-16`}>
+          <PageHeroHeader
+            eyebrow="Enterprise security"
+            title={
+              <>
+                Enterprise-grade security
+                <span className="text-[#0a0a0a]/40"> for privileged pricing data.</span>
+              </>
+            }
+            description="Rates, OCGs, realization, and negotiation history are among the most sensitive assets in a firm. Lysp is built so that information stays yours - encrypted, isolated, auditable, and never used to train models."
+          >
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="/auth"
@@ -200,7 +198,7 @@ export function SecurityPageContent() {
                 View certifications
               </a>
             </div>
-          </div>
+          </PageHeroHeader>
 
           <div className="mt-12 sm:mt-14 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {TRUST_STRIP.map((item) => (

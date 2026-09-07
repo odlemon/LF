@@ -6,9 +6,10 @@ import { useClientDetail } from "@/modules/firm/hooks/useFirm";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import toast from "react-hot-toast";
-import { HiArrowLeft, HiMail, HiUser, HiPlus, HiLockOpen, HiCheck, HiX, HiPencil } from "react-icons/hi";
+import { HiArrowLeft, HiMail, HiUser, HiPlus, HiLockOpen, HiCheck, HiX, HiPencil, HiLink } from "react-icons/hi";
 import { Select } from "@/components/ui/Select";
 import { AuditTrailPanel } from "@/components/shared/AuditTrailPanel";
+import { ClientIntelligencePanel } from "@/modules/analytics/components/ClientIntelligencePanel";
 
 interface ClientDetailPageProps {
   params: Promise<{ uid: string }>;
@@ -46,9 +47,9 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
   if (isLoading) {
     return (
       <div className="p-8 max-w-4xl w-full mx-auto flex flex-col gap-6 animate-pulse">
-        <div className="h-6 bg-gray-250 w-1/4 rounded-lg" />
-        <div className="h-40 bg-gray-200 rounded-2xl" />
-        <div className="h-48 bg-gray-200 rounded-2xl" />
+        <div className="h-6 bg-field w-1/4 rounded-lg" />
+        <div className="h-40 bg-field rounded-2xl" />
+        <div className="h-48 bg-field rounded-2xl" />
       </div>
     );
   }
@@ -115,7 +116,7 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
       case "PREFERRED":
         return "bg-blue-50 text-blue-700 border-blue-100";
       default:
-        return "bg-gray-150 text-gray-700 border-gray-200/60";
+        return "bg-field text-ink/80 border-border/60";
     }
   };
 
@@ -124,19 +125,19 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
       <div>
         <Link
           href="/clients"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-500 hover:text-gray-900 transition-colors mb-4"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-ink/55 hover:text-ink transition-colors mb-4"
         >
           <HiArrowLeft className="w-3.5 h-3.5" />
           Back to Clients
         </Link>
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 tracking-tight">{client.name}</h1>
+            <h1 className="text-2xl font-bold text-ink tracking-tight">{client.name}</h1>
             <div className="flex items-center gap-2.5 mt-2">
               <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold border uppercase tracking-wider ${getTierClass(client.tier)}`}>
                 {client.tier}
               </span>
-              <span className="text-xs text-gray-500 font-medium capitalize">
+              <span className="text-xs text-ink/55 font-medium capitalize">
                 {client.type.toLowerCase().replace("_", " ")}
               </span>
             </div>
@@ -151,29 +152,29 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-        <div className="bg-white rounded-2xl border border-gray-200/60 shadow-sm p-6 lg:col-span-2">
-          <h2 className="text-sm font-bold text-gray-900 mb-4 pb-2 border-b border-gray-100">
+        <div className="bg-surface rounded-2xl border border-border/60 shadow-sm p-6 lg:col-span-2">
+          <h2 className="text-sm font-bold text-ink mb-4 pb-2 border-b border-border">
             Client Details
           </h2>
 
           {isEditingProfile ? (
             <form onSubmit={handleUpdateProfile} className="flex flex-col gap-4">
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
                   Client Name
                 </label>
                 <input
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="px-5 py-2.5 bg-gray-55 border border-gray-250 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:bg-white transition-all text-gray-900"
+                  className="px-5 py-2.5 bg-field border border-border rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface transition-all text-ink"
                   required
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                  <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
                     Type
                   </label>
                   <Select
@@ -189,7 +190,7 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                  <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
                     Tier
                   </label>
                   <Select
@@ -206,20 +207,20 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                  <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
                     Contact Name
                   </label>
                   <input
                     type="text"
                     value={contactName}
                     onChange={(e) => setContactName(e.target.value)}
-                    className="px-5 py-2.5 bg-gray-55 border border-gray-250 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:bg-white transition-all text-gray-900"
+                    className="px-5 py-2.5 bg-field border border-border rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface transition-all text-ink"
                     required
                   />
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                  <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
                     Country (ISO)
                   </label>
                   <Select
@@ -238,19 +239,19 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
                   Contact Email
                 </label>
                 <input
                   type="email"
                   value={contactEmail}
                   onChange={(e) => setContactEmail(e.target.value)}
-                  className="px-5 py-2.5 bg-gray-55 border border-gray-250 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:bg-white transition-all text-gray-900"
+                  className="px-5 py-2.5 bg-field border border-border rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface transition-all text-ink"
                   required
                 />
               </div>
 
-              <div className="flex justify-end gap-3 mt-4 pt-4 border-t border-gray-100">
+              <div className="flex justify-end gap-3 mt-4 pt-4 border-t border-border">
                 <Button
                   type="button"
                   variant="secondary"
@@ -265,21 +266,21 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
               </div>
             </form>
           ) : (
-            <div className="grid grid-cols-2 gap-y-5 text-sm text-gray-900">
+            <div className="grid grid-cols-2 gap-y-5 text-sm text-ink">
               <div className="flex flex-col gap-0.5">
-                <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Primary Contact</span>
-                <span className="font-semibold text-gray-900">{client.contactName}</span>
+                <span className="text-xs font-bold text-ink/55 uppercase tracking-wider">Primary Contact</span>
+                <span className="font-semibold text-ink">{client.contactName}</span>
               </div>
               
               <div className="flex flex-col gap-0.5">
-                <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Country</span>
-                <span className="font-semibold text-gray-900">{client.country}</span>
+                <span className="text-xs font-bold text-ink/55 uppercase tracking-wider">Country</span>
+                <span className="font-semibold text-ink">{client.country}</span>
               </div>
 
               <div className="flex flex-col gap-0.5 col-span-2">
-                <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Contact Email</span>
-                <span className="font-medium text-gray-700 flex items-center gap-1.5">
-                  <HiMail className="w-4 h-4 text-gray-400" />
+                <span className="text-xs font-bold text-ink/55 uppercase tracking-wider">Contact Email</span>
+                <span className="font-medium text-ink/80 flex items-center gap-1.5">
+                  <HiMail className="w-4 h-4 text-ink/40" />
                   {client.contactEmail}
                 </span>
               </div>
@@ -287,9 +288,9 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
           )}
         </div>
 
-        <div className="bg-white rounded-2xl border border-gray-200/60 shadow-sm p-6 flex flex-col gap-4">
-          <div className="flex items-center justify-between gap-3 pb-2 border-b border-gray-100">
-            <h2 className="text-sm font-bold text-gray-900">Portal Logins</h2>
+        <div className="bg-surface rounded-2xl border border-border/60 shadow-sm p-6 flex flex-col gap-4">
+          <div className="flex items-center justify-between gap-3 pb-2 border-b border-border">
+            <h2 className="text-sm font-bold text-ink">Portal Logins</h2>
             <button
               onClick={() => setIsInviteModalOpen(true)}
               className="text-xs font-bold text-primary hover:underline flex items-center gap-1 transition-colors"
@@ -301,35 +302,53 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
 
           <div className="flex flex-col gap-3">
             {portalUsers.length === 0 ? (
-              <div className="text-center py-6 bg-gray-55 border border-dashed border-gray-200 rounded-xl text-xs text-gray-500">
+              <div className="text-center py-6 bg-field border border-dashed border-border rounded-xl text-xs text-ink/55">
                 No portal users configured. Click &apos;Invite&apos; to authorize client representatives.
               </div>
             ) : (
               portalUsers.map((user) => (
                 <div
                   key={user.uid}
-                  className="p-3.5 border border-gray-100 hover:border-gray-200 rounded-xl flex items-center justify-between gap-4 transition-all"
+                  className="p-3.5 border border-border hover:border-border rounded-xl flex items-center justify-between gap-4 transition-all"
                 >
                   <div className="flex items-start gap-2.5 min-w-0">
-                    <div className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center text-gray-400 shrink-0">
+                    <div className="w-8 h-8 rounded-lg bg-field flex items-center justify-center text-ink/40 shrink-0">
                       <HiUser className="w-4 h-4" />
                     </div>
                     <div className="min-w-0 flex flex-col">
-                      <span className="text-xs font-bold text-gray-900 truncate leading-tight">{user.name}</span>
-                      <span className="text-[10px] text-gray-500 truncate mt-0.5">{user.email}</span>
+                      <span className="text-xs font-bold text-ink truncate leading-tight">{user.name}</span>
+                      <span className="text-[10px] text-ink/55 truncate mt-0.5">{user.email}</span>
                     </div>
                   </div>
-                  <span>
+                  <div className="flex items-center gap-2 shrink-0">
                     {user.active ? (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-100 uppercase tracking-wide">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-bold bg-hover text-ink/80 border border-border uppercase tracking-wide">
                         Active
                       </span>
                     ) : (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-bold bg-amber-50 text-amber-700 border border-amber-100 uppercase tracking-wide">
-                        Pending
-                      </span>
+                      <>
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-bold bg-amber-50 text-amber-700 border border-amber-100 uppercase tracking-wide">
+                          Pending
+                        </span>
+                        {user.inviteToken && (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const portalBase =
+                                process.env.NEXT_PUBLIC_PORTAL_URL || window.location.origin;
+                              const link = `${portalBase}/portal/login?token=${user.inviteToken}`;
+                              navigator.clipboard.writeText(link);
+                              toast.success("Invite link copied — share it with the client contact.");
+                            }}
+                            title="Copy invite link (no email is sent automatically yet — share this link directly)"
+                            className="p-1.5 hover:bg-field rounded-lg text-ink/40 hover:text-primary transition-colors"
+                          >
+                            <HiLink className="w-3.5 h-3.5" />
+                          </button>
+                        )}
+                      </>
                     )}
-                  </span>
+                  </div>
                 </div>
               ))
             )}
@@ -337,25 +356,31 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
         </div>
       </div>
 
+      {/* Relationship intelligence, above activity history: the partner's question is
+          "is this healthy", not "what changed on the record". */}
+      <div className="mt-2">
+        <ClientIntelligencePanel clientProfileUid={uid} />
+      </div>
+
       {/* Activity History timeline compliance panel */}
-      <div className="bg-white rounded-2xl border border-gray-200/60 shadow-sm p-6 mt-2">
+      <div className="bg-surface rounded-2xl border border-border/60 shadow-sm p-6 mt-2">
         <AuditTrailPanel entityUid={uid} title="Client Account Activity History" />
       </div>
 
       {isInviteModalOpen && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in">
-          <div className="bg-white rounded-2xl max-w-sm w-full shadow-2xl p-6 relative animate-fade-in-up border border-gray-100 z-50">
-            <h3 className="text-base font-bold text-gray-900 mb-1 flex items-center gap-2">
+          <div className="bg-surface rounded-2xl max-w-sm w-full shadow-2xl p-6 relative animate-fade-in-up border border-border z-50">
+            <h3 className="text-base font-bold text-ink mb-1 flex items-center gap-2">
               <HiLockOpen className="w-5 h-5 text-primary" />
               Invite Client Contact
             </h3>
-            <p className="text-xs text-gray-500 mb-4">
+            <p className="text-xs text-ink/55 mb-4">
               Authorize {client.name} contacts to view pricing requests, scoping, and negotiate bids directly.
             </p>
 
             <form onSubmit={handleInviteUser} className="flex flex-col gap-4">
               <div className="flex flex-col gap-1">
-                <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">
+                <label className="text-[10px] font-bold text-ink/55 uppercase tracking-wider">
                   Contact Name
                 </label>
                 <input
@@ -363,13 +388,13 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
                   value={inviteName}
                   onChange={(e) => setInviteName(e.target.value)}
                   placeholder="e.g. John Doe"
-                  className="px-5 py-2.5 bg-gray-55 border border-gray-250 rounded-full text-xs focus:outline-none focus:ring-2 focus:ring-primary focus:bg-white transition-all text-gray-900"
+                  className="px-5 py-2.5 bg-field border border-border rounded-full text-xs focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface transition-all text-ink"
                   required
                 />
               </div>
 
               <div className="flex flex-col gap-1">
-                <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">
+                <label className="text-[10px] font-bold text-ink/55 uppercase tracking-wider">
                   Contact Email
                 </label>
                 <input
@@ -377,12 +402,12 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
                   value={inviteEmail}
                   onChange={(e) => setInviteEmail(e.target.value)}
                   placeholder="e.g. john@astrazeneca.com"
-                  className="px-5 py-2.5 bg-gray-55 border border-gray-250 rounded-full text-xs focus:outline-none focus:ring-2 focus:ring-primary focus:bg-white transition-all text-gray-900"
+                  className="px-5 py-2.5 bg-field border border-border rounded-full text-xs focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface transition-all text-ink"
                   required
                 />
               </div>
 
-              <div className="flex justify-end gap-2.5 mt-4 pt-3.5 border-t border-gray-100">
+              <div className="flex justify-end gap-2.5 mt-4 pt-3.5 border-t border-border">
                 <Button
                   type="button"
                   variant="secondary"

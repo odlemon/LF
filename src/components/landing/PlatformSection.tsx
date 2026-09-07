@@ -112,6 +112,51 @@ function ExploreCta() {
   );
 }
 
+/** Editorial opener - matches Journal / About brand language. */
+function PlatformIntro({ compact = false }: { compact?: boolean }) {
+  return (
+    <div
+      className={`relative overflow-hidden bg-[#0a0f0d] text-[#fefefc] ${
+        compact ? "shrink-0" : ""
+      }`}
+    >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_85%_0%,rgba(254,254,252,0.07),transparent_55%)]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-[0.04]"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+        }}
+      />
+
+      <div
+        className={`relative mx-auto w-full max-w-[1200px] px-5 sm:px-8 lg:px-10 ${
+          compact ? "pt-10 pb-7 lg:pt-12 lg:pb-8" : "pt-14 sm:pt-16 pb-10 sm:pb-12"
+        }`}
+      >
+        <div className="max-w-3xl text-left">
+          <h2
+            className={`text-balance font-semibold tracking-tight leading-[1.06] ${
+              compact
+                ? "text-[1.85rem] lg:text-[2.5rem] xl:text-[3rem]"
+                : "text-[1.85rem] sm:text-4xl"
+            }`}
+          >
+            How elite firms use Lysp
+            <span className="block text-white/40 mt-1.5 sm:mt-2">
+              from RFP to accepted fee.
+            </span>
+          </h2>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /** Mobile: compact swipe carousel - no sticky scroll-jack whitespace. */
 function MobilePlatform() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -173,14 +218,7 @@ function MobilePlatform() {
 
   return (
     <section id="platform-mobile" className="relative w-full bg-[#fefefc] lg:hidden">
-      <div className="mx-auto w-full max-w-[1280px] px-5 sm:px-8 pt-12 sm:pt-16 pb-3">
-        <p className="text-[12px] font-medium tracking-[0.22em] uppercase text-[#0a0a0a]/40">
-          Product
-        </p>
-        <h2 className="mt-3 max-w-3xl text-balance text-[1.5rem] sm:text-3xl font-semibold leading-[1.12] tracking-tight text-[#0a0a0a]">
-          How elite firms use Lysp - from RFP to accepted fee.
-        </h2>
-      </div>
+      <PlatformIntro />
 
       <div
         className="touch-pan-y select-none"
@@ -192,16 +230,16 @@ function MobilePlatform() {
         aria-roledescription="carousel"
         aria-label="Product capabilities"
       >
-        <div className="mx-auto w-full max-w-[1280px] px-5 sm:px-8 pt-4">
+        <div className="mx-auto w-full max-w-[1200px] px-5 sm:px-8 pt-6">
           <div
-            className={`h-[240px] sm:h-[300px] ${reduceMotion ? "" : "transition-opacity duration-200"}`}
+            className={`h-[380px] sm:h-[460px] ${reduceMotion ? "" : "transition-opacity duration-200"}`}
             key={active.id}
           >
             <FeaturePreview id={active.id} />
           </div>
         </div>
 
-        <div className="mx-auto w-full max-w-[1280px] px-5 sm:px-8 pt-5 pb-2">
+        <div className="mx-auto w-full max-w-[1200px] px-5 sm:px-8 pt-5 pb-2">
           <UseCaseCopy
             index={activeIndex}
             label={active.label}
@@ -213,7 +251,7 @@ function MobilePlatform() {
         </div>
       </div>
 
-      <div className="mx-auto w-full max-w-[1280px] px-5 sm:px-8 pb-10 pt-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="mx-auto w-full max-w-[1200px] px-5 sm:px-8 pb-10 pt-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <StepDots activeIndex={activeIndex} onSelect={goTo} />
         <ExploreCta />
       </div>
@@ -347,18 +385,11 @@ function DesktopPlatform() {
       style={{ height: `${count * STEP_VH}vh` }}
     >
       <div className="sticky top-0 flex h-screen flex-col overflow-hidden">
-        <div className="mx-auto w-full max-w-[1280px] shrink-0 px-5 sm:px-8 lg:px-10 pt-16 sm:pt-20 pb-3 sm:pb-4">
-          <p className="text-[12px] font-medium tracking-[0.22em] uppercase text-[#0a0a0a]/40">
-            Product
-          </p>
-          <h2 className="mt-3 max-w-3xl text-balance text-[1.5rem] sm:text-3xl lg:text-[2.35rem] font-semibold leading-[1.12] tracking-tight text-[#0a0a0a]">
-            How elite firms use Lysp - from RFP to accepted fee.
-          </h2>
-        </div>
+        <PlatformIntro compact />
 
-        <div className="relative flex min-h-0 flex-1 items-center overflow-hidden px-5 sm:px-8 lg:px-10 py-2">
+        <div className="relative flex min-h-0 flex-1 items-center overflow-hidden bg-[#fefefc] px-5 sm:px-8 lg:px-10 py-2">
           <div
-            className="relative mx-auto w-full max-w-[1280px] h-full max-h-[min(56vh,540px)] overflow-hidden"
+            className="relative mx-auto w-full max-w-[1200px] h-full max-h-[min(62vh,580px)] overflow-hidden"
             aria-live="polite"
             aria-atomic="true"
           >
@@ -422,7 +453,7 @@ function DesktopPlatform() {
           </div>
         </div>
 
-        <div className="relative z-20 mx-auto w-full max-w-[1280px] shrink-0 bg-[#fefefc] px-5 sm:px-8 lg:px-10 pb-8 sm:pb-10 pt-5 sm:pt-6">
+        <div className="relative z-20 mx-auto w-full max-w-[1200px] shrink-0 bg-[#fefefc] px-5 sm:px-8 lg:px-10 pb-8 sm:pb-10 pt-5 sm:pt-6">
           <div className="flex flex-row items-center justify-between gap-4">
             <StepDots activeIndex={activeIndex} onSelect={goToIndex} />
             <ExploreCta />

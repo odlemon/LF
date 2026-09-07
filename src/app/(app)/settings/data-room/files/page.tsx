@@ -86,7 +86,7 @@ export default function FileStoragePage() {
   const getFileIcon = (contentType: string) => {
     if (contentType.includes("pdf")) return <HiDocumentText className="w-5 h-5 text-rose-500" />;
     if (contentType.includes("spreadsheet") || contentType.includes("excel") || contentType.includes("csv"))
-      return <HiTable className="w-5 h-5 text-emerald-500" />;
+      return <HiTable className="w-5 h-5 text-ink/55" />;
     if (contentType.includes("image")) return <HiPhotograph className="w-5 h-5 text-blue-500" />;
     if (contentType.includes("json") || contentType.includes("xml") || contentType.includes("text"))
       return <HiCode className="w-5 h-5 text-indigo-500" />;
@@ -94,7 +94,7 @@ export default function FileStoragePage() {
       return <HiDocumentReport className="w-5 h-5 text-blue-600" />;
     if (contentType.includes("presentation"))
       return <HiPresentationChartBar className="w-5 h-5 text-orange-500" />;
-    return <HiDocumentText className="w-5 h-5 text-gray-400" />;
+    return <HiDocumentText className="w-5 h-5 text-ink/40" />;
   };
 
   const formatFileSize = (bytes: number) => {
@@ -122,10 +122,10 @@ export default function FileStoragePage() {
     let styles = "";
     switch (status) {
       case "ACTIVE":
-        styles = "bg-emerald-50 text-emerald-700 border-emerald-200";
+        styles = "bg-hover text-ink/80 border-border";
         break;
       case "INACTIVE":
-        styles = "bg-gray-100 text-gray-500 border-gray-200";
+        styles = "bg-canvas text-ink/55 border-border";
         break;
       case "PENDING":
         styles = "bg-amber-50 text-amber-700 border-amber-200";
@@ -134,7 +134,7 @@ export default function FileStoragePage() {
         styles = "bg-rose-50 text-rose-600 border-rose-200";
         break;
       case "DELETED":
-        styles = "bg-gray-100 text-gray-400 border-gray-200 line-through";
+        styles = "bg-canvas text-ink/40 border-border line-through";
         break;
     }
     return (
@@ -165,14 +165,14 @@ export default function FileStoragePage() {
   const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   return (
-    <div className="p-8 max-w-6xl w-full mx-auto flex flex-col gap-6 text-gray-800">
+    <div className="p-8 max-w-6xl w-full mx-auto flex flex-col gap-6 text-ink/90">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 tracking-tight flex items-center gap-2">
+          <h1 className="text-2xl font-bold text-ink tracking-tight flex items-center gap-2">
             <HiCloudUpload className="w-7 h-7 text-primary" /> File Storage
           </h1>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-sm text-ink/55 mt-1">
             Manage files stored in your firm&apos;s MinIO object storage. Upload, download, or remove files.
           </p>
         </div>
@@ -198,14 +198,14 @@ export default function FileStoragePage() {
 
       {/* Upload progress bar */}
       {isUploading && (
-        <div className="bg-white border border-primary/20 rounded-2xl p-4 shadow-sm animate-fade-in">
+        <div className="bg-surface border border-primary/20 rounded-2xl p-4 shadow-sm animate-fade-in">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-gray-600 flex items-center gap-1.5">
+            <span className="text-xs font-bold text-ink/65 flex items-center gap-1.5">
               <HiUpload className="w-4 h-4 text-primary animate-bounce" /> Uploading file...
             </span>
-            <span className="text-xs font-extrabold text-gray-900">{uploadProgress}%</span>
+            <span className="text-xs font-extrabold text-ink">{uploadProgress}%</span>
           </div>
-          <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden border border-gray-200/50">
+          <div className="h-2 w-full bg-canvas rounded-full overflow-hidden border border-border/50">
             <div
               className="h-full bg-gradient-to-r from-primary to-primary/80 rounded-full transition-all duration-300 shadow-sm shadow-primary/20"
               style={{ width: `${uploadProgress}%` }}
@@ -215,26 +215,26 @@ export default function FileStoragePage() {
       )}
 
       {/* File listing table */}
-      <div className="bg-white border border-gray-200/60 rounded-3xl overflow-hidden shadow-sm">
+      <div className="bg-surface border border-border/60 rounded-3xl overflow-hidden shadow-sm">
         <div className="overflow-x-auto rates-scrollable">
           <table className="min-w-full divide-y divide-gray-100 text-xs">
-            <thead className="bg-gray-50">
+            <thead className="bg-field">
               <tr>
-                <th className="px-5 py-4 text-left font-bold text-gray-500 uppercase tracking-wider">File Name</th>
-                <th className="px-5 py-4 text-left font-bold text-gray-500 uppercase tracking-wider">Type</th>
-                <th className="px-5 py-4 text-left font-bold text-gray-500 uppercase tracking-wider">Size</th>
-                <th className="px-5 py-4 text-left font-bold text-gray-500 uppercase tracking-wider">Status</th>
-                <th className="px-5 py-4 text-left font-bold text-gray-500 uppercase tracking-wider">Uploaded</th>
-                <th className="px-5 py-4 text-left font-bold text-gray-500 uppercase tracking-wider">Uploaded By</th>
-                <th className="px-5 py-4 text-right font-bold text-gray-500 uppercase tracking-wider w-28">Actions</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">File Name</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Type</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Size</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Status</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Uploaded</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Uploaded By</th>
+                <th className="px-5 py-4 text-right font-bold text-ink/55 uppercase tracking-wider w-28">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100 font-semibold text-gray-700">
+            <tbody className="divide-y divide-gray-100 font-semibold text-ink/80">
               {isLoading ? (
                 Array.from({ length: 5 }).map((_, idx) => (
-                  <tr key={idx} className="animate-pulse bg-gray-50/20">
+                  <tr key={idx} className="animate-pulse bg-field/20">
                     <td colSpan={7} className="px-5 py-4">
-                      <div className="h-4 bg-gray-150 rounded w-5/6 mx-auto" />
+                      <div className="h-4 bg-field rounded w-5/6 mx-auto" />
                     </td>
                   </tr>
                 ))
@@ -256,12 +256,12 @@ export default function FileStoragePage() {
               ) : files.length === 0 ? (
                 <tr>
                   <td colSpan={7} className="px-5 py-16 text-center">
-                    <div className="flex flex-col items-center gap-3 text-gray-400">
-                      <div className="w-14 h-14 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center">
+                    <div className="flex flex-col items-center gap-3 text-ink/40">
+                      <div className="w-14 h-14 rounded-2xl bg-field border border-border flex items-center justify-center">
                         <HiCloudUpload className="w-7 h-7 text-gray-300" />
                       </div>
                       <span className="text-sm font-semibold">No files uploaded yet.</span>
-                      <span className="text-xs text-gray-400">
+                      <span className="text-xs text-ink/40">
                         Click &quot;Upload File&quot; to store a file in object storage.
                       </span>
                       <Button
@@ -276,32 +276,32 @@ export default function FileStoragePage() {
                 </tr>
               ) : (
                 files.map((file) => (
-                  <tr key={file.uid} className="hover:bg-gray-50/30 transition-colors">
+                  <tr key={file.uid} className="hover:bg-field/30 transition-colors">
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-3">
                         {getFileIcon(file.contentType)}
                         <div className="flex flex-col min-w-0">
                           <span
-                            className="text-gray-900 font-extrabold truncate max-w-[220px] block"
+                            className="text-ink font-extrabold truncate max-w-[220px] block"
                             title={file.fileName}
                           >
                             {file.fileName}
                           </span>
-                          <span className="text-[10px] text-gray-400 font-medium">
+                          <span className="text-[10px] text-ink/40 font-medium">
                             {file.bucketName}
                           </span>
                         </div>
                       </div>
                     </td>
                     <td className="px-5 py-4">
-                      <span className="px-2 py-0.5 border border-gray-200/80 rounded bg-gray-50 text-gray-655 font-bold text-[10px] uppercase">
+                      <span className="px-2 py-0.5 border border-border/80 rounded bg-field text-gray-655 font-bold text-[10px] uppercase">
                         {getContentTypeLabel(file.contentType)}
                       </span>
                     </td>
-                    <td className="px-5 py-4 text-gray-600">{formatFileSize(file.fileSize)}</td>
+                    <td className="px-5 py-4 text-ink/65">{formatFileSize(file.fileSize)}</td>
                     <td className="px-5 py-4">{getStatusBadge(file.status)}</td>
-                    <td className="px-5 py-4 text-gray-600 whitespace-nowrap">{formatDate(file.uploadedAt)}</td>
-                    <td className="px-5 py-4 text-gray-600">{file.uploadedBy || <span className="text-gray-300">-</span>}</td>
+                    <td className="px-5 py-4 text-ink/65 whitespace-nowrap">{formatDate(file.uploadedAt)}</td>
+                    <td className="px-5 py-4 text-ink/65">{file.uploadedBy || <span className="text-gray-300">-</span>}</td>
                     <td className="px-5 py-4 text-right">
                       {confirmDeleteUid === file.uid ? (
                         <div className="flex gap-1.5 justify-end items-center">
@@ -314,7 +314,7 @@ export default function FileStoragePage() {
                           </button>
                           <button
                             onClick={() => setConfirmDeleteUid(null)}
-                            className="px-2 py-1 text-[10px] font-bold text-gray-600 bg-gray-100 rounded-full hover:bg-gray-200 cursor-pointer"
+                            className="px-2 py-1 text-[10px] font-bold text-ink/65 bg-canvas rounded-full hover:bg-hover cursor-pointer"
                           >
                             Cancel
                           </button>
@@ -324,14 +324,14 @@ export default function FileStoragePage() {
                           <a
                             href={dataRoomApi.getDownloadUrl(file.uid)}
                             download={file.fileName}
-                            className="p-1.5 hover:bg-gray-100 rounded-lg text-gray-400 hover:text-primary transition-colors cursor-pointer"
+                            className="p-1.5 hover:bg-canvas rounded-lg text-ink/40 hover:text-primary transition-colors cursor-pointer"
                             title="Download file"
                           >
                             <HiDownload className="w-4 h-4" />
                           </a>
                           <button
                             onClick={() => setConfirmDeleteUid(file.uid)}
-                            className="p-1.5 hover:bg-rose-50 rounded-lg text-gray-400 hover:text-rose-600 transition-colors cursor-pointer"
+                            className="p-1.5 hover:bg-rose-50 rounded-lg text-ink/40 hover:text-rose-600 transition-colors cursor-pointer"
                             title="Delete file"
                           >
                             <HiTrash className="w-4 h-4" />
@@ -348,9 +348,9 @@ export default function FileStoragePage() {
 
         {/* Footer summary */}
         {!isLoading && !error && files.length > 0 && (
-          <div className="px-5 py-3 border-t border-gray-100 bg-gray-50/30 flex items-center justify-between text-[11px] font-semibold text-gray-500">
+          <div className="px-5 py-3 border-t border-border bg-field/30 flex items-center justify-between text-[11px] font-semibold text-ink/55">
             <span>{files.length} file{files.length !== 1 ? "s" : ""} stored</span>
-            <span className="text-gray-400">
+            <span className="text-ink/40">
               Total: {formatFileSize(files.reduce((acc, f) => acc + f.fileSize, 0))}
             </span>
           </div>

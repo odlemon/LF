@@ -117,38 +117,45 @@ export function useRequestWorkspace(uid: string) {
     setIsLoading(true);
     setError(null);
     try {
+      // Parallel bootstrap — was a waterfall (detail → msgs/atts → client → scope)
       const req = await intakeApi.getRequest(uid);
       setRequest(req);
-      setScopeGenerated(req.scopeGenerated);
 
-      const [msgs, atts] = await Promise.all([
+      const wantsScope =
+        req.scopeGenerated ||
+        req.status === "SCOPE_GENERATED" ||
+        req.status === "SCOPE_CONFIRMED" ||
+        req.chatMode === "SCOPE_GENERATED" ||
+        req.chatMode === "SCOPE_CONFIRMED";
+
+      const clientPromise =
+        req.clientName
+          ? Promise.resolve(req.clientName)
+          : req.clientProfileUid
+            ? getClient(req.clientProfileUid)
+                .then((c) => c.name)
+                .catch(() => "Unknown client")
+            : Promise.resolve("");
+
+      const [msgs, atts, scopeResult, resolvedClientName] = await Promise.all([
         intakeApi.getMessages(uid),
         intakeApi.listAttachments(uid),
+        wantsScope
+          ? intakeApi.getScope(uid).catch(() => null)
+          : Promise.resolve(null),
+        clientPromise,
       ]);
+
       setMessages(msgs);
       setAttachments(atts);
-
-      let resolvedClientName = req.clientName ?? "";
-      if (!resolvedClientName && req.clientProfileUid) {
-        try {
-          const client = await getClient(req.clientProfileUid);
-          resolvedClientName = client.name;
-        } catch {
-          resolvedClientName = "Unknown client";
-        }
-      }
       setClientName(resolvedClientName);
 
-      if (req.scopeGenerated || req.status === "SCOPE_GENERATED" || req.status === "SCOPE_CONFIRMED") {
-        try {
-          const scopeData = await intakeApi.getScope(uid);
-          setScope(scopeData);
-          setScopeGenerated(true);
-        } catch {
-          setScope(null);
-        }
+      if (scopeResult?.phases?.length) {
+        setScope(scopeResult);
+        setScopeGenerated(true);
       } else {
         setScope(null);
+        setScopeGenerated(Boolean(req.scopeGenerated));
       }
     } catch (err: any) {
       setError(err.response?.data?.message || err.message || "Failed to load request");
@@ -208,7 +215,12 @@ export function useAttachments(
       try {
         const created = await intakeApi.attachFile(uid, file, attachmentType);
         syncAttachments([...attachments, created]);
-        setUploadingFiles((prev) => ({ ...prev, [key]: "done" }));
+        setUploadingFiles((prev) => {
+          const next = { ...prev };
+          delete next[key];
+          return next;
+        });
+        toast.success(`${created.fileName || file.name} attached — Lysp can use it in chat`);
       } catch {
         setUploadingFiles((prev) => ({ ...prev, [key]: "error" }));
         toast.error(`Failed to attach ${file.name}`);

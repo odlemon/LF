@@ -24,8 +24,8 @@ const NAV_ITEMS: NavItem[] = [
         href: "/#platform",
       },
       {
-        label: "Scope → Price → Propose",
-        description: "One flow from RFP to client-ready proposal",
+        label: "Pricing",
+        description: "From RFP to a fee your firm will stand behind",
         href: "/product#flow",
       },
       {
@@ -45,45 +45,39 @@ const NAV_ITEMS: NavItem[] = [
       },
     ],
   },
+  { label: "Security", href: "/security" },
   {
-    label: "Solutions",
+    label: "Resources",
     children: [
       {
-        label: "Corporate M&A",
-        description: "Fixed fees for diligence-to-close",
-        href: "/#practices",
+        label: "Blog",
+        description: "Notes on pricing intelligence for elite firms",
+        href: "/blog",
       },
       {
-        label: "Banking & Finance",
-        description: "Panel rates, caps, and volume tiers",
-        href: "/#practices",
+        label: "ROI Calculator",
+        description: "Model leakage, realization, and Lysp ROI",
+        href: "/roi-calculator",
       },
       {
-        label: "Litigation",
-        description: "Phased budgets with confidence bands",
-        href: "/#practices",
-      },
-      {
-        label: "All practice areas",
-        description: "How each practice prices with Lysp",
-        href: "/#practices",
+        label: "Privacy Policy",
+        description: "How we handle personal information",
+        href: "/privacy",
       },
     ],
   },
-  { label: "Security", href: "/security" },
-  { label: "Customers", href: "/#customers" },
   {
     label: "Company",
     children: [
       {
         label: "About",
-        description: "Pricing intelligence for elite law firms",
-        href: "/#home",
+        description: "Mission and what we are building",
+        href: "/about",
       },
       {
         label: "Contact",
-        description: "Talk to the Lysp team",
-        href: "/#contact",
+        description: "Sales, support, and general inquiries",
+        href: "/contact",
       },
       {
         label: "Pricing",

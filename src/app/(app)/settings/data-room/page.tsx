@@ -69,14 +69,14 @@ export default function DataRoomOverviewPage() {
   const activeDatasetsLimit = datasets.slice(0, 5);
 
   return (
-    <div className="p-8 max-w-6xl w-full mx-auto flex flex-col gap-6 text-gray-800">
+    <div className="p-8 max-w-6xl w-full mx-auto flex flex-col gap-6 text-ink/90">
       {/* Header bar */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 tracking-tight flex items-center gap-2">
+          <h1 className="text-2xl font-bold text-ink tracking-tight flex items-center gap-2">
             <HiDatabase className="w-7 h-7 text-primary animate-pulse" /> Data Room
           </h1>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-sm text-ink/55 mt-1">
             Manage your firm&apos;s historical intelligence hub. Ingest billing, past matters, and market benchmarks.
           </p>
         </div>
@@ -92,7 +92,7 @@ export default function DataRoomOverviewPage() {
 
       {/* Ingestion Gauges top-banner */}
       {isSummaryLoading ? (
-        <div className="h-28 bg-gray-100 rounded-3xl animate-pulse" />
+        <div className="h-28 bg-canvas rounded-3xl animate-pulse" />
       ) : (
         <DataReadinessCard summary={summary} />
       )}
@@ -108,11 +108,11 @@ export default function DataRoomOverviewPage() {
           },
           { label: "Practice Areas Covered", val: summary?.coveredPracticeAreas?.length },
         ]).map((item, idx) => (
-          <div key={idx} className="bg-white border border-gray-200/60 rounded-2xl p-5 shadow-sm">
-            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-1">
+          <div key={idx} className="bg-surface border border-border/60 rounded-2xl p-5 shadow-sm">
+            <span className="text-[10px] font-bold text-ink/40 uppercase tracking-wider block mb-1">
               {item.label}
             </span>
-            <span className="text-2xl font-extrabold text-gray-900">
+            <span className="text-2xl font-extrabold text-ink">
               {isSummaryLoading ? "..." : item.val ?? 0}
             </span>
           </div>
@@ -123,7 +123,7 @@ export default function DataRoomOverviewPage() {
         {/* Datasets panel (left 2 cols) */}
         <div className="lg:col-span-2 flex flex-col gap-4">
           <div className="flex justify-between items-center px-1">
-            <h2 className="text-base font-extrabold text-gray-900">Datasets Batches</h2>
+            <h2 className="text-base font-extrabold text-ink">Datasets Batches</h2>
             <button
               onClick={() => setIsDatasetsOpen(true)}
               className="text-xs font-bold text-primary hover:underline flex items-center gap-0.5 cursor-pointer focus:outline-none"
@@ -132,66 +132,66 @@ export default function DataRoomOverviewPage() {
             </button>
           </div>
 
-          <div className="bg-white border border-gray-200/60 rounded-3xl overflow-hidden shadow-sm">
+          <div className="bg-surface border border-border/60 rounded-3xl overflow-hidden shadow-sm">
             <div className="overflow-x-auto rates-scrollable">
               <table className="min-w-full divide-y divide-gray-100 text-xs">
-                <thead className="bg-gray-50">
+                <thead className="bg-field">
                   <tr>
-                    <th className="px-5 py-3.5 text-left font-bold text-gray-500 uppercase tracking-wider">
+                    <th className="px-5 py-3.5 text-left font-bold text-ink/55 uppercase tracking-wider">
                       Batch Name
                     </th>
-                    <th className="px-5 py-3.5 text-left font-bold text-gray-500 uppercase tracking-wider">
+                    <th className="px-5 py-3.5 text-left font-bold text-ink/55 uppercase tracking-wider">
                       Category
                     </th>
-                    <th className="px-5 py-3.5 text-left font-bold text-gray-500 uppercase tracking-wider">
+                    <th className="px-5 py-3.5 text-left font-bold text-ink/55 uppercase tracking-wider">
                       Files
                     </th>
-                    <th className="px-5 py-3.5 text-left font-bold text-gray-500 uppercase tracking-wider">
+                    <th className="px-5 py-3.5 text-left font-bold text-ink/55 uppercase tracking-wider">
                       Status
                     </th>
-                    <th className="px-5 py-3.5 text-left font-bold text-gray-500 uppercase tracking-wider">
+                    <th className="px-5 py-3.5 text-left font-bold text-ink/55 uppercase tracking-wider">
                       Records
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100 font-semibold text-gray-700">
+                <tbody className="divide-y divide-gray-100 font-semibold text-ink/80">
                   {isSummaryLoading ? (
                     Array.from({ length: 3 }).map((_, idx) => (
-                      <tr key={idx} className="animate-pulse bg-gray-50/20">
+                      <tr key={idx} className="animate-pulse bg-field/20">
                         <td colSpan={5} className="px-5 py-4">
-                          <div className="h-4 bg-gray-150 rounded w-5/6" />
+                          <div className="h-4 bg-field rounded w-5/6" />
                         </td>
                       </tr>
                     ))
                   ) : activeDatasetsLimit.length === 0 ? (
                     <tr>
-                      <td colSpan={5} className="px-5 py-8 text-center text-gray-400">
+                      <td colSpan={5} className="px-5 py-8 text-center text-ink/40">
                         No datasets uploaded yet. Click &apos;New Dataset&apos; to register one.
                       </td>
                     </tr>
                   ) : (
                     activeDatasetsLimit.map((dataset) => (
-                      <tr key={dataset.uid} className="hover:bg-gray-50/30 transition-colors">
+                      <tr key={dataset.uid} className="hover:bg-field/30 transition-colors">
                         <td className="px-5 py-4">
                           <button
                             onClick={() => setActiveDatasetUid(dataset.uid)}
-                            className="text-gray-900 font-extrabold hover:text-primary hover:underline text-left cursor-pointer focus:outline-none"
+                            className="text-ink font-extrabold hover:text-primary hover:underline text-left cursor-pointer focus:outline-none"
                           >
                             {dataset.name}
                           </button>
                         </td>
                         <td className="px-5 py-4">
-                          <span className="px-2 py-0.5 border border-gray-200/80 rounded bg-gray-50 text-gray-655 font-bold text-[10px] uppercase">
+                          <span className="px-2 py-0.5 border border-border/80 rounded bg-field text-gray-655 font-bold text-[10px] uppercase">
                             {dataset.category}
                           </span>
                         </td>
-                        <td className="px-5 py-4 text-gray-900">
+                        <td className="px-5 py-4 text-ink">
                           {dataset.processedDocuments} / {dataset.totalDocuments}
                         </td>
                         <td className="px-5 py-4">
                           <DatasetStatusBadge status={dataset.status} />
                         </td>
-                        <td className="px-5 py-4 text-gray-900">{dataset.totalRecords}</td>
+                        <td className="px-5 py-4 text-ink">{dataset.totalRecords}</td>
                       </tr>
                     ))
                   )}
@@ -204,10 +204,10 @@ export default function DataRoomOverviewPage() {
         {/* Needs attention files (right 1 col) */}
         <div className="flex flex-col gap-4">
           <div className="flex justify-between items-center px-1">
-            <h2 className="text-base font-extrabold text-gray-900 flex items-center gap-1.5 text-rose-700">
+            <h2 className="text-base font-extrabold text-ink flex items-center gap-1.5 text-rose-700">
               <HiExclamationCircle className="w-5 h-5 text-rose-500" /> Review Queue
             </h2>
-            <span className="text-xs font-bold text-gray-400">
+            <span className="text-xs font-bold text-ink/40">
               ({attentionDocs.length} failed files)
             </span>
           </div>
@@ -215,11 +215,11 @@ export default function DataRoomOverviewPage() {
           <div className="flex flex-col gap-3 max-h-[380px] overflow-y-auto rates-scrollable pr-1">
             {isDocsLoading ? (
               Array.from({ length: 3 }).map((_, idx) => (
-                <div key={idx} className="h-24 bg-gray-100 rounded-2xl animate-pulse" />
+                <div key={idx} className="h-24 bg-canvas rounded-2xl animate-pulse" />
               ))
             ) : attentionDocs.length === 0 ? (
-              <div className="bg-white border border-gray-200/60 rounded-3xl p-8 text-center text-gray-400 font-semibold shadow-sm flex flex-col items-center justify-center gap-2">
-                <div className="w-9 h-9 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center">
+              <div className="bg-surface border border-border/60 rounded-3xl p-8 text-center text-ink/40 font-semibold shadow-sm flex flex-col items-center justify-center gap-2">
+                <div className="w-9 h-9 rounded-full bg-hover text-ink/55 flex items-center justify-center">
                   ✓
                 </div>
                 All clear! Zero failed document mappings inside the workspace.
@@ -228,11 +228,11 @@ export default function DataRoomOverviewPage() {
               attentionDocs.map((doc) => (
                 <div
                   key={doc.uid}
-                  className="bg-white border border-rose-100 rounded-3xl p-4 shadow-sm hover:shadow-md transition-shadow flex flex-col gap-3.5"
+                  className="bg-surface border border-rose-100 rounded-3xl p-4 shadow-sm hover:shadow-md transition-shadow flex flex-col gap-3.5"
                 >
                   <div className="flex justify-between items-start gap-3">
                     <div className="flex flex-col overflow-hidden">
-                      <span className="text-xs font-bold text-gray-900 line-clamp-1 break-all">
+                      <span className="text-xs font-bold text-ink line-clamp-1 break-all">
                         {doc.originalFilename}
                       </span>
                       <span className="text-[10px] text-rose-600 font-bold bg-rose-50 border border-rose-100/50 px-2 py-0.5 rounded-full w-fit mt-1">
@@ -244,7 +244,7 @@ export default function DataRoomOverviewPage() {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => setActiveMappingDoc(doc)}
-                      className="flex-1 flex items-center justify-center gap-1 px-3 py-1.5 bg-gray-50 border border-gray-250 hover:bg-gray-100 rounded-full text-[11px] font-bold text-gray-700 transition-all cursor-pointer"
+                      className="flex-1 flex items-center justify-center gap-1 px-3 py-1.5 bg-field border border-border hover:bg-canvas rounded-full text-[11px] font-bold text-ink/80 transition-all cursor-pointer"
                     >
                       <HiCog className="w-3.5 h-3.5" /> Fix Mapping
                     </button>
@@ -256,7 +256,7 @@ export default function DataRoomOverviewPage() {
                     </button>
                     <button
                       onClick={() => setActiveLogDoc(doc)}
-                      className="px-2.5 py-1.5 hover:bg-gray-100 rounded-lg text-gray-400 hover:text-gray-655 transition-colors cursor-pointer text-[11px] font-bold"
+                      className="px-2.5 py-1.5 hover:bg-canvas rounded-lg text-ink/40 hover:text-gray-655 transition-colors cursor-pointer text-[11px] font-bold"
                     >
                       Log
                     </button>

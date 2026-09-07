@@ -60,7 +60,7 @@ function ClientLoginForm() {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-5 py-3 bg-gray-50/80 border border-gray-200 rounded-full text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-400 transition-all duration-200"
+            className="w-full px-5 py-3 bg-gray-50/80 border border-gray-200 rounded-full text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#0a0a0a]/20 focus:border-[#0a0a0a]/40 transition-all duration-200"
             placeholder="client@company.com"
             required
             disabled={isLoading}
@@ -74,7 +74,7 @@ function ClientLoginForm() {
               type={showPassword ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full pl-5 pr-12 py-3 bg-gray-50/80 border border-gray-200 rounded-full text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-400 transition-all duration-200"
+              className="w-full pl-5 pr-12 py-3 bg-gray-50/80 border border-gray-200 rounded-full text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#0a0a0a]/20 focus:border-[#0a0a0a]/40 transition-all duration-200"
               placeholder="••••••••"
               required
               disabled={isLoading}

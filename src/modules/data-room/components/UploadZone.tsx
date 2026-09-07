@@ -107,8 +107,8 @@ export function UploadZone({ onUpload, isUploading, progress }: UploadZoneProps)
           dragActive
             ? "border-primary bg-primary/5 shadow-md shadow-primary/10"
             : selectedFile
-            ? "border-gray-300 bg-gray-50/50 cursor-default"
-            : "border-gray-250 bg-gray-50/30 hover:bg-gray-50 hover:border-primary/50"
+            ? "border-gray-300 bg-field/50 cursor-default"
+            : "border-border bg-field/30 hover:bg-field hover:border-primary/50"
         }`}
       >
         <input
@@ -126,25 +126,25 @@ export function UploadZone({ onUpload, isUploading, progress }: UploadZoneProps)
             </div>
             
             <div className="flex flex-col items-center text-center gap-1 w-full">
-              <span className="text-sm font-bold text-gray-900 line-clamp-1 break-all px-4">
+              <span className="text-sm font-bold text-ink line-clamp-1 break-all px-4">
                 {selectedFile.name}
               </span>
-              <span className="text-xs font-semibold text-gray-400">
+              <span className="text-xs font-semibold text-ink/40">
                 {formatFileSize(selectedFile.size)}
               </span>
             </div>
 
             {isUploading ? (
               <div className="w-full flex flex-col gap-2 p-2">
-                <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden border border-gray-200/50">
+                <div className="h-2 w-full bg-canvas rounded-full overflow-hidden border border-border/50">
                   <div
                     className="h-full bg-gradient-to-r from-primary to-primary/80 rounded-full transition-all duration-300 shadow-sm shadow-primary/20"
                     style={{ width: `${progress}%` }}
                   />
                 </div>
-                <div className="flex justify-between items-center text-[10px] font-bold text-gray-400 uppercase">
+                <div className="flex justify-between items-center text-[10px] font-bold text-ink/40 uppercase">
                   <span>Uploading file...</span>
-                  <span className="text-gray-900 font-extrabold">{progress}%</span>
+                  <span className="text-ink font-extrabold">{progress}%</span>
                 </div>
               </div>
             ) : (
@@ -161,15 +161,15 @@ export function UploadZone({ onUpload, isUploading, progress }: UploadZoneProps)
           </div>
         ) : (
           <div className="flex flex-col items-center text-center gap-3">
-            <div className="p-4 bg-gray-100 border border-gray-200/50 text-gray-400 rounded-2xl group-hover:text-primary transition-colors">
+            <div className="p-4 bg-canvas border border-border/50 text-ink/40 rounded-2xl group-hover:text-primary transition-colors">
               <HiCloudUpload className="w-10 h-10" />
             </div>
             
             <div className="flex flex-col gap-1.5">
-              <span className="text-sm font-bold text-gray-800">
+              <span className="text-sm font-bold text-ink/90">
                 Drag and drop your file here, or <span className="text-primary hover:underline font-extrabold">browse files</span>
               </span>
-              <span className="text-xs font-semibold text-gray-400">
+              <span className="text-xs font-semibold text-ink/40">
                 Supports CSV, Excel (XLSX, XLS), PDF, and Word (DOCX, DOC) up to 50MB
               </span>
             </div>
@@ -184,8 +184,8 @@ export function UploadZone({ onUpload, isUploading, progress }: UploadZoneProps)
       )}
 
       {success && (
-        <div className="p-3.5 bg-emerald-50 border border-emerald-250/50 text-emerald-800 text-xs font-bold rounded-2xl flex items-center gap-2 animate-fade-in">
-          <HiCheckCircle className="w-5 h-5 text-emerald-500 shrink-0" />
+        <div className="p-3.5 bg-hover border border-border/50 text-ink text-xs font-bold rounded-2xl flex items-center gap-2 animate-fade-in">
+          <HiCheckCircle className="w-5 h-5 text-ink/55 shrink-0" />
           File uploaded successfully! Processing will begin in the background.
         </div>
       )}

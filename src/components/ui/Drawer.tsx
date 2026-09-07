@@ -47,24 +47,24 @@ export function Drawer({ isOpen, onClose, title, children, size = "xl" }: Drawer
 
       {/* Slide panel */}
       <div
-        className={`relative ${widthClass} w-full bg-white shadow-2xl flex flex-col h-full z-50 transform transition-transform duration-300 ease-out border-l border-gray-150/40 animate-slide-in-right`}
+        className={`relative ${widthClass} w-full bg-surface shadow-2xl flex flex-col h-full z-50 transform transition-transform duration-300 ease-out border-l border-border/40 animate-slide-in-right`}
       >
         {/* Header */}
-        <div className="px-6 py-5 border-b border-gray-100 flex items-center justify-between shrink-0 bg-white">
-          <h2 className="text-base font-extrabold text-gray-900 tracking-tight">
+        <div className="px-6 py-5 border-b border-border flex items-center justify-between shrink-0 bg-surface">
+          <h2 className="text-base font-extrabold text-ink tracking-tight">
             {title}
           </h2>
           <button
             onClick={onClose}
             type="button"
-            className="p-2 text-gray-400 hover:text-gray-655 rounded-xl hover:bg-gray-50 transition-all cursor-pointer border border-transparent hover:border-gray-200/50"
+            className="p-2 text-ink/40 hover:text-gray-655 rounded-xl hover:bg-field transition-all cursor-pointer border border-transparent hover:border-border/50"
           >
             <HiX className="w-5 h-5" />
           </button>
         </div>
 
         {/* Content body */}
-        <div className="flex-1 overflow-y-auto rates-scrollable p-6 bg-gray-50/10">
+        <div className="flex-1 overflow-y-auto rates-scrollable p-6 bg-field/10">
           {children}
         </div>
       </div>

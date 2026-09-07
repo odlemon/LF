@@ -15,8 +15,8 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
   const pages = Array.from({ length: displayPages }, (_, i) => i);
 
   return (
-    <div className="flex items-center justify-between py-4 border-t border-gray-100 mt-4 gap-4 flex-wrap">
-      <span className="text-xs font-semibold text-gray-500">
+    <div className="flex items-center justify-between py-4 border-t border-border mt-4 gap-4 flex-wrap">
+      <span className="text-xs font-semibold text-ink/55">
         Page {displayCurrent + 1} of {displayPages}
       </span>
       <div className="flex items-center gap-1.5">
@@ -24,7 +24,7 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
           onClick={() => onPageChange(Math.max(0, currentPage - 1))}
           disabled={currentPage === 0 || displayPages <= 1}
           type="button"
-          className="p-2 border border-gray-250/60 rounded-lg text-gray-500 hover:text-gray-950 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent transition-all shrink-0 cursor-pointer select-none"
+          className="p-2 border border-border/60 rounded-lg text-ink/55 hover:text-ink hover:bg-field disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent transition-all shrink-0 cursor-pointer select-none"
         >
           <HiChevronLeft className="w-4 h-4" />
         </button>
@@ -38,8 +38,8 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
               type="button"
               className={`px-3 py-1.5 text-xs font-extrabold rounded-lg transition-all cursor-pointer select-none ${
                 isCurrent
-                  ? "bg-primary text-white shadow-md shadow-primary/20"
-                  : "border border-gray-250/60 text-gray-650 hover:bg-gray-50 hover:text-gray-900"
+                  ? "bg-primary text-on-primary shadow-sm"
+                  : "border border-border text-ink/55 hover:bg-hover hover:text-ink"
               }`}
             >
               {p + 1}
@@ -51,7 +51,7 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
           onClick={() => onPageChange(Math.min(displayPages - 1, currentPage + 1))}
           disabled={currentPage === displayPages - 1 || displayPages <= 1}
           type="button"
-          className="p-2 border border-gray-250/60 rounded-lg text-gray-500 hover:text-gray-950 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent transition-all shrink-0 cursor-pointer select-none"
+          className="p-2 border border-border/60 rounded-lg text-ink/55 hover:text-ink hover:bg-field disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent transition-all shrink-0 cursor-pointer select-none"
         >
           <HiChevronRight className="w-4 h-4" />
         </button>

@@ -77,16 +77,16 @@ export function ClientFormModal({
 
   return (
     <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in">
-      <div className="bg-white rounded-xl max-w-md w-full shadow-2xl p-6 relative animate-fade-in-up z-50 border border-gray-100">
+      <div className="bg-surface rounded-xl max-w-md w-full shadow-2xl p-6 relative animate-fade-in-up z-50 border border-border">
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 p-1 rounded-lg hover:bg-gray-55 transition-colors"
+          className="absolute top-4 right-4 text-ink/40 hover:text-ink/65 p-1 rounded-lg hover:bg-field transition-colors"
         >
           <HiX className="w-5 h-5" />
         </button>
 
-        <h3 className="text-lg font-bold text-gray-900 mb-4 pr-8">
+        <h3 className="text-lg font-bold text-ink mb-4 pr-8">
           {client ? "Edit Client Profile" : "Add Client"}
         </h3>
 
@@ -98,7 +98,7 @@ export function ClientFormModal({
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider">
+            <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
               Client Name
             </label>
             <input
@@ -106,14 +106,14 @@ export function ClientFormModal({
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="e.g. AstraZeneca Plc"
-              className="px-5 py-2.5 bg-gray-55 border border-gray-250 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:bg-white transition-all text-gray-900"
+              className="px-5 py-2.5 bg-field border border-border rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface transition-all text-ink"
               required
             />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider">
+              <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
                 Type
               </label>
               <Select
@@ -129,7 +129,7 @@ export function ClientFormModal({
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider">
+              <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
                 Tier
               </label>
               <Select
@@ -146,7 +146,7 @@ export function ClientFormModal({
 
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider">
+              <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
                 Contact Name
               </label>
               <input
@@ -154,13 +154,13 @@ export function ClientFormModal({
                 value={contactName}
                 onChange={(e) => setContactName(e.target.value)}
                 placeholder="Sarah Jenkins"
-                className="px-5 py-2.5 bg-gray-55 border border-gray-250 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:bg-white transition-all text-gray-900"
+                className="px-5 py-2.5 bg-field border border-border rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface transition-all text-ink"
                 required
               />
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider">
+              <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
                 Country (ISO)
               </label>
               <Select
@@ -179,7 +179,7 @@ export function ClientFormModal({
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider">
+            <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
               Contact Email
             </label>
             <input
@@ -187,12 +187,12 @@ export function ClientFormModal({
               value={contactEmail}
               onChange={(e) => setContactEmail(e.target.value)}
               placeholder="e.g. contact@client.com"
-              className="px-5 py-2.5 bg-gray-55 border border-gray-250 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:bg-white transition-all text-gray-900"
+              className="px-5 py-2.5 bg-field border border-border rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface transition-all text-ink"
               required
             />
           </div>
 
-          <div className="flex justify-end gap-3 mt-6 pt-4 border-t border-gray-100">
+          <div className="flex justify-end gap-3 mt-6 pt-4 border-t border-border">
             <Button
               type="button"
               variant="secondary"

@@ -55,43 +55,43 @@ export function ClientSearchSelect({
 
   return (
     <div className="flex flex-col gap-1.5 w-full relative" ref={dropdownRef}>
-      <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider">
+      <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
         Client <span className="text-rose-500">*</span>
       </label>
       <button
         type="button"
         disabled={disabled || isLoading}
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-full flex items-center justify-between gap-2 px-5 py-2.5 bg-white border ${
-          error ? "border-rose-300" : "border-gray-250"
-        } rounded-full text-sm font-semibold text-gray-800 transition-all focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:opacity-50 text-left`}
+        className={`w-full flex items-center justify-between gap-2 px-5 py-2.5 bg-surface border ${
+          error ? "border-rose-300" : "border-border"
+        } rounded-full text-sm font-semibold text-ink/90 transition-all focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:opacity-50 text-left`}
       >
-        <span className={`min-w-0 truncate ${selected ? "text-gray-800" : "text-gray-400"}`}>
+        <span className={`min-w-0 truncate ${selected ? "text-ink/90" : "text-ink/40"}`}>
           {isLoading ? "Loading clients..." : selected ? selected.name : "Select client"}
         </span>
         <HiChevronDown
-          className={`w-4 h-4 text-gray-400 transition-transform shrink-0 ${isOpen ? "rotate-180" : ""}`}
+          className={`w-4 h-4 text-ink/40 transition-transform shrink-0 ${isOpen ? "rotate-180" : ""}`}
         />
       </button>
 
       {isOpen && (
-        <div className="absolute left-0 right-0 top-full mt-2 bg-white border border-gray-150 rounded-2xl shadow-xl z-50 overflow-hidden animate-fade-in-up">
-          <div className="p-2 border-b border-gray-100">
+        <div className="absolute left-0 right-0 top-full mt-2 bg-surface border border-border rounded-2xl shadow-xl z-50 overflow-hidden animate-fade-in-up">
+          <div className="p-2 border-b border-border">
             <div className="relative">
-              <HiSearch className="absolute left-3 top-2.5 w-4 h-4 text-gray-400" />
+              <HiSearch className="absolute left-3 top-2.5 w-4 h-4 text-ink/40" />
               <input
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search clients..."
-                className="w-full pl-9 pr-3 py-2 text-xs border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20"
+                className="w-full pl-9 pr-4 py-2 text-xs border border-border rounded-full bg-field focus:outline-none focus:ring-2 focus:ring-primary/20 focus:bg-surface"
                 autoFocus
               />
             </div>
           </div>
           <div className="max-h-48 overflow-y-auto rates-scrollable py-1">
             {filtered.length === 0 ? (
-              <p className="px-4 py-3 text-xs text-gray-400 text-center">No clients found</p>
+              <p className="px-4 py-3 text-xs text-ink/40 text-center">No clients found</p>
             ) : (
               filtered.map((client) => {
                 const isSelected = client.uid === value;
@@ -105,14 +105,14 @@ export function ClientSearchSelect({
                       setSearch("");
                     }}
                     className={`w-full flex items-start justify-between gap-2 px-4 py-2.5 text-left ${
-                      isSelected ? "bg-primary/5 text-primary" : "text-gray-700 hover:bg-gray-50"
+                      isSelected ? "bg-primary/5 text-primary" : "text-ink/80 hover:bg-field"
                     }`}
                   >
                     <div className="flex flex-col gap-0.5 min-w-0">
                       <span className="text-xs font-bold truncate">{client.name}</span>
                       <span
                         className={`text-[10px] font-medium truncate ${
-                          isSelected ? "text-primary/70" : "text-gray-400"
+                          isSelected ? "text-primary/70" : "text-ink/40"
                         }`}
                       >
                         {formatClientSubtitle(client)}

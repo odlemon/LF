@@ -79,19 +79,19 @@ export function RateCardEntriesSlideOver({
 
   return (
     <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 transition-opacity animate-fade-in flex justify-end">
-      <div className="w-full max-w-lg bg-white h-full shadow-2xl flex flex-col transition-transform duration-300 translate-x-0">
-        <div className="p-6 border-b border-gray-100 flex items-center justify-between">
+      <div className="w-full max-w-lg bg-surface h-full shadow-2xl flex flex-col transition-transform duration-300 translate-x-0">
+        <div className="p-6 border-b border-border flex items-center justify-between">
           <div>
-            <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider block mb-1">
+            <span className="text-xs font-semibold text-ink/55 uppercase tracking-wider block mb-1">
               Rate Card Entries ({rateCard.currency})
             </span>
-            <h3 className="text-lg font-bold text-gray-900 leading-tight">
+            <h3 className="text-lg font-bold text-ink leading-tight">
               {rateCard.name}
             </h3>
           </div>
           <button
             onClick={onClose}
-            className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-50 transition-colors"
+            className="p-2 text-ink/40 hover:text-ink/65 rounded-lg hover:bg-field transition-colors"
           >
             <HiX className="w-5 h-5" />
           </button>
@@ -99,24 +99,24 @@ export function RateCardEntriesSlideOver({
 
         <div className="flex-1 overflow-y-auto p-6 rates-scrollable flex flex-col gap-6">
           <div>
-            <h4 className="text-xs font-bold text-gray-700 uppercase tracking-wider mb-3">
+            <h4 className="text-xs font-bold text-ink/80 uppercase tracking-wider mb-3">
               Existing Rates
             </h4>
             {isLoading ? (
               <div className="flex flex-col gap-3">
-                <div className="h-10 bg-gray-50 rounded-xl animate-pulse" />
-                <div className="h-10 bg-gray-50 rounded-xl animate-pulse" />
-                <div className="h-10 bg-gray-50 rounded-xl animate-pulse" />
+                <div className="h-10 bg-field rounded-xl animate-pulse" />
+                <div className="h-10 bg-field rounded-xl animate-pulse" />
+                <div className="h-10 bg-field rounded-xl animate-pulse" />
               </div>
             ) : entries.length === 0 ? (
-              <div className="text-center py-8 bg-gray-50 rounded-xl border border-dashed border-gray-250 text-sm text-gray-500">
+              <div className="text-center py-8 bg-field rounded-xl border border-dashed border-border text-sm text-ink/55">
                 No rates added to this card yet.
               </div>
             ) : (
-              <div className="bg-white border border-gray-200/60 rounded-xl overflow-hidden shadow-sm">
+              <div className="bg-surface border border-border/60 rounded-xl overflow-hidden shadow-sm">
                 <table className="w-full text-left text-sm border-collapse">
                   <thead>
-                    <tr className="bg-gray-50 text-xs font-bold text-gray-600 border-b border-gray-200/60">
+                    <tr className="bg-field text-xs font-bold text-ink/65 border-b border-border/60">
                       <th className="px-4 py-3">Level</th>
                       <th className="px-4 py-3">Practice Area</th>
                       <th className="px-4 py-3 text-right">Rate</th>
@@ -125,9 +125,9 @@ export function RateCardEntriesSlideOver({
                   </thead>
                   <tbody className="divide-y divide-gray-100">
                     {entries.map((entry) => (
-                      <tr key={entry.uid} className="hover:bg-gray-50/50 text-gray-900 transition-colors">
+                      <tr key={entry.uid} className="hover:bg-field/50 text-ink transition-colors">
                         <td className="px-4 py-3 font-medium">{getLevelName(entry.feeEarnerLevelUid)}</td>
-                        <td className="px-4 py-3 text-gray-600 text-xs">{getAreaName(entry.practiceAreaUid)}</td>
+                        <td className="px-4 py-3 text-ink/65 text-xs">{getAreaName(entry.practiceAreaUid)}</td>
                         <td className="px-4 py-3 text-right font-semibold">
                           {rateCard.currency === "GBP" ? "£" : rateCard.currency === "USD" ? "$" : rateCard.currency === "EUR" ? "€" : `${rateCard.currency} `}
                           {entry.hourlyRate}
@@ -151,8 +151,8 @@ export function RateCardEntriesSlideOver({
           </div>
 
           {!isCardReadOnly && (
-            <div className="border-t border-gray-100 pt-6">
-              <h4 className="text-xs font-bold text-gray-700 uppercase tracking-wider mb-4">
+            <div className="border-t border-border pt-6">
+              <h4 className="text-xs font-bold text-ink/80 uppercase tracking-wider mb-4">
                 Add New Rate Entry
               </h4>
 
@@ -162,9 +162,9 @@ export function RateCardEntriesSlideOver({
                 </div>
               )}
 
-              <form onSubmit={handleAdd} className="flex flex-col gap-4 bg-gray-50/50 border border-gray-100 p-4 rounded-2xl">
+              <form onSubmit={handleAdd} className="flex flex-col gap-4 bg-field/50 border border-border p-4 rounded-2xl">
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                  <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
                     Seniority Level
                   </label>
                   <Select
@@ -176,7 +176,7 @@ export function RateCardEntriesSlideOver({
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                  <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
                     Practice Area
                   </label>
                   <Select
@@ -191,11 +191,11 @@ export function RateCardEntriesSlideOver({
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                  <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
                     Hourly Rate ({rateCard.currency})
                   </label>
                   <div className="relative">
-                    <span className="absolute left-4 top-2.5 text-gray-400 text-sm font-medium">
+                    <span className="absolute left-4 top-2.5 text-ink/40 text-sm font-medium">
                       {rateCard.currency === "GBP" ? "£" : rateCard.currency === "USD" ? "$" : rateCard.currency === "EUR" ? "€" : rateCard.currency}
                     </span>
                     <input
@@ -204,7 +204,7 @@ export function RateCardEntriesSlideOver({
                       onChange={(e) => setHourlyRate(e.target.value)}
                       placeholder="e.g. 450"
                       min={0}
-                      className="w-full pl-8 pr-5 py-2.5 bg-white border border-gray-250 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all text-gray-900 font-semibold"
+                      className="w-full pl-8 pr-5 py-2.5 bg-surface border border-border rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all text-ink font-semibold"
                       required
                     />
                   </div>
@@ -225,12 +225,12 @@ export function RateCardEntriesSlideOver({
           )}
 
           {/* Activity History panel for this specific rate card */}
-          <div className="border-t border-gray-100 pt-6">
+          <div className="border-t border-border pt-6">
             <AuditTrailPanel entityUid={rateCard.uid} title="Rate Card Activity History" />
           </div>
         </div>
 
-        <div className="p-6 border-t border-gray-100 bg-gray-50 flex justify-end">
+        <div className="p-6 border-t border-border bg-field flex justify-end">
           <Button variant="secondary" className="px-6" onClick={onClose}>
             Done
           </Button>

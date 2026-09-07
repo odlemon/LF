@@ -72,11 +72,11 @@ export function DatasetsListDrawerContent({
   };
 
   return (
-    <div className="flex flex-col gap-6 text-gray-800">
+    <div className="flex flex-col gap-6 text-ink/90">
       {/* Header bar within drawer context */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <p className="text-xs text-gray-500 font-medium">
+          <p className="text-xs text-ink/55 font-medium">
             Group your uploaded files by named ingestion batches to isolate data and track processing states.
           </p>
         </div>
@@ -86,7 +86,7 @@ export function DatasetsListDrawerContent({
       </div>
 
       {/* Filter Options Bar (Custom selectors!) */}
-      <div className="bg-gray-50/50 border border-gray-200/40 rounded-3xl p-5 shadow-sm flex flex-col sm:flex-row gap-4">
+      <div className="bg-field/50 border border-border/40 rounded-3xl p-5 shadow-sm flex flex-col sm:flex-row gap-4">
         <div className="flex-1">
           <Select
             label="Category"
@@ -132,64 +132,64 @@ export function DatasetsListDrawerContent({
       </div>
 
       {/* Main Datasets Grid Table */}
-      <div className="bg-white border border-gray-200/60 rounded-3xl overflow-hidden shadow-sm shrink-0">
+      <div className="bg-surface border border-border/60 rounded-3xl overflow-hidden shadow-sm shrink-0">
         <div className="overflow-x-auto rates-scrollable">
           <table className="min-w-full divide-y divide-gray-100 text-xs">
-            <thead className="bg-gray-50">
+            <thead className="bg-field">
               <tr>
-                <th className="px-5 py-4 text-left font-bold text-gray-500 uppercase tracking-wider">Dataset Name</th>
-                <th className="px-5 py-4 text-left font-bold text-gray-500 uppercase tracking-wider">Category</th>
-                <th className="px-5 py-4 text-left font-bold text-gray-500 uppercase tracking-wider">Source System</th>
-                <th className="px-5 py-4 text-left font-bold text-gray-500 uppercase tracking-wider">Files Count</th>
-                <th className="px-5 py-4 text-left font-bold text-gray-500 uppercase tracking-wider">Period Range</th>
-                <th className="px-5 py-4 text-left font-bold text-gray-500 uppercase tracking-wider">Status</th>
-                <th className="px-5 py-4 text-left font-bold text-gray-500 uppercase tracking-wider">Extracted Records</th>
-                <th className="px-5 py-4 text-right font-bold text-gray-500 uppercase tracking-wider w-20">Actions</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Dataset Name</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Category</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Source System</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Files Count</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Period Range</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Status</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Extracted Records</th>
+                <th className="px-5 py-4 text-right font-bold text-ink/55 uppercase tracking-wider w-20">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100 font-semibold text-gray-700">
+            <tbody className="divide-y divide-gray-100 font-semibold text-ink/80">
               {isLoading ? (
                 Array.from({ length: 5 }).map((_, idx) => (
-                  <tr key={idx} className="animate-pulse bg-gray-50/20">
+                  <tr key={idx} className="animate-pulse bg-field/20">
                     <td colSpan={8} className="px-5 py-4 text-center">
-                      <div className="h-4 bg-gray-150 rounded w-5/6 mx-auto" />
+                      <div className="h-4 bg-field rounded w-5/6 mx-auto" />
                     </td>
                   </tr>
                 ))
               ) : datasets.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="px-5 py-12 text-center text-gray-400">
+                  <td colSpan={8} className="px-5 py-12 text-center text-ink/40">
                     No datasets batches matched this criteria. Click &quot;New Dataset&quot; to define a new one.
                   </td>
                 </tr>
               ) : (
                 datasets.map((dataset) => (
-                  <tr key={dataset.uid} className="hover:bg-gray-50/30 transition-colors">
+                  <tr key={dataset.uid} className="hover:bg-field/30 transition-colors">
                     <td className="px-5 py-4">
                       <button
                         onClick={() => onSelectDataset(dataset.uid)}
-                        className="text-gray-900 font-extrabold hover:text-primary hover:underline flex items-center gap-1.5 text-left cursor-pointer focus:outline-none"
+                        className="text-ink font-extrabold hover:text-primary hover:underline flex items-center gap-1.5 text-left cursor-pointer focus:outline-none"
                       >
-                        <HiFolderOpen className="w-4.5 h-4.5 text-gray-400 shrink-0" />
+                        <HiFolderOpen className="w-4.5 h-4.5 text-ink/40 shrink-0" />
                         <span>{dataset.name}</span>
                       </button>
                     </td>
                     <td className="px-5 py-4">
-                      <span className="px-2 py-0.5 border border-gray-200/80 rounded bg-gray-50 text-gray-655 font-bold text-[10px] uppercase">
+                      <span className="px-2 py-0.5 border border-border/80 rounded bg-field text-gray-655 font-bold text-[10px] uppercase">
                         {dataset.category}
                       </span>
                     </td>
-                    <td className="px-5 py-4 text-gray-800">{dataset.sourceSystem || "Manual Upload"}</td>
-                    <td className="px-5 py-4 text-gray-900">
+                    <td className="px-5 py-4 text-ink/90">{dataset.sourceSystem || "Manual Upload"}</td>
+                    <td className="px-5 py-4 text-ink">
                       {dataset.processedDocuments} / {dataset.totalDocuments}
                     </td>
-                    <td className="px-5 py-4 text-gray-600">
+                    <td className="px-5 py-4 text-ink/65">
                       {renderPeriod(dataset.periodStart, dataset.periodEnd)}
                     </td>
                     <td className="px-5 py-4">
                       <DatasetStatusBadge status={dataset.status} />
                     </td>
-                    <td className="px-5 py-4 text-gray-900 font-extrabold">{dataset.totalRecords}</td>
+                    <td className="px-5 py-4 text-ink font-extrabold">{dataset.totalRecords}</td>
                     <td className="px-5 py-4 text-right">
                       {confirmDeleteUid === dataset.uid ? (
                         <div className="flex gap-2 justify-end items-center">
@@ -201,7 +201,7 @@ export function DatasetsListDrawerContent({
                           </button>
                           <button
                             onClick={() => setConfirmDeleteUid(null)}
-                            className="px-2 py-1 text-[10px] font-bold text-gray-600 bg-gray-100 rounded-full hover:bg-gray-200 cursor-pointer"
+                            className="px-2 py-1 text-[10px] font-bold text-ink/65 bg-canvas rounded-full hover:bg-hover cursor-pointer"
                           >
                             Cancel
                           </button>
@@ -209,7 +209,7 @@ export function DatasetsListDrawerContent({
                       ) : (
                         <button
                           onClick={() => setConfirmDeleteUid(dataset.uid)}
-                          className="p-1.5 hover:bg-rose-50 rounded-lg text-gray-400 hover:text-rose-600 transition-colors cursor-pointer"
+                          className="p-1.5 hover:bg-rose-50 rounded-lg text-ink/40 hover:text-rose-600 transition-colors cursor-pointer"
                         >
                           <HiTrash className="w-4.5 h-4.5" />
                         </button>
@@ -225,7 +225,7 @@ export function DatasetsListDrawerContent({
 
       {/* Pagination bar */}
       {totalPages > 1 && (
-        <div className="p-4 border-t border-gray-100 flex items-center justify-center shrink-0">
+        <div className="p-4 border-t border-border flex items-center justify-center shrink-0">
           <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
         </div>
       )}

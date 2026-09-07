@@ -23,8 +23,8 @@ export function AttachmentPill({
         state === "error"
           ? "bg-rose-50 text-rose-600"
           : isDone
-          ? "bg-emerald-50 text-emerald-700"
-          : "bg-gray-100 text-gray-600"
+          ? "bg-hover text-ink/80"
+          : "bg-canvas text-ink/65"
       }`}
     >
       {isUploading && (
@@ -51,7 +51,7 @@ export function AttachmentPill({
         <button
           type="button"
           onClick={onRemove}
-          className="p-0.5 hover:bg-black/5 rounded-full"
+          className="p-0.5 hover:bg-primary-hover/5 rounded-full"
           aria-label="Remove attachment"
         >
           <HiX className="w-3 h-3" />

@@ -11,12 +11,18 @@ export interface AiProviderConfig {
   lastTestedAt: string | null
   lastTestResult: 'SUCCESS' | 'FAILED' | null
   createdAt: string
+  baseUrl?: string | null
+  apiVersion?: string | null
+  deploymentName?: string | null
 }
 
 export interface SaveAiProviderCommand {
   provider: AiProvider
   apiKey: string
   modelName?: string
+  baseUrl?: string
+  apiVersion?: string
+  deploymentName?: string
 }
 
 export interface AiConnectionTestResult {

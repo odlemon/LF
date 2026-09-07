@@ -108,12 +108,12 @@ export default function DocumentDetailPage() {
   };
 
   return (
-    <div className="p-8 max-w-6xl w-full mx-auto flex flex-col gap-6 text-gray-800">
+    <div className="p-8 max-w-6xl w-full mx-auto flex flex-col gap-6 text-ink/90">
       {/* Back navigation */}
       <div className="flex items-center gap-3">
         <Link
           href="/settings/data-room"
-          className="text-xs font-bold text-gray-400 hover:text-primary flex items-center gap-1 w-fit transition-colors"
+          className="text-xs font-bold text-ink/40 hover:text-primary flex items-center gap-1 w-fit transition-colors"
         >
           <HiArrowSmLeft className="w-4 h-4" /> Data Room
         </Link>
@@ -122,12 +122,12 @@ export default function DocumentDetailPage() {
             <span className="text-gray-300 text-xs">/</span>
             <Link
               href={`/settings/data-room/datasets/${document.datasetUid}`}
-              className="text-xs font-bold text-gray-400 hover:text-primary flex items-center gap-1 transition-colors"
+              className="text-xs font-bold text-ink/40 hover:text-primary flex items-center gap-1 transition-colors"
             >
               <HiDatabase className="w-3.5 h-3.5" /> Dataset
             </Link>
             <span className="text-gray-300 text-xs">/</span>
-            <span className="text-xs font-bold text-gray-600 truncate max-w-[200px]">
+            <span className="text-xs font-bold text-ink/65 truncate max-w-[200px]">
               {document.originalFilename}
             </span>
           </>
@@ -136,7 +136,7 @@ export default function DocumentDetailPage() {
 
       {/* Loading State */}
       {isLoading ? (
-        <div className="h-64 bg-gray-100 rounded-3xl animate-pulse" />
+        <div className="h-64 bg-canvas rounded-3xl animate-pulse" />
       ) : error ? (
         <div className="p-6 bg-rose-50 border border-rose-200 text-rose-700 rounded-2xl font-semibold flex items-start gap-3">
           <HiExclamation className="w-5 h-5 shrink-0 mt-0.5" />
@@ -152,12 +152,12 @@ export default function DocumentDetailPage() {
       ) : (
         <>
           {/* Document Metadata Header Card */}
-          <div className="bg-white border border-gray-200/60 rounded-3xl p-6 shadow-sm">
+          <div className="bg-surface border border-border/60 rounded-3xl p-6 shadow-sm">
             <div className="flex flex-col md:flex-row gap-6 justify-between items-start">
               <div className="flex flex-col gap-2 flex-1 min-w-0">
                 <div className="flex items-center gap-2.5 flex-wrap">
                   <HiDocumentText className="w-5 h-5 text-primary shrink-0" />
-                  <h1 className="text-xl font-bold text-gray-900 tracking-tight truncate">
+                  <h1 className="text-xl font-bold text-ink tracking-tight truncate">
                     {document.originalFilename}
                   </h1>
                   <DocumentStatusBadge status={document.status} />
@@ -198,7 +198,7 @@ export default function DocumentDetailPage() {
                     </button>
                     <button
                       onClick={() => setConfirmDelete(false)}
-                      className="px-3 py-1.5 text-xs font-bold text-gray-600 bg-gray-100 rounded-full hover:bg-gray-200 cursor-pointer"
+                      className="px-3 py-1.5 text-xs font-bold text-ink/65 bg-canvas rounded-full hover:bg-hover cursor-pointer"
                     >
                       Cancel
                     </button>
@@ -215,53 +215,53 @@ export default function DocumentDetailPage() {
             </div>
 
             {/* Metadata Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mt-6 text-xs font-semibold text-gray-500">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mt-6 text-xs font-semibold text-ink/55">
               <div>
-                <span className="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">
+                <span className="block text-[9px] font-bold text-ink/40 uppercase tracking-wider mb-0.5">
                   File Type
                 </span>
-                <span className="text-gray-800 font-bold">{document.fileType}</span>
+                <span className="text-ink/90 font-bold">{document.fileType}</span>
               </div>
               <div>
-                <span className="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">
+                <span className="block text-[9px] font-bold text-ink/40 uppercase tracking-wider mb-0.5">
                   File Size
                 </span>
-                <span className="text-gray-800 font-bold">{formatFileSize(document.fileSizeBytes)}</span>
+                <span className="text-ink/90 font-bold">{formatFileSize(document.fileSizeBytes)}</span>
               </div>
               <div>
-                <span className="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">
+                <span className="block text-[9px] font-bold text-ink/40 uppercase tracking-wider mb-0.5">
                   Records Extracted
                 </span>
-                <span className="text-gray-900 font-extrabold text-[13px]">{document.recordsExtracted}</span>
+                <span className="text-ink font-extrabold text-[13px]">{document.recordsExtracted}</span>
               </div>
               <div>
-                <span className="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">
+                <span className="block text-[9px] font-bold text-ink/40 uppercase tracking-wider mb-0.5">
                   Rows Attempted
                 </span>
-                <span className="text-gray-800 font-bold">{document.rowsAttempted}</span>
+                <span className="text-ink/90 font-bold">{document.rowsAttempted}</span>
               </div>
               <div>
-                <span className="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">
+                <span className="block text-[9px] font-bold text-ink/40 uppercase tracking-wider mb-0.5">
                   Rows Failed
                 </span>
-                <span className={`font-bold ${document.rowsFailed > 0 ? "text-rose-600" : "text-gray-800"}`}>
+                <span className={`font-bold ${document.rowsFailed > 0 ? "text-rose-600" : "text-ink/90"}`}>
                   {document.rowsFailed}
                 </span>
               </div>
               <div>
-                <span className="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">
+                <span className="block text-[9px] font-bold text-ink/40 uppercase tracking-wider mb-0.5">
                   Retry Count
                 </span>
-                <span className="text-gray-800 font-bold">{document.retryCount} / 3</span>
+                <span className="text-ink/90 font-bold">{document.retryCount} / 3</span>
               </div>
               <div>
-                <span className="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">
+                <span className="block text-[9px] font-bold text-ink/40 uppercase tracking-wider mb-0.5">
                   Column Mapping
                 </span>
                 <MappingStatusBadge status={document.columnMappingStatus} />
               </div>
               <div>
-                <span className="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">
+                <span className="block text-[9px] font-bold text-ink/40 uppercase tracking-wider mb-0.5">
                   Dataset
                 </span>
                 <Link
@@ -272,17 +272,17 @@ export default function DocumentDetailPage() {
                 </Link>
               </div>
               <div>
-                <span className="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">
+                <span className="block text-[9px] font-bold text-ink/40 uppercase tracking-wider mb-0.5">
                   Uploaded
                 </span>
-                <span className="text-gray-800 font-bold">{formatDate(document.createdAt)}</span>
+                <span className="text-ink/90 font-bold">{formatDate(document.createdAt)}</span>
               </div>
               {document.processedAt && (
                 <div>
-                  <span className="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">
+                  <span className="block text-[9px] font-bold text-ink/40 uppercase tracking-wider mb-0.5">
                     Processed
                   </span>
-                  <span className="text-gray-800 font-bold">{formatDate(document.processedAt)}</span>
+                  <span className="text-ink/90 font-bold">{formatDate(document.processedAt)}</span>
                 </div>
               )}
             </div>
@@ -297,13 +297,13 @@ export default function DocumentDetailPage() {
           </div>
 
           {/* Tabs: Column Mapping | Processing Logs */}
-          <div className="flex gap-1 border-b border-gray-200">
+          <div className="flex gap-1 border-b border-border">
             <button
               onClick={() => setActiveTab("mapping")}
               className={`px-5 py-3 text-xs font-bold rounded-t-lg transition-all cursor-pointer ${
                 activeTab === "mapping"
-                  ? "text-primary bg-white border border-gray-200 border-b-white -mb-px shadow-sm"
-                  : "text-gray-500 hover:text-gray-700 hover:bg-gray-50"
+                  ? "text-primary bg-surface border border-border border-b-white -mb-px shadow-sm"
+                  : "text-ink/55 hover:text-ink/80 hover:bg-field"
               }`}
             >
               <HiDatabase className="w-4 h-4 inline mr-1.5 -mt-0.5" />
@@ -317,14 +317,14 @@ export default function DocumentDetailPage() {
               }}
               className={`px-5 py-3 text-xs font-bold rounded-t-lg transition-all cursor-pointer ${
                 activeTab === "logs"
-                  ? "text-primary bg-white border border-gray-200 border-b-white -mb-px shadow-sm"
-                  : "text-gray-500 hover:text-gray-700 hover:bg-gray-50"
+                  ? "text-primary bg-surface border border-border border-b-white -mb-px shadow-sm"
+                  : "text-ink/55 hover:text-ink/80 hover:bg-field"
               }`}
             >
               <HiCalendar className="w-4 h-4 inline mr-1.5 -mt-0.5" />
               Processing Logs
               {logs && logs.length > 0 && (
-                <span className="ml-1.5 px-1.5 py-0.5 text-[10px] font-bold bg-gray-100 text-gray-600 rounded-full">
+                <span className="ml-1.5 px-1.5 py-0.5 text-[10px] font-bold bg-canvas text-ink/65 rounded-full">
                   {logs.length}
                 </span>
               )}
@@ -334,11 +334,11 @@ export default function DocumentDetailPage() {
           {/* Tab Content */}
           {activeTab === "mapping" ? (
             /* Column Mapping Section */
-            <div className="bg-white border border-gray-200/60 rounded-3xl p-6 shadow-sm">
+            <div className="bg-surface border border-border/60 rounded-3xl p-6 shadow-sm">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h2 className="text-sm font-extrabold text-gray-900">Column Mapping</h2>
-                  <p className="text-xs text-gray-500 mt-0.5">
+                  <h2 className="text-sm font-extrabold text-ink">Column Mapping</h2>
+                  <p className="text-xs text-ink/55 mt-0.5">
                     Maps CSV/Excel headers to system fields. {isFailed && "Fix mismatches and re-process."}
                   </p>
                 </div>
@@ -348,28 +348,28 @@ export default function DocumentDetailPage() {
               </div>
 
               {document.columnMapping && Object.keys(document.columnMapping).length > 0 ? (
-                <div className="border border-gray-200/80 rounded-2xl overflow-hidden">
+                <div className="border border-border/80 rounded-2xl overflow-hidden">
                   <table className="min-w-full divide-y divide-gray-100 text-xs">
-                    <thead className="bg-gray-50">
+                    <thead className="bg-field">
                       <tr>
-                        <th className="px-4 py-3 text-left font-bold text-gray-500 uppercase tracking-wider">
+                        <th className="px-4 py-3 text-left font-bold text-ink/55 uppercase tracking-wider">
                           System Field
                         </th>
-                        <th className="px-4 py-3 text-left font-bold text-gray-500 uppercase tracking-wider">
+                        <th className="px-4 py-3 text-left font-bold text-ink/55 uppercase tracking-wider">
                           File Column Header
                         </th>
-                        <th className="px-4 py-3 text-left font-bold text-gray-500 uppercase tracking-wider w-24">
+                        <th className="px-4 py-3 text-left font-bold text-ink/55 uppercase tracking-wider w-24">
                           Status
                         </th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100 font-semibold">
                       {Object.entries(document.columnMapping).map(([sysField, fileColumn]) => (
-                        <tr key={sysField} className="hover:bg-gray-50/30">
-                          <td className="px-4 py-3 text-gray-700 font-bold">{sysField}</td>
+                        <tr key={sysField} className="hover:bg-field/30">
+                          <td className="px-4 py-3 text-ink/80 font-bold">{sysField}</td>
                           <td className="px-4 py-3">
                             {fileColumn ? (
-                              <span className="text-gray-900">{fileColumn}</span>
+                              <span className="text-ink">{fileColumn}</span>
                             ) : (
                               <span className="text-rose-600 font-extrabold bg-rose-50/50 px-2 py-0.5 rounded border border-rose-100 text-[10px]">
                                 Not mapped
@@ -378,7 +378,7 @@ export default function DocumentDetailPage() {
                           </td>
                           <td className="px-4 py-3">
                             {fileColumn ? (
-                              <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                              <span className="inline-flex items-center gap-1 text-[10px] font-bold text-ink/80 bg-hover px-2 py-0.5 rounded-full border border-border">
                                 <HiCheckCircle className="w-3 h-3" /> Mapped
                               </span>
                             ) : (
@@ -393,7 +393,7 @@ export default function DocumentDetailPage() {
                   </table>
                 </div>
               ) : (
-                <div className="text-center py-10 text-gray-400 font-semibold flex flex-col items-center gap-2 bg-gray-50/50 rounded-2xl border border-dashed border-gray-200">
+                <div className="text-center py-10 text-ink/40 font-semibold flex flex-col items-center gap-2 bg-field/50 rounded-2xl border border-dashed border-border">
                   <HiDatabase className="w-8 h-8 text-gray-300" />
                   No column mapping data available.
                 </div>
@@ -401,26 +401,26 @@ export default function DocumentDetailPage() {
             </div>
           ) : (
             /* Processing Logs Section */
-            <div className="bg-white border border-gray-200/60 rounded-3xl p-6 shadow-sm">
-              <h2 className="text-sm font-extrabold text-gray-900 mb-4">Processing Attempts</h2>
+            <div className="bg-surface border border-border/60 rounded-3xl p-6 shadow-sm">
+              <h2 className="text-sm font-extrabold text-ink mb-4">Processing Attempts</h2>
 
               {isLogsLoading ? (
                 <div className="flex flex-col gap-4 animate-pulse">
                   <div className="flex gap-2">
-                    <div className="h-8 w-24 bg-gray-100 rounded-full" />
-                    <div className="h-8 w-24 bg-gray-100 rounded-full" />
+                    <div className="h-8 w-24 bg-canvas rounded-full" />
+                    <div className="h-8 w-24 bg-canvas rounded-full" />
                   </div>
-                  <div className="h-32 bg-gray-100 rounded-2xl" />
+                  <div className="h-32 bg-canvas rounded-2xl" />
                 </div>
               ) : !logs || logs.length === 0 ? (
-                <div className="text-center py-10 text-gray-400 font-semibold flex flex-col items-center gap-2 bg-gray-50/50 rounded-2xl border border-dashed border-gray-200">
+                <div className="text-center py-10 text-ink/40 font-semibold flex flex-col items-center gap-2 bg-field/50 rounded-2xl border border-dashed border-border">
                   <HiExclamation className="w-8 h-8 text-gray-300" />
                   No processing attempts logged for this file yet.
                 </div>
               ) : (
                 <div className="flex flex-col gap-5">
                   {/* Attempt Timeline */}
-                  <div className="flex items-center gap-2 overflow-x-auto pb-1 shrink-0 border-b border-gray-100">
+                  <div className="flex items-center gap-2 overflow-x-auto pb-1 shrink-0 border-b border-border">
                     {logs.map((log, idx) => (
                       <button
                         key={log.uid || idx}
@@ -431,7 +431,7 @@ export default function DocumentDetailPage() {
                         className={`px-4 py-2 text-xs font-bold rounded-full border transition-all shrink-0 cursor-pointer ${
                           selectedAttemptIdx === idx
                             ? "bg-primary border-primary text-white shadow-sm"
-                            : "bg-gray-50 hover:bg-gray-100 text-gray-600 border-gray-200"
+                            : "bg-field hover:bg-canvas text-ink/65 border-border"
                         }`}
                       >
                         Attempt {log.attemptNumber}
@@ -443,34 +443,34 @@ export default function DocumentDetailPage() {
                     <div className="flex flex-col gap-5">
                       {/* Stats Row */}
                       <div className="grid grid-cols-3 gap-3">
-                        <div className="bg-gray-50/50 border border-gray-150 rounded-2xl p-4 text-center">
-                          <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-1">
+                        <div className="bg-field/50 border border-border rounded-2xl p-4 text-center">
+                          <span className="text-[10px] font-bold text-ink/40 uppercase tracking-wider block mb-1">
                             Status
                           </span>
                           <DocumentStatusBadge status={activeAttempt.status} />
                         </div>
-                        <div className="bg-gray-50/50 border border-gray-150 rounded-2xl p-4 text-center">
-                          <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-1">
+                        <div className="bg-field/50 border border-border rounded-2xl p-4 text-center">
+                          <span className="text-[10px] font-bold text-ink/40 uppercase tracking-wider block mb-1">
                             Rows Parsed
                           </span>
-                          <span className="text-base font-extrabold text-gray-900">
+                          <span className="text-base font-extrabold text-ink">
                             {activeAttempt.rowsProcessed} / {activeAttempt.rowsRead}
                           </span>
                         </div>
-                        <div className="bg-gray-50/50 border border-gray-150 rounded-2xl p-4 text-center">
-                          <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-1">
+                        <div className="bg-field/50 border border-border rounded-2xl p-4 text-center">
+                          <span className="text-[10px] font-bold text-ink/40 uppercase tracking-wider block mb-1">
                             Rows Failed
                           </span>
-                          <span className={`text-base font-extrabold ${activeAttempt.rowsFailed > 0 ? "text-rose-600" : "text-gray-900"}`}>
+                          <span className={`text-base font-extrabold ${activeAttempt.rowsFailed > 0 ? "text-rose-600" : "text-ink"}`}>
                             {activeAttempt.rowsFailed}
                           </span>
                         </div>
                       </div>
 
                       {/* Dates & Error Summary */}
-                      <div className="flex flex-col gap-2.5 p-4 bg-gray-50 border border-gray-200/50 rounded-2xl">
-                        <div className="flex items-center gap-2 text-xs text-gray-600 flex-wrap">
-                          <HiCalendar className="w-4 h-4 text-gray-400" />
+                      <div className="flex flex-col gap-2.5 p-4 bg-field border border-border/50 rounded-2xl">
+                        <div className="flex items-center gap-2 text-xs text-ink/65 flex-wrap">
+                          <HiCalendar className="w-4 h-4 text-ink/40" />
                           <span className="font-semibold">
                             Started: {formatTimestamp(activeAttempt.startedAt)}
                           </span>
@@ -491,17 +491,17 @@ export default function DocumentDetailPage() {
 
                       {/* Column Mapping Used */}
                       <div className="flex flex-col gap-2">
-                        <span className="text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-1.5">
-                          <HiDatabase className="w-4 h-4 text-gray-400" /> Column Mapping Used
+                        <span className="text-xs font-bold text-ink/55 uppercase tracking-wider flex items-center gap-1.5">
+                          <HiDatabase className="w-4 h-4 text-ink/40" /> Column Mapping Used
                         </span>
-                        <div className="border border-gray-200/80 rounded-2xl overflow-hidden bg-white shadow-sm">
+                        <div className="border border-border/80 rounded-2xl overflow-hidden bg-surface shadow-sm">
                           <table className="min-w-full divide-y divide-gray-100 text-xs">
-                            <thead className="bg-gray-50">
+                            <thead className="bg-field">
                               <tr>
-                                <th className="px-4 py-2.5 text-left font-bold text-gray-500 uppercase tracking-wider">
+                                <th className="px-4 py-2.5 text-left font-bold text-ink/55 uppercase tracking-wider">
                                   System Field
                                 </th>
-                                <th className="px-4 py-2.5 text-left font-bold text-gray-500 uppercase tracking-wider">
+                                <th className="px-4 py-2.5 text-left font-bold text-ink/55 uppercase tracking-wider">
                                   File Column
                                 </th>
                               </tr>
@@ -510,10 +510,10 @@ export default function DocumentDetailPage() {
                               {activeAttempt.columnMapping && Object.keys(activeAttempt.columnMapping).length > 0 ? (
                                 Object.entries(activeAttempt.columnMapping).map(([sysField, matchedVal]) => (
                                   <tr key={sysField}>
-                                    <td className="px-4 py-2.5 text-gray-700">{sysField}</td>
+                                    <td className="px-4 py-2.5 text-ink/80">{sysField}</td>
                                     <td className="px-4 py-2.5">
                                       {matchedVal ? (
-                                        <span className="text-gray-900">{matchedVal}</span>
+                                        <span className="text-ink">{matchedVal}</span>
                                       ) : (
                                         <span className="text-rose-600 font-extrabold bg-rose-50/50 px-2 py-0.5 rounded border border-rose-100">
                                           Not found
@@ -524,7 +524,7 @@ export default function DocumentDetailPage() {
                                 ))
                               ) : (
                                 <tr>
-                                  <td colSpan={2} className="px-4 py-3 text-center text-gray-400">
+                                  <td colSpan={2} className="px-4 py-3 text-center text-ink/40">
                                     No mapping template detected.
                                   </td>
                                 </tr>
@@ -537,10 +537,10 @@ export default function DocumentDetailPage() {
                       {/* Row Errors */}
                       {activeAttempt.rowErrors && activeAttempt.rowErrors.length > 0 && (
                         <div className="flex flex-col gap-2">
-                          <span className="text-xs font-bold text-gray-500 uppercase tracking-wider text-rose-700">
+                          <span className="text-xs font-bold text-ink/55 uppercase tracking-wider text-rose-700">
                             Row Error Logs ({activeAttempt.rowErrors.length} errors)
                           </span>
-                          <div className="border border-red-100 rounded-2xl overflow-hidden bg-white shadow-sm max-h-56 overflow-y-auto rates-scrollable pr-1">
+                          <div className="border border-red-100 rounded-2xl overflow-hidden bg-surface shadow-sm max-h-56 overflow-y-auto rates-scrollable pr-1">
                             <table className="min-w-full divide-y divide-red-50 text-[11px]">
                               <thead className="bg-red-50/30">
                                 <tr>

@@ -32,7 +32,7 @@ export function DocumentStatusBadge({ status, className = "" }: DocumentStatusBa
       showSpinner = true;
       break;
     case "PROCESSED":
-      styles = "bg-emerald-50 text-emerald-700 border-emerald-250/50";
+      styles = "bg-hover text-ink/80 border-border/50";
       label = "Processed";
       Icon = HiCheckCircle;
       break;
@@ -42,7 +42,7 @@ export function DocumentStatusBadge({ status, className = "" }: DocumentStatusBa
       Icon = HiExclamationCircle;
       break;
     case "SKIPPED":
-      styles = "bg-gray-100 text-gray-500 border-gray-200";
+      styles = "bg-canvas text-ink/55 border-border";
       label = "Skipped";
       Icon = HiBan;
       break;
@@ -75,7 +75,7 @@ export function MappingStatusBadge({ status }: MappingStatusBadgeProps) {
 
   switch (status) {
     case "MAPPED":
-      styles = "bg-emerald-50 text-emerald-700 border-emerald-200";
+      styles = "bg-hover text-ink/80 border-border";
       label = "Fully Mapped";
       break;
     case "PARTIAL":
@@ -115,7 +115,7 @@ export function DatasetStatusBadge({ status }: DatasetStatusBadgeProps) {
       label = "Processing";
       break;
     case "COMPLETE":
-      styles = "bg-emerald-50 text-emerald-700 border-emerald-250/50";
+      styles = "bg-hover text-ink/80 border-border/50";
       label = "Complete";
       break;
     case "PARTIAL":

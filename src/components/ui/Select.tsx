@@ -58,7 +58,7 @@ export function Select({
   return (
     <div className={`flex flex-col gap-1.5 w-full relative ${className}`} ref={dropdownRef}>
       {label && (
-        <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wider pl-1 select-none">
+        <label className="text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1 select-none">
           {label} {required && <span className="text-rose-500">*</span>}
         </label>
       )}
@@ -68,19 +68,19 @@ export function Select({
         type="button"
         disabled={disabled}
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-full flex items-center justify-between gap-2 px-5 py-2.5 bg-white border ${
+        className={`w-full flex items-center justify-between gap-2 px-5 py-2.5 bg-surface border ${
           error
             ? "border-rose-300 focus:ring-rose-100"
             : isOpen
             ? "border-primary focus:ring-primary/20"
-            : "border-gray-250 hover:border-gray-300"
-        } rounded-full text-xs font-bold text-gray-800 transition-all focus:outline-none focus:ring-2 disabled:opacity-50 disabled:bg-gray-50 cursor-pointer`}
+            : "border-border hover:border-gray-300"
+        } rounded-full text-xs font-bold text-ink/90 transition-all focus:outline-none focus:ring-2 disabled:opacity-50 disabled:bg-field cursor-pointer`}
       >
-        <span className={selectedOption ? "text-gray-800" : "text-gray-400 font-semibold"}>
+        <span className={selectedOption ? "text-ink/90" : "text-ink/40 font-semibold"}>
           {selectedOption ? selectedOption.label : placeholder}
         </span>
         <ChevronDownIcon
-          className={`w-4 h-4 text-gray-400 transition-transform duration-200 shrink-0 ${
+          className={`w-4 h-4 text-ink/40 transition-transform duration-200 shrink-0 ${
             isOpen ? "transform rotate-180" : ""
           }`}
         />
@@ -88,10 +88,10 @@ export function Select({
 
       {/* Options Dropdown list */}
       {isOpen && (
-        <div className="absolute left-0 right-0 top-full mt-2 bg-white border border-gray-150 rounded-2xl shadow-xl z-50 overflow-hidden max-h-56 overflow-y-auto rates-scrollable animate-fade-in-up">
+        <div className="absolute left-0 right-0 top-full mt-2 bg-surface border border-border rounded-2xl shadow-xl z-50 overflow-hidden max-h-56 overflow-y-auto rates-scrollable animate-fade-in-up">
           <div className="py-1">
             {options.length === 0 ? (
-              <div className="px-5 py-3 text-xs font-semibold text-gray-400 text-center">
+              <div className="px-5 py-3 text-xs font-semibold text-ink/40 text-center">
                 No options available
               </div>
             ) : (
@@ -105,13 +105,13 @@ export function Select({
                     className={`w-full flex items-center justify-between px-5 py-2.5 text-left text-xs font-bold transition-colors ${
                       isSelected
                         ? "bg-primary/5 text-primary"
-                        : "text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+                        : "text-ink/80 hover:bg-field hover:text-ink"
                     }`}
                   >
                     <div className="flex flex-col gap-0.5">
                       <span>{opt.label}</span>
                       {opt.description && (
-                        <span className="text-[10px] text-gray-400 font-medium">
+                        <span className="text-[10px] text-ink/40 font-medium">
                           {opt.description}
                         </span>
                       )}

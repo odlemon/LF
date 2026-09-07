@@ -105,10 +105,14 @@ export function CustomersSection() {
       className="relative w-full border-b border-black/[0.06] bg-[#fefefc] py-10 sm:py-12"
       aria-label="Our customers"
     >
-      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
-        <p className="mb-8 text-center text-[11px] font-semibold uppercase tracking-[0.22em] text-[#0a0a0a]/40">
-          Our Customers
-        </p>
+      <div className="mx-auto max-w-[1200px] px-5 sm:px-8 lg:px-10">
+        <div className="mb-8 flex items-center gap-3">
+          <span className="text-[13px] font-semibold tracking-[0.08em] text-[#0a0a0a]">Lysp</span>
+          <span className="h-px w-10 bg-[#0a0a0a]/25" />
+          <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#0a0a0a]/40">
+            Customers
+          </p>
+        </div>
       </div>
 
       <div className="relative overflow-hidden">

@@ -55,8 +55,8 @@ export default function PracticeAreasPage() {
     <div className="p-8 max-w-5xl w-full mx-auto flex flex-col gap-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Practice Areas</h1>
-          <p className="text-sm text-gray-500 mt-1">Define the types of legal work your firm handles.</p>
+          <h1 className="text-2xl font-bold text-ink tracking-tight">Practice Areas</h1>
+          <p className="text-sm text-ink/55 mt-1">Define the types of legal work your firm handles.</p>
         </div>
         <Button
           variant="primary"
@@ -76,55 +76,55 @@ export default function PracticeAreasPage() {
 
       {isLoading && areas.length === 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-pulse">
-          <div className="h-32 bg-gray-200 rounded-2xl" />
-          <div className="h-32 bg-gray-200 rounded-2xl" />
+          <div className="h-32 bg-field rounded-2xl" />
+          <div className="h-32 bg-field rounded-2xl" />
         </div>
       ) : areas.length === 0 ? (
-        <div className="text-center py-12 bg-white rounded-2xl border border-gray-200/60 p-8 shadow-sm flex flex-col items-center justify-center gap-3">
-          <span className="text-sm text-gray-500">No practice areas registered yet. Click &apos;Add Practice Area&apos; to define one.</span>
+        <div className="text-center py-12 bg-surface rounded-2xl border border-border/60 p-8 shadow-sm flex flex-col items-center justify-center gap-3">
+          <span className="text-sm text-ink/55">No practice areas registered yet. Click &apos;Add Practice Area&apos; to define one.</span>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {areas.map((area) => (
             <div
               key={area.uid}
-              className={`bg-white p-5 rounded-2xl border transition-all duration-200 flex flex-col justify-between gap-4 shadow-sm hover:shadow-md ${
+              className={`bg-surface p-5 rounded-2xl border transition-all duration-200 flex flex-col justify-between gap-4 shadow-sm hover:shadow-md ${
                 area.active
-                  ? "border-gray-200/60"
-                  : "border-gray-150 bg-gray-50/50 opacity-60"
+                  ? "border-border/60"
+                  : "border-border bg-field/50 opacity-60"
               }`}
             >
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-between gap-3">
                   <div className="flex items-center gap-2">
-                    <span className="text-[15px] font-bold text-gray-900 leading-tight">
+                    <span className="text-[15px] font-bold text-ink leading-tight">
                       {area.name}
                     </span>
-                    <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-gray-100 text-gray-700 uppercase">
+                    <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-canvas text-ink/80 uppercase">
                       {area.code}
                     </span>
                   </div>
                   <span>
                     {area.active ? (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-100 uppercase tracking-wide">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-hover text-ink/80 border border-border uppercase tracking-wide">
                         Active
                       </span>
                     ) : (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-gray-100 text-gray-500 border border-gray-200 uppercase tracking-wide">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-canvas text-ink/55 border border-border uppercase tracking-wide">
                         Inactive
                       </span>
                     )}
                   </span>
                 </div>
-                <p className="text-xs text-gray-500 leading-relaxed line-clamp-2">
+                <p className="text-xs text-ink/55 leading-relaxed line-clamp-2">
                   {area.description || "No description provided."}
                 </p>
               </div>
 
-              <div className="flex items-center justify-between gap-4 pt-3 border-t border-gray-100">
+              <div className="flex items-center justify-between gap-4 pt-3 border-t border-border">
                 <button
                   onClick={() => handleOpenEdit(area)}
-                  className="text-xs font-semibold text-gray-600 hover:text-primary flex items-center gap-1.5 transition-colors"
+                  className="text-xs font-semibold text-ink/65 hover:text-primary flex items-center gap-1.5 transition-colors"
                 >
                   <HiPencil className="w-3.5 h-3.5" />
                   Edit
@@ -136,13 +136,13 @@ export default function PracticeAreasPage() {
                       <span className="text-xs font-medium text-red-600">Are you sure?</span>
                       <button
                         onClick={() => handleDeactivate(area.uid)}
-                        className="p-1 text-emerald-600 hover:bg-emerald-50 rounded transition-colors"
+                        className="p-1 text-ink/70 hover:bg-hover rounded transition-colors"
                       >
                         <HiCheck className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => setConfirmDeactivateUid(null)}
-                        className="p-1 text-gray-400 hover:bg-gray-50 rounded transition-colors"
+                        className="p-1 text-ink/40 hover:bg-field rounded transition-colors"
                       >
                         <HiX className="w-4 h-4" />
                       </button>
@@ -156,7 +156,7 @@ export default function PracticeAreasPage() {
                     </button>
                   )
                 ) : (
-                  <span className="text-xs text-gray-400 flex items-center gap-1">
+                  <span className="text-xs text-ink/40 flex items-center gap-1">
                     <HiLockClosed className="w-3 h-3" />
                     Locked
                   </span>

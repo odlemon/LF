@@ -88,7 +88,9 @@ export function InlineEditField({
     );
   }
 
-  const sharedClass = `flex-1 px-2 py-1 text-sm border border-primary/40 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 ${inputClassName}`;
+  const sharedClass = multiline
+    ? `flex-1 px-3 py-1.5 text-sm border border-primary/40 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 ${inputClassName}`
+    : `flex-1 px-3 py-1.5 text-sm border border-primary/40 rounded-full focus:outline-none focus:ring-2 focus:ring-primary/20 ${inputClassName}`;
 
   return (
     <div className="flex items-center gap-1 flex-1 min-w-0">
@@ -117,7 +119,7 @@ export function InlineEditField({
         type="button"
         onClick={save}
         disabled={isSaving}
-        className="p-1 text-emerald-600 hover:bg-emerald-50 rounded"
+        className="p-1 text-ink/70 hover:bg-hover rounded"
       >
         <HiCheck className="w-4 h-4" />
       </button>
@@ -125,7 +127,7 @@ export function InlineEditField({
         type="button"
         onClick={cancel}
         disabled={isSaving}
-        className="p-1 text-gray-400 hover:bg-gray-50 rounded"
+        className="p-1 text-ink/40 hover:bg-field rounded"
       >
         <HiX className="w-4 h-4" />
       </button>

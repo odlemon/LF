@@ -3,6 +3,7 @@
 import React, { createContext, useState, useEffect, useCallback } from "react";
 import { ClientUser } from "@/types/api";
 import { apiClient } from "@/lib/api/client";
+import { getPortalMe, type PortalMe } from "@/modules/client-portal/api";
 
 export interface ClientAuthContextType {
   user: ClientUser | null;
@@ -10,6 +11,8 @@ export interface ClientAuthContextType {
   isLoading: boolean;
   login: (credentials: Record<string, unknown>) => Promise<void>;
   logout: () => Promise<void>;
+  refreshUser: () => Promise<void>;
+  clearMustChangePassword: () => void;
 }
 
 export const ClientAuthContext = createContext<ClientAuthContextType | undefined>(undefined);
@@ -30,6 +33,26 @@ const parseJwt = (token: string) => {
   }
 };
 
+function clearClientSession() {
+  if (typeof window !== "undefined") {
+    localStorage.removeItem("token");
+  }
+}
+
+function mapMe(me: PortalMe): ClientUser {
+  return {
+    id: me.uid,
+    email: me.email,
+    clientName: me.clientName || "Client",
+    contactName: me.name || me.email?.split("@")[0] || "Representative",
+    mustChangePassword: !!me.mustChangePassword,
+    firmUid: me.firmUid,
+    clientProfileUid: me.clientProfileUid,
+    country: me.country,
+    roleLabel: me.roleLabel || "Client representative",
+  };
+}
+
 export function ClientAuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<ClientUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -39,8 +62,10 @@ export function ClientAuthProvider({ children }: { children: React.ReactNode }) 
       setIsLoading(false);
       return;
     }
+
     const token = localStorage.getItem("token");
-    if (!token) {
+    if (!token || token === "mock-client-token") {
+      if (token === "mock-client-token") clearClientSession();
       setUser(null);
       setIsLoading(false);
       return;
@@ -48,47 +73,32 @@ export function ClientAuthProvider({ children }: { children: React.ReactNode }) 
 
     try {
       const decoded = parseJwt(token);
-      if (!decoded || decoded.type !== "PORTAL") {
+      if (!decoded || (decoded.type !== "PORTAL" && decoded.type !== "CLIENT_USER")) {
+        clearClientSession();
         setUser(null);
         setIsLoading(false);
         return;
       }
 
-      const clientProfileUid = decoded.clientProfileUid;
-      if (clientProfileUid) {
-        const response = await apiClient.get<any>(`/v1/clients/${clientProfileUid}`);
-        const clientProfile = response.data;
+      try {
+        const me = await getPortalMe();
+        setUser(mapMe(me));
+      } catch {
+        const email = (decoded.sub || decoded.email || "client@company.com") as string;
+        const contactGuess = email.includes("@") ? email.split("@")[0] : email;
         setUser({
-          id: decoded.userUid || clientProfile.uid,
-          email: decoded.sub || clientProfile.contactEmail,
-          clientName: clientProfile.name,
-          contactName: clientProfile.contactName || decoded.sub || "Representative",
-        });
-      } else {
-        setUser({
-          id: decoded.userUid || "portal-user",
-          email: decoded.sub || "client@company.com",
-          clientName: "Institutional Client",
-          contactName: decoded.sub || "Representative",
+          id: decoded.userUid || decoded.sub || "portal-user",
+          email,
+          clientName: "Client",
+          contactName: contactGuess || "Representative",
+          clientProfileUid: decoded.clientProfileUid,
+          firmUid: decoded.firmUid,
+          mustChangePassword: false,
         });
       }
     } catch {
-      const decoded = parseJwt(token);
-      if (decoded && decoded.type === "PORTAL") {
-        setUser({
-          id: decoded.userUid || "portal-user",
-          email: decoded.sub || "client@company.com",
-          clientName: "Institutional Client",
-          contactName: decoded.sub || "Representative",
-        });
-      } else {
-        setUser({
-          id: "client-user-1",
-          email: "partner@acme.com",
-          clientName: "Acme Corporation",
-          contactName: "John Smith",
-        });
-      }
+      clearClientSession();
+      setUser(null);
     } finally {
       setIsLoading(false);
     }
@@ -97,59 +107,50 @@ export function ClientAuthProvider({ children }: { children: React.ReactNode }) 
   const login = async (credentials: Record<string, unknown>) => {
     setIsLoading(true);
     try {
-      let token = "";
-      let email = "";
-      let userUid = "";
-
-      if (credentials.inviteToken) {
-        const response = await apiClient.post<any>("/v1/portal/auth/login", {
-          inviteToken: credentials.inviteToken,
-        });
-        token = response.data.token;
-        email = response.data.email;
-        userUid = response.data.userUid;
-      } else {
-        email = String(credentials.email || "partner@acme.com");
-        token = "mock-client-token";
-        userUid = "client-user-1";
+      const hasInviteToken = !!credentials.inviteToken;
+      const hasEmailPassword = !!credentials.email && !!credentials.password;
+      if (!hasInviteToken && !hasEmailPassword) {
+        throw new Error("Enter your email and password, or use your invite link to sign in.");
       }
 
-      if (typeof window !== "undefined") {
-        localStorage.setItem("token", token);
+      const response = await apiClient.post(
+        "/v1/portal/auth/login",
+        hasInviteToken
+          ? { inviteToken: credentials.inviteToken }
+          : { email: credentials.email, password: credentials.password }
+      );
+      const token = response.data.token as string;
+      const email = response.data.email as string;
+      const userUid = response.data.userUid as string;
+
+      if (!token || token === "mock-client-token") {
+        throw new Error("Invalid portal session.");
       }
+
+      localStorage.setItem("token", token);
 
       const decoded = parseJwt(token);
-      if (decoded && decoded.type === "PORTAL") {
-        const clientProfileUid = decoded.clientProfileUid;
-        try {
-          const response = await apiClient.get<any>(`/v1/clients/${clientProfileUid}`);
-          const clientProfile = response.data;
-          setUser({
-            id: userUid || decoded.userUid || clientProfile.uid,
-            email: email || decoded.sub || clientProfile.contactEmail,
-            clientName: clientProfile.name,
-            contactName: clientProfile.contactName || email || "Representative",
-          });
-        } catch {
-          setUser({
-            id: userUid || decoded.userUid || "portal-user",
-            email: email || decoded.sub || "client@company.com",
-            clientName: "Institutional Client",
-            contactName: email || "Representative",
-          });
-        }
-      } else {
+      if (!decoded || (decoded.type !== "PORTAL" && decoded.type !== "CLIENT_USER")) {
+        clearClientSession();
+        throw new Error("Invalid portal token.");
+      }
+
+      try {
+        const me = await getPortalMe();
+        setUser(mapMe(me));
+      } catch {
         setUser({
-          id: "client-user-1",
-          email: email,
-          clientName: "Acme Corporation",
-          contactName: "John Smith",
+          id: userUid || decoded.userUid || "portal-user",
+          email: email || decoded.sub || "client@company.com",
+          clientName: "Institutional Client",
+          contactName: email || "Representative",
+          mustChangePassword: !!response.data.mustChangePassword,
+          clientProfileUid: response.data.clientProfileUid || decoded.clientProfileUid,
+          firmUid: response.data.firmUid || decoded.firmUid,
         });
       }
     } catch (error) {
-      if (typeof window !== "undefined") {
-        localStorage.removeItem("token");
-      }
+      clearClientSession();
       setUser(null);
       throw error;
     } finally {
@@ -160,14 +161,30 @@ export function ClientAuthProvider({ children }: { children: React.ReactNode }) 
   const logout = async () => {
     setIsLoading(true);
     try {
-      if (typeof window !== "undefined") {
-        localStorage.removeItem("token");
-      }
+      clearClientSession();
       setUser(null);
+      try {
+        await fetch("/api/client-auth/logout", { method: "POST", credentials: "include" });
+      } catch {
+        // ignore
+      }
     } finally {
       setIsLoading(false);
     }
   };
+
+  const refreshUser = useCallback(async () => {
+    try {
+      const me = await getPortalMe();
+      setUser(mapMe(me));
+    } catch {
+      /* keep current */
+    }
+  }, []);
+
+  const clearMustChangePassword = useCallback(() => {
+    setUser((prev) => (prev ? { ...prev, mustChangePassword: false } : prev));
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -180,6 +197,7 @@ export function ClientAuthProvider({ children }: { children: React.ReactNode }) 
 
   useEffect(() => {
     const handleUnauthorized = () => {
+      clearClientSession();
       setUser(null);
     };
 
@@ -197,6 +215,8 @@ export function ClientAuthProvider({ children }: { children: React.ReactNode }) 
         isLoading,
         login,
         logout,
+        refreshUser,
+        clearMustChangePassword,
       }}
     >
       {children}

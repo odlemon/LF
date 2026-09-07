@@ -52,6 +52,10 @@ export interface ChatBubble {
   toolError?: string;
   sequence?: number;
   createdAt?: string;
+  /** Waiting for the current Lysp turn to finish */
+  queued?: boolean;
+  /** Stream was stopped by the user */
+  cancelled?: boolean;
 }
 
 export interface IntakeAttachment {
@@ -81,6 +85,7 @@ export interface MatterPhase {
   description?: string;
   sortOrder: number;
   tasks: PhaseTask[];
+  practiceAreaUid?: string | null;
 }
 
 export interface ScopeAssumption {
@@ -113,6 +118,7 @@ export interface CreatePricingRequestCommand {
   /** Sent to API as `title` */
   title: string;
   practiceAreaUid?: string;
+  officeCode?: string;
 }
 
 export interface SendMessageCommand {
@@ -127,6 +133,8 @@ export interface CreatePhaseCommand {
 export interface UpdatePhaseCommand {
   name?: string;
   description?: string;
+  practiceAreaUid?: string;
+  clearPracticeAreaUid?: boolean;
 }
 
 export interface CreateTaskCommand {

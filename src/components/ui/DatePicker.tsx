@@ -160,33 +160,33 @@ export function DatePicker({
         type="button"
         disabled={disabled}
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-5 py-2.5 bg-gray-50 border border-gray-250 rounded-full text-sm font-semibold text-left flex items-center justify-between text-gray-900 hover:bg-gray-100/40 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/80 transition-all duration-200 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed select-none"
+        className="w-full px-5 py-2.5 bg-field border border-border rounded-full text-sm font-semibold text-left flex items-center justify-between text-ink hover:bg-canvas/40 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/80 transition-all duration-200 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed select-none"
       >
-        <span className={value ? "text-gray-900" : "text-gray-400"}>
+        <span className={value ? "text-ink" : "text-ink/40"}>
           {formatSelectedDate(value)}
         </span>
-        <HiCalendar className="w-4 h-4 text-gray-400" />
+        <HiCalendar className="w-4 h-4 text-ink/40" />
       </button>
 
       {/* Calendar Overlay */}
       {isOpen && (
-        <div className="absolute left-0 mt-2 w-72 bg-white rounded-2xl border border-gray-150 shadow-[0_12px_40px_rgba(0,0,0,0.08)] p-4 z-50 transform origin-top animate-fade-in select-none">
+        <div className="absolute left-0 mt-2 w-72 bg-surface rounded-2xl border border-border shadow-[0_12px_40px_rgba(0,0,0,0.08)] p-4 z-50 transform origin-top animate-fade-in select-none">
           {/* Header */}
           <div className="flex items-center justify-between mb-4">
             <button
               type="button"
               onClick={handlePrevMonth}
-              className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-100 text-gray-600 transition-colors cursor-pointer"
+              className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-canvas text-ink/65 transition-colors cursor-pointer"
             >
               <HiChevronLeft className="w-4 h-4" />
             </button>
-            <span className="text-sm font-bold text-gray-900">
+            <span className="text-sm font-bold text-ink">
               {MONTH_NAMES[month]} {year}
             </span>
             <button
               type="button"
               onClick={handleNextMonth}
-              className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-100 text-gray-600 transition-colors cursor-pointer"
+              className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-canvas text-ink/65 transition-colors cursor-pointer"
             >
               <HiChevronRight className="w-4 h-4" />
             </button>
@@ -195,7 +195,7 @@ export function DatePicker({
           {/* Weekday Names */}
           <div className="grid grid-cols-7 gap-1 text-center mb-1">
             {DAYS_OF_WEEK.map((d) => (
-              <span key={d} className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">
+              <span key={d} className="text-[11px] font-bold text-ink/40 uppercase tracking-wider">
                 {d}
               </span>
             ))}
@@ -214,10 +214,10 @@ export function DatePicker({
                   onClick={() => handleSelectDay(date)}
                   className={`w-8 h-8 rounded-full text-xs font-semibold flex items-center justify-center transition-all cursor-pointer relative ${
                     selected
-                      ? "bg-primary text-white font-bold shadow-md shadow-primary/20"
+                      ? "bg-primary text-on-primary font-bold shadow-md shadow-primary/20"
                       : isCurrentMonth
-                      ? "text-gray-900 hover:bg-gray-100"
-                      : "text-gray-300 hover:bg-gray-50"
+                      ? "text-ink hover:bg-canvas"
+                      : "text-gray-300 hover:bg-field"
                   }`}
                 >
                   <span>{day}</span>
@@ -225,7 +225,7 @@ export function DatePicker({
                   {today && (
                     <span
                       className={`absolute bottom-1 w-1 h-1 rounded-full ${
-                        selected ? "bg-white" : "bg-primary"
+                        selected ? "bg-surface" : "bg-primary"
                       }`}
                     />
                   )}

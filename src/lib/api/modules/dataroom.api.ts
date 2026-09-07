@@ -1,5 +1,6 @@
 import { apiClient } from "../client";
 import { ENDPOINTS } from "../endpoints";
+import { getPublicApiBase } from "../baseUrl";
 import {
   DataRoomSummary,
   Dataset,
@@ -8,6 +9,8 @@ import {
   ProcessingLog,
   CreateDatasetCommand,
   UpdateColumnMappingCommand,
+  PmsConnectorConfig,
+  CreatePmsConnectorCommand,
 } from "@/modules/data-room/types";
 import { PaginatedResponse } from "./audit.api";
 
@@ -248,8 +251,33 @@ export const dataRoomApi = {
   },
 
   getDownloadUrl: (uid: string): string => {
-    // Use the API URL with proper /api prefix for direct links (not through axios interceptor)
-    const baseURL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
-    return `${baseURL}/api/v1/file-storage/${uid}/download`;
+    return `${getPublicApiBase()}/api/v1/file-storage/${uid}/download`;
+  },
+
+  listPmsConnectors: async (): Promise<PmsConnectorConfig[]> => {
+    const response = await apiClient.get<PmsConnectorConfig[]>(ENDPOINTS.DATA_ROOM.PMS_CONNECTORS);
+    return response.data;
+  },
+
+  createPmsConnector: async (command: CreatePmsConnectorCommand): Promise<PmsConnectorConfig> => {
+    const response = await apiClient.post<PmsConnectorConfig>(
+      ENDPOINTS.DATA_ROOM.PMS_CONNECTORS,
+      command
+    );
+    return response.data;
+  },
+
+  syncPmsConnectorNow: async (uid: string): Promise<PmsConnectorConfig> => {
+    const response = await apiClient.post<PmsConnectorConfig>(
+      ENDPOINTS.DATA_ROOM.PMS_CONNECTOR_SYNC_NOW(uid)
+    );
+    return response.data;
+  },
+
+  testPmsConnector: async (uid: string): Promise<{ reachable: boolean }> => {
+    const response = await apiClient.post<{ reachable: boolean }>(
+      ENDPOINTS.DATA_ROOM.PMS_CONNECTOR_TEST(uid)
+    );
+    return response.data;
   },
 };

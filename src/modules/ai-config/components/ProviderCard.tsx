@@ -25,8 +25,8 @@ const providerDetails = {
   },
   OPENAI: {
     displayName: "OpenAI",
-    bgClass: "bg-gray-100",
-    textClass: "text-gray-700",
+    bgClass: "bg-canvas",
+    textClass: "text-ink/80",
     initial: "O",
   },
   GEMINI: {
@@ -72,17 +72,17 @@ export function ProviderCard({
   // State 1: Not configured (no API key saved)
   if (!config) {
     return (
-      <div className="bg-white p-5 rounded-2xl border-2 border-dashed border-gray-250 flex flex-col justify-between gap-6 transition-all duration-200 hover:border-gray-300 hover:shadow-sm">
+      <div className="bg-surface p-5 rounded-2xl border-2 border-dashed border-border flex flex-col justify-between gap-6 transition-all duration-200 hover:border-gray-300 hover:shadow-sm">
         <div className="flex items-start gap-4">
           <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-lg font-bold shrink-0 ${details.bgClass} ${details.textClass}`}>
             {details.initial}
           </div>
           <div className="flex flex-col gap-1.5">
-            <span className="text-base font-bold text-gray-400">
+            <span className="text-base font-bold text-ink/40">
               {details.displayName}
             </span>
             <span>
-              <span className="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-gray-100 text-gray-500 border border-gray-200 uppercase tracking-wide">
+              <span className="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-canvas text-ink/55 border border-border uppercase tracking-wide">
                 Not configured
               </span>
             </span>
@@ -103,28 +103,28 @@ export function ProviderCard({
   // State 3: Configured and active
   if (isActive) {
     return (
-      <div className="bg-white p-5 rounded-2xl border-2 border-primary flex flex-col justify-between gap-6 transition-all duration-200 shadow-md shadow-primary/5">
+      <div className="bg-surface p-5 rounded-2xl border-2 border-primary flex flex-col justify-between gap-6 transition-all duration-200 shadow-md shadow-primary/5">
         <div className="flex items-start gap-4">
           <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-lg font-bold shrink-0 ${details.bgClass} ${details.textClass}`}>
             {details.initial}
           </div>
           <div className="flex flex-col gap-1.5">
             <div className="flex items-center gap-3">
-              <span className="text-base font-bold text-gray-900 leading-tight">
+              <span className="text-base font-bold text-ink leading-tight">
                 {details.displayName}
               </span>
-              <span className="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-100 uppercase tracking-wide">
+              <span className="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-hover text-ink/80 border border-border uppercase tracking-wide">
                 Active
               </span>
             </div>
-            <div className="flex flex-col gap-0.5 text-xs text-gray-500">
+            <div className="flex flex-col gap-0.5 text-xs text-ink/55">
               <span className="font-semibold">Key: {config.apiKeyHint}</span>
-              <span>Model: <span className="font-medium text-gray-700">{config.modelName}</span></span>
+              <span>Model: <span className="font-medium text-ink/80">{config.modelName}</span></span>
             </div>
             {config.lastTestResult && (
               <div className="mt-1">
                 {config.lastTestResult === "SUCCESS" ? (
-                  <span className="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-100 tracking-wide">
+                  <span className="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-hover text-ink/80 border border-border tracking-wide">
                     Last tested: {formatDate(config.lastTestedAt)}
                   </span>
                 ) : (
@@ -153,28 +153,28 @@ export function ProviderCard({
 
   // State 2: Configured but not active
   return (
-    <div className="bg-white p-5 rounded-2xl border border-gray-200 flex flex-col justify-between gap-6 transition-all duration-200 hover:shadow-md hover:border-gray-300">
+    <div className="bg-surface p-5 rounded-2xl border border-border flex flex-col justify-between gap-6 transition-all duration-200 hover:shadow-md hover:border-gray-300">
       <div className="flex items-start gap-4">
         <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-lg font-bold shrink-0 ${details.bgClass} ${details.textClass}`}>
           {details.initial}
         </div>
         <div className="flex flex-col gap-1.5">
           <div className="flex items-center gap-3">
-            <span className="text-base font-bold text-gray-900 leading-tight">
+            <span className="text-base font-bold text-ink leading-tight">
               {details.displayName}
             </span>
-            <span className="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-gray-100 text-gray-500 border border-gray-200 uppercase tracking-wide">
+            <span className="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-canvas text-ink/55 border border-border uppercase tracking-wide">
               Inactive
             </span>
           </div>
-          <div className="flex flex-col gap-0.5 text-xs text-gray-500">
+          <div className="flex flex-col gap-0.5 text-xs text-ink/55">
             <span className="font-semibold">Key: {config.apiKeyHint}</span>
-            <span>Model: <span className="font-medium text-gray-700">{config.modelName}</span></span>
+            <span>Model: <span className="font-medium text-ink/80">{config.modelName}</span></span>
           </div>
           {config.lastTestResult && (
             <div className="mt-1">
               {config.lastTestResult === "SUCCESS" ? (
-                <span className="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-100 tracking-wide">
+                <span className="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-hover text-ink/80 border border-border tracking-wide">
                   Last tested: {formatDate(config.lastTestedAt)}
                 </span>
               ) : (

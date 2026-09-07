@@ -5,6 +5,7 @@ import { useRoles } from "@/modules/roles/hooks/useRoles";
 import { PermissionGate } from "@/components/shared/PermissionGate";
 import { PERMISSIONS } from "@/lib/utils/permissions";
 import { Button } from "@/components/ui/Button";
+import { Input, Textarea } from "@/components/ui/Input";
 import { 
   HiPlus, 
   HiLockClosed, 
@@ -44,10 +45,10 @@ const getRoleIconAndColor = (roleName: string) => {
   if (name.includes("read") || name.includes("view") || name.includes("guest")) {
     return {
       icon: HiKey,
-      bgColor: "bg-emerald-50 text-emerald-600 border-emerald-100",
-      activeBg: "bg-emerald-600 text-white shadow-lg shadow-emerald-150/40",
-      accentBg: "border-emerald-500",
-      glowingAccent: "bg-emerald-500/10 text-emerald-700 border-emerald-200"
+      bgColor: "bg-hover text-ink/70 border-border",
+      activeBg: "bg-black text-white shadow-lg shadow-black/5",
+      accentBg: "border-primary",
+      glowingAccent: "bg-primary/10 text-ink/80 border-border"
     };
   }
   if (name.includes("user") || name.includes("member") || name.includes("staff")) {
@@ -75,7 +76,7 @@ const getPermissionBadge = (permUid: string) => {
     return { label: "Danger", color: "bg-rose-50 text-rose-700 border-rose-100" };
   }
   if (uid.includes("create") || uid.includes("add") || uid.includes("write") || uid.includes("submit")) {
-    return { label: "Create", color: "bg-emerald-50 text-emerald-700 border-emerald-100" };
+    return { label: "Create", color: "bg-hover text-ink/80 border-border" };
   }
   if (uid.includes("update") || uid.includes("edit") || uid.includes("modify") || uid.includes("assign")) {
     return { label: "Update", color: "bg-blue-50 text-blue-700 border-blue-100" };
@@ -159,13 +160,13 @@ export default function RolesPage() {
       <div className="p-8 max-w-6xl w-full mx-auto flex flex-col gap-6 animate-fade-in select-none">
         
         {/* Page Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-gray-100 pb-6 shrink-0">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-border pb-6 shrink-0">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 tracking-tight flex items-center gap-2">
+            <h1 className="text-2xl font-bold text-ink tracking-tight flex items-center gap-2">
               <HiShieldExclamation className="w-7 h-7 text-primary shrink-0" />
               Roles & Permissions
             </h1>
-            <p className="text-sm text-gray-500 mt-1">
+            <p className="text-sm text-ink/55 mt-1">
               Configure organizational roles, map granular permissions, and restrict platform access.
             </p>
           </div>
@@ -173,7 +174,7 @@ export default function RolesPage() {
             <button
               onClick={() => setIsCreateOpen(true)}
               type="button"
-              className="inline-flex items-center gap-1.5 px-4.5 py-2.5 bg-primary hover:bg-primary-hover text-white rounded-full text-xs font-bold shadow-md shadow-primary/10 hover:shadow-lg transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-4.5 py-2.5 bg-primary hover:bg-primary-hover text-on-primary rounded-full text-xs font-bold shadow-md shadow-primary/10 hover:shadow-lg transition-all cursor-pointer"
             >
               <HiPlus className="w-4 h-4" />
               Create Custom Role
@@ -182,21 +183,21 @@ export default function RolesPage() {
         </div>
 
         {isLoading && roles.length === 0 ? (
-          <div className="bg-white rounded-2xl border border-gray-200/60 p-24 flex flex-col items-center justify-center gap-3">
+          <div className="bg-surface rounded-2xl border border-border/60 p-24 flex flex-col items-center justify-center gap-3">
             <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary/20 border-b-primary" />
-            <span className="text-xs font-semibold text-gray-400">Loading system security configurations...</span>
+            <span className="text-xs font-semibold text-ink/40">Loading system security configurations...</span>
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
             {/* Left Sidebar Pane: Role cards */}
             <div className="lg:col-span-4 flex flex-col gap-4">
-              <div className="px-1 text-[10px] font-extrabold text-gray-400 uppercase tracking-widest">
+              <div className="px-1 text-[10px] font-extrabold text-ink/40 uppercase tracking-widest">
                 Available Firm Roles ({roles.length})
               </div>
               <div className="flex flex-col gap-3 overflow-y-auto rates-scrollable max-h-[70vh] pr-1">
                 {roles.length === 0 ? (
-                  <div className="bg-white rounded-2xl border border-gray-150 p-8 text-center text-gray-500 text-xs font-semibold">
+                  <div className="bg-surface rounded-2xl border border-border p-8 text-center text-ink/55 text-xs font-semibold">
                     No custom roles registered in this firm.
                   </div>
                 ) : (
@@ -209,10 +210,10 @@ export default function RolesPage() {
                       <div
                         key={role.uid}
                         onClick={() => handleSelectRole(role)}
-                        className={`bg-white rounded-2xl p-5 border transition-all cursor-pointer flex items-start gap-4 relative overflow-hidden select-none group ${
+                        className={`bg-surface rounded-2xl p-5 border transition-all cursor-pointer flex items-start gap-4 relative overflow-hidden select-none group ${
                           isSelected
                             ? "border-primary shadow-md ring-2 ring-primary/5"
-                            : "border-gray-200/60 hover:border-gray-300 shadow-sm"
+                            : "border-border/60 hover:border-gray-300 shadow-sm"
                         }`}
                       >
                         {/* Selected vertical stripe glow */}
@@ -228,15 +229,15 @@ export default function RolesPage() {
                           <RoleIcon className="w-5 h-5" />
                         </div>
                         <div className="flex-1">
-                          <h4 className={`font-semibold text-sm transition-colors ${isSelected ? "text-primary" : "text-gray-900"}`}>
+                          <h4 className={`font-semibold text-sm transition-colors ${isSelected ? "text-primary" : "text-ink"}`}>
                             {role.name}
                           </h4>
-                          <p className="text-xs text-gray-500 mt-1 line-clamp-2 leading-relaxed">
+                          <p className="text-xs text-ink/55 mt-1 line-clamp-2 leading-relaxed">
                             {role.description || "No specific description configured."}
                           </p>
                           <div className="flex items-center gap-1.5 mt-3.5">
                             <span className={`inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold border transition-colors ${
-                              isSelected ? aesthetic.glowingAccent : "bg-gray-50 text-gray-500 border-gray-150"
+                              isSelected ? aesthetic.glowingAccent : "bg-field text-ink/55 border-border"
                             }`}>
                               {role.permissions?.length || 0} Operations Authorized
                             </span>
@@ -252,18 +253,18 @@ export default function RolesPage() {
             {/* Right Pane: Perm mapping dashboard */}
             <div className="lg:col-span-8">
               {activeRole ? (
-                <div className="bg-white rounded-2xl shadow-sm border border-gray-200/60 p-6 flex flex-col gap-6">
+                <div className="bg-surface rounded-2xl shadow-sm border border-border/60 p-6 flex flex-col gap-6">
                   
                   {/* Dashboard pane header */}
-                  <div className="flex items-start justify-between border-b border-gray-100 pb-5 gap-4">
+                  <div className="flex items-start justify-between border-b border-border pb-5 gap-4">
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="text-[10px] font-extrabold text-primary bg-primary/10 border border-primary/10 px-2 py-0.5 rounded-full uppercase tracking-wider">
                           Active Role
                         </span>
                       </div>
-                      <h3 className="text-lg font-bold text-gray-900 mt-1.5">{activeRole.name}</h3>
-                      <p className="text-xs text-gray-500 mt-1 leading-normal">
+                      <h3 className="text-lg font-bold text-ink mt-1.5">{activeRole.name}</h3>
+                      <p className="text-xs text-ink/55 mt-1 leading-normal">
                         {activeRole.description || "No operational description provided."}
                       </p>
                     </div>
@@ -272,7 +273,7 @@ export default function RolesPage() {
                         onClick={handleSavePermissions}
                         disabled={isSavingPermissions}
                         type="button"
-                        className="inline-flex items-center gap-1.5 px-4.5 py-2.5 bg-primary hover:bg-primary-hover text-white rounded-full text-xs font-bold shadow-md shadow-primary/10 hover:shadow-lg transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed select-none shrink-0"
+                        className="inline-flex items-center gap-1.5 px-4.5 py-2.5 bg-primary hover:bg-primary-hover text-on-primary rounded-full text-xs font-bold shadow-md shadow-primary/10 hover:shadow-lg transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed select-none shrink-0"
                       >
                         {isSavingPermissions ? (
                           <div className="w-4 h-4 animate-spin rounded-full border-2 border-white/20 border-b-white" />
@@ -288,7 +289,7 @@ export default function RolesPage() {
                   <div className="flex flex-col gap-6 overflow-y-auto pr-1 rates-scrollable max-h-[50vh]">
                     {Object.entries(permissionsByModule).map(([moduleName, modulePerms]) => (
                       <div key={moduleName} className="flex flex-col gap-3">
-                        <h5 className="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest px-1">
+                        <h5 className="text-[10px] font-extrabold text-ink/40 uppercase tracking-widest px-1">
                           {moduleName} Module Controls
                         </h5>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -303,19 +304,19 @@ export default function RolesPage() {
                                 className={`flex items-start justify-between gap-4 p-4.5 rounded-2xl border transition-all duration-200 cursor-pointer select-none group relative ${
                                   isChecked
                                     ? "bg-primary/[0.01] border-primary/80 shadow-sm"
-                                    : "border-gray-200 hover:border-gray-300 bg-white"
+                                    : "border-border hover:border-gray-300 bg-surface"
                                 }`}
                               >
                                 <div className="flex-1 pr-2">
                                   <div className="flex items-center gap-2 flex-wrap">
-                                    <span className={`text-sm font-bold transition-colors ${isChecked ? "text-primary" : "text-gray-900"}`}>
+                                    <span className={`text-sm font-bold transition-colors ${isChecked ? "text-primary" : "text-ink"}`}>
                                       {perm.name}
                                     </span>
                                     <span className={`inline-flex px-1.5 py-0.2 rounded text-[9px] font-extrabold border uppercase tracking-wider ${category.color}`}>
                                       {category.label}
                                     </span>
                                   </div>
-                                  <span className="text-xs text-gray-500 mt-1.5 block leading-relaxed">
+                                  <span className="text-xs text-ink/55 mt-1.5 block leading-relaxed">
                                     {perm.description || "Grants platform operational clearance."}
                                   </span>
                                 </div>
@@ -324,11 +325,11 @@ export default function RolesPage() {
                                 <div className="flex items-center shrink-0 pt-0.5">
                                   <div
                                     className={`w-9 h-5 rounded-full p-0.5 transition-colors duration-200 ${
-                                      isChecked ? "bg-primary" : "bg-gray-200"
+                                      isChecked ? "bg-primary" : "bg-field"
                                     }`}
                                   >
                                     <div
-                                      className={`w-4 h-4 rounded-full bg-white shadow-sm transform duration-200 ease-out flex items-center justify-center ${
+                                      className={`w-4 h-4 rounded-full bg-surface shadow-sm transform duration-200 ease-out flex items-center justify-center ${
                                         isChecked ? "translate-x-4" : "translate-x-0"
                                       }`}
                                     >
@@ -349,12 +350,12 @@ export default function RolesPage() {
 
                 </div>
               ) : (
-                <div className="bg-white rounded-2xl border border-gray-200/60 p-24 text-center flex flex-col items-center justify-center gap-2">
+                <div className="bg-surface rounded-2xl border border-border/60 p-24 text-center flex flex-col items-center justify-center gap-2">
                   <div className="w-12 h-12 bg-primary/10 text-primary rounded-2xl flex items-center justify-center">
                     <HiLockOpen className="w-6 h-6" />
                   </div>
-                  <span className="text-xs font-bold text-gray-900 mt-2">No Active Selection</span>
-                  <span className="text-xs text-gray-400">Select a structural role from the sidebar to inspect and configure security rules.</span>
+                  <span className="text-xs font-bold text-ink mt-2">No Active Selection</span>
+                  <span className="text-xs text-ink/40">Select a structural role from the sidebar to inspect and configure security rules.</span>
                 </div>
               )}
             </div>
@@ -365,13 +366,13 @@ export default function RolesPage() {
         {/* Modal creator sheet */}
         {isCreateOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/35 backdrop-blur-sm animate-fade-in select-none">
-            <div className="bg-white rounded-2xl shadow-xl w-full max-w-md border border-gray-200/60 overflow-hidden flex flex-col">
-              <div className="px-6 py-5 border-b border-gray-100 flex items-center justify-between">
-                <h3 className="text-base font-bold text-gray-900">Create New Firm Role</h3>
+            <div className="bg-surface rounded-2xl shadow-xl w-full max-w-md border border-border/60 overflow-hidden flex flex-col">
+              <div className="px-6 py-5 border-b border-border flex items-center justify-between">
+                <h3 className="text-base font-bold text-ink">Create New Firm Role</h3>
                 <button
                   type="button"
                   onClick={() => setIsCreateOpen(false)}
-                  className="text-gray-450 hover:text-gray-900 p-1 hover:bg-gray-50 rounded-full transition-colors cursor-pointer"
+                  className="text-gray-450 hover:text-ink p-1 hover:bg-field rounded-full transition-colors cursor-pointer"
                 >
                   <HiX className="w-5 h-5" />
                 </button>
@@ -379,46 +380,45 @@ export default function RolesPage() {
 
               <form onSubmit={handleCreateSubmit} className="p-6 space-y-5">
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest">
+                  <label className="text-[10px] font-extrabold text-ink/40 uppercase tracking-widest">
                     Role Name
                   </label>
-                  <input
+                  <Input
                     type="text"
                     required
                     value={newRole.name}
                     onChange={(e) => setNewRole({ ...newRole, name: e.target.value })}
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-gray-50/50 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-white text-sm text-gray-900 font-semibold transition-all"
                     placeholder="e.g. Rate Card Approver"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest">
+                  <label className="text-[10px] font-extrabold text-ink/40 uppercase tracking-widest">
                     Role Description
                   </label>
-                  <textarea
+                  <Textarea
                     required
                     rows={3}
                     value={newRole.description}
                     onChange={(e) => setNewRole({ ...newRole, description: e.target.value })}
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-gray-50/50 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-white text-sm text-gray-900 font-semibold transition-all resize-none leading-relaxed"
+                    className="leading-relaxed"
                     placeholder="Provide a description of this role's operational authority..."
                   />
                 </div>
 
-                <div className="pt-4 border-t border-gray-100 flex items-center justify-end gap-3 shrink-0">
+                <div className="pt-4 border-t border-border flex items-center justify-end gap-3 shrink-0">
                   <button
                     type="button"
                     onClick={() => setIsCreateOpen(false)}
                     disabled={isSaving}
-                    className="px-4.5 py-2 text-xs font-bold text-gray-650 bg-gray-50 hover:bg-gray-100 hover:text-gray-900 rounded-xl border border-gray-200/50 transition-all cursor-pointer disabled:opacity-50"
+                    className="px-5 py-2 text-xs font-bold text-ink/70 bg-field hover:bg-hover hover:text-ink rounded-full border border-border transition-all cursor-pointer disabled:opacity-50"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={isSaving}
-                    className="inline-flex items-center gap-1.5 px-5 py-2 bg-primary hover:bg-primary-hover text-white rounded-xl text-xs font-bold shadow-md shadow-primary/10 hover:shadow-lg transition-all cursor-pointer disabled:opacity-50"
+                    className="inline-flex items-center gap-1.5 px-5 py-2 bg-primary hover:bg-primary-hover text-on-primary rounded-full text-xs font-bold shadow-md shadow-primary/10 hover:shadow-lg transition-all cursor-pointer disabled:opacity-50"
                   >
                     {isSaving && (
                       <div className="w-3.5 h-3.5 animate-spin rounded-full border-2 border-white/20 border-b-white" />

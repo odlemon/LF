@@ -8,7 +8,7 @@ import { Alert } from "@/components/ui/Alert";
 import { PermissionGate } from "@/components/shared/PermissionGate";
 import { PERMISSIONS } from "@/lib/utils/permissions";
 import { ClientSearchSelect } from "./ClientSearchSelect";
-import { listClients, getPracticeAreas } from "@/lib/api/modules/firm.api";
+import { listClients, getPracticeAreas, getRateCards } from "@/lib/api/modules/firm.api";
 import { PracticeArea } from "@/modules/firm/types";
 import { CreatePricingRequestCommand } from "../types";
 import { ClientProfile } from "@/modules/firm/types";
@@ -26,6 +26,8 @@ export function NewRequestModal({ isOpen, onClose, onCreate }: NewRequestModalPr
   const [clientProfileUid, setClientProfileUid] = useState("");
   const [title, setTitle] = useState("");
   const [practiceAreaUid, setPracticeAreaUid] = useState("");
+  const [officeCode, setOfficeCode] = useState("");
+  const [offices, setOffices] = useState<string[]>([]);
   const [clientError, setClientError] = useState<string | null>(null);
   const [titleError, setTitleError] = useState<string | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -36,6 +38,7 @@ export function NewRequestModal({ isOpen, onClose, onCreate }: NewRequestModalPr
     setClientProfileUid("");
     setTitle("");
     setPracticeAreaUid("");
+    setOfficeCode("");
     setClientError(null);
     setTitleError(null);
     setSubmitError(null);
@@ -43,12 +46,16 @@ export function NewRequestModal({ isOpen, onClose, onCreate }: NewRequestModalPr
     const load = async () => {
       setClientsLoading(true);
       try {
-        const [clientList, areas] = await Promise.all([
+        const [clientList, areas, rateCards] = await Promise.all([
           listClients({ size: 100, sort: "name,asc" }),
           getPracticeAreas(),
+          getRateCards(),
         ]);
         setClients(clientList);
         setPracticeAreas(areas.filter((a) => a.active));
+        setOffices(
+          Array.from(new Set(rateCards.map((c) => c.officeCode).filter((o): o is string => !!o))).sort()
+        );
       } catch {
         setSubmitError("Failed to load form data. Please try again.");
       } finally {
@@ -82,6 +89,7 @@ export function NewRequestModal({ isOpen, onClose, onCreate }: NewRequestModalPr
         clientProfileUid,
         title: title.trim(),
         ...(practiceAreaUid ? { practiceAreaUid } : {}),
+        ...(officeCode ? { officeCode } : {}),
       };
       await onCreate(command);
       onClose();
@@ -112,13 +120,13 @@ export function NewRequestModal({ isOpen, onClose, onCreate }: NewRequestModalPr
         >
           {clientsLoading ? (
             <div className="flex flex-col gap-2 animate-pulse">
-              <div className="h-4 w-24 bg-gray-200 rounded" />
-              <div className="h-10 bg-gray-200 rounded-full" />
+              <div className="h-4 w-24 bg-field rounded" />
+              <div className="h-10 bg-field rounded-full" />
             </div>
           ) : clients.length === 0 ? (
-            <div className="p-4 bg-gray-50 border border-gray-200 rounded-xl text-center">
-              <p className="text-sm font-semibold text-gray-600">No clients available</p>
-              <p className="text-xs text-gray-500 mt-1">
+            <div className="p-4 bg-field border border-border rounded-xl text-center">
+              <p className="text-sm font-semibold text-ink/65">No clients available</p>
+              <p className="text-xs text-ink/55 mt-1">
                 Contact your administrator or use seed data in development.
               </p>
             </div>
@@ -135,7 +143,7 @@ export function NewRequestModal({ isOpen, onClose, onCreate }: NewRequestModalPr
         </PermissionGate>
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider">
+          <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
             Title <span className="text-rose-500">*</span>
           </label>
           <input
@@ -144,8 +152,8 @@ export function NewRequestModal({ isOpen, onClose, onCreate }: NewRequestModalPr
             onChange={(e) => setTitle(e.target.value)}
             placeholder="e.g. Acquisition of XYZ Limited"
             disabled={isSubmitting || clientsLoading}
-            className={`px-5 py-2.5 bg-gray-55 border rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all text-gray-900 font-semibold ${
-              titleError ? "border-rose-300" : "border-gray-250"
+            className={`px-5 py-2.5 bg-field border rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all text-ink font-semibold ${
+              titleError ? "border-rose-300" : "border-border"
             }`}
           />
           {titleError && (
@@ -164,6 +172,20 @@ export function NewRequestModal({ isOpen, onClose, onCreate }: NewRequestModalPr
             ...practiceAreas.map((a) => ({ value: a.uid, label: a.name })),
           ]}
         />
+
+        {offices.length > 0 && (
+          <Select
+            label="Office"
+            value={officeCode}
+            onChange={setOfficeCode}
+            placeholder="Firm default"
+            disabled={isSubmitting || clientsLoading}
+            options={[
+              { value: "", label: "Firm default" },
+              ...offices.map((o) => ({ value: o, label: o })),
+            ]}
+          />
+        )}
 
         <div className="flex justify-end gap-3 pt-2">
           <Button type="button" variant="secondary" onClick={onClose} disabled={isSubmitting}>

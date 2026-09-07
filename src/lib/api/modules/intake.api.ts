@@ -3,6 +3,11 @@ import { ENDPOINTS } from "../endpoints";
 import {
   normalizePricingRequest,
   normalizeIntakeMessage,
+  normalizeMatterScope,
+  normalizeMatterPhase,
+  normalizePhaseTask,
+  normalizeScopeAssumption,
+  normalizeAttachment,
   dedupeIntakeMessages,
 } from "../normalize";
 import { PaginatedResponse } from "@/types/api";
@@ -69,6 +74,9 @@ export const intakeApi = {
     if (command.practiceAreaUid) {
       body.practiceAreaUid = command.practiceAreaUid;
     }
+    if (command.officeCode) {
+      body.officeCode = command.officeCode;
+    }
     const res = await apiClient.post(ENDPOINTS.PRICING_REQUESTS.CREATE, body);
     return normalizePricingRequest(res.data as Record<string, unknown>);
   },
@@ -107,7 +115,10 @@ export const intakeApi = {
         (data.aiMessage ?? {}) as Record<string, unknown>
       ),
       scopeGenerated: Boolean(data.scopeGenerated),
-      scope: data.scope as SendMessageResponse["scope"],
+      scope:
+        data.scope && typeof data.scope === "object"
+          ? normalizeMatterScope(data.scope as Record<string, unknown>)
+          : null,
     };
   },
 
@@ -136,12 +147,12 @@ export const intakeApi = {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("attachmentType", attachmentType);
-    const res = await apiClient.post<IntakeAttachment>(
+    const res = await apiClient.post(
       ENDPOINTS.PRICING_REQUESTS.ATTACHMENTS(uid),
       formData,
       { headers: { "Content-Type": "multipart/form-data" } }
     );
-    return res.data;
+    return normalizeAttachment(res.data as Record<string, unknown>);
   },
 
   deleteAttachment: async (uid: string, attachmentUid: string): Promise<void> => {
@@ -149,18 +160,23 @@ export const intakeApi = {
   },
 
   listAttachments: async (uid: string): Promise<IntakeAttachment[]> => {
-    const res = await apiClient.get<IntakeAttachment[] | { content: IntakeAttachment[] }>(
+    const res = await apiClient.get(
       ENDPOINTS.PRICING_REQUESTS.ATTACHMENTS(uid)
     );
     const data = res.data;
-    if (Array.isArray(data)) return data;
-    if (data && "content" in data && Array.isArray(data.content)) return data.content;
-    return [];
+    const items: unknown[] = Array.isArray(data)
+      ? data
+      : data && typeof data === "object" && "content" in data && Array.isArray((data as { content: unknown[] }).content)
+        ? (data as { content: unknown[] }).content
+        : [];
+    return items.map((item) =>
+      normalizeAttachment(item as Record<string, unknown>)
+    );
   },
 
   getScope: async (uid: string): Promise<MatterScope> => {
-    const res = await apiClient.get<MatterScope>(ENDPOINTS.PRICING_REQUESTS.SCOPE(uid));
-    return res.data;
+    const res = await apiClient.get(ENDPOINTS.PRICING_REQUESTS.SCOPE(uid));
+    return normalizeMatterScope(res.data as Record<string, unknown>);
   },
 
   updatePhase: async (
@@ -168,16 +184,16 @@ export const intakeApi = {
     phaseUid: string,
     command: UpdatePhaseCommand
   ): Promise<MatterPhase> => {
-    const res = await apiClient.put<MatterPhase>(
+    const res = await apiClient.put(
       ENDPOINTS.PRICING_REQUESTS.PHASE(uid, phaseUid),
       command
     );
-    return res.data;
+    return normalizeMatterPhase(res.data as Record<string, unknown>);
   },
 
   addPhase: async (uid: string, command: CreatePhaseCommand): Promise<MatterPhase> => {
-    const res = await apiClient.post<MatterPhase>(ENDPOINTS.PRICING_REQUESTS.PHASES(uid), command);
-    return res.data;
+    const res = await apiClient.post(ENDPOINTS.PRICING_REQUESTS.PHASES(uid), command);
+    return normalizeMatterPhase(res.data as Record<string, unknown>);
   },
 
   deletePhase: async (uid: string, phaseUid: string): Promise<void> => {
@@ -190,11 +206,11 @@ export const intakeApi = {
     taskUid: string,
     command: UpdateTaskCommand
   ): Promise<PhaseTask> => {
-    const res = await apiClient.put<PhaseTask>(
+    const res = await apiClient.put(
       ENDPOINTS.PRICING_REQUESTS.TASK(uid, phaseUid, taskUid),
       command
     );
-    return res.data;
+    return normalizePhaseTask(res.data as Record<string, unknown>, phaseUid);
   },
 
   addTask: async (
@@ -202,11 +218,11 @@ export const intakeApi = {
     phaseUid: string,
     command: CreateTaskCommand
   ): Promise<PhaseTask> => {
-    const res = await apiClient.post<PhaseTask>(
+    const res = await apiClient.post(
       ENDPOINTS.PRICING_REQUESTS.TASKS(uid, phaseUid),
       command
     );
-    return res.data;
+    return normalizePhaseTask(res.data as Record<string, unknown>, phaseUid);
   },
 
   deleteTask: async (uid: string, phaseUid: string, taskUid: string): Promise<void> => {
@@ -217,11 +233,14 @@ export const intakeApi = {
     uid: string,
     command: CreateAssumptionCommand
   ): Promise<ScopeAssumption> => {
-    const res = await apiClient.post<ScopeAssumption>(
+    const res = await apiClient.post(
       ENDPOINTS.PRICING_REQUESTS.ASSUMPTIONS(uid),
-      command
+      {
+        description: command.description,
+        assumptionType: command.type,
+      }
     );
-    return res.data;
+    return normalizeScopeAssumption(res.data as Record<string, unknown>);
   },
 
   deleteAssumption: async (uid: string, assumptionUid: string): Promise<void> => {
@@ -231,6 +250,19 @@ export const intakeApi = {
   confirmScope: async (uid: string): Promise<PricingRequest> => {
     const res = await apiClient.post(ENDPOINTS.PRICING_REQUESTS.CONFIRM_SCOPE(uid));
     return normalizePricingRequest(res.data as Record<string, unknown>);
+  },
+
+  resetScope: async (uid: string): Promise<PricingRequest> => {
+    const res = await apiClient.post(ENDPOINTS.PRICING_REQUESTS.RESET_SCOPE(uid));
+    return normalizePricingRequest(res.data as Record<string, unknown>);
+  },
+
+  restoreScope: async (
+    uid: string,
+    payload: import("@/modules/intake/utils/scopeSnapshot").ScopeRestorePayload
+  ): Promise<MatterScope> => {
+    const res = await apiClient.post(ENDPOINTS.PRICING_REQUESTS.RESTORE_SCOPE(uid), payload);
+    return normalizeMatterScope(res.data as Record<string, unknown>);
   },
 };
 

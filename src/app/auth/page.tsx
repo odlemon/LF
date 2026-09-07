@@ -1,11 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AuthProvider } from "@/context/AuthContext";
 import { useAuth } from "@/hooks/useAuth";
-import { Button } from "@/components/ui/Button";
-import { HiEye, HiEyeOff } from "react-icons/hi";
+import { HiArrowRight, HiEye, HiEyeOff, HiOutlineShieldCheck } from "react-icons/hi";
+import { getPublicApiBase } from "@/lib/api/baseUrl";
+
+const fieldClass =
+  "w-full rounded-full border border-black/[0.1] bg-[#f7f7f5] px-5 py-[0.95rem] text-[15px] text-[#0a0a0a] placeholder:text-[#0a0a0a]/28 outline-none transition-all duration-200 focus:border-[#0a0a0a]/40 focus:bg-white focus:shadow-[0_0_0_4px_rgba(10,10,10,0.045)] disabled:opacity-60";
 
 function LoginForm() {
   const { login } = useAuth();
@@ -21,10 +25,17 @@ function LoginForm() {
     setIsLoading(true);
     setError(null);
     try {
-      await login({ email, password });
+      const loggedIn = await login({ email, password });
+      if (
+        loggedIn.userType === "CLIENT_USER" ||
+        (loggedIn.roles || []).includes("CLIENT_USER")
+      ) {
+        router.push("/client-portal/dashboard");
+        return;
+      }
       router.push("/dashboard");
-    } catch (error: unknown) {
-      const errorObj = error as { response?: { data?: { message?: string } }; message?: string };
+    } catch (err: unknown) {
+      const errorObj = err as { response?: { data?: { message?: string } }; message?: string };
       const msg = errorObj.response?.data?.message || errorObj.message || "Authentication failed";
       setError(msg);
     } finally {
@@ -33,84 +44,242 @@ function LoginForm() {
   };
 
   return (
-    <div className="w-full max-w-md bg-white rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-200/50 p-8">
-      <div className="text-center mb-8">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/images/logo/lysp-logo.png"
-          alt="Lysp"
-          width={72}
-          height={72}
-          className="mx-auto h-[72px] w-[72px] object-contain mb-3"
+    <form onSubmit={handleSubmit} className="w-full space-y-5">
+      {error ? (
+        <div
+          role="alert"
+          className="rounded-full border border-black/[0.08] bg-[#0a0a0a]/[0.04] px-5 py-3.5 text-[13px] text-[#0a0a0a]/75 leading-snug text-center"
+        >
+          {error}
+        </div>
+      ) : null}
+
+      <div>
+        <label
+          htmlFor="email"
+          className="block text-[11px] font-semibold tracking-[0.18em] uppercase text-[#0a0a0a]/40"
+        >
+          Email
+        </label>
+        <input
+          id="email"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          autoComplete="email"
+          className={`mt-2.5 ${fieldClass}`}
+          placeholder="name@lawfirm.com"
+          required
+          disabled={isLoading}
         />
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">Lysp Platform</h1>
-        <p className="text-sm text-gray-500">Firm-side Pricing Intelligence</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-5">
-        {error && (
-          <div className="bg-red-50 border border-red-100 text-red-600 text-xs py-3 px-5 rounded-full text-center animate-fade-in font-medium">
-            {error}
-          </div>
-        )}
-
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-gray-700">Email Address</label>
+      <div>
+        <label
+          htmlFor="password"
+          className="block text-[11px] font-semibold tracking-[0.18em] uppercase text-[#0a0a0a]/40"
+        >
+          Password
+        </label>
+        <div className="relative mt-2.5">
           <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-5 py-3 bg-gray-50/80 border border-gray-200 rounded-full text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-400 transition-all duration-200"
-            placeholder="name@lawfirm.com"
+            id="password"
+            type={showPassword ? "text" : "password"}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password"
+            className={`${fieldClass} pr-12`}
+            placeholder="Your password"
             required
             disabled={isLoading}
           />
+          <button
+            type="button"
+            onClick={() => setShowPassword((v) => !v)}
+            className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full p-1.5 text-[#0a0a0a]/35 hover:text-[#0a0a0a]/70 transition-colors cursor-pointer"
+            aria-label={showPassword ? "Hide password" : "Show password"}
+          >
+            {showPassword ? <HiEyeOff className="h-5 w-5" /> : <HiEye className="h-5 w-5" />}
+          </button>
         </div>
+      </div>
 
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-gray-700">Password</label>
-          <div className="relative">
-            <input
-              type={showPassword ? "text" : "password"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full pl-5 pr-12 py-3 bg-gray-50/80 border border-gray-200 rounded-full text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-400 transition-all duration-200"
-              placeholder="••••••••"
-              required
-              disabled={isLoading}
-            />
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none p-1.5 rounded-full hover:bg-gray-100 transition-all"
-            >
-              {showPassword ? (
-                <HiEyeOff className="w-5 h-5" />
-              ) : (
-                <HiEye className="w-5 h-5" />
-              )}
-            </button>
-          </div>
-        </div>
-
-        <Button
-          type="submit"
-          variant="client"
-          loading={isLoading}
-          className="w-full font-semibold"
-        >
-          Sign In
-        </Button>
-      </form>
-    </div>
+      <button
+        type="submit"
+        disabled={isLoading}
+        className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#0a0a0a] px-6 py-[0.95rem] text-[15px] font-semibold text-[#fefefc] shadow-[0_14px_40px_-20px_rgba(10,10,10,0.55)] transition-all duration-200 hover:bg-black hover:shadow-[0_18px_48px_-18px_rgba(10,10,10,0.6)] active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed disabled:shadow-none cursor-pointer"
+      >
+        {isLoading ? (
+          <span className="inline-flex items-center gap-2">
+            <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+            Signing in
+          </span>
+        ) : (
+          <>
+            Sign in
+            <HiArrowRight className="h-4 w-4" />
+          </>
+        )}
+      </button>
+    </form>
   );
 }
 
 export default function LoginPage() {
   return (
     <AuthProvider>
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-        <LoginForm />
+      <div className="relative min-h-[100svh] w-full bg-[#fefefc] text-[#0a0a0a] lg:grid lg:grid-cols-12">
+        {/* Brand panel */}
+        <aside className="relative lg:col-span-7 min-h-[42svh] sm:min-h-[48svh] lg:min-h-[100svh] overflow-hidden text-[#fefefc]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/practices/ma-glass.jpg"
+            alt=""
+            aria-hidden
+            className="absolute inset-0 h-full w-full object-cover scale-[1.01]"
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-gradient-to-t from-[#060807] via-[#0a0f0d]/60 to-[#0a0f0d]/25"
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-gradient-to-r from-[#060807]/55 via-transparent to-[#060807]/15"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 opacity-[0.06]"
+            style={{
+              backgroundImage:
+                "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+            }}
+          />
+
+          <div className="relative z-10 flex h-full min-h-[42svh] sm:min-h-[48svh] lg:min-h-[100svh] flex-col px-6 sm:px-10 lg:px-14 xl:px-16 py-6 sm:py-8 lg:py-10">
+            <div className="flex items-start justify-between gap-4">
+              <Link
+                href="/"
+                className="inline-flex w-fit transition-opacity hover:opacity-90"
+                aria-label="Lysp home"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/logo/lysp-logo-bw-white.png"
+                  alt="Lysp"
+                  width={1024}
+                  height={1024}
+                  className="h-16 w-16 sm:h-20 sm:w-20 lg:h-28 lg:w-28 object-contain drop-shadow-[0_12px_36px_rgba(0,0,0,0.5)]"
+                />
+              </Link>
+              <Link
+                href="/"
+                className="lg:hidden text-[13px] font-medium text-white/75 hover:text-white transition-colors pt-1"
+              >
+                Back to site
+              </Link>
+            </div>
+
+            <div className="mt-auto pb-2 sm:pb-4 lg:pb-10 max-w-xl">
+              <div className="flex items-center gap-3">
+                <span className="h-px w-10 bg-white/50" />
+                <p className="text-[11px] sm:text-[12px] font-semibold tracking-[0.28em] uppercase text-white/85">
+                  Pricing intelligence
+                </p>
+              </div>
+              <h1 className="mt-4 sm:mt-5 text-[1.85rem] sm:text-4xl lg:text-[2.85rem] xl:text-[3.35rem] font-semibold tracking-tight text-balance leading-[1.05]">
+                For the desks that own the fee.
+              </h1>
+              <p className="mt-4 sm:mt-5 text-[14px] sm:text-[16px] text-white/78 leading-relaxed max-w-md">
+                Firm history, rate cards, and negotiation in one place. Sign in to continue where
+                your team left off.
+              </p>
+
+              <div className="mt-9 hidden lg:flex items-center gap-3 text-[12px] font-medium tracking-wide text-white/55">
+                <span>Matter pricing</span>
+                <span className="h-1 w-1 rounded-full bg-white/30" />
+                <span>Negotiation trail</span>
+                <span className="h-1 w-1 rounded-full bg-white/30" />
+                <span>Realization</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        {/* Form panel */}
+        <section className="relative lg:col-span-5 flex flex-col bg-[#fefefc] min-h-0 border-t border-black/[0.04] lg:border-t-0 lg:border-l lg:border-black/[0.06]">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_80%_0%,rgba(10,10,10,0.028),transparent_50%)]"
+          />
+
+          <div className="relative hidden lg:flex items-center justify-end px-10 xl:px-14 pt-9">
+            <Link
+              href="/"
+              className="text-[13px] font-medium text-[#0a0a0a]/40 hover:text-[#0a0a0a] transition-colors"
+            >
+              Back to site
+            </Link>
+          </div>
+
+          <div className="relative flex flex-1 flex-col justify-center px-6 sm:px-10 lg:px-12 xl:px-16 py-10 sm:py-12 lg:py-8 pb-[max(2.5rem,env(safe-area-inset-bottom))]">
+            <div className="w-full max-w-[400px] mx-auto lg:mx-0">
+              <div className="flex items-center gap-3">
+                <span className="text-[13px] font-semibold tracking-[0.08em] text-[#0a0a0a]">
+                  Lysp
+                </span>
+                <span className="h-px w-8 bg-[#0a0a0a]/15" />
+                <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#0a0a0a]/35">
+                  Workspace
+                </p>
+              </div>
+
+              <h2 className="mt-6 text-[1.9rem] sm:text-[2.25rem] font-semibold tracking-tight leading-[1.08]">
+                Welcome back.
+              </h2>
+              <p className="mt-3 text-[15px] text-[#0a0a0a]/50 leading-relaxed">
+                Firm workspace sign-in.
+              </p>
+
+              <div className="mt-9 sm:mt-10">
+                <LoginForm />
+              </div>
+
+              <div className="mt-6 flex items-center gap-3">
+                <span className="h-px flex-1 bg-black/[0.06]" />
+                <span className="text-[11px] font-semibold tracking-[0.14em] uppercase text-[#0a0a0a]/30">
+                  or
+                </span>
+                <span className="h-px flex-1 bg-black/[0.06]" />
+              </div>
+
+              <a
+                href={`${getPublicApiBase()}/api/oauth2/authorization/demo-sso`}
+                className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full border border-black/[0.1] bg-white px-6 py-[0.95rem] text-[15px] font-semibold text-[#0a0a0a] transition-all duration-200 hover:bg-black/[0.03] active:scale-[0.99]"
+              >
+                <HiOutlineShieldCheck className="h-4 w-4" />
+                Sign in with SSO
+              </a>
+
+              <div className="mt-10 pt-8 border-t border-black/[0.06]">
+                <p className="text-[13px] text-[#0a0a0a]/45 leading-relaxed">
+                  Need access for your firm?{" "}
+                  <Link
+                    href="/contact"
+                    className="font-semibold text-[#0a0a0a] underline-offset-4 hover:underline"
+                  >
+                    Contact us
+                  </Link>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <footer className="relative hidden lg:block px-10 xl:px-14 pb-9">
+            <p className="text-[11px] text-[#0a0a0a]/28 tracking-wide">
+              Privileged commercial data · Encrypted in transit
+            </p>
+          </footer>
+        </section>
       </div>
     </AuthProvider>
   );

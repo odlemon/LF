@@ -9,29 +9,30 @@ const COLUMNS = [
     title: "Product",
     links: [
       { label: "Overview", href: "/#platform" },
-      { label: "Scope → Price → Propose", href: "/product#flow" },
+      { label: "Pricing", href: "/product#flow" },
       { label: "Rate Negotiation", href: "/product#negotiation" },
       { label: "Volume Discounts", href: "/product#discounts" },
       { label: "Pricing Analytics", href: "/product#analytics" },
     ],
   },
   {
-    title: "Solutions",
+    title: "Company",
     links: [
-      { label: "Practice areas", href: "/#practices" },
-      { label: "Firm outcomes", href: "/#outcomes" },
+      { label: "About", href: "/about" },
+      { label: "Contact", href: "/contact" },
+      { label: "Security", href: "/security" },
       { label: "Usage pricing", href: "/#pricing" },
-      { label: "Customers", href: "/#customers" },
+      { label: "Book a demo", href: "/auth" },
     ],
   },
   {
-    title: "Company",
+    title: "Resources",
     links: [
-      { label: "Security", href: "/security" },
-      { label: "Certifications", href: "/security#certifications" },
-      { label: "Data residency", href: "/security#residency" },
-      { label: "Contact", href: "/#contact" },
-      { label: "Book a demo", href: "/auth" },
+      { label: "Blog", href: "/blog" },
+      { label: "ROI Calculator", href: "/roi-calculator" },
+      { label: "Privacy Policy", href: "/privacy" },
+      { label: "Practice areas", href: "/#practices" },
+      { label: "Firm outcomes", href: "/#outcomes" },
     ],
   },
   {
@@ -60,7 +61,7 @@ export function FooterSection() {
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_0%_0%,rgba(254,254,252,0.06),transparent_45%),radial-gradient(ellipse_at_100%_100%,rgba(254,254,252,0.04),transparent_40%)]"
       />
 
-      <div className="relative mx-auto max-w-[1200px] px-4 sm:px-8 lg:px-10">
+      <div className="relative mx-auto max-w-[1200px] px-5 sm:px-8 lg:px-10">
         {/* Top CTA band */}
         <div className="pt-16 sm:pt-20 pb-12 sm:pb-14 border-b border-white/[0.08] flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
           <div className="max-w-xl">
@@ -76,8 +77,8 @@ export function FooterSection() {
               Pricing intelligence for elite law firms.
             </h2>
             <p className="mt-4 text-[15px] text-white/45 leading-relaxed max-w-md">
-              Scope, price, propose, negotiate, and measure realization - on one usage-based
-              platform built for privileged commercial data.
+              Price, negotiate, and measure realization on one usage-based platform built for
+              privileged commercial data.
             </p>
           </div>
 
@@ -143,16 +144,16 @@ export function FooterSection() {
           </p>
           <div className="flex flex-wrap gap-x-6 gap-y-2">
             <Link
-              href="/#privacy"
+              href="/privacy"
               className="text-[12px] text-white/40 hover:text-white/70 transition-colors cursor-pointer"
             >
               Privacy Policy
             </Link>
             <Link
-              href="/#terms"
+              href="/contact"
               className="text-[12px] text-white/40 hover:text-white/70 transition-colors cursor-pointer"
             >
-              Terms of Service
+              Contact
             </Link>
             <Link
               href="/security"

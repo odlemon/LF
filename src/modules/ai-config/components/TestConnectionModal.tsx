@@ -42,7 +42,7 @@ export function TestConnectionModal({
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
-            <span className="text-sm font-semibold text-gray-500">
+            <span className="text-sm font-semibold text-ink/55">
               Testing connection to {config.displayName}...
             </span>
           </div>
@@ -52,22 +52,22 @@ export function TestConnectionModal({
           <div className="flex flex-col items-center gap-4 w-full">
             {testResult.success ? (
               <>
-                <HiCheckCircle className="w-12 h-12 text-green-500 shrink-0" />
-                <h4 className="text-lg font-bold text-gray-900 leading-tight">
+                <HiCheckCircle className="w-12 h-12 text-ink/70 shrink-0" />
+                <h4 className="text-lg font-bold text-ink leading-tight">
                   Connection Successful
                 </h4>
-                <div className="flex flex-col gap-1 text-xs text-gray-500">
+                <div className="flex flex-col gap-1 text-xs text-ink/55">
                   <p>{config.displayName} responded in {testResult.responseTimeMs}ms</p>
-                  <p className="font-semibold text-gray-700">Model: {testResult.modelName || config.modelName}</p>
+                  <p className="font-semibold text-ink/80">Model: {testResult.modelName || config.modelName}</p>
                 </div>
               </>
             ) : (
               <>
                 <HiXCircle className="w-12 h-12 text-red-500 shrink-0" />
-                <h4 className="text-lg font-bold text-gray-900 leading-tight">
+                <h4 className="text-lg font-bold text-ink leading-tight">
                   Connection Failed
                 </h4>
-                <div className="flex flex-col gap-2 text-xs text-gray-500 max-w-xs">
+                <div className="flex flex-col gap-2 text-xs text-ink/55 max-w-xs">
                   <p className="font-medium text-red-650 bg-red-50/50 p-2.5 rounded-xl border border-red-100/50 break-words max-h-24 overflow-y-auto rates-scrollable">
                     {testResult.message || "Connection failed with a blank error response."}
                   </p>

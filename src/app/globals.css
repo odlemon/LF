@@ -1,8 +1,26 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  Theme colors as real hex in @theme so utilities reference var(--color-*).
+  Dark mode overrides those --color-* vars on .platform-root.dark (cascade works).
+*/
 @theme {
-  --color-primary: #00CC76;
-  
+  --color-primary: #0a0a0a;
+  --color-primary-hover: #000000;
+  --color-on-primary: #fefefc;
+  --color-paper: #fefefc;
+  --color-ink: #0a0a0a;
+  --color-field: #f7f7f5;
+  --color-band: #0a0f0d;
+  --color-canvas: #f7f7f5;
+  --color-surface: #fefefc;
+  --color-border: rgba(10, 10, 10, 0.08);
+  --color-hover: rgba(10, 10, 10, 0.04);
+  --color-warning: #b45309;
+  --color-danger: #e11d48;
+
   --animate-fade-in: fade-in 0.2s ease-out;
   --animate-fade-in-up: fade-in-up 0.2s ease-out;
   --animate-slide-in-right: slide-in-right 0.3s ease-out;
@@ -31,11 +49,60 @@
   }
 
   --animate-customers-marquee: customers-marquee 45s linear infinite;
+
+  @keyframes editorial-rise {
+    from {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes editorial-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes hairline-grow {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  --animate-editorial-rise: editorial-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-editorial-fade: editorial-fade 1.1s ease-out both;
+  --animate-hairline-grow: hairline-grow 1s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #111827; /* gray-900 */
+  --background: #fefefc;
+  --foreground: #0a0a0a;
+}
+
+/* Must override --color-* (not only custom aliases) so bg-canvas / text-ink / etc. flip */
+.platform-root.dark {
+  color-scheme: dark;
+  --color-primary: #fefefc;
+  --color-primary-hover: #ffffff;
+  --color-on-primary: #0a0a0a;
+  --color-paper: #141816;
+  --color-ink: #fefefc;
+  --color-field: #1c211f;
+  --color-band: #060807;
+  --color-canvas: #0a0f0d;
+  --color-surface: #141816;
+  --color-border: rgba(254, 254, 252, 0.12);
+  --color-hover: rgba(254, 254, 252, 0.08);
+  --color-warning: #f59e0b;
+  --color-danger: #f43f5e;
+  --background: #0a0f0d;
+  --foreground: #fefefc;
+}
+
+.platform-root {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  min-height: 100%;
 }
 
 body {
@@ -48,6 +115,11 @@ body {
 .tiers-scrollable {
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
+}
+
+.platform-root.dark .rates-scrollable,
+.platform-root.dark .tiers-scrollable {
+  scrollbar-color: rgba(254, 254, 252, 0.2) transparent;
 }
 
 .rates-scrollable::-webkit-scrollbar,
@@ -68,7 +140,304 @@ body {
   transition: background-color 0.2s ease;
 }
 
+.platform-root.dark .rates-scrollable::-webkit-scrollbar-thumb,
+.platform-root.dark .tiers-scrollable::-webkit-scrollbar-thumb {
+  background-color: rgba(254, 254, 252, 0.2);
+}
+
 .rates-scrollable::-webkit-scrollbar-thumb:hover,
 .tiers-scrollable::-webkit-scrollbar-thumb:hover {
   background-color: rgba(0, 0, 0, 0.3);
 }
+
+.platform-root.dark .rates-scrollable::-webkit-scrollbar-thumb:hover,
+.platform-root.dark .tiers-scrollable::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(254, 254, 252, 0.35);
+}
+
+@keyframes scopeFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hide scrollbar in chat composer while keeping scroll if needed */
+.composer-textarea {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.composer-textarea::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+@keyframes pricing-scenario-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pricing-scenario-enter {
+  animation: pricing-scenario-enter 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes pricing-generate-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(10, 10, 10, 0.18);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(10, 10, 10, 0);
+  }
+}
+
+.pricing-generate-pulse {
+  animation: pricing-generate-pulse 1.4s ease-out infinite;
+}
+
+/* Lysp toast — paper/ink, replaces default react-hot-toast chrome */
+@keyframes lysp-toast-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes lysp-toast-leave {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+}
+
+.lysp-toast-enter {
+  animation: lysp-toast-enter 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.lysp-toast-leave {
+  animation: lysp-toast-leave 0.22s ease-in both;
+}
+
+.lysp-toaster > div {
+  font-family: inherit;
+}
+
+/* Pricing generate — live execution motion */
+@keyframes pricing-live-title {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pricing-live-title {
+  animation: pricing-live-title 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes pricing-stage-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.pricing-stage-shimmer {
+  background-image: linear-gradient(
+    90deg,
+    rgba(10, 10, 10, 0.55) 0%,
+    rgba(10, 10, 10, 0.95) 45%,
+    rgba(10, 10, 10, 0.55) 100%
+  );
+  background-size: 200% 100%;
+  animation: pricing-stage-shimmer 1.6s ease-in-out infinite;
+}
+
+@keyframes pricing-exec-bar {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(320%);
+  }
+}
+
+.pricing-exec-bar {
+  animation: pricing-exec-bar 1.35s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes pricing-exec-sheen {
+  0% {
+    transform: translateX(-60%);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(60%);
+    opacity: 0;
+  }
+}
+
+.pricing-exec-sheen {
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(10, 10, 10, 0.035) 50%,
+    transparent 65%
+  );
+  animation: pricing-exec-sheen 2.4s ease-in-out infinite;
+}
+
+@keyframes pricing-exec-dot {
+  0%,
+  80%,
+  100% {
+    opacity: 0.25;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+
+.pricing-exec-dots > span:nth-child(1) {
+  animation: pricing-exec-dot 1.1s ease-in-out infinite;
+}
+.pricing-exec-dots > span:nth-child(2) {
+  animation: pricing-exec-dot 1.1s ease-in-out 0.15s infinite;
+}
+.pricing-exec-dots > span:nth-child(3) {
+  animation: pricing-exec-dot 1.1s ease-in-out 0.3s infinite;
+}
+
+@keyframes pricing-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.pricing-spinner {
+  animation: pricing-spinner 0.7s linear infinite;
+}
+
+@keyframes pricing-check-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.pricing-check-pop {
+  animation: pricing-check-pop 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes pricing-activity-live {
+  0%,
+  100% {
+    box-shadow: inset 0 0 0 0 transparent;
+  }
+  50% {
+    box-shadow: inset 3px 0 0 0 rgba(10, 10, 10, 0.55);
+  }
+}
+
+.pricing-activity-live {
+  animation: pricing-activity-live 1.8s ease-in-out infinite;
+}
+
+@keyframes pricing-detail-enter {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.pricing-detail-enter {
+  animation: pricing-detail-enter 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes pricing-fee-tick {
+  from {
+    opacity: 0.35;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pricing-fee-tick {
+  animation: pricing-fee-tick 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.platform-root.dark .pricing-stage-shimmer {
+  background-image: linear-gradient(
+    90deg,
+    rgba(254, 254, 252, 0.45) 0%,
+    rgba(254, 254, 252, 0.95) 45%,
+    rgba(254, 254, 252, 0.45) 100%
+  );
+}
+
+.platform-root.dark .pricing-exec-sheen {
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(254, 254, 252, 0.05) 50%,
+    transparent 65%
+  );
+}
+
+.platform-root.dark .pricing-activity-live {
+  animation-name: pricing-activity-live-dark;
+}
+
+@keyframes pricing-activity-live-dark {
+  0%,
+  100% {
+    box-shadow: inset 0 0 0 0 transparent;
+  }
+  50% {
+    box-shadow: inset 3px 0 0 0 rgba(254, 254, 252, 0.55);
+  }
+}
+
+
+

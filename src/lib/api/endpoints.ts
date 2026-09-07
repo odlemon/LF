@@ -1,13 +1,18 @@
 export const ENDPOINTS = {
   AUTH: {
-    LOGIN: "/api/auth/login",
+    LOGIN: "/v1/auth/login",
     LOGOUT: "/api/auth/logout",
-    ME: "/api/auth/me",
+    ME: "/v1/auth/me",
   },
   CLIENT_AUTH: {
     LOGIN: "/api/client-auth/login",
     LOGOUT: "/api/client-auth/logout",
     ME: "/api/client-auth/me",
+  },
+  PORTAL_ACCOUNT: {
+    ME: "/api/v1/portal/me",
+    UPDATE_ME: "/api/v1/portal/me",
+    CHANGE_PASSWORD: "/api/v1/portal/me/password",
   },
   PRICING_REQUESTS: {
     LIST: "/api/v1/pricing-requests",
@@ -21,6 +26,8 @@ export const ENDPOINTS = {
       `/api/v1/pricing-requests/${uid}/attachments/${attachmentUid}`,
     SCOPE: (uid: string) => `/api/v1/pricing-requests/${uid}/scope`,
     CONFIRM_SCOPE: (uid: string) => `/api/v1/pricing-requests/${uid}/scope/confirm`,
+    RESET_SCOPE: (uid: string) => `/api/v1/pricing-requests/${uid}/scope/reset`,
+    RESTORE_SCOPE: (uid: string) => `/api/v1/pricing-requests/${uid}/scope/restore`,
     PHASES: (uid: string) => `/api/v1/pricing-requests/${uid}/scope/phases`,
     PHASE: (uid: string, phaseUid: string) =>
       `/api/v1/pricing-requests/${uid}/scope/phases/${phaseUid}`,
@@ -31,10 +38,71 @@ export const ENDPOINTS = {
     ASSUMPTIONS: (uid: string) => `/api/v1/pricing-requests/${uid}/scope/assumptions`,
     ASSUMPTION: (uid: string, assumptionUid: string) =>
       `/api/v1/pricing-requests/${uid}/scope/assumptions/${assumptionUid}`,
+    SCENARIOS: (uid: string) => `/api/v1/pricing-requests/${uid}/scenarios`,
+    SCENARIOS_GENERATE: (uid: string) =>
+      `/api/v1/pricing-requests/${uid}/scenarios/generate`,
+    SCENARIOS_GENERATE_ASYNC: (uid: string) =>
+      `/api/v1/pricing-requests/${uid}/scenarios/generate/async`,
+    SCENARIOS_GENERATION_STATUS: (uid: string) =>
+      `/api/v1/pricing-requests/${uid}/scenarios/generation-status`,
+    SCENARIOS_GENERATE_STREAM: (uid: string) =>
+      `/api/v1/pricing-requests/${uid}/scenarios/generate/stream`,
+    SCENARIO: (uid: string, scenarioUid: string) =>
+      `/api/v1/pricing-requests/${uid}/scenarios/${scenarioUid}`,
+    SCENARIO_PREFER: (uid: string, scenarioUid: string) =>
+      `/api/v1/pricing-requests/${uid}/scenarios/${scenarioUid}/prefer`,
+    SCENARIO_SUBMIT_PARTNER: (uid: string, scenarioUid: string) =>
+      `/api/v1/pricing-requests/${uid}/scenarios/${scenarioUid}/submit-partner`,
+    SCENARIO_APPROVE: (uid: string, scenarioUid: string) =>
+      `/api/v1/pricing-requests/${uid}/scenarios/${scenarioUid}/approve`,
+    SCENARIO_REJECT: (uid: string, scenarioUid: string) =>
+      `/api/v1/pricing-requests/${uid}/scenarios/${scenarioUid}/reject`,
+    SCENARIO_RETURN: (uid: string, scenarioUid: string) =>
+      `/api/v1/pricing-requests/${uid}/scenarios/${scenarioUid}/return`,
+    SCENARIO_COMPARABLES: (uid: string, scenarioUid: string) =>
+      `/api/v1/pricing-requests/${uid}/scenarios/${scenarioUid}/comparables`,
+  },
+  PRICING_APPROVERS: "/api/v1/pricing-approvers",
+  PRICING_APPROVAL_PACK: (scenarioUid: string) =>
+    `/api/v1/pricing-approvals/${scenarioUid}/pack`,
+  NOTIFICATIONS: {
+    LIST: "/api/v1/me/notifications",
+    UNREAD_COUNT: "/api/v1/me/notifications/unread-count",
+    MARK_READ: (uid: string) => `/api/v1/me/notifications/${uid}/read`,
+    MARK_ALL_READ: "/api/v1/me/notifications/read-all",
+    STREAM: "/api/v1/me/notifications/stream",
   },
   NEGOTIATIONS: {
-    LIST: "/api/negotiations",
-    SUBMIT: "/api/negotiations/submit",
+    LIST: "/api/v1/negotiations",
+    DETAIL: (uid: string) => `/api/v1/negotiations/${uid}`,
+    COUNTER: (uid: string) => `/api/v1/negotiations/${uid}/counter`,
+    ACCEPT_COUNTER: (uid: string) => `/api/v1/negotiations/${uid}/accept-counter`,
+    REJECT: (uid: string) => `/api/v1/negotiations/${uid}/reject`,
+    WITHDRAW: (uid: string) => `/api/v1/negotiations/${uid}/withdraw`,
+    AI_SUGGEST: (uid: string) => `/api/v1/negotiations/${uid}/ai/suggest`,
+    AI_MESSAGES: (uid: string) => `/api/v1/negotiations/${uid}/ai/messages`,
+    AI_MESSAGES_STREAM: (uid: string) =>
+      `/api/v1/negotiations/${uid}/ai/messages/stream`,
+    ENGAGEMENT_PACK: (uid: string) =>
+      `/api/v1/negotiations/${uid}/engagement-pack`,
+    ENGAGEMENT_PACK_SEND: (uid: string) =>
+      `/api/v1/negotiations/${uid}/engagement-pack/send`,
+    SEND_TO_CLIENT: (requestUid: string, scenarioUid: string) =>
+      `/api/v1/pricing-requests/${requestUid}/scenarios/${scenarioUid}/send-to-client`,
+    PORTAL_LIST: "/api/v1/portal/negotiations",
+    PORTAL_DETAIL: (uid: string) => `/api/v1/portal/negotiations/${uid}`,
+    PORTAL_ACCEPT: (uid: string) => `/api/v1/portal/negotiations/${uid}/accept`,
+    PORTAL_REJECT: (uid: string) => `/api/v1/portal/negotiations/${uid}/reject`,
+    PORTAL_COUNTER: (uid: string) => `/api/v1/portal/negotiations/${uid}/counter`,
+    PORTAL_AI_SUGGEST: (uid: string) => `/api/v1/portal/negotiations/${uid}/ai/suggest`,
+    PORTAL_AI_MESSAGES: (uid: string) =>
+      `/api/v1/portal/negotiations/${uid}/ai/messages`,
+    PORTAL_AI_MESSAGES_STREAM: (uid: string) =>
+      `/api/v1/portal/negotiations/${uid}/ai/messages/stream`,
+    PORTAL_ENGAGEMENT_PACK: (uid: string) =>
+      `/api/v1/portal/negotiations/${uid}/engagement-pack`,
+    PORTAL_ENGAGEMENT_PACK_ACK: (uid: string) =>
+      `/api/v1/portal/negotiations/${uid}/engagement-pack/acknowledge`,
   },
   CLIENTS: {
     LIST: "/api/clients",
@@ -63,6 +131,9 @@ export const ENDPOINTS = {
     RATE_CARDS: "/v1/rate-cards",
     RATE_CARD_ACTIVATE: (uid: string) => `/v1/rate-cards/${uid}/activate`,
     RATE_CARD_ENTRIES: (uid: string) => `/v1/rate-cards/${uid}/entries`,
+    FX_RATES: "/v1/fx-rates",
+    FX_RATE_DETAIL: (uid: string) => `/v1/fx-rates/${uid}`,
+    APPROVAL_MATRIX: "/v1/firm/approval-matrix",
     CLIENTS: "/api/v1/clients",
     CLIENT_DETAIL: (uid: string) => `/api/v1/clients/${uid}`,
     CLIENT_INVITE: (uid: string) => `/v1/clients/${uid}/portal-users`,
@@ -93,6 +164,13 @@ export const ENDPOINTS = {
     FILE_STORAGE: '/v1/file-storage',
     FILE_STORAGE_BY_UID: (uid: string) => `/v1/file-storage/${uid}`,
     FILE_STORAGE_DOWNLOAD: (uid: string) => `/v1/file-storage/${uid}/download`,
+    PMS_CONNECTORS: '/v1/data-room/pms-connectors',
+    PMS_CONNECTOR_SYNC_NOW: (uid: string) => `/v1/data-room/pms-connectors/${uid}/sync-now`,
+    PMS_CONNECTOR_TEST: (uid: string) => `/v1/data-room/pms-connectors/${uid}/test-connection`,
+  },
+  SSO: {
+    IDENTITY_PROVIDERS: '/v1/sso/identity-providers',
+    IDENTITY_PROVIDER_BY_UID: (uid: string) => `/v1/sso/identity-providers/${uid}`,
   },
   AI_CONFIG: {
     PROVIDERS: '/api/v1/ai-config/providers',
@@ -100,6 +178,74 @@ export const ENDPOINTS = {
     BY_UID: (uid: string) => `/api/v1/ai-config/providers/${uid}`,
     ACTIVATE: (uid: string) => `/api/v1/ai-config/providers/${uid}/activate`,
     TEST: (uid: string) => `/api/v1/ai-config/providers/${uid}/test`,
+    HEALTH: '/api/v1/ai-config/providers/health',
+  },
+  VOLUME_DISCOUNT: {
+    LIST: '/v1/volume-discount-programs',
+    CREATE: '/v1/volume-discount-programs',
+    DETAIL: (uid: string) => `/v1/volume-discount-programs/${uid}`,
+    UPDATE: (uid: string) => `/v1/volume-discount-programs/${uid}`,
+    ACTIVATE: (uid: string) => `/v1/volume-discount-programs/${uid}/activate`,
+    SPEND: (uid: string) => `/v1/volume-discount-programs/${uid}/spend`,
+    DASHBOARD: (uid: string) => `/v1/volume-discount-programs/${uid}/dashboard`,
+    PORTAL_LIST: '/v1/volume-discount-programs/portal/my-programs',
+    PORTAL_DASHBOARD: (uid: string) => `/v1/volume-discount-programs/portal/my-programs/${uid}/dashboard`,
+    PANEL_AGREEMENT: (uid: string) => `/v1/volume-discount-programs/${uid}/panel-agreement`,
+    PANEL_SECONDMENT_USAGE: (uid: string) => `/v1/volume-discount-programs/${uid}/panel-agreement/secondment-usage`,
+    PANEL_MFN_CHECK: (uid: string) => `/v1/volume-discount-programs/${uid}/panel-agreement/mfn-check`,
+  },
+  ANALYTICS: {
+    FIRM_SUMMARY: "/api/v1/analytics/firm-summary",
+    PRACTICE_AREA: (practiceAreaUid: string) =>
+      `/api/v1/analytics/practice-areas/${practiceAreaUid}`,
+    PRACTICE_AREA_LEADERBOARD: "/api/v1/analytics/practice-areas",
+    CLIENT_LEADERBOARD: "/api/v1/analytics/clients",
+    NEGOTIATION_RATE_INTELLIGENCE: (negotiationUid: string) =>
+      `/api/v1/analytics/negotiations/${negotiationUid}/rate-intelligence`,
+    CLIENT_INTELLIGENCE: (clientProfileUid: string) =>
+      `/api/v1/analytics/clients/${clientProfileUid}/intelligence`,
+    EXPORT_XLSX: "/api/v1/analytics/export.xlsx",
+    BOARD_PACK_PDF: "/api/v1/analytics/board-pack.pdf",
+    PARTNER_CONSISTENCY: "/api/v1/analytics/partner-consistency",
+    ANOMALY_EFFECTIVENESS: "/api/v1/analytics/anomalies/effectiveness",
+    ANOMALY_THRESHOLDS: "/api/v1/analytics/anomalies/thresholds",
+    DIGEST_PREVIEW: "/api/v1/analytics/digest/preview",
+    WIN_RATE: "/api/v1/analytics/win-rate",
+    PROPOSAL_PERFORMANCE: "/api/v1/analytics/proposal-performance",
+    CLIENT: (clientProfileUid: string) => `/api/v1/analytics/clients/${clientProfileUid}`,
+    MATTER: (uid: string) => `/api/v1/analytics/matters/${uid}`,
+    RATE_COMPLIANCE: "/api/v1/analytics/rate-compliance",
+    RATE_RECOMMENDATIONS: "/api/v1/analytics/rate-recommendations",
+    ANOMALIES: "/api/v1/analytics/anomalies",
+    ANOMALY: (uid: string) => `/api/v1/analytics/anomalies/${uid}`,
+    ANOMALY_RESOLVE: (uid: string) => `/api/v1/analytics/anomalies/${uid}/resolve`,
+    ADVISOR_MESSAGES: "/api/v1/analytics/advisor/messages",
+    ADVISOR_HISTORY: "/api/v1/analytics/advisor/history",
+  },
+  BILLING: {
+    ACCOUNT: "/v1/billing/account",
+    TRANSACTIONS: "/v1/billing/transactions",
+    TRANSACTIONS_RECENT: "/v1/billing/transactions/recent",
+    USAGE_SUMMARY: "/v1/billing/usage/summary",
+    ADJUST: "/v1/billing/adjust",
+  },
+  METERING: {
+    SUMMARY: "/v1/billing/metering/summary",
+    BY_OFFICE: "/v1/billing/metering/by-office",
+    BY_PRACTICE_AREA: "/v1/billing/metering/by-practice-area",
+    BY_CLIENT: "/v1/billing/metering/by-client",
+    BY_USER: "/v1/billing/metering/by-user",
+    AI_DETAIL: "/v1/billing/metering/ai-detail",
+    TREND: "/v1/billing/metering/trend",
+    STATEMENT: "/v1/billing/metering/statement",
+    STATEMENT_CSV: "/v1/billing/metering/statement.csv",
+    STATEMENT_PDF: "/v1/billing/metering/statement.pdf",
+    CONTRACT: "/v1/billing/metering/contract",
+    ADMIN_FIRMS: "/v1/billing/metering/admin/firms",
+    ADMIN_FIRM_STATEMENT: (firmUid: string) =>
+      `/v1/billing/metering/admin/firms/${firmUid}/statement`,
+    ADMIN_FIRM_STATEMENT_PDF: (firmUid: string) =>
+      `/v1/billing/metering/admin/firms/${firmUid}/statement.pdf`,
   },
 } as const;
 

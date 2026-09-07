@@ -1,7 +1,8 @@
 import { NextResponse, NextRequest } from "next/server";
 import axios from "axios";
+import { getServerBackendApiBase } from "@/lib/api/baseUrl";
 
-const BACKEND_API_URL = process.env.BACKEND_API_URL || "http://localhost:8080/api";
+const BACKEND_API_URL = getServerBackendApiBase();
 
 interface BackendPermission {
   name: string;

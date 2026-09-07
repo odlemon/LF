@@ -12,14 +12,21 @@ import toast from "react-hot-toast";
 import { HiPlus, HiOutlineDatabase, HiOutlineLightningBolt, HiCheckCircle, HiArrowRight, HiArchive } from "react-icons/hi";
 
 export default function RateCardsPage() {
-  const { cards, activeCard, isLoading, error, createCard, activateCard } = useRateCards();
-  
+  const { cards, isLoading, error, createCard, activateCard } = useRateCards();
+
   const [isFormModalOpen, setIsFormModalOpen] = useState(false);
   const [isEntriesOpen, setIsEntriesOpen] = useState(false);
   const [isActivateOpen, setIsActivateOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState<RateCard | null>(null);
+  const [officeFilter, setOfficeFilter] = useState<string>("ALL");
 
-  const handleCreate = async (data: { name: string; currency: string; effectiveDate: string; expiryDate?: string }) => {
+  const offices = Array.from(
+    new Set(cards.map((c) => c.officeCode).filter((o): o is string => !!o))
+  ).sort();
+  const filteredCards =
+    officeFilter === "ALL" ? cards : cards.filter((c) => (c.officeCode || "") === officeFilter);
+
+  const handleCreate = async (data: { name: string; currency: string; effectiveDate: string; expiryDate?: string; officeCode?: string }) => {
     try {
       await createCard(data);
       toast.success("Rate card draft created.");
@@ -50,15 +57,16 @@ export default function RateCardsPage() {
     }
   };
 
-  const draftCards = cards.filter((c) => c.status === "DRAFT");
-  const archivedCards = cards.filter((c) => c.status === "ARCHIVED");
+  const activeCards = filteredCards.filter((c) => c.status === "ACTIVE");
+  const draftCards = filteredCards.filter((c) => c.status === "DRAFT");
+  const archivedCards = filteredCards.filter((c) => c.status === "ARCHIVED");
 
   return (
     <div className="p-8 max-w-5xl w-full mx-auto flex flex-col gap-8">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Rate Cards</h1>
-          <p className="text-sm text-gray-500 mt-1">Manage corporate rate cards, billing currencies, and level multipliers.</p>
+          <h1 className="text-2xl font-bold text-ink tracking-tight">Rate Cards</h1>
+          <p className="text-sm text-ink/55 mt-1">Manage corporate rate cards, billing currencies, and level multipliers.</p>
         </div>
         <Button
           variant="primary"
@@ -76,59 +84,106 @@ export default function RateCardsPage() {
         </div>
       )}
 
+      {!isLoading && offices.length > 0 && (
+        <div className="flex flex-wrap items-center gap-2">
+          <button
+            onClick={() => setOfficeFilter("ALL")}
+            className={`px-3.5 py-1.5 text-xs font-bold rounded-full transition-all ${
+              officeFilter === "ALL" ? "bg-ink text-on-primary" : "bg-field text-ink/60 hover:bg-hover"
+            }`}
+          >
+            All offices
+          </button>
+          <button
+            onClick={() => setOfficeFilter("")}
+            className={`px-3.5 py-1.5 text-xs font-bold rounded-full transition-all ${
+              officeFilter === "" ? "bg-ink text-on-primary" : "bg-field text-ink/60 hover:bg-hover"
+            }`}
+          >
+            Firm default
+          </button>
+          {offices.map((office) => (
+            <button
+              key={office}
+              onClick={() => setOfficeFilter(office)}
+              className={`px-3.5 py-1.5 text-xs font-bold rounded-full transition-all ${
+                officeFilter === office ? "bg-ink text-on-primary" : "bg-field text-ink/60 hover:bg-hover"
+              }`}
+            >
+              {office}
+            </button>
+          ))}
+        </div>
+      )}
+
       {isLoading ? (
         <div className="flex flex-col gap-6 animate-pulse">
-          <div className="h-40 bg-gray-200 rounded-2xl" />
-          <div className="h-32 bg-gray-200 rounded-2xl" />
+          <div className="h-40 bg-field rounded-2xl" />
+          <div className="h-32 bg-field rounded-2xl" />
         </div>
       ) : (
         <>
           <div>
-            <h2 className="text-xs font-bold text-gray-700 uppercase tracking-wider mb-3">Active Rate Card</h2>
-            {activeCard ? (
-              <div className="bg-gradient-to-r from-emerald-500/10 to-emerald-600/[0.03] border border-emerald-500/25 rounded-2xl p-6 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-600 flex items-center justify-center">
-                    <HiCheckCircle className="w-6 h-6" />
+            <h2 className="text-xs font-bold text-ink/80 uppercase tracking-wider mb-3">
+              Active Rate Card{activeCards.length !== 1 ? "s" : ""}
+            </h2>
+            {activeCards.length > 0 ? (
+              <div className="flex flex-col gap-3">
+                {activeCards.map((card) => (
+                  <div
+                    key={card.uid}
+                    className="bg-gradient-to-r from-primary/10 to-black/[0.03] border border-ink/25 rounded-2xl p-6 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-6"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-primary/20 text-ink/70 flex items-center justify-center">
+                        <HiCheckCircle className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <h3 className="text-base font-bold text-ink">{card.name}</h3>
+                        <p className="text-xs text-ink/55 mt-1">
+                          Effective: {card.effectiveDate} {card.expiryDate ? `to ${card.expiryDate}` : "(No expiry)"}
+                        </p>
+                        <div className="flex items-center gap-2 mt-2.5">
+                          <span className="inline-flex items-center gap-1 text-[10px] font-bold text-ink/80 bg-hover/50 px-2 py-0.5 rounded uppercase tracking-wider border border-border">
+                            Currency: {card.currency}
+                          </span>
+                          <span className="inline-flex items-center gap-1 text-[10px] font-bold text-ink/80 bg-hover/50 px-2 py-0.5 rounded uppercase tracking-wider border border-border">
+                            Office: {card.officeCode || "Firm default"}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <Button
+                      variant="secondary"
+                      className="bg-surface border-border hover:bg-hover/20 text-ink/80 font-semibold text-xs py-2 px-4 shadow-sm"
+                      onClick={() => handleOpenEntries(card)}
+                    >
+                      View Rates
+                      <HiArrowRight className="w-4 h-4" />
+                    </Button>
                   </div>
-                  <div>
-                    <h3 className="text-base font-bold text-gray-900">{activeCard.name}</h3>
-                    <p className="text-xs text-gray-500 mt-1">
-                      Effective: {activeCard.effectiveDate} {activeCard.expiryDate ? `to ${activeCard.expiryDate}` : "(No expiry)"}
-                    </p>
-                    <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-100/50 px-2 py-0.5 rounded uppercase mt-2.5 tracking-wider border border-emerald-100">
-                      Currency: {activeCard.currency}
-                    </span>
-                  </div>
-                </div>
-                <Button
-                  variant="secondary"
-                  className="bg-white border-emerald-100 hover:bg-emerald-50/20 text-emerald-700 font-semibold text-xs py-2 px-4 shadow-sm"
-                  onClick={() => handleOpenEntries(activeCard)}
-                >
-                  View Rates
-                  <HiArrowRight className="w-4 h-4" />
-                </Button>
+                ))}
               </div>
             ) : (
               <div className="bg-amber-50/50 border border-amber-250 rounded-2xl p-6 text-center text-sm text-amber-800">
-                No active rate card currently set. Activating a rate card is required before scoped matters can be computed.
+                No active rate card currently set{officeFilter !== "ALL" ? " for this office" : ""}. Activating a rate card is required before scoped matters can be computed.
               </div>
             )}
           </div>
 
           <div>
-            <h2 className="text-xs font-bold text-gray-700 uppercase tracking-wider mb-3">Draft Rate Cards</h2>
+            <h2 className="text-xs font-bold text-ink/80 uppercase tracking-wider mb-3">Draft Rate Cards</h2>
             {draftCards.length === 0 ? (
-              <div className="text-center py-8 bg-white border border-gray-200/60 rounded-2xl p-6 text-sm text-gray-500">
+              <div className="text-center py-8 bg-surface border border-border/60 rounded-2xl p-6 text-sm text-ink/55">
                 No drafts created. Click &apos;Create Rate Card&apos; to prepare one.
               </div>
             ) : (
-              <div className="bg-white rounded-2xl border border-gray-200/60 overflow-hidden shadow-sm">
+              <div className="bg-surface rounded-2xl border border-border/60 overflow-hidden shadow-sm">
                 <table className="w-full text-left text-sm border-collapse">
                   <thead>
-                    <tr className="bg-gray-50/50 text-xs font-bold text-gray-500 border-b border-gray-100">
+                    <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
                       <th className="px-6 py-4">Name</th>
+                      <th className="px-6 py-4">Office</th>
                       <th className="px-6 py-4">Currency</th>
                       <th className="px-6 py-4">Effective Date</th>
                       <th className="px-6 py-4 text-right">Actions</th>
@@ -136,19 +191,20 @@ export default function RateCardsPage() {
                   </thead>
                   <tbody className="divide-y divide-gray-100/60">
                     {draftCards.map((card) => (
-                      <tr key={card.uid} className="hover:bg-gray-50/40 text-gray-900 transition-colors">
-                        <td className="px-6 py-4 font-semibold text-gray-900 flex items-center gap-3">
+                      <tr key={card.uid} className="hover:bg-field/40 text-ink transition-colors">
+                        <td className="px-6 py-4 font-semibold text-ink flex items-center gap-3">
                           <div className="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
                             <HiOutlineDatabase className="w-4 h-4" />
                           </div>
                           <span>{card.name}</span>
                         </td>
+                        <td className="px-6 py-4 text-xs font-medium text-ink/70">{card.officeCode || "Firm default"}</td>
                         <td className="px-6 py-4">
                           <span className="inline-flex items-center px-2.5 py-0.5 rounded-lg text-[10px] font-bold bg-primary/10 text-primary border border-primary/10 uppercase tracking-wider">
                             {card.currency}
                           </span>
                         </td>
-                        <td className="px-6 py-4 text-xs font-medium text-gray-650">{card.effectiveDate}</td>
+                        <td className="px-6 py-4 text-xs font-medium text-ink/70">{card.effectiveDate}</td>
                         <td className="px-6 py-4 text-right">
                           <div className="flex items-center justify-end gap-2.5">
                             <button
@@ -159,7 +215,7 @@ export default function RateCardsPage() {
                             </button>
                             <button
                               onClick={() => handleOpenActivate(card)}
-                              className="px-3.5 py-1.5 text-xs font-bold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 rounded-full transition-all"
+                              className="px-3.5 py-1.5 text-xs font-bold text-ink/80 bg-hover hover:bg-hover rounded-full transition-all"
                             >
                               Activate
                             </button>
@@ -175,11 +231,11 @@ export default function RateCardsPage() {
 
           {archivedCards.length > 0 && (
             <div>
-              <h2 className="text-xs font-bold text-gray-700 uppercase tracking-wider mb-3">Archived Cards</h2>
-              <div className="bg-white rounded-2xl border border-gray-200/60 overflow-hidden shadow-sm">
+              <h2 className="text-xs font-bold text-ink/80 uppercase tracking-wider mb-3">Archived Cards</h2>
+              <div className="bg-surface rounded-2xl border border-border/60 overflow-hidden shadow-sm">
                 <table className="w-full text-left text-sm border-collapse">
                   <thead>
-                    <tr className="bg-gray-50/50 text-xs font-bold text-gray-500 border-b border-gray-100">
+                    <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
                       <th className="px-6 py-4">Name</th>
                       <th className="px-6 py-4">Currency</th>
                       <th className="px-6 py-4">Effective Date</th>
@@ -188,15 +244,15 @@ export default function RateCardsPage() {
                   </thead>
                   <tbody className="divide-y divide-gray-100/60">
                     {archivedCards.map((card) => (
-                      <tr key={card.uid} className="opacity-60 text-gray-800 bg-gray-50/20 hover:bg-gray-50/40 transition-colors">
+                      <tr key={card.uid} className="opacity-60 text-ink/90 bg-field/20 hover:bg-field/40 transition-colors">
                         <td className="px-6 py-4 font-semibold flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-lg bg-gray-100 text-gray-500 flex items-center justify-center shrink-0">
+                          <div className="w-8 h-8 rounded-lg bg-canvas text-ink/55 flex items-center justify-center shrink-0">
                             <HiArchive className="w-4 h-4" />
                           </div>
                           <span>{card.name}</span>
                         </td>
                         <td className="px-6 py-4">
-                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-lg text-[10px] font-bold bg-gray-100 text-gray-655 border border-gray-200/50 uppercase tracking-wider">
+                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-lg text-[10px] font-bold bg-canvas text-gray-655 border border-border/50 uppercase tracking-wider">
                             {card.currency}
                           </span>
                         </td>
@@ -204,7 +260,7 @@ export default function RateCardsPage() {
                         <td className="px-6 py-4 text-right">
                           <button
                             onClick={() => handleOpenEntries(card)}
-                            className="px-3.5 py-1.5 text-xs font-bold text-gray-600 bg-gray-100 hover:bg-gray-150 rounded-full transition-all"
+                            className="px-3.5 py-1.5 text-xs font-bold text-ink/65 bg-canvas hover:bg-field rounded-full transition-all"
                           >
                             View Rates
                           </button>
