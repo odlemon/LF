@@ -7,6 +7,7 @@ import {
   PortalAtmosphere,
   PortalPageHeader,
 } from "@/modules/client-portal/PortalChrome";
+import { Badge } from "@/components/ui/Badge";
 
 export default function ClientDiscountStatusPage() {
   const [programs, setPrograms] = useState<VolumeDiscountProgram[]>([]);
@@ -128,17 +129,18 @@ export default function ClientDiscountStatusPage() {
                       {program.periodStart} — {program.periodEnd}
                     </p>
                   </div>
-                  <span
-                    className={`inline-flex items-center px-2.5 py-0.5 rounded-lg text-[10px] font-bold border uppercase tracking-wider self-start ${
+                  <Badge
+                    className="self-start"
+                    variant={
                       program.status === "ACTIVE"
-                        ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+                        ? "success"
                         : program.status === "DRAFT"
-                        ? "bg-amber-50 text-amber-700 border-amber-200"
-                        : "bg-gray-50 text-gray-600 border-gray-200"
-                    }`}
+                        ? "warning"
+                        : "neutral"
+                    }
                   >
                     {program.status}
-                  </span>
+                  </Badge>
                 </div>
 
                 {dashboard && (
