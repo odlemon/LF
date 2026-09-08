@@ -8,7 +8,9 @@ const quicksand = Quicksand({
 });
 
 export const metadata: Metadata = {
-  title: "Log in | Lysp",
+  // The root layout applies a "%s | Lysp" template, so naming the product here too
+  // produced "Log in | Lysp | Lysp".
+  title: "Log in",
   description: "Sign in to Lysp pricing intelligence for your firm.",
 };
 
