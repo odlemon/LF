@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { Quicksand } from "next/font/google";
 import { ClientAuthProvider } from "@/context/ClientAuthContext";
 import { ThemeProvider, platformRootClass, useTheme, PLATFORM_THEME_VARS } from "@/context/ThemeContext";
@@ -18,6 +18,23 @@ const quicksand = Quicksand({
 
 function ClientShell({ children }: { children: React.ReactNode }) {
   const { theme } = useTheme();
+  const pathname = usePathname();
+
+  // A client component cannot export Next metadata, so every portal screen showed the bare
+  // root title. Clients keep a proposal open beside their email for days; the tab should say
+  // which screen it is.
+  useEffect(() => {
+    const segment = (pathname || "").split("/").filter(Boolean)[1];
+    const names: Record<string, string> = {
+      dashboard: "Dashboard",
+      negotiations: "Proposals",
+      discount: "Discount status",
+      matters: "Matter history",
+      account: "Account",
+      settings: "Settings",
+    };
+    document.title = `${names[segment] || "Client portal"} | Lysp`;
+  }, [pathname]);
 
   return (
     <div
