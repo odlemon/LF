@@ -58,7 +58,7 @@ function PortalLoginHandler() {
   }
 
   return (
-    <div className="w-full max-w-md bg-white rounded-3xl shadow-[0_12px_40px_rgba(0,0,0,0.03)] border border-gray-150 p-8 flex flex-col items-center text-center gap-6 animate-fade-in-up">
+    <div className="w-full max-w-md bg-white rounded-3xl shadow-[0_12px_40px_rgba(0,0,0,0.03)] border border-gray-200 p-8 flex flex-col items-center text-center gap-6 animate-fade-in-up">
       <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center">
         <HiXCircle className="w-8 h-8 text-red-500" />
       </div>

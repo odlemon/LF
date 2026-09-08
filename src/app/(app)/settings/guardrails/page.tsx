@@ -128,7 +128,7 @@ export default function GuardrailsPage() {
                     setDiscountPartnerMaxPct(guardrails.discountPartnerMaxPct);
                   }
                 }}
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold text-amber-700 bg-amber-50 hover:bg-amber-100 border border-amber-250/20 transition-all cursor-pointer select-none"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold text-amber-700 bg-amber-50 hover:bg-amber-100 border border-amber-200/40 transition-all cursor-pointer select-none"
               >
                 <HiLockOpen className="w-3.5 h-3.5 text-amber-600" />
                 <span>Settings Unlocked</span>

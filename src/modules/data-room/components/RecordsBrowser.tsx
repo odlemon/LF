@@ -519,7 +519,7 @@ export function RecordsBrowser() {
                             className={`inline-flex px-2 py-0.5 rounded-full border text-[10px] font-bold ${
                               rec.status === "PAID"
                                 ? "bg-hover text-ink/80 border-border/40"
-                                : "bg-amber-50 text-amber-700 border-amber-250/40"
+                                : "bg-amber-50 text-amber-700 border-amber-200/60"
                             }`}
                           >
                             {rec.status}

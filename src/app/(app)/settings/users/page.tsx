@@ -277,7 +277,7 @@ export default function UsersPage() {
                               className={`inline-flex items-center justify-center p-1.5 rounded-lg transition-all ${
                                 currentUser?.id === user.uid
                                   ? "text-gray-300 cursor-not-allowed opacity-40"
-                                  : "text-ink/55 hover:text-red-650 hover:bg-red-50 cursor-pointer"
+                                  : "text-ink/55 hover:text-red-600 hover:bg-red-50 cursor-pointer"
                               }`}
                               title={currentUser?.id === user.uid ? "Cannot delete own account" : undefined}
                             >
@@ -472,7 +472,7 @@ export default function UsersPage() {
                               <div className={`w-5 h-5 rounded-md border flex items-center justify-center transition-all duration-200 shrink-0 ${
                                 hasRole
                                   ? "bg-primary border-primary text-white"
-                                  : "border-gray-350 bg-surface group-hover:border-primary"
+                                  : "border-gray-400 bg-surface group-hover:border-primary"
                               }`}>
                                 {hasRole && <HiCheck className="w-3.5 h-3.5 stroke-[2.5]" />}
                               </div>

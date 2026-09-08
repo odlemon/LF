@@ -29,7 +29,7 @@ const VARIANT_STYLES: Record<BadgeVariant, string> = {
   info: "bg-blue-50 text-blue-700 border-blue-200/60",
   warning: "bg-amber-50 text-amber-700 border-amber-200/60",
   success: "bg-hover text-ink/80 border-border/60",
-  error: "bg-rose-50 text-rose-700 border-rose-200/60",
+  error: "bg-red-50 text-red-700 border-red-200/60",
 };
 
 interface IntakeStatusBadgeProps {

@@ -20,13 +20,13 @@ export function DocumentStatusBadge({ status, className = "" }: DocumentStatusBa
       Icon = HiDotsCircleHorizontal;
       break;
     case "QUEUED":
-      styles = "bg-blue-50 text-blue-700 border-blue-250/50";
+      styles = "bg-blue-50 text-blue-700 border-blue-200";
       label = "Queued";
       Icon = HiDotsCircleHorizontal;
       showSpinner = true;
       break;
     case "PROCESSING":
-      styles = "bg-amber-50 text-amber-700 border-amber-250/50";
+      styles = "bg-amber-50 text-amber-700 border-amber-200";
       label = "Processing";
       Icon = HiPlay;
       showSpinner = true;
@@ -37,7 +37,7 @@ export function DocumentStatusBadge({ status, className = "" }: DocumentStatusBa
       Icon = HiCheckCircle;
       break;
     case "PROCESSING_FAILED":
-      styles = "bg-rose-50 text-rose-700 border-rose-250/50";
+      styles = "bg-red-50 text-red-700 border-red-200";
       label = "Failed";
       Icon = HiExclamationCircle;
       break;
@@ -79,11 +79,11 @@ export function MappingStatusBadge({ status }: MappingStatusBadgeProps) {
       label = "Fully Mapped";
       break;
     case "PARTIAL":
-      styles = "bg-amber-50 text-amber-700 border-amber-250/50";
+      styles = "bg-amber-50 text-amber-700 border-amber-200";
       label = "Partially Mapped";
       break;
     case "UNMAPPED":
-      styles = "bg-rose-50 text-rose-700 border-rose-250/50";
+      styles = "bg-red-50 text-red-700 border-red-200";
       label = "Not Mapped";
       break;
   }
@@ -111,7 +111,7 @@ export function DatasetStatusBadge({ status }: DatasetStatusBadgeProps) {
       label = "Pending";
       break;
     case "PROCESSING":
-      styles = "bg-amber-50 text-amber-700 border-amber-250/50 animate-pulse";
+      styles = "bg-amber-50 text-amber-700 border-amber-200 animate-pulse";
       label = "Processing";
       break;
     case "COMPLETE":
@@ -119,11 +119,11 @@ export function DatasetStatusBadge({ status }: DatasetStatusBadgeProps) {
       label = "Complete";
       break;
     case "PARTIAL":
-      styles = "bg-amber-50 text-amber-700 border-amber-250/50";
+      styles = "bg-amber-50 text-amber-700 border-amber-200";
       label = "Partial";
       break;
     case "FAILED":
-      styles = "bg-rose-50 text-rose-700 border-rose-250/50";
+      styles = "bg-red-50 text-red-700 border-red-200";
       label = "Failed";
       break;
   }

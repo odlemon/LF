@@ -53,22 +53,6 @@ export function negotiationStatusLabel(status: string) {
   }
 }
 
-export function negotiationStatusClass(status: string) {
-  switch (status) {
-    case "SENT":
-      return "bg-sky-50 text-sky-900 border-sky-200/80 dark:bg-sky-950/40 dark:text-sky-100 dark:border-sky-800/50";
-    case "NEGOTIATING":
-      return "bg-amber-50 text-amber-950 border-amber-200/80 dark:bg-amber-950/40 dark:text-amber-100 dark:border-amber-800/50";
-    case "CLIENT_APPROVED":
-      return "bg-emerald-50 text-emerald-950 border-emerald-200/80 dark:bg-emerald-950/40 dark:text-emerald-100 dark:border-emerald-800/50";
-    case "CLIENT_REJECTED":
-    case "WITHDRAWN":
-      return "bg-rose-50 text-rose-900 border-rose-200/70 dark:bg-rose-950/40 dark:text-rose-100 dark:border-rose-800/50";
-    default:
-      return "bg-field text-ink/70 border-border/70";
-  }
-}
-
 export function latestRound(detail: NegotiationDetail | null): NegotiationRound | null {
   if (!detail?.rounds?.length) return null;
   return [...detail.rounds].sort((a, b) => b.roundNumber - a.roundNumber)[0] ?? null;

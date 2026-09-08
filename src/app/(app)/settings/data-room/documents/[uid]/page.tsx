@@ -552,7 +552,7 @@ export default function DocumentDetailPage() {
                                   </th>
                                 </tr>
                               </thead>
-                              <tbody className="divide-y divide-red-50 font-semibold text-gray-750">
+                              <tbody className="divide-y divide-red-50 font-semibold text-gray-700">
                                 {(showAllErrors
                                   ? activeAttempt.rowErrors
                                   : activeAttempt.rowErrors.slice(0, 20)

@@ -172,7 +172,7 @@ export function ProcessingLogModal({ isOpen, onClose, documentUid, fileName }: P
                             <th className="px-4 py-2 text-left font-bold text-rose-800 uppercase tracking-wider">Diagnostic Reason</th>
                           </tr>
                         </thead>
-                        <tbody className="divide-y divide-red-50 font-semibold text-gray-750">
+                        <tbody className="divide-y divide-red-50 font-semibold text-gray-700">
                           {(showAllErrors
                             ? activeAttempt.rowErrors
                             : activeAttempt.rowErrors.slice(0, 20)

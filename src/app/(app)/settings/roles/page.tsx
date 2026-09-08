@@ -28,7 +28,7 @@ const getRoleIconAndColor = (roleName: string) => {
     return {
       icon: HiShieldCheck,
       bgColor: "bg-indigo-50 text-indigo-600 border-indigo-100",
-      activeBg: "bg-indigo-650 text-white shadow-lg shadow-indigo-150/40",
+      activeBg: "bg-indigo-600 text-white shadow-lg shadow-indigo-200/40",
       accentBg: "border-indigo-500",
       glowingAccent: "bg-indigo-500/10 text-indigo-700 border-indigo-200"
     };
@@ -37,7 +37,7 @@ const getRoleIconAndColor = (roleName: string) => {
     return {
       icon: HiEye,
       bgColor: "bg-amber-50 text-amber-600 border-amber-100",
-      activeBg: "bg-amber-500 text-white shadow-lg shadow-amber-150/40",
+      activeBg: "bg-amber-500 text-white shadow-lg shadow-amber-200/40",
       accentBg: "border-amber-500",
       glowingAccent: "bg-amber-500/10 text-amber-700 border-amber-200"
     };
@@ -55,7 +55,7 @@ const getRoleIconAndColor = (roleName: string) => {
     return {
       icon: HiUsers,
       bgColor: "bg-blue-50 text-blue-600 border-blue-100",
-      activeBg: "bg-blue-600 text-white shadow-lg shadow-blue-150/40",
+      activeBg: "bg-blue-600 text-white shadow-lg shadow-blue-200/40",
       accentBg: "border-blue-500",
       glowingAccent: "bg-blue-500/10 text-blue-700 border-blue-200"
     };
@@ -63,7 +63,7 @@ const getRoleIconAndColor = (roleName: string) => {
   return {
     icon: HiLockClosed,
     bgColor: "bg-purple-50 text-purple-600 border-purple-100",
-    activeBg: "bg-purple-600 text-white shadow-lg shadow-purple-150/40",
+    activeBg: "bg-purple-600 text-white shadow-lg shadow-purple-200/40",
     accentBg: "border-purple-500",
     glowingAccent: "bg-purple-500/10 text-purple-700 border-purple-200"
   };
@@ -372,7 +372,7 @@ export default function RolesPage() {
                 <button
                   type="button"
                   onClick={() => setIsCreateOpen(false)}
-                  className="text-gray-450 hover:text-ink p-1 hover:bg-field rounded-full transition-colors cursor-pointer"
+                  className="text-ink/40 hover:text-ink p-1 hover:bg-field rounded-full transition-colors cursor-pointer"
                 >
                   <HiX className="w-5 h-5" />
                 </button>

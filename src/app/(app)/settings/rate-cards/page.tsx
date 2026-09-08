@@ -165,7 +165,7 @@ export default function RateCardsPage() {
                 ))}
               </div>
             ) : (
-              <div className="bg-amber-50/50 border border-amber-250 rounded-2xl p-6 text-center text-sm text-amber-800">
+              <div className="bg-amber-50/50 border border-amber-200 rounded-2xl p-6 text-center text-sm text-amber-800">
                 No active rate card currently set{officeFilter !== "ALL" ? " for this office" : ""}. Activating a rate card is required before scoped matters can be computed.
               </div>
             )}

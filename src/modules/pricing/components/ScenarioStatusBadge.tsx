@@ -56,7 +56,7 @@ const VARIANT_STYLES: Record<BadgeVariant, string> = {
   success:
     "bg-emerald-50 text-emerald-900 border-emerald-200/80 dark:bg-emerald-950/40 dark:text-emerald-100 dark:border-emerald-800/50",
   error:
-    "bg-rose-50 text-rose-800 border-rose-200/70 dark:bg-rose-950/40 dark:text-rose-200 dark:border-rose-800/50",
+    "bg-red-50 text-red-800 border-red-200/70 dark:bg-red-950/40 dark:text-red-200 dark:border-red-800/50",
   accent:
     "bg-indigo-50 text-indigo-900 border-indigo-200/70 dark:bg-indigo-950/40 dark:text-indigo-100 dark:border-indigo-800/50",
 };
@@ -66,7 +66,7 @@ const DOT_STYLES: Record<BadgeVariant, string> = {
   info: "bg-sky-500",
   warning: "bg-amber-500",
   success: "bg-emerald-600",
-  error: "bg-rose-500",
+  error: "bg-red-500",
   accent: "bg-indigo-500",
 };
 
@@ -154,7 +154,7 @@ export function ScenarioStageRail({
           {scenarioStatusMeta(status).hint}
         </p>
       ) : rejected ? (
-        <p className="text-xs text-rose-700 dark:text-rose-300 font-medium">
+        <p className="text-xs text-red-700 dark:text-red-300 font-medium">
           Rejected — returned to the team as closed without approval.
         </p>
       ) : returned ? (

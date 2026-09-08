@@ -135,7 +135,7 @@ export default function AiConfigPage() {
             <HiExclamation className="w-5 h-5 text-yellow-600 shrink-0 mt-0.5" />
             <div className="flex flex-col gap-0.5">
               <h4 className="text-sm font-bold text-yellow-900">No active AI provider configured</h4>
-              <p className="text-xs text-yellow-750 font-semibold leading-relaxed">
+              <p className="text-xs text-yellow-700 font-semibold leading-relaxed">
                 Add a provider below and activate it before using any AI features.
               </p>
             </div>

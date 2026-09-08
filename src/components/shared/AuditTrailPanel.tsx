@@ -68,7 +68,7 @@ export function AuditTrailPanel({
         </div>
       ) : events.length === 0 ? (
         // Small muted message if no events exist
-        <p className="text-xs text-gray-450 italic leading-relaxed py-2">
+        <p className="text-xs text-gray-500 italic leading-relaxed py-2">
           No activity recorded yet.
         </p>
       ) : (
