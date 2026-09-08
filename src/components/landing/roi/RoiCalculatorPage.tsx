@@ -247,7 +247,7 @@ export function RoiCalculatorPage() {
                             key={p.label}
                             type="button"
                             onClick={() => setAvgFee(p.value)}
-                            className={`rounded-full px-3 py-1 text-[11px] font-semibold tracking-wide transition-colors cursor-pointer ${
+                            className={`rounded-full px-3.5 py-1.5 text-[11px] font-semibold tracking-wide transition-colors cursor-pointer ${
                               active
                                 ? "bg-white text-[#0a0a0a]"
                                 : "bg-white/[0.06] text-white/45 hover:text-white/80 hover:bg-white/[0.1]"
@@ -309,9 +309,17 @@ export function RoiCalculatorPage() {
         <style
           dangerouslySetInnerHTML={{
             __html: `
+              /* The input itself is the touch target, so it is 28px tall even though the
+                 track it draws is 2px. At 2px (the visual height) the slider was almost
+                 impossible to grab on a phone. */
               .roi-range {
                 -webkit-appearance: none;
                 appearance: none;
+                height: 28px;
+                background: transparent;
+                outline: none;
+              }
+              .roi-range::-webkit-slider-runnable-track {
                 height: 2px;
                 border-radius: 9999px;
                 background: linear-gradient(
@@ -319,13 +327,13 @@ export function RoiCalculatorPage() {
                   #fefefc var(--roi-fill, 0%),
                   rgba(255, 255, 255, 0.14) var(--roi-fill, 0%)
                 );
-                outline: none;
               }
               .roi-range::-webkit-slider-thumb {
                 -webkit-appearance: none;
                 appearance: none;
                 width: 18px;
                 height: 18px;
+                margin-top: -8px;
                 border-radius: 9999px;
                 background: #fefefc;
                 border: 2px solid #0a0f0d;
@@ -344,7 +352,11 @@ export function RoiCalculatorPage() {
               .roi-range::-moz-range-track {
                 height: 2px;
                 border-radius: 9999px;
-                background: transparent;
+                background: linear-gradient(
+                  to right,
+                  #fefefc var(--roi-fill, 0%),
+                  rgba(255, 255, 255, 0.14) var(--roi-fill, 0%)
+                );
               }
             `,
           }}
