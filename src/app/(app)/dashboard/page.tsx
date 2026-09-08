@@ -52,12 +52,14 @@ export default function DashboardPage() {
     );
   }
 
-  const { kpis, trend, stages, practices, liveMatters, snapshot, firmName, currency } = data;
+  const { kpis, trend, stages, practices, liveMatters, snapshot, firmName, currency, restricted } = data;
   // Says what the figures are, and when. It used to read "Live overview - demo data" on a
   // screen that was exactly that.
-  const asOf = data.hasData
-    ? `Live · ${currency} · year to date`
-    : "No priced matters yet";
+  const asOf = !data.hasData
+    ? "No priced matters yet"
+    : restricted
+      ? "Live · proposal activity"
+      : `Live · ${currency} · year to date`;
 
   return (
     <div className="relative min-h-full pb-12">
@@ -166,22 +168,29 @@ export default function DashboardPage() {
           ))}
         </section>
 
-        <div className="grid grid-cols-1 gap-4 sm:gap-5 xl:grid-cols-12">
-          <section className="rounded-[1.5rem] border border-border/70 bg-surface p-5 sm:p-6 xl:col-span-7">
-            <FeesTrendChart data={trend} />
-          </section>
-          <section className="rounded-[1.5rem] border border-border/70 bg-surface p-5 sm:p-6 xl:col-span-5">
-            <MarginWinRateChart data={trend} />
-          </section>
-        </div>
+        {/* Fee and margin views are firm-wide financials, which a CRM-restricted viewer is not
+            shown. The server omits the data; the panels come out with it rather than rendering
+            empty axes that look like a firm with no revenue. */}
+        {!restricted && (
+          <div className="grid grid-cols-1 gap-4 sm:gap-5 xl:grid-cols-12">
+            <section className="rounded-[1.5rem] border border-border/70 bg-surface p-5 sm:p-6 xl:col-span-7">
+              <FeesTrendChart data={trend} />
+            </section>
+            <section className="rounded-[1.5rem] border border-border/70 bg-surface p-5 sm:p-6 xl:col-span-5">
+              <MarginWinRateChart data={trend} />
+            </section>
+          </div>
+        )}
 
         <div className="grid grid-cols-1 gap-4 sm:gap-5 xl:grid-cols-12">
-          <section className="rounded-[1.5rem] border border-border/70 bg-surface p-5 sm:p-6 xl:col-span-5">
+          <section className={`rounded-[1.5rem] border border-border/70 bg-surface p-5 sm:p-6 ${restricted ? "xl:col-span-12" : "xl:col-span-5"}`}>
             <PipelineStagesChart data={stages} />
           </section>
-          <section className="rounded-[1.5rem] border border-border/70 bg-surface p-5 sm:p-6 xl:col-span-7">
-            <PracticeMixChart data={practices} />
-          </section>
+          {!restricted && (
+            <section className="rounded-[1.5rem] border border-border/70 bg-surface p-5 sm:p-6 xl:col-span-7">
+              <PracticeMixChart data={practices} />
+            </section>
+          )}
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-12">

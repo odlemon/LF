@@ -5,16 +5,20 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { usePermission } from "@/hooks/usePermission";
 import { PERMISSIONS } from "@/lib/utils/permissions";
+import { useAnalyticsScope } from "../useAnalyticsScope";
 
 interface TabDef {
   label: string;
   route: string;
   permission?: string;
+  /** Hidden from CRM-restricted users, who the server will refuse anyway. */
+  firmWideOnly?: boolean;
 }
 
 const TABS: TabDef[] = [
-  { label: "Firm Health", route: "/analytics" },
-  { label: "Win Rate", route: "/analytics/win-rate" },
+  // Firm-wide financials. The server restricts these to non-CRM roles, so the tabs follow.
+  { label: "Firm Health", route: "/analytics", firmWideOnly: true },
+  { label: "Win Rate", route: "/analytics/win-rate", firmWideOnly: true },
   { label: "Rate Recommendations", route: "/analytics/rate-recommendations", permission: PERMISSIONS.RATE_RECOMMENDATION_READ },
   { label: "Margin Monitor", route: "/analytics/margin-monitor", permission: PERMISSIONS.ANALYTICS_FINANCE_VIEW },
   { label: "Rate Compliance", route: "/analytics/rate-compliance", permission: PERMISSIONS.ANALYTICS_FINANCE_VIEW },
@@ -33,8 +37,10 @@ export function AnalyticsTabs() {
   const recsRead = usePermission(PERMISSIONS.RATE_RECOMMENDATION_READ);
   // Named-partner comparison is its own grant, not something ANALYTICS_READ carries.
   const partnerConsistency = usePermission(PERMISSIONS.PARTNER_CONSISTENCY_READ);
+  const { crmRestricted } = useAnalyticsScope();
 
   const visible = TABS.filter((tab) => {
+    if (tab.firmWideOnly && crmRestricted) return false;
     if (tab.permission === PERMISSIONS.ANALYTICS_FINANCE_VIEW) return financeView;
     if (tab.permission === PERMISSIONS.RATE_RECOMMENDATION_READ) return recsRead;
     if (tab.permission === PERMISSIONS.PARTNER_CONSISTENCY_READ) return partnerConsistency;

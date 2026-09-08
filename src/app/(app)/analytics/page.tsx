@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   HiChevronRight,
@@ -12,6 +13,7 @@ import { Alert } from "@/components/ui/Alert";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { usePermission } from "@/hooks/usePermission";
 import { PERMISSIONS } from "@/lib/utils/permissions";
+import { useAnalyticsScope } from "@/modules/analytics/useAnalyticsScope";
 import {
   useFirmSummary,
   usePracticeAreaMarginRows,
@@ -31,6 +33,17 @@ import {
 import type { PeriodParams } from "@/modules/analytics/types";
 
 export default function AnalyticsFirmHealthPage() {
+  const router = useRouter();
+  const { crmRestricted } = useAnalyticsScope();
+
+  // Firm health is firm-wide financial data, which the server refuses for CRM users. Send them
+  // to the view they are entitled to rather than to a permission error on the landing tab.
+  React.useEffect(() => {
+    if (crmRestricted) {
+      router.replace("/analytics/rate-recommendations");
+    }
+  }, [crmRestricted, router]);
+
   const [period, setPeriod] = useState<PeriodParams>(() => defaultPeriod());
   const financeView = usePermission(PERMISSIONS.ANALYTICS_FINANCE_VIEW);
 

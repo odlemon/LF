@@ -55,6 +55,8 @@ export type FirmDashboard = {
   liveMatters: LiveMatter[];
   snapshot: DashboardSnapshot;
   hasData: boolean;
+  /** The viewer may not see firm-wide financials; money panels are omitted, not zeroed. */
+  restricted: boolean;
 };
 
 /**
