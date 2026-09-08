@@ -593,10 +593,10 @@ export function SecurityPageContent() {
               <HiArrowRight className="h-4 w-4" />
             </Link>
             <a
-              href="mailto:nyasha@lysp.io"
+              href="mailto:nyasha@lysp.ai"
               className="inline-flex items-center justify-center rounded-full border border-white/15 px-6 py-3.5 text-[14px] font-semibold text-white/80 hover:text-white hover:border-white/30 transition-colors"
             >
-              nyasha@lysp.io
+              nyasha@lysp.ai
             </a>
           </div>
         </div>

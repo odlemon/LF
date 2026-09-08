@@ -35,7 +35,6 @@ function CapabilitySection({
 
       <div className={`${MARKETING_SHELL} py-16 sm:py-24 lg:py-28`}>
         <SectionHeader
-          brand={false}
           tone={tone}
           eyebrow={`${String(index + 1).padStart(2, "0")} · ${uc.label}`}
           title={uc.title}

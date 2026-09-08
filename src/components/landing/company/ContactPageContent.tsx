@@ -20,16 +20,16 @@ const CHANNELS = [
     id: "support" as const,
     title: "Support",
     body: "Workspace, portals, integrations, and day-to-day product help.",
-    cta: "support@lysp.io",
-    href: "mailto:support@lysp.io",
+    cta: "support@lysp.ai",
+    href: "mailto:support@lysp.ai",
     external: true,
   },
   {
     id: "general" as const,
     title: "General",
     body: "Press, partnerships, or anything that does not fit the above.",
-    cta: "nyasha@lysp.io",
-    href: "mailto:nyasha@lysp.io",
+    cta: "nyasha@lysp.ai",
+    href: "mailto:nyasha@lysp.ai",
     external: true,
   },
 ];
@@ -60,7 +60,7 @@ export function ContactPageContent() {
     ]
       .filter(Boolean)
       .join("\n");
-    const to = intent === "support" ? "support@lysp.io" : "nyasha@lysp.io";
+    const to = intent === "support" ? "support@lysp.ai" : "nyasha@lysp.ai";
     window.location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setSent(true);
   };
@@ -246,8 +246,8 @@ export function ContactPageContent() {
                 {sent ? (
                   <p className="text-[13px] text-[#0a0a0a]/45">
                     If mail did not open, write{" "}
-                    <a href="mailto:nyasha@lysp.io" className="underline underline-offset-2">
-                      nyasha@lysp.io
+                    <a href="mailto:nyasha@lysp.ai" className="underline underline-offset-2">
+                      nyasha@lysp.ai
                     </a>
                     .
                   </p>

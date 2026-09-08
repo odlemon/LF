@@ -104,7 +104,7 @@ const SECTIONS = [
     id: "contact",
     title: "Contact",
     body: [
-      "For privacy questions or requests: nyasha@lysp.io",
+      "For privacy questions or requests: nyasha@lysp.ai",
       "For security questionnaires and enterprise packs, visit our Security page or contact sales.",
     ],
   },
@@ -213,10 +213,10 @@ export function PrivacyPageContent() {
               Privacy questions or data requests.
             </p>
             <a
-              href="mailto:nyasha@lysp.io"
+              href="mailto:nyasha@lysp.ai"
               className="mt-4 inline-flex text-[15px] font-semibold text-[#0a0a0a] underline underline-offset-4 decoration-black/15 hover:decoration-black/50"
             >
-              nyasha@lysp.io
+              nyasha@lysp.ai
             </a>
           </div>
         </div>
