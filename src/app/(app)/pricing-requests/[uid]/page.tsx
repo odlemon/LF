@@ -301,8 +301,10 @@ function PricingRequestWorkspaceLoaded({
 
   return (
     <div className="h-[calc(100vh-64px)] flex flex-col bg-canvas">
-      <div className="flex items-center justify-between px-6 py-3.5 border-b border-border bg-surface shrink-0">
-        <div className="flex items-center gap-3 min-w-0">
+      {/* Wraps on narrow screens: at 375px the title, badge and CTA competing on one
+          row truncated the matter name to a single character. */}
+      <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 sm:px-6 py-3.5 border-b border-border bg-surface shrink-0">
+        <div className="flex items-center gap-3 min-w-0 flex-1 basis-[60%]">
           <button
             type="button"
             onClick={() => router.push("/pricing-requests")}
@@ -318,7 +320,7 @@ function PricingRequestWorkspaceLoaded({
             <p className="text-xs text-ink/50 truncate mt-0.5">{clientName}</p>
           </div>
         </div>
-        <div className="flex items-center gap-3 shrink-0">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           <ChatModeBadge chatMode={displayChatMode} />
           {isConfirmed && (
             <Button
@@ -340,7 +342,7 @@ function PricingRequestWorkspaceLoaded({
         <div
           className={`flex min-h-0 h-full transition-[width,flex,padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
             scopeOpen
-              ? "w-1/2 border-r border-border"
+              ? "w-full md:w-1/2 md:border-r md:border-border"
               : "w-full justify-center px-4 sm:px-8"
           }`}
         >
@@ -365,7 +367,7 @@ function PricingRequestWorkspaceLoaded({
         </div>
 
         <div
-          className={`absolute top-0 right-0 bottom-0 z-20 w-1/2 flex flex-col bg-surface border-l border-border shadow-[-12px_0_40px_rgba(10,10,10,0.04)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform ${
+          className={`absolute top-0 right-0 bottom-0 z-20 w-full md:w-1/2 flex flex-col bg-surface border-l border-border shadow-[-12px_0_40px_rgba(10,10,10,0.04)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform ${
             scopeOpen ? "translate-x-0" : "translate-x-full pointer-events-none"
           }`}
           aria-hidden={!scopeOpen}
