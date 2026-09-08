@@ -20,6 +20,7 @@ import {
 } from "./ScenarioStatusBadge";
 import type { PricingScenario } from "../types";
 import { PRICING_MODEL_LABELS } from "../types";
+import { isAwaitingDecision } from "../types";
 
 function formatMoney(amount: number, currency: string) {
   try {
@@ -68,7 +69,7 @@ export function PartnerReviewView({
     byPhase.get(key)!.push(line);
   }
 
-  const pending = scenario.status === "PENDING_PARTNER";
+  const pending = isAwaitingDecision(scenario.status);
   const canSend = scenario.status === "APPROVED" && !!onSendToClient;
 
   return (

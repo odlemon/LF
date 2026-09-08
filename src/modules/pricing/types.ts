@@ -16,6 +16,26 @@ export type PricingScenarioStatus =
   | "APPROVED"
   | "REJECTED";
 
+/**
+ * Statuses in which a scenario is waiting for somebody to decide on it.
+ *
+ * The approval matrix is configurable and can run to any number of stages, so "awaiting a
+ * decision" is not the same thing as PENDING_PARTNER. Treating those two as synonyms is what
+ * made a firm's second stage unreachable: scenarios routed to Finance correctly, the backend
+ * accepted the approval, but no screen offered the control and the Pending tab filtered the
+ * item out of its own work queue. One definition, used everywhere a decision is gated.
+ */
+export const AWAITING_DECISION_STATUSES: PricingScenarioStatus[] = [
+  "PENDING_PARTNER",
+  "PENDING_FINANCE",
+];
+
+export function isAwaitingDecision(
+  status: PricingScenarioStatus | string | null | undefined,
+): boolean {
+  return !!status && (AWAITING_DECISION_STATUSES as string[]).includes(status);
+}
+
 export interface PricingScenarioLine {
   id: string;
   scenarioUid: string;

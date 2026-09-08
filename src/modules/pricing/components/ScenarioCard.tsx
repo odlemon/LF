@@ -3,6 +3,7 @@
 import { PRICING_MODEL_LABELS, type PricingScenario } from "../types";
 import { ScenarioStatusBadge } from "./ScenarioStatusBadge";
 import { ConfidenceBreakdown } from "./ConfidenceBreakdown";
+import { isAwaitingDecision } from "../types";
 
 function formatMoney(amount: number, currency: string) {
   try {
@@ -96,7 +97,7 @@ export function ScenarioCard({
             {Number(scenario.marginPct).toFixed(1)}% margin
           </span>
           {scenario.assignedPartnerName &&
-            (scenario.status === "PENDING_PARTNER" ||
+            (isAwaitingDecision(scenario.status) ||
               scenario.status === "RETURNED_FOR_CORRECTION") && (
               <>
                 <span className="text-ink/20">·</span>

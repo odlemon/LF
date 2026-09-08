@@ -24,6 +24,7 @@ import { SubmitPartnerModal } from "@/modules/pricing/components/SubmitPartnerMo
 import { SendToClientModal } from "@/modules/negotiation/components/SendToClientModal";
 import { usePricingWorkspace } from "@/modules/pricing/hooks/usePricingWorkspace";
 import { PRICING_MODEL_LABELS } from "@/modules/pricing/types";
+import { isAwaitingDecision } from "@/modules/pricing/types";
 
 function formatMoney(amount: number, currency: string) {
   try {
@@ -82,7 +83,7 @@ export default function PricingWorkspacePage() {
     if (!isPartnerOnly || workspace.isLoading) return;
     const reviewUid = searchParams.get("review");
     const preferred = workspace.scenarios.find((s) => s.preferred);
-    const pending = workspace.scenarios.find((s) => s.status === "PENDING_PARTNER");
+    const pending = workspace.scenarios.find((s) => isAwaitingDecision(s.status));
     const target =
       (reviewUid && workspace.scenarios.find((s) => s.id === reviewUid)?.id) ||
       preferred?.id ||
@@ -111,7 +112,7 @@ export default function PricingWorkspacePage() {
     const review =
       workspace.detail ||
       workspace.preferredScenario ||
-      workspace.scenarios.find((s) => s.status === "PENDING_PARTNER") ||
+      workspace.scenarios.find((s) => isAwaitingDecision(s.status)) ||
       null;
 
     if (!review) {
@@ -170,7 +171,8 @@ export default function PricingWorkspacePage() {
       : null;
 
   const preferred = workspace.preferredScenario;
-  const pendingReview = preferred?.status === "PENDING_PARTNER";
+  // Any configured stage, not just the first one.
+  const pendingReview = isAwaitingDecision(preferred?.status);
   const returnedForCorrection =
     preferred?.status === "RETURNED_FOR_CORRECTION";
   const isElevated =
@@ -192,7 +194,7 @@ export default function PricingWorkspacePage() {
     !!preferred &&
     (preferred.status === "DRAFT" ||
       preferred.status === "RETURNED_FOR_CORRECTION" ||
-      preferred.status === "PENDING_PARTNER");
+      isAwaitingDecision(preferred.status));
   const canSendToClient = !!preferred && preferred.status === "APPROVED";
 
   const footerHint = pendingReview
@@ -283,7 +285,7 @@ export default function PricingWorkspacePage() {
         <div className="relative shrink-0 border-b border-border/70 bg-surface/90">
           <div className="px-6 py-3 space-y-2">
             <ScenarioStageRail status={stageScenario.status} />
-            {stageScenario.status === "PENDING_PARTNER" &&
+            {isAwaitingDecision(stageScenario.status) &&
               stageScenario.assignedPartnerName && (
                 <p className="text-[11px] text-ink/45">
                   With {stageScenario.assignedPartnerName}

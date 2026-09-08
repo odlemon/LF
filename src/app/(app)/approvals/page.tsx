@@ -27,14 +27,24 @@ type ApprovalItem = {
 
 type FilterTab =
   | "all"
-  | "PENDING_PARTNER"
+  | "pending"
   | "APPROVED"
   | "REJECTED"
   | "RETURNED_FOR_CORRECTION";
 
+/**
+ * "Pending" is every stage still awaiting a decision, not just the first one.
+ *
+ * This tab used to filter on PENDING_PARTNER alone. With a two-stage matrix that silently
+ * dropped anything sitting at Finance out of the queue meant to surface it — the totals did
+ * not even add up (293 items, 292 across the tabs), and a firm working from this list would
+ * never have actioned a finance sign-off.
+ */
+const PENDING_STATUSES = ["PENDING_PARTNER", "PENDING_FINANCE"] as const;
+
 const TABS: { id: FilterTab; label: string }[] = [
   { id: "all", label: "All" },
-  { id: "PENDING_PARTNER", label: "Pending" },
+  { id: "pending", label: "Pending" },
   { id: "RETURNED_FOR_CORRECTION", label: "Returned" },
   { id: "APPROVED", label: "Approved" },
   { id: "REJECTED", label: "Rejected" },
@@ -64,13 +74,28 @@ export default function ApprovalsPage() {
     setLoading(true);
     setError(null);
     try {
-      const params =
-        status === "all" ? {} : { status };
-      const res = await apiClient.get<ApprovalItem[]>(
-        "/api/v1/pricing-approvals",
-        { params }
-      );
-      setItems(Array.isArray(res.data) ? res.data : []);
+      // The API takes one status, so the pending tab is fetched per stage and merged.
+      const statuses =
+        status === "all" ? null : status === "pending" ? [...PENDING_STATUSES] : [status];
+      const params = statuses ? { status: statuses[0] } : {};
+      let rows: ApprovalItem[];
+      if (statuses && statuses.length > 1) {
+        const pages = await Promise.all(
+          statuses.map((st) =>
+            apiClient.get<ApprovalItem[]>("/api/v1/pricing-approvals", {
+              params: { status: st },
+            })
+          )
+        );
+        rows = pages.flatMap((p) => (Array.isArray(p.data) ? p.data : []));
+      } else {
+        const res = await apiClient.get<ApprovalItem[]>(
+          "/api/v1/pricing-approvals",
+          { params }
+        );
+        rows = Array.isArray(res.data) ? res.data : [];
+      }
+      setItems(rows);
     } catch {
       setError("Could not load approvals");
       setItems([]);
@@ -96,12 +121,15 @@ export default function ApprovalsPage() {
     const map: Record<string, number> = { all: items.length };
     for (const item of items) {
       map[item.status] = (map[item.status] || 0) + 1;
+      if ((PENDING_STATUSES as readonly string[]).includes(item.status)) {
+        map.pending = (map.pending || 0) + 1;
+      }
     }
     return map;
   }, [items, tab]);
 
   const emptyCopy =
-    tab === "PENDING_PARTNER"
+    tab === "pending"
       ? {
           title: "Nothing waiting",
           body: "When a preferred scenario is submitted to you, it lands here.",

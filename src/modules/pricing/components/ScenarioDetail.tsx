@@ -15,6 +15,7 @@ import {
 } from "./ScenarioStatusBadge";
 import type { PricingScenario, UpdateScenarioCommand } from "../types";
 import { PRICING_MODEL_LABELS } from "../types";
+import { isAwaitingDecision } from "../types";
 
 function formatMoney(amount: number, currency: string) {
   try {
@@ -178,7 +179,7 @@ export function ScenarioDetail({
 
       <div className="relative flex-1 overflow-y-auto rates-scrollable px-7 py-6 space-y-8 min-h-0">
         {(scenario.status === "RETURNED_FOR_CORRECTION" ||
-          (scenario.status === "PENDING_PARTNER" && scenario.returnComment)) &&
+          (isAwaitingDecision(scenario.status) && scenario.returnComment)) &&
           scenario.returnComment && (
             <PartnerReturnBanner
               comment={scenario.returnComment}
@@ -222,8 +223,8 @@ export function ScenarioDetail({
                   {scenarioStatusMeta(scenario.status).label.toLowerCase()}
                 </span>
                 . Adjustments are only available while drafting or correcting
-                {scenario.status === "PENDING_PARTNER"
-                  ? " — ask the partner to return it first"
+                {isAwaitingDecision(scenario.status)
+                  ? " — ask the reviewer to return it first"
                   : ""}
                 .
               </p>
