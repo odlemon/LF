@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { FeeEarnerLevelFormModal } from "@/modules/firm/components/FeeEarnerLevelFormModal";
 import toast from "react-hot-toast";
 import { HiPlus, HiScale } from "react-icons/hi";
+import { Alert } from "@/components/ui/Alert";
 
 export default function FeeEarnerLevelsPage() {
   const { levels, isLoading, error, createLevel } = useFeeEarnerLevels();
@@ -40,9 +41,7 @@ export default function FeeEarnerLevelsPage() {
       </div>
 
       {error && (
-        <div className="p-4 bg-red-50 border border-red-200 text-red-600 rounded-xl text-sm font-medium">
-          {error}
-        </div>
+        <Alert variant="error" message={error} />
       )}
 
       {isLoading && levels.length === 0 ? (

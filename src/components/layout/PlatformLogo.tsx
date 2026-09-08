@@ -10,15 +10,18 @@ type PlatformLogoProps = {
 
 /**
  * Icon-only Lysp mark (no "Lysp" wordmark in the chrome).
- * Light → black mark (multiply blends out white lockup BG).
- * Dark → green mark (screen blends out black lockup BG).
+ * Monochrome in both themes: black mark on light, white mark on dark. The green
+ * mark is deliberately not used in platform chrome — the app's palette is ink and
+ * paper, and an accent-coloured logo was the only thing breaking that.
+ * Light → black mark (multiply blends out the white lockup BG).
+ * Dark → white mark (screen blends out the black lockup BG).
  */
 export function PlatformLogo({ className = "", size = 40 }: PlatformLogoProps) {
   const { theme } = useTheme();
   const isDark = theme === "dark";
 
   const src = isDark
-    ? "/images/logo/lysp-logo.png"
+    ? "/images/logo/lysp-logo-bw-white.png"
     : "/images/logo/lysp-logo-bw.png";
 
   return (

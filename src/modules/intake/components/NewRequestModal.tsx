@@ -144,7 +144,7 @@ export function NewRequestModal({ isOpen, onClose, onCreate }: NewRequestModalPr
 
         <div className="flex flex-col gap-1.5">
           <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
-            Title <span className="text-rose-500">*</span>
+            Title <span className="text-red-600 dark:text-red-400">*</span>
           </label>
           <input
             type="text"

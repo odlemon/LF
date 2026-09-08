@@ -7,6 +7,7 @@ import { DatePicker } from "@/components/ui/DatePicker";
 import { fieldClassName } from "@/components/ui/Input";
 import { HiX } from "react-icons/hi";
 import type { CreatePanelAgreementCommand } from "../types";
+import { FormError } from "@/components/ui/FormError";
 
 interface PanelAgreementFormModalProps {
   isOpen: boolean;
@@ -72,9 +73,7 @@ export function PanelAgreementFormModal({ isOpen, onClose, onSave }: PanelAgreem
         <h3 className="text-lg font-bold text-ink mb-4 pr-8">Add Panel Agreement</h3>
 
         {modalError && (
-          <div className="mb-4 p-3.5 bg-red-50 border border-red-200 text-red-600 rounded-full text-xs px-5 font-medium animate-fade-in text-center">
-            {modalError}
-          </div>
+          <FormError message={modalError} />
         )}
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">

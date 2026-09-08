@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { Quicksand } from "next/font/google";
 import { ClientAuthProvider } from "@/context/ClientAuthContext";
@@ -19,6 +19,11 @@ const quicksand = Quicksand({
 function ClientShell({ children }: { children: React.ReactNode }) {
   const { theme } = useTheme();
   const pathname = usePathname();
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+
+  useEffect(() => {
+    setIsMobileNavOpen(false);
+  }, [pathname]);
 
   // A client component cannot export Next metadata, so every portal screen showed the bare
   // root title. Clients keep a proposal open beside their email for days; the tab should say
@@ -42,9 +47,12 @@ function ClientShell({ children }: { children: React.ReactNode }) {
       style={PLATFORM_THEME_VARS[theme]}
       data-theme={theme}
     >
-      <ClientSidebar />
+      <ClientSidebar
+        isMobileOpen={isMobileNavOpen}
+        onMobileClose={() => setIsMobileNavOpen(false)}
+      />
       <div className="flex min-h-screen flex-1 flex-col overflow-hidden bg-canvas text-ink">
-        <ClientPortalTopBar />
+        <ClientPortalTopBar onMenuClick={() => setIsMobileNavOpen(true)} />
         <MustChangePasswordBanner />
         <main className="rates-scrollable flex-1 overflow-y-auto bg-canvas text-ink">
           {children}

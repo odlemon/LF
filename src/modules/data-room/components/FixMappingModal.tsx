@@ -137,65 +137,68 @@ export function FixMappingModal({ isOpen, onClose, document, onSuccess }: FixMap
 
         {/* Mappings Table */}
         <div className="border border-border/80 rounded-2xl overflow-hidden bg-surface shadow-sm shrink-0">
-          <table className="min-w-full divide-y divide-gray-100 text-xs">
-            <thead className="bg-field">
-              <tr>
-                <th className="px-4 py-2.5 text-left font-bold text-ink/55 uppercase tracking-wider">System Field</th>
-                <th className="px-4 py-2.5 text-left font-bold text-ink/55 uppercase tracking-wider">File Column Match</th>
-                <th className="px-4 py-2.5 text-left font-bold text-ink/55 uppercase tracking-wider w-20">Status</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-100 font-semibold">
-              {Object.keys(mapping).map((sysField) => {
-                const currentVal = mapping[sysField];
-                const isMapped = currentVal && currentVal !== "__MANUAL__";
-                const isManualSelected = currentVal === "__MANUAL__";
-                const options = getDropdownOptions(currentVal);
+          <div className="overflow-x-auto rates-scrollable">
+            <table className="min-w-full divide-y divide-gray-100 text-xs">
 
-                const selectOptions = [
-                  { value: "", label: "-- Choose Header --" },
-                  ...options.map((opt) => ({ value: opt, label: opt })),
-                  { value: "__MANUAL__", label: "Type column name manually..." },
-                ];
+              <thead className="bg-field">
+                <tr>
+                  <th className="px-4 py-2.5 text-left font-bold text-ink/55 uppercase tracking-wider">System Field</th>
+                  <th className="px-4 py-2.5 text-left font-bold text-ink/55 uppercase tracking-wider">File Column Match</th>
+                  <th className="px-4 py-2.5 text-left font-bold text-ink/55 uppercase tracking-wider w-20">Status</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100 font-semibold">
+                {Object.keys(mapping).map((sysField) => {
+                  const currentVal = mapping[sysField];
+                  const isMapped = currentVal && currentVal !== "__MANUAL__";
+                  const isManualSelected = currentVal === "__MANUAL__";
+                  const options = getDropdownOptions(currentVal);
 
-                return (
-                  <tr key={sysField}>
-                    <td className="px-4 py-3 text-ink/80 font-bold max-w-[120px] truncate">{sysField}</td>
-                    <td className="px-4 py-3 flex flex-col gap-1.5">
-                      <Select
-                        placeholder="-- Choose Header --"
-                        options={selectOptions}
-                        value={currentVal}
-                        onChange={(val) => handleDropdownChange(sysField, val)}
-                      />
+                  const selectOptions = [
+                    { value: "", label: "-- Choose Header --" },
+                    ...options.map((opt) => ({ value: opt, label: opt })),
+                    { value: "__MANUAL__", label: "Type column name manually..." },
+                  ];
 
-                      {isManualSelected && (
-                        <input
-                          type="text"
-                          required
-                          placeholder="Type headers manually..."
-                          value={manualFields[sysField] || ""}
-                          onChange={(e) => handleManualTextChange(sysField, e.target.value)}
-                          className="w-full px-3.5 py-1.5 bg-surface border border-border rounded-full text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all"
+                  return (
+                    <tr key={sysField}>
+                      <td className="px-4 py-3 text-ink/80 font-bold max-w-[120px] truncate">{sysField}</td>
+                      <td className="px-4 py-3 flex flex-col gap-1.5">
+                        <Select
+                          placeholder="-- Choose Header --"
+                          options={selectOptions}
+                          value={currentVal}
+                          onChange={(val) => handleDropdownChange(sysField, val)}
                         />
-                      )}
-                    </td>
-                    <td className="px-4 py-3">
-                      {isMapped || (isManualSelected && manualFields[sysField]?.trim()) ? (
-                        <span className="text-[10px] font-bold text-ink/80 bg-hover px-2 py-0.5 rounded-full border border-border">
-                          Mapped
-                        </span>
-                      ) : (
-                        <span className="text-[10px] font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded-full border border-rose-200">
-                          Not Found
-                        </span>
-                      )}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+
+                        {isManualSelected && (
+                          <input
+                            type="text"
+                            required
+                            placeholder="Type headers manually..."
+                            value={manualFields[sysField] || ""}
+                            onChange={(e) => handleManualTextChange(sysField, e.target.value)}
+                            className="w-full px-3.5 py-1.5 bg-surface border border-border rounded-full text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all"
+                          />
+                        )}
+                      </td>
+                      <td className="px-4 py-3">
+                        {isMapped || (isManualSelected && manualFields[sysField]?.trim()) ? (
+                          <span className="text-[10px] font-bold text-ink/80 bg-hover px-2 py-0.5 rounded-full border border-border">
+                            Mapped
+                          </span>
+                        ) : (
+                          <span className="text-[10px] font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded-full border border-rose-200">
+                            Not Found
+                          </span>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
 
         {/* Save Template checkbox */}

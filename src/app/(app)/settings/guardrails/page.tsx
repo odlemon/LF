@@ -6,6 +6,7 @@ import { useGuardrails } from "@/modules/firm/hooks/useFirm";
 import { Button } from "@/components/ui/Button";
 import toast from "react-hot-toast";
 import { HiLockClosed, HiLockOpen, HiShieldCheck, HiXCircle, HiExclamation, HiCheckCircle } from "react-icons/hi";
+import { Alert } from "@/components/ui/Alert";
 
 export default function GuardrailsPage() {
   const { guardrails, isLoading, error, updateGuardrails } = useGuardrails();
@@ -37,9 +38,7 @@ export default function GuardrailsPage() {
   if (error && !guardrails) {
     return (
       <div className="p-8 max-w-5xl w-full mx-auto">
-        <div className="p-4 bg-red-50 border border-red-200 text-red-600 rounded-xl text-sm font-medium">
-          {error}
-        </div>
+        <Alert variant="error" message={error} />
       </div>
     );
   }

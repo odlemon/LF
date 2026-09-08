@@ -8,6 +8,7 @@ import { PracticeAreaFormModal } from "@/modules/firm/components/PracticeAreaFor
 import { PracticeArea } from "@/modules/firm/types";
 import toast from "react-hot-toast";
 import { HiPlus, HiPencil, HiCheck, HiX, HiLockClosed } from "react-icons/hi";
+import { Alert } from "@/components/ui/Alert";
 
 export default function PracticeAreasPage() {
   const { areas, isLoading, error, createArea, updateArea, deactivateArea } = usePracticeAreas();
@@ -69,9 +70,7 @@ export default function PracticeAreasPage() {
       </div>
 
       {error && (
-        <div className="p-4 bg-red-50 border border-red-200 text-red-600 rounded-xl text-sm font-medium">
-          {error}
-        </div>
+        <Alert variant="error" message={error} />
       )}
 
       {isLoading && areas.length === 0 ? (

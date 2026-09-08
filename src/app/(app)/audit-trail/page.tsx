@@ -219,7 +219,7 @@ function AuditTrailContent() {
           </div>
 
           {/* Form helper action triggers */}
-          <div className="flex items-center justify-end gap-3 pt-3 border-t border-gray-50 shrink-0">
+          <div className="flex items-center justify-end gap-3 pt-3 border-t border-border/60 shrink-0">
             <button
               onClick={handleClearFilters}
               type="button"
@@ -252,7 +252,7 @@ function AuditTrailContent() {
                 <th className="px-6 py-4.5 text-center w-14"></th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-150/40">
+            <tbody className="divide-y divide-border/60">
               {isLoading && events.length === 0 ? (
                 // Clean Table skeleton rows when initially loading
                 Array.from({ length: 5 }).map((_, i) => (
@@ -390,18 +390,18 @@ function AuditTrailContent() {
                 </div>
               </div>
 
-              <div className="flex flex-col gap-0.5 border-t border-gray-50 pt-3">
+              <div className="flex flex-col gap-0.5 border-t border-border/60 pt-3">
                 <span className="font-extrabold text-ink/40 uppercase tracking-wide text-[10px]">Action Type</span>
                 <span className="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold border uppercase tracking-wide self-start mt-1 bg-blue-50 text-blue-700 border-blue-100">
                   {ACTION_LABEL_MAP[selectedEvent.actionType] || selectedEvent.actionType}
                 </span>
               </div>
-              <div className="flex flex-col gap-0.5 border-t border-gray-50 pt-3">
+              <div className="flex flex-col gap-0.5 border-t border-border/60 pt-3">
                 <span className="font-extrabold text-ink/40 uppercase tracking-wide text-[10px]">Resource Type</span>
                 <span className="font-semibold text-ink text-sm mt-0.5">{selectedEvent.resourceName}</span>
               </div>
 
-              <div className="flex flex-col gap-0.5 border-t border-gray-50 pt-3 col-span-2">
+              <div className="flex flex-col gap-0.5 border-t border-border/60 pt-3 col-span-2">
                 <span className="font-extrabold text-ink/40 uppercase tracking-wide text-[10px]">Entity UID</span>
                 {selectedEvent.entityUid ? (
                   <div className="flex items-center gap-2 mt-0.5">
@@ -419,7 +419,7 @@ function AuditTrailContent() {
                 )}
               </div>
 
-              <div className="flex flex-col gap-0.5 border-t border-gray-50 pt-3 col-span-2">
+              <div className="flex flex-col gap-0.5 border-t border-border/60 pt-3 col-span-2">
                 <span className="font-extrabold text-ink/40 uppercase tracking-wide text-[10px]">Timestamp (Exact)</span>
                 <span className="font-medium text-ink/80 mt-0.5">
                   {formatDate(selectedEvent.createdAt, true)}

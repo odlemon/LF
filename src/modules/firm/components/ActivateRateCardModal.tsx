@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { HiX } from "react-icons/hi";
 import { RateCard } from "../types";
+import { FormError } from "@/components/ui/FormError";
 
 interface ActivateRateCardModalProps {
   isOpen: boolean;
@@ -56,9 +57,7 @@ export function ActivateRateCardModal({
         </p>
 
           {modalError && (
-            <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-600 rounded-full text-xs px-5 font-medium animate-fade-in text-center">
-              {modalError}
-            </div>
+            <FormError message={modalError} />
           )}
 
           <div className="flex justify-end gap-3 mt-6 pt-4 border-t border-border">

@@ -8,6 +8,7 @@ import { EmptyState } from "@/components/ui/EmptyState";
 import { ExchangeRate } from "@/modules/firm/types";
 import toast from "react-hot-toast";
 import { HiPlus, HiOutlineSwitchHorizontal, HiPencil, HiTrash } from "react-icons/hi";
+import { Alert } from "@/components/ui/Alert";
 
 export default function FxRatesPage() {
   const { rates, isLoading, error, createRate, updateRate, deleteRate } = useFxRates();
@@ -74,9 +75,7 @@ export default function FxRatesPage() {
       </div>
 
       {error && (
-        <div className="p-4 bg-red-50 border border-red-200 text-red-600 rounded-xl text-sm font-medium">
-          {error}
-        </div>
+        <Alert variant="error" message={error} />
       )}
 
       {isLoading ? (
@@ -91,52 +90,55 @@ export default function FxRatesPage() {
         />
       ) : (
         <div className="bg-surface rounded-2xl border border-border/60 overflow-hidden shadow-sm">
-          <table className="w-full text-left text-sm border-collapse">
-            <thead>
-              <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
-                <th className="px-6 py-4">Pair</th>
-                <th className="px-6 py-4">Rate</th>
-                <th className="px-6 py-4">As of</th>
-                <th className="px-6 py-4 text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-100/60">
-              {rates.map((rate) => (
-                <tr key={rate.uid} className="hover:bg-field/40 text-ink transition-colors">
-                  <td className="px-6 py-4 font-semibold text-ink flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
-                      <HiOutlineSwitchHorizontal className="w-4 h-4" />
-                    </div>
-                    <span>
-                      {rate.baseCurrency} → {rate.quoteCurrency}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-xs font-bold text-ink/80 tabular-nums">
-                    1 {rate.baseCurrency} = {rate.rate} {rate.quoteCurrency}
-                  </td>
-                  <td className="px-6 py-4 text-xs font-medium text-ink/70">{rate.asOfDate}</td>
-                  <td className="px-6 py-4 text-right">
-                    <div className="flex items-center justify-end gap-2.5">
-                      <button
-                        onClick={() => handleEdit(rate)}
-                        className="p-2 text-ink/50 hover:text-ink hover:bg-hover rounded-full transition-all"
-                        aria-label="Edit"
-                      >
-                        <HiPencil className="w-4 h-4" />
-                      </button>
-                      <button
-                        onClick={() => handleDelete(rate)}
-                        className="p-2 text-ink/50 hover:text-rose-600 hover:bg-hover rounded-full transition-all"
-                        aria-label="Delete"
-                      >
-                        <HiTrash className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </td>
+          <div className="overflow-x-auto rates-scrollable">
+            <table className="w-full text-left text-sm border-collapse">
+
+              <thead>
+                <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
+                  <th className="px-6 py-4">Pair</th>
+                  <th className="px-6 py-4">Rate</th>
+                  <th className="px-6 py-4">As of</th>
+                  <th className="px-6 py-4 text-right">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-gray-100/60">
+                {rates.map((rate) => (
+                  <tr key={rate.uid} className="hover:bg-field/40 text-ink transition-colors">
+                    <td className="px-6 py-4 font-semibold text-ink flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                        <HiOutlineSwitchHorizontal className="w-4 h-4" />
+                      </div>
+                      <span>
+                        {rate.baseCurrency} → {rate.quoteCurrency}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 text-xs font-bold text-ink/80 tabular-nums">
+                      1 {rate.baseCurrency} = {rate.rate} {rate.quoteCurrency}
+                    </td>
+                    <td className="px-6 py-4 text-xs font-medium text-ink/70">{rate.asOfDate}</td>
+                    <td className="px-6 py-4 text-right">
+                      <div className="flex items-center justify-end gap-2.5">
+                        <button
+                          onClick={() => handleEdit(rate)}
+                          className="p-2 text-ink/50 hover:text-ink hover:bg-hover rounded-full transition-all"
+                          aria-label="Edit"
+                        >
+                          <HiPencil className="w-4 h-4" />
+                        </button>
+                        <button
+                          onClick={() => handleDelete(rate)}
+                          className="p-2 text-ink/50 hover:text-rose-600 hover:bg-hover rounded-full transition-all"
+                          aria-label="Delete"
+                        >
+                          <HiTrash className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
 

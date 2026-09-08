@@ -279,69 +279,75 @@ export default function PracticeAreaDeepDivePage() {
                 />
               </div>
             ) : (
-              <table className="w-full text-left text-sm border-collapse">
-                <thead>
-                  <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
-                    <th className="px-6 py-4">Client</th>
-                    <th className="px-6 py-4">Revenue</th>
-                    <th className="px-6 py-4">Avg margin</th>
-                    <th className="px-6 py-4">Win rate</th>
-                    <th className="px-6 py-4">Matters</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-100/60">
-                  {metrics.clients.map((client) => (
-                    <tr key={client.clientProfileUid} className="hover:bg-field/40 transition-colors">
-                      <td className="px-6 py-3.5">
-                        <Link
-                          href={`/clients/${client.clientProfileUid}`}
-                          className="font-semibold text-ink hover:text-primary transition-colors"
-                        >
-                          {client.clientName ?? client.clientProfileUid}
-                        </Link>
-                      </td>
-                      <td className="px-6 py-3.5 tabular-nums font-medium text-ink">
-                        {formatMoney(client.revenue)}
-                      </td>
-                      <td className="px-6 py-3.5 tabular-nums text-ink/80">
-                        {formatPct(client.avgMarginPct)}
-                      </td>
-                      <td className="px-6 py-3.5 tabular-nums text-ink/80">
-                        {formatPct(client.winRatePct, 0)}
-                      </td>
-                      <td className="px-6 py-3.5 tabular-nums text-ink/80">
-                        {formatNumber(client.mattersCount)}
-                      </td>
+              <div className="overflow-x-auto rates-scrollable">
+                <table className="w-full text-left text-sm border-collapse">
+
+                  <thead>
+                    <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
+                      <th className="px-6 py-4">Client</th>
+                      <th className="px-6 py-4">Revenue</th>
+                      <th className="px-6 py-4">Avg margin</th>
+                      <th className="px-6 py-4">Win rate</th>
+                      <th className="px-6 py-4">Matters</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody className="divide-y divide-gray-100/60">
+                    {metrics.clients.map((client) => (
+                      <tr key={client.clientProfileUid} className="hover:bg-field/40 transition-colors">
+                        <td className="px-6 py-3.5">
+                          <Link
+                            href={`/clients/${client.clientProfileUid}`}
+                            className="font-semibold text-ink hover:text-primary transition-colors"
+                          >
+                            {client.clientName ?? client.clientProfileUid}
+                          </Link>
+                        </td>
+                        <td className="px-6 py-3.5 tabular-nums font-medium text-ink">
+                          {formatMoney(client.revenue)}
+                        </td>
+                        <td className="px-6 py-3.5 tabular-nums text-ink/80">
+                          {formatPct(client.avgMarginPct)}
+                        </td>
+                        <td className="px-6 py-3.5 tabular-nums text-ink/80">
+                          {formatPct(client.winRatePct, 0)}
+                        </td>
+                        <td className="px-6 py-3.5 tabular-nums text-ink/80">
+                          {formatNumber(client.mattersCount)}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             )}
           </div>
 
           {/* Pricing model table */}
           {metrics.pricingModelDistribution.length > 0 && (
             <div className="bg-surface rounded-2xl border border-border/60 overflow-hidden shadow-sm">
-              <table className="w-full text-left text-sm border-collapse">
-                <thead>
-                  <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
-                    <th className="px-6 py-4">Pricing model</th>
-                    <th className="px-6 py-4">Matters</th>
-                    <th className="px-6 py-4">Share</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-100/60">
-                  {metrics.pricingModelDistribution.map((m) => (
-                    <tr key={m.pricingModel} className="hover:bg-field/40 transition-colors">
-                      <td className="px-6 py-3.5 font-semibold text-ink">
-                        {formatPricingModel(m.pricingModel)}
-                      </td>
-                      <td className="px-6 py-3.5 tabular-nums text-ink/80">{formatNumber(m.count)}</td>
-                      <td className="px-6 py-3.5 tabular-nums text-ink/80">{formatPct(m.pct)}</td>
+              <div className="overflow-x-auto rates-scrollable">
+                <table className="w-full text-left text-sm border-collapse">
+
+                  <thead>
+                    <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
+                      <th className="px-6 py-4">Pricing model</th>
+                      <th className="px-6 py-4">Matters</th>
+                      <th className="px-6 py-4">Share</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody className="divide-y divide-gray-100/60">
+                    {metrics.pricingModelDistribution.map((m) => (
+                      <tr key={m.pricingModel} className="hover:bg-field/40 transition-colors">
+                        <td className="px-6 py-3.5 font-semibold text-ink">
+                          {formatPricingModel(m.pricingModel)}
+                        </td>
+                        <td className="px-6 py-3.5 tabular-nums text-ink/80">{formatNumber(m.count)}</td>
+                        <td className="px-6 py-3.5 tabular-nums text-ink/80">{formatPct(m.pct)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           )}
 
@@ -358,51 +364,54 @@ export default function PracticeAreaDeepDivePage() {
                 />
               </div>
             ) : (
-              <table className="w-full text-left text-sm border-collapse">
-                <thead>
-                  <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
-                    <th className="px-6 py-4">Matter</th>
-                    <th className="px-6 py-4">Source</th>
-                    <th className="px-6 py-4">Gross fees</th>
-                    <th className="px-6 py-4">Margin</th>
-                    <th className="px-6 py-4">Closed</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-100/60">
-                  {metrics.topMatters.map((matter) => (
-                    <tr key={matter.uid} className="hover:bg-field/40 transition-colors">
-                      <td className="px-6 py-3.5">
-                        {matter.source === "NEGOTIATION" ? (
-                          <Link
-                            href={`/negotiations/${matter.uid}`}
-                            className="font-semibold text-ink hover:text-primary transition-colors"
-                          >
-                            {matter.title}
-                          </Link>
-                        ) : (
-                          <span className="font-semibold text-ink">{matter.title}</span>
-                        )}
-                        {matter.marginPct < 10 && (
-                          <span
-                            className="ml-2 inline-flex items-center gap-1 text-[10px] font-bold text-red-600"
-                            title="Low margin matter"
-                          >
-                            <HiExclamation className="w-3 h-3" />
-                          </span>
-                        )}
-                      </td>
-                      <td className="px-6 py-3.5 text-xs text-ink/60 capitalize">
-                        {matter.source.toLowerCase()}
-                      </td>
-                      <td className="px-6 py-3.5 tabular-nums font-medium text-ink">
-                        {formatMoney(matter.grossFees)}
-                      </td>
-                      <td className="px-6 py-3.5 tabular-nums text-ink/80">{formatPct(matter.marginPct)}</td>
-                      <td className="px-6 py-3.5 text-xs text-ink/60">{formatDateTime(matter.closedAt)}</td>
+              <div className="overflow-x-auto rates-scrollable">
+                <table className="w-full text-left text-sm border-collapse">
+
+                  <thead>
+                    <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
+                      <th className="px-6 py-4">Matter</th>
+                      <th className="px-6 py-4">Source</th>
+                      <th className="px-6 py-4">Gross fees</th>
+                      <th className="px-6 py-4">Margin</th>
+                      <th className="px-6 py-4">Closed</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody className="divide-y divide-gray-100/60">
+                    {metrics.topMatters.map((matter) => (
+                      <tr key={matter.uid} className="hover:bg-field/40 transition-colors">
+                        <td className="px-6 py-3.5">
+                          {matter.source === "NEGOTIATION" ? (
+                            <Link
+                              href={`/negotiations/${matter.uid}`}
+                              className="font-semibold text-ink hover:text-primary transition-colors"
+                            >
+                              {matter.title}
+                            </Link>
+                          ) : (
+                            <span className="font-semibold text-ink">{matter.title}</span>
+                          )}
+                          {matter.marginPct < 10 && (
+                            <span
+                              className="ml-2 inline-flex items-center gap-1 text-[10px] font-bold text-red-600"
+                              title="Low margin matter"
+                            >
+                              <HiExclamation className="w-3 h-3" />
+                            </span>
+                          )}
+                        </td>
+                        <td className="px-6 py-3.5 text-xs text-ink/60 capitalize">
+                          {matter.source.toLowerCase()}
+                        </td>
+                        <td className="px-6 py-3.5 tabular-nums font-medium text-ink">
+                          {formatMoney(matter.grossFees)}
+                        </td>
+                        <td className="px-6 py-3.5 tabular-nums text-ink/80">{formatPct(matter.marginPct)}</td>
+                        <td className="px-6 py-3.5 text-xs text-ink/60">{formatDateTime(matter.closedAt)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             )}
           </div>
         </>

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import toast from "react-hot-toast";
 import { Select } from "@/components/ui/Select";
 import { HiLockClosed, HiLockOpen } from "react-icons/hi";
+import { Alert } from "@/components/ui/Alert";
 
 const COUNTRIES = [
   { code: "GB", name: "United Kingdom" },
@@ -75,9 +76,7 @@ export default function FirmDetailsPage() {
   if (error && !firm) {
     return (
       <div className="p-8 max-w-3xl w-full mx-auto">
-        <div className="p-4 bg-red-50 border border-red-200 text-red-600 rounded-xl text-sm font-medium">
-          {error}
-        </div>
+        <Alert variant="error" message={error} />
       </div>
     );
   }

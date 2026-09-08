@@ -10,6 +10,7 @@ import { ActivateRateCardModal } from "@/modules/firm/components/ActivateRateCar
 import { RateCard } from "@/modules/firm/types";
 import toast from "react-hot-toast";
 import { HiPlus, HiOutlineDatabase, HiOutlineLightningBolt, HiCheckCircle, HiArrowRight, HiArchive } from "react-icons/hi";
+import { Alert } from "@/components/ui/Alert";
 
 export default function RateCardsPage() {
   const { cards, isLoading, error, createCard, activateCard } = useRateCards();
@@ -79,9 +80,7 @@ export default function RateCardsPage() {
       </div>
 
       {error && (
-        <div className="p-4 bg-red-50 border border-red-200 text-red-600 rounded-xl text-sm font-medium">
-          {error}
-        </div>
+        <Alert variant="error" message={error} />
       )}
 
       {!isLoading && offices.length > 0 && (
@@ -179,52 +178,55 @@ export default function RateCardsPage() {
               </div>
             ) : (
               <div className="bg-surface rounded-2xl border border-border/60 overflow-hidden shadow-sm">
-                <table className="w-full text-left text-sm border-collapse">
-                  <thead>
-                    <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
-                      <th className="px-6 py-4">Name</th>
-                      <th className="px-6 py-4">Office</th>
-                      <th className="px-6 py-4">Currency</th>
-                      <th className="px-6 py-4">Effective Date</th>
-                      <th className="px-6 py-4 text-right">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-100/60">
-                    {draftCards.map((card) => (
-                      <tr key={card.uid} className="hover:bg-field/40 text-ink transition-colors">
-                        <td className="px-6 py-4 font-semibold text-ink flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
-                            <HiOutlineDatabase className="w-4 h-4" />
-                          </div>
-                          <span>{card.name}</span>
-                        </td>
-                        <td className="px-6 py-4 text-xs font-medium text-ink/70">{card.officeCode || "Firm default"}</td>
-                        <td className="px-6 py-4">
-                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-lg text-[10px] font-bold bg-primary/10 text-primary border border-primary/10 uppercase tracking-wider">
-                            {card.currency}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4 text-xs font-medium text-ink/70">{card.effectiveDate}</td>
-                        <td className="px-6 py-4 text-right">
-                          <div className="flex items-center justify-end gap-2.5">
-                            <button
-                              onClick={() => handleOpenEntries(card)}
-                              className="px-3.5 py-1.5 text-xs font-bold text-primary bg-primary/5 hover:bg-primary/10 rounded-full transition-all"
-                            >
-                              Add/Edit Rates
-                            </button>
-                            <button
-                              onClick={() => handleOpenActivate(card)}
-                              className="px-3.5 py-1.5 text-xs font-bold text-ink/80 bg-hover hover:bg-hover rounded-full transition-all"
-                            >
-                              Activate
-                            </button>
-                          </div>
-                        </td>
+                <div className="overflow-x-auto rates-scrollable">
+                  <table className="w-full text-left text-sm border-collapse">
+
+                    <thead>
+                      <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
+                        <th className="px-6 py-4">Name</th>
+                        <th className="px-6 py-4">Office</th>
+                        <th className="px-6 py-4">Currency</th>
+                        <th className="px-6 py-4">Effective Date</th>
+                        <th className="px-6 py-4 text-right">Actions</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100/60">
+                      {draftCards.map((card) => (
+                        <tr key={card.uid} className="hover:bg-field/40 text-ink transition-colors">
+                          <td className="px-6 py-4 font-semibold text-ink flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                              <HiOutlineDatabase className="w-4 h-4" />
+                            </div>
+                            <span>{card.name}</span>
+                          </td>
+                          <td className="px-6 py-4 text-xs font-medium text-ink/70">{card.officeCode || "Firm default"}</td>
+                          <td className="px-6 py-4">
+                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-lg text-[10px] font-bold bg-primary/10 text-primary border border-primary/10 uppercase tracking-wider">
+                              {card.currency}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4 text-xs font-medium text-ink/70">{card.effectiveDate}</td>
+                          <td className="px-6 py-4 text-right">
+                            <div className="flex items-center justify-end gap-2.5">
+                              <button
+                                onClick={() => handleOpenEntries(card)}
+                                className="px-3.5 py-1.5 text-xs font-bold text-primary bg-primary/5 hover:bg-primary/10 rounded-full transition-all"
+                              >
+                                Add/Edit Rates
+                              </button>
+                              <button
+                                onClick={() => handleOpenActivate(card)}
+                                className="px-3.5 py-1.5 text-xs font-bold text-ink/80 bg-hover hover:bg-hover rounded-full transition-all"
+                              >
+                                Activate
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             )}
           </div>
@@ -233,42 +235,45 @@ export default function RateCardsPage() {
             <div>
               <h2 className="text-xs font-bold text-ink/80 uppercase tracking-wider mb-3">Archived Cards</h2>
               <div className="bg-surface rounded-2xl border border-border/60 overflow-hidden shadow-sm">
-                <table className="w-full text-left text-sm border-collapse">
-                  <thead>
-                    <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
-                      <th className="px-6 py-4">Name</th>
-                      <th className="px-6 py-4">Currency</th>
-                      <th className="px-6 py-4">Effective Date</th>
-                      <th className="px-6 py-4 text-right"></th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-100/60">
-                    {archivedCards.map((card) => (
-                      <tr key={card.uid} className="opacity-60 text-ink/90 bg-field/20 hover:bg-field/40 transition-colors">
-                        <td className="px-6 py-4 font-semibold flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-lg bg-canvas text-ink/55 flex items-center justify-center shrink-0">
-                            <HiArchive className="w-4 h-4" />
-                          </div>
-                          <span>{card.name}</span>
-                        </td>
-                        <td className="px-6 py-4">
-                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-lg text-[10px] font-bold bg-canvas text-ink/60 border border-border/50 uppercase tracking-wider">
-                            {card.currency}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4 text-xs">{card.effectiveDate}</td>
-                        <td className="px-6 py-4 text-right">
-                          <button
-                            onClick={() => handleOpenEntries(card)}
-                            className="px-3.5 py-1.5 text-xs font-bold text-ink/65 bg-canvas hover:bg-field rounded-full transition-all"
-                          >
-                            View Rates
-                          </button>
-                        </td>
+                <div className="overflow-x-auto rates-scrollable">
+                  <table className="w-full text-left text-sm border-collapse">
+
+                    <thead>
+                      <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
+                        <th className="px-6 py-4">Name</th>
+                        <th className="px-6 py-4">Currency</th>
+                        <th className="px-6 py-4">Effective Date</th>
+                        <th className="px-6 py-4 text-right"></th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100/60">
+                      {archivedCards.map((card) => (
+                        <tr key={card.uid} className="opacity-60 text-ink/90 bg-field/20 hover:bg-field/40 transition-colors">
+                          <td className="px-6 py-4 font-semibold flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-lg bg-canvas text-ink/55 flex items-center justify-center shrink-0">
+                              <HiArchive className="w-4 h-4" />
+                            </div>
+                            <span>{card.name}</span>
+                          </td>
+                          <td className="px-6 py-4">
+                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-lg text-[10px] font-bold bg-canvas text-ink/60 border border-border/50 uppercase tracking-wider">
+                              {card.currency}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4 text-xs">{card.effectiveDate}</td>
+                          <td className="px-6 py-4 text-right">
+                            <button
+                              onClick={() => handleOpenEntries(card)}
+                              className="px-3.5 py-1.5 text-xs font-bold text-ink/65 bg-canvas hover:bg-field rounded-full transition-all"
+                            >
+                              View Rates
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           )}

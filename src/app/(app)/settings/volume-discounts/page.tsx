@@ -14,6 +14,7 @@ import { ProgramFormModal } from "@/modules/volume-discount/components/ProgramFo
 import { Button } from "@/components/ui/Button";
 import toast from "react-hot-toast";
 import { HiPlus, HiOutlineTrendingDown, HiOutlineClock, HiCheckCircle } from "react-icons/hi";
+import { Alert } from "@/components/ui/Alert";
 
 export default function VolumeDiscountsPage() {
   const router = useRouter();
@@ -114,9 +115,7 @@ export default function VolumeDiscountsPage() {
       </div>
 
       {error && (
-        <div className="p-4 bg-red-50 border border-red-200 text-red-600 rounded-xl text-sm font-medium">
-          {error}
-        </div>
+        <Alert variant="error" message={error} />
       )}
 
       {isLoading ? (
@@ -161,74 +160,77 @@ export default function VolumeDiscountsPage() {
             </div>
           ) : (
             <div className="bg-surface rounded-2xl border border-border/60 overflow-hidden shadow-sm">
-              <table className="w-full text-left text-sm border-collapse">
-                <thead>
-                  <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
-                    <th className="px-6 py-4">Client</th>
-                    <th className="px-6 py-4">Period</th>
-                    <th className="px-6 py-4">Status</th>
-                    <th className="px-6 py-4">Cumulative Spend</th>
-                    <th className="px-6 py-4">Current Tier</th>
-                    <th className="px-6 py-4">Savings</th>
-                    <th className="px-6 py-4 text-right">Actions</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-100/60">
-                  {programs.map((program) => {
-                    const dashboard = dashboards[program.uid];
-                    return (
-                      <tr key={program.uid} className="hover:bg-field/40 text-ink transition-colors">
-                        <td className="px-6 py-4">
-                          <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-lg bg-primary/10 text-ink/70 flex items-center justify-center shrink-0">
-                              <HiOutlineTrendingDown className="w-4 h-4" />
+              <div className="overflow-x-auto rates-scrollable">
+                <table className="w-full text-left text-sm border-collapse">
+
+                  <thead>
+                    <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
+                      <th className="px-6 py-4">Client</th>
+                      <th className="px-6 py-4">Period</th>
+                      <th className="px-6 py-4">Status</th>
+                      <th className="px-6 py-4">Cumulative Spend</th>
+                      <th className="px-6 py-4">Current Tier</th>
+                      <th className="px-6 py-4">Savings</th>
+                      <th className="px-6 py-4 text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-100/60">
+                    {programs.map((program) => {
+                      const dashboard = dashboards[program.uid];
+                      return (
+                        <tr key={program.uid} className="hover:bg-field/40 text-ink transition-colors">
+                          <td className="px-6 py-4">
+                            <div className="flex items-center gap-3">
+                              <div className="w-8 h-8 rounded-lg bg-primary/10 text-ink/70 flex items-center justify-center shrink-0">
+                                <HiOutlineTrendingDown className="w-4 h-4" />
+                              </div>
+                              <span className="font-semibold">{clientName(program.clientProfileUid)}</span>
                             </div>
-                            <span className="font-semibold">{clientName(program.clientProfileUid)}</span>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 text-xs font-medium text-ink/70">
-                          {formatDate(program.periodStart)} — {formatDate(program.periodEnd)}
-                        </td>
-                        <td className="px-6 py-4">
-                          <span
-                            className={`inline-flex items-center px-2.5 py-0.5 rounded-lg text-[10px] font-bold border uppercase tracking-wider ${
-                              program.status === "ACTIVE"
-                                ? "bg-emerald-50 text-emerald-700 border-emerald-200"
-                                : program.status === "DRAFT"
-                                ? "bg-amber-50 text-amber-700 border-amber-200"
-                                : "bg-gray-50 text-gray-600 border-gray-200"
-                            }`}
-                          >
-                            {program.status === "ACTIVE" && <HiCheckCircle className="w-3 h-3 mr-1" />}
-                            {program.status === "DRAFT" && <HiOutlineClock className="w-3 h-3 mr-1" />}
-                            {program.status}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4 tabular-nums font-medium">
-                          {dashboard
-                            ? formatMoney(dashboard.cumulativeSpend, program.currency)
-                            : "—"}
-                        </td>
-                        <td className="px-6 py-4 text-xs text-ink/70">
-                          {dashboard?.currentTierName || "—"}
-                        </td>
-                        <td className="px-6 py-4 tabular-nums text-emerald-700 font-medium">
-                          {dashboard ? formatMoney(dashboard.savingsToDate, program.currency) : "—"}
-                        </td>
-                        <td className="px-6 py-4 text-right">
-                          <Button
-                            variant="secondary"
-                            onClick={() => router.push(`/settings/volume-discounts/${program.uid}`)}
-                            className="text-xs py-1.5 px-3"
-                          >
-                            View
-                          </Button>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+                          </td>
+                          <td className="px-6 py-4 text-xs font-medium text-ink/70">
+                            {formatDate(program.periodStart)} — {formatDate(program.periodEnd)}
+                          </td>
+                          <td className="px-6 py-4">
+                            <span
+                              className={`inline-flex items-center px-2.5 py-0.5 rounded-lg text-[10px] font-bold border uppercase tracking-wider ${
+                                program.status === "ACTIVE"
+                                  ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+                                  : program.status === "DRAFT"
+                                  ? "bg-amber-50 text-amber-700 border-amber-200"
+                                  : "bg-gray-50 text-gray-600 border-gray-200"
+                              }`}
+                            >
+                              {program.status === "ACTIVE" && <HiCheckCircle className="w-3 h-3 mr-1" />}
+                              {program.status === "DRAFT" && <HiOutlineClock className="w-3 h-3 mr-1" />}
+                              {program.status}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4 tabular-nums font-medium">
+                            {dashboard
+                              ? formatMoney(dashboard.cumulativeSpend, program.currency)
+                              : "—"}
+                          </td>
+                          <td className="px-6 py-4 text-xs text-ink/70">
+                            {dashboard?.currentTierName || "—"}
+                          </td>
+                          <td className="px-6 py-4 tabular-nums text-emerald-700 font-medium">
+                            {dashboard ? formatMoney(dashboard.savingsToDate, program.currency) : "—"}
+                          </td>
+                          <td className="px-6 py-4 text-right">
+                            <Button
+                              variant="secondary"
+                              onClick={() => router.push(`/settings/volume-discounts/${program.uid}`)}
+                              className="text-xs py-1.5 px-3"
+                            >
+                              View
+                            </Button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
             </div>
           )}
         </>

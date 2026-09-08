@@ -116,7 +116,7 @@ export function AddEditKeyModal({
         {/* API Key field */}
         <div className="flex flex-col gap-1.5 relative">
           <label className="text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1 select-none">
-            API Key <span className="text-rose-500">*</span>
+            API Key <span className="text-red-600 dark:text-red-400">*</span>
           </label>
           <div className="relative">
             <input

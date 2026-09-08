@@ -30,56 +30,59 @@ export function EngagementPackDocument({ pack, section = "letter" }: Props) {
           </p>
         </div>
         <div className="px-8 py-8 sm:px-12">
-          <table className="w-full border-collapse text-sm">
-            <thead>
-              <tr className="border-b border-ink/15 text-left text-[10px] font-bold uppercase tracking-[0.14em] text-ink/40">
-                <th className="pb-3 pr-3 font-bold">Fee earner level</th>
-                <th className="pb-3 pr-3 text-right font-bold">Hours</th>
-                <th className="pb-3 pr-3 text-right font-bold">Rate</th>
-                <th className="pb-3 text-right font-bold">Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              {lines.map((line, i) => (
-                <tr key={i} className="border-b border-ink/8">
-                  <td className="py-3 pr-3 align-top">
-                    <span className="font-medium text-ink">
-                      {line.feeEarnerLevelName ||
-                        line.feeEarnerLevelCode ||
-                        "—"}
-                    </span>
-                    {line.description && (
-                      <p className="mt-0.5 text-xs text-ink/45">
-                        {line.description}
-                      </p>
-                    )}
+          <div className="overflow-x-auto rates-scrollable">
+            <table className="w-full border-collapse text-sm">
+
+              <thead>
+                <tr className="border-b border-ink/15 text-left text-[10px] font-bold uppercase tracking-[0.14em] text-ink/40">
+                  <th className="pb-3 pr-3 font-bold">Fee earner level</th>
+                  <th className="pb-3 pr-3 text-right font-bold">Hours</th>
+                  <th className="pb-3 pr-3 text-right font-bold">Rate</th>
+                  <th className="pb-3 text-right font-bold">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                {lines.map((line, i) => (
+                  <tr key={i} className="border-b border-ink/8">
+                    <td className="py-3 pr-3 align-top">
+                      <span className="font-medium text-ink">
+                        {line.feeEarnerLevelName ||
+                          line.feeEarnerLevelCode ||
+                          "—"}
+                      </span>
+                      {line.description && (
+                        <p className="mt-0.5 text-xs text-ink/45">
+                          {line.description}
+                        </p>
+                      )}
+                    </td>
+                    <td className="py-3 pr-3 text-right tabular-nums text-ink/70">
+                      {line.hours != null ? Number(line.hours) : "—"}
+                    </td>
+                    <td className="py-3 pr-3 text-right tabular-nums text-ink/70">
+                      {formatMoney(line.hourlyRate, currency)}
+                    </td>
+                    <td className="py-3 text-right tabular-nums font-medium text-ink">
+                      {formatMoney(line.amount, currency)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td
+                    colSpan={3}
+                    className="pt-4 text-sm font-semibold text-ink"
+                  >
+                    Agreed estimated total
                   </td>
-                  <td className="py-3 pr-3 text-right tabular-nums text-ink/70">
-                    {line.hours != null ? Number(line.hours) : "—"}
-                  </td>
-                  <td className="py-3 pr-3 text-right tabular-nums text-ink/70">
-                    {formatMoney(line.hourlyRate, currency)}
-                  </td>
-                  <td className="py-3 text-right tabular-nums font-medium text-ink">
-                    {formatMoney(line.amount, currency)}
+                  <td className="pt-4 text-right text-sm font-semibold tabular-nums text-ink">
+                    {formatMoney(pack.agreedGrossFees, currency)}
                   </td>
                 </tr>
-              ))}
-            </tbody>
-            <tfoot>
-              <tr>
-                <td
-                  colSpan={3}
-                  className="pt-4 text-sm font-semibold text-ink"
-                >
-                  Agreed estimated total
-                </td>
-                <td className="pt-4 text-right text-sm font-semibold tabular-nums text-ink">
-                  {formatMoney(pack.agreedGrossFees, currency)}
-                </td>
-              </tr>
-            </tfoot>
-          </table>
+              </tfoot>
+            </table>
+          </div>
         </div>
       </div>
     );

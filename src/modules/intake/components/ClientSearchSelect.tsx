@@ -56,7 +56,7 @@ export function ClientSearchSelect({
   return (
     <div className="flex flex-col gap-1.5 w-full relative" ref={dropdownRef}>
       <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
-        Client <span className="text-rose-500">*</span>
+        Client <span className="text-red-600 dark:text-red-400">*</span>
       </label>
       <button
         type="button"

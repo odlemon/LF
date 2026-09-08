@@ -8,6 +8,7 @@ import { DatePicker } from "@/components/ui/DatePicker";
 import { fieldClassName } from "@/components/ui/Input";
 import { HiX } from "react-icons/hi";
 import type { AddSpendRecordCommand } from "../types";
+import { FormError } from "@/components/ui/FormError";
 
 interface AddSpendModalProps {
   isOpen: boolean;
@@ -79,9 +80,7 @@ export function AddSpendModal({ isOpen, onClose, onSave, defaultCurrency = "GBP"
         </h3>
 
         {modalError && (
-          <div className="mb-4 p-3.5 bg-red-50 border border-red-200 text-red-600 rounded-full text-xs px-5 font-medium animate-fade-in text-center">
-            {modalError}
-          </div>
+          <FormError message={modalError} />
         )}
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">

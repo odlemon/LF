@@ -3,8 +3,11 @@
 
 import React, { useState } from "react";
 import { useClients } from "@/modules/firm/hooks/useFirm";
+import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
+import { EmptyState } from "@/components/ui/EmptyState";
 import { ClientFormModal } from "@/modules/firm/components/ClientFormModal";
+import { ClientTierBadge } from "@/modules/firm/components/ClientTierBadge";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { HiPlus, HiSearch, HiExternalLink } from "react-icons/hi";
@@ -21,17 +24,6 @@ export default function ClientsPage() {
       setIsModalOpen(false);
     } catch (err: any) {
       throw err;
-    }
-  };
-
-  const getTierClass = (tier: string) => {
-    switch (tier) {
-      case "STRATEGIC":
-        return "bg-purple-50 text-purple-700 border-purple-100";
-      case "PREFERRED":
-        return "bg-blue-50 text-blue-700 border-blue-100";
-      default:
-        return "bg-field text-ink/80 border-border/60";
     }
   };
 
@@ -63,11 +55,7 @@ export default function ClientsPage() {
         />
       </div>
 
-      {error && (
-        <div className="p-4 bg-red-50 border border-red-200 text-red-600 rounded-xl text-sm font-medium">
-          {error}
-        </div>
-      )}
+      {error && <Alert variant="error" message={error} />}
 
       {isLoading ? (
         <div className="flex flex-col gap-3 animate-pulse">
@@ -76,14 +64,18 @@ export default function ClientsPage() {
           <div className="h-16 bg-field rounded-xl" />
         </div>
       ) : clients.length === 0 ? (
-        <div className="text-center py-12 bg-surface rounded-2xl border border-border/60 p-8 shadow-sm flex flex-col items-center justify-center gap-3">
-          <span className="text-sm text-ink/55">
-            {searchQuery ? "No clients match your search criteria." : "No clients registered yet. Click 'Add Client' to register one."}
-          </span>
-        </div>
+        <EmptyState
+          title={searchQuery ? "No clients match your search" : "No clients registered yet"}
+          description={
+            searchQuery
+              ? "Try a different name, contact, or email."
+              : "Click “Add Client” to register one."
+          }
+        />
       ) : (
         <div className="bg-surface rounded-2xl border border-border/60 overflow-hidden shadow-sm">
-          <table className="w-full text-left text-sm border-collapse">
+          <div className="overflow-x-auto rates-scrollable">
+          <table className="w-full min-w-[860px] text-left text-sm border-collapse">
             <thead>
               <tr className="bg-field text-xs font-bold text-ink/65 border-b border-border">
                 <th className="px-6 py-4">Client Name</th>
@@ -94,7 +86,7 @@ export default function ClientsPage() {
                 <th className="px-6 py-4 text-right"></th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-border/60">
               {clients.map((client) => (
                 <tr key={client.uid} className="hover:bg-field/50 text-ink transition-colors">
                   <td className="px-6 py-4 font-bold">
@@ -106,9 +98,7 @@ export default function ClientsPage() {
                     {client.type.replace("_", " ")}
                   </td>
                   <td className="px-6 py-4">
-                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold border uppercase tracking-wider ${getTierClass(client.tier)}`}>
-                      {client.tier}
-                    </span>
+                    <ClientTierBadge tier={client.tier} />
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex flex-col">
@@ -130,6 +120,7 @@ export default function ClientsPage() {
               ))}
             </tbody>
           </table>
+          </div>
         </div>
       )}
 

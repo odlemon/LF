@@ -16,8 +16,10 @@ export function Button({
   disabled,
   ...props
 }: ButtonProps) {
+  // whitespace-nowrap: without it a two-word label ("Add Client", "New Request") wrapped
+  // inside the pill on narrow columns and the button rendered at double height.
   const baseStyles =
-    "transition-all duration-200 flex items-center justify-center gap-2 font-semibold disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer";
+    "transition-all duration-200 inline-flex items-center justify-center gap-2 font-semibold whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer";
   let variantStyles = "";
 
   switch (variant) {
@@ -27,11 +29,11 @@ export function Button({
       break;
     case "cta":
       variantStyles =
-        "px-5 py-3 text-[15px] text-on-primary bg-primary hover:bg-primary-hover rounded-full shadow-[0_14px_40px_-20px_rgba(10,10,10,0.55)]";
+        "px-5 py-2.5 text-sm text-on-primary bg-primary hover:bg-primary-hover rounded-full shadow-[0_14px_40px_-20px_rgba(10,10,10,0.55)]";
       break;
     case "client":
       variantStyles =
-        "w-full py-3 px-4 bg-primary hover:bg-primary-hover text-on-primary text-sm rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:ring-offset-2 focus:ring-offset-surface";
+        "w-full py-2.5 px-4 bg-primary hover:bg-primary-hover text-on-primary text-sm rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:ring-offset-2 focus:ring-offset-surface";
       break;
     case "secondary":
       variantStyles =

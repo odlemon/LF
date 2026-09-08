@@ -17,6 +17,7 @@ import type { PanelAgreement, CreatePanelAgreementCommand } from "@/modules/volu
 import { Button } from "@/components/ui/Button";
 import toast from "react-hot-toast";
 import { HiOutlinePlus, HiOutlineCheckCircle, HiOutlineShieldCheck, HiOutlineClock } from "react-icons/hi";
+import { Alert } from "@/components/ui/Alert";
 
 export default function VolumeDiscountDetailPage() {
   const params = useParams();
@@ -153,9 +154,7 @@ export default function VolumeDiscountDetailPage() {
   if (error || !program || !dashboard) {
     return (
       <div className="p-8 max-w-5xl w-full mx-auto">
-        <div className="p-4 bg-red-50 border border-red-200 text-red-600 rounded-xl text-sm font-medium">
-          {error || "Program not found"}
-        </div>
+        <Alert variant="error" message={error || "Program not found"} />
       </div>
     );
   }

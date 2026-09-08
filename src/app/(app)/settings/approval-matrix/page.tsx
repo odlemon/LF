@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { ApprovalStageDefinition } from "@/modules/firm/types";
 import toast from "react-hot-toast";
 import { HiPlus, HiTrash, HiArrowUp, HiArrowDown, HiOutlineClipboardCheck } from "react-icons/hi";
+import { Alert } from "@/components/ui/Alert";
 
 export default function ApprovalMatrixPage() {
   const { stages, isLoading, error, saveStages } = useApprovalMatrix();
@@ -85,9 +86,7 @@ export default function ApprovalMatrixPage() {
       </div>
 
       {error && (
-        <div className="p-4 bg-red-50 border border-red-200 text-red-600 rounded-xl text-sm font-medium">
-          {error}
-        </div>
+        <Alert variant="error" message={error} />
       )}
 
       {isLoading && draft.length === 0 ? (

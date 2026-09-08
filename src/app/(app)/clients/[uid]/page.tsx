@@ -3,6 +3,7 @@
 
 import React, { useState, useEffect, use } from "react";
 import { useClientDetail } from "@/modules/firm/hooks/useFirm";
+import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import toast from "react-hot-toast";
@@ -10,6 +11,7 @@ import { HiArrowLeft, HiMail, HiUser, HiPlus, HiLockOpen, HiCheck, HiX, HiPencil
 import { Select } from "@/components/ui/Select";
 import { AuditTrailPanel } from "@/components/shared/AuditTrailPanel";
 import { ClientIntelligencePanel } from "@/modules/analytics/components/ClientIntelligencePanel";
+import { ClientTierBadge } from "@/modules/firm/components/ClientTierBadge";
 
 interface ClientDetailPageProps {
   params: Promise<{ uid: string }>;
@@ -57,9 +59,7 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
   if (error || !client) {
     return (
       <div className="p-8 max-w-4xl w-full mx-auto">
-        <div className="p-4 bg-red-50 border border-red-200 text-red-600 rounded-xl text-sm font-medium">
-          {error || "Client profile not found."}
-        </div>
+        <Alert variant="error" message={error || "Client profile not found."} />
       </div>
     );
   }
@@ -109,17 +109,6 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
     }
   };
 
-  const getTierClass = (t: string) => {
-    switch (t) {
-      case "STRATEGIC":
-        return "bg-purple-50 text-purple-700 border-purple-100";
-      case "PREFERRED":
-        return "bg-blue-50 text-blue-700 border-blue-100";
-      default:
-        return "bg-field text-ink/80 border-border/60";
-    }
-  };
-
   return (
     <div className="p-8 max-w-5xl w-full mx-auto flex flex-col gap-6">
       <div>
@@ -134,9 +123,7 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
           <div>
             <h1 className="text-2xl font-bold text-ink tracking-tight">{client.name}</h1>
             <div className="flex items-center gap-2.5 mt-2">
-              <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold border uppercase tracking-wider ${getTierClass(client.tier)}`}>
-                {client.tier}
-              </span>
+              <ClientTierBadge tier={client.tier} />
               <span className="text-xs text-ink/55 font-medium capitalize">
                 {client.type.toLowerCase().replace("_", " ")}
               </span>

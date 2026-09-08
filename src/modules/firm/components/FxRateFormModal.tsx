@@ -7,6 +7,7 @@ import { HiX } from "react-icons/hi";
 import { Select } from "@/components/ui/Select";
 import { DatePicker } from "@/components/ui/DatePicker";
 import { ExchangeRate } from "@/modules/firm/types";
+import { FormError } from "@/components/ui/FormError";
 
 const CURRENCY_OPTIONS = [
   { value: "GBP", label: "GBP (£)" },
@@ -93,9 +94,7 @@ export function FxRateFormModal({ isOpen, onClose, editingRate, onSave }: FxRate
         </h3>
 
         {modalError && (
-          <div className="mb-4 p-3.5 bg-red-50 border border-red-200 text-red-600 rounded-full text-xs px-5 font-medium animate-fade-in text-center">
-            {modalError}
-          </div>
+          <FormError message={modalError} />
         )}
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">

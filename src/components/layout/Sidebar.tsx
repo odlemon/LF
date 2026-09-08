@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
@@ -31,7 +31,11 @@ import {
   HiOutlineKey,
   HiOutlineChartBar,
   HiOutlineOfficeBuilding,
+  HiChevronDoubleLeft,
+  HiChevronDoubleRight,
 } from "react-icons/hi";
+
+const COLLAPSE_STORAGE_KEY = "lysp.sidebar.collapsed";
 
 interface NavItem {
   label: string;
@@ -49,6 +53,29 @@ export function Sidebar({ isMobileOpen = false, onMobileClose }: SidebarProps = 
   const pathname = usePathname();
   const { user } = useAuth();
   const [isSettingsOpen, setIsSettingsOpen] = useState(true);
+  // Read on mount rather than in the initial state so the server and first client
+  // render agree; flipping straight to the stored value would hydrate-mismatch.
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
+  useEffect(() => {
+    try {
+      setIsCollapsed(window.localStorage.getItem(COLLAPSE_STORAGE_KEY) === "1");
+    } catch {
+      /* storage unavailable (private mode) — stay expanded */
+    }
+  }, []);
+
+  const toggleCollapsed = () => {
+    setIsCollapsed((prev) => {
+      const next = !prev;
+      try {
+        window.localStorage.setItem(COLLAPSE_STORAGE_KEY, next ? "1" : "0");
+      } catch {
+        /* preference simply will not persist */
+      }
+      return next;
+    });
+  };
 
   const mainNavItems: NavItem[] = [
     { label: "Dashboard", route: "/dashboard", icon: HiHome },
@@ -91,14 +118,18 @@ export function Sidebar({ isMobileOpen = false, onMobileClose }: SidebarProps = 
         key={item.route}
         href={item.route}
         onClick={onMobileClose}
-        className={`flex items-center gap-3 px-4 py-2.5 text-sm font-semibold transition-all ${
+        title={isCollapsed ? item.label : undefined}
+        aria-label={isCollapsed ? item.label : undefined}
+        className={`flex items-center gap-3 py-2.5 text-sm font-semibold transition-all rounded-full ${
+          isCollapsed ? "justify-center px-0" : "px-4"
+        } ${
           isActive
-            ? "bg-primary text-on-primary rounded-full"
-            : "text-ink/65 hover:bg-hover hover:text-ink rounded-full"
+            ? "bg-primary text-on-primary"
+            : "text-ink/65 hover:bg-hover hover:text-ink"
         }`}
       >
-        <Icon className="w-5 h-5" />
-        {item.label}
+        <Icon className="w-5 h-5 shrink-0" />
+        {!isCollapsed && item.label}
       </Link>
     );
   };
@@ -159,15 +190,19 @@ export function Sidebar({ isMobileOpen = false, onMobileClose }: SidebarProps = 
         />
       )}
       <aside
-        className={`w-64 bg-surface border-r border-border flex flex-col h-screen p-4 fixed inset-y-0 left-0 z-50 transition-transform duration-200 ease-out md:sticky md:top-0 md:translate-x-0 ${
-          isMobileOpen ? "translate-x-0" : "-translate-x-full"
+        className={`bg-surface border-r border-border flex flex-col h-screen p-4 fixed inset-y-0 left-0 z-50 transition-all duration-200 ease-out md:sticky md:top-0 md:translate-x-0 ${
+          isCollapsed ? "w-64 md:w-[76px]" : "w-64"
+        } ${isMobileOpen ? "translate-x-0" : "-translate-x-full"}`}
+      >
+      <div
+        className={`mb-8 px-3 flex items-center gap-2 ${
+          isCollapsed ? "md:flex-col md:px-0 md:gap-3" : "justify-between"
         }`}
       >
-      <div className="mb-8 px-3 flex items-center justify-between gap-2">
         <Link href="/dashboard" className="inline-flex items-center shrink-0" aria-label="Lysp home" onClick={onMobileClose}>
           <PlatformLogo size={40} />
         </Link>
-        {!isPartnerOnly && (
+        {!isPartnerOnly && !isCollapsed && (
           <Link
             href="/settings/firm"
             onClick={onMobileClose}
@@ -176,6 +211,19 @@ export function Sidebar({ isMobileOpen = false, onMobileClose }: SidebarProps = 
             Firm
           </Link>
         )}
+        <button
+          type="button"
+          onClick={toggleCollapsed}
+          title={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+          aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+          className="hidden md:inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-border bg-surface text-ink/50 hover:text-ink hover:bg-hover transition-colors cursor-pointer"
+        >
+          {isCollapsed ? (
+            <HiChevronDoubleRight className="w-3.5 h-3.5" />
+          ) : (
+            <HiChevronDoubleLeft className="w-3.5 h-3.5" />
+          )}
+        </button>
       </div>
 
       <nav className="flex-1 flex flex-col gap-6 overflow-y-auto rates-scrollable">
@@ -185,20 +233,30 @@ export function Sidebar({ isMobileOpen = false, onMobileClose }: SidebarProps = 
 
         {visibleSettingsItems.length > 0 && (
           <div className="flex flex-col gap-0.5">
-            <button
-              onClick={() => setIsSettingsOpen(!isSettingsOpen)}
-              className="flex items-center justify-between px-4 py-2 text-[11px] font-semibold text-ink/35 uppercase tracking-[0.18em] hover:text-ink/70 transition-colors w-full text-left cursor-pointer"
-            >
-              <span>Settings</span>
-              {isSettingsOpen ? (
-                <HiChevronUp className="w-3.5 h-3.5" />
-              ) : (
-                <HiChevronDown className="w-3.5 h-3.5" />
-              )}
-            </button>
+            {isCollapsed ? (
+              <div className="my-2 border-t border-border" aria-hidden />
+            ) : (
+              <button
+                onClick={() => setIsSettingsOpen(!isSettingsOpen)}
+                className="flex items-center justify-between px-4 py-2 text-[11px] font-semibold text-ink/35 uppercase tracking-[0.18em] hover:text-ink/70 transition-colors w-full text-left cursor-pointer"
+              >
+                <span>Settings</span>
+                {isSettingsOpen ? (
+                  <HiChevronUp className="w-3.5 h-3.5" />
+                ) : (
+                  <HiChevronDown className="w-3.5 h-3.5" />
+                )}
+              </button>
+            )}
 
-            {isSettingsOpen && (
-              <div className="flex flex-col gap-0.5 pl-1 transition-all duration-300 animate-fade-in">
+            {/* Collapsed to icons there is no group header to re-open it with, so the
+                group always shows; the toggle only applies to the expanded rail. */}
+            {(isSettingsOpen || isCollapsed) && (
+              <div
+                className={`flex flex-col gap-0.5 transition-all duration-300 animate-fade-in ${
+                  isCollapsed ? "" : "pl-1"
+                }`}
+              >
                 {visibleSettingsItems.map(renderItem)}
               </div>
             )}
@@ -207,21 +265,12 @@ export function Sidebar({ isMobileOpen = false, onMobileClose }: SidebarProps = 
 
         {!isPartnerOnly && checkPermission(PERMISSIONS.AUDIT_READ) && (
           <div className="flex flex-col gap-0.5 border-t border-border pt-4 mt-2">
-            <span className="px-4 py-2 text-[11px] font-semibold text-ink/35 uppercase tracking-[0.18em] block">
-              Audit
-            </span>
-            <Link
-              href="/audit-trail"
-              onClick={onMobileClose}
-              className={`flex items-center gap-3 px-4 py-2.5 text-sm font-semibold transition-all ${
-                pathname === "/audit-trail"
-                  ? "bg-primary text-on-primary rounded-full"
-                  : "text-ink/65 hover:bg-hover hover:text-ink rounded-full"
-              }`}
-            >
-              <HiClipboardList className="w-5 h-5" />
-              Audit Trail
-            </Link>
+            {!isCollapsed && (
+              <span className="px-4 py-2 text-[11px] font-semibold text-ink/35 uppercase tracking-[0.18em] block">
+                Audit
+              </span>
+            )}
+            {renderItem({ label: "Audit Trail", route: "/audit-trail", icon: HiClipboardList })}
           </div>
         )}
       </nav>

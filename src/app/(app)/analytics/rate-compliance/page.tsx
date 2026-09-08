@@ -118,46 +118,49 @@ export default function RateCompliancePage() {
                 />
               </div>
             ) : (
-              <table className="w-full text-left text-sm border-collapse">
-                <thead>
-                  <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
-                    <th className="px-6 py-4">Fee earner level</th>
-                    <th className="px-6 py-4">Lines</th>
-                    <th className="px-6 py-4">Compliant</th>
-                    <th className="px-6 py-4">Below card</th>
-                    <th className="px-6 py-4">Above card</th>
-                    <th className="px-6 py-4">Avg delta</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-100/60">
-                  {compliance.byLevel.map((level) => {
-                    const hasIssues = level.belowCardCount > 0 || level.aboveCardCount > 0;
-                    return (
-                      <tr key={level.feeEarnerLevelCode} className="hover:bg-field/40 transition-colors">
-                        <td className="px-6 py-3.5 font-semibold text-ink">
-                          {level.feeEarnerLevelName ?? level.feeEarnerLevelCode}
-                        </td>
-                        <td className="px-6 py-3.5 tabular-nums text-ink/80">
-                          {formatNumber(level.lineCount)}
-                        </td>
-                        <td className="px-6 py-3.5 tabular-nums text-emerald-700 font-medium">
-                          {formatNumber(level.compliantCount)}
-                        </td>
-                        <td className={`px-6 py-3.5 tabular-nums ${level.belowCardCount > 0 ? "text-red-600 font-bold" : "text-ink/50"}`}>
-                          {formatNumber(level.belowCardCount)}
-                        </td>
-                        <td className={`px-6 py-3.5 tabular-nums ${level.aboveCardCount > 0 ? "text-amber-600 font-bold" : "text-ink/50"}`}>
-                          {formatNumber(level.aboveCardCount)}
-                        </td>
-                        <td className="px-6 py-3.5 tabular-nums text-ink/80">
-                          {level.avgDeltaPct != null ? formatPct(level.avgDeltaPct) : "—"}
-                          {hasIssues && level.avgDeltaPct == null && "—"}
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+              <div className="overflow-x-auto rates-scrollable">
+                <table className="w-full text-left text-sm border-collapse">
+
+                  <thead>
+                    <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
+                      <th className="px-6 py-4">Fee earner level</th>
+                      <th className="px-6 py-4">Lines</th>
+                      <th className="px-6 py-4">Compliant</th>
+                      <th className="px-6 py-4">Below card</th>
+                      <th className="px-6 py-4">Above card</th>
+                      <th className="px-6 py-4">Avg delta</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-100/60">
+                    {compliance.byLevel.map((level) => {
+                      const hasIssues = level.belowCardCount > 0 || level.aboveCardCount > 0;
+                      return (
+                        <tr key={level.feeEarnerLevelCode} className="hover:bg-field/40 transition-colors">
+                          <td className="px-6 py-3.5 font-semibold text-ink">
+                            {level.feeEarnerLevelName ?? level.feeEarnerLevelCode}
+                          </td>
+                          <td className="px-6 py-3.5 tabular-nums text-ink/80">
+                            {formatNumber(level.lineCount)}
+                          </td>
+                          <td className="px-6 py-3.5 tabular-nums text-emerald-700 font-medium">
+                            {formatNumber(level.compliantCount)}
+                          </td>
+                          <td className={`px-6 py-3.5 tabular-nums ${level.belowCardCount > 0 ? "text-red-600 font-bold" : "text-ink/50"}`}>
+                            {formatNumber(level.belowCardCount)}
+                          </td>
+                          <td className={`px-6 py-3.5 tabular-nums ${level.aboveCardCount > 0 ? "text-amber-600 font-bold" : "text-ink/50"}`}>
+                            {formatNumber(level.aboveCardCount)}
+                          </td>
+                          <td className="px-6 py-3.5 tabular-nums text-ink/80">
+                            {level.avgDeltaPct != null ? formatPct(level.avgDeltaPct) : "—"}
+                            {hasIssues && level.avgDeltaPct == null && "—"}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
             )}
           </div>
         </>

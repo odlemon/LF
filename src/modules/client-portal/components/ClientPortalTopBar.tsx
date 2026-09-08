@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import {
   HiOutlineCog,
   HiOutlineLogout,
+  HiOutlineMenu,
   HiOutlineUserCircle,
 } from "react-icons/hi";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
@@ -33,7 +34,7 @@ function portalToastAllowed(n: AppNotification): boolean {
   return prefs.proposalAlerts;
 }
 
-export function ClientPortalTopBar() {
+export function ClientPortalTopBar({ onMenuClick }: { onMenuClick?: () => void } = {}) {
   const { user, logout } = useClientAuth();
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -149,7 +150,16 @@ export function ClientPortalTopBar() {
 
   return (
     <header className="relative z-40 flex h-14 shrink-0 items-center justify-between gap-3 border-b border-border/70 bg-surface/85 px-4 backdrop-blur-md sm:px-6">
-      <div className="min-w-0">
+      <button
+        type="button"
+        onClick={onMenuClick}
+        aria-label="Open menu"
+        className="md:hidden inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border text-ink/60 hover:bg-hover hover:text-ink transition-colors cursor-pointer"
+      >
+        <HiOutlineMenu className="h-5 w-5" />
+      </button>
+
+      <div className="min-w-0 flex-1">
         <p className="truncate text-[11px] font-semibold tracking-wide text-ink/35">
           {user?.clientName || "Secure client workspace"}
         </p>

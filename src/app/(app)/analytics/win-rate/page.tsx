@@ -20,32 +20,35 @@ import type { PeriodParams, WinRateRow } from "@/modules/analytics/types";
 
 function WinRateTable({ rows, labelFor }: { rows: WinRateRow[]; labelFor?: (v: string) => string }) {
   return (
-    <table className="w-full text-left text-sm border-collapse">
-      <thead>
-        <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
-          <th className="px-6 py-4">Segment</th>
-          <th className="px-6 py-4">Won</th>
-          <th className="px-6 py-4">Lost</th>
-          <th className="px-6 py-4">Win rate</th>
-          <th className="px-6 py-4">Avg rounds</th>
-          <th className="px-6 py-4">Avg days</th>
-        </tr>
-      </thead>
-      <tbody className="divide-y divide-gray-100/60">
-        {rows.map((row) => (
-          <tr key={row.dimensionValue} className="hover:bg-field/40 transition-colors">
-            <td className="px-6 py-3.5 font-semibold text-ink">
-              {labelFor ? labelFor(row.dimensionValue) : row.dimensionValue}
-            </td>
-            <td className="px-6 py-3.5 tabular-nums text-emerald-700 font-medium">{row.wins}</td>
-            <td className="px-6 py-3.5 tabular-nums text-red-600 font-medium">{row.losses}</td>
-            <td className="px-6 py-3.5 tabular-nums font-bold text-ink">{formatPct(row.winRatePct)}</td>
-            <td className="px-6 py-3.5 tabular-nums text-ink/80">{formatRounds(row.avgRoundsToClose)}</td>
-            <td className="px-6 py-3.5 tabular-nums text-ink/80">{formatDays(row.avgDaysToClose)}</td>
+    <div className="overflow-x-auto rates-scrollable">
+      <table className="w-full text-left text-sm border-collapse">
+
+        <thead>
+          <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
+            <th className="px-6 py-4">Segment</th>
+            <th className="px-6 py-4">Won</th>
+            <th className="px-6 py-4">Lost</th>
+            <th className="px-6 py-4">Win rate</th>
+            <th className="px-6 py-4">Avg rounds</th>
+            <th className="px-6 py-4">Avg days</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody className="divide-y divide-gray-100/60">
+          {rows.map((row) => (
+            <tr key={row.dimensionValue} className="hover:bg-field/40 transition-colors">
+              <td className="px-6 py-3.5 font-semibold text-ink">
+                {labelFor ? labelFor(row.dimensionValue) : row.dimensionValue}
+              </td>
+              <td className="px-6 py-3.5 tabular-nums text-emerald-700 font-medium">{row.wins}</td>
+              <td className="px-6 py-3.5 tabular-nums text-red-600 font-medium">{row.losses}</td>
+              <td className="px-6 py-3.5 tabular-nums font-bold text-ink">{formatPct(row.winRatePct)}</td>
+              <td className="px-6 py-3.5 tabular-nums text-ink/80">{formatRounds(row.avgRoundsToClose)}</td>
+              <td className="px-6 py-3.5 tabular-nums text-ink/80">{formatDays(row.avgDaysToClose)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 

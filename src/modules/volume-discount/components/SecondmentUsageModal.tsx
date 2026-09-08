@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/Button";
 import { fieldClassName } from "@/components/ui/Input";
 import { HiX } from "react-icons/hi";
+import { FormError } from "@/components/ui/FormError";
 
 interface SecondmentUsageModalProps {
   isOpen: boolean;
@@ -61,9 +62,7 @@ export function SecondmentUsageModal({ isOpen, onClose, onSave, remainingHours }
         <p className="text-xs text-ink/55 mb-4">{remainingHours}h remaining of the annual allowance.</p>
 
         {modalError && (
-          <div className="mb-4 p-3.5 bg-red-50 border border-red-200 text-red-600 rounded-full text-xs px-5 font-medium animate-fade-in text-center">
-            {modalError}
-          </div>
+          <FormError message={modalError} />
         )}
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">

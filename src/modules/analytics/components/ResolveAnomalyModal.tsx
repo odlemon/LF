@@ -8,6 +8,7 @@ import { useResolveAnomaly } from "../hooks/useAnalytics";
 import { SeverityBadge } from "./badges";
 import { formatAnomalyType } from "../utils/format";
 import type { AnomalyFlagResponse, AnomalyOutcome } from "../types";
+import { FormError } from "@/components/ui/FormError";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -66,15 +67,11 @@ function ResolveAnomalyForm({
         </p>
       )}
 
-      {error && (
-        <div className="p-3 bg-red-50 border border-red-200 text-red-600 rounded-full text-xs font-medium animate-fade-in text-center">
-          {error}
-        </div>
-      )}
+      {error && <FormError message={error} className="mb-0" />}
 
       <div className="flex flex-col gap-1.5">
         <label className="text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1">
-          Resolution note <span className="text-rose-500">*</span>
+          Resolution note <span className="text-red-600 dark:text-red-400">*</span>
         </label>
         <Textarea
           rows={4}

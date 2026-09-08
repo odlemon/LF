@@ -8,6 +8,7 @@ import { RateCard } from "../types";
 import { HiTrash, HiX, HiPlus } from "react-icons/hi";
 import { Select } from "@/components/ui/Select";
 import { AuditTrailPanel } from "@/components/shared/AuditTrailPanel";
+import { FormError } from "@/components/ui/FormError";
 
 interface RateCardEntriesSlideOverProps {
   isOpen: boolean;
@@ -114,38 +115,41 @@ export function RateCardEntriesSlideOver({
               </div>
             ) : (
               <div className="bg-surface border border-border/60 rounded-xl overflow-hidden shadow-sm">
-                <table className="w-full text-left text-sm border-collapse">
-                  <thead>
-                    <tr className="bg-field text-xs font-bold text-ink/65 border-b border-border/60">
-                      <th className="px-4 py-3">Level</th>
-                      <th className="px-4 py-3">Practice Area</th>
-                      <th className="px-4 py-3 text-right">Rate</th>
-                      {!isCardReadOnly && <th className="px-4 py-3 text-center w-12"></th>}
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-100">
-                    {entries.map((entry) => (
-                      <tr key={entry.uid} className="hover:bg-field/50 text-ink transition-colors">
-                        <td className="px-4 py-3 font-medium">{getLevelName(entry.feeEarnerLevelUid)}</td>
-                        <td className="px-4 py-3 text-ink/65 text-xs">{getAreaName(entry.practiceAreaUid)}</td>
-                        <td className="px-4 py-3 text-right font-semibold">
-                          {rateCard.currency === "GBP" ? "£" : rateCard.currency === "USD" ? "$" : rateCard.currency === "EUR" ? "€" : `${rateCard.currency} `}
-                          {entry.hourlyRate}
-                        </td>
-                        {!isCardReadOnly && (
-                          <td className="px-4 py-3 text-center">
-                            <button
-                              onClick={() => deleteEntry(entry.uid)}
-                              className="text-red-500 hover:text-red-700 p-1 rounded hover:bg-red-50 transition-colors"
-                            >
-                              <HiTrash className="w-4 h-4" />
-                            </button>
-                          </td>
-                        )}
+                <div className="overflow-x-auto rates-scrollable">
+                  <table className="w-full text-left text-sm border-collapse">
+
+                    <thead>
+                      <tr className="bg-field text-xs font-bold text-ink/65 border-b border-border/60">
+                        <th className="px-4 py-3">Level</th>
+                        <th className="px-4 py-3">Practice Area</th>
+                        <th className="px-4 py-3 text-right">Rate</th>
+                        {!isCardReadOnly && <th className="px-4 py-3 text-center w-12"></th>}
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100">
+                      {entries.map((entry) => (
+                        <tr key={entry.uid} className="hover:bg-field/50 text-ink transition-colors">
+                          <td className="px-4 py-3 font-medium">{getLevelName(entry.feeEarnerLevelUid)}</td>
+                          <td className="px-4 py-3 text-ink/65 text-xs">{getAreaName(entry.practiceAreaUid)}</td>
+                          <td className="px-4 py-3 text-right font-semibold">
+                            {rateCard.currency === "GBP" ? "£" : rateCard.currency === "USD" ? "$" : rateCard.currency === "EUR" ? "€" : `${rateCard.currency} `}
+                            {entry.hourlyRate}
+                          </td>
+                          {!isCardReadOnly && (
+                            <td className="px-4 py-3 text-center">
+                              <button
+                                onClick={() => deleteEntry(entry.uid)}
+                                className="text-red-500 hover:text-red-700 p-1 rounded hover:bg-red-50 transition-colors"
+                              >
+                                <HiTrash className="w-4 h-4" />
+                              </button>
+                            </td>
+                          )}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             )}
           </div>
@@ -157,9 +161,7 @@ export function RateCardEntriesSlideOver({
               </h4>
 
               {formError && (
-                <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-600 rounded-full text-xs px-5 font-medium animate-fade-in text-center">
-                  {formError}
-                </div>
+                <FormError message={formError} />
               )}
 
               <form onSubmit={handleAdd} className="flex flex-col gap-4 bg-field/50 border border-border p-4 rounded-2xl">
