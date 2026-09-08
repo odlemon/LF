@@ -174,7 +174,7 @@ export default function RolesPage() {
             <button
               onClick={() => setIsCreateOpen(true)}
               type="button"
-              className="inline-flex items-center gap-1.5 px-4.5 py-2.5 bg-primary hover:bg-primary-hover text-on-primary rounded-full text-xs font-bold shadow-md shadow-primary/10 hover:shadow-lg transition-all cursor-pointer"
+              className="inline-flex items-center whitespace-nowrap gap-1.5 px-4.5 py-2.5 bg-primary hover:bg-primary-hover text-on-primary rounded-full text-xs font-bold shadow-md shadow-primary/10 hover:shadow-lg transition-all cursor-pointer"
             >
               <HiPlus className="w-4 h-4" />
               Create Custom Role
@@ -273,7 +273,7 @@ export default function RolesPage() {
                         onClick={handleSavePermissions}
                         disabled={isSavingPermissions}
                         type="button"
-                        className="inline-flex items-center gap-1.5 px-4.5 py-2.5 bg-primary hover:bg-primary-hover text-on-primary rounded-full text-xs font-bold shadow-md shadow-primary/10 hover:shadow-lg transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed select-none shrink-0"
+                        className="inline-flex items-center whitespace-nowrap gap-1.5 px-4.5 py-2.5 bg-primary hover:bg-primary-hover text-on-primary rounded-full text-xs font-bold shadow-md shadow-primary/10 hover:shadow-lg transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed select-none shrink-0"
                       >
                         {isSavingPermissions ? (
                           <div className="w-4 h-4 animate-spin rounded-full border-2 border-white/20 border-b-white" />
@@ -418,7 +418,7 @@ export default function RolesPage() {
                   <button
                     type="submit"
                     disabled={isSaving}
-                    className="inline-flex items-center gap-1.5 px-5 py-2 bg-primary hover:bg-primary-hover text-on-primary rounded-full text-xs font-bold shadow-md shadow-primary/10 hover:shadow-lg transition-all cursor-pointer disabled:opacity-50"
+                    className="inline-flex items-center whitespace-nowrap gap-1.5 px-5 py-2 bg-primary hover:bg-primary-hover text-on-primary rounded-full text-xs font-bold shadow-md shadow-primary/10 hover:shadow-lg transition-all cursor-pointer disabled:opacity-50"
                   >
                     {isSaving && (
                       <div className="w-3.5 h-3.5 animate-spin rounded-full border-2 border-white/20 border-b-white" />

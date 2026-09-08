@@ -8,6 +8,7 @@ import {
   HiOutlineClock,
   HiOutlineSparkles,
 } from "react-icons/hi";
+import { Button } from "@/components/ui/Button";
 import { useClientAuth } from "@/hooks/useClientAuth";
 import * as negotiationApi from "@/modules/negotiation/api";
 import { NegotiationStatusBadge } from "@/modules/negotiation/components/NegotiationStatusBadge";
@@ -117,14 +118,13 @@ export default function ClientDashboardPage() {
           title={`${greetingForHour(new Date().getHours())}, ${firstName}`}
           description="Your fee proposals, negotiations, and agreed rates — with Lysp coaching when you need a counter."
           action={
-            <button
-              type="button"
+            <Button
+              variant="cta"
               onClick={() => router.push("/client-portal/negotiations")}
-              className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-on-primary shadow-sm transition-colors hover:bg-primary-hover"
             >
               Open proposals
               <HiOutlineArrowRight className="h-4 w-4" />
-            </button>
+            </Button>
           }
         />
 
