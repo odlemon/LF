@@ -4,8 +4,10 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { HiPlus } from "react-icons/hi";
 import toast from "react-hot-toast";
+import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { Tabs } from "@/components/ui/Tabs";
 import { PermissionGate } from "@/components/shared/PermissionGate";
 import { PERMISSIONS } from "@/lib/utils/permissions";
 import { usePricingRequests, ListFilterTab } from "@/modules/intake/hooks/useIntake";
@@ -66,28 +68,9 @@ export default function PricingRequestsPage() {
         </PermissionGate>
       </div>
 
-      <div className="flex flex-wrap gap-2 border-b border-border/60 pb-1">
-        {TABS.map((tab) => (
-          <button
-            key={tab.id}
-            type="button"
-            onClick={() => setActiveTab(tab.id)}
-            className={`px-4 py-2 text-sm font-semibold rounded-t-lg transition-colors ${
-              activeTab === tab.id
-                ? "text-primary border-b-2 border-primary"
-                : "text-ink/55 hover:text-ink/90"
-            }`}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
+      <Tabs tabs={TABS} activeId={activeTab} onChange={setActiveTab} />
 
-      {error && (
-        <div className="p-4 bg-red-50 border border-red-200 text-red-600 rounded-xl text-sm font-medium">
-          {error}
-        </div>
-      )}
+      {error && <Alert variant="error" message={error} />}
 
       {isLoading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

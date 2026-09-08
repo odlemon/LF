@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
 import { apiClient } from "@/lib/api/client";
+import { Tabs } from "@/components/ui/Tabs";
 import { ScenarioStatusBadge } from "@/modules/pricing/components/ScenarioStatusBadge";
 
 type ApprovalItem = {
@@ -162,8 +163,8 @@ export default function ApprovalsPage() {
           </p>
         </header>
 
-        <div className="flex flex-wrap gap-1.5 border-b border-border/60 pb-1">
-          {TABS.map((t) => {
+        <Tabs
+          tabs={TABS.map((t) => {
             const count =
               t.id === "all"
                 ? tab === "all"
@@ -174,32 +175,11 @@ export default function ApprovalsPage() {
                   : tab === t.id
                     ? items.length
                     : undefined;
-            return (
-              <button
-                key={t.id}
-                type="button"
-                onClick={() => setTab(t.id)}
-                className={`px-3.5 py-2 text-sm font-semibold rounded-t-lg transition-colors ${
-                  tab === t.id
-                    ? "text-primary border-b-2 border-primary"
-                    : "text-ink/55 hover:text-ink/90"
-                }`}
-              >
-                {t.label}
-                {typeof count === "number" && tab === "all" && (
-                  <span className="ml-1.5 text-[11px] tabular-nums text-ink/35">
-                    {count}
-                  </span>
-                )}
-                {tab === t.id && t.id !== "all" && (
-                  <span className="ml-1.5 text-[11px] tabular-nums text-ink/35">
-                    {items.length}
-                  </span>
-                )}
-              </button>
-            );
+            return { ...t, count };
           })}
-        </div>
+          activeId={tab}
+          onChange={setTab}
+        />
 
         {loading ? (
           <div className="space-y-3">

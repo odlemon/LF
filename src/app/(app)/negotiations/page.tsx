@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
+import { Tabs } from "@/components/ui/Tabs";
 import * as negotiationApi from "@/modules/negotiation/api";
 import { NegotiationStatusBadge } from "@/modules/negotiation/components/NegotiationStatusBadge";
 import type { NegotiationListItem } from "@/modules/negotiation/types";
@@ -62,22 +63,7 @@ export default function NegotiationsPage() {
           description="Live fee proposals with clients — advisor, counters, margin, and history in one workspace."
         />
 
-        <div className="flex flex-wrap gap-1.5">
-          {TABS.map((t) => (
-            <button
-              key={t.id}
-              type="button"
-              onClick={() => setTab(t.id)}
-              className={`rounded-full px-3.5 py-1.5 text-[12px] font-semibold transition-colors ${
-                tab === t.id
-                  ? "bg-ink text-canvas"
-                  : "bg-field text-ink/55 hover:text-ink"
-              }`}
-            >
-              {t.label}
-            </button>
-          ))}
-        </div>
+        <Tabs tabs={TABS} activeId={tab} onChange={setTab} />
 
         {loading && items.length === 0 ? (
           <div className="space-y-3">

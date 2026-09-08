@@ -157,7 +157,7 @@ export function RateCoachWorkspace({
                     className={`max-w-[92%] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm ${
                       msg.role === "user"
                         ? "rounded-br-md bg-primary text-on-primary"
-                        : "rounded-tl-md border border-border/70 bg-surface text-ink"
+                        : "rounded-tl-md border border-border bg-surface text-ink"
                     }`}
                   >
                     {msg.role === "assistant" ? (

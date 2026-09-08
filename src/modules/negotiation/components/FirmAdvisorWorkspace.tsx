@@ -144,7 +144,7 @@ export function FirmAdvisorWorkspace({
                     className={`max-w-[90%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
                       msg.role === "user"
                         ? "rounded-br-md bg-primary text-on-primary"
-                        : "rounded-tl-md border border-border/70 bg-canvas text-ink"
+                        : "rounded-tl-md border border-border bg-surface text-ink"
                     }`}
                   >
                     {msg.role === "assistant" ? (
