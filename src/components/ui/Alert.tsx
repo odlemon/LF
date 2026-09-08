@@ -17,7 +17,7 @@ export function Alert({ variant = "info", message }: AlertProps) {
       case "error":
         return {
           container:
-            "bg-red-50 border border-red-150/40 text-red-800 dark:bg-red-950/40 dark:border-red-900/50 dark:text-red-200",
+            "bg-red-50 border border-red-100 text-red-800 dark:bg-red-950/40 dark:border-red-900/50 dark:text-red-200",
           icon: (
             <HiExclamation className="w-5 h-5 text-red-600 dark:text-red-400 shrink-0 mt-0.5" />
           ),
@@ -25,7 +25,7 @@ export function Alert({ variant = "info", message }: AlertProps) {
       case "warning":
         return {
           container:
-            "bg-amber-50/70 border border-amber-150/30 text-amber-800 dark:bg-amber-950/30 dark:border-amber-800/40 dark:text-amber-200",
+            "bg-amber-50/70 border border-amber-100 text-amber-800 dark:bg-amber-950/30 dark:border-amber-800/40 dark:text-amber-200",
           icon: (
             <HiExclamation className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
           ),

@@ -59,7 +59,7 @@ export function Select({
     <div className={`flex flex-col gap-1.5 w-full relative ${className}`} ref={dropdownRef}>
       {label && (
         <label className="text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1 select-none">
-          {label} {required && <span className="text-rose-500">*</span>}
+          {label} {required && <span className="text-red-600 dark:text-red-400">*</span>}
         </label>
       )}
 
@@ -70,10 +70,10 @@ export function Select({
         onClick={() => setIsOpen(!isOpen)}
         className={`w-full flex items-center justify-between gap-2 px-5 py-2.5 bg-surface border ${
           error
-            ? "border-rose-300 focus:ring-rose-100"
+            ? "border-red-300 focus:ring-red-100 dark:border-red-800 dark:focus:ring-red-950/40"
             : isOpen
             ? "border-primary focus:ring-primary/20"
-            : "border-border hover:border-gray-300"
+            : "border-border hover:border-ink/20"
         } rounded-full text-xs font-bold text-ink/90 transition-all focus:outline-none focus:ring-2 disabled:opacity-50 disabled:bg-field cursor-pointer`}
       >
         <span className={selectedOption ? "text-ink/90" : "text-ink/40 font-semibold"}>
@@ -126,7 +126,7 @@ export function Select({
       )}
 
       {error && (
-        <span className="text-[10px] font-bold text-rose-500 pl-1">
+        <span className="text-[10px] font-bold text-red-600 dark:text-red-400 pl-1">
           {error}
         </span>
       )}

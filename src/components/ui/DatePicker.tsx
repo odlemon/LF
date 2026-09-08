@@ -8,6 +8,7 @@ export interface DatePickerProps {
   onChange: (value: string) => void;
   placeholder?: string;
   disabled?: boolean;
+  error?: string;
   className?: string;
 }
 
@@ -16,6 +17,7 @@ export function DatePicker({
   onChange,
   placeholder = "Select date...",
   disabled = false,
+  error,
   className = "",
 }: DatePickerProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -160,13 +162,22 @@ export function DatePicker({
         type="button"
         disabled={disabled}
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-5 py-2.5 bg-field border border-border rounded-full text-sm font-semibold text-left flex items-center justify-between text-ink hover:bg-canvas/40 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/80 transition-all duration-200 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed select-none"
+        className={`w-full px-5 py-2.5 bg-field border rounded-full text-sm font-semibold text-left flex items-center justify-between text-ink hover:bg-canvas/40 focus:outline-none focus:ring-2 transition-all duration-200 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed select-none ${
+          error
+            ? "border-red-300 focus:ring-red-100 dark:border-red-800 dark:focus:ring-red-950/40"
+            : "border-border focus:ring-primary/20 focus:border-primary/80"
+        }`}
       >
         <span className={value ? "text-ink" : "text-ink/40"}>
           {formatSelectedDate(value)}
         </span>
         <HiCalendar className="w-4 h-4 text-ink/40" />
       </button>
+      {error && (
+        <span className="mt-1.5 block text-[10px] font-bold text-red-600 dark:text-red-400 pl-1">
+          {error}
+        </span>
+      )}
 
       {/* Calendar Overlay */}
       {isOpen && (
@@ -217,7 +228,7 @@ export function DatePicker({
                       ? "bg-primary text-on-primary font-bold shadow-md shadow-primary/20"
                       : isCurrentMonth
                       ? "text-ink hover:bg-canvas"
-                      : "text-gray-300 hover:bg-field"
+                      : "text-ink/25 hover:bg-field"
                   }`}
                 >
                   <span>{day}</span>
