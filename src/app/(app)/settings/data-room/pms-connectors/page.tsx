@@ -159,7 +159,7 @@ export default function PmsConnectorsPage() {
                   <tr key={c.uid} className="hover:bg-field/30 transition-colors">
                     <td className="px-5 py-4 text-ink font-extrabold">{c.displayName}</td>
                     <td className="px-5 py-4">
-                      <span className="px-2 py-0.5 border border-border/80 rounded bg-field text-gray-655 font-bold text-[10px] uppercase">
+                      <span className="px-2 py-0.5 border border-border/80 rounded bg-field text-ink/60 font-bold text-[10px] uppercase">
                         {c.systemType.replace("_", " ")}
                       </span>
                     </td>

@@ -549,9 +549,9 @@ export function RecordsBrowser() {
                         <td className="px-5 py-4">{rec.practiceAreaCode}</td>
                         <td className="px-5 py-4">{rec.jurisdiction}</td>
                         <td className="px-5 py-4">{rec.feeEarnerLevelCode}</td>
-                        <td className="px-5 py-4 text-gray-655">{formatCurrency(rec.lowRate, rec.currency)}</td>
+                        <td className="px-5 py-4 text-ink/60">{formatCurrency(rec.lowRate, rec.currency)}</td>
                         <td className="px-5 py-4 text-ink font-extrabold">{formatCurrency(rec.medianRate, rec.currency)}</td>
-                        <td className="px-5 py-4 text-gray-655">{formatCurrency(rec.highRate, rec.currency)}</td>
+                        <td className="px-5 py-4 text-ink/60">{formatCurrency(rec.highRate, rec.currency)}</td>
                         <td className="px-5 py-4 text-ink">{rec.surveyYear}</td>
                       </>
                     )}

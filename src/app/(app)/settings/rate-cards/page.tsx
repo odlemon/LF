@@ -252,7 +252,7 @@ export default function RateCardsPage() {
                           <span>{card.name}</span>
                         </td>
                         <td className="px-6 py-4">
-                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-lg text-[10px] font-bold bg-canvas text-gray-655 border border-border/50 uppercase tracking-wider">
+                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-lg text-[10px] font-bold bg-canvas text-ink/60 border border-border/50 uppercase tracking-wider">
                             {card.currency}
                           </span>
                         </td>

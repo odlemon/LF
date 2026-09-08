@@ -150,7 +150,7 @@ export default function DatasetDetailPage() {
           <div className="flex flex-col gap-2 flex-1">
             <div className="flex items-center gap-2.5 flex-wrap">
               <h1 className="text-xl font-bold text-ink tracking-tight">{dataset.name}</h1>
-              <span className="px-2.5 py-0.5 border border-border rounded-full bg-field text-gray-655 font-bold text-[10px] uppercase">
+              <span className="px-2.5 py-0.5 border border-border rounded-full bg-field text-ink/60 font-bold text-[10px] uppercase">
                 {dataset.category}
               </span>
             </div>

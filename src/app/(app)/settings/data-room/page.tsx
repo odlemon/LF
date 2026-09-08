@@ -181,7 +181,7 @@ export default function DataRoomOverviewPage() {
                           </button>
                         </td>
                         <td className="px-5 py-4">
-                          <span className="px-2 py-0.5 border border-border/80 rounded bg-field text-gray-655 font-bold text-[10px] uppercase">
+                          <span className="px-2 py-0.5 border border-border/80 rounded bg-field text-ink/60 font-bold text-[10px] uppercase">
                             {dataset.category}
                           </span>
                         </td>
@@ -256,7 +256,7 @@ export default function DataRoomOverviewPage() {
                     </button>
                     <button
                       onClick={() => setActiveLogDoc(doc)}
-                      className="px-2.5 py-1.5 hover:bg-canvas rounded-lg text-ink/40 hover:text-gray-655 transition-colors cursor-pointer text-[11px] font-bold"
+                      className="px-2.5 py-1.5 hover:bg-canvas rounded-lg text-ink/40 hover:text-ink/70 transition-colors cursor-pointer text-[11px] font-bold"
                     >
                       Log
                     </button>

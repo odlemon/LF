@@ -58,7 +58,7 @@ export function RemoveConfirmModal({
           <button
             type="button"
             onClick={onClose}
-            className="w-full sm:flex-1 text-center text-xs font-bold text-ink/40 hover:text-gray-655 transition-colors py-3 cursor-pointer"
+            className="w-full sm:flex-1 text-center text-xs font-bold text-ink/40 hover:text-ink/70 transition-colors py-3 cursor-pointer"
           >
             Cancel
           </button>

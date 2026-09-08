@@ -47,7 +47,7 @@ export function Modal({ isOpen, onClose, title, children, size = "lg" }: ModalPr
           <button
             onClick={onClose}
             type="button"
-            className="p-1.5 text-ink/40 hover:text-gray-655 rounded-lg hover:bg-field transition-colors cursor-pointer"
+            className="p-1.5 text-ink/40 hover:text-ink/70 rounded-lg hover:bg-field transition-colors cursor-pointer"
           >
             <HiX className="w-4.5 h-4.5" />
           </button>

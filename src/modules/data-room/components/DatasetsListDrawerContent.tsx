@@ -175,7 +175,7 @@ export function DatasetsListDrawerContent({
                       </button>
                     </td>
                     <td className="px-5 py-4">
-                      <span className="px-2 py-0.5 border border-border/80 rounded bg-field text-gray-655 font-bold text-[10px] uppercase">
+                      <span className="px-2 py-0.5 border border-border/80 rounded bg-field text-ink/60 font-bold text-[10px] uppercase">
                         {dataset.category}
                       </span>
                     </td>
