@@ -17,6 +17,7 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [ssoBusy, setSsoBusy] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -40,6 +41,40 @@ function LoginForm() {
       setError(msg);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  /**
+   * Resolve which identity provider owns this address, then hand off to it.
+   *
+   * The registration id used to be hardcoded, which meant the button pointed at whatever
+   * provider happened to be configured when the page was written — after the demo fixture was
+   * retired it led somewhere that no longer existed. A login page is shared by every firm, so
+   * it cannot simply list the providers either: that would publish the client list. Asking by
+   * domain keeps the answer to something the person typing already knows.
+   */
+  const handleSso = async () => {
+    const address = email.trim();
+    if (!address.includes("@")) {
+      setError("Enter your work email first, then choose Sign in with SSO.");
+      return;
+    }
+    setError(null);
+    setSsoBusy(true);
+    try {
+      const res = await fetch(
+        `${getPublicApiBase()}/api/v1/sso/provider-for-email?email=${encodeURIComponent(address)}`
+      );
+      if (!res.ok) {
+        setError("Single sign-on is not set up for that email domain.");
+        return;
+      }
+      const { providerName } = await res.json();
+      window.location.href = `${getPublicApiBase()}/api/oauth2/authorization/${encodeURIComponent(providerName)}`;
+    } catch {
+      setError("Could not reach single sign-on. Try again, or sign in with your password.");
+    } finally {
+      setSsoBusy(false);
     }
   };
 
@@ -120,6 +155,29 @@ function LoginForm() {
             <HiArrowRight className="h-4 w-4" />
           </>
         )}
+      </button>
+
+      <div className="mt-6 flex items-center gap-3">
+        <span className="h-px flex-1 bg-black/[0.06]" />
+        <span className="text-[11px] font-semibold tracking-[0.14em] uppercase text-[#0a0a0a]/30">
+          or
+        </span>
+        <span className="h-px flex-1 bg-black/[0.06]" />
+      </div>
+
+      {/*
+        Inside the form on purpose: it needs the address already typed above to work out which
+        identity provider owns it. It sat outside until now, which is part of why it could only
+        ever point at one hardcoded provider.
+      */}
+      <button
+        type="button"
+        onClick={handleSso}
+        disabled={ssoBusy}
+        className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full border border-black/[0.1] bg-white px-6 py-[0.95rem] text-[15px] font-semibold text-[#0a0a0a] transition-all duration-200 hover:bg-black/[0.03] active:scale-[0.99] disabled:opacity-60 cursor-pointer"
+      >
+        <HiOutlineShieldCheck className="h-4 w-4" />
+        {ssoBusy ? "Redirecting…" : "Sign in with SSO"}
       </button>
     </form>
   );
@@ -223,15 +281,9 @@ export default function LoginPage() {
 
           <div className="relative flex flex-1 flex-col justify-center px-6 sm:px-10 lg:px-12 xl:px-16 py-10 sm:py-12 lg:py-8 pb-[max(2.5rem,env(safe-area-inset-bottom))]">
             <div className="w-full max-w-[400px] mx-auto lg:mx-0">
-              <div className="flex items-center gap-3">
-                <span className="text-[13px] font-semibold tracking-[0.08em] text-[#0a0a0a]">
-                  Lysp
-                </span>
-                <span className="h-px w-8 bg-[#0a0a0a]/15" />
-                <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#0a0a0a]/35">
-                  Workspace
-                </p>
-              </div>
+              <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#0a0a0a]/35">
+                Workspace
+              </p>
 
               <h2 className="mt-6 text-[1.9rem] sm:text-[2.25rem] font-semibold tracking-tight leading-[1.08]">
                 Welcome back.
@@ -243,22 +295,6 @@ export default function LoginPage() {
               <div className="mt-9 sm:mt-10">
                 <LoginForm />
               </div>
-
-              <div className="mt-6 flex items-center gap-3">
-                <span className="h-px flex-1 bg-black/[0.06]" />
-                <span className="text-[11px] font-semibold tracking-[0.14em] uppercase text-[#0a0a0a]/30">
-                  or
-                </span>
-                <span className="h-px flex-1 bg-black/[0.06]" />
-              </div>
-
-              <a
-                href={`${getPublicApiBase()}/api/oauth2/authorization/demo-sso`}
-                className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full border border-black/[0.1] bg-white px-6 py-[0.95rem] text-[15px] font-semibold text-[#0a0a0a] transition-all duration-200 hover:bg-black/[0.03] active:scale-[0.99]"
-              >
-                <HiOutlineShieldCheck className="h-4 w-4" />
-                Sign in with SSO
-              </a>
 
               <div className="mt-10 pt-8 border-t border-black/[0.06]">
                 <p className="text-[13px] text-[#0a0a0a]/45 leading-relaxed">
