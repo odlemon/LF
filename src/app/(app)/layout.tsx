@@ -24,6 +24,17 @@ function FirmShell({ children }: { children: React.ReactNode }) {
     setIsMobileNavOpen(false);
   }, [pathname]);
 
+  // This layout is a client component, so it cannot export Next metadata; the browser tab
+  // would otherwise show only the root default for every screen in the workspace. Naming the
+  // section matters here because people keep several of these tabs open at once.
+  React.useEffect(() => {
+    const segment = (pathname || "/").split("/").filter(Boolean)[0];
+    const name = segment
+      ? segment.replace(/-/g, " ").replace(/^./, (c) => c.toUpperCase())
+      : "Workspace";
+    document.title = `${name} | Lysp`;
+  }, [pathname]);
+
   return (
     <div
       className={platformRootClass(theme, `${quicksand.className} flex min-h-screen antialiased`)}

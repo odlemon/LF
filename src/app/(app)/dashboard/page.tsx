@@ -8,7 +8,7 @@ import {
   PipelineStagesChart,
   PracticeMixChart,
 } from "@/modules/dashboard/charts";
-import { FIRM_OVERVIEW } from "@/modules/dashboard/demoData";
+import { useFirmDashboard } from "@/modules/dashboard/useFirmDashboard";
 import { HiOutlineArrowRight, HiOutlineScale } from "react-icons/hi";
 
 function greetingForHour(hour: number) {
@@ -33,8 +33,31 @@ export default function DashboardPage() {
     !roles.includes("ADMIN") &&
     !roles.includes("SUPER_ADMIN");
 
-  const { kpis, trend, stages, practices, liveMatters, snapshot, firmName, asOf } =
-    FIRM_OVERVIEW;
+  const { data, loading, error } = useFirmDashboard();
+
+  if (loading) {
+    return (
+      <div className="flex min-h-[60vh] items-center justify-center">
+        <div className="h-6 w-6 animate-spin rounded-full border-2 border-ink/15 border-t-ink/60" />
+      </div>
+    );
+  }
+
+  if (error || !data) {
+    return (
+      <div className="mx-auto flex min-h-[60vh] w-full max-w-[1400px] flex-col items-center justify-center gap-2 px-5 text-center">
+        <p className="text-sm font-semibold text-ink/70">Firm overview unavailable</p>
+        <p className="max-w-sm text-sm text-ink/45">{error}</p>
+      </div>
+    );
+  }
+
+  const { kpis, trend, stages, practices, liveMatters, snapshot, firmName, currency } = data;
+  // Says what the figures are, and when. It used to read "Live overview - demo data" on a
+  // screen that was exactly that.
+  const asOf = data.hasData
+    ? `Live · ${currency} · year to date`
+    : "No priced matters yet";
 
   return (
     <div className="relative min-h-full pb-12">
@@ -129,12 +152,14 @@ export default function DashboardPage() {
               </p>
               <p
                 className={`mt-1.5 text-[11px] font-semibold ${
-                  kpi.positive
-                    ? "text-emerald-700 dark:text-emerald-400"
-                    : "text-amber-700 dark:text-amber-400"
+                  kpi.delta === null
+                    ? "text-ink/30"
+                    : kpi.positive
+                      ? "text-emerald-700 dark:text-emerald-400"
+                      : "text-amber-700 dark:text-amber-400"
                 }`}
               >
-                {kpi.delta}
+                {kpi.delta ?? "no prior period"}
               </p>
               <p className="mt-1 text-[10px] leading-snug text-ink/35">{kpi.caption}</p>
             </article>
