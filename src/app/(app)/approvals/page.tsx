@@ -74,28 +74,12 @@ export default function ApprovalsPage() {
     setLoading(true);
     setError(null);
     try {
-      // The API takes one status, so the pending tab is fetched per stage and merged.
-      const statuses =
-        status === "all" ? null : status === "pending" ? [...PENDING_STATUSES] : [status];
-      const params = statuses ? { status: statuses[0] } : {};
-      let rows: ApprovalItem[];
-      if (statuses && statuses.length > 1) {
-        const pages = await Promise.all(
-          statuses.map((st) =>
-            apiClient.get<ApprovalItem[]>("/api/v1/pricing-approvals", {
-              params: { status: st },
-            })
-          )
-        );
-        rows = pages.flatMap((p) => (Array.isArray(p.data) ? p.data : []));
-      } else {
-        const res = await apiClient.get<ApprovalItem[]>(
-          "/api/v1/pricing-approvals",
-          { params }
-        );
-        rows = Array.isArray(res.data) ? res.data : [];
-      }
-      setItems(rows);
+      // The API understands "PENDING" as every stage still awaiting a decision, so one
+      // request covers the matrix. Fetching per stage and merging doubled the load on what
+      // load testing showed was the slowest endpoint on the platform.
+      const params = status === "all" ? {} : { status: status === "pending" ? "PENDING" : status };
+      const res = await apiClient.get<ApprovalItem[]>("/api/v1/pricing-approvals", { params });
+      setItems(Array.isArray(res.data) ? res.data : []);
     } catch {
       setError("Could not load approvals");
       setItems([]);
