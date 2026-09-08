@@ -197,14 +197,18 @@ export default function PricingWorkspacePage() {
       isAwaitingDecision(preferred.status));
   const canSendToClient = !!preferred && preferred.status === "APPROVED";
 
+  // Names the stage it is actually at. Saying "partner review" while a scenario sits at
+  // finance is how the second stage came to look like a dead end in the first place.
+  const stageLabel =
+    preferred?.status === "PENDING_FINANCE" ? "Pending finance" : "Pending partner review";
   const footerHint = pendingReview
     ? canDecide
-      ? `Pending partner review${
+      ? `${stageLabel}${
           preferred?.assignedPartnerName
             ? ` · assigned to ${preferred.assignedPartnerName}`
             : ""
         }`
-      : `Pending partner review${
+      : `${stageLabel}${
           preferred?.assignedPartnerName
             ? ` by ${preferred.assignedPartnerName}`
             : ""

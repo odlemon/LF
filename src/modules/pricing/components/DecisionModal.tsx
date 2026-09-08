@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
 
 interface DecisionModalProps {
@@ -23,6 +23,15 @@ export function DecisionModal({
   onConfirm,
 }: DecisionModalProps) {
   const [comment, setComment] = useState("");
+
+  // The component stays mounted between decisions, so without this the note from the previous
+  // one is still in the box when the modal reopens. On a two-stage matrix that means the
+  // partner's comment is what gets submitted as the finance sign-off.
+  useEffect(() => {
+    if (open) {
+      setComment("");
+    }
+  }, [open]);
 
   if (!open) return null;
 
