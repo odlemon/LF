@@ -56,12 +56,15 @@ function FirmShell({ children }: { children: React.ReactNode }) {
 }
 
 function FirmAuthGuard({ children }: { children: React.ReactNode }) {
-  const { isAuthenticated, isLoading, user } = useAuth();
+  const { isAuthenticated, isLoading, user, sessionUnavailable, retrySession } = useAuth();
   const { theme } = useTheme();
   const router = useRouter();
 
   useEffect(() => {
     if (isLoading) return;
+    // Not signed out — just unconfirmed. Sending someone to the login screen because the API
+    // was briefly unreachable loses whatever they were in the middle of, for no reason.
+    if (sessionUnavailable) return;
     if (!isAuthenticated) {
       router.push("/login");
       return;
@@ -72,7 +75,7 @@ function FirmAuthGuard({ children }: { children: React.ReactNode }) {
     ) {
       router.replace("/client-portal/dashboard");
     }
-  }, [isAuthenticated, isLoading, router, user]);
+  }, [isAuthenticated, isLoading, router, user, sessionUnavailable]);
 
   if (isLoading) {
     return (
@@ -84,6 +87,31 @@ function FirmAuthGuard({ children }: { children: React.ReactNode }) {
         style={PLATFORM_THEME_VARS[theme]}
       >
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-ink" />
+      </div>
+    );
+  }
+
+  if (sessionUnavailable) {
+    return (
+      <div
+        className={platformRootClass(
+          theme,
+          `${quicksand.className} flex h-screen w-screen flex-col items-center justify-center gap-4 px-6 text-center`
+        )}
+        style={PLATFORM_THEME_VARS[theme]}
+      >
+        <p className="text-lg font-semibold text-ink">Can&apos;t reach Lysp right now</p>
+        <p className="max-w-sm text-sm leading-relaxed text-ink/55">
+          You are still signed in. The workspace could not confirm your session — usually a
+          restart that clears in under a minute.
+        </p>
+        <button
+          type="button"
+          onClick={retrySession}
+          className="rounded-full bg-ink px-6 py-2.5 text-sm font-semibold text-on-primary transition-opacity hover:opacity-90 cursor-pointer"
+        >
+          Try again
+        </button>
       </div>
     );
   }

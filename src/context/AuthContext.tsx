@@ -28,6 +28,13 @@ export interface AuthContextType {
   isLoading: boolean;
   login: (credentials: Record<string, unknown>) => Promise<User>;
   logout: () => Promise<void>;
+  /**
+   * True when we hold a session but could not reach the API to confirm it. Distinct from being
+   * signed out: the token is still there and still valid, we simply do not know who it belongs
+   * to yet.
+   */
+  sessionUnavailable: boolean;
+  retrySession: () => void;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -35,6 +42,8 @@ export const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [sessionUnavailable, setSessionUnavailable] = useState(false);
+  const [attempt, setAttempt] = useState(0);
 
   const fetchCurrentUser = useCallback(async () => {
     const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
@@ -78,11 +87,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         userType: "FIRM_USER",
       };
       setUser(mappedUser);
-    } catch {
-      if (typeof window !== "undefined") {
-        localStorage.removeItem("token");
+      setSessionUnavailable(false);
+    } catch (error) {
+      // Only an explicit rejection ends the session. This used to be a bare catch that threw the
+      // token away on any failure at all, so a backend restart — or a moment of bad network —
+      // signed the user out and dropped them at the login screen mid-task. The token is a signed
+      // bearer credential with its own expiry; a server we cannot reach has not revoked it.
+      const status = (error as { response?: { status?: number } })?.response?.status;
+      if (status === 401 || status === 403) {
+        if (typeof window !== "undefined") {
+          localStorage.removeItem("token");
+        }
+        setUser(null);
+        setSessionUnavailable(false);
+      } else {
+        setUser(null);
+        setSessionUnavailable(true);
       }
-      setUser(null);
     } finally {
       setIsLoading(false);
     }
@@ -173,7 +194,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => {
       clearTimeout(timer);
     };
-  }, [fetchCurrentUser]);
+  }, [fetchCurrentUser, attempt]);
 
   useEffect(() => {
     const handleUnauthorized = () => {
@@ -197,6 +218,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         isLoading,
         login,
         logout,
+        sessionUnavailable,
+        retrySession: () => {
+          setIsLoading(true);
+          setSessionUnavailable(false);
+          setAttempt((n) => n + 1);
+        },
       }}
     >
       {children}
