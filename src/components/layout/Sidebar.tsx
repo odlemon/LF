@@ -34,6 +34,7 @@ import {
   HiChevronDoubleLeft,
   HiChevronDoubleRight,
   HiOutlineInboxIn,
+  HiOutlineLightBulb,
 } from "react-icons/hi";
 
 const COLLAPSE_STORAGE_KEY = "lysp.sidebar.collapsed";
@@ -84,10 +85,6 @@ export function Sidebar({ isMobileOpen = false, onMobileClose }: SidebarProps = 
     { label: "Approvals", route: "/approvals", permission: PERMISSIONS.SCENARIO_APPROVE, icon: HiCheckCircle },
     { label: "Negotiations", route: "/negotiations", permission: PERMISSIONS.NEGOTIATION_READ, icon: HiScale },
     { label: "Analytics", route: "/analytics", permission: PERMISSIONS.ANALYTICS_READ, icon: HiChartBar },
-    // Knowledge Base: the backend module exists (/v1/knowledge-articles) but no
-    // frontend page was ever built, so this link 404'd for every user. Hidden
-    // until the page exists rather than shipping a dead nav item.
-    // { label: "Knowledge Base", route: "/knowledge", permission: PERMISSIONS.KNOWLEDGE_READ, icon: HiDocumentText },
     { label: "Clients", route: "/clients", permission: PERMISSIONS.CLIENT_READ, icon: HiUserGroup },
     { label: "Demo Requests", route: "/settings/demo-requests", permission: PERMISSIONS.DEMO_REQUEST_READ, icon: HiOutlineInboxIn },
   ];
@@ -96,6 +93,7 @@ export function Sidebar({ isMobileOpen = false, onMobileClose }: SidebarProps = 
     { label: "Practice Areas", route: "/settings/practice-areas", permission: PERMISSIONS.PRACTICE_AREA_READ, icon: HiFolder },
     { label: "Fee Earner Levels", route: "/settings/fee-earner-levels", permission: "FEE_EARNER_READ", icon: HiScale },
     { label: "Rate Cards", route: "/settings/rate-cards", permission: PERMISSIONS.RATE_CARD_READ, icon: HiDatabase },
+    { label: "Matter Learnings", route: "/settings/matter-learnings", permission: PERMISSIONS.MATTER_LEARNING_READ, icon: HiOutlineLightBulb },
     { label: "FX Rates", route: "/settings/fx-rates", permission: PERMISSIONS.FIRM_READ, icon: HiOutlineSwitchHorizontal },
     { label: "Approval Matrix", route: "/settings/approval-matrix", permission: PERMISSIONS.FIRM_READ, icon: HiOutlineClipboardCheck },
     { label: "Volume Discounts", route: "/settings/volume-discounts", permission: "VOLUME_DISCOUNT_PROGRAM_READ", icon: HiOutlineTrendingDown },

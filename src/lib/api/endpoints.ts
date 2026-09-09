@@ -5,6 +5,10 @@ export const ENDPOINTS = {
     DETAIL: (uid: string) => `/api/v1/admin/demo-requests/${uid}`,
     UPDATE: (uid: string) => `/api/v1/admin/demo-requests/${uid}`,
   },
+  MATTER_LEARNINGS: {
+    BASE: "/v1/matter-learnings",
+    BY_UID: (uid: string) => `/v1/matter-learnings/${uid}`,
+  },
   AUTH: {
     LOGIN: "/v1/auth/login",
     LOGOUT: "/api/auth/logout",
