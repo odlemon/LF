@@ -185,6 +185,8 @@ export const ENDPOINTS = {
   SSO: {
     IDENTITY_PROVIDERS: '/v1/sso/identity-providers',
     IDENTITY_PROVIDER_BY_UID: (uid: string) => `/v1/sso/identity-providers/${uid}`,
+    VERIFY_ISSUER: '/v1/sso/identity-providers/verify-issuer',
+    REDIRECT_URI: '/v1/sso/identity-providers/redirect-uri',
   },
   AI_CONFIG: {
     PROVIDERS: '/api/v1/ai-config/providers',
