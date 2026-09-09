@@ -5,22 +5,35 @@ import React, { useState } from "react";
 import { useFeeEarnerLevels } from "@/modules/firm/hooks/useFirm";
 import { Button } from "@/components/ui/Button";
 import { FeeEarnerLevelFormModal } from "@/modules/firm/components/FeeEarnerLevelFormModal";
+import type { FeeEarnerLevel } from "@/modules/firm/types";
 import toast from "react-hot-toast";
 import { HiPlus, HiScale } from "react-icons/hi";
 import { Alert } from "@/components/ui/Alert";
 
 export default function FeeEarnerLevelsPage() {
-  const { levels, isLoading, error, createLevel } = useFeeEarnerLevels();
+  const { levels, isLoading, error, createLevel, updateLevel } = useFeeEarnerLevels();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editing, setEditing] = useState<FeeEarnerLevel | null>(null);
 
   const handleSave = async (data: { name: string; code: string; sortOrder: number; costRate: number | null }) => {
     try {
-      await createLevel(data);
-      toast.success("Seniority level added successfully.");
+      if (editing) {
+        await updateLevel(editing.uid, data);
+        toast.success("Seniority level updated.");
+      } else {
+        await createLevel(data);
+        toast.success("Seniority level added successfully.");
+      }
       setIsModalOpen(false);
+      setEditing(null);
     } catch (err: any) {
       throw err;
     }
+  };
+
+  const openEdit = (level: FeeEarnerLevel) => {
+    setEditing(level);
+    setIsModalOpen(true);
   };
 
   return (
@@ -80,6 +93,15 @@ export default function FeeEarnerLevelsPage() {
                 </div>
 
                 <div className="flex items-center gap-6">
+                  {/* Existing levels predate cost rates, so they need a way to acquire one -
+                      otherwise margin stays an estimate on every firm already using Lysp. */}
+                  <button
+                    type="button"
+                    onClick={() => openEdit(level)}
+                    className="text-xs font-semibold text-ink/55 hover:text-ink transition-colors cursor-pointer"
+                  >
+                    Edit
+                  </button>
                   <span className="text-xs text-ink/55 font-medium flex items-center gap-1.5 bg-field px-3 py-1.5 rounded-lg border border-border">
                     <HiScale className="w-3.5 h-3.5 text-ink/40" />
                     Rank #{idx + 1}
@@ -99,8 +121,12 @@ export default function FeeEarnerLevelsPage() {
 
       <FeeEarnerLevelFormModal
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() => {
+          setIsModalOpen(false);
+          setEditing(null);
+        }}
         onSave={handleSave}
+        feeEarnerLevel={editing}
       />
     </div>
   );

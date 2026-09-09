@@ -68,12 +68,25 @@ export async function getFeeEarnerLevels(): Promise<FeeEarnerLevel[]> {
       name: String(raw.name ?? ""),
       code: String(raw.code ?? ""),
       sortOrder: raw.sortOrder != null ? Number(raw.sortOrder) : 0,
+      // Whitelisted mapping, so a new field is invisible until it is named here.
+      costRate: raw.costRate != null ? Number(raw.costRate) : null,
     } as FeeEarnerLevel;
   });
 }
 
 export async function createFeeEarnerLevel(data: CreateFeeEarnerLevelCommand): Promise<FeeEarnerLevel> {
   const res = await apiClient.post<FeeEarnerLevel>(ENDPOINTS.FIRM.FEE_EARNER_LEVELS, data);
+  return res.data;
+}
+
+export async function updateFeeEarnerLevel(
+  uid: string,
+  data: CreateFeeEarnerLevelCommand
+): Promise<FeeEarnerLevel> {
+  const res = await apiClient.put<FeeEarnerLevel>(
+    `${ENDPOINTS.FIRM.FEE_EARNER_LEVELS}/${uid}`,
+    data
+  );
   return res.data;
 }
 

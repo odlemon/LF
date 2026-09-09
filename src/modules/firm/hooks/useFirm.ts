@@ -182,6 +182,18 @@ export function useFeeEarnerLevels() {
     }
   }, []);
 
+  const updateLevel = useCallback(async (uid: string, data: CreateFeeEarnerLevelCommand) => {
+    try {
+      const updated = await api.updateFeeEarnerLevel(uid, data);
+      await fetchLevels();
+      return updated;
+    } catch (err: any) {
+      const msg = err.response?.data?.message || err.message || "Failed to update fee earner level";
+      setError(msg);
+      throw new Error(msg);
+    }
+  }, [fetchLevels]);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       fetchLevels();
@@ -191,7 +203,7 @@ export function useFeeEarnerLevels() {
     };
   }, [fetchLevels]);
 
-  return { levels, isLoading, error, createLevel, refetch: fetchLevels };
+  return { levels, isLoading, error, createLevel, updateLevel, refetch: fetchLevels };
 }
 
 export function useRateCards() {
