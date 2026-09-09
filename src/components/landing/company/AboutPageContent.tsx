@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { HiArrowRight } from "react-icons/hi";
 import { MARKETING_SHELL, PageHeroHeader, SectionHeader } from "@/components/landing/editorial";
+import { useBookDemo } from "@/components/landing/BookDemoModal";
 
 const BUILDING = [
   {
@@ -47,6 +48,7 @@ const PRINCIPLES = [
 ] as const;
 
 export function AboutPageContent() {
+  const { openBookDemo } = useBookDemo();
   const [reduceMotion, setReduceMotion] = useState(false);
 
   useEffect(() => {
@@ -91,13 +93,14 @@ export function AboutPageContent() {
             description="We are building the commercial system firms deserve: from RFP to accepted fee."
           >
             <div className="mt-10 flex flex-wrap gap-3">
-              <Link
-                href="/auth"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#fefefc] px-7 py-3.5 text-[14px] font-semibold text-[#0a0a0a] hover:bg-white transition-colors"
-              >
+              <button
+              type="button"
+              onClick={() => openBookDemo("about")}
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#fefefc] px-7 py-3.5 text-[14px] font-semibold text-[#0a0a0a] hover:bg-white transition-colors"
+            >
                 Book a demo
                 <HiArrowRight className="h-4 w-4" />
-              </Link>
+              </button>
               <Link
                 href="/product"
                 className="inline-flex items-center justify-center rounded-full border border-white/20 px-7 py-3.5 text-[14px] font-semibold text-white/85 hover:text-white hover:border-white/40 transition-colors"

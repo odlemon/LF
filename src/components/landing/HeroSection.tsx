@@ -4,8 +4,10 @@ import React from "react";
 import Link from "next/link";
 import { HeroNavbar } from "./HeroNavbar";
 import { HeroVideo } from "./HeroVideo";
+import { useBookDemo } from "@/components/landing/BookDemoModal";
 
 export function HeroSection() {
+  const { openBookDemo } = useBookDemo();
   return (
     <section id="home" className="relative min-h-[100svh] w-full overflow-hidden bg-[#0a0f0d]">
       {/* Full-bleed media - z-0, extends behind transparent navbar */}
@@ -28,12 +30,13 @@ export function HeroSection() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 pt-2">
-            <Link
-              href="/auth"
+            <button
+              type="button"
+              onClick={() => openBookDemo("hero")}
               className="inline-flex items-center justify-center rounded-full bg-[#fefefc] text-[#0a0a0a] px-7 py-3.5 text-sm font-semibold hover:bg-white transition-colors min-w-[160px]"
             >
               Book a demo
-            </Link>
+            </button>
           </div>
         </div>
       </div>

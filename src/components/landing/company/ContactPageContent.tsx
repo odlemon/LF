@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { HiArrowRight } from "react-icons/hi";
 import { MARKETING_SHELL, PageHeroHeader } from "@/components/landing/editorial";
+import { demoRequestApi } from "@/lib/api/modules/demoRequest.api";
+import { useBookDemo } from "@/components/landing/BookDemoModal";
 
 type Intent = "sales" | "support" | "general";
 
@@ -13,7 +15,7 @@ const CHANNELS = [
     title: "Sales",
     body: "Demos, rollout, usage pricing, and security review for your firm.",
     cta: "Book a demo",
-    href: "/auth",
+    href: "/login",
     external: false,
   },
   {
@@ -35,34 +37,40 @@ const CHANNELS = [
 ];
 
 export function ContactPageContent() {
+  const { openBookDemo } = useBookDemo();
   const [intent, setIntent] = useState<Intent>("sales");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [firm, setFirm] = useState("");
   const [message, setMessage] = useState("");
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject =
-      intent === "sales"
-        ? "Lysp sales inquiry"
-        : intent === "support"
-          ? "Lysp support request"
-          : "Lysp inquiry";
-    const body = [
-      `Name: ${name}`,
-      `Email: ${email}`,
-      firm ? `Firm: ${firm}` : null,
-      `Intent: ${intent}`,
-      "",
-      message,
-    ]
-      .filter(Boolean)
-      .join("\n");
-    const to = intent === "support" ? "support@lysp.ai" : "nyasha@lysp.ai";
-    window.location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setSent(true);
+    setError(null);
+    setSubmitting(true);
+    try {
+      await demoRequestApi.submit({
+        fullName: name,
+        workEmail: email,
+        // The form asks for the firm optionally, but an enquiry record requires one -
+        // "Not given" is more honest in a sales inbox than an empty column.
+        firmName: firm.trim() || "Not given",
+        message: `[${intent}] ${message}`,
+        source: `contact-${intent}`,
+      });
+      setSent(true);
+    } catch (err: unknown) {
+      const response = (err as { response?: { data?: { message?: string } } })?.response;
+      setError(
+        response?.data?.message ||
+          "We could not send that just now. Please email nyasha@lysp.ai directly."
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -121,9 +129,13 @@ export function ContactPageContent() {
                       {inner}
                     </a>
                   ) : (
-                    <Link href={channel.href} className={className}>
+                    <button
+                      type="button"
+                      onClick={() => openBookDemo("contact-channel")}
+                      className={`${className} w-full text-left cursor-pointer`}
+                    >
                       {inner}
-                    </Link>
+                    </button>
                   )}
                 </li>
               );
@@ -238,18 +250,21 @@ export function ContactPageContent() {
               <div className="flex flex-col sm:flex-row sm:items-center gap-4 pt-2">
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center gap-2 self-start rounded-full bg-[#0a0a0a] px-7 py-3.5 text-[14px] font-semibold text-[#fefefc] hover:bg-black transition-colors cursor-pointer"
+                  disabled={submitting || sent}
+                  className="inline-flex items-center justify-center gap-2 self-start whitespace-nowrap rounded-full bg-[#0a0a0a] px-7 py-3.5 text-[14px] font-semibold text-[#fefefc] hover:bg-black transition-colors cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  Open email draft
-                  <HiArrowRight className="h-4 w-4" />
+                  {submitting ? "Sending…" : sent ? "Sent" : "Send message"}
+                  {!submitting && !sent && <HiArrowRight className="h-4 w-4" />}
                 </button>
                 {sent ? (
-                  <p className="text-[13px] text-[#0a0a0a]/45">
-                    If mail did not open, write{" "}
-                    <a href="mailto:nyasha@lysp.ai" className="underline underline-offset-2">
-                      nyasha@lysp.ai
-                    </a>
-                    .
+                  <p className="text-[13px] text-[#0a0a0a]/60">
+                    Thank you — that is with us. We will reply to{" "}
+                    <span className="font-semibold text-[#0a0a0a]">{email}</span> shortly.
+                  </p>
+                ) : null}
+                {error ? (
+                  <p role="alert" className="text-[13px] text-red-700">
+                    {error}
                   </p>
                 ) : null}
               </div>

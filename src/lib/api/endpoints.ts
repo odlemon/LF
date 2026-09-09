@@ -1,4 +1,7 @@
 export const ENDPOINTS = {
+  DEMO_REQUESTS: {
+    SUBMIT: "/v1/demo-requests",
+  },
   AUTH: {
     LOGIN: "/v1/auth/login",
     LOGOUT: "/api/auth/logout",

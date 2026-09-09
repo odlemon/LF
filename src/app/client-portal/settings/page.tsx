@@ -234,7 +234,7 @@ export default function ClientSettingsPage() {
               variant="secondary"
               onClick={async () => {
                 await logout();
-                router.push("/auth");
+                router.push("/login");
               }}
             >
               Sign out

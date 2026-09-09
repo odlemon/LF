@@ -61,7 +61,7 @@ function FirmAuthGuard({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (isLoading) return;
     if (!isAuthenticated) {
-      router.push("/auth");
+      router.push("/login");
       return;
     }
     if (

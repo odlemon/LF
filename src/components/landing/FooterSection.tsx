@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useBookDemo } from "@/components/landing/BookDemoModal";
 import Link from "next/link";
 import { HiArrowRight } from "react-icons/hi";
 
@@ -22,7 +23,7 @@ const COLUMNS = [
       { label: "Contact", href: "/contact" },
       { label: "Security", href: "/security" },
       { label: "Usage pricing", href: "/#pricing" },
-      { label: "Book a demo", href: "/auth" },
+      { label: "Book a demo", href: "/contact" },
     ],
   },
   {
@@ -52,6 +53,7 @@ const COLUMNS = [
  * executed in Lysp’s dossier language (dark close, hairlines, quiet type).
  */
 export function FooterSection() {
+  const { openBookDemo } = useBookDemo();
   const year = new Date().getFullYear();
 
   return (
@@ -83,13 +85,14 @@ export function FooterSection() {
           </div>
 
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-            <Link
-              href="/auth"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#fefefc] px-6 py-3.5 text-[14px] font-semibold text-[#0a0a0a] hover:bg-white transition-all hover:gap-3 cursor-pointer"
+            <button
+              type="button"
+              onClick={() => openBookDemo("footer")}
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#fefefc] px-6 py-3.5 text-[14px] font-semibold text-[#0a0a0a] hover:bg-white transition-all hover:gap-3 cursor-pointer"
             >
               Book a demo
               <HiArrowRight className="h-4 w-4" />
-            </Link>
+            </button>
             <a
               href="mailto:nyasha@lysp.ai"
               className="inline-flex items-center justify-center rounded-full border border-white/15 px-6 py-3.5 text-[14px] font-semibold text-white/80 hover:text-white hover:border-white/30 transition-colors cursor-pointer"

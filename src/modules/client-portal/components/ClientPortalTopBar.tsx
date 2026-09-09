@@ -98,7 +98,7 @@ export function ClientPortalTopBar({ onMenuClick }: { onMenuClick?: () => void }
     try {
       await logout();
     } finally {
-      router.push("/auth");
+      router.push("/login");
     }
   };
 

@@ -8,7 +8,7 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "*",
         allow: ["/", "/product", "/security", "/about", "/contact", "/blog", "/privacy", "/roi-calculator"],
         disallow: [
-          "/auth",
+          "/login",
           "/dashboard",
           "/pricing-requests",
           "/approvals",

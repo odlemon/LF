@@ -6,6 +6,7 @@ import { HiArrowRight, HiCheck, HiChevronDown, HiLockClosed, HiShieldCheck } fro
 import { SECURITY_CERTIFICATIONS } from "@/components/landing/security/certifications";
 import { SecurityBadge } from "@/components/landing/security/SecurityBadge";
 import { MARKETING_SHELL, PageHeroHeader } from "@/components/landing/editorial";
+import { useBookDemo } from "@/components/landing/BookDemoModal";
 
 const TRUST_STRIP = [
   { label: "Encryption", value: "AES-256 · TLS 1.2+" },
@@ -157,6 +158,7 @@ const DISCLOSURES = [
 ];
 
 export function SecurityPageContent() {
+  const { openBookDemo } = useBookDemo();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const [activeDomain, setActiveDomain] = useState<(typeof CONTROL_DOMAINS)[number]["id"]>(
     "encryption",
@@ -184,13 +186,14 @@ export function SecurityPageContent() {
             description="Rates, OCGs, realization, and negotiation history are among the most sensitive assets in a firm. Lysp is built so that information stays yours - encrypted, isolated, auditable, and never used to train models."
           >
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                href="/auth"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#0a0a0a] px-6 py-3 text-[14px] font-semibold text-[#fefefc] hover:bg-black transition-colors cursor-pointer"
+              <button
+                type="button"
+                onClick={() => openBookDemo("security-pack")}
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#0a0a0a] px-6 py-3 text-[14px] font-semibold text-[#fefefc] hover:bg-black transition-colors cursor-pointer"
               >
                 Request the security pack
                 <HiArrowRight className="h-4 w-4" />
-              </Link>
+              </button>
               <a
                 href="#certifications"
                 className="inline-flex items-center justify-center rounded-full border border-black/15 bg-white px-6 py-3 text-[14px] font-semibold text-[#0a0a0a] hover:bg-black/[0.03] transition-colors cursor-pointer"
@@ -585,13 +588,14 @@ export function SecurityPageContent() {
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 shrink-0">
-            <Link
-              href="/auth"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#fefefc] px-6 py-3.5 text-[14px] font-semibold text-[#0a0a0a] hover:bg-white transition-colors"
+            <button
+              type="button"
+              onClick={() => openBookDemo("security-pack")}
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#fefefc] px-6 py-3.5 text-[14px] font-semibold text-[#0a0a0a] hover:bg-white transition-colors cursor-pointer"
             >
               Request the security pack
               <HiArrowRight className="h-4 w-4" />
-            </Link>
+            </button>
             <a
               href="mailto:nyasha@lysp.ai"
               className="inline-flex items-center justify-center rounded-full border border-white/15 px-6 py-3.5 text-[14px] font-semibold text-white/80 hover:text-white hover:border-white/30 transition-colors"

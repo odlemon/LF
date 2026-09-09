@@ -13,6 +13,7 @@ import {
   inputsFromSimple,
   type FirmProfile,
 } from "./roiMath";
+import { useBookDemo } from "@/components/landing/BookDemoModal";
 
 function useAnimatedNumber(target: number, duration = 520) {
   const [value, setValue] = useState(target);
@@ -52,6 +53,7 @@ const FEE_PRESETS = [
 ] as const;
 
 export function RoiCalculatorPage() {
+  const { openBookDemo } = useBookDemo();
   const [matters, setMatters] = useState(40);
   const [avgFee, setAvgFee] = useState(2_400_000);
   const [profile, setProfile] = useState<FirmProfile>("balanced");
@@ -455,13 +457,14 @@ export function RoiCalculatorPage() {
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <Link
-              href="/auth"
+            <button
+              type="button"
+              onClick={() => openBookDemo("roi-calculator")}
               className="inline-flex items-center gap-2 rounded-full bg-[#fefefc] px-6 py-3.5 text-[14px] font-semibold text-[#0a0a0a]"
             >
               Book a demo
               <HiArrowRight className="h-4 w-4" />
-            </Link>
+            </button>
             <button
               type="button"
               onClick={shareMailto}

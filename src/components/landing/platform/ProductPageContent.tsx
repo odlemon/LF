@@ -10,6 +10,7 @@ import {
   PageHeroHeader,
   SectionHeader,
 } from "@/components/landing/editorial";
+import { useBookDemo } from "@/components/landing/BookDemoModal";
 
 function CapabilitySection({
   uc,
@@ -99,6 +100,7 @@ function CapabilitySection({
 }
 
 export function ProductPageContent() {
+  const { openBookDemo } = useBookDemo();
   useEffect(() => {
     const hash = window.location.hash.replace("#", "");
     if (!hash) return;
@@ -130,13 +132,14 @@ export function ProductPageContent() {
             className="max-w-3xl"
           >
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Link
-                href="/auth"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#0a0a0a] px-6 py-3 text-[14px] font-semibold text-[#fefefc] hover:bg-black transition-colors"
-              >
+              <button
+              type="button"
+              onClick={() => openBookDemo("product")}
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#0a0a0a] px-6 py-3 text-[14px] font-semibold text-[#fefefc] hover:bg-black transition-colors"
+            >
                 Book a demo
                 <HiArrowRight className="h-4 w-4" />
-              </Link>
+              </button>
             </div>
           </PageHeroHeader>
         </div>

@@ -64,7 +64,7 @@ export default function FirmPreferencesPage() {
                   variant="secondary"
                   onClick={async () => {
                     await logout();
-                    router.push("/auth");
+                    router.push("/login");
                   }}
                 >
                   Sign out

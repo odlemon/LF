@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
+import { useBookDemo } from "@/components/landing/BookDemoModal";
 import Link from "next/link";
 import { HiCheck, HiLockClosed, HiArrowRight, HiPlay } from "react-icons/hi";
 
 export function IntegrationsCTASection() {
+  const { openBookDemo } = useBookDemo();
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
 
   const integrations = [
@@ -85,13 +87,14 @@ export function IntegrationsCTASection() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
-              <Link
-                href="/auth"
-                className="flex-1 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white rounded-xl py-3 text-center text-xs sm:text-sm font-semibold shadow-md shadow-emerald-500/20 flex items-center justify-center gap-2"
+              <button
+                type="button"
+                onClick={() => openBookDemo("integrations")}
+                className="flex-1 bg-[#0a0a0a] hover:bg-black text-[#fefefc] rounded-xl py-3 text-center text-xs sm:text-sm font-semibold whitespace-nowrap flex items-center justify-center gap-2 cursor-pointer transition-colors"
               >
                 Request a Demo
                 <HiArrowRight className="w-4 h-4" />
-              </Link>
+              </button>
               <Link
                 href="#pricing"
                 className="flex-1 border border-emerald-500 text-emerald-600 hover:bg-emerald-50 rounded-xl py-3 text-center text-xs sm:text-sm font-semibold flex items-center justify-center gap-2"

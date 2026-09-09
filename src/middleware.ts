@@ -31,6 +31,10 @@ const FIRM_PREFIXES = [
   "/pricing-requests",
   "/settings",
   "/account",
+  "/login",
+  // The login page used to live here. Kept in the firm prefix list so an old link or
+  // bookmark is still recognised as belonging to this surface, then redirected below
+  // rather than bounced to the marketing site.
   "/auth",
   "/api/auth",
 ];
@@ -88,9 +92,16 @@ export function middleware(request: NextRequest) {
   }
 
   if (mode === "firm") {
-    if (isPortal) return crossOrigin(portalUrl, request, "/auth");
+    // /auth moved to /login. Redirect rather than 404 so bookmarks and any link already
+    // in the wild still land somewhere useful.
+    if (pathname === "/auth" || pathname.startsWith("/auth/")) {
+      const moved = request.nextUrl.clone();
+      moved.pathname = pathname.replace(/^\/auth/, "/login");
+      return NextResponse.redirect(moved);
+    }
+    if (isPortal) return crossOrigin(portalUrl, request, "/login");
     // Marketing pages belong to the landing site.
-    if (isLanding && pathname !== "/") return crossOrigin(landingUrl, request, "/auth");
+    if (isLanding && pathname !== "/") return crossOrigin(landingUrl, request, "/login");
     // The app has no marketing root of its own; send arrivals to the workspace
     // and let the auth guard bounce them to /auth if they are not signed in.
     if (pathname === "/") return NextResponse.redirect(new URL("/dashboard", request.url));

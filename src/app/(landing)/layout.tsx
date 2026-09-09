@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Quicksand } from "next/font/google";
 import { preload } from "react-dom";
+import { BookDemoProvider } from "@/components/landing/BookDemoModal";
 import "../globals.css";
 
 const quicksand = Quicksand({
@@ -54,7 +55,7 @@ export default function LandingLayout({
 
   return (
     <div className={`${quicksand.className} min-h-screen bg-gray-100 antialiased`}>
-      {children}
+      <BookDemoProvider>{children}</BookDemoProvider>
     </div>
   );
 }

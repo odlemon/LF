@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { HiChevronDown, HiMenu, HiX } from "react-icons/hi";
+import { useBookDemo } from "@/components/landing/BookDemoModal";
 
 type HeroNavbarProps = {
   variant?: "default" | "overMedia";
@@ -89,6 +90,7 @@ const NAV_ITEMS: NavItem[] = [
 ];
 
 export function HeroNavbar({ variant = "default" }: HeroNavbarProps) {
+  const { openBookDemo } = useBookDemo();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDesktop, setOpenDesktop] = useState<string | null>(null);
@@ -217,7 +219,7 @@ export function HeroNavbar({ variant = "default" }: HeroNavbarProps) {
         {/* Right CTAs */}
         <div className="relative z-10 flex items-center gap-2 sm:gap-3">
           <Link
-            href="/auth"
+            href="/login"
             className={`hidden sm:inline-flex text-[13px] font-medium transition-colors ${
               onDark ? "text-white/85 hover:text-white" : "text-[#0a0a0a]/80 hover:text-[#0a0a0a]"
             }`}
@@ -225,16 +227,17 @@ export function HeroNavbar({ variant = "default" }: HeroNavbarProps) {
             Log in
           </Link>
 
-          <Link
-            href="/auth"
-            className={`inline-flex items-center justify-center rounded-full px-4 sm:px-5 py-2 text-[13px] font-semibold transition-colors ${
+          <button
+            type="button"
+            onClick={() => openBookDemo("navbar")}
+            className={`inline-flex items-center justify-center whitespace-nowrap rounded-full px-4 sm:px-5 py-2 text-[13px] font-semibold transition-colors cursor-pointer ${
               onDark
                 ? "bg-[#fefefc] text-[#0a0a0a] hover:bg-white"
                 : "bg-[#0a0a0a] text-[#fefefc] hover:bg-black"
             }`}
           >
             Book a demo
-          </Link>
+          </button>
 
           <button
             type="button"
@@ -306,19 +309,22 @@ export function HeroNavbar({ variant = "default" }: HeroNavbarProps) {
 
             <div className="mt-6 flex flex-col gap-3 px-3">
               <Link
-                href="/auth"
+                href="/login"
                 onClick={() => setIsMenuOpen(false)}
                 className="text-center rounded-full border border-black/15 px-5 py-3 text-[14px] font-semibold text-[#0a0a0a]"
               >
                 Log in
               </Link>
-              <Link
-                href="/auth"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-center rounded-full bg-[#0a0a0a] px-5 py-3 text-[14px] font-semibold text-[#fefefc]"
+              <button
+                type="button"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  openBookDemo("navbar-mobile");
+                }}
+                className="text-center rounded-full bg-[#0a0a0a] px-5 py-3 text-[14px] font-semibold text-[#fefefc] cursor-pointer"
               >
                 Book a demo
-              </Link>
+              </button>
             </div>
           </div>
         </div>

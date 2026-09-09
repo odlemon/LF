@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { HiArrowRight, HiCheck } from "react-icons/hi";
 import { MARKETING_SHELL, SectionHeader } from "@/components/landing/editorial";
+import { useBookDemo } from "@/components/landing/BookDemoModal";
 
 /** Illustrative public rate - firm rate cards are custom. */
 const CREDIT_USD = 32;
@@ -116,6 +117,7 @@ function useAnimatedNumber(target: number, duration = 420) {
 }
 
 export function PricingSection() {
+  const { openBookDemo } = useBookDemo();
   const [matters, setMatters] = useState(MATTERS_DEFAULT);
   const [pace, setPace] = useState<Pace>("typical");
 
@@ -406,13 +408,14 @@ export function PricingSection() {
                   </div>
                 </div>
 
-                <Link
-                  href="/auth"
-                  className="relative mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#fefefc] px-6 py-3.5 text-[14px] font-semibold text-[#0a0a0a] hover:bg-white transition-all duration-200 hover:gap-3 cursor-pointer shadow-[0_8px_24px_-12px_rgba(254,254,252,0.5)]"
-                >
+                <button
+              type="button"
+              onClick={() => openBookDemo("pricing")}
+              className="relative mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#fefefc] px-6 py-3.5 text-[14px] font-semibold text-[#0a0a0a] hover:bg-white transition-all duration-200 hover:gap-3 cursor-pointer shadow-[0_8px_24px_-12px_rgba(254,254,252,0.5)]"
+            >
                   Book a demo
                   <HiArrowRight className="h-4 w-4" />
-                </Link>
+                </button>
                 <p className="relative mt-4 text-center text-[11px] text-white/30 leading-relaxed">
                   Final pricing is custom. Estimate uses the public ${CREDIT_USD}/credit reference.
                 </p>

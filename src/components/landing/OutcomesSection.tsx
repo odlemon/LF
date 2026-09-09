@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { HiArrowRight } from "react-icons/hi";
 import { MARKETING_SHELL, SectionHeader } from "@/components/landing/editorial";
+import { useBookDemo } from "@/components/landing/BookDemoModal";
 
 /**
  * Single generalized large-matter scenario for elite commercial firms.
@@ -23,6 +24,7 @@ const SCENARIO = {
 };
 
 export function OutcomesSection() {
+  const { openBookDemo } = useBookDemo();
   return (
     <section id="outcomes" className="relative w-full overflow-hidden bg-[#fefefc] text-[#0a0a0a]">
       <div
@@ -179,13 +181,14 @@ export function OutcomesSection() {
               Model your firm’s impact
               <HiArrowRight className="h-4 w-4" />
             </Link>
-            <Link
-              href="/auth"
+            <button
+              type="button"
+              onClick={() => openBookDemo("outcomes")}
               className="inline-flex items-center justify-center gap-2 rounded-full bg-[#0a0a0a] px-6 py-3.5 text-[14px] font-semibold text-[#fefefc] hover:bg-black transition-colors cursor-pointer"
             >
               Book a demo
               <HiArrowRight className="h-4 w-4" />
-            </Link>
+            </button>
           </div>
         </div>
       </div>

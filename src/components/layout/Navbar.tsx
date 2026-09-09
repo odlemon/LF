@@ -94,7 +94,7 @@ export function Navbar({ onMenuClick }: NavbarProps = {}) {
       if (landingUrl) {
         window.location.href = landingUrl;
       } else {
-        router.push("/auth");
+        router.push("/login");
       }
     }
   };
