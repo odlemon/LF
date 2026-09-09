@@ -76,7 +76,7 @@ export function ClientSidebar({ isMobileOpen = false, onMobileClose }: ClientSid
 
   const handleLogout = async () => {
     await logout();
-    router.push("/login");
+    router.push("/client-login");
   };
 
   return (

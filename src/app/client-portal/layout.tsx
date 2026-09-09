@@ -70,7 +70,7 @@ function ClientAuthGuard({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
-      router.push("/login");
+      router.push("/client-login");
     }
   }, [isAuthenticated, isLoading, router]);
 
