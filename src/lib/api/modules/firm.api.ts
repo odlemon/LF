@@ -63,7 +63,10 @@ export async function getFeeEarnerLevels(): Promise<FeeEarnerLevel[]> {
   return items.map((item) => {
     const raw = item as Record<string, unknown>;
     return {
-      uid: String(raw.id ?? raw.uid ?? ""),
+      // The TSID, not the numeric primary key. Preferring id meant this carried "1" while
+      // every other part of the platform identifies a level by its uid: rate card entries
+      // could not resolve a level's name, and any write addressed by it 404'd.
+      uid: String(raw.uid ?? raw.id ?? ""),
       firmUid: String(raw.firmUid ?? ""),
       name: String(raw.name ?? ""),
       code: String(raw.code ?? ""),
