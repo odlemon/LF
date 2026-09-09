@@ -9,6 +9,10 @@ export const ENDPOINTS = {
     LOGIN: "/v1/auth/login",
     LOGOUT: "/api/auth/logout",
     ME: "/v1/auth/me",
+    PASSWORD_RESET_REQUEST: "/v1/auth/password-reset/request",
+    PASSWORD_RESET_REQUEST_PORTAL: "/v1/auth/password-reset/portal/request",
+    // Shared: the token already identifies which account it belongs to.
+    PASSWORD_RESET_CONFIRM: "/v1/auth/password-reset/confirm",
   },
   CLIENT_AUTH: {
     LOGIN: "/api/client-auth/login",

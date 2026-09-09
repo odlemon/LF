@@ -298,6 +298,22 @@ export default function LoginPage() {
 
               <div className="mt-10 pt-8 border-t border-black/[0.06]">
                 <p className="text-[13px] text-[#0a0a0a]/45 leading-relaxed">
+                  <Link
+                    href="/login/forgot"
+                    className="font-semibold text-[#0a0a0a]/70 hover:text-[#0a0a0a] underline underline-offset-4"
+                  >
+                    Forgot your password?
+                  </Link>
+                  <span className="mx-2 text-[#0a0a0a]/25">|</span>
+                  Looking for your{" "}
+                  <a
+                    href="https://client.lysp.ai"
+                    className="font-semibold text-[#0a0a0a]/70 hover:text-[#0a0a0a] underline underline-offset-4"
+                  >
+                    client portal
+                  </a>
+                  ?
+                  <br />
                   Need access for your firm?{" "}
                   <Link
                     href="/contact"

@@ -212,6 +212,13 @@ export default function ClientLoginPage() {
 
               <div className="mt-10 border-t border-black/[0.06] pt-8">
                 <p className="text-[13px] leading-relaxed text-[#0a0a0a]/45">
+                  <Link
+                    href="/client-login/forgot"
+                    className="font-semibold text-[#0a0a0a]/70 hover:text-[#0a0a0a] underline underline-offset-4"
+                  >
+                    Forgot your password?
+                  </Link>
+                  <br />
                   Access is by invitation from your firm. If you have not received one, ask your
                   relationship partner.
                 </p>
