@@ -33,6 +33,7 @@ import {
   HiOutlineOfficeBuilding,
   HiChevronDoubleLeft,
   HiChevronDoubleRight,
+  HiOutlineInboxIn,
 } from "react-icons/hi";
 
 const COLLAPSE_STORAGE_KEY = "lysp.sidebar.collapsed";
@@ -88,6 +89,7 @@ export function Sidebar({ isMobileOpen = false, onMobileClose }: SidebarProps = 
     // until the page exists rather than shipping a dead nav item.
     // { label: "Knowledge Base", route: "/knowledge", permission: PERMISSIONS.KNOWLEDGE_READ, icon: HiDocumentText },
     { label: "Clients", route: "/clients", permission: PERMISSIONS.CLIENT_READ, icon: HiUserGroup },
+    { label: "Demo Requests", route: "/settings/demo-requests", permission: PERMISSIONS.DEMO_REQUEST_READ, icon: HiOutlineInboxIn },
   ];
 
   const settingsNavItems: NavItem[] = [

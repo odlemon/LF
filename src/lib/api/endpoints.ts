@@ -1,6 +1,9 @@
 export const ENDPOINTS = {
   DEMO_REQUESTS: {
     SUBMIT: "/v1/demo-requests",
+    LIST: "/api/v1/admin/demo-requests",
+    DETAIL: (uid: string) => `/api/v1/admin/demo-requests/${uid}`,
+    UPDATE: (uid: string) => `/api/v1/admin/demo-requests/${uid}`,
   },
   AUTH: {
     LOGIN: "/v1/auth/login",
