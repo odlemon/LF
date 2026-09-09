@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/Button";
 import { Pagination } from "@/components/ui/Pagination";
 import toast from "react-hot-toast";
 import { HiPlus, HiDatabase, HiTrash, HiFolderOpen } from "react-icons/hi";
+import { Select } from "@/components/ui/Select";
 
 export default function DatasetsIndexPage() {
   const [page, setPage] = useState(0);
@@ -91,44 +92,44 @@ export default function DatasetsIndexPage() {
       {/* Filter Options Bar */}
       <div className="bg-field/50 border border-border/40 rounded-3xl p-5 shadow-sm flex flex-col sm:flex-row gap-4">
         <div className="flex flex-col gap-1 flex-1">
-          <label className="text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1">Category</label>
-          <select
+          <Select
+            label="Category"
             value={filters.category}
-            onChange={(e) => {
-              setFilters((prev) => ({ ...prev, category: e.target.value }));
+            onChange={(value) => {
+              setFilters((prev) => ({ ...prev, category: value }));
               setPage(0);
             }}
-            className="w-full px-4 py-2.5 bg-surface border border-border rounded-full text-xs font-semibold focus:outline-none"
-          >
-            <option value="ALL">All Categories</option>
-            <option value="PAST_MATTERS">Past Matters</option>
-            <option value="TIME_ENTRIES">Time Entries</option>
-            <option value="BILLING_HISTORY">Billing History</option>
-            <option value="RATE_CARD_HISTORY">Rate Card History</option>
-            <option value="MARKET_BENCHMARKS">Market Benchmarks</option>
-            <option value="CLIENT_OCG">Client OCG Guidelines</option>
-            <option value="MATTER_ASSUMPTIONS">Matter Assumptions</option>
-            <option value="OTHER">Other</option>
-          </select>
+            options={[
+              { value: "ALL", label: "All Categories" },
+              { value: "PAST_MATTERS", label: "Past Matters" },
+              { value: "TIME_ENTRIES", label: "Time Entries" },
+              { value: "BILLING_HISTORY", label: "Billing History" },
+              { value: "RATE_CARD_HISTORY", label: "Rate Card History" },
+              { value: "MARKET_BENCHMARKS", label: "Market Benchmarks" },
+              { value: "CLIENT_OCG", label: "Client OCG Guidelines" },
+              { value: "MATTER_ASSUMPTIONS", label: "Matter Assumptions" },
+              { value: "OTHER", label: "Other" },
+            ]}
+          />
         </div>
 
         <div className="flex flex-col gap-1 flex-1">
-          <label className="text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1">Batch Ingestion Status</label>
-          <select
+          <Select
+            label="Batch Ingestion Status"
             value={filters.status}
-            onChange={(e) => {
-              setFilters((prev) => ({ ...prev, status: e.target.value }));
+            onChange={(value) => {
+              setFilters((prev) => ({ ...prev, status: value }));
               setPage(0);
             }}
-            className="w-full px-4 py-2.5 bg-surface border border-border rounded-full text-xs font-semibold focus:outline-none"
-          >
-            <option value="ALL">All Statuses</option>
-            <option value="PENDING">Pending</option>
-            <option value="PROCESSING">Processing</option>
-            <option value="COMPLETE">Complete</option>
-            <option value="PARTIAL">Partial</option>
-            <option value="FAILED">Failed</option>
-          </select>
+            options={[
+              { value: "ALL", label: "All Statuses" },
+              { value: "PENDING", label: "Pending" },
+              { value: "PROCESSING", label: "Processing" },
+              { value: "COMPLETE", label: "Complete" },
+              { value: "PARTIAL", label: "Partial" },
+              { value: "FAILED", label: "Failed" },
+            ]}
+          />
         </div>
       </div>
 

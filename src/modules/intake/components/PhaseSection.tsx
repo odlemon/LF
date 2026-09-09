@@ -134,21 +134,20 @@ export function PhaseSection({
                     </span>
                   ) : editingPracticeArea ? (
                     <div className="flex items-center gap-1.5">
-                      <select
-                        autoFocus
-                        defaultValue={phase.practiceAreaUid || ""}
+                      <Select
+                        className="min-w-44"
+                        value={phase.practiceAreaUid || ""}
                         disabled={isSavingPracticeArea}
-                        onChange={(e) => handleSavePracticeArea(e.target.value)}
-                        onBlur={() => setEditingPracticeArea(false)}
-                        className="text-[11px] font-semibold text-ink/80 bg-field border border-border rounded-full px-2.5 py-1 focus:outline-none focus:ring-2 focus:ring-primary/20"
-                      >
-                        <option value="">No practice area</option>
-                        {practiceAreas.map((pa) => (
-                          <option key={pa.uid} value={pa.uid}>
-                            {pa.name}
-                          </option>
-                        ))}
-                      </select>
+                        placeholder="No practice area"
+                        onChange={(value) => {
+                          handleSavePracticeArea(value);
+                          setEditingPracticeArea(false);
+                        }}
+                        options={[
+                          { value: "", label: "No practice area" },
+                          ...practiceAreas.map((pa) => ({ value: pa.uid, label: pa.name })),
+                        ]}
+                      />
                     </div>
                   ) : (
                     <button

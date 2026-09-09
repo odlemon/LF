@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/Button";
 import toast from "react-hot-toast";
 import { HiOutlineDocumentDownload, HiOutlineOfficeBuilding } from "react-icons/hi";
 import type { FirmUsageRow, Statement } from "@/modules/billing/metering.types";
+import { Select } from "@/components/ui/Select";
 
 function recentPeriods(count = 6): string[] {
   const out: string[] = [];
@@ -118,18 +119,13 @@ export default function CrossFirmUsagePage() {
               trial firms are shown but marked non-billable.
             </p>
           </div>
-          <select
+          <Select
+            className="w-44 shrink-0"
             value={period}
-            onChange={(e) => setPeriod(e.target.value)}
-            className="shrink-0 rounded-xl border border-border bg-field px-3 py-2 text-sm text-ink"
-            aria-label="Billing period"
-          >
-            {periods.map((p) => (
-              <option key={p} value={p}>
-                {p}
-              </option>
-            ))}
-          </select>
+            onChange={setPeriod}
+            options={periods.map((p) => ({ value: p, label: p }))}
+            placeholder="Billing period"
+          />
         </header>
 
         {error && (

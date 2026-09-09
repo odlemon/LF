@@ -19,6 +19,17 @@ interface SelectProps {
   disabled?: boolean;
   required?: boolean;
   className?: string;
+  /**
+   * Which of the two form languages already in the codebase this instance speaks.
+   *
+   * "platform" is the workspace: pill triggers, small bold uppercase-ish text. "marketing" is
+   * the landing site's forms: larger type, softer radius, sentence case. Both already existed;
+   * naming them here is what lets one component serve both instead of the landing site keeping
+   * a native <select> because the shared one looked wrong next to its siblings.
+   */
+  variant?: "platform" | "marketing";
+  /** Render without the built-in label when the caller supplies its own. */
+  id?: string;
 }
 
 export function Select({
@@ -31,7 +42,10 @@ export function Select({
   disabled = false,
   required = false,
   className = "",
+  variant = "platform",
+  id,
 }: SelectProps) {
+  const marketing = variant === "marketing";
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -68,15 +82,18 @@ export function Select({
         type="button"
         disabled={disabled}
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-full flex items-center justify-between gap-2 px-5 py-2.5 bg-surface border ${
+        id={id}
+        className={`w-full flex items-center justify-between gap-2 bg-surface border ${
+          marketing ? "px-4 py-2.5 rounded-xl text-[15px]" : "px-5 py-2.5 rounded-full text-xs font-bold"
+        } ${
           error
             ? "border-red-300 focus:ring-red-100 dark:border-red-800 dark:focus:ring-red-950/40"
             : isOpen
             ? "border-primary focus:ring-primary/20"
             : "border-border hover:border-ink/20"
-        } rounded-full text-xs font-bold text-ink/90 transition-all focus:outline-none focus:ring-2 disabled:opacity-50 disabled:bg-field cursor-pointer`}
+        } text-ink/90 transition-all focus:outline-none focus:ring-2 disabled:opacity-50 disabled:bg-field cursor-pointer`}
       >
-        <span className={selectedOption ? "text-ink/90" : "text-ink/40 font-semibold"}>
+        <span className={selectedOption ? "text-ink/90" : `text-ink/40 ${marketing ? "" : "font-semibold"}`}>
           {selectedOption ? selectedOption.label : placeholder}
         </span>
         <ChevronDownIcon
@@ -102,7 +119,9 @@ export function Select({
                     key={opt.value}
                     type="button"
                     onClick={() => handleSelect(opt.value)}
-                    className={`w-full flex items-center justify-between px-5 py-2.5 text-left text-xs font-bold transition-colors ${
+                    className={`w-full flex items-center justify-between px-5 py-2.5 text-left transition-colors ${
+                      marketing ? "text-[15px]" : "text-xs font-bold"
+                    } ${
                       isSelected
                         ? "bg-primary/5 text-primary"
                         : "text-ink/80 hover:bg-field hover:text-ink"

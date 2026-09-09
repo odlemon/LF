@@ -3,13 +3,16 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { HiArrowRight, HiCheckCircle, HiX } from "react-icons/hi";
 import { demoRequestApi } from "@/lib/api/modules/demoRequest.api";
+import { Select } from "@/components/ui/Select";
 
+// Lysp sells to firms with a real pricing function, which starts around a hundred fee earners.
+// Offering smaller bands invited enquiries that were never going to be a fit and made the form
+// look like it was written for a different company.
 const FIRM_SIZES = [
-  "1-25 fee earners",
-  "26-100 fee earners",
   "101-500 fee earners",
   "501-1000 fee earners",
-  "1000+ fee earners",
+  "1000-2500 fee earners",
+  "2500+ fee earners",
 ];
 
 const ROLES = [
@@ -245,40 +248,30 @@ function BookDemoModal({
                   <label className={LABEL} htmlFor="bd-role">
                     Your role
                   </label>
-                  <select
+                  <Select
                     id="bd-role"
-                    className={FIELD}
+                    variant="marketing"
+                    placeholder="Select…"
+                    options={ROLES.map((r) => ({ value: r, label: r }))}
                     value={roleTitle}
-                    onChange={(e) => setRoleTitle(e.target.value)}
+                    onChange={setRoleTitle}
                     disabled={submitting}
-                  >
-                    <option value="">Select…</option>
-                    {ROLES.map((r) => (
-                      <option key={r} value={r}>
-                        {r}
-                      </option>
-                    ))}
-                  </select>
+                  />
                 </div>
 
                 <div>
                   <label className={LABEL} htmlFor="bd-size">
                     Firm size
                   </label>
-                  <select
+                  <Select
                     id="bd-size"
-                    className={FIELD}
+                    variant="marketing"
+                    placeholder="Select…"
+                    options={FIRM_SIZES.map((v) => ({ value: v, label: v }))}
                     value={firmSize}
-                    onChange={(e) => setFirmSize(e.target.value)}
+                    onChange={setFirmSize}
                     disabled={submitting}
-                  >
-                    <option value="">Select…</option>
-                    {FIRM_SIZES.map((s) => (
-                      <option key={s} value={s}>
-                        {s}
-                      </option>
-                    ))}
-                  </select>
+                  />
                 </div>
 
                 <div>
@@ -290,7 +283,7 @@ function BookDemoModal({
                     className={FIELD}
                     value={country}
                     onChange={(e) => setCountry(e.target.value)}
-                    placeholder="United Kingdom"
+                    placeholder="United States"
                     autoComplete="country-name"
                     maxLength={80}
                     disabled={submitting}

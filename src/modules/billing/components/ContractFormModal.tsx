@@ -7,6 +7,7 @@ import { fieldClassName } from "@/components/ui/Input";
 import { meteringApi } from "@/lib/api/modules/metering.api";
 import toast from "react-hot-toast";
 import type { FirmContract } from "@/modules/billing/metering.types";
+import { Select } from "@/components/ui/Select";
 
 interface Props {
   open: boolean;
@@ -127,24 +128,18 @@ export function ContractFormModal({ open, onClose, existing, onSaved }: Props) {
           </Field>
 
           <Field label="Contract Type">
-            <select
+            <Select
               value={form.contractType}
-              onChange={(e) =>
+              onChange={(value) =>
                 setForm({
                   ...form,
-                  contractType: e.target.value as ContractType,
+                  contractType: value as ContractType,
                   // Pilots and trials are not invoiced; keep the flag honest by default.
-                  billable: e.target.value === "COMMERCIAL",
+                  billable: value === "COMMERCIAL",
                 })
               }
-              className={fieldClassName}
-            >
-              {CONTRACT_TYPES.map((t) => (
-                <option key={t} value={t}>
-                  {t}
-                </option>
-              ))}
-            </select>
+              options={CONTRACT_TYPES.map((t) => ({ value: t, label: t }))}
+            />
           </Field>
 
           <Field label="Period Start">

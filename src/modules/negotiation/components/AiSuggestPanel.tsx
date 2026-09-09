@@ -4,6 +4,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/Button";
 import type { NegotiationAiSuggest } from "../types";
+import { Select } from "@/components/ui/Select";
 
 interface AiSuggestPanelProps {
   /** Firm view shows margin / guardrail fields. Client view must stay clean. */
@@ -47,14 +48,15 @@ export function AiSuggestPanel({
         </div>
         <div className="flex items-center gap-2">
           {variant === "firm" && (
-            <select
+            <Select
+              className="w-44"
               value={intent}
-              onChange={(e) => setIntent(e.target.value)}
-              className="h-9 rounded-xl border border-border bg-field px-2.5 text-xs text-ink"
-            >
-              <option value="opening">Opening brief</option>
-              <option value="counter">Analyse counter</option>
-            </select>
+              onChange={setIntent}
+              options={[
+                { value: "opening", label: "Opening brief" },
+                { value: "counter", label: "Analyse counter" },
+              ]}
+            />
           )}
           <Button
             variant="secondary"

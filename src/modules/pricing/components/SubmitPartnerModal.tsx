@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import * as pricingApi from "../api";
 import type { PricingApprover } from "../types";
+import { Select } from "@/components/ui/Select";
 
 interface SubmitPartnerModalProps {
   open: boolean;
@@ -75,18 +76,14 @@ export function SubmitPartnerModal({
               role to a user in Settings, or submit as an admin to yourself.
             </p>
           ) : (
-            <select
+            <Select
               value={selected}
-              onChange={(e) => setSelected(e.target.value)}
-              className="w-full h-10 rounded-xl border border-border bg-field px-3 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-primary/15"
-            >
-              {approvers.map((a) => (
-                <option key={a.id} value={a.id}>
-                  {a.displayName}
-                  {a.roles?.length ? ` · ${a.roles.join(", ")}` : ""}
-                </option>
-              ))}
-            </select>
+              onChange={setSelected}
+              options={approvers.map((a) => ({
+                value: a.id,
+                label: a.displayName + (a.roles?.length ? ` · ${a.roles.join(", ")}` : ""),
+              }))}
+            />
           )}
         </div>
 

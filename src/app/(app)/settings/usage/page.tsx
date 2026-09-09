@@ -10,6 +10,7 @@ import { ContractFormModal } from "@/modules/billing/components/ContractFormModa
 import { Button } from "@/components/ui/Button";
 import { EmptyState } from "@/components/ui/EmptyState";
 import toast from "react-hot-toast";
+import { Select } from "@/components/ui/Select";
 import {
   HiOutlineChartBar,
   HiOutlineDocumentDownload,
@@ -158,18 +159,13 @@ export default function UsagePage() {
             </p>
           </div>
           <div className="flex shrink-0 items-center gap-2">
-            <select
+            <Select
+              className="w-44"
               value={period}
-              onChange={(e) => setPeriod(e.target.value)}
-              className="rounded-xl border border-border bg-field px-3 py-2 text-sm text-ink"
-              aria-label="Billing period"
-            >
-              {periods.map((p) => (
-                <option key={p} value={p}>
-                  {p}
-                </option>
-              ))}
-            </select>
+              onChange={setPeriod}
+              options={periods.map((p) => ({ value: p, label: p }))}
+              placeholder="Billing period"
+            />
             <Button variant="secondary" onClick={downloadCsv}>
               <HiOutlineDownload className="h-4 w-4" />
               CSV

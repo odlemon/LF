@@ -12,6 +12,7 @@ import type {
   UpdateScenarioCommand,
 } from "../types";
 import { PRICING_MODEL_LABELS } from "../types";
+import { Select } from "@/components/ui/Select";
 
 interface WhatIfPanelProps {
   scenario: PricingScenario;
@@ -359,17 +360,15 @@ export function WhatIfPanel({
             <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/35">
               Pricing model
             </p>
-            <select
+            <Select
+              className="mt-2"
               value={pricingModel}
-              onChange={(e) => setPricingModel(e.target.value as PricingModel)}
-              className="mt-2 w-full h-10 rounded-xl border border-border/70 bg-surface px-3 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-primary/15"
-            >
-              {MODEL_OPTIONS.map((m) => (
-                <option key={m} value={m}>
-                  {PRICING_MODEL_LABELS[m]}
-                </option>
-              ))}
-            </select>
+              onChange={(value) => setPricingModel(value as PricingModel)}
+              options={MODEL_OPTIONS.map((m) => ({
+                value: m,
+                label: PRICING_MODEL_LABELS[m],
+              }))}
+            />
           </div>
 
           <StepperControl
@@ -561,20 +560,19 @@ export function WhatIfPanel({
                             <span className="text-[10px] font-semibold uppercase tracking-wide text-ink/35">
                               Level
                             </span>
-                            <select
+                            <Select
+                              className="mt-1"
                               value={line.feeEarnerLevelUid}
-                              onChange={(e) =>
-                                applyLevel(line.key, e.target.value)
-                              }
-                              className="mt-1 w-full h-9 rounded-lg border border-border/70 bg-surface px-2 text-xs text-ink focus:outline-none focus:ring-2 focus:ring-primary/10"
-                            >
-                              <option value="">—</option>
-                              {(feeEarnerLevels ?? []).map((l) => (
-                                <option key={l.uid} value={l.uid}>
-                                  {l.code || l.name}
-                                </option>
-                              ))}
-                            </select>
+                              onChange={(value) => applyLevel(line.key, value)}
+                              placeholder="—"
+                              options={[
+                                { value: "", label: "—" },
+                                ...(feeEarnerLevels ?? []).map((l) => ({
+                                  value: l.uid,
+                                  label: l.code || l.name,
+                                })),
+                              ]}
+                            />
                           </label>
                         </div>
                         <p className="text-right text-xs tabular-nums font-semibold text-ink/70">
