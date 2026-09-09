@@ -10,6 +10,7 @@ import { ClientSidebar } from "@/components/layout/ClientSidebar";
 import { AppToaster } from "@/components/ui/AppToaster";
 import { ClientPortalTopBar } from "@/modules/client-portal/components/ClientPortalTopBar";
 import { MustChangePasswordBanner } from "@/modules/client-portal/components/MustChangePasswordBanner";
+import { ConnectionBanner } from "@/components/layout/ConnectionBanner";
 
 const quicksand = Quicksand({
   subsets: ["latin"],
@@ -53,6 +54,7 @@ function ClientShell({ children }: { children: React.ReactNode }) {
       />
       <div className="flex min-h-screen flex-1 flex-col overflow-hidden bg-canvas text-ink">
         <ClientPortalTopBar onMenuClick={() => setIsMobileNavOpen(true)} />
+        <ConnectionBanner />
         <MustChangePasswordBanner />
         <main className="rates-scrollable flex-1 overflow-y-auto bg-canvas text-ink">
           {children}

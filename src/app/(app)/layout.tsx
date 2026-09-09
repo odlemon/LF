@@ -9,6 +9,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Navbar } from "@/components/layout/Navbar";
 import { AppToaster } from "@/components/ui/AppToaster";
+import { ConnectionBanner } from "@/components/layout/ConnectionBanner";
 
 const quicksand = Quicksand({
   subsets: ["latin"],
@@ -44,6 +45,7 @@ function FirmShell({ children }: { children: React.ReactNode }) {
       <Sidebar isMobileOpen={isMobileNavOpen} onMobileClose={() => setIsMobileNavOpen(false)} />
       <div className="flex min-h-screen flex-1 flex-col overflow-hidden bg-canvas text-ink">
         <Navbar onMenuClick={() => setIsMobileNavOpen(true)} />
+        <ConnectionBanner />
         <main className="rates-scrollable min-h-0 flex-1 overflow-y-auto bg-canvas text-ink">
           {children}
         </main>

@@ -315,12 +315,16 @@ export default function LoginPage() {
                   ?
                   <br />
                   Need access for your firm?{" "}
-                  <Link
-                    href="/contact"
+                  {/* Absolute, and a plain anchor: /contact only exists on the marketing site,
+                      so on this host the middleware redirects it away. A Next Link prefetches
+                      that redirect cross-origin and the browser blocks it on CORS — a console
+                      error on every visit to the sign-in page, for a link nobody had clicked. */}
+                  <a
+                    href="https://lysp.ai/contact"
                     className="font-semibold text-[#0a0a0a] underline-offset-4 hover:underline"
                   >
                     Contact us
-                  </Link>
+                  </a>
                 </p>
               </div>
             </div>
