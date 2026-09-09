@@ -110,7 +110,10 @@ export default function DemoRequestsPage() {
         <div>
           <h1 className="text-2xl font-bold text-ink tracking-tight">Demo requests</h1>
           <p className="text-sm text-ink/55 mt-1">
-            Enquiries from the marketing site. {totalElements} in total.
+            Enquiries from the marketing site.{" "}
+            {tab === "all"
+              ? `${totalElements} in total.`
+              : `${totalElements} at this stage.`}
           </p>
         </div>
         <Button variant="secondary" onClick={() => void load(tab, page)}>
