@@ -254,7 +254,7 @@ export default function NegotiationDetailPage() {
 
       <div className="grid min-h-0 flex-1 lg:grid-cols-12">
         <section
-          className={`min-h-0 flex-col border-r border-border/60 bg-canvas lg:col-span-7 ${
+          className={`min-h-0 min-w-0 flex-col border-r border-border/60 bg-canvas lg:col-span-7 ${
             mobilePane === "advisor" ? "flex" : "hidden lg:flex"
           }`}
         >
@@ -348,7 +348,7 @@ export default function NegotiationDetailPage() {
         </section>
 
         <section
-          className={`min-h-0 flex-col bg-surface lg:col-span-5 ${
+          className={`min-h-0 min-w-0 flex-col bg-surface lg:col-span-5 ${
             mobilePane === "rates" ? "flex" : "hidden lg:flex"
           }`}
         >

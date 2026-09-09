@@ -238,7 +238,7 @@ export default function PortalNegotiationDetailPage() {
       <div className="grid min-h-0 flex-1 lg:grid-cols-12">
         {/* AI coach */}
         <section
-          className={`min-h-0 border-border/60 lg:col-span-7 lg:border-r ${
+          className={`min-h-0 min-w-0 border-border/60 lg:col-span-7 lg:border-r ${
             mobilePane === "coach" ? "flex flex-col" : "hidden lg:flex lg:flex-col"
           }`}
         >
@@ -288,7 +288,7 @@ export default function PortalNegotiationDetailPage() {
 
         {/* Rate rail */}
         <section
-          className={`min-h-0 flex-col bg-surface lg:col-span-5 ${
+          className={`min-h-0 min-w-0 flex-col bg-surface lg:col-span-5 ${
             mobilePane === "rates" ? "flex" : "hidden lg:flex"
           }`}
         >
