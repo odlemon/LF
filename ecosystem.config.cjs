@@ -14,15 +14,25 @@
 // repository is checked out into. The deploy script builds in place and reloads this file.
 const path = require("path");
 
+// Bound to loopback. Next binds every interface by default, so all three surfaces were
+// answering directly on the server's public IP over plain HTTP — the sign-in pages included.
+// That is nginx's TLS, its HSTS header and its request logging all bypassed, and a password
+// typed into http://<ip>:3021/login travelling in the clear. nginx already proxies to
+// 127.0.0.1, so it reaches them exactly as before; nothing else should be able to.
 const surface = (name, port, mode, memory) => ({
   name,
   cwd: __dirname,
   script: path.join(__dirname, "node_modules/next/dist/bin/next"),
-  args: `start -p ${port}`,
+  args: `start -p ${port} -H 127.0.0.1`,
   instances: 1,
   autorestart: true,
   max_memory_restart: memory,
-  env: { NODE_ENV: "production", APP_MODE: mode, PORT: String(port) },
+  env: {
+    NODE_ENV: "production",
+    APP_MODE: mode,
+    PORT: String(port),
+    HOSTNAME: "127.0.0.1",
+  },
 });
 
 module.exports = {
