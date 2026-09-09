@@ -98,7 +98,9 @@ export default function AnalyticsFirmHealthPage() {
             <KpiCard
               label="Win rate"
               value={formatPct(summary.winRatePct, 0)}
-              caption={`${summary.proposalsWon} won / ${summary.proposalsLost} lost`}
+              caption={`${summary.proposalsWon} of ${
+                summary.proposalsDecided ?? summary.proposalsWon + summary.proposalsLost
+              } decided`}
               delta={prior ? formatDelta(prior.winRateDeltaPts, "pts") : undefined}
               deltaValue={prior?.winRateDeltaPts}
             />

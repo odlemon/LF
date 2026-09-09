@@ -13,7 +13,7 @@ export default function FeeEarnerLevelsPage() {
   const { levels, isLoading, error, createLevel } = useFeeEarnerLevels();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleSave = async (data: { name: string; code: string; sortOrder: number }) => {
+  const handleSave = async (data: { name: string; code: string; sortOrder: number; costRate: number | null }) => {
     try {
       await createLevel(data);
       toast.success("Seniority level added successfully.");
@@ -72,6 +72,9 @@ export default function FeeEarnerLevelsPage() {
                     </h3>
                     <span className="text-[10px] font-bold text-ink/40 uppercase tracking-wider block mt-1">
                       Code: {level.code}
+                      {level.costRate != null && (
+                        <span className="ml-2 text-ink/45">· cost {level.costRate}/h</span>
+                      )}
                     </span>
                   </div>
                 </div>

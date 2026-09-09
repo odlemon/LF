@@ -46,6 +46,14 @@ export interface FirmSummaryDto {
   avgProposalDays: number | null;
   mattersPriced: number;
   proposalsSent: number;
+  /**
+   * Proposals decided in the period — the denominator win rate is computed over.
+   *
+   * <p>Not the same set as proposalsSent: a decision can land on a proposal sent before the
+   * window opened, which is why won + lost can exceed sent. Shown so the two are not read as
+   * contradicting each other.
+   */
+  proposalsDecided?: number;
   proposalsWon: number;
   proposalsLost: number;
   priorPeriod: PriorPeriod | null;

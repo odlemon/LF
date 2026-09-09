@@ -47,6 +47,14 @@ export default function PricingWorkspacePage() {
 
   const [request, setRequest] = useState<PricingRequest | null>(null);
   const [requestLoading, setRequestLoading] = useState(true);
+
+  // Same reason as the intake screen: the layout would otherwise title every open matter
+  // "Pricing".
+  useEffect(() => {
+    if (request?.matterTitle) {
+      document.title = `${request.matterTitle} | Lysp`;
+    }
+  }, [request?.matterTitle]);
   const [submitOpen, setSubmitOpen] = useState(false);
   const [sendOpen, setSendOpen] = useState(false);
   const [decision, setDecision] = useState<"approve" | "reject" | "return" | null>(

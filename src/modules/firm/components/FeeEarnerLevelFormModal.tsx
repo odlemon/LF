@@ -10,7 +10,7 @@ import { FormError } from "@/components/ui/FormError";
 interface FeeEarnerLevelFormModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (data: { name: string; code: string; sortOrder: number }) => Promise<any>;
+  onSave: (data: { name: string; code: string; sortOrder: number; costRate: number | null }) => Promise<any>;
   feeEarnerLevel?: FeeEarnerLevel | null;
 }
 
@@ -23,6 +23,7 @@ export function FeeEarnerLevelFormModal({
   const [name, setName] = useState("");
   const [code, setCode] = useState("");
   const [sortOrder, setSortOrder] = useState<number>(1);
+  const [costRate, setCostRate] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [modalError, setModalError] = useState<string | null>(null);
 
@@ -31,6 +32,7 @@ export function FeeEarnerLevelFormModal({
       setName(feeEarnerLevel.name);
       setCode(feeEarnerLevel.code);
       setSortOrder(feeEarnerLevel.sortOrder);
+      setCostRate(feeEarnerLevel.costRate != null ? String(feeEarnerLevel.costRate) : "");
     } else {
       setName("");
       setCode("");
@@ -50,7 +52,12 @@ export function FeeEarnerLevelFormModal({
     setIsSubmitting(true);
     setModalError(null);
     try {
-      await onSave({ name, code, sortOrder: Number(sortOrder) });
+      await onSave({
+        name,
+        code,
+        sortOrder: Number(sortOrder),
+        costRate: costRate.trim() === "" ? null : Number(costRate),
+      });
       onClose();
     } catch (err: any) {
       setModalError(err.message || "Failed to save fee earner level.");
@@ -123,6 +130,25 @@ export function FeeEarnerLevelFormModal({
             />
             <span className="text-xs text-ink/55 mt-0.5">
               Lower number = more senior. Partner might be 1, Associate might be 3.
+            </span>
+          </div>
+
+          <div className="flex flex-col gap-1.5">
+            <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
+              Cost Rate (per hour)
+            </label>
+            <input
+              type="number"
+              value={costRate}
+              onChange={(e) => setCostRate(e.target.value)}
+              placeholder="e.g. 395"
+              min={0}
+              step="1"
+              className="px-5 py-2.5 bg-field border border-border rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface transition-all text-ink"
+            />
+            <span className="text-xs text-ink/55 mt-0.5">
+              What this level costs the firm per hour — salary, on-costs and overhead. Not the
+              billing rate. Margin is estimated rather than costed until every level has one.
             </span>
           </div>
 

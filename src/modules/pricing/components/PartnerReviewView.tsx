@@ -72,6 +72,12 @@ export function PartnerReviewView({
   const pending = isAwaitingDecision(scenario.status);
   const canSend = scenario.status === "APPROVED" && !!onSendToClient;
 
+  // Sum of the priced lines, for the rounding note above.
+  const lineTotal = (scenario.lines ?? []).reduce(
+    (sum, l) => sum + Number(l.amount ?? 0),
+    0
+  );
+
   return (
     <div className="h-[calc(100vh-64px)] flex flex-col bg-canvas relative">
       <div
@@ -111,6 +117,15 @@ export function PartnerReviewView({
             <p className="mt-5 text-4xl sm:text-5xl font-semibold tracking-tight tabular-nums">
               {formatMoney(Number(scenario.grossFees), scenario.currency)}
             </p>
+            {/* A fixed fee is rounded to a quotable number, so it rarely equals the time value
+                below it. Saying so stops a partner reconciling a difference that is intentional. */}
+            {scenario.pricingModel === "FIXED_FEE" && lineTotal > 0
+              && Math.abs(lineTotal - Number(scenario.grossFees)) >= 1 && (
+              <p className="mt-1.5 text-[11px] text-on-primary/50">
+                Rounded for quoting · time value{" "}
+                {formatMoney(lineTotal, scenario.currency)}
+              </p>
+            )}
             <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-4">
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-on-primary/40">
@@ -118,6 +133,11 @@ export function PartnerReviewView({
                 </p>
                 <p className="mt-1 text-lg font-semibold tabular-nums">
                   {Number(scenario.marginPct).toFixed(1)}%
+                  {scenario.costBasis === "RATIO" && (
+                    <span className="ml-1.5 text-[10px] font-bold uppercase tracking-wider text-warning">
+                      est.
+                    </span>
+                  )}
                 </p>
               </div>
               <div>

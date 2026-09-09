@@ -95,6 +95,14 @@ export function ScenarioCard({
         <div className="mt-3 flex items-center gap-2 text-xs text-ink/45">
           <span className="tabular-nums font-medium text-ink/60">
             {Number(scenario.marginPct).toFixed(1)}% margin
+            {scenario.costBasis === "RATIO" && (
+              <span
+                className="ml-1.5 text-[10px] font-bold uppercase tracking-wider text-warning"
+                title="Estimated from the firm's target cost ratio — add cost rates to fee earner levels for a costed margin"
+              >
+                est.
+              </span>
+            )}
           </span>
           {scenario.assignedPartnerName &&
             (isAwaitingDecision(scenario.status) ||

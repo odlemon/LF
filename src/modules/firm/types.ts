@@ -22,6 +22,8 @@ export interface PracticeArea {
 }
 
 export interface FeeEarnerLevel {
+  /** What an hour at this level costs the firm. Without it, margin can only be estimated. */
+  costRate?: number | null;
   uid: string;
   firmUid: string;
   name: string;
@@ -111,6 +113,7 @@ export interface CreatePracticeAreaCommand {
 }
 
 export interface CreateFeeEarnerLevelCommand {
+  costRate?: number | null;
   name: string;
   code: string;
   sortOrder: number;

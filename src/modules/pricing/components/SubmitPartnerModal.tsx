@@ -34,7 +34,9 @@ export function SubmitPartnerModal({
         const list = await pricingApi.listPricingApprovers();
         if (cancelled) return;
         setApprovers(list);
-        setSelected((prev) => prev || list[0]?.id || "");
+        // Deliberately no default. Pre-selecting the first approver meant the submitter was
+        // usually offered themselves, making self-approval the path of least resistance.
+        setSelected((prev) => prev || "");
       } catch {
         if (!cancelled) setLoadError("Could not load partners");
       } finally {

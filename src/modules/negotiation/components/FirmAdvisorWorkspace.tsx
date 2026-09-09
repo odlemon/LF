@@ -236,7 +236,7 @@ export function FirmAdvisorWorkspace({
         </div>
         <p className="mt-2 text-center text-[10px] text-ink/30">
           {open
-            ? "Say submit to send a counter — no Partner sign-off in MVP."
+            ? "Say submit to send a counter to the client."
             : "This negotiation is closed."}
         </p>
       </div>

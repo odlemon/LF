@@ -85,6 +85,12 @@ export interface PricingScenario {
   grossFees: number;
   estimatedCost: number;
   marginPct: number;
+  /**
+   * How estimatedCost was arrived at. COSTED means hours x per-level cost rates, so the margin
+   * is real. RATIO means the firm has not supplied cost rates and the figure is an estimate -
+   * which the UI has to say, because the two used to be indistinguishable on screen.
+   */
+  costBasis?: "COSTED" | "RATIO" | null;
   capAmount?: number | null;
   hoursMultiplier: number;
   discountPct: number;

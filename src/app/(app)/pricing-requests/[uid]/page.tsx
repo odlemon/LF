@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { HiArrowLeft, HiChevronDoubleLeft, HiViewBoards } from "react-icons/hi";
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/Button";
+import { Modal } from "@/components/ui/Modal";
 import {
   useRequestWorkspace,
   useIntakeChat,
@@ -278,7 +279,19 @@ function PricingRequestWorkspaceLoaded({
     }
   }, [chat.scopeBuildActive, scopeGenerated]);
 
+  const [confirmScopeOpen, setConfirmScopeOpen] = useState(false);
+
+  // The workspace layout names the tab after the section, which makes every open matter read
+  // "Pricing requests". Partners routinely have three of these side by side.
+  useEffect(() => {
+    if (request?.matterTitle) {
+      document.title = `${request.matterTitle} | Lysp`;
+    }
+  }, [request?.matterTitle]);
+
+
   const handleConfirmScope = async () => {
+    setConfirmScopeOpen(false);
     try {
       await scopeHook.confirmScope();
       chat.setChatMode("SCOPE_CONFIRMED");
@@ -331,12 +344,40 @@ function PricingRequestWorkspaceLoaded({
             </Button>
           )}
           {showConfirmScope && (
-            <Button variant="cta" onClick={handleConfirmScope} loading={scopeHook.isConfirming}>
+            <Button
+              variant="cta"
+              onClick={() => setConfirmScopeOpen(true)}
+              loading={scopeHook.isConfirming}
+            >
               Confirm Scope
             </Button>
           )}
         </div>
       </div>
+
+      {/* Confirming the scope moves the matter into pricing, so it asks first - the same
+          courtesy Approve already extends on the next screen. */}
+      <Modal
+        isOpen={confirmScopeOpen}
+        onClose={() => setConfirmScopeOpen(false)}
+        title="Confirm this scope?"
+        size="md"
+      >
+        <div className="flex flex-col gap-5">
+          <p className="text-sm text-ink/70 leading-relaxed">
+            This locks the work plan and opens pricing. You can still ask questions in chat
+            afterwards, but the phases and hours become the basis for every fee scenario.
+          </p>
+          <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3">
+            <Button variant="secondary" onClick={() => setConfirmScopeOpen(false)}>
+              Keep editing
+            </Button>
+            <Button variant="cta" onClick={handleConfirmScope} loading={scopeHook.isConfirming}>
+              Confirm scope
+            </Button>
+          </div>
+        </div>
+      </Modal>
 
       <div className="relative flex flex-1 overflow-hidden min-h-0 bg-canvas">
         <div

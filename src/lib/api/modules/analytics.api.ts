@@ -98,6 +98,7 @@ function normalizeFirmSummary(raw: unknown): FirmSummaryDto {
     avgProposalDays: numOrNull(r.avgProposalDays),
     mattersPriced: num(r.mattersPriced),
     proposalsSent: num(r.proposalsSent),
+    proposalsDecided: num(r.proposalsDecided),
     proposalsWon: num(r.proposalsWon),
     proposalsLost: num(r.proposalsLost),
     priorPeriod: normalizePriorPeriod(r.priorPeriod),
