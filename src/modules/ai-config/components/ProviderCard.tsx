@@ -55,18 +55,18 @@ export function ProviderCard({
 }: ProviderCardProps) {
   const details = providerDetails[provider];
 
+  // The try/catch here caught nothing: toLocaleString on an unparseable date does not throw,
+  // it returns the string "Invalid Date". The check has to be explicit.
   const formatDate = (dateStr: string | null) => {
     if (!dateStr) return "";
-    try {
-      return new Date(dateStr).toLocaleString(undefined, {
-        month: "short",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-      });
-    } catch {
-      return dateStr;
-    }
+    const d = new Date(dateStr);
+    if (Number.isNaN(d.getTime())) return "";
+    return d.toLocaleString(undefined, {
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
   };
 
   // State 1: Not configured (no API key saved)

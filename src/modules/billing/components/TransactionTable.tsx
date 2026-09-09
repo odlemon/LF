@@ -4,6 +4,7 @@ import React from "react";
 import type { CreditTransaction } from "@/modules/billing/types";
 import { Button } from "@/components/ui/Button";
 import { HiReceiptRefund, HiArrowUp, HiArrowDown } from "react-icons/hi";
+import { formatDate as formatAbsoluteDate, NO_DATE } from "@/lib/utils/format";
 
 interface TransactionTableProps {
   transactions: CreditTransaction[];
@@ -65,16 +66,23 @@ export function TransactionTable({ transactions, loading, onRefresh }: Transacti
     }
   };
 
-  const formatDate = (iso: string) => {
-    const d = new Date(iso + "T00:00:00");
-    const now = new Date();
-    const diffDays = Math.floor((now.getTime() - d.getTime()) / (1000 * 60 * 60 * 24));
-    
+  // createdAt is a timestamp, not a calendar date. This used to append "T00:00:00" to it, which
+  // produced "2026-09-08T13:30:21T00:00:00" and rendered as "Invalid Date" on every row.
+  const formatDate = (iso: string | null | undefined) => {
+    if (!iso) return NO_DATE;
+    const d = new Date(/^\d{4}-\d{2}-\d{2}$/.test(iso.trim()) ? `${iso.trim()}T00:00:00` : iso);
+    if (Number.isNaN(d.getTime())) return NO_DATE;
+
+    // Compared at local midnight: something logged an hour ago is still "Today" at 00:30,
+    // which counting elapsed milliseconds would call yesterday.
+    const midnight = (x: Date) => new Date(x.getFullYear(), x.getMonth(), x.getDate()).getTime();
+    const diffDays = Math.round((midnight(new Date()) - midnight(d)) / 86_400_000);
+
     if (diffDays === 0) return "Today";
     if (diffDays === 1) return "Yesterday";
-    if (diffDays < 7) return `${diffDays} days ago`;
-    
-    return d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+    if (diffDays > 1 && diffDays < 7) return `${diffDays} days ago`;
+
+    return formatAbsoluteDate(d);
   };
 
   return (
