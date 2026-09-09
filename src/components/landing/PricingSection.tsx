@@ -424,7 +424,7 @@ export function PricingSection() {
           </div>
         </div>
 
-        <div className="mt-10 sm:mt-12 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t border-black/[0.07] pt-10">
+        <div className="mt-10 sm:mt-12 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 border-t border-black/[0.07] pt-10">
           <p className="text-[14px] text-[#0a0a0a]/40 max-w-sm leading-relaxed">
             Platform access for the whole firm. You only pay when pricing work runs.
           </p>

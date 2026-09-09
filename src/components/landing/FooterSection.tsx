@@ -141,7 +141,7 @@ export function FooterSection() {
         </div>
 
         {/* Bottom bar */}
-        <div className="py-8 border-t border-white/[0.08] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="py-8 border-t border-white/[0.08] flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
           <p className="text-[12px] text-white/35">
             © {year} Lysp. All rights reserved.
           </p>

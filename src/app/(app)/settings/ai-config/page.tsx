@@ -104,7 +104,7 @@ export default function AiConfigPage() {
         ) : activeProvider ? (
           <div className="bg-hover border border-border rounded-2xl p-5 flex items-center gap-4 animate-fade-in shadow-sm shadow-black/5">
             <HiCheckCircle className="w-8 h-8 text-ink/70 shrink-0" />
-            <div className="flex-1 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div className="flex-1 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
               <div>
                 <h4 className="text-sm font-bold text-ink">
                   Active Provider: {activeProvider.displayName}

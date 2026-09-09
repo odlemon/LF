@@ -251,7 +251,7 @@ function MobilePlatform() {
         </div>
       </div>
 
-      <div className="mx-auto w-full max-w-[1200px] px-5 sm:px-8 pb-10 pt-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="mx-auto w-full max-w-[1200px] px-5 sm:px-8 pb-10 pt-5 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <StepDots activeIndex={activeIndex} onSelect={goTo} />
         <ExploreCta />
       </div>

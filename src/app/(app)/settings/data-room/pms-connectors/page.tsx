@@ -84,7 +84,7 @@ export default function PmsConnectorsPage() {
 
   return (
     <div className="p-8 max-w-6xl w-full mx-auto flex flex-col gap-6 text-ink/90">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-ink tracking-tight flex items-center gap-2">
             <HiCloudUpload className="w-7 h-7 text-primary" /> PMS Connectors

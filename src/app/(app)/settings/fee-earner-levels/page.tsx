@@ -38,7 +38,7 @@ export default function FeeEarnerLevelsPage() {
 
   return (
     <div className="p-8 max-w-4xl w-full mx-auto flex flex-col gap-6">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-ink tracking-tight">Fee Earner Levels</h1>
           <p className="text-sm text-ink/55 mt-1">Configure seniority rankings and billing levels for lawyers in the firm.</p>

@@ -74,7 +74,7 @@ export function DatasetsListDrawerContent({
   return (
     <div className="flex flex-col gap-6 text-ink/90">
       {/* Header bar within drawer context */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
           <p className="text-xs text-ink/55 font-medium">
             Group your uploaded files by named ingestion batches to isolate data and track processing states.

@@ -168,7 +168,7 @@ export function OutcomesSection() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
+        <div className="mt-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
           <p className="text-[12px] text-[#0a0a0a]/40 max-w-xl leading-relaxed">
             Illustrative for a typical elite large-matter book. In a demo we run the same math on
             your last twenty deals.

@@ -54,7 +54,7 @@ export default function PracticeAreasPage() {
 
   return (
     <div className="p-8 max-w-5xl w-full mx-auto flex flex-col gap-6">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-ink tracking-tight">Practice Areas</h1>
           <p className="text-sm text-ink/55 mt-1">Define the types of legal work your firm handles.</p>

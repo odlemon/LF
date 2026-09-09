@@ -323,7 +323,7 @@ export function PracticeAreasSection() {
           })}
         </div>
 
-        <div className="mt-8 sm:mt-10 lg:mt-12 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-t border-white/10 pt-5 sm:pt-6">
+        <div className="mt-8 sm:mt-10 lg:mt-12 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 border-t border-white/10 pt-5 sm:pt-6">
           <p className="text-[11px] sm:text-[12px] tracking-[0.18em] uppercase text-white/35">
             {String(activeIndex + 1).padStart(2, "0")} /{" "}
             {String(PRACTICES.length).padStart(2, "0")}

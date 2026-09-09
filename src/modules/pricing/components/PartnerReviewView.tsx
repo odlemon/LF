@@ -185,7 +185,7 @@ export function PartnerReviewView({
               <ScenarioStageRail status={scenario.status} />
             </div>
             {canSend && (
-              <div className="border-t border-border/60 bg-gradient-to-r from-field/50 via-surface to-surface px-5 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+              <div className="border-t border-border/60 bg-gradient-to-r from-field/50 via-surface to-surface px-5 py-4 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
                 <div className="min-w-0">
                   <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35">
                     Next step

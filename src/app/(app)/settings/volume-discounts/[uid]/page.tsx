@@ -161,7 +161,7 @@ export default function VolumeDiscountDetailPage() {
 
   return (
     <div className="p-8 max-w-5xl w-full mx-auto flex flex-col gap-8">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
             <h1 className="text-2xl font-bold text-ink tracking-tight">Volume Discount Program</h1>

@@ -117,7 +117,7 @@ export default function ClientDiscountStatusPage() {
                 key={program.uid}
                 className="rounded-[1.5rem] border border-border/70 bg-surface p-5 sm:p-6"
               >
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2">
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
                       Program
