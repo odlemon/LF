@@ -153,11 +153,11 @@ export function NewRequestModal({ isOpen, onClose, onCreate }: NewRequestModalPr
             placeholder="e.g. Acquisition of XYZ Limited"
             disabled={isSubmitting || clientsLoading}
             className={`px-5 py-2.5 bg-field border rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all text-ink font-semibold ${
-              titleError ? "border-rose-300" : "border-border"
+              titleError ? "border-red-300" : "border-border"
             }`}
           />
           {titleError && (
-            <span className="text-[10px] font-bold text-rose-500 pl-1">{titleError}</span>
+            <span className="text-[10px] font-bold text-red-500 pl-1">{titleError}</span>
           )}
         </div>
 

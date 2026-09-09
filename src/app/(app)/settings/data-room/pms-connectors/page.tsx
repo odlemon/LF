@@ -23,7 +23,7 @@ function SyncStatusBadge({ status }: { status?: string }) {
     );
   }
   return (
-    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase bg-rose-50 text-rose-700 border border-rose-200">
+    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase bg-red-50 text-red-700 border border-red-200">
       <HiXCircle className="w-3 h-3" /> {status}
     </span>
   );

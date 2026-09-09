@@ -117,7 +117,7 @@ export function ScenarioChangeTrailPanel({
                           {formatTrailValue(line.afterAmount, currency, true)}
                         </span>
                       ) : line.kind === "removed" ? (
-                        <span className="text-rose-700 dark:text-rose-300 font-semibold">
+                        <span className="text-red-700 dark:text-red-300 font-semibold">
                           −
                           {formatTrailValue(line.beforeAmount, currency, true)}
                         </span>

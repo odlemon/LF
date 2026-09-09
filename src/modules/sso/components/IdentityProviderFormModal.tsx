@@ -100,7 +100,7 @@ export function IdentityProviderFormModal({
     >
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         {error && (
-          <div className="p-3.5 bg-rose-50 border border-rose-200/50 text-rose-700 text-xs font-bold rounded-2xl">
+          <div className="p-3.5 bg-red-50 border border-red-200/50 text-red-700 text-xs font-bold rounded-2xl">
             {error}
           </div>
         )}

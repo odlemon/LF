@@ -24,7 +24,9 @@ export type ColumnMappingStatus = "MAPPED" | "PARTIAL" | "UNMAPPED";
 
 export type DataReadiness = "HIGH" | "MEDIUM" | "LOW";
 
-export type MatterOutcome = "WON" | "LOST" | "SETTLED" | "ONGOING";
+// ABANDONED is written by the backend and branched on there alongside LOST; it was
+// missing here, so those matters were invisible to the outcome filter.
+export type MatterOutcome = "WON" | "LOST" | "SETTLED" | "ONGOING" | "ABANDONED";
 
 export type DataComplexity = "LOW" | "MEDIUM" | "HIGH";
 

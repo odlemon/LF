@@ -109,7 +109,7 @@ export function AssumptionSection({
                       <button
                         type="button"
                         onClick={() => onDelete(item.uid)}
-                        className="p-1 opacity-0 group-hover:opacity-100 text-ink/30 hover:text-rose-500 shrink-0 transition-opacity"
+                        className="p-1 opacity-0 group-hover:opacity-100 text-ink/30 hover:text-red-500 shrink-0 transition-opacity"
                         aria-label="Delete assumption"
                       >
                         <HiTrash className="w-3.5 h-3.5" />

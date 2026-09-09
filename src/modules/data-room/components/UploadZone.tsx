@@ -150,7 +150,7 @@ export function UploadZone({ onUpload, isUploading, progress }: UploadZoneProps)
             ) : (
               <div className="flex gap-3 items-center pt-2">
                 <Button variant="secondary" onClick={() => setSelectedFile(null)} className="!px-3.5 !py-1.5 shrink-0">
-                  <HiTrash className="w-4 h-4 text-rose-500" />
+                  <HiTrash className="w-4 h-4 text-red-500" />
                   Clear File
                 </Button>
                 <Button variant="primary" onClick={handleStartUpload} className="shadow-md shadow-primary/25 !px-5 !py-2 shrink-0">
@@ -178,7 +178,7 @@ export function UploadZone({ onUpload, isUploading, progress }: UploadZoneProps)
       </div>
 
       {error && (
-        <div className="p-3.5 bg-rose-50 border border-rose-200/50 text-rose-700 text-xs font-bold rounded-2xl animate-fade-in">
+        <div className="p-3.5 bg-red-50 border border-red-200/50 text-red-700 text-xs font-bold rounded-2xl animate-fade-in">
           {error}
         </div>
       )}

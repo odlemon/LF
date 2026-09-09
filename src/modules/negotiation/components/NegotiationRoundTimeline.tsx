@@ -36,8 +36,8 @@ function actionTone(action?: string | null): {
     case "REJECT":
     case "WITHDRAW":
       return {
-        dot: "bg-rose-500 ring-rose-500/20",
-        badge: "bg-rose-50 text-rose-800 border-rose-200/80",
+        dot: "bg-red-500 ring-red-500/20",
+        badge: "bg-red-50 text-red-800 border-red-200/80",
         label: actionLabel(action),
       };
     case "COUNTER":

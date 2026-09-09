@@ -73,7 +73,7 @@ const getRoleIconAndColor = (roleName: string) => {
 const getPermissionBadge = (permUid: string) => {
   const uid = permUid.toLowerCase();
   if (uid.includes("delete") || uid.includes("remove") || uid.includes("deactivate")) {
-    return { label: "Danger", color: "bg-rose-50 text-rose-700 border-rose-100" };
+    return { label: "Danger", color: "bg-red-50 text-red-700 border-red-100" };
   }
   if (uid.includes("create") || uid.includes("add") || uid.includes("write") || uid.includes("submit")) {
     return { label: "Create", color: "bg-hover text-ink/80 border-border" };

@@ -147,7 +147,7 @@ export function TaskRow({
               <button
                 type="button"
                 onClick={() => onDelete(phaseUid, task.uid)}
-                className="p-1 text-ink/30 hover:text-rose-500 rounded"
+                className="p-1 text-ink/30 hover:text-red-500 rounded"
                 aria-label="Delete task"
               >
                 <HiTrash className="w-3.5 h-3.5" />

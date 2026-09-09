@@ -196,7 +196,7 @@ export default function DatasetsIndexPage() {
                         <div className="flex gap-2 justify-end items-center">
                           <button
                             onClick={() => handleDelete(dataset.uid)}
-                            className="px-2 py-1 text-[10px] font-bold text-white bg-rose-600 rounded-full hover:bg-rose-700"
+                            className="px-2 py-1 text-[10px] font-bold text-white bg-red-600 rounded-full hover:bg-red-700"
                           >
                             Confirm
                           </button>
@@ -210,7 +210,7 @@ export default function DatasetsIndexPage() {
                       ) : (
                         <button
                           onClick={() => setConfirmDeleteUid(dataset.uid)}
-                          className="p-1.5 hover:bg-rose-50 rounded-lg text-ink/40 hover:text-rose-600 transition-colors"
+                          className="p-1.5 hover:bg-red-50 rounded-lg text-ink/40 hover:text-red-600 transition-colors"
                         >
                           <HiTrash className="w-4.5 h-4.5" />
                         </button>

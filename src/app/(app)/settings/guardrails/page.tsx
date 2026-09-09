@@ -139,7 +139,7 @@ export default function GuardrailsPage() {
           <div className="p-5 bg-field/40 rounded-2xl border border-border flex flex-col gap-4">
             <h3 className="text-xs font-bold text-ink/90 uppercase tracking-wider flex items-center gap-1.5">
               <span>1. Margin Guardrails</span>
-              <span className="text-[9px] font-extrabold text-rose-600 bg-rose-50 px-2 py-0.5 rounded-lg normal-case">
+              <span className="text-[9px] font-extrabold text-red-600 bg-red-50 px-2 py-0.5 rounded-lg normal-case">
                 Protects Profitability
               </span>
             </h3>
@@ -309,7 +309,7 @@ export default function GuardrailsPage() {
             <div className="h-4 w-full rounded-full bg-canvas overflow-hidden flex shadow-inner border border-border/30">
               <div
                 style={{ width: `${rejectLimit}%` }}
-                className="h-full bg-gradient-to-r from-red-500 to-rose-400 transition-all duration-300"
+                className="h-full bg-gradient-to-r from-red-500 to-red-400 transition-all duration-300"
               />
               <div
                 style={{ width: `${warningLimit - rejectLimit}%` }}
@@ -323,10 +323,10 @@ export default function GuardrailsPage() {
 
             <div className="flex flex-col gap-3">
               {/* Reject card */}
-              <div className="p-4 bg-rose-50/40 border border-rose-100/60 rounded-2xl flex gap-3">
-                <HiXCircle className="w-5 h-5 text-rose-500 shrink-0 mt-0.5" />
+              <div className="p-4 bg-red-50/40 border border-red-100/60 rounded-2xl flex gap-3">
+                <HiXCircle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
                 <div className="flex flex-col gap-0.5">
-                  <span className="text-[10px] font-extrabold text-rose-800 uppercase tracking-wide">Auto-Reject Zone</span>
+                  <span className="text-[10px] font-extrabold text-red-800 uppercase tracking-wide">Auto-Reject Zone</span>
                   <span className="text-xs font-bold text-ink mt-0.5">Margins 0% to {rejectLimit}%</span>
                   <span className="text-[10px] text-ink/55 mt-0.5 leading-normal">
                     Matter proposals falling below this minimum are automatically flagged as unprofitable and blocked.

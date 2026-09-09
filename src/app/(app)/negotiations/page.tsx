@@ -75,8 +75,8 @@ export default function NegotiationsPage() {
             ))}
           </div>
         ) : error && items.length === 0 ? (
-          <div className="rounded-2xl border border-rose-200/70 bg-rose-50/50 px-5 py-8 text-center">
-            <p className="text-sm text-rose-800">{error}</p>
+          <div className="rounded-2xl border border-red-200/70 bg-red-50/50 px-5 py-8 text-center">
+            <p className="text-sm text-red-800">{error}</p>
             <Button
               variant="secondary"
               className="mt-3"

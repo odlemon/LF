@@ -43,7 +43,7 @@ export function ProcessingLogModal({ isOpen, onClose, documentUid, fileName }: P
             <div className="h-40 bg-field rounded-2xl" />
           </div>
         ) : error ? (
-          <div className="p-3.5 bg-rose-50 border border-rose-200/50 text-rose-700 text-xs font-bold rounded-2xl">
+          <div className="p-3.5 bg-red-50 border border-red-200/50 text-red-700 text-xs font-bold rounded-2xl">
             {error}
           </div>
         ) : !logs || logs.length === 0 ? (
@@ -89,7 +89,7 @@ export function ProcessingLogModal({ isOpen, onClose, documentUid, fileName }: P
                   </div>
                   <div className="bg-field/50 border border-border rounded-2xl p-4 text-center">
                     <span className="text-[10px] font-bold text-ink/40 uppercase tracking-wider block mb-1">Rows Failed</span>
-                    <span className={`text-base font-extrabold ${activeAttempt.rowsFailed > 0 ? "text-rose-600" : "text-ink"}`}>
+                    <span className={`text-base font-extrabold ${activeAttempt.rowsFailed > 0 ? "text-red-600" : "text-ink"}`}>
                       {activeAttempt.rowsFailed}
                     </span>
                   </div>
@@ -110,8 +110,8 @@ export function ProcessingLogModal({ isOpen, onClose, documentUid, fileName }: P
                   </div>
 
                   {activeAttempt.errorMessage && (
-                    <div className="mt-2 text-xs text-rose-700 bg-rose-50 border border-rose-100 p-3 rounded-xl font-bold flex items-start gap-2">
-                      <HiExclamation className="w-4.5 h-4.5 text-rose-500 shrink-0 mt-0.5" />
+                    <div className="mt-2 text-xs text-red-700 bg-red-50 border border-red-100 p-3 rounded-xl font-bold flex items-start gap-2">
+                      <HiExclamation className="w-4.5 h-4.5 text-red-500 shrink-0 mt-0.5" />
                       <span>{activeAttempt.errorMessage}</span>
                     </div>
                   )}
@@ -139,7 +139,7 @@ export function ProcessingLogModal({ isOpen, onClose, documentUid, fileName }: P
                                 {matchedVal ? (
                                   <span className="text-ink">{matchedVal}</span>
                                 ) : (
-                                  <span className="text-rose-600 font-extrabold bg-rose-50/50 px-2 py-0.5 rounded border border-rose-100">
+                                  <span className="text-red-600 font-extrabold bg-red-50/50 px-2 py-0.5 rounded border border-red-100">
                                     Not found
                                   </span>
                                 )}
@@ -161,15 +161,15 @@ export function ProcessingLogModal({ isOpen, onClose, documentUid, fileName }: P
                 {/* Row Errors Breakdown (limit to 20 errors initially) */}
                 {activeAttempt.rowErrors && activeAttempt.rowErrors.length > 0 && (
                   <div className="flex flex-col gap-2">
-                    <span className="text-xs font-bold text-ink/55 uppercase tracking-wider text-rose-700">
+                    <span className="text-xs font-bold text-ink/55 uppercase tracking-wider text-red-700">
                       Row Error Logs ({activeAttempt.rowErrors.length} errors)
                     </span>
                     <div className="border border-red-100 rounded-2xl overflow-hidden bg-surface shadow-sm max-h-56 overflow-y-auto rates-scrollable pr-1">
                       <table className="min-w-full divide-y divide-red-50 text-[11px]">
                         <thead className="bg-red-50/30">
                           <tr>
-                            <th className="px-4 py-2 text-left font-bold text-rose-800 uppercase tracking-wider w-16">Row</th>
-                            <th className="px-4 py-2 text-left font-bold text-rose-800 uppercase tracking-wider">Diagnostic Reason</th>
+                            <th className="px-4 py-2 text-left font-bold text-red-800 uppercase tracking-wider w-16">Row</th>
+                            <th className="px-4 py-2 text-left font-bold text-red-800 uppercase tracking-wider">Diagnostic Reason</th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-red-50 font-semibold text-gray-700">
@@ -178,7 +178,7 @@ export function ProcessingLogModal({ isOpen, onClose, documentUid, fileName }: P
                             : activeAttempt.rowErrors.slice(0, 20)
                           ).map((err, i) => (
                             <tr key={i}>
-                              <td className="px-4 py-2 text-rose-700 font-bold">#{err.rowNumber}</td>
+                              <td className="px-4 py-2 text-red-700 font-bold">#{err.rowNumber}</td>
                               <td className="px-4 py-2 break-all">{err.errorMessage}</td>
                             </tr>
                           ))}

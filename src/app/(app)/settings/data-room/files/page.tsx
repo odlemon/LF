@@ -84,7 +84,7 @@ export default function FileStoragePage() {
   };
 
   const getFileIcon = (contentType: string) => {
-    if (contentType.includes("pdf")) return <HiDocumentText className="w-5 h-5 text-rose-500" />;
+    if (contentType.includes("pdf")) return <HiDocumentText className="w-5 h-5 text-red-500" />;
     if (contentType.includes("spreadsheet") || contentType.includes("excel") || contentType.includes("csv"))
       return <HiTable className="w-5 h-5 text-ink/55" />;
     if (contentType.includes("image")) return <HiPhotograph className="w-5 h-5 text-blue-500" />;
@@ -131,7 +131,7 @@ export default function FileStoragePage() {
         styles = "bg-amber-50 text-amber-700 border-amber-200";
         break;
       case "SUSPENDED":
-        styles = "bg-rose-50 text-rose-600 border-rose-200";
+        styles = "bg-red-50 text-red-600 border-red-200";
         break;
       case "DELETED":
         styles = "bg-canvas text-ink/40 border-border line-through";
@@ -241,7 +241,7 @@ export default function FileStoragePage() {
               ) : error ? (
                 <tr>
                   <td colSpan={7} className="px-5 py-12 text-center">
-                    <div className="flex flex-col items-center gap-2 text-rose-600">
+                    <div className="flex flex-col items-center gap-2 text-red-600">
                       <HiExclamation className="w-6 h-6" />
                       <span className="text-sm font-bold">{error}</span>
                       <button
@@ -308,7 +308,7 @@ export default function FileStoragePage() {
                           <button
                             onClick={() => handleDelete(file.uid)}
                             disabled={isDeleting}
-                            className="px-2 py-1 text-[10px] font-bold text-white bg-rose-600 rounded-full hover:bg-rose-700 disabled:opacity-50 cursor-pointer"
+                            className="px-2 py-1 text-[10px] font-bold text-white bg-red-600 rounded-full hover:bg-red-700 disabled:opacity-50 cursor-pointer"
                           >
                             {isDeleting ? "..." : "Confirm"}
                           </button>
@@ -331,7 +331,7 @@ export default function FileStoragePage() {
                           </a>
                           <button
                             onClick={() => setConfirmDeleteUid(file.uid)}
-                            className="p-1.5 hover:bg-rose-50 rounded-lg text-ink/40 hover:text-rose-600 transition-colors cursor-pointer"
+                            className="p-1.5 hover:bg-red-50 rounded-lg text-ink/40 hover:text-red-600 transition-colors cursor-pointer"
                             title="Delete file"
                           >
                             <HiTrash className="w-4 h-4" />

@@ -21,8 +21,8 @@ export function DataReadinessCard({ summary }: DataReadinessCardProps) {
 
   switch (level) {
     case "LOW":
-      badgeColor = "bg-rose-50 border-rose-200 text-rose-800";
-      iconColor = "text-rose-500";
+      badgeColor = "bg-red-50 border-red-200 text-red-800";
+      iconColor = "text-red-500";
       title = "Limited Data";
       description = "Less than 10 historical matters ingested. Pricing recommendations will be generic. Upload past matter data to improve accuracy.";
       Icon = HiShieldExclamation;
@@ -79,7 +79,7 @@ export function DataReadinessCard({ summary }: DataReadinessCardProps) {
                 ? "bg-gradient-to-r from-primary to-primary/70 shadow-black/5"
                 : level === "MEDIUM"
                 ? "bg-gradient-to-r from-amber-400 to-amber-500 shadow-amber-500/25"
-                : "bg-gradient-to-r from-rose-400 to-rose-500 shadow-rose-500/25"
+                : "bg-gradient-to-r from-red-400 to-red-500 shadow-red-500/25"
             }`}
             style={{ width: `${Math.max(progressPct, 4)}%` }}
           />

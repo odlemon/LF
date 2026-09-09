@@ -195,7 +195,7 @@ export function FirmAdvisorWorkspace({
             <div ref={bottomRef} />
           </div>
         )}
-        {error && <p className="mt-2 text-xs text-rose-600">{error}</p>}
+        {error && <p className="mt-2 text-xs text-red-600">{error}</p>}
       </div>
 
       <div className="border-t border-border/60 px-3 py-3">

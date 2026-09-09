@@ -125,7 +125,7 @@ export function AddEditKeyModal({
               onChange={(e) => setApiKey(e.target.value)}
               placeholder="Paste your API key here"
               className={`w-full px-5 py-2.5 bg-surface border ${
-                validationError ? "border-rose-300 focus:ring-rose-100" : "border-border focus:ring-primary/20"
+                validationError ? "border-red-300 focus:ring-red-100" : "border-border focus:ring-primary/20"
               } rounded-full text-xs text-ink/90 focus:outline-none focus:ring-2 pr-12 font-medium`}
             />
             <button
@@ -137,7 +137,7 @@ export function AddEditKeyModal({
             </button>
           </div>
           {validationError ? (
-            <span className="text-[10px] font-bold text-rose-500 pl-1">
+            <span className="text-[10px] font-bold text-red-500 pl-1">
               {validationError}
             </span>
           ) : (

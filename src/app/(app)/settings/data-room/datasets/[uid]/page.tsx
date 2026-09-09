@@ -142,7 +142,7 @@ export default function DatasetDetailPage() {
       {isDatasetLoading ? (
         <div className="h-44 bg-canvas rounded-3xl animate-pulse" />
       ) : !dataset ? (
-        <div className="p-5 bg-rose-50 border border-rose-200 text-rose-700 rounded-2xl font-semibold">
+        <div className="p-5 bg-red-50 border border-red-200 text-red-700 rounded-2xl font-semibold">
           Dataset not found.
         </div>
       ) : (
@@ -263,7 +263,7 @@ export default function DatasetDetailPage() {
                                 <div className="flex gap-1 items-center shrink-0">
                                   <button
                                     onClick={() => handleDeleteDoc(doc.uid)}
-                                    className="px-1.5 py-0.5 text-[9px] font-bold text-white bg-rose-600 rounded"
+                                    className="px-1.5 py-0.5 text-[9px] font-bold text-white bg-red-600 rounded"
                                   >
                                     OK
                                   </button>
@@ -302,7 +302,7 @@ export default function DatasetDetailPage() {
                                   </button>
                                   <button
                                     onClick={() => setConfirmDeleteUid(doc.uid)}
-                                    className="p-1 hover:bg-rose-50 text-ink/40 hover:text-rose-600 rounded-lg transition-colors cursor-pointer"
+                                    className="p-1 hover:bg-red-50 text-ink/40 hover:text-red-600 rounded-lg transition-colors cursor-pointer"
                                   >
                                     <HiTrash className="w-4 h-4" />
                                   </button>

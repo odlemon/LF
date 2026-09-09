@@ -63,7 +63,7 @@ export function ClientSearchSelect({
         disabled={disabled || isLoading}
         onClick={() => setIsOpen(!isOpen)}
         className={`w-full flex items-center justify-between gap-2 px-5 py-2.5 bg-surface border ${
-          error ? "border-rose-300" : "border-border"
+          error ? "border-red-300" : "border-border"
         } rounded-full text-sm font-semibold text-ink/90 transition-all focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:opacity-50 text-left`}
       >
         <span className={`min-w-0 truncate ${selected ? "text-ink/90" : "text-ink/40"}`}>
@@ -126,7 +126,7 @@ export function ClientSearchSelect({
           </div>
         </div>
       )}
-      {error && <span className="text-[10px] font-bold text-rose-500 pl-1">{error}</span>}
+      {error && <span className="text-[10px] font-bold text-red-500 pl-1">{error}</span>}
     </div>
   );
 }

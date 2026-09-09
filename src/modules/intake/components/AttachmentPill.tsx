@@ -21,7 +21,7 @@ export function AttachmentPill({
     <span
       className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs ${
         state === "error"
-          ? "bg-rose-50 text-rose-600"
+          ? "bg-red-50 text-red-600"
           : isDone
           ? "bg-hover text-ink/80"
           : "bg-canvas text-ink/65"

@@ -127,7 +127,7 @@ export default function FxRatesPage() {
                         </button>
                         <button
                           onClick={() => handleDelete(rate)}
-                          className="p-2 text-ink/50 hover:text-rose-600 hover:bg-hover rounded-full transition-all"
+                          className="p-2 text-ink/50 hover:text-red-600 hover:bg-hover rounded-full transition-all"
                           aria-label="Delete"
                         >
                           <HiTrash className="w-4 h-4" />

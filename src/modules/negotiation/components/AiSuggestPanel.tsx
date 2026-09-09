@@ -109,7 +109,7 @@ export function AiSuggestPanel({
                   className={
                     suggestion.clearsGuardrail
                       ? "text-emerald-700 dark:text-emerald-300"
-                      : "text-rose-700 dark:text-rose-300"
+                      : "text-red-700 dark:text-red-300"
                   }
                 >
                   {suggestion.clearsGuardrail

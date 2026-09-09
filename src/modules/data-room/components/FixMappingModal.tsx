@@ -188,7 +188,7 @@ export function FixMappingModal({ isOpen, onClose, document, onSuccess }: FixMap
                             Mapped
                           </span>
                         ) : (
-                          <span className="text-[10px] font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded-full border border-rose-200">
+                          <span className="text-[10px] font-bold text-red-700 bg-red-50 px-2 py-0.5 rounded-full border border-red-200">
                             Not Found
                           </span>
                         )}

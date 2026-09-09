@@ -204,8 +204,8 @@ export default function DataRoomOverviewPage() {
         {/* Needs attention files (right 1 col) */}
         <div className="flex flex-col gap-4">
           <div className="flex justify-between items-center px-1">
-            <h2 className="text-base font-extrabold text-ink flex items-center gap-1.5 text-rose-700">
-              <HiExclamationCircle className="w-5 h-5 text-rose-500" /> Review Queue
+            <h2 className="text-base font-extrabold text-ink flex items-center gap-1.5 text-red-700">
+              <HiExclamationCircle className="w-5 h-5 text-red-500" /> Review Queue
             </h2>
             <span className="text-xs font-bold text-ink/40">
               ({attentionDocs.length} failed files)
@@ -228,14 +228,14 @@ export default function DataRoomOverviewPage() {
               attentionDocs.map((doc) => (
                 <div
                   key={doc.uid}
-                  className="bg-surface border border-rose-100 rounded-3xl p-4 shadow-sm hover:shadow-md transition-shadow flex flex-col gap-3.5"
+                  className="bg-surface border border-red-100 rounded-3xl p-4 shadow-sm hover:shadow-md transition-shadow flex flex-col gap-3.5"
                 >
                   <div className="flex justify-between items-start gap-3">
                     <div className="flex flex-col overflow-hidden">
                       <span className="text-xs font-bold text-ink line-clamp-1 break-all">
                         {doc.originalFilename}
                       </span>
-                      <span className="text-[10px] text-rose-600 font-bold bg-rose-50 border border-rose-100/50 px-2 py-0.5 rounded-full w-fit mt-1">
+                      <span className="text-[10px] text-red-600 font-bold bg-red-50 border border-red-100/50 px-2 py-0.5 rounded-full w-fit mt-1">
                         Failed
                       </span>
                     </div>

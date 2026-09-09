@@ -195,7 +195,7 @@ export function DatasetsListDrawerContent({
                         <div className="flex gap-2 justify-end items-center">
                           <button
                             onClick={() => handleDelete(dataset.uid)}
-                            className="px-2 py-1 text-[10px] font-bold text-white bg-rose-600 rounded-full hover:bg-rose-700 cursor-pointer"
+                            className="px-2 py-1 text-[10px] font-bold text-white bg-red-600 rounded-full hover:bg-red-700 cursor-pointer"
                           >
                             Confirm
                           </button>
@@ -209,7 +209,7 @@ export function DatasetsListDrawerContent({
                       ) : (
                         <button
                           onClick={() => setConfirmDeleteUid(dataset.uid)}
-                          className="p-1.5 hover:bg-rose-50 rounded-lg text-ink/40 hover:text-rose-600 transition-colors cursor-pointer"
+                          className="p-1.5 hover:bg-red-50 rounded-lg text-ink/40 hover:text-red-600 transition-colors cursor-pointer"
                         >
                           <HiTrash className="w-4.5 h-4.5" />
                         </button>

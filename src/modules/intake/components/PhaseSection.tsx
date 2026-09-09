@@ -185,7 +185,7 @@ export function PhaseSection({
                 <button
                   type="button"
                   onClick={() => onDeletePhase(phase.uid)}
-                  className="p-1.5 text-ink/20 hover:text-rose-500 rounded-lg opacity-0 group-hover/phase:opacity-100 transition-all"
+                  className="p-1.5 text-ink/20 hover:text-red-500 rounded-lg opacity-0 group-hover/phase:opacity-100 transition-all"
                   aria-label="Delete phase"
                 >
                   <HiTrash className="w-3.5 h-3.5" />

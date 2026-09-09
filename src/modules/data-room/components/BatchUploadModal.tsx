@@ -86,7 +86,7 @@ export function BatchUploadModal({ isOpen, onClose, onUpload }: BatchUploadModal
     <Modal isOpen={isOpen} onClose={onClose} title="Upload Multiple Files">
       <div className="flex flex-col gap-5">
         {error && (
-          <div className="p-3.5 bg-rose-50 border border-rose-200/50 text-rose-700 text-xs font-bold rounded-2xl">
+          <div className="p-3.5 bg-red-50 border border-red-200/50 text-red-700 text-xs font-bold rounded-2xl">
             {error}
           </div>
         )}
@@ -145,7 +145,7 @@ export function BatchUploadModal({ isOpen, onClose, onUpload }: BatchUploadModal
                     disabled={isUploading}
                     onClick={() => removeFile(idx)}
                     type="button"
-                    className="p-1 hover:bg-hover/50 rounded-lg text-ink/40 hover:text-rose-500 cursor-pointer disabled:opacity-50"
+                    className="p-1 hover:bg-hover/50 rounded-lg text-ink/40 hover:text-red-500 cursor-pointer disabled:opacity-50"
                   >
                     <HiX className="w-4 h-4" />
                   </button>

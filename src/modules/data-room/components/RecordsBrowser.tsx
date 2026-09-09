@@ -161,6 +161,7 @@ export function RecordsBrowser() {
                   { value: "LOST", label: "Lost" },
                   { value: "SETTLED", label: "Settled" },
                   { value: "ONGOING", label: "Ongoing" },
+                  { value: "ABANDONED", label: "Abandoned" },
                 ]}
                 value={pastMattersFilters.outcome}
                 onChange={(val) => {
@@ -355,7 +356,7 @@ export function RecordsBrowser() {
 
       {/* Main Records Table Grid */}
       {error && (
-        <div className="p-3.5 bg-rose-50 border border-rose-200/50 text-rose-700 text-xs font-bold rounded-2xl">
+        <div className="p-3.5 bg-red-50 border border-red-200/50 text-red-700 text-xs font-bold rounded-2xl">
           {error}
         </div>
       )}
@@ -462,7 +463,7 @@ export function RecordsBrowser() {
                               rec.outcome === "WON"
                                 ? "bg-hover text-ink/80 border-border"
                                 : rec.outcome === "LOST"
-                                ? "bg-rose-50 text-rose-700 border-rose-200"
+                                ? "bg-red-50 text-red-700 border-red-200"
                                 : "bg-blue-50 text-blue-700 border-blue-200"
                             }`}
                           >
@@ -476,7 +477,7 @@ export function RecordsBrowser() {
                           <span
                             className={`inline-flex px-2 py-0.5 rounded border text-[10px] font-bold ${
                               rec.complexity === "HIGH"
-                                ? "bg-rose-50 border-rose-100 text-rose-700"
+                                ? "bg-red-50 border-red-100 text-red-700"
                                 : rec.complexity === "MEDIUM"
                                 ? "bg-amber-50 border-amber-100 text-amber-700"
                                 : "bg-slate-50 border-slate-100 text-slate-700"
@@ -513,7 +514,7 @@ export function RecordsBrowser() {
                         <td className="px-5 py-4">{new Date(rec.invoiceDate).toLocaleDateString()}</td>
                         <td className="px-5 py-4 text-ink">{formatCurrency(rec.totalAmount)}</td>
                         <td className="px-5 py-4 text-ink/70">{formatCurrency(rec.paidAmount)}</td>
-                        <td className="px-5 py-4 text-rose-600">{formatCurrency(rec.outstandingAmount)}</td>
+                        <td className="px-5 py-4 text-red-600">{formatCurrency(rec.outstandingAmount)}</td>
                         <td className="px-5 py-4">
                           <span
                             className={`inline-flex px-2 py-0.5 rounded-full border text-[10px] font-bold ${

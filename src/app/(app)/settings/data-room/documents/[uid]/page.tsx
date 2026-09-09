@@ -138,15 +138,15 @@ export default function DocumentDetailPage() {
       {isLoading ? (
         <div className="h-64 bg-canvas rounded-3xl animate-pulse" />
       ) : error ? (
-        <div className="p-6 bg-rose-50 border border-rose-200 text-rose-700 rounded-2xl font-semibold flex items-start gap-3">
+        <div className="p-6 bg-red-50 border border-red-200 text-red-700 rounded-2xl font-semibold flex items-start gap-3">
           <HiExclamation className="w-5 h-5 shrink-0 mt-0.5" />
           <div>
             <p className="font-bold">Failed to load document</p>
-            <p className="text-xs font-medium mt-1 text-rose-500">{error}</p>
+            <p className="text-xs font-medium mt-1 text-red-500">{error}</p>
           </div>
         </div>
       ) : !document ? (
-        <div className="p-6 bg-rose-50 border border-rose-200 text-rose-700 rounded-2xl font-semibold">
+        <div className="p-6 bg-red-50 border border-red-200 text-red-700 rounded-2xl font-semibold">
           Document not found.
         </div>
       ) : (
@@ -192,7 +192,7 @@ export default function DocumentDetailPage() {
                   <div className="flex gap-1.5 items-center">
                     <button
                       onClick={handleDelete}
-                      className="px-3 py-1.5 text-xs font-bold text-white bg-rose-600 rounded-full hover:bg-rose-700 cursor-pointer"
+                      className="px-3 py-1.5 text-xs font-bold text-white bg-red-600 rounded-full hover:bg-red-700 cursor-pointer"
                     >
                       Confirm Delete
                     </button>
@@ -244,7 +244,7 @@ export default function DocumentDetailPage() {
                 <span className="block text-[9px] font-bold text-ink/40 uppercase tracking-wider mb-0.5">
                   Rows Failed
                 </span>
-                <span className={`font-bold ${document.rowsFailed > 0 ? "text-rose-600" : "text-ink/90"}`}>
+                <span className={`font-bold ${document.rowsFailed > 0 ? "text-red-600" : "text-ink/90"}`}>
                   {document.rowsFailed}
                 </span>
               </div>
@@ -289,8 +289,8 @@ export default function DocumentDetailPage() {
 
             {/* Error message for failed documents */}
             {document.errorMessage && (
-              <div className="mt-4 text-xs text-rose-700 bg-rose-50 border border-rose-100 p-3 rounded-xl font-bold flex items-start gap-2">
-                <HiExclamation className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
+              <div className="mt-4 text-xs text-red-700 bg-red-50 border border-red-100 p-3 rounded-xl font-bold flex items-start gap-2">
+                <HiExclamation className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
                 <span>{document.errorMessage}</span>
               </div>
             )}
@@ -371,7 +371,7 @@ export default function DocumentDetailPage() {
                             {fileColumn ? (
                               <span className="text-ink">{fileColumn}</span>
                             ) : (
-                              <span className="text-rose-600 font-extrabold bg-rose-50/50 px-2 py-0.5 rounded border border-rose-100 text-[10px]">
+                              <span className="text-red-600 font-extrabold bg-red-50/50 px-2 py-0.5 rounded border border-red-100 text-[10px]">
                                 Not mapped
                               </span>
                             )}
@@ -382,7 +382,7 @@ export default function DocumentDetailPage() {
                                 <HiCheckCircle className="w-3 h-3" /> Mapped
                               </span>
                             ) : (
-                              <span className="inline-flex items-center gap-1 text-[10px] font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded-full border border-rose-200">
+                              <span className="inline-flex items-center gap-1 text-[10px] font-bold text-red-700 bg-red-50 px-2 py-0.5 rounded-full border border-red-200">
                                 <HiXCircle className="w-3 h-3" /> Unmapped
                               </span>
                             )}
@@ -461,7 +461,7 @@ export default function DocumentDetailPage() {
                           <span className="text-[10px] font-bold text-ink/40 uppercase tracking-wider block mb-1">
                             Rows Failed
                           </span>
-                          <span className={`text-base font-extrabold ${activeAttempt.rowsFailed > 0 ? "text-rose-600" : "text-ink"}`}>
+                          <span className={`text-base font-extrabold ${activeAttempt.rowsFailed > 0 ? "text-red-600" : "text-ink"}`}>
                             {activeAttempt.rowsFailed}
                           </span>
                         </div>
@@ -482,8 +482,8 @@ export default function DocumentDetailPage() {
                         </div>
 
                         {activeAttempt.errorMessage && (
-                          <div className="mt-2 text-xs text-rose-700 bg-rose-50 border border-rose-100 p-3 rounded-xl font-bold flex items-start gap-2">
-                            <HiExclamation className="w-4.5 h-4.5 text-rose-500 shrink-0 mt-0.5" />
+                          <div className="mt-2 text-xs text-red-700 bg-red-50 border border-red-100 p-3 rounded-xl font-bold flex items-start gap-2">
+                            <HiExclamation className="w-4.5 h-4.5 text-red-500 shrink-0 mt-0.5" />
                             <span>{activeAttempt.errorMessage}</span>
                           </div>
                         )}
@@ -515,7 +515,7 @@ export default function DocumentDetailPage() {
                                       {matchedVal ? (
                                         <span className="text-ink">{matchedVal}</span>
                                       ) : (
-                                        <span className="text-rose-600 font-extrabold bg-rose-50/50 px-2 py-0.5 rounded border border-rose-100">
+                                        <span className="text-red-600 font-extrabold bg-red-50/50 px-2 py-0.5 rounded border border-red-100">
                                           Not found
                                         </span>
                                       )}
@@ -537,17 +537,17 @@ export default function DocumentDetailPage() {
                       {/* Row Errors */}
                       {activeAttempt.rowErrors && activeAttempt.rowErrors.length > 0 && (
                         <div className="flex flex-col gap-2">
-                          <span className="text-xs font-bold text-ink/55 uppercase tracking-wider text-rose-700">
+                          <span className="text-xs font-bold text-ink/55 uppercase tracking-wider text-red-700">
                             Row Error Logs ({activeAttempt.rowErrors.length} errors)
                           </span>
                           <div className="border border-red-100 rounded-2xl overflow-hidden bg-surface shadow-sm max-h-56 overflow-y-auto rates-scrollable pr-1">
                             <table className="min-w-full divide-y divide-red-50 text-[11px]">
                               <thead className="bg-red-50/30">
                                 <tr>
-                                  <th className="px-4 py-2 text-left font-bold text-rose-800 uppercase tracking-wider w-16">
+                                  <th className="px-4 py-2 text-left font-bold text-red-800 uppercase tracking-wider w-16">
                                     Row
                                   </th>
-                                  <th className="px-4 py-2 text-left font-bold text-rose-800 uppercase tracking-wider">
+                                  <th className="px-4 py-2 text-left font-bold text-red-800 uppercase tracking-wider">
                                     Diagnostic Reason
                                   </th>
                                 </tr>
@@ -558,7 +558,7 @@ export default function DocumentDetailPage() {
                                   : activeAttempt.rowErrors.slice(0, 20)
                                 ).map((err, i) => (
                                   <tr key={i}>
-                                    <td className="px-4 py-2 text-rose-700 font-bold">#{err.rowNumber}</td>
+                                    <td className="px-4 py-2 text-red-700 font-bold">#{err.rowNumber}</td>
                                     <td className="px-4 py-2 break-all">{err.errorMessage}</td>
                                   </tr>
                                 ))}

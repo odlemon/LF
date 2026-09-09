@@ -504,7 +504,7 @@ export function WhatIfPanel({
                           <button
                             type="button"
                             onClick={() => removeLine(line.key)}
-                            className="p-1.5 rounded-lg text-ink/35 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors"
+                            className="p-1.5 rounded-lg text-ink/35 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors"
                             aria-label="Remove line"
                           >
                             <HiTrash className="h-4 w-4" />
