@@ -122,6 +122,14 @@ export default function VolumeDiscountDetailPage() {
     toast.success("Secondment usage recorded.");
   };
 
+  // Newest upgrade first, and the total the firm still has to pay out.
+  const crossings = [...(dashboard?.tierCrossings ?? [])].sort((a, b) =>
+    b.occurredAt.localeCompare(a.occurredAt),
+  );
+  const creditsOwed = crossings
+    .filter((c) => c.adjustmentStatus === "PENDING")
+    .reduce((sum, c) => sum + c.retroactiveAdjustmentAmount, 0);
+
   const formatMoney = (value: number, currency: string) => {
     try {
       return new Intl.NumberFormat("en-GB", {
@@ -331,6 +339,66 @@ export default function VolumeDiscountDetailPage() {
                 Record Usage
               </Button>
             </div>
+          </div>
+        )}
+      </div>
+
+      <div className="bg-surface border border-border/60 rounded-2xl p-6">
+        <div className="flex flex-wrap items-baseline justify-between gap-2 mb-1">
+          <h2 className="text-xs font-bold text-ink/80 uppercase tracking-wider">Tier Credits</h2>
+          {creditsOwed > 0 && (
+            <p className="text-xs text-ink/55">
+              <span className="font-semibold text-ink tabular-nums">
+                {formatMoney(creditsOwed, program.currency)}
+              </span>{" "}
+              still to be issued
+            </p>
+          )}
+        </div>
+        <p className="text-xs text-ink/55 mb-4 max-w-2xl">
+          Each upgrade credits the client the difference between their new rate and their old one,
+          across everything they had already spent. Work billed after an upgrade carries the new
+          rate on the invoice, so it is not credited here.
+        </p>
+        {crossings.length === 0 ? (
+          <p className="text-sm text-ink/55">
+            No tier has been crossed yet, so no credit is owed.
+          </p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-sm border-collapse">
+              <thead>
+                <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
+                  <th className="px-4 py-3">Date</th>
+                  <th className="px-4 py-3">Upgrade</th>
+                  <th className="px-4 py-3">Spend at Upgrade</th>
+                  <th className="px-4 py-3">Credit</th>
+                  <th className="px-4 py-3">Status</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100/60">
+                {crossings.map((crossing) => (
+                  <tr key={crossing.eventUid} className="text-ink">
+                    <td className="px-4 py-3">{formatDate(crossing.occurredAt)}</td>
+                    <td className="px-4 py-3">
+                      {crossing.fromTierName ? `${crossing.fromTierName} → ` : ""}
+                      <span className="font-semibold">{crossing.toTierName}</span>
+                    </td>
+                    <td className="px-4 py-3 tabular-nums text-ink/70">
+                      {formatMoney(crossing.cumulativeSpendAtChange, program.currency)}
+                    </td>
+                    <td className="px-4 py-3 tabular-nums font-semibold">
+                      {formatMoney(crossing.retroactiveAdjustmentAmount, program.currency)}
+                    </td>
+                    <td className="px-4 py-3">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-field text-ink/70 border border-border uppercase tracking-wider">
+                        {crossing.adjustmentStatus || "—"}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         )}
       </div>

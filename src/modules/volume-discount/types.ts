@@ -69,6 +69,22 @@ export interface VolumeDiscountDashboard {
   totalSpendRecords: number;
   /** True when spend already qualifies for a tier not yet booked as a TierChangeEvent. */
   tierChangePending: boolean;
+  /** Every tier this client has crossed, and the credit each crossing created. */
+  tierCrossings: TierCrossing[];
+}
+
+/**
+ * One tier upgrade. The credit tops the client's earlier spend up to the new tier's rate —
+ * spend invoiced after the crossing already carries that rate, so it is not credited again.
+ */
+export interface TierCrossing {
+  eventUid: string;
+  fromTierName?: string | null;
+  toTierName: string;
+  cumulativeSpendAtChange: number;
+  retroactiveAdjustmentAmount: number;
+  adjustmentStatus?: string | null;
+  occurredAt: string;
 }
 
 export interface CreateVolumeDiscountProgramCommand {
