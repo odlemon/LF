@@ -21,6 +21,7 @@ export default function VolumeDiscountsPage() {
   const [programs, setPrograms] = useState<VolumeDiscountProgram[]>([]);
   const [dashboards, setDashboards] = useState<Record<string, VolumeDiscountDashboard>>({});
   const [clients, setClients] = useState<ClientProfile[]>([]);
+  const [clientsLoaded, setClientsLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
@@ -61,6 +62,8 @@ export default function VolumeDiscountsPage() {
         if (isActive) setClients(clientData);
       } catch {
         // client names are best-effort for display
+      } finally {
+        if (isActive) setClientsLoaded(true);
       }
     }
 
@@ -70,8 +73,13 @@ export default function VolumeDiscountsPage() {
     };
   }, [load]);
 
-  const clientName = (uid: string) =>
-    clients.find((c) => c.uid === uid)?.name || uid;
+  // The table renders before the client list has arrived. Until it does, show nothing rather
+  // than the raw uid — an identifier on screen reads as a bug to the person using this.
+  const clientName = (uid: string) => {
+    const match = clients.find((c) => c.uid === uid)?.name;
+    if (match) return match;
+    return clientsLoaded ? uid : "—";
+  };
 
   const handleCreate = async (command: CreateVolumeDiscountProgramCommand) => {
     await volumeDiscountApi.createProgram(command);
