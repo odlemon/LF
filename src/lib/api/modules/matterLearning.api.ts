@@ -20,7 +20,37 @@ export interface MatterLearningCommand {
   matterReference?: string;
 }
 
+/** One position as it was handed to the agent, with where it came from. */
+export interface CitedPosition {
+  uid: string;
+  title: string;
+  learningText: string;
+  practiceAreaCode?: string | null;
+  clientType?: string | null;
+  matterReference?: string | null;
+  loggedByName?: string | null;
+  automatic: boolean;
+  createdAt: string;
+}
+
+export interface HouseViewForRequest {
+  practiceAreaCode: string;
+  clientType: string;
+  positions: CitedPosition[];
+}
+
 export const matterLearningApi = {
+  /**
+   * What the firm's house view told the agent about this matter. Recomputed on each call rather
+   * than stored against a message, so a correction shows up the moment it is made.
+   */
+  forRequest: async (requestUid: string): Promise<HouseViewForRequest> => {
+    const res = await apiClient.get<HouseViewForRequest>(
+      ENDPOINTS.MATTER_LEARNINGS.FOR_REQUEST(requestUid)
+    );
+    return res.data;
+  },
+
   list: async (): Promise<MatterLearning[]> => {
     const res = await apiClient.get<MatterLearning[]>(ENDPOINTS.MATTER_LEARNINGS.BASE);
     return Array.isArray(res.data) ? res.data : [];

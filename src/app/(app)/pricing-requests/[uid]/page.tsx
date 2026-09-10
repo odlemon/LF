@@ -14,6 +14,7 @@ import {
 } from "@/modules/intake/hooks/useIntake";
 import { ChatPanel } from "@/modules/intake/components/ChatPanel";
 import { ScopePanel } from "@/modules/intake/components/ScopePanel";
+import { HouseViewCitation } from "@/modules/intake/components/HouseViewCitation";
 import { ChatModeBadge } from "@/modules/intake/components/IntakeStatusBadge";
 import { PricingRequestWorkspaceSkeleton } from "@/modules/intake/components/PricingRequestWorkspaceSkeleton";
 import {
@@ -387,6 +388,9 @@ function PricingRequestWorkspaceLoaded({
               : "w-full justify-center px-4 sm:px-8"
           }`}
         >
+          {/* Above the conversation: what the firm already believed, before the agent spoke. */}
+          <HouseViewCitation requestUid={uid} />
+
           <ChatPanel
             messages={chat.messages}
             isAiThinking={chat.isAiThinking}

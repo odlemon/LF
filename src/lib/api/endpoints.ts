@@ -8,6 +8,8 @@ export const ENDPOINTS = {
   MATTER_LEARNINGS: {
     BASE: "/v1/matter-learnings",
     BY_UID: (uid: string) => `/v1/matter-learnings/${uid}`,
+    /** The positions the pricing agent was given for one matter. */
+    FOR_REQUEST: (uid: string) => `/v1/pricing-requests/${uid}/house-view`,
   },
   AUTH: {
     LOGIN: "/v1/auth/login",
