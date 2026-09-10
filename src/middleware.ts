@@ -112,6 +112,17 @@ export function middleware(request: NextRequest) {
   if (pathname === "/") {
     return NextResponse.redirect(new URL("/client-login", request.url));
   }
+  // A client on the portal host asking for /login wants the portal's own sign-in, not the
+  // firm's. Sending them to the workspace login on another host is the one bounce that is
+  // never what the person meant: both surfaces have a sign-in, and they are already on
+  // theirs. /forgot and /reset mirror one-for-one. SSO is firm-only, so its callback still
+  // belongs to the workspace and falls through to the redirect below.
+  if ((pathname === "/login" || pathname.startsWith("/login/"))
+      && !pathname.startsWith("/login/sso-callback")) {
+    const moved = request.nextUrl.clone();
+    moved.pathname = pathname.replace(/^\/login/, "/client-login");
+    return NextResponse.redirect(moved);
+  }
   if (!isPortal) {
     if (isFirm) return crossOrigin(appUrl, request, "/client-login");
     if (isLanding) return crossOrigin(landingUrl, request, "/client-login");
