@@ -98,7 +98,7 @@ export default function FeeEarnerLevelsPage() {
                   <button
                     type="button"
                     onClick={() => openEdit(level)}
-                    className="text-xs font-semibold text-ink/55 hover:text-ink transition-colors cursor-pointer"
+                    className="text-xs font-semibold text-ink/55 hover:text-ink transition-colors cursor-pointer px-2 py-1.5 -my-1.5 rounded"
                   >
                     Edit
                   </button>

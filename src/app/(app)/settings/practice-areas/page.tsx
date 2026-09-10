@@ -123,7 +123,7 @@ export default function PracticeAreasPage() {
               <div className="flex items-center justify-between gap-4 pt-3 border-t border-border">
                 <button
                   onClick={() => handleOpenEdit(area)}
-                  className="text-xs font-semibold text-ink/65 hover:text-primary flex items-center gap-1.5 transition-colors"
+                  className="text-xs font-semibold text-ink/65 hover:text-primary flex items-center gap-1.5 transition-colors py-1.5 -my-1.5 rounded"
                 >
                   <HiPencil className="w-3.5 h-3.5" />
                   Edit
@@ -149,7 +149,7 @@ export default function PracticeAreasPage() {
                   ) : (
                     <button
                       onClick={() => setConfirmDeactivateUid(area.uid)}
-                      className="text-xs font-semibold text-red-600 hover:text-red-800 transition-colors"
+                      className="text-xs font-semibold text-red-600 hover:text-red-800 transition-colors py-1.5 -my-1.5 rounded"
                     >
                       Deactivate
                     </button>
