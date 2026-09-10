@@ -220,7 +220,7 @@ export function HeroNavbar({ variant = "default" }: HeroNavbarProps) {
         <div className="relative z-10 flex items-center gap-2 sm:gap-3">
           <Link
             href="/login"
-            className={`hidden sm:inline-flex text-[13px] font-medium transition-colors ${
+            className={`hidden sm:inline-flex items-center px-2 py-1.5 -mx-2 -my-1.5 text-[13px] font-medium transition-colors ${
               onDark ? "text-white/85 hover:text-white" : "text-[#0a0a0a]/80 hover:text-[#0a0a0a]"
             }`}
           >

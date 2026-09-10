@@ -365,7 +365,7 @@ function NegotiationMock() {
             key={r.id}
             type="button"
             onClick={() => setRoundId(r.id)}
-            className={`rounded-full px-3 py-1 text-[11px] font-semibold cursor-pointer ${
+            className={`rounded-full px-3 py-1.5 text-[11px] font-semibold cursor-pointer ${
               roundId === r.id
                 ? "bg-[#fefefc] text-[#0a0a0a]"
                 : "bg-white/[0.05] text-white/40 hover:text-white/70"
@@ -550,7 +550,7 @@ function DiscountsMock() {
               key={c.id}
               type="button"
               onClick={() => setBookId(c.id)}
-              className={`rounded-full px-3 py-1 text-[11px] font-semibold cursor-pointer ${
+              className={`rounded-full px-3 py-1.5 text-[11px] font-semibold cursor-pointer ${
                 bookId === c.id
                   ? "bg-[#fefefc] text-[#0a0a0a]"
                   : "bg-white/[0.05] text-white/40"
