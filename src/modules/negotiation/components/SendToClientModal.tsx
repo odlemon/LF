@@ -101,7 +101,7 @@ export function SendToClientModal({
           <label className="block text-[11px] font-semibold text-ink/55 mb-1.5">
             Cover message
           </label>
-          <textarea
+          <textarea aria-label="Cover message"
             value={coverMessage}
             onChange={(e) => setCoverMessage(e.target.value)}
             rows={3}

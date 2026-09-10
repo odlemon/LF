@@ -68,7 +68,7 @@ export function SecondmentUsageModal({ isOpen, onClose, onSave, remainingHours }
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="flex flex-col gap-1.5">
             <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">Hours</label>
-            <input
+            <input aria-label="Hours"
               type="number"
               min="0.5"
               step="0.5"
@@ -83,7 +83,7 @@ export function SecondmentUsageModal({ isOpen, onClose, onSave, remainingHours }
             <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
               Matter (optional)
             </label>
-            <input
+            <input aria-label="Matter (optional)"
               type="text"
               value={matterUid}
               onChange={(e) => setMatterUid(e.target.value)}

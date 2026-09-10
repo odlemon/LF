@@ -78,7 +78,7 @@ export function PmsConnectorFormModal({ isOpen, onClose, onSave, datasets }: Pms
 
         <div className="flex flex-col gap-1.5">
           <label className="text-[11px] font-bold text-ink/40 uppercase tracking-wider">Display Name *</label>
-          <input
+          <input aria-label="Display Name"
             type="text"
             required
             placeholder="e.g. Aderant Sync — Corporate"
@@ -107,7 +107,7 @@ export function PmsConnectorFormModal({ isOpen, onClose, onSave, datasets }: Pms
 
         <div className="flex flex-col gap-1.5">
           <label className="text-[11px] font-bold text-ink/40 uppercase tracking-wider">Base URL *</label>
-          <input
+          <input aria-label="Base URL"
             type="text"
             required
             placeholder="e.g. http://localhost:8080/mock-pms"
@@ -119,7 +119,7 @@ export function PmsConnectorFormModal({ isOpen, onClose, onSave, datasets }: Pms
 
         <div className="flex flex-col gap-1.5">
           <label className="text-[11px] font-bold text-ink/40 uppercase tracking-wider">API Key (optional)</label>
-          <input
+          <input aria-label="API Key (optional)"
             type="password"
             placeholder="Stored encrypted — never echoed back"
             value={apiKey}
@@ -130,7 +130,7 @@ export function PmsConnectorFormModal({ isOpen, onClose, onSave, datasets }: Pms
 
         <div className="flex flex-col gap-1.5">
           <label className="text-[11px] font-bold text-ink/40 uppercase tracking-wider">Sync Interval (hours)</label>
-          <input
+          <input aria-label="Sync Interval (hours)"
             type="number"
             min="1"
             value={syncIntervalHours}

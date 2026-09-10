@@ -175,7 +175,7 @@ export function ProgramFormModal({ isOpen, onClose, onSave, clients }: ProgramFo
 
             {tiers.map((tier, index) => (
               <div key={index} className="grid grid-cols-[1.2fr_1fr_0.8fr_auto] gap-3 items-center">
-                <input
+                <input aria-label="Discount Tiers"
                   type="text"
                   value={tier.tierName}
                   onChange={(e) => updateTier(index, "tierName", e.target.value)}

@@ -88,7 +88,7 @@ export function AddSpendModal({ isOpen, onClose, onSave, defaultCurrency = "GBP"
             <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
               Invoice Reference
             </label>
-            <input
+            <input aria-label="Invoice Reference"
               type="text"
               value={invoiceReference}
               onChange={(e) => setInvoiceReference(e.target.value)}
@@ -102,7 +102,7 @@ export function AddSpendModal({ isOpen, onClose, onSave, defaultCurrency = "GBP"
               <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
                 Amount
               </label>
-              <input
+              <input aria-label="Amount"
                 type="number"
                 step="0.01"
                 min="0"

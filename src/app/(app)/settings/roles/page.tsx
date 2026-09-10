@@ -383,7 +383,7 @@ export default function RolesPage() {
                   <label className="text-[10px] font-extrabold text-ink/40 uppercase tracking-widest">
                     Role Name
                   </label>
-                  <Input
+                  <Input aria-label="Role Name"
                     type="text"
                     required
                     value={newRole.name}
@@ -396,7 +396,7 @@ export default function RolesPage() {
                   <label className="text-[10px] font-extrabold text-ink/40 uppercase tracking-widest">
                     Role Description
                   </label>
-                  <Textarea
+                  <Textarea aria-label="Role Description"
                     required
                     rows={3}
                     value={newRole.description}

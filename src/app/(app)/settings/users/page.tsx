@@ -319,7 +319,7 @@ export default function UsersPage() {
                     <label className="text-xs font-semibold text-ink/55 uppercase tracking-wider">
                       First Name
                     </label>
-                    <Input
+                    <Input aria-label="First Name"
                       type="text"
                       required
                       value={formState.firstName}
@@ -332,7 +332,7 @@ export default function UsersPage() {
                     <label className="text-xs font-semibold text-ink/55 uppercase tracking-wider">
                       Last Name
                     </label>
-                    <Input
+                    <Input aria-label="Last Name"
                       type="text"
                       required
                       value={formState.lastName}
@@ -347,7 +347,7 @@ export default function UsersPage() {
                   <label className="text-xs font-semibold text-ink/55 uppercase tracking-wider">
                     Email Address
                   </label>
-                  <Input
+                  <Input aria-label="Email Address"
                     type="email"
                     required
                     value={formState.email}
@@ -361,7 +361,7 @@ export default function UsersPage() {
                   <label className="text-xs font-semibold text-ink/55 uppercase tracking-wider">
                     Phone Number
                   </label>
-                  <Input
+                  <Input aria-label="Phone Number"
                     type="text"
                     value={formState.phoneNumber}
                     onChange={(e) =>
@@ -375,7 +375,7 @@ export default function UsersPage() {
                     <label className="text-xs font-semibold text-ink/55 uppercase tracking-wider">
                       Initial Password
                     </label>
-                    <Input
+                    <Input aria-label="Initial Password"
                       type="password"
                       required
                       value={formState.password || ""}

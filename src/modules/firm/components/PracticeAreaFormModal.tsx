@@ -83,7 +83,7 @@ export function PracticeAreaFormModal({
             <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
               Name
             </label>
-            <input
+            <input aria-label="Name"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -97,7 +97,7 @@ export function PracticeAreaFormModal({
             <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
               Code
             </label>
-            <input
+            <input aria-label="Code"
               type="text"
               value={code}
               onChange={(e) => setCode(e.target.value.toUpperCase())}
@@ -117,7 +117,7 @@ export function PracticeAreaFormModal({
             <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
               Description
             </label>
-            <textarea
+            <textarea aria-label="Description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Provide a brief summary of the practice area legal domain..."

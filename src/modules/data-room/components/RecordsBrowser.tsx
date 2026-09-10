@@ -197,7 +197,7 @@ export function RecordsBrowser() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             <div className="flex flex-col gap-1">
               <label className="text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1">Matter Reference</label>
-              <input
+              <input aria-label="Matter Reference"
                 type="text"
                 placeholder="Search matter ref..."
                 value={timeEntriesFilters.matterReference}
@@ -296,7 +296,7 @@ export function RecordsBrowser() {
             </div>
             <div className="flex flex-col gap-1">
               <label className="text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1">Effective Year</label>
-              <input
+              <input aria-label="Effective Year"
                 type="number"
                 placeholder="e.g. 2024"
                 value={rateHistoryFilters.effectiveYear}
@@ -326,7 +326,7 @@ export function RecordsBrowser() {
             </div>
             <div className="flex flex-col gap-1">
               <label className="text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1">Jurisdiction</label>
-              <input
+              <input aria-label="Jurisdiction"
                 type="text"
                 placeholder="e.g. New York, UK"
                 value={benchmarksFilters.jurisdiction}
@@ -339,7 +339,7 @@ export function RecordsBrowser() {
             </div>
             <div className="flex flex-col gap-1">
               <label className="text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1">Survey Year</label>
-              <input
+              <input aria-label="Survey Year"
                 type="number"
                 placeholder="e.g. 2023"
                 value={benchmarksFilters.surveyYear}

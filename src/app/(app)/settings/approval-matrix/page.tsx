@@ -111,7 +111,7 @@ export default function ApprovalMatrixPage() {
                       <label className="text-[10px] font-bold text-ink/50 uppercase tracking-wider">
                         Stage name
                       </label>
-                      <input
+                      <input aria-label="Stage name"
                         type="text"
                         value={stage.stageName}
                         onChange={(e) => updateStage(index, { stageName: e.target.value })}
@@ -155,7 +155,7 @@ export default function ApprovalMatrixPage() {
                     <label className="text-[10px] font-bold text-ink/50 uppercase tracking-wider">
                       Approver permission
                     </label>
-                    <input
+                    <input aria-label="Approver permission"
                       type="text"
                       value={stage.approverPermission}
                       onChange={(e) => updateStage(index, { approverPermission: e.target.value })}
@@ -166,7 +166,7 @@ export default function ApprovalMatrixPage() {
                     <label className="text-[10px] font-bold text-ink/50 uppercase tracking-wider">
                       Trigger: min discount %
                     </label>
-                    <input
+                    <input aria-label="Trigger: min discount %"
                       type="number"
                       value={stage.triggerMinDiscountPct ?? ""}
                       onChange={(e) =>
@@ -182,7 +182,7 @@ export default function ApprovalMatrixPage() {
                     <label className="text-[10px] font-bold text-ink/50 uppercase tracking-wider">
                       Trigger: min amount
                     </label>
-                    <input
+                    <input aria-label="Trigger: min amount"
                       type="number"
                       value={stage.triggerMinAmount ?? ""}
                       onChange={(e) =>

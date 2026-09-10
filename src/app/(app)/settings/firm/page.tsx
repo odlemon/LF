@@ -182,7 +182,7 @@ export default function FirmDetailsPage() {
               <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
                 Firm Name
               </label>
-              <input
+              <input aria-label="Firm Name"
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -220,7 +220,7 @@ export default function FirmDetailsPage() {
               <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
                 Registration Number
               </label>
-              <input
+              <input aria-label="Registration Number"
                 type="text"
                 value={registrationNumber}
                 onChange={(e) => setRegistrationNumber(e.target.value)}
@@ -234,7 +234,7 @@ export default function FirmDetailsPage() {
               <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
                 Tax ID
               </label>
-              <input
+              <input aria-label="Tax ID"
                 type="text"
                 value={taxId}
                 onChange={(e) => setTaxId(e.target.value)}
@@ -248,7 +248,7 @@ export default function FirmDetailsPage() {
               <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
                 Phone Number
               </label>
-              <input
+              <input aria-label="Phone Number"
                 type="text"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
@@ -262,7 +262,7 @@ export default function FirmDetailsPage() {
               <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
                 Email Address
               </label>
-              <input
+              <input aria-label="Email Address"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -276,7 +276,7 @@ export default function FirmDetailsPage() {
               <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
                 Address
               </label>
-              <textarea
+              <textarea aria-label="Address"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 disabled={!isEditing}

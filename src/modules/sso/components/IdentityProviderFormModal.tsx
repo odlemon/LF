@@ -221,7 +221,7 @@ export function IdentityProviderFormModal({
 
         <div className="flex flex-col gap-1.5">
           <label className={labelClassName}>Provider name *</label>
-          <input
+          <input aria-label="Provider name"
             type="text"
             required
             placeholder="keycloak"
@@ -239,7 +239,7 @@ export function IdentityProviderFormModal({
           <div className="flex flex-col gap-1.5">
             <label className={labelClassName}>Issuer URL *</label>
             <div className="flex items-center gap-2">
-              <input
+              <input aria-label="Issuer URL"
                 type="text"
                 value={issuerUri}
                 onChange={(e) => {
@@ -291,7 +291,7 @@ export function IdentityProviderFormModal({
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="flex flex-col gap-1.5">
             <label className={labelClassName}>Client ID *</label>
-            <input
+            <input aria-label="Client ID"
               type="text"
               required
               value={clientId}
@@ -316,7 +316,7 @@ export function IdentityProviderFormModal({
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="flex flex-col gap-1.5">
             <label className={labelClassName}>Email domain *</label>
-            <input
+            <input aria-label="Email domain"
               type="text"
               required
               placeholder="acmelaw.com"
@@ -356,7 +356,7 @@ export function IdentityProviderFormModal({
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-1.5">
               <label className={labelClassName}>Authorization URL *</label>
-              <input
+              <input aria-label="Authorization URL"
                 type="text"
                 value={authorizationUri}
                 onChange={(e) => setAuthorizationUri(e.target.value)}
@@ -366,7 +366,7 @@ export function IdentityProviderFormModal({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="flex flex-col gap-1.5">
                 <label className={labelClassName}>Token URL *</label>
-                <input
+                <input aria-label="Token URL"
                   type="text"
                   value={tokenUri}
                   onChange={(e) => setTokenUri(e.target.value)}
@@ -375,7 +375,7 @@ export function IdentityProviderFormModal({
               </div>
               <div className="flex flex-col gap-1.5">
                 <label className={labelClassName}>User info URL *</label>
-                <input
+                <input aria-label="User info URL"
                   type="text"
                   value={userInfoUri}
                   onChange={(e) => setUserInfoUri(e.target.value)}

@@ -87,7 +87,7 @@ export function RateCardFormModal({
             <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
               Name
             </label>
-            <input
+            <input aria-label="Name"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -119,7 +119,7 @@ export function RateCardFormModal({
             <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
               Office
             </label>
-            <input
+            <input aria-label="Office"
               type="text"
               value={officeCode}
               onChange={(e) => setOfficeCode(e.target.value.toUpperCase())}

@@ -90,7 +90,7 @@ export function FeeEarnerLevelFormModal({
             <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
               Name
             </label>
-            <input
+            <input aria-label="Name"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -104,7 +104,7 @@ export function FeeEarnerLevelFormModal({
             <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
               Code
             </label>
-            <input
+            <input aria-label="Code"
               type="text"
               value={code}
               onChange={(e) => setCode(e.target.value.toUpperCase())}
@@ -119,7 +119,7 @@ export function FeeEarnerLevelFormModal({
             <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
               Sort Order
             </label>
-            <input
+            <input aria-label="Sort Order"
               type="number"
               value={sortOrder}
               onChange={(e) => setSortOrder(Number(e.target.value))}
@@ -137,7 +137,7 @@ export function FeeEarnerLevelFormModal({
             <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
               Cost Rate (per hour)
             </label>
-            <input
+            <input aria-label="Cost Rate (per hour)"
               type="number"
               value={costRate}
               onChange={(e) => setCostRate(e.target.value)}

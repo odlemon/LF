@@ -79,7 +79,7 @@ export function DatasetFormModal({ isOpen, onClose, onSave }: DatasetFormModalPr
 
         <div className="flex flex-col gap-1.5">
           <label className="text-[11px] font-bold text-ink/40 uppercase tracking-wider">Dataset Name *</label>
-          <input
+          <input aria-label="Dataset Name"
             type="text"
             required
             placeholder="e.g. Ingestion 2024 - Corporate Matters"
@@ -101,7 +101,7 @@ export function DatasetFormModal({ isOpen, onClose, onSave }: DatasetFormModalPr
 
         <div className="flex flex-col gap-1.5">
           <label className="text-[11px] font-bold text-ink/40 uppercase tracking-wider">Source System</label>
-          <input
+          <input aria-label="Source System"
             type="text"
             placeholder="e.g. Aderant, Elite 3E, InTapp"
             value={sourceSystem}
@@ -123,7 +123,7 @@ export function DatasetFormModal({ isOpen, onClose, onSave }: DatasetFormModalPr
 
         <div className="flex flex-col gap-1.5">
           <label className="text-[11px] font-bold text-ink/40 uppercase tracking-wider">Description</label>
-          <textarea
+          <textarea aria-label="Description"
             placeholder="Provide context or instructions for this historical billing batch..."
             rows={3}
             value={description}

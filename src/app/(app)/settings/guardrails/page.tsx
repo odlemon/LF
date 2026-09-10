@@ -148,7 +148,7 @@ export default function GuardrailsPage() {
                 Minimum Target Profit Margin (%)
               </label>
               <div className="relative">
-                <input
+                <input aria-label="Minimum Target Profit Margin (%)"
                   type="number"
                   value={minMarginPct}
                   onChange={(e) => setMinMarginPct(Number(e.target.value))}
@@ -180,7 +180,7 @@ export default function GuardrailsPage() {
                   Auto-Approval Max Discount (%)
                 </label>
                 <div className="relative">
-                  <input
+                  <input aria-label="Auto-Approval Max Discount (%)"
                     type="number"
                     value={discountAutoMaxPct}
                     onChange={(e) => setDiscountAutoMaxPct(Number(e.target.value))}
@@ -202,7 +202,7 @@ export default function GuardrailsPage() {
                   Partner-Approval Max Discount (%)
                 </label>
                 <div className="relative">
-                  <input
+                  <input aria-label="Partner-Approval Max Discount (%)"
                     type="number"
                     value={discountPartnerMaxPct}
                     onChange={(e) => setDiscountPartnerMaxPct(Number(e.target.value))}
@@ -258,7 +258,7 @@ export default function GuardrailsPage() {
               Committee Review Approver
             </label>
             <div className="relative">
-              <input
+              <input aria-label="Committee Review Approver"
                 type="text"
                 value="COMMITTEE"
                 disabled

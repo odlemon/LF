@@ -103,7 +103,7 @@ export function PanelAgreementFormModal({ isOpen, onClose, onSave }: PanelAgreem
             <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
               Secondment Credit Hours (annual allowance)
             </label>
-            <input
+            <input aria-label="Secondment Credit Hours (annual allowance)"
               type="number"
               min="0"
               step="0.5"

@@ -147,7 +147,7 @@ function AuditTrailContent() {
               <label className="text-[10px] font-extrabold text-ink/40 uppercase tracking-widest">
                 Entity ID
               </label>
-              <input
+              <input aria-label="Entity ID"
                 type="text"
                 value={entityUidInput}
                 onChange={(e) => setEntityUidInput(e.target.value)}

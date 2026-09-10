@@ -150,7 +150,7 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
                 <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
                   Client Name
                 </label>
-                <input
+                <input aria-label="Client Name"
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -197,7 +197,7 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
                   <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
                     Contact Name
                   </label>
-                  <input
+                  <input aria-label="Contact Name"
                     type="text"
                     value={contactName}
                     onChange={(e) => setContactName(e.target.value)}
@@ -229,7 +229,7 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
                 <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
                   Contact Email
                 </label>
-                <input
+                <input aria-label="Contact Email"
                   type="email"
                   value={contactEmail}
                   onChange={(e) => setContactEmail(e.target.value)}
@@ -370,7 +370,7 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
                 <label className="text-[10px] font-bold text-ink/55 uppercase tracking-wider">
                   Contact Name
                 </label>
-                <input
+                <input aria-label="Contact Name"
                   type="text"
                   value={inviteName}
                   onChange={(e) => setInviteName(e.target.value)}
@@ -384,7 +384,7 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
                 <label className="text-[10px] font-bold text-ink/55 uppercase tracking-wider">
                   Contact Email
                 </label>
-                <input
+                <input aria-label="Contact Email"
                   type="email"
                   value={inviteEmail}
                   onChange={(e) => setInviteEmail(e.target.value)}

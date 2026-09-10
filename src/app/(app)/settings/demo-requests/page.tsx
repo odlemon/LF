@@ -290,7 +290,7 @@ export default function DemoRequestsPage() {
                 <label className="text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1">
                   Internal note
                 </label>
-                <Textarea
+                <Textarea aria-label="Internal note"
                   rows={4}
                   value={draftNote}
                   onChange={(e) => setDraftNote(e.target.value)}
