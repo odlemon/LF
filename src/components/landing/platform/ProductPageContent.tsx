@@ -81,7 +81,7 @@ function CapabilitySection({
             {uc.foundation}{" "}
             <Link
               href="/security"
-              className={`font-semibold underline-offset-2 hover:underline ${
+              className={`inline-block py-1.5 -my-1.5 font-semibold underline-offset-2 hover:underline ${
                 isDark ? "text-white/65" : "text-[#0a0a0a]"
               }`}
             >

@@ -751,15 +751,24 @@ function AnalyticsMock() {
                   {hover !== null ? `W${hover + 1}: ${perf.bars[hover]}%` : "Hover"}
                 </span>
               </div>
-              <div className="mt-4 flex flex-1 items-end gap-1.5 min-h-[100px]">
+              {/* The bars only drive the hover readout above -- nothing happens on click or on
+                  Enter. As buttons they were twelve dead stops in the tab order that announced
+                  themselves as controls, and the figures were reachable only by mouse. They are
+                  presentation now, with the numbers given in text for anyone not using one. */}
+              <div
+                className="mt-4 flex flex-1 items-end gap-1.5 min-h-[100px]"
+                role="img"
+                aria-label={`Win rate by week: ${perf.bars
+                  .map((h, i) => `week ${i + 1}, ${h}%`)
+                  .join("; ")}`}
+              >
                 {perf.bars.map((h, i) => (
-                  <button
+                  <div
                     key={i}
-                    type="button"
-                    aria-label={`Week ${i + 1}`}
+                    aria-hidden="true"
                     onMouseEnter={() => setHover(i)}
                     onMouseLeave={() => setHover(null)}
-                    className="flex-1 rounded-sm bg-white/55 transition-opacity cursor-pointer hover:bg-white"
+                    className="flex-1 rounded-sm bg-white/55 transition-opacity hover:bg-white"
                     style={{
                       height: `${h}%`,
                       opacity: hover === null || hover === i ? 1 : 0.28,
