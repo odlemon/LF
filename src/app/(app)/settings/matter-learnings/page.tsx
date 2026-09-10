@@ -2,47 +2,54 @@
 
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
-import { HiOutlineLightBulb, HiPlus, HiRefresh } from "react-icons/hi";
+import { HiOutlineSearch, HiPlus, HiRefresh, HiX } from "react-icons/hi";
 import { Alert } from "@/components/ui/Alert";
-import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Drawer } from "@/components/ui/Drawer";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Select } from "@/components/ui/Select";
-import { Textarea } from "@/components/ui/Input";
-import { Tabs } from "@/components/ui/Tabs";
 import { usePracticeAreas } from "@/modules/firm/hooks/useFirm";
 import {
   matterLearningApi,
   type MatterLearning,
 } from "@/lib/api/modules/matterLearning.api";
-import { formatDate } from "@/lib/utils/format";
+import { AUTHOR_ADVISOR, LearningCard } from "@/modules/knowledge/components/LearningCard";
+import { LearningDetail } from "@/modules/knowledge/components/LearningDetail";
+import { LearningForm, type LearningDraft } from "@/modules/knowledge/components/LearningForm";
+import { searchableText } from "@/modules/knowledge/lib/lesson";
 
-const CLIENT_TYPES = [
-  { value: "", label: "Any client type" },
-  { value: "CORPORATE", label: "Corporate" },
-  { value: "FINANCIAL_INSTITUTION", label: "Financial Institution" },
-  { value: "GOVERNMENT", label: "Government" },
-  { value: "INDIVIDUAL", label: "Individual" },
+/**
+ * The firm's pricing memory.
+ *
+ * Two things drove this layout. Filtering used to be a row of pills — one per practice area —
+ * which wrapped onto three lines before a firm had ten practices, and offered no way to narrow by
+ * anything else. And clicking a learning opened the edit form, so reading one meant reading it
+ * inside a textarea. Both are now what they should be: a compact filter bar that scales, and a
+ * reading view with revising as a deliberate second step.
+ */
+
+type SourceFilter = "all" | "people" | "captured";
+
+const SOURCES: { value: SourceFilter; label: string }[] = [
+  { value: "all", label: "Every source" },
+  { value: "people", label: "Recorded by people" },
+  { value: "captured", label: "Captured from negotiations" },
 ];
-
-const FIELD =
-  "w-full px-5 py-2.5 bg-surface border border-border rounded-full text-sm text-ink placeholder-ink/35 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all";
 
 export default function MatterLearningsPage() {
   const { areas: practiceAreas } = usePracticeAreas();
+
   const [items, setItems] = useState<MatterLearning[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [tab, setTab] = useState<string>("all");
+
+  const [query, setQuery] = useState("");
+  const [practiceArea, setPracticeArea] = useState("");
+  const [source, setSource] = useState<SourceFilter>("all");
 
   const [open, setOpen] = useState(false);
-  const [editing, setEditing] = useState<MatterLearning | null>(null);
-  const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
-  const [practiceArea, setPracticeArea] = useState("");
-  const [clientType, setClientType] = useState("");
-  const [matterRef, setMatterRef] = useState("");
+  const [selected, setSelected] = useState<MatterLearning | null>(null);
+  const [editing, setEditing] = useState(false);
   const [saving, setSaving] = useState(false);
 
   const load = useCallback(async () => {
@@ -62,63 +69,72 @@ export default function MatterLearningsPage() {
     void load();
   }, [load]);
 
-  const tabs = useMemo(() => {
+  const areaName = useCallback(
+    (code?: string | null) => practiceAreas.find((p) => p.code === code)?.name ?? code ?? "",
+    [practiceAreas]
+  );
+
+  // Only the practice areas that actually have learnings — a filter listing empty options is a
+  // list of dead ends.
+  const areaOptions = useMemo(() => {
     const used = new Set(items.map((i) => i.practiceAreaCode).filter(Boolean) as string[]);
     return [
-      { id: "all", label: "All", count: items.length },
-      { id: "firmwide", label: "Firm-wide", count: items.filter((i) => !i.practiceAreaCode).length },
+      { value: "", label: "Every practice area" },
+      { value: "__firmwide", label: "Firm-wide only" },
       ...practiceAreas
         .filter((pa) => used.has(pa.code))
-        .map((pa) => ({
-          id: pa.code,
-          label: pa.name,
-          count: items.filter((i) => i.practiceAreaCode === pa.code).length,
-        })),
+        .map((pa) => ({ value: pa.code, label: pa.name })),
     ];
   }, [items, practiceAreas]);
 
   const visible = useMemo(() => {
-    if (tab === "all") return items;
-    if (tab === "firmwide") return items.filter((i) => !i.practiceAreaCode);
-    return items.filter((i) => i.practiceAreaCode === tab);
-  }, [items, tab]);
+    const needle = query.trim().toLowerCase();
+    return items.filter((l) => {
+      if (practiceArea === "__firmwide" && l.practiceAreaCode) return false;
+      if (practiceArea && practiceArea !== "__firmwide" && l.practiceAreaCode !== practiceArea) {
+        return false;
+      }
+      const captured = l.loggedByName === AUTHOR_ADVISOR;
+      if (source === "people" && captured) return false;
+      if (source === "captured" && !captured) return false;
+      if (needle && !searchableText(l).includes(needle)) return false;
+      return true;
+    });
+  }, [items, query, practiceArea, source]);
+
+  const capturedCount = useMemo(
+    () => items.filter((l) => l.loggedByName === AUTHOR_ADVISOR).length,
+    [items]
+  );
+
+  const filtered = query.trim() !== "" || practiceArea !== "" || source !== "all";
+  const clearFilters = () => {
+    setQuery("");
+    setPracticeArea("");
+    setSource("all");
+  };
 
   const startNew = () => {
-    setEditing(null);
-    setTitle("");
-    setText("");
-    setPracticeArea("");
-    setClientType("");
-    setMatterRef("");
+    setSelected(null);
+    setEditing(true);
     setOpen(true);
   };
 
-  const startEdit = (l: MatterLearning) => {
-    setEditing(l);
-    setTitle(l.title ?? "");
-    setText(l.learningText ?? "");
-    setPracticeArea(l.practiceAreaCode ?? "");
-    setClientType(l.clientType ?? "");
-    setMatterRef(l.matterReference ?? "");
+  const openLearning = (l: MatterLearning) => {
+    setSelected(l);
+    setEditing(false);
     setOpen(true);
   };
 
-  const save = async () => {
+  const save = async (draft: LearningDraft) => {
     setSaving(true);
     try {
-      const payload = {
-        title,
-        learningText: text,
-        practiceAreaCode: practiceArea || undefined,
-        clientType: clientType || undefined,
-        matterReference: matterRef || undefined,
-      };
-      if (editing) {
-        await matterLearningApi.update(editing.uid, payload);
+      if (selected) {
+        await matterLearningApi.update(selected.uid, draft);
         toast.success("Learning updated");
       } else {
-        await matterLearningApi.create(payload);
-        toast.success("Learning recorded — the pricing agent will use it from now on");
+        await matterLearningApi.create(draft);
+        toast.success("Recorded — the pricing agent will use it from now on");
       }
       setOpen(false);
       await load();
@@ -130,10 +146,10 @@ export default function MatterLearningsPage() {
   };
 
   const remove = async () => {
-    if (!editing) return;
+    if (!selected) return;
     setSaving(true);
     try {
-      await matterLearningApi.remove(editing.uid);
+      await matterLearningApi.remove(selected.uid);
       toast.success("Learning removed");
       setOpen(false);
       await load();
@@ -144,78 +160,108 @@ export default function MatterLearningsPage() {
     }
   };
 
-  const areaName = (code?: string | null) =>
-    practiceAreas.find((p) => p.code === code)?.name ?? code;
-
   return (
-    <div className="p-4 sm:p-8 max-w-5xl w-full mx-auto flex flex-col gap-6">
-      <div className="flex flex-wrap items-start justify-between gap-3">
+    <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 p-4 sm:p-8">
+      <header className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div className="min-w-0">
-          <h1 className="text-2xl font-bold text-ink tracking-tight">Matter learnings</h1>
-          <p className="text-sm text-ink/55 mt-1 max-w-2xl leading-relaxed">
-            What the firm has worked out about pricing its own work. Everything here is read by
-            the pricing agent when it scopes a comparable matter, so a lesson recorded once stops
-            being relearned deal by deal.
+          <h1 className="text-2xl font-bold tracking-tight text-ink">Matter learnings</h1>
+          <p className="mt-1 max-w-2xl text-sm leading-relaxed text-ink/55">
+            What the firm has worked out about pricing its own work. Everything here is read by the
+            pricing agent when it scopes a comparable matter, so a lesson recorded once stops being
+            relearned deal by deal.
           </p>
         </div>
-        <div className="flex items-center gap-2 shrink-0">
+        <div className="flex shrink-0 items-center gap-2">
           <Button variant="secondary" onClick={() => void load()}>
-            <HiRefresh className="w-4 h-4" />
+            <HiRefresh className="h-4 w-4" />
             Refresh
           </Button>
           <Button variant="primary" onClick={startNew}>
-            <HiPlus className="w-4 h-4" />
+            <HiPlus className="h-4 w-4" />
             Record a learning
           </Button>
         </div>
+      </header>
+
+      <div className="flex flex-col gap-3 rounded-2xl border border-border bg-surface p-3 sm:flex-row sm:items-center">
+        <div className="relative min-w-0 flex-1">
+          <HiOutlineSearch className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink/35" />
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search lessons, matters, clients"
+            aria-label="Search learnings"
+            className="w-full rounded-full border border-border bg-canvas py-2.5 pl-11 pr-4 text-sm text-ink placeholder-ink/35 transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+          />
+        </div>
+        <div className="grid grid-cols-1 gap-3 sm:w-auto sm:grid-cols-2">
+          <Select
+            value={practiceArea}
+            onChange={setPracticeArea}
+            options={areaOptions}
+            placeholder="Every practice area"
+          />
+          <Select
+            value={source}
+            onChange={(v) => setSource(v as SourceFilter)}
+            options={SOURCES}
+            placeholder="Every source"
+          />
+        </div>
       </div>
 
-      {tabs.length > 2 && <Tabs tabs={tabs} activeId={tab} onChange={setTab} />}
+      <div className="flex flex-wrap items-center gap-2 text-[12px] text-ink/50">
+        <span>
+          {visible.length} {visible.length === 1 ? "learning" : "learnings"}
+          {filtered && items.length !== visible.length ? ` of ${items.length}` : ""}
+        </span>
+        {capturedCount > 0 && !filtered && (
+          <>
+            <span className="text-ink/30">·</span>
+            <span>
+              {capturedCount} captured automatically when a negotiation closed
+            </span>
+          </>
+        )}
+        {filtered && (
+          <button
+            type="button"
+            onClick={clearFilters}
+            className="ml-auto inline-flex items-center gap-1 font-semibold text-ink/60 transition-colors hover:text-ink cursor-pointer"
+          >
+            <HiX className="h-3.5 w-3.5" />
+            Clear filters
+          </button>
+        )}
+      </div>
 
       {error && <Alert variant="error" message={error} />}
 
       {loading ? (
         <div className="flex flex-col gap-3">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="h-28 rounded-2xl border border-border bg-surface animate-pulse" />
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="h-28 animate-pulse rounded-2xl border border-border bg-surface" />
           ))}
         </div>
       ) : visible.length === 0 ? (
         <EmptyState
-          title="Nothing recorded yet"
-          description="When a matter teaches the firm something about how to price that kind of work, record it here and every future scope will take it into account."
+          title={filtered ? "Nothing matches those filters" : "Nothing recorded yet"}
+          description={
+            filtered
+              ? "Try a broader search, or clear the filters to see everything the firm has recorded."
+              : "When a matter teaches the firm something about how to price that kind of work, record it here and every future scope will take it into account. Closed negotiations also add their own."
+          }
         />
       ) : (
         <div className="flex flex-col gap-3">
           {visible.map((l) => (
-            <button
+            <LearningCard
               key={l.uid}
-              type="button"
-              onClick={() => startEdit(l)}
-              className="text-left bg-surface border border-border/70 rounded-2xl p-5 transition-all hover:border-ink/30 hover:shadow-sm cursor-pointer"
-            >
-              <div className="flex items-center gap-2 flex-wrap">
-                <HiOutlineLightBulb className="w-4 h-4 text-ink/35 shrink-0" />
-                <span className="text-sm font-bold text-ink">{l.title}</span>
-                {l.practiceAreaCode ? (
-                  <Badge variant="info">{areaName(l.practiceAreaCode)}</Badge>
-                ) : (
-                  <Badge variant="neutral">Firm-wide</Badge>
-                )}
-                {l.clientType && <Badge variant="neutral">{l.clientType.replace(/_/g, " ")}</Badge>}
-                <span className="ml-auto text-[11px] text-ink/40">{formatDate(l.createdAt)}</span>
-              </div>
-              <p className="mt-2.5 text-sm text-ink/70 leading-relaxed line-clamp-3">
-                {l.learningText}
-              </p>
-              {(l.matterReference || l.loggedByName) && (
-                <p className="mt-2 text-[11px] text-ink/40">
-                  {l.matterReference && <>From {l.matterReference}</>}
-                  {l.matterReference && l.loggedByName && " · "}
-                  {l.loggedByName && <>Recorded by {l.loggedByName}</>}
-                </p>
-              )}
-            </button>
+              learning={l}
+              practiceAreaName={areaName}
+              onOpen={openLearning}
+            />
           ))}
         </div>
       )}
@@ -223,97 +269,26 @@ export default function MatterLearningsPage() {
       <Drawer
         isOpen={open}
         onClose={() => setOpen(false)}
-        title={editing ? "Edit learning" : "Record a learning"}
-        size="lg"
+        title={selected ? (editing ? "Revise learning" : "Learning") : "Record a learning"}
+        size="xl"
       >
-        <div className="flex flex-col gap-5">
-          <div className="flex flex-col gap-1.5">
-            <label className="text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1">
-              What is the lesson
-            </label>
-            <input
-              className={FIELD}
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="e.g. TSAs overrun on partial-stake deals"
-              maxLength={200}
-            />
-          </div>
-
-          <div className="flex flex-col gap-1.5">
-            <label className="text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1">
-              In full
-            </label>
-            <Textarea
-              rows={6}
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              placeholder="Write it as you would explain it to a partner about to price this kind of matter. The pricing agent reads this text directly."
-              maxLength={4000}
-            />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Select
-              label="Practice area"
-              placeholder="Applies firm-wide"
-              value={practiceArea}
-              onChange={setPracticeArea}
-              options={[
-                { value: "", label: "Applies firm-wide" },
-                ...practiceAreas.map((pa) => ({ value: pa.code, label: pa.name })),
-              ]}
-            />
-            <Select
-              label="Client type"
-              placeholder="Any client type"
-              value={clientType}
-              onChange={setClientType}
-              options={CLIENT_TYPES}
-            />
-          </div>
-
-          <div className="flex flex-col gap-1.5">
-            <label className="text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1">
-              Matter it came from <span className="font-normal normal-case">(optional)</span>
-            </label>
-            <input
-              className={FIELD}
-              value={matterRef}
-              onChange={(e) => setMatterRef(e.target.value)}
-              placeholder="e.g. MAT-2026-0412"
-              maxLength={100}
-            />
-          </div>
-
-          <p className="text-[12px] text-ink/45 leading-relaxed">
-            Leaving practice area and client type blank makes this apply to every matter. Narrow
-            it when the lesson only holds for a particular kind of work.
-          </p>
-
-          <div className="flex flex-col-reverse sm:flex-row sm:justify-between gap-3 pt-2">
-            {editing ? (
-              <Button variant="secondary" onClick={remove} disabled={saving}>
-                Remove
-              </Button>
-            ) : (
-              <span />
-            )}
-            <div className="flex flex-col-reverse sm:flex-row gap-3">
-              <Button variant="secondary" onClick={() => setOpen(false)} disabled={saving}>
-                Cancel
-              </Button>
-              <Button
-                variant="primary"
-                onClick={save}
-                loading={saving}
-                disabled={!title.trim() || !text.trim()}
-              >
-                {editing ? "Save" : "Record"}
-              </Button>
-            </div>
-          </div>
-        </div>
+        {selected && !editing ? (
+          <LearningDetail
+            learning={selected}
+            practiceAreaName={areaName}
+            onEdit={() => setEditing(true)}
+            onRemove={remove}
+            removing={saving}
+          />
+        ) : (
+          <LearningForm
+            existing={selected}
+            practiceAreas={practiceAreas}
+            saving={saving}
+            onCancel={() => (selected ? setEditing(false) : setOpen(false))}
+            onSave={save}
+          />
+        )}
       </Drawer>
     </div>
   );
