@@ -231,7 +231,7 @@ export default function LoginPage() {
               </Link>
               <Link
                 href="/"
-                className="lg:hidden text-[13px] font-medium text-white/75 hover:text-white transition-colors pt-1"
+                className="lg:hidden text-[13px] font-medium text-white/75 hover:text-white transition-colors pt-1 py-1.5 -my-1.5"
               >
                 Back to site
               </Link>
@@ -273,7 +273,7 @@ export default function LoginPage() {
           <div className="relative hidden lg:flex items-center justify-end px-10 xl:px-14 pt-9">
             <Link
               href="/"
-              className="text-[13px] font-medium text-[#0a0a0a]/40 hover:text-[#0a0a0a] transition-colors"
+              className="text-[13px] font-medium text-[#0a0a0a]/40 hover:text-[#0a0a0a] transition-colors py-1.5 -my-1.5"
             >
               Back to site
             </Link>

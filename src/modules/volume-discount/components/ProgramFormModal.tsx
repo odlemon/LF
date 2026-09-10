@@ -166,7 +166,7 @@ export function ProgramFormModal({ isOpen, onClose, onSave, clients }: ProgramFo
               <button
                 type="button"
                 onClick={addTier}
-                className="text-xs font-semibold text-primary hover:text-primary/80 flex items-center gap-1 transition-colors"
+                className="text-xs font-semibold text-primary hover:text-primary/80 flex items-center gap-1 transition-colors py-1.5 -my-1.5"
               >
                 <HiPlus className="w-3.5 h-3.5" />
                 Add Tier

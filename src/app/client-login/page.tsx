@@ -188,7 +188,7 @@ export default function ClientLoginPage() {
           <div className="hidden justify-end px-8 pt-6 lg:flex xl:px-12">
             <Link
               href="https://lysp.ai"
-              className="text-[13px] font-medium text-[#0a0a0a]/45 transition-colors hover:text-[#0a0a0a]"
+              className="text-[13px] font-medium text-[#0a0a0a]/45 transition-colors hover:text-[#0a0a0a] py-1.5 -my-1.5"
             >
               About Lysp
             </Link>

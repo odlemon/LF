@@ -214,7 +214,7 @@ export function PrivacyPageContent() {
             </p>
             <a
               href="mailto:nyasha@lysp.ai"
-              className="mt-4 inline-flex text-[15px] font-semibold text-[#0a0a0a] underline underline-offset-4 decoration-black/15 hover:decoration-black/50"
+              className="mt-4 inline-flex text-[15px] font-semibold text-[#0a0a0a] underline underline-offset-4 decoration-black/15 hover:decoration-black/50 py-1.5"
             >
               nyasha@lysp.ai
             </a>

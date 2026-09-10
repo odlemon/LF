@@ -167,7 +167,7 @@ export function AssumptionSection({
           <button
             type="button"
             onClick={() => setShowForm(true)}
-            className="mt-5 inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-ink/45 hover:text-ink transition-colors"
+            className="mt-5 inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-ink/45 hover:text-ink transition-colors py-1.5"
           >
             <HiPlus className="w-3.5 h-3.5" />
             Add Assumption

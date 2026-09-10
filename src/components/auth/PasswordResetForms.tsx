@@ -64,7 +64,7 @@ export function ForgotPasswordForm({ portal, backHref }: { portal: boolean; back
         </p>
         <Link
           href={backHref}
-          className="mt-8 inline-block text-[14px] font-semibold underline underline-offset-4"
+          className="mt-8 inline-block text-[14px] font-semibold underline underline-offset-4 py-1.5"
         >
           Back to sign in
         </Link>
@@ -102,7 +102,7 @@ export function ForgotPasswordForm({ portal, backHref }: { portal: boolean; back
       </form>
       <Link
         href={backHref}
-        className="mt-6 inline-block text-[14px] font-semibold text-[#0a0a0a]/55 hover:text-[#0a0a0a]"
+        className="mt-6 inline-block text-[14px] font-semibold text-[#0a0a0a]/55 hover:text-[#0a0a0a] py-1.5"
       >
         Back to sign in
       </Link>
@@ -145,7 +145,7 @@ export function ResetPasswordForm({ backHref }: { backHref: string }) {
         </p>
         <Link
           href={backHref}
-          className="mt-8 inline-block text-[14px] font-semibold underline underline-offset-4"
+          className="mt-8 inline-block text-[14px] font-semibold underline underline-offset-4 py-1.5"
         >
           Back to sign in
         </Link>
@@ -161,7 +161,7 @@ export function ResetPasswordForm({ backHref }: { backHref: string }) {
         </p>
         <Link
           href={backHref}
-          className="mt-8 inline-block text-[14px] font-semibold underline underline-offset-4"
+          className="mt-8 inline-block text-[14px] font-semibold underline underline-offset-4 py-1.5"
         >
           Sign in
         </Link>

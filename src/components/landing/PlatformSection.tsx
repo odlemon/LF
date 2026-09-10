@@ -61,7 +61,7 @@ function UseCaseCopy({
       </p>
       <Link
         href={`/product#${id}`}
-        className="mt-4 sm:mt-5 lg:mt-6 inline-flex items-center gap-1.5 self-start text-[13px] sm:text-[14px] font-semibold text-[#0a0a0a] hover:opacity-70 transition-opacity"
+        className="mt-4 sm:mt-5 lg:mt-6 inline-flex items-center gap-1.5 self-start text-[13px] sm:text-[14px] font-semibold text-[#0a0a0a] hover:opacity-70 transition-opacity py-1.5"
         tabIndex={active ? 0 : -1}
         onClick={(e) => e.stopPropagation()}
       >

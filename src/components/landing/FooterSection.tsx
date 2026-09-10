@@ -148,19 +148,19 @@ export function FooterSection() {
           <div className="flex flex-wrap gap-x-6 gap-y-2">
             <Link
               href="/privacy"
-              className="text-[12px] text-white/40 hover:text-white/70 transition-colors cursor-pointer"
+              className="text-[12px] text-white/40 hover:text-white/70 transition-colors cursor-pointer py-1.5 -my-1.5"
             >
               Privacy Policy
             </Link>
             <Link
               href="/contact"
-              className="text-[12px] text-white/40 hover:text-white/70 transition-colors cursor-pointer"
+              className="text-[12px] text-white/40 hover:text-white/70 transition-colors cursor-pointer py-1.5 -my-1.5"
             >
               Contact
             </Link>
             <Link
               href="/security"
-              className="text-[12px] text-white/40 hover:text-white/70 transition-colors cursor-pointer"
+              className="text-[12px] text-white/40 hover:text-white/70 transition-colors cursor-pointer py-1.5 -my-1.5"
             >
               Security
             </Link>

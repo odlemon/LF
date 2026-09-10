@@ -198,7 +198,7 @@ export function NotificationBell({
             <button
               type="button"
               onClick={() => void onMarkAll()}
-              className="cursor-pointer text-[10px] font-semibold text-ink/55 hover:text-ink"
+              className="cursor-pointer text-[10px] font-semibold text-ink/55 hover:text-ink py-1.5 -my-1.5"
             >
               Mark all read
             </button>

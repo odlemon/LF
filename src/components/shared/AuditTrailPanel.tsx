@@ -105,7 +105,7 @@ export function AuditTrailPanel({
           {hasMore && (
             <Link
               href={`/audit-trail?entityUid=${encodeURIComponent(entityUid)}`}
-              className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-primary hover:text-primary-hover hover:underline self-start transition-all"
+              className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-primary hover:text-primary-hover hover:underline self-start transition-all py-1.5"
             >
               <span>View all activity history</span>
               <HiChevronRight className="w-3.5 h-3.5" />

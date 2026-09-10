@@ -74,7 +74,7 @@ export function BlogArticleContent({ post }: { post: BlogPost }) {
         <div className="relative mx-auto max-w-[760px] px-5 sm:px-8 pt-24 sm:pt-32 pb-16 sm:pb-20">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-[13px] font-semibold text-white/55 hover:text-white transition-colors"
+            className="inline-flex items-center gap-2 text-[13px] font-semibold text-white/55 hover:text-white transition-colors py-1.5 -my-1.5"
           >
             <HiArrowLeft className="h-4 w-4" />
             Journal
@@ -155,7 +155,7 @@ export function BlogArticleContent({ post }: { post: BlogPost }) {
                     href={`/blog/${p.slug}`}
                     className="group flex items-baseline justify-between gap-6 py-5"
                   >
-                    <span className="text-[15px] sm:text-base font-semibold tracking-tight group-hover:opacity-70 transition-opacity text-balance">
+                    <span className="text-[15px] sm:text-base font-semibold tracking-tight group-hover:opacity-70 transition-opacity text-balance py-1.5 -my-1.5">
                       {p.title}
                     </span>
                     <HiArrowRight className="h-4 w-4 shrink-0 text-[#0a0a0a]/30 transition-transform group-hover:translate-x-0.5" />

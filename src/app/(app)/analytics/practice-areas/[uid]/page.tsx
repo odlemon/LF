@@ -107,7 +107,7 @@ export default function PracticeAreaDeepDivePage() {
           <div>
             <Link
               href="/analytics"
-              className="inline-flex items-center gap-1 text-xs font-bold text-ink/50 hover:text-ink transition-colors mb-2"
+              className="inline-flex items-center gap-1 text-xs font-bold text-ink/50 hover:text-ink transition-colors mb-2 py-1.5"
             >
               <HiArrowLeft className="w-3.5 h-3.5" />
               Firm health

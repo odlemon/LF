@@ -48,7 +48,7 @@ export function RecentTransactions({
           <p className="text-sm font-medium text-red-600">{error}</p>
           <button
             onClick={load}
-            className="mt-3 text-xs font-semibold text-ink/60 underline underline-offset-4 hover:text-ink"
+            className="mt-3 text-xs font-semibold text-ink/60 underline underline-offset-4 hover:text-ink py-1.5"
           >
             Retry
           </button>

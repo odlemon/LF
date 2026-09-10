@@ -344,7 +344,7 @@ export function IdentityProviderFormModal({
           <button
             type="button"
             onClick={() => setManualEndpoints((v) => !v)}
-            className="text-[11px] font-bold text-ink/50 hover:text-ink transition-colors cursor-pointer"
+            className="text-[11px] font-bold text-ink/50 hover:text-ink transition-colors cursor-pointer py-1.5 -my-1.5"
           >
             {manualEndpoints
               ? "← Use an issuer URL instead"

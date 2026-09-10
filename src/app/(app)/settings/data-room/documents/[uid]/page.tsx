@@ -113,7 +113,7 @@ export default function DocumentDetailPage() {
       <div className="flex items-center gap-3">
         <Link
           href="/settings/data-room"
-          className="text-xs font-bold text-ink/40 hover:text-primary flex items-center gap-1 w-fit transition-colors"
+          className="text-xs font-bold text-ink/40 hover:text-primary flex items-center gap-1 w-fit transition-colors py-1.5 -my-1.5"
         >
           <HiArrowSmLeft className="w-4 h-4" /> Data Room
         </Link>
