@@ -263,13 +263,13 @@ export default function DatasetDetailPage() {
                                 <div className="flex gap-1 items-center shrink-0">
                                   <button
                                     onClick={() => handleDeleteDoc(doc.uid)}
-                                    className="px-1.5 py-0.5 text-[9px] font-bold text-white bg-red-600 rounded"
+                                    className="px-2.5 py-1.5 text-[9px] font-bold text-white bg-red-600 rounded"
                                   >
                                     OK
                                   </button>
                                   <button
                                     onClick={() => setConfirmDeleteUid(null)}
-                                    className="px-1.5 py-0.5 text-[9px] font-bold text-ink/65 bg-canvas rounded"
+                                    className="px-2.5 py-1.5 text-[9px] font-bold text-ink/65 bg-canvas rounded"
                                   >
                                     No
                                   </button>
@@ -281,14 +281,14 @@ export default function DatasetDetailPage() {
                                       <button
                                         onClick={() => setActiveMappingDoc(doc)}
                                         title="Fix column mapping"
-                                        className="p-1 hover:bg-canvas text-ink/40 hover:text-primary rounded-lg cursor-pointer"
+                                        className="p-1.5 hover:bg-canvas text-ink/40 hover:text-primary rounded-lg cursor-pointer"
                                       >
                                         <HiCog className="w-4 h-4" />
                                       </button>
                                       <button
                                         onClick={() => handleRetry(doc.uid)}
                                         title="Retry processing"
-                                        className="p-1 hover:bg-canvas text-ink/40 hover:text-primary rounded-lg cursor-pointer"
+                                        className="p-1.5 hover:bg-canvas text-ink/40 hover:text-primary rounded-lg cursor-pointer"
                                       >
                                         <HiLightningBolt className="w-4 h-4" />
                                       </button>
@@ -296,13 +296,13 @@ export default function DatasetDetailPage() {
                                   )}
                                   <button
                                     onClick={() => setActiveLogDoc(doc)}
-                                    className="px-2 py-0.5 hover:bg-canvas rounded text-[10px] font-bold text-ink/55 hover:text-ink transition-colors"
+                                    className="px-2.5 py-1.5 hover:bg-canvas rounded text-[10px] font-bold text-ink/55 hover:text-ink transition-colors"
                                   >
                                     Log
                                   </button>
                                   <button
                                     onClick={() => setConfirmDeleteUid(doc.uid)}
-                                    className="p-1 hover:bg-red-50 text-ink/40 hover:text-red-600 rounded-lg transition-colors cursor-pointer"
+                                    className="p-1.5 hover:bg-red-50 text-ink/40 hover:text-red-600 rounded-lg transition-colors cursor-pointer"
                                   >
                                     <HiTrash className="w-4 h-4" />
                                   </button>

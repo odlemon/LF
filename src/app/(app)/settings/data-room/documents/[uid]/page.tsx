@@ -122,7 +122,7 @@ export default function DocumentDetailPage() {
             <span className="text-gray-300 text-xs">/</span>
             <Link
               href={`/settings/data-room/datasets/${document.datasetUid}`}
-              className="text-xs font-bold text-ink/40 hover:text-primary flex items-center gap-1 transition-colors"
+              className="text-xs font-bold text-ink/40 hover:text-primary flex items-center gap-1 transition-colors py-1.5 -my-1.5 rounded"
             >
               <HiDatabase className="w-3.5 h-3.5" /> Dataset
             </Link>
