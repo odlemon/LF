@@ -98,7 +98,7 @@ export function BatchUploadModal({ isOpen, onClose, onUpload }: BatchUploadModal
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="text-primary hover:underline flex items-center gap-1 font-extrabold cursor-pointer"
+                className="text-primary hover:underline flex items-center gap-1 font-extrabold cursor-pointer py-1.5 -my-1.5 rounded"
               >
                 <HiPlus className="w-3.5 h-3.5" /> Add Files
               </button>

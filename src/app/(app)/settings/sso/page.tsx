@@ -107,7 +107,7 @@ export default function SsoAdminPage() {
                         href={`${getPublicApiBase()}/api/oauth2/authorization/${p.providerName}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-primary hover:underline font-bold"
+                        className="inline-flex items-center gap-1 text-primary hover:underline font-bold py-1.5 -my-1.5 rounded"
                       >
                         Test <HiExternalLink className="w-3 h-3" />
                       </a>

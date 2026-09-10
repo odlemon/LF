@@ -170,7 +170,7 @@ export default function DatasetsIndexPage() {
                     <td className="px-5 py-4">
                       <Link
                         href={`/settings/data-room/datasets/${dataset.uid}`}
-                        className="text-ink font-extrabold hover:text-primary hover:underline flex items-center gap-1.5"
+                        className="text-ink font-extrabold hover:text-primary hover:underline flex items-center gap-1.5 py-1.5 -my-1.5 rounded"
                       >
                         <HiFolderOpen className="w-4.5 h-4.5 text-ink/40" />
                         {dataset.name}

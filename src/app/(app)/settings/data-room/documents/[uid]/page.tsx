@@ -266,7 +266,7 @@ export default function DocumentDetailPage() {
                 </span>
                 <Link
                   href={`/settings/data-room/datasets/${document.datasetUid}`}
-                  className="text-primary hover:underline font-bold"
+                  className="text-primary hover:underline font-bold py-1.5 -my-1.5 rounded"
                 >
                   View Dataset
                 </Link>

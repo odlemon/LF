@@ -299,7 +299,7 @@ export default function ClientDashboardPage() {
               <button
                 type="button"
                 onClick={() => router.push("/client-portal/negotiations")}
-                className="mt-4 text-xs font-semibold text-primary hover:underline"
+                className="mt-4 text-xs font-semibold text-primary hover:underline py-1.5 -my-1.5 rounded"
               >
                 Browse proposals →
               </button>
@@ -320,7 +320,7 @@ export default function ClientDashboardPage() {
             <button
               type="button"
               onClick={() => router.push("/client-portal/matters")}
-              className="text-xs font-semibold text-primary hover:underline"
+              className="text-xs font-semibold text-primary hover:underline py-1.5 -my-1.5 rounded"
             >
               Full history
             </button>

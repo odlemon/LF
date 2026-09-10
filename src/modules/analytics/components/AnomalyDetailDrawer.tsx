@@ -93,7 +93,7 @@ export function AnomalyDetailDrawer({ anomaly, onClose, canResolve, onResolve }:
               value={
                 <Link
                   href={`/negotiations/${anomaly.sourceUid}`}
-                  className="text-primary hover:underline font-bold"
+                  className="text-primary hover:underline font-bold py-1.5 -my-1.5 rounded"
                 >
                   Open negotiation
                 </Link>
