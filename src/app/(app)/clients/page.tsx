@@ -50,6 +50,7 @@ export default function ClientsPage() {
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          aria-label="Search clients"
           placeholder="Search clients by name, contact or email..."
           className="w-full pl-11 pr-5 py-2.5 bg-surface border border-border rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-ink shadow-sm"
         />

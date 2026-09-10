@@ -83,7 +83,8 @@ export function ClientSearchSelect({
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search clients..."
+                aria-label="Search clients"
+        placeholder="Search clients..."
                 className="w-full pl-9 pr-4 py-2 text-xs border border-border rounded-full bg-field focus:outline-none focus:ring-2 focus:ring-primary/20 focus:bg-surface"
                 autoFocus
               />

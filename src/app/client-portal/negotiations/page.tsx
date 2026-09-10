@@ -118,6 +118,7 @@ export default function PortalNegotiationsPage() {
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
+              aria-label="Search proposals"
               placeholder="Search…"
               className="w-52 rounded-full border border-border bg-surface py-2 pl-9 pr-3 text-sm text-ink placeholder:text-ink/35 focus:outline-none focus:ring-2 focus:ring-primary/15"
             />
