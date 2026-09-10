@@ -128,7 +128,7 @@ export default function AnalyticsFirmHealthPage() {
                 href="/analytics/margin-monitor"
                 className="group flex items-center gap-4 bg-surface border border-border/70 rounded-2xl p-5 hover:border-ink/30 transition-all"
               >
-                <div className="w-10 h-10 rounded-xl bg-red-50 text-red-600 flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-red-50 text-red-700 flex items-center justify-center shrink-0">
                   <HiShieldExclamation className="w-5 h-5" />
                 </div>
                 <div className="min-w-0 flex-1">
@@ -209,7 +209,7 @@ export default function AnalyticsFirmHealthPage() {
                         </div>
                         {belowTarget ? (
                           <span
-                            className="inline-flex items-center gap-1 text-[10px] font-bold text-red-600 bg-red-50 border border-red-200 rounded-full px-2 py-0.5 shrink-0"
+                            className="inline-flex items-center gap-1 text-[10px] font-bold text-red-700 bg-red-50 border border-red-200 rounded-full px-2 py-0.5 shrink-0"
                             title={`Below target by ${Math.abs(row.marginVsTargetPts ?? 0).toFixed(1)} pts`}
                           >
                             {formatDelta(row.marginVsTargetPts, "pts")} vs target

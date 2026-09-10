@@ -371,7 +371,7 @@ export default function DocumentDetailPage() {
                             {fileColumn ? (
                               <span className="text-ink">{fileColumn}</span>
                             ) : (
-                              <span className="text-red-600 font-extrabold bg-red-50/50 px-2 py-0.5 rounded border border-red-100 text-[10px]">
+                              <span className="text-red-700 font-extrabold bg-red-50/50 px-2 py-0.5 rounded border border-red-100 text-[10px]">
                                 Not mapped
                               </span>
                             )}
@@ -515,7 +515,7 @@ export default function DocumentDetailPage() {
                                       {matchedVal ? (
                                         <span className="text-ink">{matchedVal}</span>
                                       ) : (
-                                        <span className="text-red-600 font-extrabold bg-red-50/50 px-2 py-0.5 rounded border border-red-100">
+                                        <span className="text-red-700 font-extrabold bg-red-50/50 px-2 py-0.5 rounded border border-red-100">
                                           Not found
                                         </span>
                                       )}

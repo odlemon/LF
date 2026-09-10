@@ -36,7 +36,7 @@ const getRoleIconAndColor = (roleName: string) => {
   if (name.includes("audit") || name.includes("complia")) {
     return {
       icon: HiEye,
-      bgColor: "bg-amber-50 text-amber-600 border-amber-100",
+      bgColor: "bg-amber-50 text-amber-700 border-amber-100",
       activeBg: "bg-amber-500 text-white shadow-lg shadow-amber-200/40",
       accentBg: "border-amber-500",
       glowingAccent: "bg-amber-500/10 text-amber-700 border-amber-200"

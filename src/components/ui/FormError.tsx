@@ -10,7 +10,7 @@ import React from "react";
 export function FormError({ message, className = "" }: { message: string; className?: string }) {
   return (
     <div
-      className={`mb-4 p-3.5 px-5 bg-red-50 border border-red-200 text-red-600 dark:bg-red-950/40 dark:border-red-900/50 dark:text-red-300 rounded-full text-xs font-medium animate-fade-in text-center ${className}`}
+      className={`mb-4 p-3.5 px-5 bg-red-50 border border-red-200 text-red-700 dark:bg-red-950/40 dark:border-red-900/50 dark:text-red-300 rounded-full text-xs font-medium animate-fade-in text-center ${className}`}
     >
       {message}
     </div>

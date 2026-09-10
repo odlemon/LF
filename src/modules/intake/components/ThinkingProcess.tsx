@@ -92,7 +92,7 @@ export function ThinkingProcess({ steps, live = false }: ThinkingProcessProps) {
         ) : (
           <span
             className={`flex h-3.5 w-3.5 items-center justify-center rounded-full shrink-0 ${
-              hasFailure ? "bg-red-500/15 text-red-600" : "bg-ink/8 text-ink/45"
+              hasFailure ? "bg-red-500/15 text-red-700" : "bg-ink/8 text-ink/45"
             }`}
           >
             {hasFailure ? (
@@ -124,7 +124,7 @@ export function ThinkingProcess({ steps, live = false }: ThinkingProcessProps) {
                       <span
                         className={`flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-semibold ${
                           failed
-                            ? "bg-red-500/12 text-red-600"
+                            ? "bg-red-500/12 text-red-700"
                             : "bg-ink/[0.06] text-ink/40"
                         }`}
                       >

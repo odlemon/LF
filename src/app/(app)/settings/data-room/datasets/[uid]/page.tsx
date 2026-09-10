@@ -302,7 +302,7 @@ export default function DatasetDetailPage() {
                                   </button>
                                   <button
                                     onClick={() => setConfirmDeleteUid(doc.uid)}
-                                    className="p-1.5 hover:bg-red-50 text-ink/40 hover:text-red-600 rounded-lg transition-colors cursor-pointer"
+                                    className="p-1.5 hover:bg-red-50 text-ink/40 hover:text-red-700 rounded-lg transition-colors cursor-pointer"
                                   >
                                     <HiTrash className="w-4 h-4" />
                                   </button>

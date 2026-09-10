@@ -139,7 +139,7 @@ export default function GuardrailsPage() {
           <div className="p-5 bg-field/40 rounded-2xl border border-border flex flex-col gap-4">
             <h3 className="text-xs font-bold text-ink/90 uppercase tracking-wider flex items-center gap-1.5">
               <span>1. Margin Guardrails</span>
-              <span className="text-[9px] font-extrabold text-red-600 bg-red-50 px-2 py-0.5 rounded-lg normal-case">
+              <span className="text-[9px] font-extrabold text-red-700 bg-red-50 px-2 py-0.5 rounded-lg normal-case">
                 Protects Profitability
               </span>
             </h3>

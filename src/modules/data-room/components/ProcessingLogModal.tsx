@@ -139,7 +139,7 @@ export function ProcessingLogModal({ isOpen, onClose, documentUid, fileName }: P
                                 {matchedVal ? (
                                   <span className="text-ink">{matchedVal}</span>
                                 ) : (
-                                  <span className="text-red-600 font-extrabold bg-red-50/50 px-2 py-0.5 rounded border border-red-100">
+                                  <span className="text-red-700 font-extrabold bg-red-50/50 px-2 py-0.5 rounded border border-red-100">
                                     Not found
                                   </span>
                                 )}

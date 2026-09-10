@@ -178,7 +178,7 @@ export default function UsagePage() {
         </header>
 
         {error && (
-          <div className="rounded-2xl border border-red-200 bg-red-50/80 p-4 text-sm font-medium text-red-600">
+          <div className="rounded-2xl border border-red-200 bg-red-50/80 p-4 text-sm font-medium text-red-700">
             {error}
           </div>
         )}

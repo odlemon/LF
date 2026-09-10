@@ -42,7 +42,7 @@ export function KpiCard({ label, value, caption, delta, deltaValue, invert = fal
             className={`inline-flex items-center gap-1 text-[11px] font-bold rounded-full px-2 py-0.5 ${
               isGood
                 ? "bg-emerald-50 text-emerald-700"
-                : "bg-red-50 text-red-600"
+                : "bg-red-50 text-red-700"
             }`}
             title="vs same period last year"
           >

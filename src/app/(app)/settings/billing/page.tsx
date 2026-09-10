@@ -84,7 +84,7 @@ export default function BillingPage() {
         </header>
 
         {error && (
-          <div className="rounded-2xl border border-red-200 bg-red-50/80 p-4 text-sm font-medium text-red-600 animate-fade-in backdrop-blur-sm">
+          <div className="rounded-2xl border border-red-200 bg-red-50/80 p-4 text-sm font-medium text-red-700 animate-fade-in backdrop-blur-sm">
             {error}
           </div>
         )}

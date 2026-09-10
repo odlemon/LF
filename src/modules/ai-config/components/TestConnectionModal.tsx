@@ -68,7 +68,7 @@ export function TestConnectionModal({
                   Connection Failed
                 </h4>
                 <div className="flex flex-col gap-2 text-xs text-ink/55 max-w-xs">
-                  <p className="font-medium text-red-600 bg-red-50/50 p-2.5 rounded-xl border border-red-100/50 break-words max-h-24 overflow-y-auto rates-scrollable">
+                  <p className="font-medium text-red-700 bg-red-50/50 p-2.5 rounded-xl border border-red-100/50 break-words max-h-24 overflow-y-auto rates-scrollable">
                     {testResult.message || "Connection failed with a blank error response."}
                   </p>
                   <p className="font-semibold">Check that your API key is correct and has not expired.</p>

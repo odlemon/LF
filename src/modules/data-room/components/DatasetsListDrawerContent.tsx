@@ -209,7 +209,7 @@ export function DatasetsListDrawerContent({
                       ) : (
                         <button
                           onClick={() => setConfirmDeleteUid(dataset.uid)}
-                          className="p-1.5 hover:bg-red-50 rounded-lg text-ink/40 hover:text-red-600 transition-colors cursor-pointer"
+                          className="p-1.5 hover:bg-red-50 rounded-lg text-ink/40 hover:text-red-700 transition-colors cursor-pointer"
                         >
                           <HiTrash className="w-4.5 h-4.5" />
                         </button>

@@ -211,7 +211,7 @@ export default function DatasetsIndexPage() {
                       ) : (
                         <button
                           onClick={() => setConfirmDeleteUid(dataset.uid)}
-                          className="p-1.5 hover:bg-red-50 rounded-lg text-ink/40 hover:text-red-600 transition-colors"
+                          className="p-1.5 hover:bg-red-50 rounded-lg text-ink/40 hover:text-red-700 transition-colors"
                         >
                           <HiTrash className="w-4.5 h-4.5" />
                         </button>

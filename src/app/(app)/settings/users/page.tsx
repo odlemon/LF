@@ -214,7 +214,7 @@ export default function UsersPage() {
                             className={`inline-flex items-center px-3 py-1 rounded-lg text-xs font-semibold ${
                               user.active
                                 ? "bg-hover text-ink border border-border"
-                                : "bg-red-50 text-red-600 border border-red-100"
+                                : "bg-red-50 text-red-700 border border-red-100"
                             }`}
                           >
                             {user.active ? "Active" : "Inactive"}
@@ -277,7 +277,7 @@ export default function UsersPage() {
                               className={`inline-flex items-center justify-center p-1.5 rounded-lg transition-all ${
                                 currentUser?.id === user.uid
                                   ? "text-gray-300 cursor-not-allowed opacity-40"
-                                  : "text-ink/55 hover:text-red-600 hover:bg-red-50 cursor-pointer"
+                                  : "text-ink/55 hover:text-red-700 hover:bg-red-50 cursor-pointer"
                               }`}
                               title={currentUser?.id === user.uid ? "Cannot delete own account" : undefined}
                             >

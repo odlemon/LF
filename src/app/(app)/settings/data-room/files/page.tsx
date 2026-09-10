@@ -131,7 +131,7 @@ export default function FileStoragePage() {
         styles = "bg-amber-50 text-amber-700 border-amber-200";
         break;
       case "SUSPENDED":
-        styles = "bg-red-50 text-red-600 border-red-200";
+        styles = "bg-red-50 text-red-700 border-red-200";
         break;
       case "DELETED":
         styles = "bg-canvas text-ink/40 border-border line-through";
@@ -331,7 +331,7 @@ export default function FileStoragePage() {
                           </a>
                           <button
                             onClick={() => setConfirmDeleteUid(file.uid)}
-                            className="p-1.5 hover:bg-red-50 rounded-lg text-ink/40 hover:text-red-600 transition-colors cursor-pointer"
+                            className="p-1.5 hover:bg-red-50 rounded-lg text-ink/40 hover:text-red-700 transition-colors cursor-pointer"
                             title="Delete file"
                           >
                             <HiTrash className="w-4 h-4" />
