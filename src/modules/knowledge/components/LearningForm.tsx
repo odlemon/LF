@@ -70,7 +70,7 @@ export function LearningForm({
     >
       <div className="flex flex-col gap-1.5">
         <label className={LABEL} htmlFor="learning-title">
-          The lesson, in one line
+          The position, in one line
         </label>
         <Input
           id="learning-title"
@@ -135,7 +135,7 @@ export function LearningForm({
 
       <p className="text-[12px] leading-relaxed text-ink/45">
         Leaving both narrowing fields blank makes this apply to every matter. Narrow it only when
-        the lesson genuinely stops holding elsewhere — a lesson nobody sees is worth nothing.
+        the position genuinely stops holding elsewhere — one nobody sees is worth nothing.
       </p>
 
       <div className="flex flex-col-reverse gap-3 border-t border-border pt-5 sm:flex-row sm:justify-end">
@@ -143,7 +143,7 @@ export function LearningForm({
           Cancel
         </Button>
         <Button type="submit" variant="primary" loading={saving} disabled={!ready}>
-          {existing ? "Save changes" : "Record it"}
+          {existing ? "Save changes" : "Add it"}
         </Button>
       </div>
     </form>

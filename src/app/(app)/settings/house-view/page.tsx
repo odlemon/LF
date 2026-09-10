@@ -19,13 +19,17 @@ import { LearningForm, type LearningDraft } from "@/modules/knowledge/components
 import { searchableText } from "@/modules/knowledge/lib/lesson";
 
 /**
- * The firm's pricing memory.
+ * The house view: what this firm has settled on about pricing its own work.
  *
- * Two things drove this layout. Filtering used to be a row of pills — one per practice area —
- * which wrapped onto three lines before a firm had ten practices, and offered no way to narrow by
- * anything else. And clicking a learning opened the edit form, so reading one meant reading it
- * inside a textarea. Both are now what they should be: a compact filter bar that scales, and a
- * reading view with revising as a deliberate second step.
+ * Framed around the fact that it fills itself. Every closed negotiation writes its own entry, and
+ * the pricing agent reads them back when scoping comparable work — so this is a standing record
+ * the firm curates, not a form somebody has to remember to fill in. Adding one by hand is
+ * therefore a secondary action, and there is deliberately no primary call to action on the page:
+ * the thing to do here is read.
+ *
+ * Two earlier problems drove the layout. Filtering was a row of pills, one per practice area,
+ * wrapping onto three lines before a firm had ten practices. And clicking an entry opened the
+ * edit form, so reading one meant reading it inside a textarea.
  */
 
 type SourceFilter = "all" | "people" | "captured";
@@ -58,7 +62,7 @@ export default function MatterLearningsPage() {
     try {
       setItems(await matterLearningApi.list());
     } catch {
-      setError("Could not load the firm's learnings.");
+      setError("Could not load the firm's house view.");
       setItems([]);
     } finally {
       setLoading(false);
@@ -131,15 +135,15 @@ export default function MatterLearningsPage() {
     try {
       if (selected) {
         await matterLearningApi.update(selected.uid, draft);
-        toast.success("Learning updated");
+        toast.success("Position updated");
       } else {
         await matterLearningApi.create(draft);
-        toast.success("Recorded — the pricing agent will use it from now on");
+        toast.success("Added — the pricing agent will apply it from now on");
       }
       setOpen(false);
       await load();
     } catch {
-      toast.error("Could not save that learning");
+      toast.error("Could not save that position");
     } finally {
       setSaving(false);
     }
@@ -150,11 +154,11 @@ export default function MatterLearningsPage() {
     setSaving(true);
     try {
       await matterLearningApi.remove(selected.uid);
-      toast.success("Learning removed");
+      toast.success("Position removed");
       setOpen(false);
       await load();
     } catch {
-      toast.error("Could not remove that learning");
+      toast.error("Could not remove that position");
     } finally {
       setSaving(false);
     }
@@ -164,11 +168,11 @@ export default function MatterLearningsPage() {
     <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 p-4 sm:p-8">
       <header className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div className="min-w-0">
-          <h1 className="text-2xl font-bold tracking-tight text-ink">Matter learnings</h1>
+          <h1 className="text-2xl font-bold tracking-tight text-ink">House view</h1>
           <p className="mt-1 max-w-2xl text-sm leading-relaxed text-ink/55">
-            What the firm has worked out about pricing its own work. Everything here is read by the
-            pricing agent when it scopes a comparable matter, so a lesson recorded once stops being
-            relearned deal by deal.
+            Where this firm has landed on pricing its own work. Every negotiation that closes adds
+            its own entry, and the pricing agent reads them back when it scopes comparable work — so
+            what the firm learns once stops being relearned deal by deal.
           </p>
         </div>
         <div className="flex shrink-0 items-center gap-2">
@@ -176,9 +180,9 @@ export default function MatterLearningsPage() {
             <HiRefresh className="h-4 w-4" />
             Refresh
           </Button>
-          <Button variant="primary" onClick={startNew}>
+          <Button variant="secondary" onClick={startNew}>
             <HiPlus className="h-4 w-4" />
-            Record a learning
+            Add a position
           </Button>
         </div>
       </header>
@@ -190,8 +194,8 @@ export default function MatterLearningsPage() {
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search lessons, matters, clients"
-            aria-label="Search learnings"
+            placeholder="Search positions, matters, clients"
+            aria-label="Search the house view"
             className="w-full rounded-full border border-border bg-canvas py-2.5 pl-11 pr-4 text-sm text-ink placeholder-ink/35 transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
           />
         </div>
@@ -213,14 +217,16 @@ export default function MatterLearningsPage() {
 
       <div className="flex flex-wrap items-center gap-2 text-[12px] text-ink/50">
         <span>
-          {visible.length} {visible.length === 1 ? "learning" : "learnings"}
+          {visible.length} {visible.length === 1 ? "position" : "positions"}
           {filtered && items.length !== visible.length ? ` of ${items.length}` : ""}
         </span>
-        {capturedCount > 0 && !filtered && (
+        {!filtered && (
           <>
             <span className="text-ink/30">·</span>
             <span>
-              {capturedCount} captured automatically when a negotiation closed
+              {capturedCount > 0
+                ? `${capturedCount} written automatically as negotiations closed`
+                : "Entries are added automatically as negotiations close"}
             </span>
           </>
         )}
@@ -246,11 +252,11 @@ export default function MatterLearningsPage() {
         </div>
       ) : visible.length === 0 ? (
         <EmptyState
-          title={filtered ? "Nothing matches those filters" : "Nothing recorded yet"}
+          title={filtered ? "Nothing matches those filters" : "No positions yet"}
           description={
             filtered
-              ? "Try a broader search, or clear the filters to see everything the firm has recorded."
-              : "When a matter teaches the firm something about how to price that kind of work, record it here and every future scope will take it into account. Closed negotiations also add their own."
+              ? "Try a broader search, or clear the filters to see everything the firm holds."
+              : "The house view builds itself: when a negotiation closes, what the firm learned from it is written up and filed here automatically. You can also add a position by hand at any time."
           }
         />
       ) : (
@@ -269,7 +275,7 @@ export default function MatterLearningsPage() {
       <Drawer
         isOpen={open}
         onClose={() => setOpen(false)}
-        title={selected ? (editing ? "Revise learning" : "Learning") : "Record a learning"}
+        title={selected ? (editing ? "Revise position" : "House view") : "Add a position"}
         size="xl"
       >
         {selected && !editing ? (

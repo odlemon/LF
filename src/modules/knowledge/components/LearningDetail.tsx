@@ -10,9 +10,9 @@ import { parseLesson } from "../lib/lesson";
 import { AUTHOR_ADVISOR } from "./LearningCard";
 
 /**
- * Reading view for one lesson.
+ * Reading view for one position.
  *
- * A learning captured from a closed negotiation runs to several hundred words under headings.
+ * A position written from a closed negotiation runs to several hundred words under headings.
  * Dropping straight into an edit form — which is what this screen used to do on click — made the
  * common action (read it) impossible without wading through a textarea, and the rare one (revise
  * it) the default.
@@ -53,10 +53,10 @@ export function LearningDetail({
           {captured ? (
             <span className="inline-flex items-center gap-1.5 font-medium text-ink/60">
               <HiOutlineSparkles className="h-3.5 w-3.5" />
-              Captured automatically when this negotiation closed
+              Written automatically when this negotiation closed
             </span>
           ) : (
-            <span>Recorded by {learning.loggedByName || "a colleague"}</span>
+            <span>Added by {learning.loggedByName || "a colleague"}</span>
           )}
           <span>·</span>
           <span>{formatDate(learning.createdAt)}</span>
@@ -99,8 +99,8 @@ export function LearningDetail({
 
       {captured && (
         <p className="text-[12px] leading-relaxed text-ink/45">
-          The pricing agent reads this when scoping a comparable matter. Revise it if the lesson is
-          wrong — a correction here changes what every future scope is told.
+          The pricing agent reads this when scoping comparable work. Revise it if the firm&apos;s
+          position has moved — a correction here changes what every future scope is told.
         </p>
       )}
     </div>

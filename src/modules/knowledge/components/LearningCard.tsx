@@ -8,11 +8,11 @@ import type { MatterLearning } from "@/lib/api/modules/matterLearning.api";
 import { lessonPreview } from "../lib/lesson";
 
 /**
- * One lesson in the list.
+ * One position in the list.
  *
- * The title is the lesson itself, so it gets the weight. Everything else — where it came from,
- * which practice it applies to, when it was recorded — is supporting detail on one line beneath,
- * because a partner scanning twenty of these is reading the lessons, not the metadata.
+ * The title is the position itself, so it gets the weight. Everything else — where it came from,
+ * which practice it applies to, when it was written — is supporting detail on one line beneath,
+ * because a partner scanning twenty of these is reading the positions, not the metadata.
  */
 
 export const AUTHOR_ADVISOR = "Negotiation Advisor";
@@ -67,7 +67,7 @@ export function LearningCard({
             )}
             <span className="text-[11px] text-ink/35">·</span>
             <span className="text-[11px] font-medium text-ink/45">
-              {captured ? "Captured from a negotiation" : learning.loggedByName || "Recorded"}
+              {captured ? "From a closed negotiation" : learning.loggedByName || "Added by hand"}
             </span>
             {learning.matterReference && (
               <>
