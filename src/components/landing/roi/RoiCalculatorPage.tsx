@@ -118,7 +118,7 @@ export function RoiCalculatorPage() {
             title={
               <>
                 What does better pricing
-                <span className="text-white/40"> return for your firm?</span>
+                <span className="text-white/45"> return for your firm?</span>
               </>
             }
             description="Set three things your partners already know. Lysp estimates fees protected from underpricing, write-downs, slow proposals, and soft negotiations, after estimated platform cost."
@@ -128,7 +128,7 @@ export function RoiCalculatorPage() {
           <div className="mt-10 sm:mt-12 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
             {/* Result */}
             <div className="lg:col-span-7 flex flex-col justify-end order-2 lg:order-1">
-              <p className="text-[11px] font-semibold tracking-[0.28em] uppercase text-white/35">
+              <p className="text-[11px] font-semibold tracking-[0.28em] uppercase text-white/45">
                 Estimated net annual impact
               </p>
               <p className="mt-3 text-[3.5rem] sm:text-6xl lg:text-[5.5rem] font-semibold tracking-tight tabular-nums leading-[0.95]">
@@ -155,7 +155,7 @@ export function RoiCalculatorPage() {
                   },
                 ].map((m) => (
                   <div key={m.label} className="bg-[#0a0f0d]/80 px-4 py-4 sm:px-5 sm:py-5">
-                    <p className="text-[10px] font-semibold uppercase tracking-wider text-white/30">
+                    <p className="text-[10px] font-semibold uppercase tracking-wider text-white/45">
                       {m.label}
                     </p>
                     <p className="mt-2 text-[15px] sm:text-lg font-semibold tabular-nums tracking-tight">
@@ -170,10 +170,10 @@ export function RoiCalculatorPage() {
             <div className="lg:col-span-5 order-1 lg:order-2">
               <div className="relative h-full rounded-[1.75rem] border border-white/[0.12] bg-gradient-to-b from-white/[0.09] to-white/[0.03] p-6 sm:p-7 flex flex-col shadow-[0_40px_80px_-40px_rgba(0,0,0,0.65)]">
                 <div className="flex items-center justify-between gap-3">
-                  <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-white/40">
+                  <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-white/45">
                     Your book
                   </p>
-                  <p className="text-[11px] text-white/25 tabular-nums">
+                  <p className="text-[11px] text-white/45 tabular-nums">
                     {formatCompact(result.grossFeeVolume)} fee volume
                   </p>
                 </div>
@@ -186,7 +186,7 @@ export function RoiCalculatorPage() {
                         <label className="text-[13px] font-semibold text-white/90">
                           Matters you price each year
                         </label>
-                        <p className="mt-1 text-[12px] text-white/35 leading-snug">
+                        <p className="mt-1 text-[12px] text-white/45 leading-snug">
                           RFPs and pitches that need a fee
                         </p>
                       </div>
@@ -218,7 +218,7 @@ export function RoiCalculatorPage() {
                         <label className="text-[13px] font-semibold text-white/90">
                           Typical matter fee
                         </label>
-                        <p className="mt-1 text-[12px] text-white/35 leading-snug">
+                        <p className="mt-1 text-[12px] text-white/45 leading-snug">
                           Average agreed fee across that book
                         </p>
                       </div>
@@ -267,7 +267,7 @@ export function RoiCalculatorPage() {
                     <p className="text-[13px] font-semibold text-white/90">
                       How hard do clients push on price?
                     </p>
-                    <p className="mt-1 text-[12px] text-white/35 leading-snug">
+                    <p className="mt-1 text-[12px] text-white/45 leading-snug">
                       Sets how aggressive the estimate is on negotiation and recovery
                     </p>
                     <div
@@ -298,7 +298,7 @@ export function RoiCalculatorPage() {
                         );
                       })}
                     </div>
-                    <p className="mt-3 text-[12px] text-white/40 leading-relaxed min-h-[2.5rem]">
+                    <p className="mt-3 text-[12px] text-white/45 leading-relaxed min-h-[2.5rem]">
                       {profileMeta.line}
                     </p>
                   </div>
@@ -369,13 +369,13 @@ export function RoiCalculatorPage() {
       <section className="relative border-b border-black/[0.06] bg-[#fefefc]">
         <div className={`${MARKETING_SHELL} py-14 sm:py-16`}>
           <div className="max-w-2xl mb-10 sm:mb-12">
-            <p className="text-[11px] font-semibold tracking-[0.28em] uppercase text-[#0a0a0a]/35">
+            <p className="text-[11px] font-semibold tracking-[0.28em] uppercase text-[#0a0a0a]/60">
               How to read the number
             </p>
             <h2 className="mt-3 text-2xl sm:text-3xl font-semibold tracking-tight text-balance">
               Five ways pricing discipline shows up in the P&amp;L.
             </h2>
-            <p className="mt-4 text-[15px] text-[#0a0a0a]/50 leading-relaxed">
+            <p className="mt-4 text-[15px] text-[#0a0a0a]/60 leading-relaxed">
               Each line is an annual estimate for a book like yours. Nothing here is a promise. It is
               a structured way to talk about leakage, realization, and negotiation with partners and
               finance.
@@ -419,18 +419,18 @@ export function RoiCalculatorPage() {
                 key={row.n}
                 className="grid grid-cols-1 sm:grid-cols-12 gap-2 sm:gap-6 py-7 sm:py-8 border-b border-black/[0.08]"
               >
-                <span className="sm:col-span-1 text-[12px] font-semibold tabular-nums tracking-wider text-[#0a0a0a]/25">
+                <span className="sm:col-span-1 text-[12px] font-semibold tabular-nums tracking-wider text-[#0a0a0a]/60">
                   {row.n}
                 </span>
                 <div className="sm:col-span-7">
                   <p className="text-[16px] font-semibold tracking-tight">{row.title}</p>
-                  <p className="mt-1.5 text-[14px] text-[#0a0a0a]/48 leading-relaxed max-w-xl">
+                  <p className="mt-1.5 text-[14px] text-[#0a0a0a]/60 leading-relaxed max-w-xl">
                     {row.body}
                   </p>
                 </div>
                 <p
                   className={`sm:col-span-4 sm:text-right text-[16px] font-semibold tabular-nums ${
-                    row.value < 0 ? "text-[#0a0a0a]/40" : "text-[#0a0a0a]"
+                    row.value < 0 ? "text-[#0a0a0a]/60" : "text-[#0a0a0a]"
                   }`}
                 >
                   {row.value < 0 ? `−${formatUsd(Math.abs(row.value))}` : formatUsd(row.value)}
@@ -479,10 +479,10 @@ export function RoiCalculatorPage() {
       {/* Methodology */}
       <section className="relative">
         <div className="relative mx-auto w-full max-w-[720px] px-5 sm:px-8 lg:px-10 py-14 sm:py-16">
-          <p className="text-[11px] font-semibold tracking-[0.28em] uppercase text-[#0a0a0a]/35">
+          <p className="text-[11px] font-semibold tracking-[0.28em] uppercase text-[#0a0a0a]/60">
             Methodology
           </p>
-          <div className="mt-5 space-y-4 text-[15px] text-[#0a0a0a]/55 leading-relaxed">
+          <div className="mt-5 space-y-4 text-[15px] text-[#0a0a0a]/60 leading-relaxed">
             <p>
               Fee volume is matters times typical fee. We start from a 7% underpricing baseline
               (common when elite work is priced without firm comps) and recover only the share that
@@ -493,7 +493,7 @@ export function RoiCalculatorPage() {
               setting. Lysp cost uses the public ${CREDIT_USD} per credit model. Realization is
               capped at 95%.
             </p>
-            <p className="text-[13px] text-[#0a0a0a]/40">
+            <p className="text-[13px] text-[#0a0a0a]/60">
               Estimates are for internal discussion only. Lysp does not guarantee any particular
               financial outcome. Firm commercial terms are custom.
             </p>

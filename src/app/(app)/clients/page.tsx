@@ -32,7 +32,7 @@ export default function ClientsPage() {
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-ink tracking-tight">Clients</h1>
-          <p className="text-sm text-ink/55 mt-1">Manage institutional and corporate client profiles and configure client portal parameters.</p>
+          <p className="text-sm text-ink/60 mt-1">Manage institutional and corporate client profiles and configure client portal parameters.</p>
         </div>
         <Button
           variant="primary"
@@ -45,7 +45,7 @@ export default function ClientsPage() {
       </div>
 
       <div className="relative max-w-md w-full">
-        <HiSearch className="absolute left-4 top-3 text-ink/40 w-5 h-5" />
+        <HiSearch className="absolute left-4 top-3 text-ink/60 w-5 h-5" />
         <input
           type="text"
           value={searchQuery}
@@ -107,7 +107,7 @@ export default function ClientsPage() {
                   <td className="px-6 py-4">
                     <div className="flex flex-col">
                       <span className="font-semibold text-ink text-xs">{client.contactName}</span>
-                      <span className="text-[10px] text-ink/55 mt-0.5">{client.contactEmail}</span>
+                      <span className="text-[10px] text-ink/60 mt-0.5">{client.contactEmail}</span>
                     </div>
                   </td>
                   <td className="px-6 py-4 text-xs font-bold text-ink/65">{client.country}</td>

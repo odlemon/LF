@@ -56,10 +56,10 @@ export function UsageChart({ data, loading }: UsageChartProps) {
     <div className="animate-fade-in-up rounded-[1.5rem] border border-border/60 bg-surface shadow-[0_1px_3px_rgba(0,0,0,0.03)]" style={{ animationDelay: "240ms" }}>
       <div className="p-5 sm:p-6 pb-0">
         <div className="mb-1">
-          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">Consumption</p>
+          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">Consumption</p>
           <h3 className="mt-1 text-base font-semibold tracking-tight text-ink">Usage by feature</h3>
         </div>
-        <p className="text-xs text-ink/50">
+        <p className="text-xs text-ink/60">
           {data.length === 0
             ? "No usage recorded in this period."
             : `${formatCredits(totalCredits)} credits consumed across ${data.length} feature${data.length === 1 ? "" : "s"}`}
@@ -68,7 +68,7 @@ export function UsageChart({ data, loading }: UsageChartProps) {
 
       {data.length === 0 ? (
         <div className="flex h-[200px] items-center justify-center p-6">
-          <p className="text-sm text-ink/35">Activity will appear here as features are used.</p>
+          <p className="text-sm text-ink/60">Activity will appear here as features are used.</p>
         </div>
       ) : (
         <div className="p-5 sm:p-6 pt-2">
@@ -99,14 +99,14 @@ export function UsageChart({ data, loading }: UsageChartProps) {
                     const row = chartData.find((d) => d.feature === label);
                     return (
                       <div className="rounded-xl border border-border bg-surface/95 backdrop-blur-sm px-3.5 py-2.5 shadow-[0_12px_32px_rgba(0,0,0,0.12)]">
-                        <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/40 mb-1.5">{label}</p>
+                        <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60 mb-1.5">{label}</p>
                         <ul className="space-y-1">
                           <li className="flex items-center justify-between gap-4 text-xs text-ink/80">
-                            <span className="text-ink/45">Credits</span>
+                            <span className="text-ink/60">Credits</span>
                             <span className="font-semibold tabular-nums">{formatCredits(entry.value as number)}</span>
                           </li>
                           <li className="flex items-center justify-between gap-4 text-xs text-ink/80">
-                            <span className="text-ink/45">Share</span>
+                            <span className="text-ink/60">Share</span>
                             <span className="font-semibold tabular-nums">{(row?.pct ?? 0).toFixed(1)}%</span>
                           </li>
                         </ul>

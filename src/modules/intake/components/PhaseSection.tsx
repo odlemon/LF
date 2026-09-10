@@ -113,7 +113,7 @@ export function PhaseSection({
               className="flex-1 min-w-0"
               onClick={(e) => e.stopPropagation()}
             >
-              <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/30 mb-0.5">
+              <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60 mb-0.5">
                 Phase {index + 1}
               </p>
               <InlineEditField
@@ -123,7 +123,7 @@ export function PhaseSection({
                 readOnly={readOnly}
               />
               {phase.description && (
-                <p className="mt-1 text-xs text-ink/45 line-clamp-2">{phase.description}</p>
+                <p className="mt-1 text-xs text-ink/60 line-clamp-2">{phase.description}</p>
               )}
 
               {practiceAreas.length > 0 && (readOnly ? Boolean(practiceAreaName) : true) && (
@@ -156,7 +156,7 @@ export function PhaseSection({
                       className={`inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full border transition-colors cursor-pointer ${
                         practiceAreaName
                           ? "bg-primary/5 border-primary/20 text-primary hover:bg-primary/10"
-                          : "bg-field border-border/60 text-ink/35 hover:text-ink/55"
+                          : "bg-field border-border/60 text-ink/60 hover:text-ink/55"
                       }`}
                     >
                       {practiceAreaName || "Tag practice area"}
@@ -175,7 +175,7 @@ export function PhaseSection({
                   <p className="text-sm font-semibold tabular-nums text-ink leading-none">
                     {Math.round(phaseHours)}
                   </p>
-                  <p className="text-[9px] font-semibold uppercase tracking-wider text-ink/35 mt-0.5">
+                  <p className="text-[9px] font-semibold uppercase tracking-wider text-ink/60 mt-0.5">
                     hours
                   </p>
                 </div>
@@ -184,14 +184,14 @@ export function PhaseSection({
                 <button
                   type="button"
                   onClick={() => onDeletePhase(phase.uid)}
-                  className="p-1.5 text-ink/20 hover:text-red-500 rounded-lg opacity-0 group-hover/phase:opacity-100 transition-all"
+                  className="p-1.5 text-ink/60 hover:text-red-500 rounded-lg opacity-0 group-hover/phase:opacity-100 transition-all"
                   aria-label="Delete phase"
                 >
                   <HiTrash className="w-3.5 h-3.5" />
                 </button>
               )}
               <HiChevronDown
-                className={`w-4 h-4 text-ink/30 transition-transform duration-200 ${
+                className={`w-4 h-4 text-ink/60 transition-transform duration-200 ${
                   expanded ? "rotate-180" : ""
                 }`}
               />
@@ -201,7 +201,7 @@ export function PhaseSection({
           {expanded && (
             <div className="border-t border-border/80">
               {phase.tasks.length === 0 && !showAddTask && (
-                <p className="px-4 py-4 text-xs text-ink/40 italic">No tasks yet</p>
+                <p className="px-4 py-4 text-xs text-ink/60 italic">No tasks yet</p>
               )}
               {phase.tasks.map((task, taskIndex) => (
                 <TaskRow
@@ -271,7 +271,7 @@ export function PhaseSection({
                   <button
                     type="button"
                     onClick={() => setShowAddTask(true)}
-                    className="w-full flex items-center justify-center gap-1.5 py-3 text-[11px] font-semibold uppercase tracking-[0.08em] text-ink/40 hover:text-ink hover:bg-field/50 transition-colors"
+                    className="w-full flex items-center justify-center gap-1.5 py-3 text-[11px] font-semibold uppercase tracking-[0.08em] text-ink/60 hover:text-ink hover:bg-field/50 transition-colors"
                   >
                     <HiPlus className="w-3.5 h-3.5" />
                     Add Task

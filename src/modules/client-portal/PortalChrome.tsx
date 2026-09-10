@@ -32,7 +32,7 @@ export function PortalPageHeader({
     <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
       <div className="min-w-0">
         {eyebrow && (
-          <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/35">
+          <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/60">
             {eyebrow}
           </p>
         )}
@@ -40,7 +40,7 @@ export function PortalPageHeader({
           {title}
         </h1>
         {description && (
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/50">
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/60">
             {description}
           </p>
         )}

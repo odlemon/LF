@@ -31,11 +31,11 @@ export function TransactionTable({ transactions, loading, onRefresh }: Transacti
   if (transactions.length === 0) {
     return (
       <div className="rounded-[1.5rem] border border-border/60 bg-surface p-10 text-center shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
-        <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-field text-ink/20">
+        <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-field text-ink/60">
           <HiReceiptRefund className="h-6 w-6" />
         </div>
-        <p className="text-sm font-medium text-ink/50">No transactions yet</p>
-        <p className="mt-1 text-xs text-ink/35">Activity will appear here as credits are used.</p>
+        <p className="text-sm font-medium text-ink/60">No transactions yet</p>
+        <p className="mt-1 text-xs text-ink/60">Activity will appear here as credits are used.</p>
       </div>
     );
   }
@@ -91,7 +91,7 @@ export function TransactionTable({ transactions, loading, onRefresh }: Transacti
       <div className="flex items-center justify-between border-b border-border/60 px-5 py-4 sm:px-6">
         <div>
           <h3 className="text-sm font-semibold text-ink">Transactions</h3>
-          <p className="text-[11px] text-ink/40 mt-0.5">{transactions.length} record{transactions.length === 1 ? "" : "s"}</p>
+          <p className="text-[11px] text-ink/60 mt-0.5">{transactions.length} record{transactions.length === 1 ? "" : "s"}</p>
         </div>
         {onRefresh && (
           <Button variant="secondary" onClick={onRefresh} className="text-xs py-1.5 px-3">
@@ -104,7 +104,7 @@ export function TransactionTable({ transactions, loading, onRefresh }: Transacti
       <div className="overflow-x-auto">
         <table className="w-full text-left text-sm border-collapse">
           <thead>
-            <tr className="border-b border-border/60 text-[10px] font-bold uppercase tracking-[0.12em] text-ink/35">
+            <tr className="border-b border-border/60 text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">
               <th className="px-5 py-3 font-medium sm:px-6">Date</th>
               <th className="px-3 py-3 font-medium sm:px-6">Type</th>
               <th className="px-3 py-3 font-medium sm:px-6">Description</th>
@@ -144,11 +144,11 @@ export function TransactionTable({ transactions, loading, onRefresh }: Transacti
                   }`}>
                     {tx.type === "TOPUP" ? "+" : tx.type === "USAGE" ? "−" : ""}
                     {Math.abs(tx.amount).toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                    <span className="ml-1 text-[10px] font-medium text-ink/30">cr</span>
+                    <span className="ml-1 text-[10px] font-medium text-ink/60">cr</span>
                   </td>
                   <td className="px-3 py-3.5 text-xs font-semibold tabular-nums text-right text-ink/60 sm:px-6">
                     {tx.balanceAfter.toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                    <span className="ml-1 text-[10px] font-medium text-ink/30">cr</span>
+                    <span className="ml-1 text-[10px] font-medium text-ink/60">cr</span>
                   </td>
                 </tr>
               );

@@ -54,7 +54,7 @@ export function DataHandlingPanel({ config }: { config: AiProviderConfig | null 
     <section className="rounded-2xl border border-border bg-surface">
       <header className="border-b border-border px-5 py-4">
         <h2 className="text-sm font-bold text-ink">Data handling</h2>
-        <p className="mt-0.5 text-[12px] text-ink/50">
+        <p className="mt-0.5 text-[12px] text-ink/60">
           Read from the deployment currently in use, not from a fixed statement.
         </p>
       </header>
@@ -62,7 +62,7 @@ export function DataHandlingPanel({ config }: { config: AiProviderConfig | null 
       <dl className="divide-y divide-border">
         {rows.map((row) => (
           <div key={row.label} className="grid grid-cols-1 gap-1 px-5 py-3.5 sm:grid-cols-3 sm:gap-4">
-            <dt className="text-[10px] font-bold uppercase tracking-wider text-ink/40 sm:pt-0.5">
+            <dt className="text-[10px] font-bold uppercase tracking-wider text-ink/60 sm:pt-0.5">
               {row.label}
             </dt>
             <dd className="text-[13px] leading-relaxed text-ink/70 sm:col-span-2">{row.value}</dd>

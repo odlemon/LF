@@ -81,7 +81,7 @@ export function PeriodFilter({ period, onChange, className = "" }: PeriodFilterP
         />
       </div>
       <div className="w-40">
-        <label className="text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1 block mb-1.5">
+        <label className="text-[10px] font-bold text-ink/60 uppercase tracking-wider pl-1 block mb-1.5">
           From
         </label>
         <DatePicker
@@ -91,7 +91,7 @@ export function PeriodFilter({ period, onChange, className = "" }: PeriodFilterP
         />
       </div>
       <div className="w-40">
-        <label className="text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1 block mb-1.5">
+        <label className="text-[10px] font-bold text-ink/60 uppercase tracking-wider pl-1 block mb-1.5">
           To
         </label>
         <DatePicker

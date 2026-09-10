@@ -72,7 +72,7 @@ export function Select({
   return (
     <div className={`flex flex-col gap-1.5 w-full relative ${className}`} ref={dropdownRef}>
       {label && (
-        <label className="text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1 select-none">
+        <label className="text-[10px] font-bold text-ink/60 uppercase tracking-wider pl-1 select-none">
           {label} {required && <span className="text-red-600 dark:text-red-400">*</span>}
         </label>
       )}
@@ -93,11 +93,11 @@ export function Select({
             : "border-border hover:border-ink/20"
         } text-ink/90 transition-all focus:outline-none focus:ring-2 disabled:opacity-50 disabled:bg-field cursor-pointer`}
       >
-        <span className={selectedOption ? "text-ink/90" : `text-ink/40 ${marketing ? "" : "font-semibold"}`}>
+        <span className={selectedOption ? "text-ink/90" : `text-ink/60 ${marketing ? "" : "font-semibold"}`}>
           {selectedOption ? selectedOption.label : placeholder}
         </span>
         <ChevronDownIcon
-          className={`w-4 h-4 text-ink/40 transition-transform duration-200 shrink-0 ${
+          className={`w-4 h-4 text-ink/60 transition-transform duration-200 shrink-0 ${
             isOpen ? "transform rotate-180" : ""
           }`}
         />
@@ -108,7 +108,7 @@ export function Select({
         <div className="absolute left-0 right-0 top-full mt-2 bg-surface border border-border rounded-2xl shadow-xl z-50 overflow-hidden max-h-56 overflow-y-auto rates-scrollable animate-fade-in-up">
           <div className="py-1">
             {options.length === 0 ? (
-              <div className="px-5 py-3 text-xs font-semibold text-ink/40 text-center">
+              <div className="px-5 py-3 text-xs font-semibold text-ink/60 text-center">
                 No options available
               </div>
             ) : (
@@ -130,7 +130,7 @@ export function Select({
                     <div className="flex flex-col gap-0.5">
                       <span>{opt.label}</span>
                       {opt.description && (
-                        <span className="text-[10px] text-ink/40 font-medium">
+                        <span className="text-[10px] text-ink/60 font-medium">
                           {opt.description}
                         </span>
                       )}

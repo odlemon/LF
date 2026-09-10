@@ -65,7 +65,7 @@ export function PracticeAreaFormModal({
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 text-ink/40 hover:text-ink/65 p-1 rounded-lg hover:bg-field transition-colors"
+          className="absolute top-4 right-4 text-ink/60 hover:text-ink/65 p-1 rounded-lg hover:bg-field transition-colors"
         >
           <HiX className="w-5 h-5" />
         </button>
@@ -107,7 +107,7 @@ export function PracticeAreaFormModal({
               required
             />
             {!practiceArea && (
-              <span className="text-xs text-ink/55 mt-0.5">
+              <span className="text-xs text-ink/60 mt-0.5">
                 Short code, e.g. MA for Mergers and Acquisitions. Cannot be changed after creation.
               </span>
             )}

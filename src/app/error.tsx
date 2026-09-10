@@ -27,7 +27,7 @@ export default function GlobalError({
   return (
     <main className="min-h-screen bg-[#fefefc] text-[#0a0a0a] flex items-center justify-center px-6">
       <div className="w-full max-w-lg text-center">
-        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#0a0a0a]/40">
+        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#0a0a0a]/60">
           Something went wrong
         </p>
         <h1 className="mt-4 text-3xl sm:text-4xl font-semibold tracking-tight">
@@ -55,7 +55,7 @@ export default function GlobalError({
         </div>
 
         {error.digest && (
-          <p className="mt-8 text-[13px] text-[#0a0a0a]/45">
+          <p className="mt-8 text-[13px] text-[#0a0a0a]/60">
             Reference <span className="font-mono text-[#0a0a0a]/70">{error.digest}</span> — quote
             this to{" "}
             <a href="mailto:support@lysp.ai" className="underline underline-offset-4 hover:text-[#0a0a0a]">

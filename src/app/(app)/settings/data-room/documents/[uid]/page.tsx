@@ -113,7 +113,7 @@ export default function DocumentDetailPage() {
       <div className="flex items-center gap-3">
         <Link
           href="/settings/data-room"
-          className="text-xs font-bold text-ink/40 hover:text-primary flex items-center gap-1 w-fit transition-colors py-1.5 -my-1.5"
+          className="text-xs font-bold text-ink/60 hover:text-primary flex items-center gap-1 w-fit transition-colors py-1.5 -my-1.5"
         >
           <HiArrowSmLeft className="w-4 h-4" /> Data Room
         </Link>
@@ -122,7 +122,7 @@ export default function DocumentDetailPage() {
             <span className="text-gray-300 text-xs">/</span>
             <Link
               href={`/settings/data-room/datasets/${document.datasetUid}`}
-              className="text-xs font-bold text-ink/40 hover:text-primary flex items-center gap-1 transition-colors py-1.5 -my-1.5 rounded"
+              className="text-xs font-bold text-ink/60 hover:text-primary flex items-center gap-1 transition-colors py-1.5 -my-1.5 rounded"
             >
               <HiDatabase className="w-3.5 h-3.5" /> Dataset
             </Link>
@@ -215,33 +215,33 @@ export default function DocumentDetailPage() {
             </div>
 
             {/* Metadata Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mt-6 text-xs font-semibold text-ink/55">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mt-6 text-xs font-semibold text-ink/60">
               <div>
-                <span className="block text-[9px] font-bold text-ink/40 uppercase tracking-wider mb-0.5">
+                <span className="block text-[9px] font-bold text-ink/60 uppercase tracking-wider mb-0.5">
                   File Type
                 </span>
                 <span className="text-ink/90 font-bold">{document.fileType}</span>
               </div>
               <div>
-                <span className="block text-[9px] font-bold text-ink/40 uppercase tracking-wider mb-0.5">
+                <span className="block text-[9px] font-bold text-ink/60 uppercase tracking-wider mb-0.5">
                   File Size
                 </span>
                 <span className="text-ink/90 font-bold">{formatFileSize(document.fileSizeBytes)}</span>
               </div>
               <div>
-                <span className="block text-[9px] font-bold text-ink/40 uppercase tracking-wider mb-0.5">
+                <span className="block text-[9px] font-bold text-ink/60 uppercase tracking-wider mb-0.5">
                   Records Extracted
                 </span>
                 <span className="text-ink font-extrabold text-[13px]">{document.recordsExtracted}</span>
               </div>
               <div>
-                <span className="block text-[9px] font-bold text-ink/40 uppercase tracking-wider mb-0.5">
+                <span className="block text-[9px] font-bold text-ink/60 uppercase tracking-wider mb-0.5">
                   Rows Attempted
                 </span>
                 <span className="text-ink/90 font-bold">{document.rowsAttempted}</span>
               </div>
               <div>
-                <span className="block text-[9px] font-bold text-ink/40 uppercase tracking-wider mb-0.5">
+                <span className="block text-[9px] font-bold text-ink/60 uppercase tracking-wider mb-0.5">
                   Rows Failed
                 </span>
                 <span className={`font-bold ${document.rowsFailed > 0 ? "text-red-600" : "text-ink/90"} dark:text-red-400`}>
@@ -249,19 +249,19 @@ export default function DocumentDetailPage() {
                 </span>
               </div>
               <div>
-                <span className="block text-[9px] font-bold text-ink/40 uppercase tracking-wider mb-0.5">
+                <span className="block text-[9px] font-bold text-ink/60 uppercase tracking-wider mb-0.5">
                   Retry Count
                 </span>
                 <span className="text-ink/90 font-bold">{document.retryCount} / 3</span>
               </div>
               <div>
-                <span className="block text-[9px] font-bold text-ink/40 uppercase tracking-wider mb-0.5">
+                <span className="block text-[9px] font-bold text-ink/60 uppercase tracking-wider mb-0.5">
                   Column Mapping
                 </span>
                 <MappingStatusBadge status={document.columnMappingStatus} />
               </div>
               <div>
-                <span className="block text-[9px] font-bold text-ink/40 uppercase tracking-wider mb-0.5">
+                <span className="block text-[9px] font-bold text-ink/60 uppercase tracking-wider mb-0.5">
                   Dataset
                 </span>
                 <Link
@@ -272,14 +272,14 @@ export default function DocumentDetailPage() {
                 </Link>
               </div>
               <div>
-                <span className="block text-[9px] font-bold text-ink/40 uppercase tracking-wider mb-0.5">
+                <span className="block text-[9px] font-bold text-ink/60 uppercase tracking-wider mb-0.5">
                   Uploaded
                 </span>
                 <span className="text-ink/90 font-bold">{formatDate(document.createdAt)}</span>
               </div>
               {document.processedAt && (
                 <div>
-                  <span className="block text-[9px] font-bold text-ink/40 uppercase tracking-wider mb-0.5">
+                  <span className="block text-[9px] font-bold text-ink/60 uppercase tracking-wider mb-0.5">
                     Processed
                   </span>
                   <span className="text-ink/90 font-bold">{formatDate(document.processedAt)}</span>
@@ -303,7 +303,7 @@ export default function DocumentDetailPage() {
               className={`px-5 py-3 text-xs font-bold rounded-t-lg transition-all cursor-pointer ${
                 activeTab === "mapping"
                   ? "text-primary bg-surface border border-border border-b-white -mb-px shadow-sm"
-                  : "text-ink/55 hover:text-ink/80 hover:bg-field"
+                  : "text-ink/60 hover:text-ink/80 hover:bg-field"
               }`}
             >
               <HiDatabase className="w-4 h-4 inline mr-1.5 -mt-0.5" />
@@ -318,7 +318,7 @@ export default function DocumentDetailPage() {
               className={`px-5 py-3 text-xs font-bold rounded-t-lg transition-all cursor-pointer ${
                 activeTab === "logs"
                   ? "text-primary bg-surface border border-border border-b-white -mb-px shadow-sm"
-                  : "text-ink/55 hover:text-ink/80 hover:bg-field"
+                  : "text-ink/60 hover:text-ink/80 hover:bg-field"
               }`}
             >
               <HiCalendar className="w-4 h-4 inline mr-1.5 -mt-0.5" />
@@ -338,7 +338,7 @@ export default function DocumentDetailPage() {
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <h2 className="text-sm font-extrabold text-ink">Column Mapping</h2>
-                  <p className="text-xs text-ink/55 mt-0.5">
+                  <p className="text-xs text-ink/60 mt-0.5">
                     Maps CSV/Excel headers to system fields. {isFailed && "Fix mismatches and re-process."}
                   </p>
                 </div>
@@ -352,13 +352,13 @@ export default function DocumentDetailPage() {
                   <table className="min-w-full divide-y divide-gray-100 text-xs">
                     <thead className="bg-field">
                       <tr>
-                        <th className="px-4 py-3 text-left font-bold text-ink/55 uppercase tracking-wider">
+                        <th className="px-4 py-3 text-left font-bold text-ink/60 uppercase tracking-wider">
                           System Field
                         </th>
-                        <th className="px-4 py-3 text-left font-bold text-ink/55 uppercase tracking-wider">
+                        <th className="px-4 py-3 text-left font-bold text-ink/60 uppercase tracking-wider">
                           File Column Header
                         </th>
-                        <th className="px-4 py-3 text-left font-bold text-ink/55 uppercase tracking-wider w-24">
+                        <th className="px-4 py-3 text-left font-bold text-ink/60 uppercase tracking-wider w-24">
                           Status
                         </th>
                       </tr>
@@ -393,7 +393,7 @@ export default function DocumentDetailPage() {
                   </table>
                 </div>
               ) : (
-                <div className="text-center py-10 text-ink/40 font-semibold flex flex-col items-center gap-2 bg-field/50 rounded-2xl border border-dashed border-border">
+                <div className="text-center py-10 text-ink/60 font-semibold flex flex-col items-center gap-2 bg-field/50 rounded-2xl border border-dashed border-border">
                   <HiDatabase className="w-8 h-8 text-gray-300" />
                   No column mapping data available.
                 </div>
@@ -413,7 +413,7 @@ export default function DocumentDetailPage() {
                   <div className="h-32 bg-canvas rounded-2xl" />
                 </div>
               ) : !logs || logs.length === 0 ? (
-                <div className="text-center py-10 text-ink/40 font-semibold flex flex-col items-center gap-2 bg-field/50 rounded-2xl border border-dashed border-border">
+                <div className="text-center py-10 text-ink/60 font-semibold flex flex-col items-center gap-2 bg-field/50 rounded-2xl border border-dashed border-border">
                   <HiExclamation className="w-8 h-8 text-gray-300" />
                   No processing attempts logged for this file yet.
                 </div>
@@ -444,13 +444,13 @@ export default function DocumentDetailPage() {
                       {/* Stats Row */}
                       <div className="grid grid-cols-3 gap-3">
                         <div className="bg-field/50 border border-border rounded-2xl p-4 text-center">
-                          <span className="text-[10px] font-bold text-ink/40 uppercase tracking-wider block mb-1">
+                          <span className="text-[10px] font-bold text-ink/60 uppercase tracking-wider block mb-1">
                             Status
                           </span>
                           <DocumentStatusBadge status={activeAttempt.status} />
                         </div>
                         <div className="bg-field/50 border border-border rounded-2xl p-4 text-center">
-                          <span className="text-[10px] font-bold text-ink/40 uppercase tracking-wider block mb-1">
+                          <span className="text-[10px] font-bold text-ink/60 uppercase tracking-wider block mb-1">
                             Rows Parsed
                           </span>
                           <span className="text-base font-extrabold text-ink">
@@ -458,7 +458,7 @@ export default function DocumentDetailPage() {
                           </span>
                         </div>
                         <div className="bg-field/50 border border-border rounded-2xl p-4 text-center">
-                          <span className="text-[10px] font-bold text-ink/40 uppercase tracking-wider block mb-1">
+                          <span className="text-[10px] font-bold text-ink/60 uppercase tracking-wider block mb-1">
                             Rows Failed
                           </span>
                           <span className={`text-base font-extrabold ${activeAttempt.rowsFailed > 0 ? "text-red-600" : "text-ink"} dark:text-red-400`}>
@@ -470,7 +470,7 @@ export default function DocumentDetailPage() {
                       {/* Dates & Error Summary */}
                       <div className="flex flex-col gap-2.5 p-4 bg-field border border-border/50 rounded-2xl">
                         <div className="flex items-center gap-2 text-xs text-ink/65 flex-wrap">
-                          <HiCalendar className="w-4 h-4 text-ink/40" />
+                          <HiCalendar className="w-4 h-4 text-ink/60" />
                           <span className="font-semibold">
                             Started: {formatTimestamp(activeAttempt.startedAt)}
                           </span>
@@ -491,17 +491,17 @@ export default function DocumentDetailPage() {
 
                       {/* Column Mapping Used */}
                       <div className="flex flex-col gap-2">
-                        <span className="text-xs font-bold text-ink/55 uppercase tracking-wider flex items-center gap-1.5">
-                          <HiDatabase className="w-4 h-4 text-ink/40" /> Column Mapping Used
+                        <span className="text-xs font-bold text-ink/60 uppercase tracking-wider flex items-center gap-1.5">
+                          <HiDatabase className="w-4 h-4 text-ink/60" /> Column Mapping Used
                         </span>
                         <div className="border border-border/80 rounded-2xl overflow-hidden bg-surface shadow-sm">
                           <table className="min-w-full divide-y divide-gray-100 text-xs">
                             <thead className="bg-field">
                               <tr>
-                                <th className="px-4 py-2.5 text-left font-bold text-ink/55 uppercase tracking-wider">
+                                <th className="px-4 py-2.5 text-left font-bold text-ink/60 uppercase tracking-wider">
                                   System Field
                                 </th>
-                                <th className="px-4 py-2.5 text-left font-bold text-ink/55 uppercase tracking-wider">
+                                <th className="px-4 py-2.5 text-left font-bold text-ink/60 uppercase tracking-wider">
                                   File Column
                                 </th>
                               </tr>
@@ -524,7 +524,7 @@ export default function DocumentDetailPage() {
                                 ))
                               ) : (
                                 <tr>
-                                  <td colSpan={2} className="px-4 py-3 text-center text-ink/40">
+                                  <td colSpan={2} className="px-4 py-3 text-center text-ink/60">
                                     No mapping template detected.
                                   </td>
                                 </tr>
@@ -537,7 +537,7 @@ export default function DocumentDetailPage() {
                       {/* Row Errors */}
                       {activeAttempt.rowErrors && activeAttempt.rowErrors.length > 0 && (
                         <div className="flex flex-col gap-2">
-                          <span className="text-xs font-bold text-ink/55 uppercase tracking-wider text-red-700 dark:text-red-400">
+                          <span className="text-xs font-bold text-ink/60 uppercase tracking-wider text-red-700 dark:text-red-400">
                             Row Error Logs ({activeAttempt.rowErrors.length} errors)
                           </span>
                           <div className="border border-red-100 rounded-2xl overflow-hidden bg-surface shadow-sm max-h-56 overflow-y-auto rates-scrollable pr-1">

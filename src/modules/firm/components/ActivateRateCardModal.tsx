@@ -43,7 +43,7 @@ export function ActivateRateCardModal({
         <div className="bg-surface rounded-xl max-w-sm w-full shadow-2xl p-6 relative animate-fade-in-up z-50 border border-red-100">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-ink/40 hover:text-ink/65 transition-colors"
+          className="absolute top-4 right-4 text-ink/60 hover:text-ink/65 transition-colors"
         >
           <HiX size={20} />
         </button>

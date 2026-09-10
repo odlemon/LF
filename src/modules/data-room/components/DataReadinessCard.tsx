@@ -38,7 +38,7 @@ export function DataReadinessCard({ summary }: DataReadinessCardProps) {
       break;
     case "HIGH":
       badgeColor = "bg-hover border-border text-ink";
-      iconColor = "text-ink/55";
+      iconColor = "text-ink/60";
       title = "Data Ready";
       description = "More than 50 historical matters ingested. Pricing recommendations are fully data-driven.";
       Icon = HiShieldCheck;
@@ -66,7 +66,7 @@ export function DataReadinessCard({ summary }: DataReadinessCardProps) {
       </div>
 
       <div className="flex flex-col gap-2 w-full md:w-64 shrink-0">
-        <div className="flex items-center justify-between text-xs font-bold text-ink/40 uppercase tracking-wider">
+        <div className="flex items-center justify-between text-xs font-bold text-ink/60 uppercase tracking-wider">
           <span>Ingestion Goal</span>
           <span className="text-ink">{matters} / 50+ Matters</span>
         </div>
@@ -85,7 +85,7 @@ export function DataReadinessCard({ summary }: DataReadinessCardProps) {
           />
         </div>
 
-        <div className="flex items-center justify-between text-[10px] font-bold text-ink/40 uppercase">
+        <div className="flex items-center justify-between text-[10px] font-bold text-ink/60 uppercase">
           <span>0 (Low)</span>
           <span>10 (Mid)</span>
           <span>50 (High)</span>

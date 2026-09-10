@@ -56,7 +56,7 @@ export function AuditTrailPanel({
     <div className="flex flex-col gap-4 animate-fade-in w-full">
       <div className="flex items-center justify-between gap-3 border-b border-border pb-2.5">
         <h3 className="text-sm font-bold text-ink flex items-center gap-1.5">
-          <HiOutlineClock className="w-4 h-4 text-ink/55" />
+          <HiOutlineClock className="w-4 h-4 text-ink/60" />
           {title}
         </h3>
       </div>
@@ -93,7 +93,7 @@ export function AuditTrailPanel({
                     </strong>
                     {sentence}
                   </div>
-                  <span className="text-[10px] text-ink/40 mt-1 block">
+                  <span className="text-[10px] text-ink/60 mt-1 block">
                     {getRelativeTime(event.createdAt)}
                   </span>
                 </div>

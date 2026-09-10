@@ -322,7 +322,7 @@ function PricingRequestWorkspaceLoaded({
           <button
             type="button"
             onClick={() => router.push("/pricing-requests")}
-            className="p-2 text-ink/50 hover:text-ink hover:bg-hover rounded-lg shrink-0 transition-colors"
+            className="p-2 text-ink/60 hover:text-ink hover:bg-hover rounded-lg shrink-0 transition-colors"
             aria-label="Back"
           >
             <HiArrowLeft className="w-5 h-5" />
@@ -331,7 +331,7 @@ function PricingRequestWorkspaceLoaded({
             <h1 className="text-base font-semibold text-ink truncate tracking-tight">
               {request.matterTitle}
             </h1>
-            <p className="text-xs text-ink/50 truncate mt-0.5">{clientName}</p>
+            <p className="text-xs text-ink/60 truncate mt-0.5">{clientName}</p>
           </div>
         </div>
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
@@ -441,7 +441,7 @@ function PricingRequestWorkspaceLoaded({
         <button
           type="button"
           onClick={() => setScopeOpen(true)}
-          className={`absolute right-4 top-1/2 z-10 -translate-y-1/2 flex flex-col items-center gap-2 px-2.5 py-4 rounded-2xl border border-border bg-surface shadow-[0_8px_30px_rgba(10,10,10,0.08)] text-ink/55 hover:text-ink hover:border-ink/20 transition-all duration-500 ease-out ${
+          className={`absolute right-4 top-1/2 z-10 -translate-y-1/2 flex flex-col items-center gap-2 px-2.5 py-4 rounded-2xl border border-border bg-surface shadow-[0_8px_30px_rgba(10,10,10,0.08)] text-ink/60 hover:text-ink hover:border-ink/20 transition-all duration-500 ease-out ${
             scopeOpen
               ? "opacity-0 translate-x-4 pointer-events-none"
               : "opacity-100 translate-x-0 delay-200"

@@ -83,7 +83,7 @@ export function RateCardEntriesSlideOver({
       <div className="w-full max-w-lg bg-surface h-full shadow-2xl flex flex-col transition-transform duration-300 translate-x-0">
         <div className="p-6 border-b border-border flex items-center justify-between">
           <div>
-            <span className="text-xs font-semibold text-ink/55 uppercase tracking-wider block mb-1">
+            <span className="text-xs font-semibold text-ink/60 uppercase tracking-wider block mb-1">
               Rate Card Entries ({rateCard.currency})
             </span>
             <h3 className="text-lg font-bold text-ink leading-tight">
@@ -92,7 +92,7 @@ export function RateCardEntriesSlideOver({
           </div>
           <button
             onClick={onClose}
-            className="p-2 text-ink/40 hover:text-ink/65 rounded-lg hover:bg-field transition-colors"
+            className="p-2 text-ink/60 hover:text-ink/65 rounded-lg hover:bg-field transition-colors"
           >
             <HiX className="w-5 h-5" />
           </button>
@@ -110,7 +110,7 @@ export function RateCardEntriesSlideOver({
                 <div className="h-10 bg-field rounded-xl animate-pulse" />
               </div>
             ) : entries.length === 0 ? (
-              <div className="text-center py-8 bg-field rounded-xl border border-dashed border-border text-sm text-ink/55">
+              <div className="text-center py-8 bg-field rounded-xl border border-dashed border-border text-sm text-ink/60">
                 No rates added to this card yet.
               </div>
             ) : (
@@ -197,7 +197,7 @@ export function RateCardEntriesSlideOver({
                     Hourly Rate ({rateCard.currency})
                   </label>
                   <div className="relative">
-                    <span className="absolute left-4 top-2.5 text-ink/40 text-sm font-medium">
+                    <span className="absolute left-4 top-2.5 text-ink/60 text-sm font-medium">
                       {rateCard.currency === "GBP" ? "£" : rateCard.currency === "USD" ? "$" : rateCard.currency === "EUR" ? "€" : rateCard.currency}
                     </span>
                     <input

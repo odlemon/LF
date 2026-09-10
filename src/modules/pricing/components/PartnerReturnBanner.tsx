@@ -46,7 +46,7 @@ export function PartnerReturnBanner({
             {isCorrection ? "Action required" : "Partner request"}
           </span>
           {partnerName && (
-            <span className="text-[11px] text-ink/45">
+            <span className="text-[11px] text-ink/60">
               from {partnerName}
               {decidedAt
                 ? ` · ${new Date(decidedAt).toLocaleString()}`
@@ -63,7 +63,7 @@ export function PartnerReturnBanner({
           {comment}
         </blockquote>
         {isCorrection && (
-          <p className="mt-3 text-[11px] text-ink/45 leading-relaxed">
+          <p className="mt-3 text-[11px] text-ink/60 leading-relaxed">
             Update the economics below, then resubmit — it goes straight back to
             the same partner.
           </p>

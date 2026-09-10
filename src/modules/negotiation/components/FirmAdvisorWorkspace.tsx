@@ -91,7 +91,7 @@ export function FirmAdvisorWorkspace({
           L
         </span>
         <div>
-          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
             Negotiation advisor
           </p>
           <p className="text-sm font-semibold tracking-tight text-ink">
@@ -107,9 +107,9 @@ export function FirmAdvisorWorkspace({
           </div>
         ) : messages.length === 0 ? (
           <div className="flex flex-col items-center py-8 text-center">
-            <HiOutlineSparkles className="h-6 w-6 text-ink/40" />
+            <HiOutlineSparkles className="h-6 w-6 text-ink/60" />
             <p className="mt-3 text-sm font-semibold text-ink">Strategy, not scripts</p>
-            <p className="mt-1 max-w-md text-xs text-ink/45">
+            <p className="mt-1 max-w-md text-xs text-ink/60">
               Ask about margin impact, counters, or say submit to send rates to the client.
             </p>
             <div className="mt-4 flex flex-wrap justify-center gap-2">
@@ -130,7 +130,7 @@ export function FirmAdvisorWorkspace({
             {messages.map((msg) => {
               if (msg.role === "tool") {
                 return (
-                  <p key={msg.id} className="text-[11px] font-semibold uppercase tracking-wide text-ink/35">
+                  <p key={msg.id} className="text-[11px] font-semibold uppercase tracking-wide text-ink/60">
                     {msg.content}
                   </p>
                 );
@@ -151,7 +151,7 @@ export function FirmAdvisorWorkspace({
                       msg.content ? (
                         <MarkdownContent content={msg.content} />
                       ) : (
-                        <p className="text-ink/45">{msg.streaming ? "Thinking…" : ""}</p>
+                        <p className="text-ink/60">{msg.streaming ? "Thinking…" : ""}</p>
                       )
                     ) : (
                       <p className="whitespace-pre-wrap">{msg.content}</p>
@@ -234,7 +234,7 @@ export function FirmAdvisorWorkspace({
             </Button>
           )}
         </div>
-        <p className="mt-2 text-center text-[10px] text-ink/30">
+        <p className="mt-2 text-center text-[10px] text-ink/60">
           {open
             ? "Say submit to send a counter to the client."
             : "This negotiation is closed."}

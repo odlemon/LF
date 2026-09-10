@@ -265,7 +265,7 @@ export default function PricingWorkspacePage() {
           <button
             type="button"
             onClick={() => router.push(`/pricing-requests/${uid}`)}
-            className="p-2 text-ink/50 hover:text-ink hover:bg-hover rounded-lg shrink-0 transition-colors"
+            className="p-2 text-ink/60 hover:text-ink hover:bg-hover rounded-lg shrink-0 transition-colors"
             aria-label="Back to intake"
           >
             <HiArrowLeft className="w-5 h-5" />
@@ -274,7 +274,7 @@ export default function PricingWorkspacePage() {
             <h1 className="text-base font-semibold text-ink truncate tracking-tight">
               {matterTitle}
             </h1>
-            <p className="text-xs text-ink/50 truncate mt-0.5">{clientName}</p>
+            <p className="text-xs text-ink/60 truncate mt-0.5">{clientName}</p>
           </div>
         </div>
         <div className="flex items-center gap-2.5 shrink-0 flex-wrap justify-end">
@@ -299,7 +299,7 @@ export default function PricingWorkspacePage() {
             <ScenarioStageRail status={stageScenario.status} />
             {isAwaitingDecision(stageScenario.status) &&
               stageScenario.assignedPartnerName && (
-                <p className="text-[11px] text-ink/45">
+                <p className="text-[11px] text-ink/60">
                   With {stageScenario.assignedPartnerName}
                   {stageScenario.submittedAt
                     ? ` · submitted ${new Date(stageScenario.submittedAt).toLocaleString()}`
@@ -316,7 +316,7 @@ export default function PricingWorkspacePage() {
             {(stageScenario.status === "APPROVED" ||
               stageScenario.status === "REJECTED") &&
               stageScenario.decidedByEmail && (
-                <p className="text-[11px] text-ink/45">
+                <p className="text-[11px] text-ink/60">
                   Decided by {stageScenario.decidedByEmail}
                   {stageScenario.decidedAt
                     ? ` · ${new Date(stageScenario.decidedAt).toLocaleString()}`
@@ -330,7 +330,7 @@ export default function PricingWorkspacePage() {
           {canSendToClient && preferred && (
             <div className="border-t border-border/60 bg-gradient-to-r from-field/40 via-surface to-surface px-6 py-3 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
               <div className="min-w-0">
-                <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35">
+                <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
                   Next step
                 </p>
                 <p className="mt-0.5 text-sm font-semibold text-ink tracking-tight">
@@ -366,7 +366,7 @@ export default function PricingWorkspacePage() {
           <div className="relative flex-1 flex min-h-0 overflow-hidden">
             <div className="w-full lg:w-[46%] xl:w-[44%] overflow-y-auto rates-scrollable border-r border-border/60 p-5 sm:p-6">
               <div className="mb-5">
-                <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35">
+                <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
                   Compare
                 </p>
                 <div className="mt-1 flex items-end justify-between gap-3">
@@ -374,7 +374,7 @@ export default function PricingWorkspacePage() {
                     {workspace.scenarios.length} scenarios
                   </h2>
                   {lowestFee != null && (
-                    <p className="text-xs text-ink/45 tabular-nums shrink-0 pb-0.5">
+                    <p className="text-xs text-ink/60 tabular-nums shrink-0 pb-0.5">
                       From {formatMoney(lowestFee, currency)}
                     </p>
                   )}
@@ -388,7 +388,7 @@ export default function PricingWorkspacePage() {
                       className={`shrink-0 rounded-full px-3 py-1.5 text-[11px] font-semibold tracking-tight transition-colors ${
                         workspace.selectedUid === s.id
                           ? "bg-ink text-on-primary"
-                          : "bg-field text-ink/55 hover:text-ink"
+                          : "bg-field text-ink/60 hover:text-ink"
                       }`}
                     >
                       {PRICING_MODEL_LABELS[s.pricingModel] ?? s.pricingModel}
@@ -422,7 +422,7 @@ export default function PricingWorkspacePage() {
           </div>
 
           <div className="relative shrink-0 border-t border-border bg-surface/95 backdrop-blur-sm px-6 py-3.5 flex flex-wrap items-center justify-between gap-3">
-            <p className="text-xs text-ink/45 max-w-md">{footerHint}</p>
+            <p className="text-xs text-ink/60 max-w-md">{footerHint}</p>
             <div className="flex items-center gap-2 flex-wrap justify-end">
               {canDecide && preferred ? (
                 <>

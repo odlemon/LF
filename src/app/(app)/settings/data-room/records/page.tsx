@@ -12,7 +12,7 @@ export default function StandaloneRecordsPage() {
       <div>
         <Link
           href="/settings/data-room"
-          className="text-xs font-bold text-ink/40 hover:text-primary flex items-center gap-1 w-fit transition-colors py-1.5 -my-1.5 rounded"
+          className="text-xs font-bold text-ink/60 hover:text-primary flex items-center gap-1 w-fit transition-colors py-1.5 -my-1.5 rounded"
         >
           <HiArrowSmLeft className="w-4 h-4" /> Back to Data Room Overview
         </Link>
@@ -23,7 +23,7 @@ export default function StandaloneRecordsPage() {
         <h1 className="text-2xl font-bold text-ink tracking-tight flex items-center gap-2">
           <HiClipboardList className="w-7 h-7 text-primary" /> Pricing Records Explorer
         </h1>
-        <p className="text-sm text-ink/55 mt-1">
+        <p className="text-sm text-ink/60 mt-1">
           Audit and browse through all structured items extracted from files ingested into your firm&apos;s Data Room.
         </p>
       </div>

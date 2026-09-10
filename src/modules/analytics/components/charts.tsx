@@ -37,7 +37,7 @@ function ChartTooltip({ active, payload, label, formatter }: TipProps) {
   return (
     <div className="rounded-xl border border-border bg-surface px-3.5 py-2.5 shadow-[0_12px_32px_rgba(0,0,0,0.12)]">
       {label != null && label !== "" && (
-        <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/40 mb-1.5">
+        <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60 mb-1.5">
           {label}
         </p>
       )}
@@ -48,7 +48,7 @@ function ChartTooltip({ active, payload, label, formatter }: TipProps) {
               className="h-1.5 w-1.5 rounded-full shrink-0"
               style={{ background: entry.color || INK }}
             />
-            <span className="text-ink/45">{entry.name}</span>
+            <span className="text-ink/60">{entry.name}</span>
             <span className="font-semibold tabular-nums ml-auto pl-3">
               {formatter
                 ? formatter(entry)
@@ -66,7 +66,7 @@ function ChartTooltip({ active, payload, label, formatter }: TipProps) {
 function ChartHeader({ eyebrow, title }: { eyebrow: string; title: string }) {
   return (
     <div className="mb-4">
-      <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">{eyebrow}</p>
+      <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">{eyebrow}</p>
       <h3 className="mt-1 text-base font-semibold text-ink tracking-tight">{title}</h3>
     </div>
   );
@@ -154,7 +154,7 @@ export function FeesMarginTrendChart({ data }: { data: MonthlyPoint[] }) {
           </ComposedChart>
         </ResponsiveContainer>
       </div>
-      <p className="mt-2 text-[11px] text-ink/35">Bars in £000s · dashed line = margin %</p>
+      <p className="mt-2 text-[11px] text-ink/60">Bars in £000s · dashed line = margin %</p>
     </div>
   );
 }
@@ -244,16 +244,16 @@ export function WinRateBars({ data }: { data: WinRateRow[] }) {
               const row = payload[0]?.payload as WinRateRow | undefined;
               return (
                 <div className="rounded-xl border border-border bg-surface px-3.5 py-2.5 shadow-[0_12px_32px_rgba(0,0,0,0.12)]">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/40 mb-1.5">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60 mb-1.5">
                     {row?.dimensionValue}
                   </p>
                   <ul className="space-y-1 text-xs text-ink/80">
                     <li className="flex justify-between gap-6">
-                      <span className="text-ink/45">Win rate</span>
+                      <span className="text-ink/60">Win rate</span>
                       <span className="font-semibold tabular-nums">{Number(row?.winRatePct ?? 0).toFixed(1)}%</span>
                     </li>
                     <li className="flex justify-between gap-6">
-                      <span className="text-ink/45">Won / lost</span>
+                      <span className="text-ink/60">Won / lost</span>
                       <span className="font-semibold tabular-nums">
                         {row?.wins ?? 0} / {row?.losses ?? 0}
                       </span>
@@ -310,7 +310,7 @@ export function ComplianceDonut({ pct, size = 168 }: { pct: number; size?: numbe
       </ResponsiveContainer>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
         <span className="text-2xl font-bold tabular-nums text-ink">{clamped.toFixed(0)}%</span>
-        <span className="text-[10px] font-bold uppercase tracking-wider text-ink/40">compliant</span>
+        <span className="text-[10px] font-bold uppercase tracking-wider text-ink/60">compliant</span>
       </div>
     </div>
   );

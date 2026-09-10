@@ -43,7 +43,7 @@ function ChatMessageComponent({
             <button
               type="button"
               onClick={() => onRemoveQueued(message.id)}
-              className="absolute -left-2 top-1/2 -translate-y-1/2 -translate-x-full opacity-0 group-hover:opacity-100 transition-opacity px-2 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wide bg-surface border border-border text-ink/55 hover:text-ink shadow-sm"
+              className="absolute -left-2 top-1/2 -translate-y-1/2 -translate-x-full opacity-0 group-hover:opacity-100 transition-opacity px-2 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wide bg-surface border border-border text-ink/60 hover:text-ink shadow-sm"
             >
               Remove
             </button>
@@ -56,11 +56,11 @@ function ChatMessageComponent({
   return (
     <div className="group flex justify-start mb-3.5 flex-col items-start gap-1 w-full">
       <div className="flex items-center gap-2 px-1">
-        <span className="text-[10px] font-semibold uppercase tracking-wider text-ink/35">
+        <span className="text-[10px] font-semibold uppercase tracking-wider text-ink/60">
           Lysp
         </span>
         {message.cancelled && (
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-ink/35">
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-ink/60">
             · Stopped
           </span>
         )}
@@ -69,9 +69,9 @@ function ChatMessageComponent({
         {message.content?.trim() ? (
           <MarkdownContent content={message.content} />
         ) : isStreaming ? (
-          <p className="text-sm text-ink/40 italic">Thinking…</p>
+          <p className="text-sm text-ink/60 italic">Thinking…</p>
         ) : message.cancelled ? (
-          <p className="text-sm text-ink/45 italic">Generation stopped.</p>
+          <p className="text-sm text-ink/60 italic">Generation stopped.</p>
         ) : null}
         {isStreaming && message.content?.trim() && (
           <span

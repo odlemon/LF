@@ -77,14 +77,14 @@ export function PmsConnectorFormModal({ isOpen, onClose, onSave, datasets }: Pms
         )}
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-[11px] font-bold text-ink/40 uppercase tracking-wider">Display Name *</label>
+          <label className="text-[11px] font-bold text-ink/60 uppercase tracking-wider">Display Name *</label>
           <input aria-label="Display Name"
             type="text"
             required
             placeholder="e.g. Aderant Sync — Corporate"
             value={displayName}
             onChange={(e) => setDisplayName(e.target.value)}
-            className="w-full px-5 py-3 bg-field border border-border rounded-full text-sm font-semibold text-ink placeholder:text-ink/30 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/80 transition-all duration-200"
+            className="w-full px-5 py-3 bg-field border border-border rounded-full text-sm font-semibold text-ink placeholder:text-ink/60 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/80 transition-all duration-200"
           />
         </div>
 
@@ -106,36 +106,36 @@ export function PmsConnectorFormModal({ isOpen, onClose, onSave, datasets }: Pms
         />
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-[11px] font-bold text-ink/40 uppercase tracking-wider">Base URL *</label>
+          <label className="text-[11px] font-bold text-ink/60 uppercase tracking-wider">Base URL *</label>
           <input aria-label="Base URL"
             type="text"
             required
             placeholder="e.g. http://localhost:8080/mock-pms"
             value={baseUrl}
             onChange={(e) => setBaseUrl(e.target.value)}
-            className="w-full px-5 py-3 bg-field border border-border rounded-full text-sm font-semibold text-ink placeholder:text-ink/30 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/80 transition-all duration-200"
+            className="w-full px-5 py-3 bg-field border border-border rounded-full text-sm font-semibold text-ink placeholder:text-ink/60 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/80 transition-all duration-200"
           />
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-[11px] font-bold text-ink/40 uppercase tracking-wider">API Key (optional)</label>
+          <label className="text-[11px] font-bold text-ink/60 uppercase tracking-wider">API Key (optional)</label>
           <input aria-label="API Key (optional)"
             type="password"
             placeholder="Stored encrypted — never echoed back"
             value={apiKey}
             onChange={(e) => setApiKey(e.target.value)}
-            className="w-full px-5 py-3 bg-field border border-border rounded-full text-sm font-semibold text-ink placeholder:text-ink/30 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/80 transition-all duration-200"
+            className="w-full px-5 py-3 bg-field border border-border rounded-full text-sm font-semibold text-ink placeholder:text-ink/60 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/80 transition-all duration-200"
           />
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-[11px] font-bold text-ink/40 uppercase tracking-wider">Sync Interval (hours)</label>
+          <label className="text-[11px] font-bold text-ink/60 uppercase tracking-wider">Sync Interval (hours)</label>
           <input aria-label="Sync Interval (hours)"
             type="number"
             min="1"
             value={syncIntervalHours}
             onChange={(e) => setSyncIntervalHours(e.target.value)}
-            className="w-full px-5 py-3 bg-field border border-border rounded-full text-sm font-semibold text-ink placeholder:text-ink/30 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/80 transition-all duration-200"
+            className="w-full px-5 py-3 bg-field border border-border rounded-full text-sm font-semibold text-ink placeholder:text-ink/60 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/80 transition-all duration-200"
           />
         </div>
 

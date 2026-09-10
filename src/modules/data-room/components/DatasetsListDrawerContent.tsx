@@ -76,7 +76,7 @@ export function DatasetsListDrawerContent({
       {/* Header bar within drawer context */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
-          <p className="text-xs text-ink/55 font-medium">
+          <p className="text-xs text-ink/60 font-medium">
             Group your uploaded files by named ingestion batches to isolate data and track processing states.
           </p>
         </div>
@@ -137,14 +137,14 @@ export function DatasetsListDrawerContent({
           <table className="min-w-full divide-y divide-gray-100 text-xs">
             <thead className="bg-field">
               <tr>
-                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Dataset Name</th>
-                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Category</th>
-                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Source System</th>
-                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Files Count</th>
-                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Period Range</th>
-                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Status</th>
-                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Extracted Records</th>
-                <th className="px-5 py-4 text-right font-bold text-ink/55 uppercase tracking-wider w-20">Actions</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Dataset Name</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Category</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Source System</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Files Count</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Period Range</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Status</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Extracted Records</th>
+                <th className="px-5 py-4 text-right font-bold text-ink/60 uppercase tracking-wider w-20">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 font-semibold text-ink/80">
@@ -158,7 +158,7 @@ export function DatasetsListDrawerContent({
                 ))
               ) : datasets.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="px-5 py-12 text-center text-ink/40">
+                  <td colSpan={8} className="px-5 py-12 text-center text-ink/60">
                     No datasets batches matched this criteria. Click &quot;New Dataset&quot; to define a new one.
                   </td>
                 </tr>
@@ -170,7 +170,7 @@ export function DatasetsListDrawerContent({
                         onClick={() => onSelectDataset(dataset.uid)}
                         className="text-ink font-extrabold hover:text-primary hover:underline flex items-center py-1.5 -my-1.5 rounded gap-1.5 text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1 focus-visible:ring-offset-surface"
                       >
-                        <HiFolderOpen className="w-4.5 h-4.5 text-ink/40 shrink-0" />
+                        <HiFolderOpen className="w-4.5 h-4.5 text-ink/60 shrink-0" />
                         <span>{dataset.name}</span>
                       </button>
                     </td>
@@ -209,7 +209,7 @@ export function DatasetsListDrawerContent({
                       ) : (
                         <button
                           onClick={() => setConfirmDeleteUid(dataset.uid)}
-                          className="p-1.5 hover:bg-red-50 rounded-lg text-ink/40 hover:text-red-700 transition-colors cursor-pointer"
+                          className="p-1.5 hover:bg-red-50 rounded-lg text-ink/60 hover:text-red-700 transition-colors cursor-pointer"
                         >
                           <HiTrash className="w-4.5 h-4.5" />
                         </button>

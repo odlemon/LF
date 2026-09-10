@@ -239,7 +239,7 @@ export function ContractFormModal({ open, onClose, existing, onSaved }: Props) {
           Billable — include this firm when raising invoices
         </label>
 
-        <p className="text-xs text-ink/45">
+        <p className="text-xs text-ink/60">
           Entitlements are reporting thresholds. Exceeding one is shown on the statement and
           never blocks anyone from working.
         </p>

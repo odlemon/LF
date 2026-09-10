@@ -109,7 +109,7 @@ export default function DemoRequestsPage() {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-ink tracking-tight">Demo requests</h1>
-          <p className="text-sm text-ink/55 mt-1">
+          <p className="text-sm text-ink/60 mt-1">
             Enquiries from the marketing site.{" "}
             {tab === "all"
               ? `${totalElements} in total.`
@@ -163,11 +163,11 @@ export default function DemoRequestsPage() {
                 </Badge>
                 <span className="text-sm font-bold text-ink">{request.firmName}</span>
                 {request.firmSize && (
-                  <span className="text-[11px] font-semibold text-ink/45">
+                  <span className="text-[11px] font-semibold text-ink/60">
                     · {request.firmSize}
                   </span>
                 )}
-                <span className="ml-auto text-[11px] text-ink/40">
+                <span className="ml-auto text-[11px] text-ink/60">
                   {formatDate(request.createdAt)}
                 </span>
               </div>
@@ -175,11 +175,11 @@ export default function DemoRequestsPage() {
               <p className="mt-2 text-sm text-ink/75">
                 {request.fullName}
                 {request.roleTitle ? (
-                  <span className="text-ink/50"> · {request.roleTitle}</span>
+                  <span className="text-ink/60"> · {request.roleTitle}</span>
                 ) : null}
               </p>
 
-              <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] text-ink/55">
+              <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] text-ink/60">
                 <span className="inline-flex items-center gap-1.5">
                   <HiOutlineMail className="w-3.5 h-3.5" />
                   {request.workEmail}
@@ -191,7 +191,7 @@ export default function DemoRequestsPage() {
                   </span>
                 )}
                 {request.source && (
-                  <span className="text-ink/35">from {request.source}</span>
+                  <span className="text-ink/60">from {request.source}</span>
                 )}
               </div>
 
@@ -225,7 +225,7 @@ export default function DemoRequestsPage() {
                 {!selected.notified && (
                   <Badge variant="warning">Sales email not sent</Badge>
                 )}
-                <span className="ml-auto text-[11px] text-ink/40">
+                <span className="ml-auto text-[11px] text-ink/60">
                   {formatDate(selected.createdAt)}
                 </span>
               </div>
@@ -244,7 +244,7 @@ export default function DemoRequestsPage() {
                   .filter(([, value]) => Boolean(value))
                   .map(([label, value]) => (
                     <div key={label as string}>
-                      <dt className="text-[10px] font-bold uppercase tracking-wider text-ink/40">
+                      <dt className="text-[10px] font-bold uppercase tracking-wider text-ink/60">
                         {label}
                       </dt>
                       <dd className="mt-0.5 text-sm font-semibold text-ink/85 break-words">
@@ -256,7 +256,7 @@ export default function DemoRequestsPage() {
 
               {selected.message && (
                 <div className="mt-5 pt-4 border-t border-border">
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-ink/40">
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-ink/60">
                     What they asked for
                   </p>
                   <p className="mt-1.5 text-sm text-ink/75 leading-relaxed whitespace-pre-wrap">
@@ -287,7 +287,7 @@ export default function DemoRequestsPage() {
               />
 
               <div className="flex flex-col gap-1.5">
-                <label className="text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1">
+                <label className="text-[10px] font-bold text-ink/60 uppercase tracking-wider pl-1">
                   Internal note
                 </label>
                 <Textarea aria-label="Internal note"
@@ -300,7 +300,7 @@ export default function DemoRequestsPage() {
               </div>
 
               {selected.handledBy && (
-                <p className="text-[11px] text-ink/40">
+                <p className="text-[11px] text-ink/60">
                   Last updated by {selected.handledBy}
                 </p>
               )}

@@ -76,7 +76,7 @@ export function GuardrailStrip({ pack, currency }: GuardrailStripProps) {
       </span>
       {facts.map((f) => (
         <div key={f.label} className="min-w-0">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-ink/35">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-ink/60">
             {f.label}
           </p>
           <p className="text-sm font-semibold tabular-nums text-ink">{f.value}</p>
@@ -95,13 +95,13 @@ export function ClientContextSection({ pack }: { pack: ApprovalPack }) {
         </span>
       )}
       <div>
-        <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-ink/35">
+        <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-ink/60">
           Prior matters
         </p>
         <p className="text-sm font-semibold tabular-nums text-ink">{pack.clientMatterCount}</p>
       </div>
       <div>
-        <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-ink/35">
+        <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-ink/60">
           Avg. margin on wins
         </p>
         <p className="text-sm font-semibold tabular-nums text-ink">
@@ -132,9 +132,9 @@ export function ScopeSummarySection({ pack, currency }: { pack: ApprovalPack; cu
           {Number(pack.totalHours).toFixed(0)} hours
         </span>
         {open ? (
-          <HiChevronDown className="w-4 h-4 text-ink/40 shrink-0" />
+          <HiChevronDown className="w-4 h-4 text-ink/60 shrink-0" />
         ) : (
-          <HiChevronRight className="w-4 h-4 text-ink/40 shrink-0" />
+          <HiChevronRight className="w-4 h-4 text-ink/60 shrink-0" />
         )}
       </button>
       {open && (
@@ -142,7 +142,7 @@ export function ScopeSummarySection({ pack, currency }: { pack: ApprovalPack; cu
           <div className="overflow-x-auto">
             <table className="w-full text-left text-[12px] min-w-[420px]">
               <thead>
-                <tr className="text-[10px] uppercase tracking-wide text-ink/35">
+                <tr className="text-[10px] uppercase tracking-wide text-ink/60">
                   <th className="font-semibold px-1 py-1.5">Phase</th>
                   <th className="font-semibold px-1 py-1.5 text-right">Tasks</th>
                   <th className="font-semibold px-1 py-1.5 text-right">Hours</th>
@@ -153,8 +153,8 @@ export function ScopeSummarySection({ pack, currency }: { pack: ApprovalPack; cu
                 {pack.phases.map((p) => (
                   <tr key={p.name}>
                     <td className="px-1 py-2 font-medium text-ink/85">{p.name}</td>
-                    <td className="px-1 py-2 text-right tabular-nums text-ink/55">{p.taskCount}</td>
-                    <td className="px-1 py-2 text-right tabular-nums text-ink/55">
+                    <td className="px-1 py-2 text-right tabular-nums text-ink/60">{p.taskCount}</td>
+                    <td className="px-1 py-2 text-right tabular-nums text-ink/60">
                       {Number(p.hours).toFixed(1)}
                     </td>
                     <td className="px-1 py-2 text-right tabular-nums text-ink/70">
@@ -169,7 +169,7 @@ export function ScopeSummarySection({ pack, currency }: { pack: ApprovalPack; cu
             <div className="space-y-2.5">
               {[...byType.entries()].map(([type, texts]) => (
                 <div key={type}>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-ink/35 mb-1">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-ink/60 mb-1">
                     {type.toLowerCase()}
                   </p>
                   <ul className="space-y-1">

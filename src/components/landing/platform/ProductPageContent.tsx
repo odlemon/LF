@@ -49,7 +49,7 @@ function CapabilitySection({
             <div key={beat.n}>
               <p
                 className={`text-[11px] font-semibold tabular-nums tracking-[0.18em] ${
-                  isDark ? "text-white/30" : "text-[#0a0a0a]/25"
+                  isDark ? "text-white/45" : "text-[#0a0a0a]/60"
                 }`}
               >
                 {beat.n}
@@ -63,7 +63,7 @@ function CapabilitySection({
               </h3>
               <p
                 className={`mt-2 text-[13px] leading-relaxed ${
-                  isDark ? "text-white/45" : "text-[#0a0a0a]/50"
+                  isDark ? "text-white/45" : "text-[#0a0a0a]/60"
                 }`}
               >
                 {beat.body}
@@ -75,7 +75,7 @@ function CapabilitySection({
         {uc.foundation ? (
           <p
             className={`mt-8 text-[13px] leading-relaxed max-w-2xl ${
-              isDark ? "text-white/35" : "text-[#0a0a0a]/40"
+              isDark ? "text-white/45" : "text-[#0a0a0a]/60"
             }`}
           >
             {uc.foundation}{" "}
@@ -125,7 +125,7 @@ export function ProductPageContent() {
             title={
               <>
                 Pricing intelligence
-                <span className="text-[#0a0a0a]/38"> for the desks that own the fee.</span>
+                <span className="text-[#0a0a0a]/60"> for the desks that own the fee.</span>
               </>
             }
             description="When elite firms price well, they win better work and keep more of it. Lysp is the commercial system behind that: pricing, negotiation, volume, and visibility in one place."
@@ -156,7 +156,7 @@ export function ProductPageContent() {
 
       <section className="relative border-t border-black/[0.06] bg-[#fefefc]">
         <div className={`${MARKETING_SHELL} py-14 sm:py-16`}>
-          <p className="text-[11px] font-semibold tracking-[0.28em] uppercase text-[#0a0a0a]/35">
+          <p className="text-[11px] font-semibold tracking-[0.28em] uppercase text-[#0a0a0a]/60">
             Built for the desk
           </p>
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-8">
@@ -165,7 +165,7 @@ export function ProductPageContent() {
                 <h3 className="text-[14px] font-semibold tracking-tight text-[#0a0a0a]">
                   {item.role}
                 </h3>
-                <p className="mt-2 text-[13px] text-[#0a0a0a]/50 leading-relaxed">{item.body}</p>
+                <p className="mt-2 text-[13px] text-[#0a0a0a]/60 leading-relaxed">{item.body}</p>
               </div>
             ))}
           </div>

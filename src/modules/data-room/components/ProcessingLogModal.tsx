@@ -47,7 +47,7 @@ export function ProcessingLogModal({ isOpen, onClose, documentUid, fileName }: P
             {error}
           </div>
         ) : !logs || logs.length === 0 ? (
-          <div className="text-center py-8 text-ink/40 font-semibold flex flex-col items-center gap-2">
+          <div className="text-center py-8 text-ink/60 font-semibold flex flex-col items-center gap-2">
             <HiExclamation className="w-8 h-8 text-gray-300" />
             No processing attempts logged for this file yet.
           </div>
@@ -78,17 +78,17 @@ export function ProcessingLogModal({ isOpen, onClose, documentUid, fileName }: P
                 {/* Stats row card */}
                 <div className="grid grid-cols-3 gap-3">
                   <div className="bg-field/50 border border-border rounded-2xl p-4 text-center">
-                    <span className="text-[10px] font-bold text-ink/40 uppercase tracking-wider block mb-1">Status</span>
+                    <span className="text-[10px] font-bold text-ink/60 uppercase tracking-wider block mb-1">Status</span>
                     <DocumentStatusBadge status={activeAttempt.status} />
                   </div>
                   <div className="bg-field/50 border border-border rounded-2xl p-4 text-center">
-                    <span className="text-[10px] font-bold text-ink/40 uppercase tracking-wider block mb-1">Rows Parsed</span>
+                    <span className="text-[10px] font-bold text-ink/60 uppercase tracking-wider block mb-1">Rows Parsed</span>
                     <span className="text-base font-extrabold text-ink">
                       {activeAttempt.rowsProcessed} / {activeAttempt.rowsRead}
                     </span>
                   </div>
                   <div className="bg-field/50 border border-border rounded-2xl p-4 text-center">
-                    <span className="text-[10px] font-bold text-ink/40 uppercase tracking-wider block mb-1">Rows Failed</span>
+                    <span className="text-[10px] font-bold text-ink/60 uppercase tracking-wider block mb-1">Rows Failed</span>
                     <span className={`text-base font-extrabold ${activeAttempt.rowsFailed > 0 ? "text-red-600" : "text-ink"} dark:text-red-400`}>
                       {activeAttempt.rowsFailed}
                     </span>
@@ -98,7 +98,7 @@ export function ProcessingLogModal({ isOpen, onClose, documentUid, fileName }: P
                 {/* Date & Error Summary */}
                 <div className="flex flex-col gap-2.5 p-4 bg-field border border-border/50 rounded-2xl">
                   <div className="flex items-center gap-2 text-xs text-ink/65">
-                    <HiCalendar className="w-4 h-4 text-ink/40" />
+                    <HiCalendar className="w-4 h-4 text-ink/60" />
                     <span className="font-semibold">
                       Started: {formatTimestamp(activeAttempt.startedAt)}
                     </span>
@@ -119,15 +119,15 @@ export function ProcessingLogModal({ isOpen, onClose, documentUid, fileName }: P
 
                 {/* Column Mapping Review */}
                 <div className="flex flex-col gap-2">
-                  <span className="text-xs font-bold text-ink/55 uppercase tracking-wider flex items-center gap-1.5">
-                    <HiDatabase className="w-4 h-4 text-ink/40" /> Column Mapping Matches
+                  <span className="text-xs font-bold text-ink/60 uppercase tracking-wider flex items-center gap-1.5">
+                    <HiDatabase className="w-4 h-4 text-ink/60" /> Column Mapping Matches
                   </span>
                   <div className="border border-border/80 rounded-2xl overflow-hidden bg-surface shadow-sm">
                     <table className="min-w-full divide-y divide-gray-100 text-xs">
                       <thead className="bg-field">
                         <tr>
-                          <th className="px-4 py-2.5 text-left font-bold text-ink/55 uppercase tracking-wider">System Field</th>
-                          <th className="px-4 py-2.5 text-left font-bold text-ink/55 uppercase tracking-wider">File Column</th>
+                          <th className="px-4 py-2.5 text-left font-bold text-ink/60 uppercase tracking-wider">System Field</th>
+                          <th className="px-4 py-2.5 text-left font-bold text-ink/60 uppercase tracking-wider">File Column</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-gray-100 font-semibold">
@@ -148,7 +148,7 @@ export function ProcessingLogModal({ isOpen, onClose, documentUid, fileName }: P
                           ))
                         ) : (
                           <tr>
-                            <td colSpan={2} className="px-4 py-3 text-center text-ink/40">
+                            <td colSpan={2} className="px-4 py-3 text-center text-ink/60">
                               No mapping template detected.
                             </td>
                           </tr>
@@ -161,7 +161,7 @@ export function ProcessingLogModal({ isOpen, onClose, documentUid, fileName }: P
                 {/* Row Errors Breakdown (limit to 20 errors initially) */}
                 {activeAttempt.rowErrors && activeAttempt.rowErrors.length > 0 && (
                   <div className="flex flex-col gap-2">
-                    <span className="text-xs font-bold text-ink/55 uppercase tracking-wider text-red-700 dark:text-red-400">
+                    <span className="text-xs font-bold text-ink/60 uppercase tracking-wider text-red-700 dark:text-red-400">
                       Row Error Logs ({activeAttempt.rowErrors.length} errors)
                     </span>
                     <div className="border border-red-100 rounded-2xl overflow-hidden bg-surface shadow-sm max-h-56 overflow-y-auto rates-scrollable pr-1">

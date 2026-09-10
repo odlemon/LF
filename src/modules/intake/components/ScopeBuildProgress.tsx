@@ -35,14 +35,14 @@ export function ScopeBuildProgress({
         <div className="max-w-md mx-auto">
           <div className="mb-2 flex items-center gap-2">
             <span className="h-1.5 w-1.5 rounded-full bg-ink animate-pulse" />
-            <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35">
+            <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
               Building scope
             </p>
           </div>
           <h2 className="text-xl font-semibold text-ink tracking-tight leading-tight">
             {statusLabel || SCOPE_PROGRESS_STEPS[Math.max(activeIdx, 0)]?.label}
           </h2>
-          <p className="text-sm text-ink/45 leading-relaxed mb-8 mt-2">
+          <p className="text-sm text-ink/60 leading-relaxed mb-8 mt-2">
             Assembling a partner-ready plan. You can keep chatting — new messages
             wait their turn.
           </p>
@@ -70,7 +70,7 @@ export function ScopeBuildProgress({
                         ? "border-ink bg-ink text-on-primary"
                         : current
                           ? "border-ink/40 bg-surface text-ink shadow-sm"
-                          : "border-border bg-field text-ink/30"
+                          : "border-border bg-field text-ink/60"
                     }`}
                   >
                     {done ? (
@@ -84,14 +84,14 @@ export function ScopeBuildProgress({
                   <div className="min-w-0 pt-0.5">
                     <p
                       className={`text-sm font-semibold tracking-tight ${
-                        upcoming ? "text-ink/35" : "text-ink"
+                        upcoming ? "text-ink/60" : "text-ink"
                       }`}
                     >
                       {step.label}
                     </p>
                     <p
                       className={`text-xs mt-0.5 leading-relaxed ${
-                        current ? "text-ink/55" : "text-ink/35"
+                        current ? "text-ink/60" : "text-ink/60"
                       }`}
                     >
                       {step.detail}

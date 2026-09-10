@@ -96,7 +96,7 @@ export function RateCoachWorkspace({
             L
           </span>
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+            <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
               Rate coach
             </p>
             <p className="text-sm font-semibold tracking-tight text-ink">
@@ -104,7 +104,7 @@ export function RateCoachWorkspace({
             </p>
           </div>
         </div>
-        <p className="mt-2 text-xs leading-relaxed text-ink/45">
+        <p className="mt-2 text-xs leading-relaxed text-ink/60">
           Lysp helps both sides reach a defensible number faster.
         </p>
       </div>
@@ -117,12 +117,12 @@ export function RateCoachWorkspace({
         ) : messages.length === 0 && !streaming ? (
           <div className="flex h-full min-h-[280px] flex-col items-center justify-center text-center animate-fade-in">
             <span className="flex h-14 w-14 items-center justify-center rounded-2xl border border-border/70 bg-surface shadow-sm">
-              <HiOutlineSparkles className="h-6 w-6 text-ink/55" />
+              <HiOutlineSparkles className="h-6 w-6 text-ink/60" />
             </span>
             <h3 className="mt-4 text-lg font-semibold tracking-tight text-ink">
               Negotiate with confidence
             </h3>
-            <p className="mt-2 max-w-sm text-sm leading-relaxed text-ink/50">
+            <p className="mt-2 max-w-sm text-sm leading-relaxed text-ink/60">
               Ask anything about the proposal. Lysp reasons from the live rate card, market context, and your history - not scripts.
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-2">
@@ -143,7 +143,7 @@ export function RateCoachWorkspace({
             {messages.map((msg) => {
               if (msg.role === "tool") {
                 return (
-                  <p key={msg.id} className="text-[11px] font-semibold uppercase tracking-wide text-ink/35">
+                  <p key={msg.id} className="text-[11px] font-semibold uppercase tracking-wide text-ink/60">
                     {msg.content}
                   </p>
                 );
@@ -169,7 +169,7 @@ export function RateCoachWorkspace({
                           ) : null}
                         </div>
                       ) : (
-                        <p className="text-ink/45">{msg.streaming ? "Thinking…" : ""}</p>
+                        <p className="text-ink/60">{msg.streaming ? "Thinking…" : ""}</p>
                       )
                     ) : (
                       <p className="whitespace-pre-wrap">
@@ -243,7 +243,7 @@ export function RateCoachWorkspace({
                 ? "Ask anything — or say submit / accept"
                 : "Ask about this closed negotiation…"
             }
-            className="composer-textarea max-h-28 min-h-[40px] flex-1 resize-none bg-transparent px-2 py-2 text-sm text-ink placeholder:text-ink/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1 focus-visible:ring-offset-surface"
+            className="composer-textarea max-h-28 min-h-[40px] flex-1 resize-none bg-transparent px-2 py-2 text-sm text-ink placeholder:text-ink/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1 focus-visible:ring-offset-surface"
           />
           {streaming ? (
             <Button
@@ -269,7 +269,7 @@ export function RateCoachWorkspace({
             </Button>
           )}
         </div>
-        <p className="mx-auto mt-2 max-w-2xl text-center text-[10px] text-ink/30">
+        <p className="mx-auto mt-2 max-w-2xl text-center text-[10px] text-ink/60">
           {open
             ? "Say submit to send a counter, or accept to take the firm’s offer."
             : "This negotiation is closed — chat is advisory only."}

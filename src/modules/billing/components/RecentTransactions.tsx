@@ -40,7 +40,7 @@ export function RecentTransactions({
   return (
     <div className="animate-fade-in-up">
       <div className="mb-3">
-        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">{subtitle}</p>
+        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">{subtitle}</p>
         <h3 className="mt-1 text-base font-semibold tracking-tight text-ink">{title}</h3>
       </div>
       {error ? (

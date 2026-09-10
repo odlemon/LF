@@ -54,7 +54,7 @@ export function SecuritySection() {
             Explore enterprise security
             <HiArrowRight className="h-4 w-4" />
           </Link>
-          <p className="text-[12px] text-[#0a0a0a]/40 text-left max-w-md leading-relaxed">
+          <p className="text-[12px] text-[#0a0a0a]/60 text-left max-w-md leading-relaxed">
             Full controls, data residency, ethical walls, and disclosure answers on our security page.
           </p>
         </div>

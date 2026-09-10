@@ -42,7 +42,7 @@ function ClientLoginForm() {
   };
 
   const field =
-    "w-full rounded-2xl border border-black/[0.08] bg-[#f6f6f3] px-5 py-[0.95rem] text-[15px] text-[#0a0a0a] placeholder:text-[#0a0a0a]/30 outline-none transition-all duration-200 focus-visible:ring-4 focus-visible:ring-[#0a0a0a]/15 focus-visible:border-[#0a0a0a] focus:bg-white focus:ring-4 focus:ring-black/[0.04] disabled:opacity-60";
+    "w-full rounded-2xl border border-black/[0.08] bg-[#f6f6f3] px-5 py-[0.95rem] text-[15px] text-[#0a0a0a] placeholder:text-[#0a0a0a]/60 outline-none transition-all duration-200 focus-visible:ring-4 focus-visible:ring-[#0a0a0a]/15 focus-visible:border-[#0a0a0a] focus:bg-white focus:ring-4 focus:ring-black/[0.04] disabled:opacity-60";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5" noValidate>
@@ -58,7 +58,7 @@ function ClientLoginForm() {
       <div>
         <label
           htmlFor="client-email"
-          className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0a0a0a]/45"
+          className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0a0a0a]/60"
         >
           Email
         </label>
@@ -78,7 +78,7 @@ function ClientLoginForm() {
       <div>
         <label
           htmlFor="client-password"
-          className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0a0a0a]/45"
+          className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0a0a0a]/60"
         >
           Password
         </label>
@@ -98,7 +98,7 @@ function ClientLoginForm() {
             type="button"
             onClick={() => setShowPassword((v) => !v)}
             aria-label={showPassword ? "Hide password" : "Show password"}
-            className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-2 text-[#0a0a0a]/35 transition-colors hover:bg-black/[0.04] hover:text-[#0a0a0a]/70"
+            className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-2 text-[#0a0a0a]/60 transition-colors hover:bg-black/[0.04] hover:text-[#0a0a0a]/70"
           >
             {showPassword ? <HiEyeOff className="h-4 w-4" /> : <HiEye className="h-4 w-4" />}
           </button>
@@ -188,7 +188,7 @@ export default function ClientLoginPage() {
           <div className="hidden justify-end px-8 pt-6 lg:flex xl:px-12">
             <Link
               href="https://lysp.ai"
-              className="text-[13px] font-medium text-[#0a0a0a]/45 transition-colors hover:text-[#0a0a0a] py-1.5 -my-1.5"
+              className="text-[13px] font-medium text-[#0a0a0a]/60 transition-colors hover:text-[#0a0a0a] py-1.5 -my-1.5"
             >
               About Lysp
             </Link>
@@ -196,13 +196,13 @@ export default function ClientLoginPage() {
 
           <div className="relative flex flex-1 flex-col justify-center px-6 py-10 pb-[max(2.5rem,env(safe-area-inset-bottom))] sm:px-10 sm:py-12 lg:px-12 lg:py-8 xl:px-16">
             <div className="mx-auto w-full max-w-[400px] lg:mx-0">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#0a0a0a]/35">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#0a0a0a]/60">
                 Client portal
               </p>
               <h2 className="mt-6 text-[1.9rem] font-semibold leading-[1.08] tracking-tight sm:text-[2.25rem]">
                 Welcome back.
               </h2>
-              <p className="mt-3 text-[15px] leading-relaxed text-[#0a0a0a]/50">
+              <p className="mt-3 text-[15px] leading-relaxed text-[#0a0a0a]/60">
                 Sign in to the workspace your firm set up for you.
               </p>
 
@@ -211,7 +211,7 @@ export default function ClientLoginPage() {
               </div>
 
               <div className="mt-10 border-t border-black/[0.06] pt-8">
-                <p className="text-[13px] leading-relaxed text-[#0a0a0a]/45">
+                <p className="text-[13px] leading-relaxed text-[#0a0a0a]/60">
                   <Link
                     href="/client-login/forgot"
                     className="font-semibold text-[#0a0a0a]/70 hover:text-[#0a0a0a] underline underline-offset-4 inline-block py-1.5 -my-1.5"
@@ -227,7 +227,7 @@ export default function ClientLoginPage() {
           </div>
 
           <footer className="px-6 pb-6 sm:px-10 lg:px-12 xl:px-16">
-            <p className="text-[11px] text-[#0a0a0a]/30">
+            <p className="text-[11px] text-[#0a0a0a]/60">
               Only your organisation&apos;s proposals are visible here · Encrypted in transit
             </p>
           </footer>

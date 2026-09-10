@@ -76,7 +76,7 @@ export function DeploymentRow({
         <div className="flex min-w-0 items-start gap-3">
           <span
             className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${
-              isActive ? "bg-ink text-on-primary" : "bg-field text-ink/50"
+              isActive ? "bg-ink text-on-primary" : "bg-field text-ink/60"
             }`}
             aria-hidden
           >
@@ -87,10 +87,10 @@ export function DeploymentRow({
               <h3 className="text-sm font-bold text-ink">{KIND_LABEL[kind]}</h3>
               {isActive && <Badge variant="primary">Serving now</Badge>}
             </div>
-            <p className="mt-1 truncate font-mono text-[12px] text-ink/55">
+            <p className="mt-1 truncate font-mono text-[12px] text-ink/60">
               {endpointLabel(config)}
             </p>
-            <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-ink/45">
+            <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-ink/60">
               <span className="font-semibold text-ink/60">{PROVIDER_LABEL[config.provider]}</span>
               <span>·</span>
               <span className="font-mono">{config.modelName}</span>

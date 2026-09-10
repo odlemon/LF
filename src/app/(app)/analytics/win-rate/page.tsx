@@ -24,7 +24,7 @@ function WinRateTable({ rows, labelFor }: { rows: WinRateRow[]; labelFor?: (v: s
       <table className="w-full text-left text-sm border-collapse">
 
         <thead>
-          <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
+          <tr className="bg-field/50 text-xs font-bold text-ink/60 border-b border-border">
             <th className="px-6 py-4">Segment</th>
             <th className="px-6 py-4">Won</th>
             <th className="px-6 py-4">Lost</th>
@@ -63,7 +63,7 @@ export default function WinRatePage() {
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
           <div>
             <h1 className="text-2xl font-bold text-ink tracking-tight">Proposal Performance</h1>
-            <p className="text-sm text-ink/55 mt-1">
+            <p className="text-sm text-ink/60 mt-1">
               Win rates, cycle time and outcomes across pricing models and practice areas.
             </p>
           </div>
@@ -95,7 +95,7 @@ export default function WinRatePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div className="bg-surface border border-border/70 rounded-2xl p-5">
               <div className="mb-4">
-                <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+                <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
                   Outcomes
                 </p>
                 <h3 className="mt-1 text-base font-semibold text-ink tracking-tight">
@@ -114,7 +114,7 @@ export default function WinRatePage() {
             </div>
             <div className="bg-surface border border-border/70 rounded-2xl p-5">
               <div className="mb-4">
-                <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+                <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
                   Outcomes
                 </p>
                 <h3 className="mt-1 text-base font-semibold text-ink tracking-tight">

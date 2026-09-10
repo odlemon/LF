@@ -88,7 +88,7 @@ export default function NegotiationsPage() {
         ) : items.length === 0 ? (
           <div className="rounded-[1.5rem] border border-border/70 bg-surface px-5 py-14 text-center">
             <p className="text-sm font-semibold text-ink">No negotiations yet</p>
-            <p className="mx-auto mt-1.5 max-w-sm text-xs leading-relaxed text-ink/45">
+            <p className="mx-auto mt-1.5 max-w-sm text-xs leading-relaxed text-ink/60">
               After a partner approves a scenario, open Pricing and choose Send to
               client — then it lands here for relationship-led negotiation.
             </p>
@@ -109,7 +109,7 @@ export default function NegotiationsPage() {
                     </p>
                     <NegotiationStatusBadge status={item.status} />
                   </div>
-                  <p className="mt-1 text-xs text-ink/45">
+                  <p className="mt-1 text-xs text-ink/60">
                     {item.clientName || "Client"}
                     {item.currentRound != null
                       ? ` · Round ${item.currentRound}`

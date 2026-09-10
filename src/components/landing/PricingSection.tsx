@@ -181,7 +181,7 @@ export function PricingSection() {
           title={
             <>
               One credit.
-              <span className="text-[#0a0a0a]/38"> One clear price.</span>
+              <span className="text-[#0a0a0a]/60"> One clear price.</span>
             </>
           }
           description="No seats. No opaque tiers. You buy credits; Lysp spends them when your firm prices, negotiates, and reports. Your rate card is custom - this is the public reference."
@@ -191,16 +191,16 @@ export function PricingSection() {
         <div className="mt-14 sm:mt-16 grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-stretch">
           <div className="lg:col-span-5 relative overflow-hidden rounded-[1.85rem] border border-black/[0.07] bg-white p-8 sm:p-10 flex flex-col justify-between shadow-[0_24px_60px_-40px_rgba(10,10,10,0.28)]">
             <div>
-              <p className="text-[11px] font-semibold tracking-[0.24em] uppercase text-[#0a0a0a]/35">
+              <p className="text-[11px] font-semibold tracking-[0.24em] uppercase text-[#0a0a0a]/60">
                 Cost of 1 credit
               </p>
               <div className="mt-7 flex items-baseline gap-2.5">
                 <span className="text-6xl sm:text-7xl font-semibold tracking-tight tabular-nums leading-none">
                   ${CREDIT_USD}
                 </span>
-                <span className="text-[15px] text-[#0a0a0a]/40 font-medium pb-1">/ credit</span>
+                <span className="text-[15px] text-[#0a0a0a]/60 font-medium pb-1">/ credit</span>
               </div>
-              <p className="mt-6 text-[15px] text-[#0a0a0a]/55 leading-relaxed max-w-sm">
+              <p className="mt-6 text-[15px] text-[#0a0a0a]/60 leading-relaxed max-w-sm">
                 A credit is one unit of pricing work. Pricing a matter uses{" "}
                 <span className="text-[#0a0a0a] font-semibold">{ACTION_COST.matter} credits</span>
                 {" "}- about {formatUsd(estimate.perMatter)}.
@@ -209,7 +209,7 @@ export function PricingSection() {
 
             <div className="relative mt-10 flex items-center gap-3 border-t border-black/[0.06] pt-5">
               <span className="h-1.5 w-1.5 rounded-full bg-[#0a0a0a]/25" />
-              <p className="text-[12px] text-[#0a0a0a]/40">
+              <p className="text-[12px] text-[#0a0a0a]/60">
                 Illustrative rate · firm contracts are custom
               </p>
             </div>
@@ -227,16 +227,16 @@ export function PricingSection() {
                       ${i < 2 ? "border-b border-black/[0.06]" : ""}`}
                   >
                     <div>
-                      <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#0a0a0a]/28">
+                      <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#0a0a0a]/60">
                         0{i + 1}
                       </p>
                       <p className="mt-2.5 text-[15px] sm:text-[16px] font-semibold tracking-tight">
                         {item.action}
                       </p>
-                      <p className="mt-1 text-[13px] text-[#0a0a0a]/45">{item.detail}</p>
+                      <p className="mt-1 text-[13px] text-[#0a0a0a]/60">{item.detail}</p>
                     </div>
                     <div className="mt-6 flex items-end justify-between gap-3">
-                      <p className="text-[13px] text-[#0a0a0a]/40">
+                      <p className="text-[13px] text-[#0a0a0a]/60">
                         {item.credits} credit{item.credits === 1 ? "" : "s"}
                       </p>
                       <p className="text-2xl font-semibold tabular-nums tracking-tight transition-transform duration-300 group-hover/cell:-translate-y-0.5">
@@ -261,7 +261,7 @@ export function PricingSection() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
               <div className="lg:col-span-7 flex flex-col gap-10">
                 <div>
-                  <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#0a0a0a]/35">
+                  <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#0a0a0a]/60">
                     Quick estimate
                   </p>
                   <h3 className="mt-2 text-xl sm:text-2xl font-semibold tracking-tight">
@@ -281,7 +281,7 @@ export function PricingSection() {
                       <span className="text-3xl font-semibold tabular-nums tracking-tight leading-none">
                         {matters}
                       </span>
-                      <span className="text-[12px] text-[#0a0a0a]/35 font-medium">/ mo</span>
+                      <span className="text-[12px] text-[#0a0a0a]/60 font-medium">/ mo</span>
                     </div>
                   </div>
 
@@ -313,9 +313,9 @@ export function PricingSection() {
                         [&::-moz-range-track]:bg-transparent"
                     />
                   </div>
-                  <div className="mt-3 flex justify-between text-[11px] text-[#0a0a0a]/28 tabular-nums">
+                  <div className="mt-3 flex justify-between text-[11px] text-[#0a0a0a]/60 tabular-nums">
                     <span>{MATTERS_MIN}</span>
-                    <span className="text-[#0a0a0a]/40">Centered at {MATTERS_DEFAULT}</span>
+                    <span className="text-[#0a0a0a]/60">Centered at {MATTERS_DEFAULT}</span>
                     <span>{MATTERS_MAX}</span>
                   </div>
                 </div>
@@ -335,7 +335,7 @@ export function PricingSection() {
                           className={`relative rounded-[0.85rem] px-3 py-3.5 text-left transition-all duration-200 cursor-pointer ${
                             active
                               ? "bg-white text-[#0a0a0a] shadow-[0_4px_14px_-4px_rgba(10,10,10,0.14)] ring-1 ring-black/[0.06]"
-                              : "text-[#0a0a0a]/42 hover:text-[#0a0a0a]/65"
+                              : "text-[#0a0a0a]/60 hover:text-[#0a0a0a]/65"
                           }`}
                         >
                           {active && (
@@ -347,7 +347,7 @@ export function PricingSection() {
                           <span className="block text-[14px] font-semibold">{PACE[key].label}</span>
                           <span
                             className={`mt-0.5 block text-[11px] leading-snug ${
-                              active ? "text-[#0a0a0a]/45" : "text-[#0a0a0a]/28"
+                              active ? "text-[#0a0a0a]/60" : "text-[#0a0a0a]/60"
                             }`}
                           >
                             {PACE[key].hint}
@@ -374,7 +374,7 @@ export function PricingSection() {
                   className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent"
                 />
 
-                <p className="relative text-[11px] font-semibold tracking-[0.22em] uppercase text-white/40">
+                <p className="relative text-[11px] font-semibold tracking-[0.22em] uppercase text-white/45">
                   Estimated monthly spend
                 </p>
                 <p className="relative mt-5 text-4xl sm:text-5xl font-semibold tracking-tight tabular-nums leading-none">
@@ -389,21 +389,21 @@ export function PricingSection() {
 
                 <div className="relative mt-8 space-y-3 border-t border-white/10 pt-6 text-[13px]">
                   <div className="flex justify-between">
-                    <span className="text-white/40">Credits used</span>
+                    <span className="text-white/45">Credits used</span>
                     <span className="font-semibold tabular-nums">
                       {animatedCredits.toLocaleString()} x ${CREDIT_USD}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-white/40">Matters priced</span>
+                    <span className="text-white/45">Matters priced</span>
                     <span className="font-semibold tabular-nums">{matters}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-white/40">Negotiations (est.)</span>
+                    <span className="text-white/45">Negotiations (est.)</span>
                     <span className="font-semibold tabular-nums">{estimate.negotiations}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-white/40">Seat fees</span>
+                    <span className="text-white/45">Seat fees</span>
                     <span className="font-semibold">$0</span>
                   </div>
                 </div>
@@ -416,7 +416,7 @@ export function PricingSection() {
                   Book a demo
                   <HiArrowRight className="h-4 w-4" />
                 </button>
-                <p className="relative mt-4 text-center text-[11px] text-white/30 leading-relaxed">
+                <p className="relative mt-4 text-center text-[11px] text-white/45 leading-relaxed">
                   Final pricing is custom. Estimate uses the public ${CREDIT_USD}/credit reference.
                 </p>
               </div>
@@ -425,16 +425,16 @@ export function PricingSection() {
         </div>
 
         <div className="mt-10 sm:mt-12 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 border-t border-black/[0.07] pt-10">
-          <p className="text-[14px] text-[#0a0a0a]/40 max-w-sm leading-relaxed">
+          <p className="text-[14px] text-[#0a0a0a]/60 max-w-sm leading-relaxed">
             Platform access for the whole firm. You only pay when pricing work runs.
           </p>
           <ul className="flex flex-wrap gap-x-5 gap-y-2.5">
             {INCLUDED.map((item) => (
               <li
                 key={item}
-                className="inline-flex items-center gap-2 rounded-full border border-black/[0.06] bg-white/70 px-3.5 py-1.5 text-[12px] text-[#0a0a0a]/55 shadow-[0_1px_2px_rgba(10,10,10,0.03)]"
+                className="inline-flex items-center gap-2 rounded-full border border-black/[0.06] bg-white/70 px-3.5 py-1.5 text-[12px] text-[#0a0a0a]/60 shadow-[0_1px_2px_rgba(10,10,10,0.03)]"
               >
-                <HiCheck className="h-3.5 w-3.5 shrink-0 text-[#0a0a0a]/40" />
+                <HiCheck className="h-3.5 w-3.5 shrink-0 text-[#0a0a0a]/60" />
                 {item}
               </li>
             ))}

@@ -38,7 +38,7 @@ export default function RateCompliancePage() {
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
           <div>
             <h1 className="text-2xl font-bold text-ink tracking-tight">Rate Compliance</h1>
-            <p className="text-sm text-ink/55 mt-1">
+            <p className="text-sm text-ink/60 mt-1">
               Proposed and agreed rate lines compared against the firm&apos;s active rate card.
             </p>
           </div>
@@ -66,7 +66,7 @@ export default function RateCompliancePage() {
           <div className="bg-surface border border-border/70 rounded-2xl p-6 flex flex-col md:flex-row items-center gap-8">
             <ComplianceDonut pct={compliance.compliantPct} />
             <div className="flex-1 min-w-0">
-              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
                 Active rate card
               </p>
               <h3 className="mt-1 text-lg font-bold text-ink tracking-tight">
@@ -74,31 +74,31 @@ export default function RateCompliancePage() {
               </h3>
               <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-4">
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-ink/40">Lines evaluated</p>
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-ink/60">Lines evaluated</p>
                   <p className="mt-1 text-lg font-bold tabular-nums text-ink">
                     {formatNumber(compliance.linesEvaluated)}
                   </p>
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-ink/40">Compliant</p>
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-ink/60">Compliant</p>
                   <p className="mt-1 text-lg font-bold tabular-nums text-emerald-700 dark:text-emerald-400">
                     {formatNumber(compliance.compliantCount)}
                   </p>
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-ink/40">Non-compliant</p>
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-ink/60">Non-compliant</p>
                   <p className="mt-1 text-lg font-bold tabular-nums text-red-600 dark:text-red-400">
                     {formatNumber(compliance.nonCompliantCount)}
                   </p>
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-ink/40">Unmatched</p>
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-ink/60">Unmatched</p>
                   <p className="mt-1 text-lg font-bold tabular-nums text-ink/70">
                     {formatNumber(compliance.unmatchedCount)}
                   </p>
                 </div>
               </div>
-              <p className="mt-4 text-[11px] text-ink/45 leading-relaxed">
+              <p className="mt-4 text-[11px] text-ink/60 leading-relaxed">
                 Compliance covers scenario and negotiation rate lines — not time-entry billing.
               </p>
             </div>
@@ -122,7 +122,7 @@ export default function RateCompliancePage() {
                 <table className="w-full text-left text-sm border-collapse">
 
                   <thead>
-                    <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
+                    <tr className="bg-field/50 text-xs font-bold text-ink/60 border-b border-border">
                       <th className="px-6 py-4">Fee earner level</th>
                       <th className="px-6 py-4">Lines</th>
                       <th className="px-6 py-4">Compliant</th>
@@ -145,10 +145,10 @@ export default function RateCompliancePage() {
                           <td className="px-6 py-3.5 tabular-nums text-emerald-700 font-medium dark:text-emerald-400">
                             {formatNumber(level.compliantCount)}
                           </td>
-                          <td className={`px-6 py-3.5 tabular-nums ${level.belowCardCount > 0 ? "text-red-600 font-bold" : "text-ink/50"} dark:text-red-400`}>
+                          <td className={`px-6 py-3.5 tabular-nums ${level.belowCardCount > 0 ? "text-red-600 font-bold" : "text-ink/60"} dark:text-red-400`}>
                             {formatNumber(level.belowCardCount)}
                           </td>
-                          <td className={`px-6 py-3.5 tabular-nums ${level.aboveCardCount > 0 ? "text-amber-600 font-bold" : "text-ink/50"} dark:text-amber-400`}>
+                          <td className={`px-6 py-3.5 tabular-nums ${level.aboveCardCount > 0 ? "text-amber-600 font-bold" : "text-ink/60"} dark:text-amber-400`}>
                             {formatNumber(level.aboveCardCount)}
                           </td>
                           <td className="px-6 py-3.5 tabular-nums text-ink/80">

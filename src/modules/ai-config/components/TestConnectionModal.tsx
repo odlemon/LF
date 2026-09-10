@@ -42,7 +42,7 @@ export function TestConnectionModal({
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
-            <span className="text-sm font-semibold text-ink/55">
+            <span className="text-sm font-semibold text-ink/60">
               Testing connection to {config.displayName}...
             </span>
           </div>
@@ -56,7 +56,7 @@ export function TestConnectionModal({
                 <h4 className="text-lg font-bold text-ink leading-tight">
                   Connection Successful
                 </h4>
-                <div className="flex flex-col gap-1 text-xs text-ink/55">
+                <div className="flex flex-col gap-1 text-xs text-ink/60">
                   <p>{config.displayName} responded in {testResult.responseTimeMs}ms</p>
                   <p className="font-semibold text-ink/80">Model: {testResult.modelName || config.modelName}</p>
                 </div>
@@ -67,7 +67,7 @@ export function TestConnectionModal({
                 <h4 className="text-lg font-bold text-ink leading-tight">
                   Connection Failed
                 </h4>
-                <div className="flex flex-col gap-2 text-xs text-ink/55 max-w-xs">
+                <div className="flex flex-col gap-2 text-xs text-ink/60 max-w-xs">
                   <p className="font-medium text-red-700 bg-red-50/50 p-2.5 rounded-xl border border-red-100/50 break-words max-h-24 overflow-y-auto rates-scrollable">
                     {testResult.message || "Connection failed with a blank error response."}
                   </p>

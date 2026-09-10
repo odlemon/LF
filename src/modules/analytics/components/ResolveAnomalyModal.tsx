@@ -58,7 +58,7 @@ function ResolveAnomalyForm({
         <span className="text-xs font-bold text-ink/70">
           {formatAnomalyType(anomaly.anomalyType)}
         </span>
-        <span className="text-[11px] text-ink/40">· {anomaly.uid.slice(0, 8)}</span>
+        <span className="text-[11px] text-ink/60">· {anomaly.uid.slice(0, 8)}</span>
       </div>
 
       {anomaly.aiDescription && (
@@ -70,7 +70,7 @@ function ResolveAnomalyForm({
       {error && <FormError message={error} className="mb-0" />}
 
       <div className="flex flex-col gap-1.5">
-        <label className="text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1">
+        <label className="text-[10px] font-bold text-ink/60 uppercase tracking-wider pl-1">
           Resolution note <span className="text-red-600 dark:text-red-400">*</span>
         </label>
         <Textarea

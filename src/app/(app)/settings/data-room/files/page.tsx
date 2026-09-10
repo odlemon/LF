@@ -86,7 +86,7 @@ export default function FileStoragePage() {
   const getFileIcon = (contentType: string) => {
     if (contentType.includes("pdf")) return <HiDocumentText className="w-5 h-5 text-red-500" />;
     if (contentType.includes("spreadsheet") || contentType.includes("excel") || contentType.includes("csv"))
-      return <HiTable className="w-5 h-5 text-ink/55" />;
+      return <HiTable className="w-5 h-5 text-ink/60" />;
     if (contentType.includes("image")) return <HiPhotograph className="w-5 h-5 text-blue-500" />;
     if (contentType.includes("json") || contentType.includes("xml") || contentType.includes("text"))
       return <HiCode className="w-5 h-5 text-indigo-500" />;
@@ -94,7 +94,7 @@ export default function FileStoragePage() {
       return <HiDocumentReport className="w-5 h-5 text-blue-600" />;
     if (contentType.includes("presentation"))
       return <HiPresentationChartBar className="w-5 h-5 text-orange-500" />;
-    return <HiDocumentText className="w-5 h-5 text-ink/40" />;
+    return <HiDocumentText className="w-5 h-5 text-ink/60" />;
   };
 
   const formatFileSize = (bytes: number) => {
@@ -125,7 +125,7 @@ export default function FileStoragePage() {
         styles = "bg-hover text-ink/80 border-border";
         break;
       case "INACTIVE":
-        styles = "bg-canvas text-ink/55 border-border";
+        styles = "bg-canvas text-ink/60 border-border";
         break;
       case "PENDING":
         styles = "bg-amber-50 text-amber-700 border-amber-200";
@@ -134,7 +134,7 @@ export default function FileStoragePage() {
         styles = "bg-red-50 text-red-700 border-red-200";
         break;
       case "DELETED":
-        styles = "bg-canvas text-ink/40 border-border line-through";
+        styles = "bg-canvas text-ink/60 border-border line-through";
         break;
     }
     return (
@@ -172,7 +172,7 @@ export default function FileStoragePage() {
           <h1 className="text-2xl font-bold text-ink tracking-tight flex items-center gap-2">
             <HiCloudUpload className="w-7 h-7 text-primary" /> File Storage
           </h1>
-          <p className="text-sm text-ink/55 mt-1">
+          <p className="text-sm text-ink/60 mt-1">
             Manage files stored in your firm&apos;s MinIO object storage. Upload, download, or remove files.
           </p>
         </div>
@@ -220,13 +220,13 @@ export default function FileStoragePage() {
           <table className="min-w-full divide-y divide-gray-100 text-xs">
             <thead className="bg-field">
               <tr>
-                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">File Name</th>
-                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Type</th>
-                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Size</th>
-                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Status</th>
-                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Uploaded</th>
-                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Uploaded By</th>
-                <th className="px-5 py-4 text-right font-bold text-ink/55 uppercase tracking-wider w-28">Actions</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">File Name</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Type</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Size</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Status</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Uploaded</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Uploaded By</th>
+                <th className="px-5 py-4 text-right font-bold text-ink/60 uppercase tracking-wider w-28">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 font-semibold text-ink/80">
@@ -256,12 +256,12 @@ export default function FileStoragePage() {
               ) : files.length === 0 ? (
                 <tr>
                   <td colSpan={7} className="px-5 py-16 text-center">
-                    <div className="flex flex-col items-center gap-3 text-ink/40">
+                    <div className="flex flex-col items-center gap-3 text-ink/60">
                       <div className="w-14 h-14 rounded-2xl bg-field border border-border flex items-center justify-center">
                         <HiCloudUpload className="w-7 h-7 text-gray-300" />
                       </div>
                       <span className="text-sm font-semibold">No files uploaded yet.</span>
-                      <span className="text-xs text-ink/40">
+                      <span className="text-xs text-ink/60">
                         Click &quot;Upload File&quot; to store a file in object storage.
                       </span>
                       <Button
@@ -287,7 +287,7 @@ export default function FileStoragePage() {
                           >
                             {file.fileName}
                           </span>
-                          <span className="text-[10px] text-ink/40 font-medium">
+                          <span className="text-[10px] text-ink/60 font-medium">
                             {file.bucketName}
                           </span>
                         </div>
@@ -324,14 +324,14 @@ export default function FileStoragePage() {
                           <a
                             href={dataRoomApi.getDownloadUrl(file.uid)}
                             download={file.fileName}
-                            className="p-1.5 hover:bg-canvas rounded-lg text-ink/40 hover:text-primary transition-colors cursor-pointer"
+                            className="p-1.5 hover:bg-canvas rounded-lg text-ink/60 hover:text-primary transition-colors cursor-pointer"
                             title="Download file"
                           >
                             <HiDownload className="w-4 h-4" />
                           </a>
                           <button
                             onClick={() => setConfirmDeleteUid(file.uid)}
-                            className="p-1.5 hover:bg-red-50 rounded-lg text-ink/40 hover:text-red-700 transition-colors cursor-pointer"
+                            className="p-1.5 hover:bg-red-50 rounded-lg text-ink/60 hover:text-red-700 transition-colors cursor-pointer"
                             title="Delete file"
                           >
                             <HiTrash className="w-4 h-4" />
@@ -348,9 +348,9 @@ export default function FileStoragePage() {
 
         {/* Footer summary */}
         {!isLoading && !error && files.length > 0 && (
-          <div className="px-5 py-3 border-t border-border bg-field/30 flex items-center justify-between text-[11px] font-semibold text-ink/55">
+          <div className="px-5 py-3 border-t border-border bg-field/30 flex items-center justify-between text-[11px] font-semibold text-ink/60">
             <span>{files.length} file{files.length !== 1 ? "s" : ""} stored</span>
-            <span className="text-ink/40">
+            <span className="text-ink/60">
               Total: {formatFileSize(files.reduce((acc, f) => acc + f.fileSize, 0))}
             </span>
           </div>

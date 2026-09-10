@@ -72,7 +72,7 @@ export function FeeEarnerLevelFormModal({
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 text-ink/40 hover:text-ink/65 p-1 rounded-lg hover:bg-field transition-colors"
+          className="absolute top-4 right-4 text-ink/60 hover:text-ink/65 p-1 rounded-lg hover:bg-field transition-colors"
         >
           <HiX className="w-5 h-5" />
         </button>
@@ -128,7 +128,7 @@ export function FeeEarnerLevelFormModal({
               className="px-5 py-2.5 bg-field border border-border rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface transition-all text-ink"
               required
             />
-            <span className="text-xs text-ink/55 mt-0.5">
+            <span className="text-xs text-ink/60 mt-0.5">
               Lower number = more senior. Partner might be 1, Associate might be 3.
             </span>
           </div>
@@ -146,7 +146,7 @@ export function FeeEarnerLevelFormModal({
               step="1"
               className="px-5 py-2.5 bg-field border border-border rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface transition-all text-ink"
             />
-            <span className="text-xs text-ink/55 mt-0.5">
+            <span className="text-xs text-ink/60 mt-0.5">
               What this level costs the firm per hour — salary, on-costs and overhead. Not the
               billing rate. Margin is estimated rather than costed until every level has one.
             </span>

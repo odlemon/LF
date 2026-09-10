@@ -114,7 +114,7 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
       <div>
         <Link
           href="/clients"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-ink/55 hover:text-ink transition-colors mb-4 py-1.5 -mt-1.5 rounded"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-ink/60 hover:text-ink transition-colors mb-4 py-1.5 -mt-1.5 rounded"
         >
           <HiArrowLeft className="w-3.5 h-3.5" />
           Back to Clients
@@ -124,7 +124,7 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
             <h1 className="text-2xl font-bold text-ink tracking-tight">{client.name}</h1>
             <div className="flex items-center gap-2.5 mt-2">
               <ClientTierBadge tier={client.tier} />
-              <span className="text-xs text-ink/55 font-medium capitalize">
+              <span className="text-xs text-ink/60 font-medium capitalize">
                 {client.type.toLowerCase().replace("_", " ")}
               </span>
             </div>
@@ -255,19 +255,19 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
           ) : (
             <div className="grid grid-cols-2 gap-y-5 text-sm text-ink">
               <div className="flex flex-col gap-0.5">
-                <span className="text-xs font-bold text-ink/55 uppercase tracking-wider">Primary Contact</span>
+                <span className="text-xs font-bold text-ink/60 uppercase tracking-wider">Primary Contact</span>
                 <span className="font-semibold text-ink">{client.contactName}</span>
               </div>
               
               <div className="flex flex-col gap-0.5">
-                <span className="text-xs font-bold text-ink/55 uppercase tracking-wider">Country</span>
+                <span className="text-xs font-bold text-ink/60 uppercase tracking-wider">Country</span>
                 <span className="font-semibold text-ink">{client.country}</span>
               </div>
 
               <div className="flex flex-col gap-0.5 col-span-2">
-                <span className="text-xs font-bold text-ink/55 uppercase tracking-wider">Contact Email</span>
+                <span className="text-xs font-bold text-ink/60 uppercase tracking-wider">Contact Email</span>
                 <span className="font-medium text-ink/80 flex items-center gap-1.5">
-                  <HiMail className="w-4 h-4 text-ink/40" />
+                  <HiMail className="w-4 h-4 text-ink/60" />
                   {client.contactEmail}
                 </span>
               </div>
@@ -289,7 +289,7 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
 
           <div className="flex flex-col gap-3">
             {portalUsers.length === 0 ? (
-              <div className="text-center py-6 bg-field border border-dashed border-border rounded-xl text-xs text-ink/55">
+              <div className="text-center py-6 bg-field border border-dashed border-border rounded-xl text-xs text-ink/60">
                 No portal users configured. Click &apos;Invite&apos; to authorize client representatives.
               </div>
             ) : (
@@ -299,12 +299,12 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
                   className="p-3.5 border border-border hover:border-border rounded-xl flex items-center justify-between gap-4 transition-all"
                 >
                   <div className="flex items-start gap-2.5 min-w-0">
-                    <div className="w-8 h-8 rounded-lg bg-field flex items-center justify-center text-ink/40 shrink-0">
+                    <div className="w-8 h-8 rounded-lg bg-field flex items-center justify-center text-ink/60 shrink-0">
                       <HiUser className="w-4 h-4" />
                     </div>
                     <div className="min-w-0 flex flex-col">
                       <span className="text-xs font-bold text-ink truncate leading-tight">{user.name}</span>
-                      <span className="text-[10px] text-ink/55 truncate mt-0.5">{user.email}</span>
+                      <span className="text-[10px] text-ink/60 truncate mt-0.5">{user.email}</span>
                     </div>
                   </div>
                   <div className="flex items-center gap-2 shrink-0">
@@ -328,7 +328,7 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
                               toast.success("Invite link copied — share it with the client contact.");
                             }}
                             title="Copy invite link (no email is sent automatically yet — share this link directly)"
-                            className="p-1.5 hover:bg-field rounded-lg text-ink/40 hover:text-primary transition-colors"
+                            className="p-1.5 hover:bg-field rounded-lg text-ink/60 hover:text-primary transition-colors"
                           >
                             <HiLink className="w-3.5 h-3.5" />
                           </button>
@@ -361,13 +361,13 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
               <HiLockOpen className="w-5 h-5 text-primary" />
               Invite Client Contact
             </h3>
-            <p className="text-xs text-ink/55 mb-4">
+            <p className="text-xs text-ink/60 mb-4">
               Authorize {client.name} contacts to view pricing requests, scoping, and negotiate bids directly.
             </p>
 
             <form onSubmit={handleInviteUser} className="flex flex-col gap-4">
               <div className="flex flex-col gap-1">
-                <label className="text-[10px] font-bold text-ink/55 uppercase tracking-wider">
+                <label className="text-[10px] font-bold text-ink/60 uppercase tracking-wider">
                   Contact Name
                 </label>
                 <input aria-label="Contact Name"
@@ -381,7 +381,7 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
               </div>
 
               <div className="flex flex-col gap-1">
-                <label className="text-[10px] font-bold text-ink/55 uppercase tracking-wider">
+                <label className="text-[10px] font-bold text-ink/60 uppercase tracking-wider">
                   Contact Email
                 </label>
                 <input aria-label="Contact Email"

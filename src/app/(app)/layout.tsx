@@ -101,7 +101,7 @@ function FirmAuthGuard({ children }: { children: React.ReactNode }) {
         style={PLATFORM_THEME_VARS[theme]}
       >
         <p className="text-lg font-semibold text-ink">Can&apos;t reach Lysp right now</p>
-        <p className="max-w-sm text-sm leading-relaxed text-ink/55">
+        <p className="max-w-sm text-sm leading-relaxed text-ink/60">
           You are still signed in. The workspace could not confirm your session — usually a
           restart that clears in under a minute.
         </p>

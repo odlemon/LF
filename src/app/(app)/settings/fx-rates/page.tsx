@@ -56,7 +56,7 @@ export default function FxRatesPage() {
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-ink tracking-tight">FX Rates</h1>
-          <p className="text-sm text-ink/55 mt-1">
+          <p className="text-sm text-ink/60 mt-1">
             Exchange rates used to normalize revenue across offices and currencies into the
             firm&apos;s reporting currency.
           </p>
@@ -94,7 +94,7 @@ export default function FxRatesPage() {
             <table className="w-full text-left text-sm border-collapse">
 
               <thead>
-                <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
+                <tr className="bg-field/50 text-xs font-bold text-ink/60 border-b border-border">
                   <th className="px-6 py-4">Pair</th>
                   <th className="px-6 py-4">Rate</th>
                   <th className="px-6 py-4">As of</th>
@@ -120,14 +120,14 @@ export default function FxRatesPage() {
                       <div className="flex items-center justify-end gap-2.5">
                         <button
                           onClick={() => handleEdit(rate)}
-                          className="p-2 text-ink/50 hover:text-ink hover:bg-hover rounded-full transition-all"
+                          className="p-2 text-ink/60 hover:text-ink hover:bg-hover rounded-full transition-all"
                           aria-label="Edit"
                         >
                           <HiPencil className="w-4 h-4" />
                         </button>
                         <button
                           onClick={() => handleDelete(rate)}
-                          className="p-2 text-ink/50 hover:text-red-600 hover:bg-hover rounded-full transition-all dark:text-red-400"
+                          className="p-2 text-ink/60 hover:text-red-600 hover:bg-hover rounded-full transition-all dark:text-red-400"
                           aria-label="Delete"
                         >
                           <HiTrash className="w-4 h-4" />

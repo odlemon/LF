@@ -34,7 +34,7 @@ export function RateCardEditor({
     return (
       <div className="py-10 text-center">
         <p className="text-sm font-semibold text-ink">No rate lines</p>
-        <p className="mt-1 text-xs text-ink/45">
+        <p className="mt-1 text-xs text-ink/60">
           This round does not include a fee earner breakdown.
         </p>
       </div>
@@ -44,10 +44,10 @@ export function RateCardEditor({
   return (
     <div className="animate-fade-in">
       <div className="mb-3 flex items-baseline justify-between gap-3 border-b border-border/50 pb-3">
-        <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35">
+        <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
           Fee earner mix
         </p>
-        <p className="text-[11px] tabular-nums text-ink/40">
+        <p className="text-[11px] tabular-nums text-ink/60">
           {totalHours.toLocaleString(undefined, { maximumFractionDigits: 1 })} hrs
           <span className="mx-1.5 text-ink/20">·</span>
           {formatMoney(totalFees, currency)}
@@ -72,14 +72,14 @@ export function RateCardEditor({
                 <p className="truncate text-[15px] font-semibold tracking-tight text-ink">
                   {row.feeEarnerLevelName}
                 </p>
-                <p className="mt-0.5 text-[11px] tabular-nums text-ink/40">
+                <p className="mt-0.5 text-[11px] tabular-nums text-ink/60">
                   Line {formatMoney(lineTotal, currency)}
                   {delta != null && Math.abs(delta) >= 0.5 && (
                     <span
                       className={
                         delta < 0
                           ? "ml-2 font-semibold text-emerald-700"
-                          : "ml-2 font-semibold text-ink/45"
+                          : "ml-2 font-semibold text-ink/60"
                       }
                     >
                       {delta < 0 ? "↓" : "↑"} {formatRate(Math.abs(delta), currency)}
@@ -90,7 +90,7 @@ export function RateCardEditor({
               </div>
 
               <div className="text-right">
-                <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-ink/30">
+                <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-ink/60">
                   Hours
                 </p>
                 <p className="mt-0.5 text-sm tabular-nums text-ink/65">
@@ -101,7 +101,7 @@ export function RateCardEditor({
               </div>
 
               <div className="text-right">
-                <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-ink/30">
+                <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-ink/60">
                   {editable ? "Your rate" : "Rate"}
                 </p>
                 {editable && onChange ? (
@@ -121,18 +121,18 @@ export function RateCardEditor({
                       }}
                       className="h-9 w-[5.75rem] rounded-lg border border-border bg-field px-2 text-right text-sm font-semibold tabular-nums text-ink focus:outline-none focus:ring-2 focus:ring-primary/15"
                     />
-                    <span className="text-[11px] text-ink/35">/hr</span>
+                    <span className="text-[11px] text-ink/60">/hr</span>
                   </div>
                 ) : (
                   <p className="mt-0.5 text-[15px] font-semibold tabular-nums tracking-tight text-ink">
                     {formatRate(row.hourlyRate, currency)}
-                    <span className="ml-1 text-[11px] font-normal text-ink/35">
+                    <span className="ml-1 text-[11px] font-normal text-ink/60">
                       /hr
                     </span>
                   </p>
                 )}
                 {compareAgainst && prior != null && !editable && (
-                  <p className="mt-0.5 text-[10px] tabular-nums text-ink/35">
+                  <p className="mt-0.5 text-[10px] tabular-nums text-ink/60">
                     {compareLabel} {formatRate(prior, currency)}
                   </p>
                 )}

@@ -150,13 +150,13 @@ export default function ApprovalsPage() {
       />
       <div className="relative p-5 sm:p-8 max-w-4xl mx-auto w-full flex flex-col gap-6 animate-fade-in">
         <header>
-          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
             {isPartner ? "Your desk" : "Firm queue"}
           </p>
           <h1 className="mt-2 text-2xl sm:text-3xl font-semibold tracking-tight text-ink">
             Approvals
           </h1>
-          <p className="mt-2 text-sm text-ink/50 max-w-xl leading-relaxed">
+          <p className="mt-2 text-sm text-ink/60 max-w-xl leading-relaxed">
             {isPartner
               ? "Everything assigned to you — pending review, returned for correction, approved, and rejected."
               : "Firm-wide partner reviews across every status."}
@@ -195,7 +195,7 @@ export default function ApprovalsPage() {
         ) : items.length === 0 ? (
           <div className="rounded-2xl border border-border/70 bg-surface px-6 py-14 text-center">
             <p className="text-sm font-semibold text-ink/70">{emptyCopy.title}</p>
-            <p className="mt-2 text-xs text-ink/40 max-w-sm mx-auto leading-relaxed">
+            <p className="mt-2 text-xs text-ink/60 max-w-sm mx-auto leading-relaxed">
               {emptyCopy.body}
             </p>
           </div>
@@ -222,7 +222,7 @@ export default function ApprovalsPage() {
                         <div className="flex flex-wrap items-center gap-2 mb-1.5">
                           <ScenarioStatusBadge status={item.status} size="sm" />
                           {!isPartner && item.assignedPartnerName && (
-                            <span className="text-[11px] text-ink/40">
+                            <span className="text-[11px] text-ink/60">
                               → {item.assignedPartnerName}
                             </span>
                           )}
@@ -230,11 +230,11 @@ export default function ApprovalsPage() {
                         <p className="text-sm font-semibold text-ink tracking-tight">
                           {item.matterTitle}
                         </p>
-                        <p className="mt-1 text-xs text-ink/45">
+                        <p className="mt-1 text-xs text-ink/60">
                           {item.scenarioName} ·{" "}
                           {item.pricingModel?.replace(/_/g, " ")}
                         </p>
-                        <p className="mt-2 text-[11px] text-ink/35">
+                        <p className="mt-2 text-[11px] text-ink/60">
                           From {item.submittedByEmail || "team"}
                           {item.submittedAt
                             ? ` · submitted ${new Date(item.submittedAt).toLocaleString()}`
@@ -244,7 +244,7 @@ export default function ApprovalsPage() {
                             : ""}
                         </p>
                         {note && (
-                          <p className="mt-2 text-[12px] text-ink/55 line-clamp-2 leading-relaxed border-l-2 border-ink/15 pl-2.5">
+                          <p className="mt-2 text-[12px] text-ink/60 line-clamp-2 leading-relaxed border-l-2 border-ink/15 pl-2.5">
                             {note}
                           </p>
                         )}
@@ -253,7 +253,7 @@ export default function ApprovalsPage() {
                         <p className="text-base font-semibold text-ink tabular-nums">
                           {formatMoney(Number(item.grossFees), item.currency)}
                         </p>
-                        <p className="mt-1 text-[11px] font-semibold text-ink/40 tabular-nums">
+                        <p className="mt-1 text-[11px] font-semibold text-ink/60 tabular-nums">
                           {Number(item.marginPct).toFixed(1)}% margin
                         </p>
                       </div>

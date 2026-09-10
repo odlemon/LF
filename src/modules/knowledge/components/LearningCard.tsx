@@ -38,7 +38,7 @@ export function LearningCard({
       <div className="flex items-start gap-3">
         <span
           className={`mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full ${
-            captured ? "bg-ink text-on-primary" : "bg-field text-ink/50"
+            captured ? "bg-ink text-on-primary" : "bg-field text-ink/60"
           }`}
           aria-hidden
         >
@@ -66,18 +66,18 @@ export function LearningCard({
               <Badge variant="neutral">{learning.clientType.replace(/_/g, " ")}</Badge>
             )}
             <span className="text-[11px] text-ink/35">·</span>
-            <span className="text-[11px] font-medium text-ink/45">
+            <span className="text-[11px] font-medium text-ink/60">
               {captured ? "From a closed negotiation" : learning.loggedByName || "Added by hand"}
             </span>
             {learning.matterReference && (
               <>
                 <span className="text-[11px] text-ink/35">·</span>
-                <span className="font-mono text-[11px] text-ink/45">
+                <span className="font-mono text-[11px] text-ink/60">
                   {learning.matterReference}
                 </span>
               </>
             )}
-            <span className="ml-auto shrink-0 text-[11px] text-ink/40">
+            <span className="ml-auto shrink-0 text-[11px] text-ink/60">
               {formatDate(learning.createdAt)}
             </span>
           </div>

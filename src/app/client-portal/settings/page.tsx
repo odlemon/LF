@@ -33,7 +33,7 @@ function ToggleRow({
     <label className="flex cursor-pointer items-start justify-between gap-4 py-3.5">
       <div className="min-w-0">
         <p className="text-sm font-semibold text-ink">{label}</p>
-        <p className="mt-0.5 text-xs leading-relaxed text-ink/45">{description}</p>
+        <p className="mt-0.5 text-xs leading-relaxed text-ink/60">{description}</p>
       </div>
       <button
         type="button"
@@ -86,13 +86,13 @@ export default function ClientSettingsPage() {
         />
 
         <section>
-          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
             Appearance
           </p>
           <div className="mt-3 flex items-center justify-between gap-4 border-y border-border/50 py-4">
             <div>
               <p className="text-sm font-semibold text-ink">Theme</p>
-              <p className="mt-0.5 text-xs text-ink/45">
+              <p className="mt-0.5 text-xs text-ink/60">
                 Currently {theme === "dark" ? "dark" : "light"} mode
               </p>
             </div>
@@ -101,7 +101,7 @@ export default function ClientSettingsPage() {
         </section>
 
         <section id="security" className="scroll-mt-8">
-          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
             Security
           </p>
           {user?.mustChangePassword && (
@@ -110,13 +110,13 @@ export default function ClientSettingsPage() {
               credential.
             </p>
           )}
-          <p className="mt-2 text-sm text-ink/50">
+          <p className="mt-2 text-sm text-ink/60">
             Change the password for <span className="font-semibold text-ink">{user?.email}</span>.
             Minimum 8 characters.
           </p>
           <div className="mt-4 space-y-3">
             <label className="block">
-              <span className="mb-1.5 block text-[11px] font-semibold text-ink/55">
+              <span className="mb-1.5 block text-[11px] font-semibold text-ink/60">
                 Current password
               </span>
               <input
@@ -128,7 +128,7 @@ export default function ClientSettingsPage() {
               />
             </label>
             <label className="block">
-              <span className="mb-1.5 block text-[11px] font-semibold text-ink/55">
+              <span className="mb-1.5 block text-[11px] font-semibold text-ink/60">
                 New password
               </span>
               <input
@@ -140,7 +140,7 @@ export default function ClientSettingsPage() {
               />
             </label>
             <label className="block">
-              <span className="mb-1.5 block text-[11px] font-semibold text-ink/55">
+              <span className="mb-1.5 block text-[11px] font-semibold text-ink/60">
                 Confirm new password
               </span>
               <input
@@ -191,10 +191,10 @@ export default function ClientSettingsPage() {
         </section>
 
         <section>
-          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
             Notifications
           </p>
-          <p className="mt-1 text-xs text-ink/45">
+          <p className="mt-1 text-xs text-ink/60">
             Saved on this device until firm-wide email preferences are available.
           </p>
           <div className="mt-2 divide-y divide-border/50 border-y border-border/50">
@@ -220,13 +220,13 @@ export default function ClientSettingsPage() {
         </section>
 
         <section>
-          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
             Session
           </p>
           <div className="mt-3 flex flex-wrap items-center justify-between gap-3 border-y border-border/50 py-4">
             <div>
               <p className="text-sm font-semibold text-ink">Sign out of this workspace</p>
-              <p className="mt-0.5 text-xs text-ink/45">
+              <p className="mt-0.5 text-xs text-ink/60">
                 Ends your session on this browser.
               </p>
             </div>

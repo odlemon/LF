@@ -106,7 +106,7 @@ export function FooterSection() {
         <div className="py-12 sm:py-14 grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-8">
           {COLUMNS.map((col) => (
             <div key={col.title}>
-              <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-white/35">
+              <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-white/45">
                 {col.title}
               </p>
               <ul className="mt-5 flex flex-col gap-3">
@@ -142,25 +142,25 @@ export function FooterSection() {
 
         {/* Bottom bar */}
         <div className="py-8 border-t border-white/[0.08] flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-          <p className="text-[12px] text-white/35">
+          <p className="text-[12px] text-white/45">
             © {year} Lysp. All rights reserved.
           </p>
           <div className="flex flex-wrap gap-x-6 gap-y-2">
             <Link
               href="/privacy"
-              className="text-[12px] text-white/40 hover:text-white/70 transition-colors cursor-pointer py-1.5 -my-1.5"
+              className="text-[12px] text-white/45 hover:text-white/70 transition-colors cursor-pointer py-1.5 -my-1.5"
             >
               Privacy Policy
             </Link>
             <Link
               href="/contact"
-              className="text-[12px] text-white/40 hover:text-white/70 transition-colors cursor-pointer py-1.5 -my-1.5"
+              className="text-[12px] text-white/45 hover:text-white/70 transition-colors cursor-pointer py-1.5 -my-1.5"
             >
               Contact
             </Link>
             <Link
               href="/security"
-              className="text-[12px] text-white/40 hover:text-white/70 transition-colors cursor-pointer py-1.5 -my-1.5"
+              className="text-[12px] text-white/45 hover:text-white/70 transition-colors cursor-pointer py-1.5 -my-1.5"
             >
               Security
             </Link>

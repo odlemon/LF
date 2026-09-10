@@ -167,7 +167,7 @@ export default function PortalNegotiationDetailPage() {
         <button
           type="button"
           onClick={() => router.push("/client-portal/negotiations")}
-          className="rounded-lg p-2 text-ink/50 hover:bg-hover hover:text-ink"
+          className="rounded-lg p-2 text-ink/60 hover:bg-hover hover:text-ink"
           aria-label="Back"
         >
           <HiArrowLeft className="h-5 w-5" />
@@ -179,7 +179,7 @@ export default function PortalNegotiationDetailPage() {
             </h1>
             <NegotiationStatusBadge status={detail.status} />
           </div>
-          <p className="mt-0.5 text-xs text-ink/45">
+          <p className="mt-0.5 text-xs text-ink/60">
             {formatMoney(detail.latestGrossFees, currency)}
             {detail.responseDeadline
               ? ` · respond by ${formatDateTime(detail.responseDeadline)}`
@@ -191,7 +191,7 @@ export default function PortalNegotiationDetailPage() {
             type="button"
             onClick={() => setMobilePane("coach")}
             className={`rounded-full px-3 py-1.5 text-[11px] font-semibold ${
-              mobilePane === "coach" ? "bg-surface text-ink shadow-sm" : "text-ink/45"
+              mobilePane === "coach" ? "bg-surface text-ink shadow-sm" : "text-ink/60"
             }`}
           >
             Coach
@@ -200,7 +200,7 @@ export default function PortalNegotiationDetailPage() {
             type="button"
             onClick={() => setMobilePane("rates")}
             className={`rounded-full px-3 py-1.5 text-[11px] font-semibold ${
-              mobilePane === "rates" ? "bg-surface text-ink shadow-sm" : "text-ink/45"
+              mobilePane === "rates" ? "bg-surface text-ink shadow-sm" : "text-ink/60"
             }`}
           >
             Rates
@@ -308,7 +308,7 @@ export default function PortalNegotiationDetailPage() {
                   className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold transition-colors ${
                     rail === t.id
                       ? "bg-ink text-canvas"
-                      : "text-ink/50 hover:bg-hover hover:text-ink"
+                      : "text-ink/60 hover:bg-hover hover:text-ink"
                   }`}
                 >
                   <Icon className="h-3.5 w-3.5" />
@@ -323,7 +323,7 @@ export default function PortalNegotiationDetailPage() {
               <div className="space-y-7 animate-fade-in">
                 {detail.coverMessage && (
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
                       From the firm
                     </p>
                     <p className="mt-2 border-l-2 border-ink/15 pl-3.5 text-[15px] leading-relaxed text-ink/75">
@@ -334,7 +334,7 @@ export default function PortalNegotiationDetailPage() {
 
                 {detail.scopeSummary && (
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
                       Scope
                     </p>
                     <ul className="mt-3 space-y-3">
@@ -357,7 +357,7 @@ export default function PortalNegotiationDetailPage() {
                                   {title}
                                 </p>
                                 {body && (
-                                  <p className="mt-0.5 text-[13px] leading-relaxed text-ink/55">
+                                  <p className="mt-0.5 text-[13px] leading-relaxed text-ink/60">
                                     {body}
                                   </p>
                                 )}
@@ -381,7 +381,7 @@ export default function PortalNegotiationDetailPage() {
 
                   <div className="mt-6 mb-4 flex items-end justify-between gap-3">
                     <div>
-                      <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+                      <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
                         {counterMode ? "Your counter" : "Fee earner detail"}
                       </p>
                       {counterMode && (
@@ -389,7 +389,7 @@ export default function PortalNegotiationDetailPage() {
                           <p className="mt-1 text-2xl font-semibold tracking-tight tabular-nums text-ink">
                             {formatMoney(draftTotal, currency)}
                           </p>
-                          <p className="mt-1 text-[12px] text-ink/45">
+                          <p className="mt-1 text-[12px] text-ink/60">
                             Estimated fees at the rates below
                           </p>
                         </>

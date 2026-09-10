@@ -175,7 +175,7 @@ export default function NegotiationDetailPage() {
           <button
             type="button"
             onClick={() => router.push("/negotiations")}
-            className="mt-0.5 rounded-lg p-2 text-ink/50 hover:bg-hover hover:text-ink"
+            className="mt-0.5 rounded-lg p-2 text-ink/60 hover:bg-hover hover:text-ink"
             aria-label="Back"
           >
             <HiArrowLeft className="h-5 w-5" />
@@ -187,7 +187,7 @@ export default function NegotiationDetailPage() {
               </h1>
               <NegotiationStatusBadge status={detail.status} />
             </div>
-            <p className="mt-0.5 truncate text-xs text-ink/45">
+            <p className="mt-0.5 truncate text-xs text-ink/60">
               {detail.clientName}
               {detail.portalUserEmail ? ` · ${detail.portalUserEmail}` : ""}
               <span className="mx-1.5 text-ink/20">·</span>
@@ -195,7 +195,7 @@ export default function NegotiationDetailPage() {
                 {formatMoney(detail.latestGrossFees, currency)}
               </span>
               {detail.latestMarginPct != null && (
-                <span className="ml-1.5 tabular-nums text-ink/40">
+                <span className="ml-1.5 tabular-nums text-ink/60">
                   {Number(detail.latestMarginPct).toFixed(1)}% margin
                 </span>
               )}
@@ -217,7 +217,7 @@ export default function NegotiationDetailPage() {
               className={`rounded-full px-3 py-1.5 text-xs font-semibold ${
                 mobilePane === t.id
                   ? "bg-ink text-canvas"
-                  : "text-ink/50 hover:text-ink"
+                  : "text-ink/60 hover:text-ink"
               }`}
             >
               {t.label}
@@ -368,7 +368,7 @@ export default function NegotiationDetailPage() {
                   className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold transition-colors ${
                     rail === t.id
                       ? "bg-ink text-canvas"
-                      : "text-ink/50 hover:bg-hover hover:text-ink"
+                      : "text-ink/60 hover:bg-hover hover:text-ink"
                   }`}
                 >
                   <Icon className="h-3.5 w-3.5" />
@@ -383,7 +383,7 @@ export default function NegotiationDetailPage() {
               <div className="space-y-6 animate-fade-in">
                 {detail.scopeSummary && (
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
                       Scope
                     </p>
                     <ul className="mt-3 space-y-3">
@@ -406,7 +406,7 @@ export default function NegotiationDetailPage() {
                                   {title}
                                 </p>
                                 {body && (
-                                  <p className="mt-0.5 text-[13px] leading-relaxed text-ink/55">
+                                  <p className="mt-0.5 text-[13px] leading-relaxed text-ink/60">
                                     {body}
                                   </p>
                                 )}
@@ -431,7 +431,7 @@ export default function NegotiationDetailPage() {
 
                   <div className="mt-6 mb-4 flex items-end justify-between gap-3">
                     <div>
-                      <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+                      <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
                         {mode === "counter" ? "Revised rates" : "Fee earner detail"}
                       </p>
                       {mode === "counter" && (

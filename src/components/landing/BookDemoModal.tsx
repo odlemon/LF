@@ -27,7 +27,7 @@ const ROLES = [
 
 const FIELD =
   "w-full rounded-xl border border-black/10 bg-white px-4 py-2.5 text-[15px] text-[#0a0a0a] placeholder-[#0a0a0a]/35 outline-none transition-colors focus-visible:ring-4 focus-visible:ring-[#0a0a0a]/15 focus-visible:border-[#0a0a0a] disabled:opacity-60";
-const LABEL = "block text-[12px] font-semibold tracking-wide text-[#0a0a0a]/55 mb-1.5";
+const LABEL = "block text-[12px] font-semibold tracking-wide text-[#0a0a0a]/60 mb-1.5";
 
 interface BookDemoContextValue {
   openBookDemo: (source?: string) => void;
@@ -147,7 +147,7 @@ function BookDemoModal({
           type="button"
           onClick={onClose}
           aria-label="Close"
-          className="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full text-[#0a0a0a]/40 transition-colors hover:bg-black/5 hover:text-[#0a0a0a]"
+          className="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full text-[#0a0a0a]/60 transition-colors hover:bg-black/5 hover:text-[#0a0a0a]"
         >
           <HiX className="h-5 w-5" />
         </button>
@@ -163,7 +163,7 @@ function BookDemoModal({
               <span className="font-semibold text-[#0a0a0a]">{workEmail}</span> shortly, usually
               within one working day.
             </p>
-            <p className="mt-5 text-[12px] text-[#0a0a0a]/40">
+            <p className="mt-5 text-[12px] text-[#0a0a0a]/60">
               Reference <span className="tabular-nums">{reference}</span>
             </p>
             <button
@@ -176,7 +176,7 @@ function BookDemoModal({
           </div>
         ) : (
           <>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#0a0a0a]/35">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#0a0a0a]/60">
               Book a demo
             </p>
             <h2
@@ -185,7 +185,7 @@ function BookDemoModal({
             >
               See Lysp on your own matters.
             </h2>
-            <p className="mt-2 text-[14px] leading-relaxed text-[#0a0a0a]/55">
+            <p className="mt-2 text-[14px] leading-relaxed text-[#0a0a0a]/60">
               Thirty minutes, your rate card, and a matter you priced recently. We will show you
               what Lysp would have proposed, and why.
             </p>
@@ -292,7 +292,7 @@ function BookDemoModal({
 
                 <div>
                   <label className={LABEL} htmlFor="bd-phone">
-                    Phone <span className="font-normal text-[#0a0a0a]/35">(optional)</span>
+                    Phone <span className="font-normal text-[#0a0a0a]/60">(optional)</span>
                   </label>
                   <input
                     id="bd-phone"
@@ -334,7 +334,7 @@ function BookDemoModal({
               )}
 
               <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <p className="text-[12px] leading-relaxed text-[#0a0a0a]/40">
+                <p className="text-[12px] leading-relaxed text-[#0a0a0a]/60">
                   We use these details only to arrange your demo.
                 </p>
                 <button

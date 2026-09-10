@@ -115,7 +115,7 @@ export function ClientPortalTopBar({ onMenuClick }: { onMenuClick?: () => void }
       >
         <div className="border-b border-border/60 px-3.5 py-2.5 sm:hidden">
           <p className="truncate text-sm font-semibold text-ink">{user?.contactName}</p>
-          <p className="truncate text-[11px] text-ink/45">{user?.email}</p>
+          <p className="truncate text-[11px] text-ink/60">{user?.email}</p>
         </div>
         <button
           type="button"
@@ -160,7 +160,7 @@ export function ClientPortalTopBar({ onMenuClick }: { onMenuClick?: () => void }
       </button>
 
       <div className="min-w-0 flex-1">
-        <p className="truncate text-[11px] font-semibold tracking-wide text-ink/35">
+        <p className="truncate text-[11px] font-semibold tracking-wide text-ink/60">
           {user?.clientName || "Secure client workspace"}
         </p>
         <p className="truncate text-xs font-semibold text-ink/70 sm:hidden">
@@ -193,7 +193,7 @@ export function ClientPortalTopBar({ onMenuClick }: { onMenuClick?: () => void }
               <span className="block text-[12px] font-semibold leading-tight text-ink">
                 {user?.contactName || "Account"}
               </span>
-              <span className="block truncate text-[10px] leading-tight text-ink/45">
+              <span className="block truncate text-[10px] leading-tight text-ink/60">
                 {user?.email}
               </span>
             </span>

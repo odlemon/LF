@@ -149,7 +149,7 @@ export function DetectorTuningPanel() {
     <section className="rounded-2xl border border-border/70 bg-surface p-5">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <div>
-          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
             Detector performance
           </p>
           <h3 className="mt-1 text-base font-semibold tracking-tight text-ink">
@@ -162,7 +162,7 @@ export function DetectorTuningPanel() {
               className={`rounded-full px-2.5 py-1 text-xs ${
                 effectiveness.overallFalsePositiveRatePct >= 50
                   ? "bg-amber-50 text-amber-700"
-                  : "bg-field text-ink/55"
+                  : "bg-field text-ink/60"
               }`}
             >
               {effectiveness.overallFalsePositiveRatePct}% dismissed as valid
@@ -176,7 +176,7 @@ export function DetectorTuningPanel() {
         </div>
       </div>
 
-      <p className="mt-2 text-xs text-ink/50">
+      <p className="mt-2 text-xs text-ink/60">
         When a reviewer closes a flag as a valid exception they are saying the detector was
         wrong. A detector routinely dismissed is mis-tuned for this firm — the rate only appears
         once it has been judged {effectiveness.minReviewedForRate} times.
@@ -185,7 +185,7 @@ export function DetectorTuningPanel() {
       <div className="mt-4 overflow-x-auto">
         <table className="w-full min-w-[620px] text-sm">
           <thead>
-            <tr className="border-b border-border text-left text-[11px] text-ink/45">
+            <tr className="border-b border-border text-left text-[11px] text-ink/60">
               <th className="pb-2 font-medium">Detector</th>
               <th className="pb-2 text-right font-medium">Flags</th>
               <th className="pb-2 text-right font-medium">Open</th>
@@ -198,15 +198,15 @@ export function DetectorTuningPanel() {
             {effectiveness.detectors.map((d) => (
               <tr key={d.anomalyType} className="border-b border-border/50 last:border-0">
                 <td className="py-2.5">
-                  <span className={d.enabled ? "text-ink" : "text-ink/40 line-through"}>
+                  <span className={d.enabled ? "text-ink" : "text-ink/60 line-through"}>
                     {d.anomalyType.replace(/_/g, " ").toLowerCase()}
                   </span>
                   {!d.enabled && (
-                    <span className="ml-2 rounded-full bg-field px-2 py-0.5 text-[10px] uppercase tracking-wide text-ink/45">
+                    <span className="ml-2 rounded-full bg-field px-2 py-0.5 text-[10px] uppercase tracking-wide text-ink/60">
                       off
                     </span>
                   )}
-                  <p className="mt-0.5 text-[11px] text-ink/45">{d.verdict}</p>
+                  <p className="mt-0.5 text-[11px] text-ink/60">{d.verdict}</p>
                 </td>
                 <td className="py-2.5 text-right tabular-nums text-ink/70">{d.totalFlags}</td>
                 <td className="py-2.5 text-right tabular-nums text-ink/70">{d.open}</td>
@@ -216,7 +216,7 @@ export function DetectorTuningPanel() {
                 </td>
                 <td className="py-2.5 text-right tabular-nums">
                   {d.falsePositiveRatePct === null ? (
-                    <span className="text-ink/25">—</span>
+                    <span className="text-ink/60">—</span>
                   ) : (
                     <span
                       className={
@@ -235,7 +235,7 @@ export function DetectorTuningPanel() {
 
       {open && canManage && (
         <div className="mt-6 border-t border-border pt-5">
-          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
             Tuning
           </p>
           <div className="mt-4 flex flex-col gap-5">
@@ -281,7 +281,7 @@ export function DetectorTuningPanel() {
                             }
                             className={fieldClassName}
                           />
-                          <span className="text-[11px] text-ink/40">{t.hint}</span>
+                          <span className="text-[11px] text-ink/60">{t.hint}</span>
                         </div>
                       ))}
                     </div>
@@ -299,7 +299,7 @@ export function DetectorTuningPanel() {
               {saving ? "Saving…" : "Save settings"}
             </Button>
           </div>
-          <p className="mt-3 text-[11px] text-ink/40">
+          <p className="mt-3 text-[11px] text-ink/60">
             Changes affect matters scanned from now on. Existing flags are left as they are —
             silently re-judging past decisions would rewrite a record people have already acted on.
           </p>

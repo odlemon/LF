@@ -119,7 +119,7 @@ export default function VolumeDiscountsPage() {
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-ink tracking-tight">Volume Discounts</h1>
-          <p className="text-sm text-ink/55 mt-1">Manage tiered discount programs and client spend tracking.</p>
+          <p className="text-sm text-ink/60 mt-1">Manage tiered discount programs and client spend tracking.</p>
         </div>
         <Button
           variant="primary"
@@ -144,15 +144,15 @@ export default function VolumeDiscountsPage() {
         <>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="bg-surface border border-border/70 rounded-2xl p-5">
-              <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/35">Active Programs</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">Active Programs</p>
               <p className="mt-2 text-2xl font-semibold tabular-nums text-ink">{activePrograms.length}</p>
             </div>
             <div className="bg-surface border border-border/70 rounded-2xl p-5">
-              <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/35">Draft Programs</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">Draft Programs</p>
               <p className="mt-2 text-2xl font-semibold tabular-nums text-ink">{draftPrograms.length}</p>
             </div>
             <div className="bg-surface border border-border/70 rounded-2xl p-5">
-              <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/35">Total Savings Issued</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">Total Savings Issued</p>
               <p className="mt-2 text-2xl font-semibold tabular-nums text-ink">
                 {formatMoney(
                   Object.values(dashboards).reduce((sum, d) => sum + d.savingsToDate, 0),
@@ -164,8 +164,8 @@ export default function VolumeDiscountsPage() {
 
           {activePrograms.length === 0 && draftPrograms.length === 0 ? (
             <div className="text-center py-16 bg-surface border border-border/60 rounded-2xl p-6">
-              <HiOutlineTrendingDown className="w-10 h-10 text-ink/25 mx-auto mb-3" />
-              <p className="text-sm text-ink/55">No volume discount programs yet.</p>
+              <HiOutlineTrendingDown className="w-10 h-10 text-ink/60 mx-auto mb-3" />
+              <p className="text-sm text-ink/60">No volume discount programs yet.</p>
               <Button
                 variant="primary"
                 onClick={() => setIsCreateOpen(true)}
@@ -181,7 +181,7 @@ export default function VolumeDiscountsPage() {
                 <table className="w-full text-left text-sm border-collapse">
 
                   <thead>
-                    <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
+                    <tr className="bg-field/50 text-xs font-bold text-ink/60 border-b border-border">
                       <th className="px-6 py-4">Client</th>
                       <th className="px-6 py-4">Period</th>
                       <th className="px-6 py-4">Status</th>

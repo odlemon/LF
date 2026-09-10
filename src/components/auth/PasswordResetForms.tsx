@@ -16,7 +16,7 @@ import { ENDPOINTS } from "@/lib/api/endpoints";
 
 const FIELD =
   "w-full rounded-xl border border-black/10 bg-white px-4 py-2.5 text-[15px] text-[#0a0a0a] placeholder-[#0a0a0a]/35 outline-none transition-colors focus-visible:ring-4 focus-visible:ring-[#0a0a0a]/15 focus-visible:border-[#0a0a0a] disabled:opacity-60";
-const LABEL = "block text-[12px] font-semibold tracking-wide text-[#0a0a0a]/55 mb-1.5";
+const LABEL = "block text-[12px] font-semibold tracking-wide text-[#0a0a0a]/60 mb-1.5";
 const BUTTON =
   "w-full inline-flex items-center justify-center rounded-full bg-[#0a0a0a] px-6 py-2.5 text-[15px] font-semibold text-[#fefefc] transition-opacity hover:opacity-90 disabled:opacity-50 cursor-pointer";
 
@@ -102,7 +102,7 @@ export function ForgotPasswordForm({ portal, backHref }: { portal: boolean; back
       </form>
       <Link
         href={backHref}
-        className="mt-6 inline-block text-[14px] font-semibold text-[#0a0a0a]/55 hover:text-[#0a0a0a] py-1.5"
+        className="mt-6 inline-block text-[14px] font-semibold text-[#0a0a0a]/60 hover:text-[#0a0a0a] py-1.5"
       >
         Back to sign in
       </Link>

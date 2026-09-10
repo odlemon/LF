@@ -79,7 +79,7 @@ export default function GuardrailsPage() {
     <div className="p-8 max-w-5xl w-full mx-auto flex flex-col gap-6">
       <div>
         <h1 className="text-2xl font-bold text-ink tracking-tight">Pricing Guardrails</h1>
-        <p className="text-sm text-ink/55 mt-1">
+        <p className="text-sm text-ink/60 mt-1">
           Configure safety parameters, automatic bid validation thresholds, and discount controls.
         </p>
       </div>
@@ -91,7 +91,7 @@ export default function GuardrailsPage() {
         </div>
         <div>
           <h2 className="text-sm font-bold text-ink">What are Pricing Guardrails?</h2>
-          <p className="text-xs text-ink/55 mt-1.5 leading-relaxed">
+          <p className="text-xs text-ink/60 mt-1.5 leading-relaxed">
             Guardrails are firm-wide safety limits rather than a user-defined list. When budgeting a new matter, the system automatically checks your proposed profit margins and discounts against these policy thresholds to determine the required approval level (Auto-Approved, Partner Review, or Pricing Committee).
           </p>
         </div>
@@ -113,7 +113,7 @@ export default function GuardrailsPage() {
                 onClick={() => setIsEditing(true)}
                 className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold text-ink/70 bg-field hover:bg-canvas border border-border/60 transition-all cursor-pointer select-none"
               >
-                <HiLockClosed className="w-3.5 h-3.5 text-ink/55" />
+                <HiLockClosed className="w-3.5 h-3.5 text-ink/60" />
                 <span>Locked (Read-Only)</span>
               </button>
             ) : (
@@ -158,9 +158,9 @@ export default function GuardrailsPage() {
                   className={inputStyles(isEditing)}
                   required
                 />
-                <span className="absolute right-4 top-2.5 text-ink/40 font-medium">%</span>
+                <span className="absolute right-4 top-2.5 text-ink/60 font-medium">%</span>
               </div>
-              <span className="text-[10px] text-ink/55 leading-normal">
+              <span className="text-[10px] text-ink/60 leading-normal">
                 Bids falling below this margin threshold are unprofitable and trigger automatic rejection tags.
               </span>
             </div>
@@ -190,9 +190,9 @@ export default function GuardrailsPage() {
                     className={inputStyles(isEditing)}
                     required
                   />
-                  <span className="absolute right-4 top-2.5 text-ink/40 font-medium">%</span>
+                  <span className="absolute right-4 top-2.5 text-ink/60 font-medium">%</span>
                 </div>
-                <span className="text-[10px] text-ink/55 leading-normal">
+                <span className="text-[10px] text-ink/60 leading-normal">
                   Maximum discount allowed without oversight.
                 </span>
               </div>
@@ -212,9 +212,9 @@ export default function GuardrailsPage() {
                     className={inputStyles(isEditing)}
                     required
                   />
-                  <span className="absolute right-4 top-2.5 text-ink/40 font-medium">%</span>
+                  <span className="absolute right-4 top-2.5 text-ink/60 font-medium">%</span>
                 </div>
-                <span className="text-[10px] text-ink/55 leading-normal">
+                <span className="text-[10px] text-ink/60 leading-normal">
                   Maximum discount a partner can authorize.
                 </span>
               </div>
@@ -222,7 +222,7 @@ export default function GuardrailsPage() {
 
             {/* Live Interactive Escalation Path Preview */}
             <div className="bg-surface rounded-xl border border-border p-4 mt-2">
-              <span className="text-[10px] font-extrabold text-ink/40 uppercase tracking-widest block mb-3">
+              <span className="text-[10px] font-extrabold text-ink/60 uppercase tracking-widest block mb-3">
                 Live Escalation Path Simulation
               </span>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -231,7 +231,7 @@ export default function GuardrailsPage() {
                     Auto-Approve
                   </span>
                   <span className="text-[13px] font-extrabold text-ink mt-1">0% to {discountAutoMaxPct}%</span>
-                  <span className="text-[10px] text-ink/55 leading-normal mt-0.5">Cleared instantly without additional oversight.</span>
+                  <span className="text-[10px] text-ink/60 leading-normal mt-0.5">Cleared instantly without additional oversight.</span>
                 </div>
                 
                 <div className="p-3.5 bg-amber-50/20 border border-amber-100 rounded-2xl flex flex-col gap-1">
@@ -239,7 +239,7 @@ export default function GuardrailsPage() {
                     Partner Sign-Off
                   </span>
                   <span className="text-[13px] font-extrabold text-ink mt-1">{discountAutoMaxPct}% to {discountPartnerMaxPct}%</span>
-                  <span className="text-[10px] text-ink/55 leading-normal mt-0.5">Requires partner authorization to onboard.</span>
+                  <span className="text-[10px] text-ink/60 leading-normal mt-0.5">Requires partner authorization to onboard.</span>
                 </div>
 
                 <div className="p-3.5 bg-purple-50/20 border border-purple-100 rounded-2xl flex flex-col gap-1">
@@ -247,7 +247,7 @@ export default function GuardrailsPage() {
                     Committee Review
                   </span>
                   <span className="text-[13px] font-extrabold text-ink mt-1">Above {discountPartnerMaxPct}%</span>
-                  <span className="text-[10px] text-ink/55 leading-normal mt-0.5">Requires global Pricing Committee review.</span>
+                  <span className="text-[10px] text-ink/60 leading-normal mt-0.5">Requires global Pricing Committee review.</span>
                 </div>
               </div>
             </div>
@@ -262,11 +262,11 @@ export default function GuardrailsPage() {
                 type="text"
                 value="COMMITTEE"
                 disabled
-                className="w-full pl-5 pr-10 py-2.5 bg-canvas border border-border rounded-full text-sm text-ink/55 font-bold tracking-wider cursor-not-allowed select-none"
+                className="w-full pl-5 pr-10 py-2.5 bg-canvas border border-border rounded-full text-sm text-ink/60 font-bold tracking-wider cursor-not-allowed select-none"
               />
-              <HiLockClosed className="absolute right-4 top-3.5 text-ink/40 w-4 h-4" />
+              <HiLockClosed className="absolute right-4 top-3.5 text-ink/60 w-4 h-4" />
             </div>
-            <span className="text-[10px] text-ink/40">
+            <span className="text-[10px] text-ink/60">
               Discounts exceeding partner limits require global Pricing Committee approval (system-locked).
             </span>
           </div>
@@ -328,7 +328,7 @@ export default function GuardrailsPage() {
                 <div className="flex flex-col gap-0.5">
                   <span className="text-[10px] font-extrabold text-red-800 uppercase tracking-wide dark:text-red-400">Auto-Reject Zone</span>
                   <span className="text-xs font-bold text-ink mt-0.5">Margins 0% to {rejectLimit}%</span>
-                  <span className="text-[10px] text-ink/55 mt-0.5 leading-normal">
+                  <span className="text-[10px] text-ink/60 mt-0.5 leading-normal">
                     Matter proposals falling below this minimum are automatically flagged as unprofitable and blocked.
                   </span>
                 </div>
@@ -340,7 +340,7 @@ export default function GuardrailsPage() {
                 <div className="flex flex-col gap-0.5">
                   <span className="text-[10px] font-extrabold text-amber-800 uppercase tracking-wide dark:text-amber-400">Partner Oversight Zone</span>
                   <span className="text-xs font-bold text-ink mt-0.5">Margins {rejectLimit}% to {warningLimit}%</span>
-                  <span className="text-[10px] text-ink/55 mt-0.5 leading-normal">
+                  <span className="text-[10px] text-ink/60 mt-0.5 leading-normal">
                     Bids trigger partner-level margin validation and review warnings before matter onboarding.
                   </span>
                 </div>
@@ -348,11 +348,11 @@ export default function GuardrailsPage() {
 
               {/* Safe card */}
               <div className="p-4 bg-hover/40 border border-border/60 rounded-2xl flex gap-3">
-                <HiCheckCircle className="w-5 h-5 text-ink/55 shrink-0 mt-0.5" />
+                <HiCheckCircle className="w-5 h-5 text-ink/60 shrink-0 mt-0.5" />
                 <div className="flex flex-col gap-0.5">
                   <span className="text-[10px] font-extrabold text-ink uppercase tracking-wide">Safe Approval Zone</span>
                   <span className="text-xs font-bold text-ink mt-0.5">Margins above {warningLimit}%</span>
-                  <span className="text-[10px] text-ink/55 mt-0.5 leading-normal">
+                  <span className="text-[10px] text-ink/60 mt-0.5 leading-normal">
                     Matter qualifies for standard profit margins. Approved instantly without additional margin review.
                   </span>
                 </div>

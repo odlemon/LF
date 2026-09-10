@@ -66,22 +66,22 @@ export function ScopeConfidenceCard({
       <div className="relative p-5 sm:p-6">
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
-            <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35">
+            <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
               Proposed engagement
             </p>
             <div className="mt-2 flex items-baseline gap-2 flex-wrap">
               <span className="text-3xl sm:text-4xl font-semibold tracking-tight text-ink tabular-nums">
                 {totalHours > 0 ? Math.round(totalHours).toLocaleString() : "—"}
               </span>
-              <span className="text-sm font-medium text-ink/40">hours</span>
+              <span className="text-sm font-medium text-ink/60">hours</span>
             </div>
-            <p className="mt-1.5 text-xs text-ink/45">
+            <p className="mt-1.5 text-xs text-ink/60">
               {phaseCount} phase{phaseCount === 1 ? "" : "s"} structured across fee-earner levels
             </p>
           </div>
           <div className="flex flex-col items-center gap-1">
             <ConfidenceRing pct={pct} />
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-ink/40">
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-ink/60">
               Confidence
             </span>
           </div>

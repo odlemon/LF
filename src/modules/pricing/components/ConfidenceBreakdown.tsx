@@ -47,14 +47,14 @@ export function ConfidenceBreakdown({
   const [open, setOpen] = useState(false);
 
   if (confidence == null) {
-    return <span className={onDark ? "text-on-primary/40" : "text-ink/40"}>—</span>;
+    return <span className={onDark ? "text-on-primary/40" : "text-ink/60"}>—</span>;
   }
 
   const parsed = parseDrivers(drivers);
   const triggerTone = onDark
     ? "text-on-primary hover:text-on-primary"
     : compact
-      ? "text-ink/40 hover:text-ink"
+      ? "text-ink/60 hover:text-ink"
       : "text-ink hover:text-ink";
 
   return (
@@ -89,7 +89,7 @@ export function ConfidenceBreakdown({
             <p className="text-xs font-bold text-ink/80">How this is calculated</p>
 
             {!parsed || method === "deterministic-v1" ? (
-              <p className="mt-2 text-[11px] leading-relaxed text-ink/50">
+              <p className="mt-2 text-[11px] leading-relaxed text-ink/60">
                 Generated without AI — score derived from scope and rate card only.
               </p>
             ) : (
@@ -126,7 +126,7 @@ export function ConfidenceBreakdown({
                   </div>
                   <Bar value={parsed.headroomScore} />
                 </div>
-                <p className="text-[10px] text-ink/35 pt-1 border-t border-border/60">
+                <p className="text-[10px] text-ink/60 pt-1 border-t border-border/60">
                   Weighted 35 / 30 / 20 / 15.
                 </p>
               </div>

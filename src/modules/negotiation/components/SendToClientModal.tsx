@@ -67,7 +67,7 @@ export function SendToClientModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-fade-in">
       <div className="bg-surface rounded-2xl border border-border shadow-[0_12px_40px_rgba(0,0,0,0.14)] w-full max-w-md p-6 animate-fade-in-up">
-        <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35">
+        <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
           Client proposal
         </p>
         <h3 className="mt-2 text-lg font-semibold text-ink tracking-tight">
@@ -75,13 +75,13 @@ export function SendToClientModal({
         </h3>
 
         <div className="mt-5 rounded-xl border border-border/70 bg-field/40 px-4 py-3">
-          <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/35">
+          <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">
             Recipient
           </p>
           <p className="mt-1 text-sm font-semibold text-ink tracking-tight">
             {lockedName}
           </p>
-          <p className="mt-0.5 text-xs text-ink/45">
+          <p className="mt-0.5 text-xs text-ink/60">
             {resolving
               ? "Loading portal contact…"
               : portalEmail
@@ -98,7 +98,7 @@ export function SendToClientModal({
         )}
 
         <div className="mt-4">
-          <label className="block text-[11px] font-semibold text-ink/55 mb-1.5">
+          <label className="block text-[11px] font-semibold text-ink/60 mb-1.5">
             Cover message
           </label>
           <textarea aria-label="Cover message"

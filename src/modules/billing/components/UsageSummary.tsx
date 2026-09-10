@@ -34,8 +34,8 @@ export function UsageSummary({ data, loading }: UsageSummaryProps) {
   if (data.length === 0) {
     return (
       <div className="bg-surface border border-border/70 rounded-2xl p-8 text-center">
-        <HiTrendingDown className="w-10 h-10 text-ink/25 mx-auto mb-3" />
-        <p className="text-sm text-ink/55">No usage recorded yet.</p>
+        <HiTrendingDown className="w-10 h-10 text-ink/60 mx-auto mb-3" />
+        <p className="text-sm text-ink/60">No usage recorded yet.</p>
       </div>
     );
   }
@@ -46,7 +46,7 @@ export function UsageSummary({ data, loading }: UsageSummaryProps) {
     <div className="bg-surface border border-border/70 rounded-2xl overflow-hidden">
       <div className="px-6 py-4 border-b border-border/60">
         <h3 className="text-sm font-bold text-ink">Usage by Feature</h3>
-        <p className="text-xs text-ink/50 mt-0.5">
+        <p className="text-xs text-ink/60 mt-0.5">
           Total consumed: <span className="font-semibold tabular-nums">{formatCredits(totalCredits)} credits</span>
         </p>
       </div>
@@ -60,7 +60,7 @@ export function UsageSummary({ data, loading }: UsageSummaryProps) {
             </div>
             <div className="text-right">
               <p className="text-sm font-semibold tabular-nums text-ink">
-                {formatCredits(row.totalCredits)} <span className="text-[10px] font-medium text-ink/40">credits</span>
+                {formatCredits(row.totalCredits)} <span className="text-[10px] font-medium text-ink/60">credits</span>
               </p>
             </div>
           </div>

@@ -79,11 +79,11 @@ export function ThinkingProcess({ steps, live = false }: ThinkingProcessProps) {
           setUserToggled(true);
           setExpanded((v) => !v);
         }}
-        className="group flex items-center gap-2 text-left text-[13px] text-ink/50 hover:text-ink/75 transition-colors py-1"
+        className="group flex items-center gap-2 text-left text-[13px] text-ink/60 hover:text-ink/75 transition-colors py-1"
         aria-expanded={expanded}
       >
         <HiChevronRight
-          className={`w-3.5 h-3.5 shrink-0 text-ink/35 transition-transform duration-200 ${
+          className={`w-3.5 h-3.5 shrink-0 text-ink/60 transition-transform duration-200 ${
             expanded ? "rotate-90" : ""
           }`}
         />
@@ -92,7 +92,7 @@ export function ThinkingProcess({ steps, live = false }: ThinkingProcessProps) {
         ) : (
           <span
             className={`flex h-3.5 w-3.5 items-center justify-center rounded-full shrink-0 ${
-              hasFailure ? "bg-red-500/15 text-red-700" : "bg-ink/8 text-ink/45"
+              hasFailure ? "bg-red-500/15 text-red-700" : "bg-ink/8 text-ink/60"
             }`}
           >
             {hasFailure ? (
@@ -125,7 +125,7 @@ export function ThinkingProcess({ steps, live = false }: ThinkingProcessProps) {
                         className={`flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-semibold ${
                           failed
                             ? "bg-red-500/12 text-red-700"
-                            : "bg-ink/[0.06] text-ink/40"
+                            : "bg-ink/[0.06] text-ink/60"
                         }`}
                       >
                         {failed ? (
@@ -146,14 +146,14 @@ export function ThinkingProcess({ steps, live = false }: ThinkingProcessProps) {
                           ? "text-red-700"
                           : isRunning
                             ? "text-ink/75"
-                            : "text-ink/55"
+                            : "text-ink/60"
                       }`}
                     >
                       {stepTitle(step)}
                     </p>
                     <p
                       className={`mt-0.5 text-[12px] leading-relaxed ${
-                        failed ? "text-red-600/80" : "text-ink/38"
+                        failed ? "text-red-600/80" : "text-ink/60"
                       }`}
                     >
                       {stepDetail(step)}

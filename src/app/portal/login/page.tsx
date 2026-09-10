@@ -45,7 +45,7 @@ function PortalLoginHandler() {
       <div className="w-full max-w-md bg-white rounded-3xl shadow-[0_12px_40px_rgba(0,0,0,0.03)] border border-gray-100 p-8 flex flex-col items-center text-center gap-6 animate-fade-in">
         <div className="relative flex items-center justify-center">
           <div className="w-16 h-16 rounded-full border-4 border-black/[0.08] border-t-[#0a0a0a] animate-spin" />
-          <HiLockClosed className="w-6 h-6 text-[#0a0a0a]/55 absolute" />
+          <HiLockClosed className="w-6 h-6 text-[#0a0a0a]/60 absolute" />
         </div>
         <div>
           <h1 className="text-xl font-bold text-gray-900 mb-1.5">Verifying Invitation</h1>

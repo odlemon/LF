@@ -92,7 +92,7 @@ export function BatchUploadModal({ isOpen, onClose, onUpload }: BatchUploadModal
         )}
 
         <div className="flex flex-col gap-2">
-          <div className="flex justify-between items-center text-xs font-bold text-ink/40 uppercase tracking-wider">
+          <div className="flex justify-between items-center text-xs font-bold text-ink/60 uppercase tracking-wider">
             <span>Selected Files ({selectedFiles.length} / 20)</span>
             {selectedFiles.length < 20 && (
               <button
@@ -119,9 +119,9 @@ export function BatchUploadModal({ isOpen, onClose, onUpload }: BatchUploadModal
               onClick={() => fileInputRef.current?.click()}
               className="border-2 border-dashed border-border hover:border-primary/50 bg-field/20 hover:bg-field p-10 rounded-2xl flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors text-center select-none"
             >
-              <HiDocumentText className="w-8 h-8 text-ink/40" />
+              <HiDocumentText className="w-8 h-8 text-ink/60" />
               <span className="text-sm font-bold text-ink/65">Select files to upload...</span>
-              <span className="text-xs text-ink/40">CSV, Excel, Word, or PDF up to 50MB</span>
+              <span className="text-xs text-ink/60">CSV, Excel, Word, or PDF up to 50MB</span>
             </div>
           ) : (
             <div className="flex flex-col gap-2 max-h-60 overflow-y-auto rates-scrollable pr-1">
@@ -131,12 +131,12 @@ export function BatchUploadModal({ isOpen, onClose, onUpload }: BatchUploadModal
                   className="flex items-center justify-between p-3 bg-field border border-border/40 rounded-xl gap-4 shadow-sm"
                 >
                   <div className="flex items-center gap-2.5 overflow-hidden flex-1">
-                    <HiDocumentText className="w-5 h-5 text-ink/40 shrink-0" />
+                    <HiDocumentText className="w-5 h-5 text-ink/60 shrink-0" />
                     <div className="flex flex-col overflow-hidden">
                       <span className="text-xs font-bold text-ink line-clamp-1 break-all">
                         {file.name}
                       </span>
-                      <span className="text-[10px] font-semibold text-ink/40">
+                      <span className="text-[10px] font-semibold text-ink/60">
                         {formatFileSize(file.size)}
                       </span>
                     </div>
@@ -145,7 +145,7 @@ export function BatchUploadModal({ isOpen, onClose, onUpload }: BatchUploadModal
                     disabled={isUploading}
                     onClick={() => removeFile(idx)}
                     type="button"
-                    className="p-1 hover:bg-hover/50 rounded-lg text-ink/40 hover:text-red-500 cursor-pointer disabled:opacity-50"
+                    className="p-1 hover:bg-hover/50 rounded-lg text-ink/60 hover:text-red-500 cursor-pointer disabled:opacity-50"
                   >
                     <HiX className="w-4 h-4" />
                   </button>

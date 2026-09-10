@@ -15,18 +15,18 @@ export function UsageBreakdownTable({ title, caption, rows, emptyMessage }: Prop
 
   return (
     <div className="rounded-[1.5rem] border border-border bg-surface p-6">
-      <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/35">{title}</p>
-      {caption && <p className="mt-1.5 text-xs text-ink/50">{caption}</p>}
+      <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/60">{title}</p>
+      {caption && <p className="mt-1.5 text-xs text-ink/60">{caption}</p>}
 
       {rows.length === 0 ? (
-        <p className="mt-4 text-sm text-ink/45">
+        <p className="mt-4 text-sm text-ink/60">
           {emptyMessage ?? "Nothing recorded for this period yet."}
         </p>
       ) : (
         <div className="mt-4 overflow-x-auto">
           <table className="w-full min-w-[380px] text-sm">
             <thead>
-              <tr className="border-b border-border text-left text-xs text-ink/45">
+              <tr className="border-b border-border text-left text-xs text-ink/60">
                 <th className="pb-2 font-medium">Bucket</th>
                 <th className="pb-2 text-right font-medium">Events</th>
                 <th className="pb-2 text-right font-medium">AI tokens</th>
@@ -45,7 +45,7 @@ export function UsageBreakdownTable({ title, caption, rows, emptyMessage }: Prop
                     <td className="py-2.5 text-right tabular-nums text-ink/70">
                       {row.tokens.toLocaleString()}
                     </td>
-                    <td className="py-2.5 text-right tabular-nums text-ink/50">
+                    <td className="py-2.5 text-right tabular-nums text-ink/60">
                       {totalTokens > 0 ? `${share.toFixed(1)}%` : "—"}
                     </td>
                   </tr>

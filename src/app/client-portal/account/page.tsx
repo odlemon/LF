@@ -46,22 +46,22 @@ export default function ClientAccountPage() {
             <h2 className="text-xl font-semibold tracking-tight text-ink">
               {user?.contactName}
             </h2>
-            <p className="mt-0.5 text-sm text-ink/50">{user?.clientName}</p>
-            <p className="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-ink/35">
+            <p className="mt-0.5 text-sm text-ink/60">{user?.clientName}</p>
+            <p className="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-ink/60">
               {user?.roleLabel || "Client representative"}
             </p>
           </div>
         </section>
 
         <section>
-          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
             Organisation
           </p>
           <dl className="mt-3 divide-y divide-border/50 border-y border-border/50">
             <div className="flex items-start gap-3 py-3.5">
-              <HiOutlineOfficeBuilding className="mt-0.5 h-4 w-4 shrink-0 text-ink/35" />
+              <HiOutlineOfficeBuilding className="mt-0.5 h-4 w-4 shrink-0 text-ink/60" />
               <div>
-                <dt className="text-[11px] font-semibold uppercase tracking-wide text-ink/35">
+                <dt className="text-[11px] font-semibold uppercase tracking-wide text-ink/60">
                   Company
                 </dt>
                 <dd className="mt-0.5 text-sm font-semibold text-ink">
@@ -70,9 +70,9 @@ export default function ClientAccountPage() {
               </div>
             </div>
             <div className="flex items-start gap-3 py-3.5">
-              <HiOutlineMail className="mt-0.5 h-4 w-4 shrink-0 text-ink/35" />
+              <HiOutlineMail className="mt-0.5 h-4 w-4 shrink-0 text-ink/60" />
               <div>
-                <dt className="text-[11px] font-semibold uppercase tracking-wide text-ink/35">
+                <dt className="text-[11px] font-semibold uppercase tracking-wide text-ink/60">
                   Sign-in email
                 </dt>
                 <dd className="mt-0.5 text-sm font-semibold text-ink">{user?.email}</dd>
@@ -80,9 +80,9 @@ export default function ClientAccountPage() {
             </div>
             {user?.country && (
               <div className="flex items-start gap-3 py-3.5">
-                <HiOutlineGlobe className="mt-0.5 h-4 w-4 shrink-0 text-ink/35" />
+                <HiOutlineGlobe className="mt-0.5 h-4 w-4 shrink-0 text-ink/60" />
                 <div>
-                  <dt className="text-[11px] font-semibold uppercase tracking-wide text-ink/35">
+                  <dt className="text-[11px] font-semibold uppercase tracking-wide text-ink/60">
                     Country
                   </dt>
                   <dd className="mt-0.5 text-sm font-semibold text-ink">{user.country}</dd>
@@ -93,10 +93,10 @@ export default function ClientAccountPage() {
         </section>
 
         <section>
-          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
             Display name
           </p>
-          <p className="mt-1 text-sm text-ink/50">
+          <p className="mt-1 text-sm text-ink/60">
             This is the name shown in the portal. Your email stays as the login identity.
           </p>
           <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-end">
@@ -138,10 +138,10 @@ export default function ClientAccountPage() {
         </section>
 
         <section className="border-t border-border/50 pt-6">
-          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
             Session
           </p>
-          <p className="mt-2 text-sm leading-relaxed text-ink/55">
+          <p className="mt-2 text-sm leading-relaxed text-ink/60">
             You are signed in to a secure Lysp client workspace for{" "}
             <span className="font-semibold text-ink">{user?.clientName}</span>. Only your
             organisation&apos;s proposals and history are visible here — never firm margins or

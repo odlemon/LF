@@ -56,7 +56,7 @@ export default function PricingRequestsPage() {
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-ink tracking-tight">Pricing Requests</h1>
-          <p className="text-sm text-ink/55 mt-1">
+          <p className="text-sm text-ink/60 mt-1">
             Scope matters with AI-assisted conversational intake.
           </p>
         </div>

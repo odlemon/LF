@@ -146,13 +146,13 @@ export default function UsagePage() {
       <div className="relative mx-auto flex w-full max-w-[1200px] flex-col gap-6 px-5 pt-8 sm:gap-7 sm:px-8 sm:pt-10">
         <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between animate-fade-in-up">
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/35">
+            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/60">
               Consumption
             </p>
             <h1 className="mt-2 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
               Usage &amp; Billing
             </h1>
-            <p className="mt-2 max-w-lg text-sm text-ink/50">
+            <p className="mt-2 max-w-lg text-sm text-ink/60">
               What your firm consumed this period, attributed to office, practice area and
               client. Figures come from recorded events, not estimates — AI token counts are
               the exact numbers the model provider returned.
@@ -198,7 +198,7 @@ export default function UsagePage() {
             <div className="rounded-[1.5rem] border border-border bg-surface p-6">
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/35">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/60">
                     Contract
                   </p>
                   {contract ? (
@@ -206,14 +206,14 @@ export default function UsagePage() {
                       <p className="mt-2 text-lg font-semibold text-ink">
                         {contract.contractReference}
                       </p>
-                      <p className="mt-1 text-sm text-ink/50">
+                      <p className="mt-1 text-sm text-ink/60">
                         {contract.contractType} · {contract.currency} ·{" "}
                         {contract.periodStart} to {contract.periodEnd}
                         {contract.renewalDate ? ` · renews ${contract.renewalDate}` : ""}
                       </p>
                     </>
                   ) : (
-                    <p className="mt-2 max-w-md text-sm text-ink/50">
+                    <p className="mt-2 max-w-md text-sm text-ink/60">
                       No contract recorded. Consumption is still metered in full — an
                       entitlement only changes what this page reports it against.
                     </p>
@@ -225,7 +225,7 @@ export default function UsagePage() {
                       className={`rounded-full px-2.5 py-1 text-xs ${
                         contract.billable
                           ? "bg-emerald-50 text-emerald-700"
-                          : "bg-field text-ink/50"
+                          : "bg-field text-ink/60"
                       }`}
                     >
                       {contract.billable ? "Billable" : "Not billable"}
@@ -289,10 +289,10 @@ export default function UsagePage() {
                 />
               ) : (
                 <div className="rounded-[1.5rem] border border-border bg-surface p-6">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/35">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/60">
                     By user
                   </p>
-                  <p className="mt-4 text-sm text-ink/45">
+                  <p className="mt-4 text-sm text-ink/60">
                     Per-person usage is restricted. It needs the USAGE_USER_DETAIL_READ
                     permission, kept separate so firm-level reporting does not expose
                     individual lawyers&apos; activity by default.
@@ -302,19 +302,19 @@ export default function UsagePage() {
             </div>
 
             <div className="rounded-[1.5rem] border border-border bg-surface p-6">
-              <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/35">
+              <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/60">
                 AI detail
               </p>
-              <p className="mt-1.5 text-xs text-ink/50">
+              <p className="mt-1.5 text-xs text-ink/60">
                 Exact provider-reported token counts per model and feature.
               </p>
               {aiDetail.length === 0 ? (
-                <p className="mt-4 text-sm text-ink/45">No AI calls recorded this period.</p>
+                <p className="mt-4 text-sm text-ink/60">No AI calls recorded this period.</p>
               ) : (
                 <div className="mt-4 overflow-x-auto">
                   <table className="w-full min-w-[560px] text-sm">
                     <thead>
-                      <tr className="border-b border-border text-left text-xs text-ink/45">
+                      <tr className="border-b border-border text-left text-xs text-ink/60">
                         <th className="pb-2 font-medium">Provider</th>
                         <th className="pb-2 font-medium">Model</th>
                         <th className="pb-2 font-medium">Feature</th>
@@ -350,19 +350,19 @@ export default function UsagePage() {
             </div>
 
             <div className="rounded-[1.5rem] border border-border bg-surface p-6">
-              <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/35">
+              <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/60">
                 Statement line items
               </p>
-              <p className="mt-1.5 text-xs text-ink/50">
+              <p className="mt-1.5 text-xs text-ink/60">
                 Every metered event type for {period}. This is what the CSV export contains.
               </p>
               {lineItems.length === 0 ? (
-                <p className="mt-4 text-sm text-ink/45">Nothing recorded this period.</p>
+                <p className="mt-4 text-sm text-ink/60">Nothing recorded this period.</p>
               ) : (
                 <div className="mt-4 overflow-x-auto">
                   <table className="w-full min-w-[440px] text-sm">
                     <thead>
-                      <tr className="border-b border-border text-left text-xs text-ink/45">
+                      <tr className="border-b border-border text-left text-xs text-ink/60">
                         <th className="pb-2 font-medium">Event type</th>
                         <th className="pb-2 font-medium">Unit</th>
                         <th className="pb-2 text-right font-medium">Events</th>
@@ -419,7 +419,7 @@ export default function UsagePage() {
 function StatCard({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div className="rounded-2xl border border-border bg-surface p-4">
-      <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">{label}</p>
+      <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">{label}</p>
       <p className="mt-2 text-xl font-semibold tabular-nums text-ink">
         {typeof value === "number" ? value.toLocaleString() : value}
       </p>

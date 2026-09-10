@@ -192,7 +192,7 @@ export function Navbar({ onMenuClick }: NavbarProps = {}) {
           <span className="text-xs font-semibold leading-tight text-ink">
             {user ? `${user.firstName} ${user.lastName}` : "Lysp User"}
           </span>
-          <span className="truncate text-[10px] font-medium text-ink/45">
+          <span className="truncate text-[10px] font-medium text-ink/60">
             {user?.email}
           </span>
           <div className="mt-2 flex flex-wrap gap-1.5">
@@ -214,7 +214,7 @@ export function Navbar({ onMenuClick }: NavbarProps = {}) {
             onClick={() => navigate("/account")}
             className="flex w-full cursor-pointer items-center gap-3 rounded-xl px-3.5 py-2.5 text-left text-xs font-semibold text-ink/70 transition-all hover:bg-hover hover:text-ink"
           >
-            <HiOutlineUserCircle className="h-4 w-4 text-ink/35" />
+            <HiOutlineUserCircle className="h-4 w-4 text-ink/60" />
             Profile
           </button>
           <button
@@ -223,7 +223,7 @@ export function Navbar({ onMenuClick }: NavbarProps = {}) {
             onClick={() => navigate("/settings/preferences")}
             className="flex w-full cursor-pointer items-center gap-3 rounded-xl px-3.5 py-2.5 text-left text-xs font-semibold text-ink/70 transition-all hover:bg-hover hover:text-ink"
           >
-            <HiOutlineCog className="h-4 w-4 text-ink/35" />
+            <HiOutlineCog className="h-4 w-4 text-ink/60" />
             Settings
           </button>
           <button
@@ -232,7 +232,7 @@ export function Navbar({ onMenuClick }: NavbarProps = {}) {
             onClick={() => void handleLogout()}
             className="flex w-full cursor-pointer items-center gap-3 rounded-xl px-3.5 py-2.5 text-left text-xs font-semibold text-ink/70 transition-all hover:bg-hover hover:text-ink"
           >
-            <HiOutlineLogout className="h-4 w-4 text-ink/35" />
+            <HiOutlineLogout className="h-4 w-4 text-ink/60" />
             Sign out
           </button>
         </div>
@@ -277,13 +277,13 @@ export function Navbar({ onMenuClick }: NavbarProps = {}) {
               <span className="text-xs font-semibold leading-tight text-ink">
                 {user ? `${user.firstName} ${user.lastName}` : "Lysp User"}
               </span>
-              <span className="mt-0.5 text-[9px] font-semibold uppercase leading-none tracking-wider text-ink/40">
+              <span className="mt-0.5 text-[9px] font-semibold uppercase leading-none tracking-wider text-ink/60">
                 {primaryRole}
               </span>
             </div>
 
             <HiChevronDown
-              className={`h-4 w-4 text-ink/35 transition-transform duration-300 ${
+              className={`h-4 w-4 text-ink/60 transition-transform duration-300 ${
                 isDropdownOpen ? "rotate-180" : ""
               }`}
             />

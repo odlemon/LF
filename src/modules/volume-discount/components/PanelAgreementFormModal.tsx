@@ -65,7 +65,7 @@ export function PanelAgreementFormModal({ isOpen, onClose, onSave }: PanelAgreem
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 text-ink/40 hover:text-ink/65 p-1 rounded-lg hover:bg-field transition-colors"
+          className="absolute top-4 right-4 text-ink/60 hover:text-ink/65 p-1 rounded-lg hover:bg-field transition-colors"
         >
           <HiX className="w-5 h-5" />
         </button>

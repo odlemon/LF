@@ -143,7 +143,7 @@ export function BlogArticleContent({ post }: { post: BlogPost }) {
 
       <section className="border-t border-black/[0.06]">
         <div className="mx-auto max-w-[680px] px-5 sm:px-8 py-14 sm:py-16">
-          <p className="text-[11px] font-semibold tracking-[0.28em] uppercase text-[#0a0a0a]/35 mb-8">
+          <p className="text-[11px] font-semibold tracking-[0.28em] uppercase text-[#0a0a0a]/60 mb-8">
             Continue reading
           </p>
           <ul className="space-y-0 divide-y divide-black/[0.08] border-y border-black/[0.08]">
@@ -158,7 +158,7 @@ export function BlogArticleContent({ post }: { post: BlogPost }) {
                     <span className="text-[15px] sm:text-base font-semibold tracking-tight group-hover:opacity-70 transition-opacity text-balance py-1.5 -my-1.5">
                       {p.title}
                     </span>
-                    <HiArrowRight className="h-4 w-4 shrink-0 text-[#0a0a0a]/30 transition-transform group-hover:translate-x-0.5" />
+                    <HiArrowRight className="h-4 w-4 shrink-0 text-[#0a0a0a]/60 transition-transform group-hover:translate-x-0.5" />
                   </Link>
                 </li>
               ))}

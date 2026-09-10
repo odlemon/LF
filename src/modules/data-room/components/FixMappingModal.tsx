@@ -131,7 +131,7 @@ export function FixMappingModal({ isOpen, onClose, document, onSuccess }: FixMap
   return (
     <Modal isOpen={isOpen} onClose={onClose} title={`Fix Column Mapping - ${document.originalFilename}`} size="2xl">
       <div className="flex flex-col gap-5 text-ink/90">
-        <p className="text-xs font-semibold text-ink/55 leading-relaxed">
+        <p className="text-xs font-semibold text-ink/60 leading-relaxed">
           The system could not automatically map all columns in this file. Review the mapping below and correct any mismatches, then re-process.
         </p>
 
@@ -142,9 +142,9 @@ export function FixMappingModal({ isOpen, onClose, document, onSuccess }: FixMap
 
               <thead className="bg-field">
                 <tr>
-                  <th className="px-4 py-2.5 text-left font-bold text-ink/55 uppercase tracking-wider">System Field</th>
-                  <th className="px-4 py-2.5 text-left font-bold text-ink/55 uppercase tracking-wider">File Column Match</th>
-                  <th className="px-4 py-2.5 text-left font-bold text-ink/55 uppercase tracking-wider w-20">Status</th>
+                  <th className="px-4 py-2.5 text-left font-bold text-ink/60 uppercase tracking-wider">System Field</th>
+                  <th className="px-4 py-2.5 text-left font-bold text-ink/60 uppercase tracking-wider">File Column Match</th>
+                  <th className="px-4 py-2.5 text-left font-bold text-ink/60 uppercase tracking-wider w-20">Status</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100 font-semibold">
@@ -210,7 +210,7 @@ export function FixMappingModal({ isOpen, onClose, document, onSuccess }: FixMap
             onChange={(e) => setSaveTemplate(e.target.checked)}
             className="w-4 h-4 text-primary bg-canvas border-border rounded focus:ring-primary/20 cursor-pointer"
           />
-          <label htmlFor="saveTemplate" className="text-xs font-bold text-ink/55 cursor-pointer">
+          <label htmlFor="saveTemplate" className="text-xs font-bold text-ink/60 cursor-pointer">
             Save this mapping as a template for future uploads of this category
           </label>
         </div>

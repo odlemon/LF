@@ -30,7 +30,7 @@ function ToolBubble({ bubble }: { bubble: AdvisorBubble }) {
     <div className="flex justify-start mb-2.5">
       <div className="flex items-center gap-2 rounded-full border border-border bg-field/60 px-4 py-1.5 shadow-sm">
         {bubble.toolStatus === "running" ? (
-          <HiCog className="w-3.5 h-3.5 text-ink/50 animate-spin" />
+          <HiCog className="w-3.5 h-3.5 text-ink/60 animate-spin" />
         ) : bubble.toolStatus === "success" ? (
           <HiCheckCircle className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
         ) : (
@@ -38,7 +38,7 @@ function ToolBubble({ bubble }: { bubble: AdvisorBubble }) {
         )}
         <span
           className={`text-[11px] font-semibold ${
-            bubble.toolStatus === "running" ? "text-ink/60" : "text-ink/50"
+            bubble.toolStatus === "running" ? "text-ink/60" : "text-ink/60"
           }`}
         >
           {bubble.toolStatus === "running" ? `${label}…` : label}
@@ -67,7 +67,7 @@ function AiBubble({ bubble }: { bubble: AdvisorBubble }) {
   return (
     <div className="group flex justify-start mb-3.5 flex-col items-start gap-1 w-full">
       <div className="flex items-center gap-2 px-1">
-        <span className="text-[10px] font-semibold uppercase tracking-wider text-ink/35">
+        <span className="text-[10px] font-semibold uppercase tracking-wider text-ink/60">
           Lysp Advisor
         </span>
       </div>
@@ -75,7 +75,7 @@ function AiBubble({ bubble }: { bubble: AdvisorBubble }) {
         {bubble.content?.trim() ? (
           <MarkdownContent content={bubble.content} />
         ) : bubble.streaming ? (
-          <p className="text-sm text-ink/40 italic">Thinking…</p>
+          <p className="text-sm text-ink/60 italic">Thinking…</p>
         ) : null}
         {bubble.streaming && bubble.content?.trim() && (
           <span className="inline-block w-1.5 h-3.5 ml-0.5 bg-ink/40 animate-pulse align-middle" aria-hidden />
@@ -111,7 +111,7 @@ export default function AdvisorPage() {
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
           <div>
             <h1 className="text-2xl font-bold text-ink tracking-tight">Analytics Advisor</h1>
-            <p className="text-sm text-ink/55 mt-1">
+            <p className="text-sm text-ink/60 mt-1">
               Ask anything about your firm&apos;s pricing, margins, win rates and anomalies.
             </p>
           </div>
@@ -145,11 +145,11 @@ export default function AdvisorPage() {
         ) : bubbles.length === 0 ? (
           <div className="h-full flex flex-col items-center justify-center text-center gap-4">
             <div className="w-12 h-12 rounded-full bg-field border border-border flex items-center justify-center">
-              <HiSparkles className="w-5 h-5 text-ink/45" />
+              <HiSparkles className="w-5 h-5 text-ink/60" />
             </div>
             <div>
               <h3 className="text-base font-bold text-ink">How can I help with your analytics?</h3>
-              <p className="mt-1 text-xs text-ink/50 max-w-sm">
+              <p className="mt-1 text-xs text-ink/60 max-w-sm">
                 The advisor queries your firm&apos;s live metrics, anomalies and market data to answer.
               </p>
             </div>

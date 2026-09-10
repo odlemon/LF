@@ -130,7 +130,7 @@ export default function FirmDetailsPage() {
     <div className="p-8 max-w-3xl w-full mx-auto flex flex-col gap-6">
       <div>
         <h1 className="text-2xl font-bold text-ink tracking-tight">Firm Settings</h1>
-        <p className="text-sm text-ink/55 mt-1">Configure your enterprise firm profile, registration details, and localization parameters.</p>
+        <p className="text-sm text-ink/60 mt-1">Configure your enterprise firm profile, registration details, and localization parameters.</p>
       </div>
 
       <div className="bg-surface rounded-2xl shadow-sm border border-border/60 overflow-hidden">
@@ -149,7 +149,7 @@ export default function FirmDetailsPage() {
               onClick={() => setIsEditing(true)}
               className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold text-ink/70 bg-field hover:bg-canvas border border-border/60 transition-all cursor-pointer select-none"
             >
-              <HiLockClosed className="w-3.5 h-3.5 text-ink/55" />
+              <HiLockClosed className="w-3.5 h-3.5 text-ink/60" />
               <span>Locked (Read-Only)</span>
             </button>
           ) : (

@@ -77,7 +77,7 @@ export default function ApprovalMatrixPage() {
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-ink tracking-tight">Approval Matrix</h1>
-          <p className="text-sm text-ink/55 mt-1">
+          <p className="text-sm text-ink/60 mt-1">
             Configure the ordered stages a pricing scenario must clear before it is fully
             approved. A stage with a discount or amount trigger only engages when the
             scenario meets or exceeds it — otherwise every scenario passes through it.
@@ -108,7 +108,7 @@ export default function ApprovalMatrixPage() {
                       {index + 1}
                     </span>
                     <div className="flex flex-col gap-1">
-                      <label className="text-[10px] font-bold text-ink/50 uppercase tracking-wider">
+                      <label className="text-[10px] font-bold text-ink/60 uppercase tracking-wider">
                         Stage name
                       </label>
                       <input aria-label="Stage name"
@@ -125,7 +125,7 @@ export default function ApprovalMatrixPage() {
                       type="button"
                       onClick={() => moveStage(index, -1)}
                       disabled={index === 0}
-                      className="p-2 text-ink/40 hover:text-ink hover:bg-hover rounded-full disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                      className="p-2 text-ink/60 hover:text-ink hover:bg-hover rounded-full disabled:opacity-30 disabled:cursor-not-allowed transition-all"
                       aria-label="Move up"
                     >
                       <HiArrowUp className="w-4 h-4" />
@@ -134,7 +134,7 @@ export default function ApprovalMatrixPage() {
                       type="button"
                       onClick={() => moveStage(index, 1)}
                       disabled={index === draft.length - 1}
-                      className="p-2 text-ink/40 hover:text-ink hover:bg-hover rounded-full disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                      className="p-2 text-ink/60 hover:text-ink hover:bg-hover rounded-full disabled:opacity-30 disabled:cursor-not-allowed transition-all"
                       aria-label="Move down"
                     >
                       <HiArrowDown className="w-4 h-4" />
@@ -142,7 +142,7 @@ export default function ApprovalMatrixPage() {
                     <button
                       type="button"
                       onClick={() => removeStage(index)}
-                      className="p-2 text-ink/40 hover:text-red-600 hover:bg-hover rounded-full transition-all dark:text-red-400"
+                      className="p-2 text-ink/60 hover:text-red-600 hover:bg-hover rounded-full transition-all dark:text-red-400"
                       aria-label="Remove stage"
                     >
                       <HiTrash className="w-4 h-4" />
@@ -152,7 +152,7 @@ export default function ApprovalMatrixPage() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[10px] font-bold text-ink/50 uppercase tracking-wider">
+                    <label className="text-[10px] font-bold text-ink/60 uppercase tracking-wider">
                       Approver permission
                     </label>
                     <input aria-label="Approver permission"
@@ -163,7 +163,7 @@ export default function ApprovalMatrixPage() {
                     />
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[10px] font-bold text-ink/50 uppercase tracking-wider">
+                    <label className="text-[10px] font-bold text-ink/60 uppercase tracking-wider">
                       Trigger: min discount %
                     </label>
                     <input aria-label="Trigger: min discount %"
@@ -179,7 +179,7 @@ export default function ApprovalMatrixPage() {
                     />
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[10px] font-bold text-ink/50 uppercase tracking-wider">
+                    <label className="text-[10px] font-bold text-ink/60 uppercase tracking-wider">
                       Trigger: min amount
                     </label>
                     <input aria-label="Trigger: min amount"
@@ -214,8 +214,8 @@ export default function ApprovalMatrixPage() {
           </div>
 
           <div className="bg-field/40 border border-border rounded-2xl p-5 flex items-start gap-3">
-            <HiOutlineClipboardCheck className="w-5 h-5 text-ink/40 shrink-0 mt-0.5" />
-            <p className="text-xs text-ink/55 leading-relaxed">
+            <HiOutlineClipboardCheck className="w-5 h-5 text-ink/60 shrink-0 mt-0.5" />
+            <p className="text-xs text-ink/60 leading-relaxed">
               Every firm starts with a default two-stage matrix (Partner, then Finance) that
               matches the approval flow already shown on the pricing workspace. Reconfiguring
               is additive — existing scenarios already mid-approval are unaffected.

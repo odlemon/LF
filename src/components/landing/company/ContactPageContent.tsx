@@ -107,13 +107,13 @@ export function ContactPageContent() {
                 "group grid grid-cols-1 sm:grid-cols-12 gap-3 sm:gap-8 items-center py-8 sm:py-10 border-b border-black/[0.06] last:border-0";
               const inner = (
                 <>
-                  <span className="sm:col-span-1 text-[12px] font-semibold tabular-nums tracking-wider text-[#0a0a0a]/25">
+                  <span className="sm:col-span-1 text-[12px] font-semibold tabular-nums tracking-wider text-[#0a0a0a]/60">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <h2 className="sm:col-span-3 text-[1.35rem] sm:text-xl font-semibold tracking-tight">
                     {channel.title}
                   </h2>
-                  <p className="sm:col-span-5 text-[14px] sm:text-[15px] text-[#0a0a0a]/50 leading-relaxed">
+                  <p className="sm:col-span-5 text-[14px] sm:text-[15px] text-[#0a0a0a]/60 leading-relaxed">
                     {channel.body}
                   </p>
                   <span className="sm:col-span-3 sm:justify-self-end inline-flex items-center gap-2 text-[14px] font-semibold text-[#0a0a0a] group-hover:gap-3 transition-all">
@@ -150,20 +150,20 @@ export function ContactPageContent() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
             <div className="lg:col-span-4">
               <span className="block h-px w-12 bg-[#0a0a0a]/25 mb-5" />
-              <p className="text-[11px] font-semibold tracking-[0.28em] uppercase text-[#0a0a0a]/35">
+              <p className="text-[11px] font-semibold tracking-[0.28em] uppercase text-[#0a0a0a]/60">
                 Write us
               </p>
               <h2 className="mt-4 text-2xl sm:text-3xl font-semibold tracking-tight text-balance leading-[1.1]">
                 Prefer a message?
               </h2>
-              <p className="mt-4 text-[15px] text-[#0a0a0a]/50 leading-relaxed">
+              <p className="mt-4 text-[15px] text-[#0a0a0a]/60 leading-relaxed">
                 We’ll open a draft in your mail app - nothing is stored on this page.
               </p>
             </div>
 
             <form onSubmit={onSubmit} className="lg:col-span-8 space-y-8">
               <div>
-                <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#0a0a0a]/35 mb-4">
+                <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#0a0a0a]/60 mb-4">
                   Regarding
                 </p>
                 <div className="flex flex-wrap gap-x-1 gap-y-2 border-b border-black/[0.08]">
@@ -181,7 +181,7 @@ export function ContactPageContent() {
                       className={`relative px-4 pb-3 text-[14px] font-semibold transition-colors ${
                         intent === opt.id
                           ? "text-[#0a0a0a]"
-                          : "text-[#0a0a0a]/35 hover:text-[#0a0a0a]/60"
+                          : "text-[#0a0a0a]/60 hover:text-[#0a0a0a]/60"
                       }`}
                     >
                       {opt.label}
@@ -195,19 +195,19 @@ export function ContactPageContent() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <label className="block">
-                  <span className="text-[12px] font-semibold tracking-wide text-[#0a0a0a]/40">
+                  <span className="text-[12px] font-semibold tracking-wide text-[#0a0a0a]/60">
                     Name
                   </span>
                   <input
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="mt-2 w-full border-0 border-b border-black/15 bg-transparent px-0 py-3 text-[15px] outline-none focus-visible:ring-4 focus-visible:ring-[#0a0a0a]/15 focus-visible:border-[#0a0a0a] transition-colors placeholder:text-[#0a0a0a]/25"
+                    className="mt-2 w-full border-0 border-b border-black/15 bg-transparent px-0 py-3 text-[15px] outline-none focus-visible:ring-4 focus-visible:ring-[#0a0a0a]/15 focus-visible:border-[#0a0a0a] transition-colors placeholder:text-[#0a0a0a]/60"
                     placeholder="Your name"
                   />
                 </label>
                 <label className="block">
-                  <span className="text-[12px] font-semibold tracking-wide text-[#0a0a0a]/40">
+                  <span className="text-[12px] font-semibold tracking-wide text-[#0a0a0a]/60">
                     Work email
                   </span>
                   <input
@@ -215,26 +215,26 @@ export function ContactPageContent() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="mt-2 w-full border-0 border-b border-black/15 bg-transparent px-0 py-3 text-[15px] outline-none focus-visible:ring-4 focus-visible:ring-[#0a0a0a]/15 focus-visible:border-[#0a0a0a] transition-colors placeholder:text-[#0a0a0a]/25"
+                    className="mt-2 w-full border-0 border-b border-black/15 bg-transparent px-0 py-3 text-[15px] outline-none focus-visible:ring-4 focus-visible:ring-[#0a0a0a]/15 focus-visible:border-[#0a0a0a] transition-colors placeholder:text-[#0a0a0a]/60"
                     placeholder="you@firm.com"
                   />
                 </label>
               </div>
 
               <label className="block">
-                <span className="text-[12px] font-semibold tracking-wide text-[#0a0a0a]/40">
+                <span className="text-[12px] font-semibold tracking-wide text-[#0a0a0a]/60">
                   Firm
                 </span>
                 <input
                   value={firm}
                   onChange={(e) => setFirm(e.target.value)}
-                  className="mt-2 w-full border-0 border-b border-black/15 bg-transparent px-0 py-3 text-[15px] outline-none focus-visible:ring-4 focus-visible:ring-[#0a0a0a]/15 focus-visible:border-[#0a0a0a] transition-colors placeholder:text-[#0a0a0a]/25"
+                  className="mt-2 w-full border-0 border-b border-black/15 bg-transparent px-0 py-3 text-[15px] outline-none focus-visible:ring-4 focus-visible:ring-[#0a0a0a]/15 focus-visible:border-[#0a0a0a] transition-colors placeholder:text-[#0a0a0a]/60"
                   placeholder="Optional"
                 />
               </label>
 
               <label className="block">
-                <span className="text-[12px] font-semibold tracking-wide text-[#0a0a0a]/40">
+                <span className="text-[12px] font-semibold tracking-wide text-[#0a0a0a]/60">
                   Message
                 </span>
                 <textarea
@@ -242,7 +242,7 @@ export function ContactPageContent() {
                   rows={4}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="mt-2 w-full resize-y border-0 border-b border-black/15 bg-transparent px-0 py-3 text-[15px] outline-none focus-visible:ring-4 focus-visible:ring-[#0a0a0a]/15 focus-visible:border-[#0a0a0a] transition-colors placeholder:text-[#0a0a0a]/25"
+                  className="mt-2 w-full resize-y border-0 border-b border-black/15 bg-transparent px-0 py-3 text-[15px] outline-none focus-visible:ring-4 focus-visible:ring-[#0a0a0a]/15 focus-visible:border-[#0a0a0a] transition-colors placeholder:text-[#0a0a0a]/60"
                   placeholder="What should we know?"
                 />
               </label>

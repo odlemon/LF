@@ -38,7 +38,7 @@ export function OutcomesSection() {
           title={
             <>
               On a large matter, a few points of leakage
-              <span className="text-[#0a0a0a]/40"> is a seven-figure story.</span>
+              <span className="text-[#0a0a0a]/60"> is a seven-figure story.</span>
             </>
           }
           description="Am Law 100 overall realization sits near 78%, and most firms still expect write-offs to climb. Here is what that looks like on one common large matter - then across a year of them."
@@ -47,31 +47,31 @@ export function OutcomesSection() {
         <div className="mt-12 sm:mt-16 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-5">
           {/* One matter */}
           <div className="lg:col-span-5 rounded-[1.5rem] border border-black/[0.08] bg-white p-6 sm:p-8 flex flex-col">
-            <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#0a0a0a]/35">
+            <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#0a0a0a]/60">
               One large matter
             </p>
             <p className="mt-4 text-4xl sm:text-5xl font-semibold tracking-tight tabular-nums">
               {SCENARIO.matterFee}
             </p>
-            <p className="mt-2 text-[14px] text-[#0a0a0a]/50">{SCENARIO.matterLabel}</p>
+            <p className="mt-2 text-[14px] text-[#0a0a0a]/60">{SCENARIO.matterLabel}</p>
 
             <div className="mt-8 space-y-5 flex-1">
               <div className="flex items-end justify-between gap-4 border-b border-black/[0.06] pb-4">
                 <div>
-                  <p className="text-[12px] text-[#0a0a0a]/40">Leakage without pricing discipline</p>
-                  <p className="mt-1 text-[13px] text-[#0a0a0a]/55">
+                  <p className="text-[12px] text-[#0a0a0a]/60">Leakage without pricing discipline</p>
+                  <p className="mt-1 text-[13px] text-[#0a0a0a]/60">
                     ~{SCENARIO.leakRate} underprice / write-down pressure
                   </p>
                 </div>
-                <p className="text-2xl sm:text-3xl font-semibold tabular-nums text-[#0a0a0a]/35 line-through decoration-[#0a0a0a]/20">
+                <p className="text-2xl sm:text-3xl font-semibold tabular-nums text-[#0a0a0a]/60 line-through decoration-[#0a0a0a]/20">
                   {SCENARIO.leakPerMatter}
                 </p>
               </div>
 
               <div className="flex items-end justify-between gap-4">
                 <div>
-                  <p className="text-[12px] text-[#0a0a0a]/40">Held with Lysp</p>
-                  <p className="mt-1 text-[13px] text-[#0a0a0a]/55">
+                  <p className="text-[12px] text-[#0a0a0a]/60">Held with Lysp</p>
+                  <p className="mt-1 text-[13px] text-[#0a0a0a]/60">
                     Comps, confidence, and approvals before the fee ships
                   </p>
                 </div>
@@ -83,18 +83,18 @@ export function OutcomesSection() {
 
             <div className="mt-8 grid grid-cols-2 gap-4 pt-5 border-t border-black/[0.06]">
               <div>
-                <p className="text-[10px] font-semibold tracking-[0.18em] uppercase text-[#0a0a0a]/35">
+                <p className="text-[10px] font-semibold tracking-[0.18em] uppercase text-[#0a0a0a]/60">
                   Quote cycle
                 </p>
                 <p className="mt-1.5 text-[15px] font-semibold">
-                  <span className="text-[#0a0a0a]/35 line-through mr-2">
+                  <span className="text-[#0a0a0a]/60 line-through mr-2">
                     {SCENARIO.quoteWithout}
                   </span>
                   {SCENARIO.quoteWith}
                 </p>
               </div>
               <div>
-                <p className="text-[10px] font-semibold tracking-[0.18em] uppercase text-[#0a0a0a]/35">
+                <p className="text-[10px] font-semibold tracking-[0.18em] uppercase text-[#0a0a0a]/60">
                   Realization
                 </p>
                 <p className="mt-1.5 text-[15px] font-semibold tabular-nums">
@@ -115,7 +115,7 @@ export function OutcomesSection() {
               className="pointer-events-none absolute -left-16 bottom-0 h-48 w-48 rounded-full bg-white/[0.03]"
             />
 
-            <p className="relative text-[11px] font-semibold tracking-[0.22em] uppercase text-white/40">
+            <p className="relative text-[11px] font-semibold tracking-[0.22em] uppercase text-white/45">
               Across the firm year
             </p>
             <p className="relative mt-3 max-w-md text-[15px] text-white/55 leading-relaxed">
@@ -139,7 +139,7 @@ export function OutcomesSection() {
                 />
               ))}
             </div>
-            <p className="relative mt-4 text-[12px] text-white/35">
+            <p className="relative mt-4 text-[12px] text-white/45">
               Each mark = one large matter in the annual portfolio
             </p>
           </div>
@@ -148,28 +148,28 @@ export function OutcomesSection() {
         <div className="mt-12 sm:mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-black/[0.08] pt-10">
           <div>
             <p className="text-3xl sm:text-4xl font-semibold tracking-tight tabular-nums">78%</p>
-            <p className="mt-2 text-[13px] text-[#0a0a0a]/50 leading-relaxed">
+            <p className="mt-2 text-[13px] text-[#0a0a0a]/60 leading-relaxed">
               Am Law 100 overall realization - flat even as rates climb.{" "}
-              <span className="text-[#0a0a0a]/35">Law.com FY2025</span>
+              <span className="text-[#0a0a0a]/60">Law.com FY2025</span>
             </p>
           </div>
           <div>
             <p className="text-3xl sm:text-4xl font-semibold tracking-tight tabular-nums">75%</p>
-            <p className="mt-2 text-[13px] text-[#0a0a0a]/50 leading-relaxed">
+            <p className="mt-2 text-[13px] text-[#0a0a0a]/60 leading-relaxed">
               Of firms expect write-offs to increase again.{" "}
-              <span className="text-[#0a0a0a]/35">BigHand 2025</span>
+              <span className="text-[#0a0a0a]/60">BigHand 2025</span>
             </p>
           </div>
           <div>
             <p className="text-3xl sm:text-4xl font-semibold tracking-tight tabular-nums">Hours</p>
-            <p className="mt-2 text-[13px] text-[#0a0a0a]/50 leading-relaxed">
+            <p className="mt-2 text-[13px] text-[#0a0a0a]/60 leading-relaxed">
               Not days - to a priced proposal, while the opportunity is still warm.
             </p>
           </div>
         </div>
 
         <div className="mt-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
-          <p className="text-[12px] text-[#0a0a0a]/40 max-w-xl leading-relaxed">
+          <p className="text-[12px] text-[#0a0a0a]/60 max-w-xl leading-relaxed">
             Illustrative for a typical elite large-matter book. In a demo we run the same math on
             your last twenty deals.
           </p>

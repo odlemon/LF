@@ -31,10 +31,10 @@ function delta(draft: number | undefined, reference: number | null): number | nu
 }
 
 function DeltaChip({ value }: { value: number | null }) {
-  if (value === null) return <span className="text-ink/25">—</span>;
+  if (value === null) return <span className="text-ink/60">—</span>;
   const rounded = Math.round(value * 10) / 10;
   if (Math.abs(rounded) < 0.05) {
-    return <span className="text-ink/45 tabular-nums">on</span>;
+    return <span className="text-ink/60 tabular-nums">on</span>;
   }
   // Above a reference is not automatically good or bad, so this stays neutral in tone:
   // it reports direction and size, and lets the partner judge.
@@ -86,10 +86,10 @@ export function RateIntelligencePanel({ intelligence, isLoading, drafts, currenc
   if (!hasAnyReference) {
     return (
       <div className="rounded-[1.25rem] border border-border bg-surface p-5">
-        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
           Rate intelligence
         </p>
-        <p className="mt-3 text-sm text-ink/50">
+        <p className="mt-3 text-sm text-ink/60">
           Nothing to compare against yet. Once this firm has settled matters and benchmark data,
           card, recommended and historically-agreed rates appear here.
         </p>
@@ -100,16 +100,16 @@ export function RateIntelligencePanel({ intelligence, isLoading, drafts, currenc
   return (
     <div className="rounded-[1.25rem] border border-border bg-surface p-5">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
           Rate intelligence
         </p>
-        <p className="text-xs text-ink/45">{intelligence.note}</p>
+        <p className="text-xs text-ink/60">{intelligence.note}</p>
       </div>
 
       <div className="mt-4 overflow-x-auto">
         <table className="w-full min-w-[620px] text-sm">
           <thead>
-            <tr className="border-b border-border text-left text-[11px] text-ink/45">
+            <tr className="border-b border-border text-left text-[11px] text-ink/60">
               <th className="pb-2 font-medium">Level</th>
               <th className="pb-2 text-right font-medium">Draft</th>
               <th className="pb-2 text-right font-medium">Card</th>
@@ -130,7 +130,7 @@ export function RateIntelligencePanel({ intelligence, isLoading, drafts, currenc
                   <td className="py-2.5">
                     <span className="text-ink">{level.feeEarnerLevelName}</span>
                     {level.marketLow !== null && level.marketHigh !== null && (
-                      <span className="ml-2 text-[11px] text-ink/35">
+                      <span className="ml-2 text-[11px] text-ink/60">
                         mkt {money(level.marketLow, currency)}–{money(level.marketHigh, currency)}
                       </span>
                     )}
@@ -150,7 +150,7 @@ export function RateIntelligencePanel({ intelligence, isLoading, drafts, currenc
                   <td className="py-2.5 text-right tabular-nums text-ink/60">
                     {money(level.clientAgreedAvgRate, currency)}
                     {level.clientAgreedSampleSize > 0 && (
-                      <span className="ml-1 text-[11px] text-ink/30">
+                      <span className="ml-1 text-[11px] text-ink/60">
                         n={level.clientAgreedSampleSize}
                       </span>
                     )}
@@ -165,7 +165,7 @@ export function RateIntelligencePanel({ intelligence, isLoading, drafts, currenc
         </table>
       </div>
 
-      <p className="mt-3 text-[11px] leading-relaxed text-ink/40">
+      <p className="mt-3 text-[11px] leading-relaxed text-ink/60">
         &ldquo;This client&rdquo; is the average rate this client has actually agreed on settled
         matters, excluding this one. A dash means there is no recorded history for that level —
         no figure is estimated.

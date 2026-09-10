@@ -42,7 +42,7 @@ export function RemoveConfirmModal({
       size="md"
     >
       <div className="flex flex-col gap-6">
-        <p className="text-sm text-ink/55 leading-relaxed">
+        <p className="text-sm text-ink/60 leading-relaxed">
           This will permanently remove the API key for <span className="font-bold text-ink/90">{config.displayName}</span>. You can add it again at any time.
         </p>
 
@@ -58,7 +58,7 @@ export function RemoveConfirmModal({
           <button
             type="button"
             onClick={onClose}
-            className="w-full sm:flex-1 text-center text-xs font-bold text-ink/40 hover:text-ink/70 transition-colors py-3 cursor-pointer"
+            className="w-full sm:flex-1 text-center text-xs font-bold text-ink/60 hover:text-ink/70 transition-colors py-3 cursor-pointer"
           >
             Cancel
           </button>

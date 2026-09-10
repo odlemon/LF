@@ -18,13 +18,13 @@ export function EngagementPackDocument({ pack, section = "letter" }: Props) {
     return (
       <div className="engagement-doc mx-auto w-full max-w-[720px] bg-[#f7f4ef] text-ink shadow-[0_1px_0_rgba(0,0,0,0.04)]">
         <div className="border-b border-ink/10 px-8 py-10 sm:px-12">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-ink/40">
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-ink/60">
             Annex A
           </p>
           <h2 className="mt-2 text-xl font-semibold tracking-tight text-ink">
             Fee Schedule
           </h2>
-          <p className="mt-2 text-sm text-ink/55">
+          <p className="mt-2 text-sm text-ink/60">
             {pack.matterTitle}
             {pack.clientName ? ` · ${pack.clientName}` : ""}
           </p>
@@ -34,7 +34,7 @@ export function EngagementPackDocument({ pack, section = "letter" }: Props) {
             <table className="w-full border-collapse text-sm">
 
               <thead>
-                <tr className="border-b border-ink/15 text-left text-[10px] font-bold uppercase tracking-[0.14em] text-ink/40">
+                <tr className="border-b border-ink/15 text-left text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
                   <th className="pb-3 pr-3 font-bold">Fee earner level</th>
                   <th className="pb-3 pr-3 text-right font-bold">Hours</th>
                   <th className="pb-3 pr-3 text-right font-bold">Rate</th>
@@ -51,7 +51,7 @@ export function EngagementPackDocument({ pack, section = "letter" }: Props) {
                           "—"}
                       </span>
                       {line.description && (
-                        <p className="mt-0.5 text-xs text-ink/45">
+                        <p className="mt-0.5 text-xs text-ink/60">
                           {line.description}
                         </p>
                       )}

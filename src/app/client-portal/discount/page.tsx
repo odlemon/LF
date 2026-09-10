@@ -93,7 +93,7 @@ export default function ClientDiscountStatusPage() {
               className="rounded-2xl border border-border/70 bg-surface p-5 animate-fade-in-up"
               style={{ animationDelay: `${i * 40}ms` }}
             >
-              <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/35">
+              <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">
                 {k.label}
               </p>
               <p className="mt-2 text-2xl font-semibold tabular-nums text-ink">
@@ -107,7 +107,7 @@ export default function ClientDiscountStatusPage() {
           <div className="mt-6 h-40 animate-pulse rounded-xl bg-field" />
         ) : programs.length === 0 ? (
           <section className="rounded-[1.5rem] border border-border/70 bg-surface p-6 text-center">
-            <p className="text-sm text-ink/55">No volume discount programs found for your account.</p>
+            <p className="text-sm text-ink/60">No volume discount programs found for your account.</p>
           </section>
         ) : (
           programs.map((program) => {
@@ -123,13 +123,13 @@ export default function ClientDiscountStatusPage() {
               >
                 <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2">
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
                       Program
                     </p>
                     <h2 className="mt-1 text-base font-semibold tracking-tight text-ink">
                       {program.currency} Volume Discount
                     </h2>
-                    <p className="text-xs text-ink/55 mt-1">
+                    <p className="text-xs text-ink/60 mt-1">
                       {program.periodStart} — {program.periodEnd}
                     </p>
                   </div>
@@ -153,7 +153,7 @@ export default function ClientDiscountStatusPage() {
                       <span className="font-semibold text-ink/75">
                         {dashboard.currentTierName || "No tier"} ({dashboard.currentDiscountPct}% off)
                       </span>
-                      <span className="tabular-nums text-ink/55">
+                      <span className="tabular-nums text-ink/60">
                         {formatMoney(dashboard.cumulativeSpend, program.currency)} spent
                       </span>
                     </div>
@@ -164,7 +164,7 @@ export default function ClientDiscountStatusPage() {
                       />
                     </div>
                     {dashboard.nextTierName && (
-                      <p className="text-xs text-ink/55">
+                      <p className="text-xs text-ink/60">
                         {formatMoney(
                           (dashboard.nextThreshold ?? 0) - dashboard.cumulativeSpend,
                           program.currency
@@ -173,7 +173,7 @@ export default function ClientDiscountStatusPage() {
                       </p>
                     )}
                     <div className="pt-2 border-t border-border/50">
-                      <p className="text-xs text-ink/55">
+                      <p className="text-xs text-ink/60">
                         Savings to date:{" "}
                         <span className="font-semibold text-emerald-700 dark:text-emerald-400">
                           {formatMoney(dashboard.savingsToDate, program.currency)}

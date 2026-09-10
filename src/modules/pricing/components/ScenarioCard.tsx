@@ -59,7 +59,7 @@ export function ScenarioCard({
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
-              <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/40">
+              <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
                 {PRICING_MODEL_LABELS[scenario.pricingModel] ??
                   scenario.pricingModel}
               </p>
@@ -92,7 +92,7 @@ export function ScenarioCard({
           {formatMoney(Number(scenario.grossFees), scenario.currency)}
         </p>
 
-        <div className="mt-3 flex items-center gap-2 text-xs text-ink/45">
+        <div className="mt-3 flex items-center gap-2 text-xs text-ink/60">
           <span className="tabular-nums font-medium text-ink/60">
             {Number(scenario.marginPct).toFixed(1)}% margin
             {scenario.costBasis === "RATIO" && (

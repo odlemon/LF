@@ -42,7 +42,7 @@ export default function SsoAdminPage() {
           <h1 className="text-2xl font-bold text-ink tracking-tight flex items-center gap-2">
             <HiOutlineKey className="w-7 h-7 text-primary" /> SSO Admin
           </h1>
-          <p className="text-sm text-ink/55 mt-1">
+          <p className="text-sm text-ink/60 mt-1">
             Configure single sign-on so your firm&apos;s users can log in with their existing identity provider.
           </p>
         </div>
@@ -56,13 +56,13 @@ export default function SsoAdminPage() {
           <table className="min-w-full divide-y divide-gray-100 text-xs">
             <thead className="bg-field">
               <tr>
-                <th className="px-5 py-3.5 text-left font-bold text-ink/55 uppercase tracking-wider">Provider</th>
-                <th className="px-5 py-3.5 text-left font-bold text-ink/55 uppercase tracking-wider">Client ID</th>
-                <th className="px-5 py-3.5 text-left font-bold text-ink/55 uppercase tracking-wider">Email Domain</th>
-                <th className="px-5 py-3.5 text-left font-bold text-ink/55 uppercase tracking-wider">Default Role</th>
-                <th className="px-5 py-3.5 text-left font-bold text-ink/55 uppercase tracking-wider">Status</th>
-                <th className="px-5 py-3.5 text-left font-bold text-ink/55 uppercase tracking-wider">Login URL</th>
-                <th className="px-5 py-3.5 text-right font-bold text-ink/55 uppercase tracking-wider">Actions</th>
+                <th className="px-5 py-3.5 text-left font-bold text-ink/60 uppercase tracking-wider">Provider</th>
+                <th className="px-5 py-3.5 text-left font-bold text-ink/60 uppercase tracking-wider">Client ID</th>
+                <th className="px-5 py-3.5 text-left font-bold text-ink/60 uppercase tracking-wider">Email Domain</th>
+                <th className="px-5 py-3.5 text-left font-bold text-ink/60 uppercase tracking-wider">Default Role</th>
+                <th className="px-5 py-3.5 text-left font-bold text-ink/60 uppercase tracking-wider">Status</th>
+                <th className="px-5 py-3.5 text-left font-bold text-ink/60 uppercase tracking-wider">Login URL</th>
+                <th className="px-5 py-3.5 text-right font-bold text-ink/60 uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 font-semibold text-ink/80">
@@ -76,7 +76,7 @@ export default function SsoAdminPage() {
                 ))
               ) : providers.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="px-5 py-12 text-center text-ink/40">
+                  <td colSpan={7} className="px-5 py-12 text-center text-ink/60">
                     No identity providers configured yet. Click &quot;New Identity Provider&quot; to enable SSO.
                   </td>
                 </tr>
@@ -97,7 +97,7 @@ export default function SsoAdminPage() {
                           Active
                         </span>
                       ) : (
-                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-field text-ink/40 border border-border/60">
+                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-field text-ink/60 border border-border/60">
                           Inactive
                         </span>
                       )}
@@ -115,7 +115,7 @@ export default function SsoAdminPage() {
                     <td className="px-5 py-4 text-right">
                       <button
                         onClick={() => openEdit(p)}
-                        className="p-1.5 hover:bg-field rounded-lg text-ink/40 hover:text-ink/80 transition-colors"
+                        className="p-1.5 hover:bg-field rounded-lg text-ink/60 hover:text-ink/80 transition-colors"
                       >
                         <HiPencil className="w-4.5 h-4.5" />
                       </button>

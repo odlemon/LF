@@ -138,7 +138,7 @@ export default function UsersPage() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-ink">Users</h1>
-            <p className="text-sm text-ink/55 mt-1">
+            <p className="text-sm text-ink/60 mt-1">
               Manage law firm team members, assign operational roles, and set access status
             </p>
           </div>
@@ -160,19 +160,19 @@ export default function UsersPage() {
               <table className={`w-full text-left border-collapse transition-all duration-300 ${processingUserUid ? "blur-[2px] pointer-events-none select-none opacity-80" : ""}`}>
                 <thead>
                   <tr className="border-b border-border/50 bg-field/50">
-                    <th className="px-6 py-4 text-xs font-semibold text-ink/55 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-xs font-semibold text-ink/60 uppercase tracking-wider">
                       Name
                     </th>
-                    <th className="px-6 py-4 text-xs font-semibold text-ink/55 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-xs font-semibold text-ink/60 uppercase tracking-wider">
                       Email
                     </th>
-                    <th className="px-6 py-4 text-xs font-semibold text-ink/55 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-xs font-semibold text-ink/60 uppercase tracking-wider">
                       Roles
                     </th>
-                    <th className="px-6 py-4 text-xs font-semibold text-ink/55 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-xs font-semibold text-ink/60 uppercase tracking-wider">
                       Status
                     </th>
-                    <th className="px-6 py-4 text-xs font-semibold text-ink/55 uppercase tracking-wider text-right">
+                    <th className="px-6 py-4 text-xs font-semibold text-ink/60 uppercase tracking-wider text-right">
                       Actions
                     </th>
                   </tr>
@@ -180,7 +180,7 @@ export default function UsersPage() {
                 <tbody className="divide-y divide-gray-100">
                   {users.length === 0 ? (
                     <tr>
-                      <td colSpan={5} className="px-6 py-12 text-center text-ink/55">
+                      <td colSpan={5} className="px-6 py-12 text-center text-ink/60">
                         No users registered in the workspace
                       </td>
                     </tr>
@@ -205,7 +205,7 @@ export default function UsersPage() {
                                 </span>
                               ))
                             ) : (
-                              <span className="text-xs text-ink/40 font-medium">No roles</span>
+                              <span className="text-xs text-ink/60 font-medium">No roles</span>
                             )}
                           </div>
                         </td>
@@ -227,7 +227,7 @@ export default function UsersPage() {
                                 setActiveUserUid(user.uid);
                                 setIsRoleModalOpen(true);
                               }}
-                              className="inline-flex items-center justify-center p-1.5 text-ink/55 hover:text-primary hover:bg-primary/5 rounded-lg transition-all cursor-pointer"
+                              className="inline-flex items-center justify-center p-1.5 text-ink/60 hover:text-primary hover:bg-primary/5 rounded-lg transition-all cursor-pointer"
                             >
                               <HiUserGroup className="w-4.5 h-4.5" />
                             </button>
@@ -235,7 +235,7 @@ export default function UsersPage() {
                           <PermissionGate permission={PERMISSIONS.USER_UPDATE}>
                             <button
                               onClick={() => openEditModal(user)}
-                              className="inline-flex items-center justify-center p-1.5 text-ink/55 hover:text-primary hover:bg-primary/5 rounded-lg transition-all cursor-pointer"
+                              className="inline-flex items-center justify-center p-1.5 text-ink/60 hover:text-primary hover:bg-primary/5 rounded-lg transition-all cursor-pointer"
                             >
                               <HiPencil className="w-4.5 h-4.5" />
                             </button>
@@ -251,7 +251,7 @@ export default function UsersPage() {
                               className={`inline-flex items-center justify-center p-1.5 rounded-lg transition-all ${
                                 currentUser?.id === user.uid
                                   ? "text-gray-300 cursor-not-allowed opacity-40"
-                                  : "text-ink/55 hover:text-primary hover:bg-primary/5 cursor-pointer"
+                                  : "text-ink/60 hover:text-primary hover:bg-primary/5 cursor-pointer"
                               }`}
                               title={currentUser?.id === user.uid ? "Cannot deactivate own account" : undefined}
                             >
@@ -277,7 +277,7 @@ export default function UsersPage() {
                               className={`inline-flex items-center justify-center p-1.5 rounded-lg transition-all ${
                                 currentUser?.id === user.uid
                                   ? "text-gray-300 cursor-not-allowed opacity-40"
-                                  : "text-ink/55 hover:text-red-700 hover:bg-red-50 cursor-pointer"
+                                  : "text-ink/60 hover:text-red-700 hover:bg-red-50 cursor-pointer"
                               }`}
                               title={currentUser?.id === user.uid ? "Cannot delete own account" : undefined}
                             >
@@ -307,7 +307,7 @@ export default function UsersPage() {
                 </h3>
                 <button
                   onClick={() => setIsFormOpen(false)}
-                  className="text-ink/40 hover:text-ink/65 p-1 hover:bg-field rounded-full"
+                  className="text-ink/60 hover:text-ink/65 p-1 hover:bg-field rounded-full"
                 >
                   <HiX className="w-5 h-5" />
                 </button>
@@ -316,7 +316,7 @@ export default function UsersPage() {
               <form onSubmit={handleFormSubmit} className="flex-1 overflow-y-auto p-6 space-y-5">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-ink/55 uppercase tracking-wider">
+                    <label className="text-xs font-semibold text-ink/60 uppercase tracking-wider">
                       First Name
                     </label>
                     <Input aria-label="First Name"
@@ -329,7 +329,7 @@ export default function UsersPage() {
                     />
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-ink/55 uppercase tracking-wider">
+                    <label className="text-xs font-semibold text-ink/60 uppercase tracking-wider">
                       Last Name
                     </label>
                     <Input aria-label="Last Name"
@@ -344,7 +344,7 @@ export default function UsersPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-ink/55 uppercase tracking-wider">
+                  <label className="text-xs font-semibold text-ink/60 uppercase tracking-wider">
                     Email Address
                   </label>
                   <Input aria-label="Email Address"
@@ -358,7 +358,7 @@ export default function UsersPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-ink/55 uppercase tracking-wider">
+                  <label className="text-xs font-semibold text-ink/60 uppercase tracking-wider">
                     Phone Number
                   </label>
                   <Input aria-label="Phone Number"
@@ -372,7 +372,7 @@ export default function UsersPage() {
 
                 {!editingUserUid && (
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-ink/55 uppercase tracking-wider">
+                    <label className="text-xs font-semibold text-ink/60 uppercase tracking-wider">
                       Initial Password
                     </label>
                     <Input aria-label="Initial Password"
@@ -413,7 +413,7 @@ export default function UsersPage() {
                 </h3>
                 <button
                   onClick={() => setIsRoleModalOpen(false)}
-                  className="text-ink/40 hover:text-ink/65 p-1 hover:bg-field rounded-full"
+                  className="text-ink/60 hover:text-ink/65 p-1 hover:bg-field rounded-full"
                 >
                   <HiX className="w-5 h-5" />
                 </button>
@@ -428,7 +428,7 @@ export default function UsersPage() {
                     <h4 className="font-semibold text-ink">
                       {activeUser.firstName} {activeUser.lastName}
                     </h4>
-                    <p className="text-xs text-ink/55">{activeUser.email}</p>
+                    <p className="text-xs text-ink/60">{activeUser.email}</p>
                   </div>
                 </div>
 
@@ -438,12 +438,12 @@ export default function UsersPage() {
                   </div>
                 ) : (
                   <div className="space-y-3">
-                    <span className="text-xs font-semibold text-ink/55 uppercase tracking-wider block">
+                    <span className="text-xs font-semibold text-ink/60 uppercase tracking-wider block">
                       Assign System Roles
                     </span>
                     <div className="space-y-2.5 max-h-[40vh] overflow-y-auto pr-1 rates-scrollable">
                       {roles.length === 0 ? (
-                        <div className="p-4 text-center text-sm text-ink/55 bg-field/50 border border-border/50 rounded-xl">
+                        <div className="p-4 text-center text-sm text-ink/60 bg-field/50 border border-border/50 rounded-xl">
                           No roles defined in the system
                         </div>
                       ) : (
@@ -465,7 +465,7 @@ export default function UsersPage() {
                                 <span className={`text-sm font-semibold block transition-colors ${hasRole ? "text-primary" : "text-ink"}`}>
                                   {role.name}
                                 </span>
-                                <span className="text-xs text-ink/55 mt-1 block leading-normal">
+                                <span className="text-xs text-ink/60 mt-1 block leading-normal">
                                   {role.description || "No description provided"}
                                 </span>
                               </div>

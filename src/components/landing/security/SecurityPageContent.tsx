@@ -180,7 +180,7 @@ export function SecurityPageContent() {
             title={
               <>
                 Enterprise-grade security
-                <span className="text-[#0a0a0a]/40"> for privileged pricing data.</span>
+                <span className="text-[#0a0a0a]/60"> for privileged pricing data.</span>
               </>
             }
             description="Rates, OCGs, realization, and negotiation history are among the most sensitive assets in a firm. Lysp is built so that information stays yours - encrypted, isolated, auditable, and never used to train models."
@@ -209,7 +209,7 @@ export function SecurityPageContent() {
                 key={item.label}
                 className="rounded-2xl border border-black/[0.07] bg-white/80 px-4 py-4 sm:px-5 sm:py-5"
               >
-                <p className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0a0a0a]/35">
+                <p className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0a0a0a]/60">
                   {item.label}
                 </p>
                 <p className="mt-2 text-[14px] sm:text-[16px] font-semibold tracking-tight">
@@ -225,13 +225,13 @@ export function SecurityPageContent() {
       <section id="architecture" className="relative scroll-mt-28">
         <div className="mx-auto max-w-[1200px] px-4 sm:px-8 lg:px-10 py-16 sm:py-20">
           <div className="max-w-2xl">
-            <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#0a0a0a]/35">
+            <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#0a0a0a]/60">
               Architecture
             </p>
             <h2 className="mt-3 text-2xl sm:text-3xl font-semibold tracking-tight text-balance">
               How privileged pricing data moves - and where it stops.
             </h2>
-            <p className="mt-3 text-[15px] text-[#0a0a0a]/55 leading-relaxed">
+            <p className="mt-3 text-[15px] text-[#0a0a0a]/60 leading-relaxed">
               Firm systems remain the source of truth. Lysp isolates each workspace, encrypts every
               layer, and never feeds your corpus into shared model training.
             </p>
@@ -249,11 +249,11 @@ export function SecurityPageContent() {
                       →
                     </span>
                   ) : null}
-                  <p className="text-[11px] font-semibold tabular-nums tracking-wider text-[#0a0a0a]/30">
+                  <p className="text-[11px] font-semibold tabular-nums tracking-wider text-[#0a0a0a]/60">
                     {item.step}
                   </p>
                   <h3 className="mt-3 text-[16px] font-semibold tracking-tight">{item.title}</h3>
-                  <p className="mt-2 text-[13px] sm:text-[14px] text-[#0a0a0a]/55 leading-relaxed">
+                  <p className="mt-2 text-[13px] sm:text-[14px] text-[#0a0a0a]/60 leading-relaxed">
                     {item.body}
                   </p>
                 </div>
@@ -269,7 +269,7 @@ export function SecurityPageContent() {
                 className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_80%_0%,rgba(254,254,252,0.08),transparent_45%)]"
               />
               <div className="relative">
-                <div className="flex items-center gap-2 text-white/40">
+                <div className="flex items-center gap-2 text-white/45">
                   <HiLockClosed className="h-4 w-4" />
                   <p className="text-[11px] font-semibold tracking-[0.2em] uppercase">
                     Workspace isolation
@@ -288,7 +288,7 @@ export function SecurityPageContent() {
                         <HiShieldCheck className="h-4 w-4 text-white/50" />
                         <p className="text-[13px] font-semibold">{label}</p>
                       </div>
-                      <p className="mt-2 text-[11px] text-white/35">Encrypted · RBAC · Audited</p>
+                      <p className="mt-2 text-[11px] text-white/45">Encrypted · RBAC · Audited</p>
                     </div>
                   ))}
                 </div>
@@ -296,13 +296,13 @@ export function SecurityPageContent() {
             </div>
 
             <div className="lg:col-span-5 rounded-[1.5rem] border border-black/[0.08] bg-white p-6 sm:p-8 flex flex-col">
-              <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#0a0a0a]/35">
+              <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#0a0a0a]/60">
                 Ethical walls
               </p>
               <h3 className="mt-3 text-xl font-semibold tracking-tight">
                 Your walls provider stays system of record.
               </h3>
-              <p className="mt-3 text-[14px] text-[#0a0a0a]/55 leading-relaxed">
+              <p className="mt-3 text-[14px] text-[#0a0a0a]/60 leading-relaxed">
                 Lysp syncs and enforces existing ethical wall policies. Restricted users cannot see
                 or share walled pricing content. We never create, modify, or delete walls.
               </p>
@@ -329,7 +329,7 @@ export function SecurityPageContent() {
       <section id="controls" className="relative scroll-mt-28 bg-[#f7f7f4] border-y border-black/[0.05]">
         <div className="mx-auto max-w-[1200px] px-4 sm:px-8 lg:px-10 py-16 sm:py-20">
           <div className="max-w-2xl">
-            <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#0a0a0a]/35">
+            <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#0a0a0a]/60">
               Controls
             </p>
             <h2 className="mt-3 text-2xl sm:text-3xl font-semibold tracking-tight text-balance">
@@ -361,7 +361,7 @@ export function SecurityPageContent() {
                     <p className="text-[15px] font-semibold tracking-tight">{item.title}</p>
                     <p
                       className={`mt-1 text-[13px] leading-snug ${
-                        selected ? "text-white/55" : "text-[#0a0a0a]/50"
+                        selected ? "text-white/55" : "text-[#0a0a0a]/60"
                       }`}
                     >
                       {item.summary}
@@ -372,11 +372,11 @@ export function SecurityPageContent() {
             </div>
 
             <div className="lg:col-span-8 rounded-[1.5rem] border border-black/[0.08] bg-white p-6 sm:p-8">
-              <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#0a0a0a]/35">
+              <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#0a0a0a]/60">
                 Detail
               </p>
               <h3 className="mt-3 text-xl sm:text-2xl font-semibold tracking-tight">{domain.title}</h3>
-              <p className="mt-2 text-[15px] text-[#0a0a0a]/55 leading-relaxed">{domain.summary}</p>
+              <p className="mt-2 text-[15px] text-[#0a0a0a]/60 leading-relaxed">{domain.summary}</p>
               <ul className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {domain.points.map((point) => (
                   <li
@@ -399,13 +399,13 @@ export function SecurityPageContent() {
       <section id="residency" className="relative scroll-mt-28">
         <div className="mx-auto max-w-[1200px] px-4 sm:px-8 lg:px-10 py-16 sm:py-20">
           <div className="max-w-2xl">
-            <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#0a0a0a]/35">
+            <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#0a0a0a]/60">
               Data residency
             </p>
             <h2 className="mt-3 text-2xl sm:text-3xl font-semibold tracking-tight text-balance">
               Process where your firm requires.
             </h2>
-            <p className="mt-3 text-[15px] text-[#0a0a0a]/55 leading-relaxed">
+            <p className="mt-3 text-[15px] text-[#0a0a0a]/60 leading-relaxed">
               Localization extends to applicable subprocessors so residency commitments hold across
               the stack - not only the application tier.
             </p>
@@ -416,12 +416,12 @@ export function SecurityPageContent() {
                 key={region.code}
                 className="rounded-[1.35rem] border border-black/[0.08] bg-white p-6 sm:p-7"
               >
-                <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#0a0a0a]/35">
+                <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#0a0a0a]/60">
                   Region
                 </p>
                 <h3 className="mt-3 text-xl font-semibold tracking-tight">{region.code}</h3>
                 <p className="mt-1 text-[14px] font-medium text-[#0a0a0a]/70">{region.title}</p>
-                <p className="mt-3 text-[14px] text-[#0a0a0a]/55 leading-relaxed">{region.body}</p>
+                <p className="mt-3 text-[14px] text-[#0a0a0a]/60 leading-relaxed">{region.body}</p>
               </div>
             ))}
           </div>
@@ -432,13 +432,13 @@ export function SecurityPageContent() {
       <section id="certifications" className="relative scroll-mt-28 border-t border-black/[0.06]">
         <div className="mx-auto max-w-[1200px] px-4 sm:px-8 lg:px-10 py-16 sm:py-20">
           <div className="max-w-2xl">
-            <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#0a0a0a]/35">
+            <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#0a0a0a]/60">
               Certifications & frameworks
             </p>
             <h2 className="mt-3 text-2xl sm:text-3xl font-semibold tracking-tight">
               Independently attested assurances
             </h2>
-            <p className="mt-3 text-[15px] text-[#0a0a0a]/55 leading-relaxed">
+            <p className="mt-3 text-[15px] text-[#0a0a0a]/60 leading-relaxed">
               External frameworks for security, privacy, and responsible AI - with links to the
               official standards bodies.
             </p>
@@ -457,12 +457,12 @@ export function SecurityPageContent() {
                   <SecurityBadge id={cert.id} title={cert.fullLabel} />
                 </span>
                 <div className="min-w-0">
-                  <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#0a0a0a]/30">
+                  <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#0a0a0a]/60">
                     Framework
                   </p>
                   <h3 className="mt-1.5 text-[18px] font-semibold tracking-tight">{cert.fullLabel}</h3>
-                  <p className="mt-2 text-[14px] text-[#0a0a0a]/55 leading-relaxed">{cert.summary}</p>
-                  <p className="mt-3 text-[12px] font-semibold text-[#0a0a0a]/40 underline underline-offset-2">
+                  <p className="mt-2 text-[14px] text-[#0a0a0a]/60 leading-relaxed">{cert.summary}</p>
+                  <p className="mt-3 text-[12px] font-semibold text-[#0a0a0a]/60 underline underline-offset-2">
                     Official site ↗
                   </p>
                 </div>
@@ -477,10 +477,10 @@ export function SecurityPageContent() {
         <div className="mx-auto max-w-[1200px] px-4 sm:px-8 lg:px-10 pb-16 sm:pb-20">
           <div className="rounded-[1.5rem] border border-black/[0.08] bg-white overflow-hidden">
             <div className="px-6 sm:px-8 py-5 border-b border-black/[0.06]">
-              <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#0a0a0a]/35">
+              <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#0a0a0a]/60">
                 Enterprise-grade protection
               </p>
-              <p className="mt-2 text-[15px] text-[#0a0a0a]/50">
+              <p className="mt-2 text-[15px] text-[#0a0a0a]/60">
                 Controls at every layer - from auth to model providers
               </p>
             </div>
@@ -493,14 +493,14 @@ export function SecurityPageContent() {
                   }`}
                 >
                   <div className="sm:col-span-4 flex items-baseline gap-3">
-                    <span className="text-[11px] font-semibold tabular-nums text-[#0a0a0a]/30 tracking-wider">
+                    <span className="text-[11px] font-semibold tabular-nums text-[#0a0a0a]/60 tracking-wider">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <h3 className="text-[16px] sm:text-[17px] font-semibold tracking-tight">
                       {item.title}
                     </h3>
                   </div>
-                  <p className="sm:col-span-8 text-[14px] sm:text-[15px] text-[#0a0a0a]/55 leading-relaxed">
+                  <p className="sm:col-span-8 text-[14px] sm:text-[15px] text-[#0a0a0a]/60 leading-relaxed">
                     {item.body}
                   </p>
                 </li>
@@ -515,13 +515,13 @@ export function SecurityPageContent() {
         <div className="mx-auto max-w-[1200px] px-4 sm:px-8 lg:px-10 py-16 sm:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
             <div className="lg:col-span-4">
-              <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#0a0a0a]/35">
+              <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#0a0a0a]/60">
                 Disclosures
               </p>
               <h2 className="mt-3 text-xl sm:text-2xl font-semibold tracking-tight">
                 Answers counsel and infosec ask first.
               </h2>
-              <p className="mt-3 text-[14px] text-[#0a0a0a]/50 leading-relaxed">
+              <p className="mt-3 text-[14px] text-[#0a0a0a]/60 leading-relaxed">
                 Encryption, residency, access, training bans, and audit cadence - in plain language.
               </p>
             </div>
@@ -544,7 +544,7 @@ export function SecurityPageContent() {
                         {item.q}
                       </span>
                       <span
-                        className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#f3f3f1] text-[#0a0a0a]/50 transition-transform duration-200 ${
+                        className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#f3f3f1] text-[#0a0a0a]/60 transition-transform duration-200 ${
                           open ? "rotate-180" : ""
                         }`}
                       >
@@ -556,7 +556,7 @@ export function SecurityPageContent() {
                       style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
                     >
                       <div className="overflow-hidden">
-                        <p className="px-5 sm:px-6 pb-5 sm:pb-6 text-[14px] text-[#0a0a0a]/55 leading-relaxed">
+                        <p className="px-5 sm:px-6 pb-5 sm:pb-6 text-[14px] text-[#0a0a0a]/60 leading-relaxed">
                           {item.a}
                         </p>
                       </div>
@@ -577,7 +577,7 @@ export function SecurityPageContent() {
         />
         <div className="relative mx-auto max-w-[1200px] px-4 sm:px-8 lg:px-10 py-16 sm:py-20 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
           <div className="max-w-xl">
-            <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-white/35">
+            <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-white/45">
               Security pack
             </p>
             <h2 className="mt-3 text-2xl sm:text-3xl font-semibold tracking-tight text-balance">

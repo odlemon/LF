@@ -76,7 +76,7 @@ export default function PartnerConsistencyPage() {
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
           <div>
             <h1 className="text-2xl font-bold text-ink tracking-tight">Partner Consistency</h1>
-            <p className="text-sm text-ink/55 mt-1 max-w-2xl">
+            <p className="text-sm text-ink/60 mt-1 max-w-2xl">
               How consistently partners price comparable matters, within each practice area.
               Deviation is reported, not judged — a partner may be discounting more because
               their matters are harder, and this data cannot see that.
@@ -125,20 +125,20 @@ export default function PartnerConsistencyPage() {
                       className={`rounded-full px-2.5 py-1 text-xs ${
                         area.discountSpreadPts > 10
                           ? "bg-amber-50 text-amber-700"
-                          : "bg-field text-ink/55"
+                          : "bg-field text-ink/60"
                       }`}
                     >
                       {area.discountSpreadPts} pts spread
                     </span>
                   )}
                 </div>
-                <p className="mt-1 text-xs text-ink/50">{area.note}</p>
+                <p className="mt-1 text-xs text-ink/60">{area.note}</p>
 
                 {area.partners.length > 0 && (
                   <div className="mt-4 overflow-x-auto">
                     <table className="w-full min-w-[560px] text-sm">
                       <thead>
-                        <tr className="border-b border-border text-left text-[11px] text-ink/45">
+                        <tr className="border-b border-border text-left text-[11px] text-ink/60">
                           <th className="pb-2 font-medium">Partner</th>
                           <th className="pb-2 text-right font-medium">Matters</th>
                           <th className="pb-2 text-right font-medium">Avg discount</th>
@@ -167,13 +167,13 @@ export default function PartnerConsistencyPage() {
                             <td className="py-2.5 text-right tabular-nums text-ink">
                               {pct(p.avgDiscountPct)}
                             </td>
-                            <td className="py-2.5 text-right tabular-nums text-ink/55">
+                            <td className="py-2.5 text-right tabular-nums text-ink/60">
                               {signed(p.discountVsMedianPts)}
                             </td>
                             <td className="py-2.5 text-right tabular-nums text-ink">
                               {pct(p.avgMarginPct)}
                             </td>
-                            <td className="py-2.5 text-right tabular-nums text-ink/55">
+                            <td className="py-2.5 text-right tabular-nums text-ink/60">
                               {signed(p.marginVsMedianPts)}
                             </td>
                           </tr>
@@ -184,7 +184,7 @@ export default function PartnerConsistencyPage() {
                 )}
 
                 {area.excludedPartners.length > 0 && (
-                  <p className="mt-3 text-[11px] text-ink/40">
+                  <p className="mt-3 text-[11px] text-ink/60">
                     Excluded for too few matters:{" "}
                     {area.excludedPartners
                       .map((p) => `${p.partnerName} (${p.matters})`)

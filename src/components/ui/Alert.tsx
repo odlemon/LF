@@ -33,7 +33,7 @@ export function Alert({ variant = "info", message }: AlertProps) {
       default:
         return {
           container: "bg-canvas border border-border text-ink",
-          icon: <HiInformationCircle className="w-5 h-5 text-ink/55 shrink-0 mt-0.5" />,
+          icon: <HiInformationCircle className="w-5 h-5 text-ink/60 shrink-0 mt-0.5" />,
         };
     }
   };

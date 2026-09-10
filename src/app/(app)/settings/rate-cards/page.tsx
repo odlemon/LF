@@ -67,7 +67,7 @@ export default function RateCardsPage() {
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-ink tracking-tight">Rate Cards</h1>
-          <p className="text-sm text-ink/55 mt-1">Manage corporate rate cards, billing currencies, and level multipliers.</p>
+          <p className="text-sm text-ink/60 mt-1">Manage corporate rate cards, billing currencies, and level multipliers.</p>
         </div>
         <Button
           variant="primary"
@@ -139,7 +139,7 @@ export default function RateCardsPage() {
                       </div>
                       <div>
                         <h3 className="text-base font-bold text-ink">{card.name}</h3>
-                        <p className="text-xs text-ink/55 mt-1">
+                        <p className="text-xs text-ink/60 mt-1">
                           Effective: {card.effectiveDate} {card.expiryDate ? `to ${card.expiryDate}` : "(No expiry)"}
                         </p>
                         <div className="flex items-center gap-2 mt-2.5">
@@ -173,7 +173,7 @@ export default function RateCardsPage() {
           <div>
             <h2 className="text-xs font-bold text-ink/80 uppercase tracking-wider mb-3">Draft Rate Cards</h2>
             {draftCards.length === 0 ? (
-              <div className="text-center py-8 bg-surface border border-border/60 rounded-2xl p-6 text-sm text-ink/55">
+              <div className="text-center py-8 bg-surface border border-border/60 rounded-2xl p-6 text-sm text-ink/60">
                 No drafts created. Click &apos;Create Rate Card&apos; to prepare one.
               </div>
             ) : (
@@ -182,7 +182,7 @@ export default function RateCardsPage() {
                   <table className="w-full text-left text-sm border-collapse">
 
                     <thead>
-                      <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
+                      <tr className="bg-field/50 text-xs font-bold text-ink/60 border-b border-border">
                         <th className="px-6 py-4">Name</th>
                         <th className="px-6 py-4">Office</th>
                         <th className="px-6 py-4">Currency</th>
@@ -239,7 +239,7 @@ export default function RateCardsPage() {
                   <table className="w-full text-left text-sm border-collapse">
 
                     <thead>
-                      <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
+                      <tr className="bg-field/50 text-xs font-bold text-ink/60 border-b border-border">
                         <th className="px-6 py-4">Name</th>
                         <th className="px-6 py-4">Currency</th>
                         <th className="px-6 py-4">Effective Date</th>
@@ -250,7 +250,7 @@ export default function RateCardsPage() {
                       {archivedCards.map((card) => (
                         <tr key={card.uid} className="opacity-60 text-ink/90 bg-field/20 hover:bg-field/40 transition-colors">
                           <td className="px-6 py-4 font-semibold flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-lg bg-canvas text-ink/55 flex items-center justify-center shrink-0">
+                            <div className="w-8 h-8 rounded-lg bg-canvas text-ink/60 flex items-center justify-center shrink-0">
                               <HiArchive className="w-4 h-4" />
                             </div>
                             <span>{card.name}</span>

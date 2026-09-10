@@ -57,7 +57,7 @@ export default function PracticeAreasPage() {
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-ink tracking-tight">Practice Areas</h1>
-          <p className="text-sm text-ink/55 mt-1">Define the types of legal work your firm handles.</p>
+          <p className="text-sm text-ink/60 mt-1">Define the types of legal work your firm handles.</p>
         </div>
         <Button
           variant="primary"
@@ -80,7 +80,7 @@ export default function PracticeAreasPage() {
         </div>
       ) : areas.length === 0 ? (
         <div className="text-center py-12 bg-surface rounded-2xl border border-border/60 p-8 shadow-sm flex flex-col items-center justify-center gap-3">
-          <span className="text-sm text-ink/55">No practice areas registered yet. Click &apos;Add Practice Area&apos; to define one.</span>
+          <span className="text-sm text-ink/60">No practice areas registered yet. Click &apos;Add Practice Area&apos; to define one.</span>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -109,13 +109,13 @@ export default function PracticeAreasPage() {
                         Active
                       </span>
                     ) : (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-canvas text-ink/55 border border-border uppercase tracking-wide">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-canvas text-ink/60 border border-border uppercase tracking-wide">
                         Inactive
                       </span>
                     )}
                   </span>
                 </div>
-                <p className="text-xs text-ink/55 leading-relaxed line-clamp-2">
+                <p className="text-xs text-ink/60 leading-relaxed line-clamp-2">
                   {area.description || "No description provided."}
                 </p>
               </div>
@@ -141,7 +141,7 @@ export default function PracticeAreasPage() {
                       </button>
                       <button
                         onClick={() => setConfirmDeactivateUid(null)}
-                        className="p-1 text-ink/40 hover:bg-field rounded transition-colors"
+                        className="p-1 text-ink/60 hover:bg-field rounded transition-colors"
                       >
                         <HiX className="w-4 h-4" />
                       </button>
@@ -155,7 +155,7 @@ export default function PracticeAreasPage() {
                     </button>
                   )
                 ) : (
-                  <span className="text-xs text-ink/40 flex items-center gap-1">
+                  <span className="text-xs text-ink/60 flex items-center gap-1">
                     <HiLockClosed className="w-3 h-3" />
                     Locked
                   </span>

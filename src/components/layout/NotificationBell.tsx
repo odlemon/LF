@@ -190,7 +190,7 @@ export function NotificationBell({
         <div className="flex items-center justify-between gap-3 border-b border-border px-4 py-3">
           <div>
             <p className="text-xs font-semibold text-ink">Notifications</p>
-            <p className="mt-0.5 text-[10px] font-medium text-ink/45">
+            <p className="mt-0.5 text-[10px] font-medium text-ink/60">
               {unread > 0 ? `${unread} unread` : "You are up to date"}
             </p>
           </div>
@@ -198,7 +198,7 @@ export function NotificationBell({
             <button
               type="button"
               onClick={() => void onMarkAll()}
-              className="cursor-pointer text-[10px] font-semibold text-ink/55 hover:text-ink py-1.5 -my-1.5"
+              className="cursor-pointer text-[10px] font-semibold text-ink/60 hover:text-ink py-1.5 -my-1.5"
             >
               Mark all read
             </button>
@@ -207,11 +207,11 @@ export function NotificationBell({
 
         <div className="max-h-[380px] overflow-y-auto rates-scrollable">
           {loading && items.length === 0 ? (
-            <div className="px-4 py-10 text-center text-xs text-ink/45">Loading…</div>
+            <div className="px-4 py-10 text-center text-xs text-ink/60">Loading…</div>
           ) : items.length === 0 ? (
             <div className="px-4 py-10 text-center">
               <p className="text-xs font-semibold text-ink/70">{emptyTitle}</p>
-              <p className="mt-1.5 text-[10px] leading-relaxed text-ink/40">{emptyBody}</p>
+              <p className="mt-1.5 text-[10px] leading-relaxed text-ink/60">{emptyBody}</p>
             </div>
           ) : (
             <ul className="py-1.5">
@@ -235,11 +235,11 @@ export function NotificationBell({
                           {n.title}
                         </p>
                         {n.body && (
-                          <p className="mt-1 line-clamp-2 text-[11px] leading-relaxed text-ink/50">
+                          <p className="mt-1 line-clamp-2 text-[11px] leading-relaxed text-ink/60">
                             {n.body}
                           </p>
                         )}
-                        <p className="mt-1.5 text-[10px] font-medium text-ink/35">
+                        <p className="mt-1.5 text-[10px] font-medium text-ink/60">
                           {timeAgo(n.createdAt)}
                         </p>
                       </div>

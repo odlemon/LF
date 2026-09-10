@@ -78,7 +78,7 @@ export function BlogPageContent() {
                 Read article
                 <HiArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </span>
-              <span className="text-white/35">
+              <span className="text-white/45">
                 {formatDate(featured.date)} · {featured.readMins} min
               </span>
             </div>
@@ -90,10 +90,10 @@ export function BlogPageContent() {
       <section className="relative">
         <div className="mx-auto max-w-[1200px] px-5 sm:px-8 lg:px-10 py-16 sm:py-24">
           <div className="flex items-baseline justify-between gap-4 mb-2">
-            <p className="text-[11px] font-semibold tracking-[0.28em] uppercase text-[#0a0a0a]/35">
+            <p className="text-[11px] font-semibold tracking-[0.28em] uppercase text-[#0a0a0a]/60">
               Archive
             </p>
-            <p className="text-[12px] tabular-nums text-[#0a0a0a]/30">
+            <p className="text-[12px] tabular-nums text-[#0a0a0a]/60">
               {String(BLOG_POSTS.length).padStart(2, "0")}
             </p>
           </div>
@@ -107,27 +107,27 @@ export function BlogPageContent() {
                 >
                   <div className="lg:col-span-8">
                     <div className="flex items-center gap-3 text-[11px]">
-                      <span className="font-semibold tabular-nums tracking-wider text-[#0a0a0a]/25">
+                      <span className="font-semibold tabular-nums tracking-wider text-[#0a0a0a]/60">
                         {String(i + 2).padStart(2, "0")}
                       </span>
-                      <span className="tracking-[0.18em] uppercase font-semibold text-[#0a0a0a]/35">
+                      <span className="tracking-[0.18em] uppercase font-semibold text-[#0a0a0a]/60">
                         {post.category}
                       </span>
                     </div>
                     <h3 className="mt-3 text-[1.25rem] sm:text-[1.5rem] lg:text-[1.65rem] font-semibold tracking-tight text-balance leading-snug transition-opacity group-hover:opacity-65">
                       {post.title}
                     </h3>
-                    <p className="mt-3 max-w-xl text-[14px] sm:text-[15px] text-[#0a0a0a]/45 leading-relaxed">
+                    <p className="mt-3 max-w-xl text-[14px] sm:text-[15px] text-[#0a0a0a]/60 leading-relaxed">
                       {post.excerpt}
                     </p>
                   </div>
                   <div className="lg:col-span-4 flex lg:flex-col lg:items-end lg:justify-between gap-3 pt-1 lg:pt-0 lg:pb-1">
-                    <span className="text-[13px] text-[#0a0a0a]/40 tabular-nums">
+                    <span className="text-[13px] text-[#0a0a0a]/60 tabular-nums">
                       {formatDate(post.date)}
                       <span className="mx-2 text-[#0a0a0a]/20">·</span>
                       {post.readMins} min
                     </span>
-                    <span className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#0a0a0a]/50 group-hover:text-[#0a0a0a] transition-colors">
+                    <span className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#0a0a0a]/60 group-hover:text-[#0a0a0a] transition-colors">
                       Read
                       <HiArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                     </span>

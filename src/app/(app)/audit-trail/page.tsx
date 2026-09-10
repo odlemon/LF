@@ -131,7 +131,7 @@ function AuditTrailContent() {
             <HiClipboardList className="w-7 h-7 text-primary shrink-0" />
             Audit Trail
           </h1>
-          <p className="text-sm text-ink/55 mt-1">
+          <p className="text-sm text-ink/60 mt-1">
             A complete record of all actions taken in your firm.
           </p>
         </div>
@@ -144,7 +144,7 @@ function AuditTrailContent() {
             
             {/* Search by Entity ID */}
             <div className="flex flex-col gap-1.5 lg:col-span-1">
-              <label className="text-[10px] font-extrabold text-ink/40 uppercase tracking-widest">
+              <label className="text-[10px] font-extrabold text-ink/60 uppercase tracking-widest">
                 Entity ID
               </label>
               <input aria-label="Entity ID"
@@ -158,7 +158,7 @@ function AuditTrailContent() {
 
             {/* Action Type */}
             <div className="flex flex-col gap-1.5 lg:col-span-1">
-              <label className="text-[10px] font-extrabold text-ink/40 uppercase tracking-widest">
+              <label className="text-[10px] font-extrabold text-ink/60 uppercase tracking-widest">
                 Action Type
               </label>
               <Select
@@ -173,7 +173,7 @@ function AuditTrailContent() {
 
             {/* Resource */}
             <div className="flex flex-col gap-1.5 lg:col-span-1">
-              <label className="text-[10px] font-extrabold text-ink/40 uppercase tracking-widest">
+              <label className="text-[10px] font-extrabold text-ink/60 uppercase tracking-widest">
                 Resource Name
               </label>
               <Select
@@ -188,7 +188,7 @@ function AuditTrailContent() {
 
             {/* Date From */}
             <div className="flex flex-col gap-1.5 lg:col-span-1">
-              <label className="text-[10px] font-extrabold text-ink/40 uppercase tracking-widest">
+              <label className="text-[10px] font-extrabold text-ink/60 uppercase tracking-widest">
                 Date From
               </label>
               <DatePicker
@@ -203,7 +203,7 @@ function AuditTrailContent() {
 
             {/* Date To */}
             <div className="flex flex-col gap-1.5 lg:col-span-1">
-              <label className="text-[10px] font-extrabold text-ink/40 uppercase tracking-widest">
+              <label className="text-[10px] font-extrabold text-ink/60 uppercase tracking-widest">
                 Date To
               </label>
               <DatePicker
@@ -242,7 +242,7 @@ function AuditTrailContent() {
         <div className="overflow-x-auto rates-scrollable">
           <table className="w-full text-left text-sm border-collapse">
             <thead>
-              <tr className="bg-field/60 text-xs font-bold text-ink/55 border-b border-border">
+              <tr className="bg-field/60 text-xs font-bold text-ink/60 border-b border-border">
                 <th className="px-6 py-4.5">When</th>
                 <th className="px-6 py-4.5">Who</th>
                 <th className="px-6 py-4.5">Action</th>
@@ -280,7 +280,7 @@ function AuditTrailContent() {
                       key={event.id}
                       className="hover:bg-field/20 text-ink/90 transition-colors"
                     >
-                      <td className="px-6 py-4.5 font-medium whitespace-nowrap text-xs text-ink/55">
+                      <td className="px-6 py-4.5 font-medium whitespace-nowrap text-xs text-ink/60">
                         {formatDate(event.createdAt)}
                       </td>
                       <td className="px-6 py-4.5 font-bold text-ink whitespace-nowrap">
@@ -308,7 +308,7 @@ function AuditTrailContent() {
                       <td className="px-6 py-4.5">
                         {event.entityUid ? (
                           <div className="flex items-center gap-1.5">
-                            <span className="font-mono text-xs text-ink/55 shrink-0">
+                            <span className="font-mono text-xs text-ink/60 shrink-0">
                               {event.entityUid.substring(0, 10)}...
                             </span>
                             {/* These rendered at 22x22, which fails WCAG 2.2 AA target size
@@ -317,7 +317,7 @@ function AuditTrailContent() {
                             <button
                               type="button"
                               onClick={() => copyToClipboard(event.entityUid!, "Entity ID")}
-                              className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-ink/40 transition-colors hover:bg-primary/5 hover:text-primary cursor-pointer"
+                              className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-ink/60 transition-colors hover:bg-primary/5 hover:text-primary cursor-pointer"
                               title="Copy Full Entity ID"
                               aria-label="Copy the full entity ID"
                             >
@@ -325,14 +325,14 @@ function AuditTrailContent() {
                             </button>
                           </div>
                         ) : (
-                          <span className="text-ink/40">-</span>
+                          <span className="text-ink/60">-</span>
                         )}
                       </td>
                       <td className="px-6 py-4.5 text-center">
                         <button
                           type="button"
                           onClick={() => openDetails(event)}
-                          className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-ink/55 transition-all hover:bg-primary/5 hover:text-primary cursor-pointer"
+                          className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-ink/60 transition-all hover:bg-primary/5 hover:text-primary cursor-pointer"
                           title="View Log Details"
                           aria-label="View this audit entry in full"
                         >
@@ -368,7 +368,7 @@ function AuditTrailContent() {
         {selectedEvent && (
           <div className="flex flex-col gap-5">
             <div className="p-4 bg-field/50 rounded-xl border border-border/40 flex flex-col gap-2">
-              <span className="text-[10px] font-extrabold text-ink/40 uppercase tracking-widest">
+              <span className="text-[10px] font-extrabold text-ink/60 uppercase tracking-widest">
                 Log Event Description
               </span>
               <p className="text-sm font-bold text-ink leading-normal">
@@ -378,17 +378,17 @@ function AuditTrailContent() {
 
             <div className="grid grid-cols-2 gap-y-4 gap-x-6 text-xs text-ink border-t border-border pt-4">
               <div className="flex flex-col gap-0.5">
-                <span className="font-extrabold text-ink/40 uppercase tracking-wide text-[10px]">Actor Name</span>
+                <span className="font-extrabold text-ink/60 uppercase tracking-wide text-[10px]">Actor Name</span>
                 <span className="font-semibold text-ink text-sm mt-0.5">{selectedEvent.actorName}</span>
               </div>
               <div className="flex flex-col gap-0.5">
-                <span className="font-extrabold text-ink/40 uppercase tracking-wide text-[10px]">Actor User UID</span>
+                <span className="font-extrabold text-ink/60 uppercase tracking-wide text-[10px]">Actor User UID</span>
                 <div className="flex items-center gap-1.5 mt-0.5">
                   <span className="font-mono text-ink/70">{selectedEvent.actorUid}</span>
                   <button
                     type="button"
                     onClick={() => copyToClipboard(selectedEvent.actorUid, "Actor UID")}
-                    className="text-ink/40 hover:text-primary transition-colors"
+                    className="text-ink/60 hover:text-primary transition-colors"
                   >
                     <HiClipboardCopy className="w-3.5 h-3.5" />
                   </button>
@@ -396,36 +396,36 @@ function AuditTrailContent() {
               </div>
 
               <div className="flex flex-col gap-0.5 border-t border-border/60 pt-3">
-                <span className="font-extrabold text-ink/40 uppercase tracking-wide text-[10px]">Action Type</span>
+                <span className="font-extrabold text-ink/60 uppercase tracking-wide text-[10px]">Action Type</span>
                 <span className="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold border uppercase tracking-wide self-start mt-1 bg-blue-50 text-blue-700 border-blue-100">
                   {ACTION_LABEL_MAP[selectedEvent.actionType] || selectedEvent.actionType}
                 </span>
               </div>
               <div className="flex flex-col gap-0.5 border-t border-border/60 pt-3">
-                <span className="font-extrabold text-ink/40 uppercase tracking-wide text-[10px]">Resource Type</span>
+                <span className="font-extrabold text-ink/60 uppercase tracking-wide text-[10px]">Resource Type</span>
                 <span className="font-semibold text-ink text-sm mt-0.5">{selectedEvent.resourceName}</span>
               </div>
 
               <div className="flex flex-col gap-0.5 border-t border-border/60 pt-3 col-span-2">
-                <span className="font-extrabold text-ink/40 uppercase tracking-wide text-[10px]">Entity UID</span>
+                <span className="font-extrabold text-ink/60 uppercase tracking-wide text-[10px]">Entity UID</span>
                 {selectedEvent.entityUid ? (
                   <div className="flex items-center gap-2 mt-0.5">
                     <span className="font-mono text-ink/70">{selectedEvent.entityUid}</span>
                     <button
                       type="button"
                       onClick={() => copyToClipboard(selectedEvent.entityUid!, "Entity UID")}
-                      className="text-ink/40 hover:text-primary transition-colors"
+                      className="text-ink/60 hover:text-primary transition-colors"
                     >
                       <HiClipboardCopy className="w-3.5 h-3.5" />
                     </button>
                   </div>
                 ) : (
-                  <span className="text-ink/40 mt-0.5">-</span>
+                  <span className="text-ink/60 mt-0.5">-</span>
                 )}
               </div>
 
               <div className="flex flex-col gap-0.5 border-t border-border/60 pt-3 col-span-2">
-                <span className="font-extrabold text-ink/40 uppercase tracking-wide text-[10px]">Timestamp (Exact)</span>
+                <span className="font-extrabold text-ink/60 uppercase tracking-wide text-[10px]">Timestamp (Exact)</span>
                 <span className="font-medium text-ink/80 mt-0.5">
                   {formatDate(selectedEvent.createdAt, true)}
                 </span>

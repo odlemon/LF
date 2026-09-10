@@ -42,7 +42,7 @@ export function DocumentStatusBadge({ status, className = "" }: DocumentStatusBa
       Icon = HiExclamationCircle;
       break;
     case "SKIPPED":
-      styles = "bg-canvas text-ink/55 border-border";
+      styles = "bg-canvas text-ink/60 border-border";
       label = "Skipped";
       Icon = HiBan;
       break;

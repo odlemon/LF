@@ -16,7 +16,7 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
 
   return (
     <div className="flex items-center justify-between py-4 border-t border-border mt-4 gap-4 flex-wrap">
-      <span className="text-xs font-semibold text-ink/55">
+      <span className="text-xs font-semibold text-ink/60">
         Page {displayCurrent + 1} of {displayPages}
       </span>
       <div className="flex items-center gap-1.5">
@@ -24,7 +24,7 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
           onClick={() => onPageChange(Math.max(0, currentPage - 1))}
           disabled={currentPage === 0 || displayPages <= 1}
           type="button"
-          className="p-2 border border-border/60 rounded-lg text-ink/55 hover:text-ink hover:bg-field disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent transition-all shrink-0 cursor-pointer select-none"
+          className="p-2 border border-border/60 rounded-lg text-ink/60 hover:text-ink hover:bg-field disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent transition-all shrink-0 cursor-pointer select-none"
         >
           <HiChevronLeft className="w-4 h-4" />
         </button>
@@ -39,7 +39,7 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
               className={`px-3 py-1.5 text-xs font-extrabold rounded-lg transition-all cursor-pointer select-none ${
                 isCurrent
                   ? "bg-primary text-on-primary shadow-sm"
-                  : "border border-border text-ink/55 hover:bg-hover hover:text-ink"
+                  : "border border-border text-ink/60 hover:bg-hover hover:text-ink"
               }`}
             >
               {p + 1}
@@ -51,7 +51,7 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
           onClick={() => onPageChange(Math.min(displayPages - 1, currentPage + 1))}
           disabled={currentPage === displayPages - 1 || displayPages <= 1}
           type="button"
-          className="p-2 border border-border/60 rounded-lg text-ink/55 hover:text-ink hover:bg-field disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent transition-all shrink-0 cursor-pointer select-none"
+          className="p-2 border border-border/60 rounded-lg text-ink/60 hover:text-ink hover:bg-field disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent transition-all shrink-0 cursor-pointer select-none"
         >
           <HiChevronRight className="w-4 h-4" />
         </button>

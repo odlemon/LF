@@ -81,7 +81,7 @@ export function DataRoomHero({
           >
             {level.label}
           </span>
-          <span className="text-[11px] font-semibold text-ink/40">
+          <span className="text-[11px] font-semibold text-ink/60">
             {matters.toLocaleString()} of {TARGET_MATTERS}+ matters ingested
           </span>
         </div>
@@ -103,7 +103,7 @@ export function DataRoomHero({
       <dl className="grid grid-cols-2 sm:grid-cols-4 border-t border-border divide-x divide-border">
         {figures.map((f) => (
           <div key={f.label} className="px-6 py-5">
-            <dt className="text-[10px] font-bold uppercase tracking-wider text-ink/40">
+            <dt className="text-[10px] font-bold uppercase tracking-wider text-ink/60">
               {f.label}
             </dt>
             <dd className="mt-1 text-xl font-semibold tabular-nums text-ink">{f.value}</dd>

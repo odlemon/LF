@@ -127,7 +127,7 @@ export function InlineEditField({
         type="button"
         onClick={cancel}
         disabled={isSaving}
-        className="p-1 text-ink/40 hover:bg-field rounded"
+        className="p-1 text-ink/60 hover:bg-field rounded"
       >
         <HiX className="w-4 h-4" />
       </button>

@@ -92,15 +92,15 @@ export function OfferCompareRail({
     <div className="animate-fade-in">
       <div className="mb-3 flex items-end justify-between gap-3">
         <div>
-          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
             Offers
           </p>
-          <p className="mt-1 text-[12px] text-ink/45">
+          <p className="mt-1 text-[12px] text-ink/60">
             Original versus each counter — select to inspect the rate mix
           </p>
         </div>
         {offers.length > 2 && (
-          <p className="shrink-0 text-[10px] font-semibold uppercase tracking-[0.12em] text-ink/30">
+          <p className="shrink-0 text-[10px] font-semibold uppercase tracking-[0.12em] text-ink/60">
             Scroll
           </p>
         )}
@@ -159,14 +159,14 @@ export function OfferCompareRail({
               <div className="flex items-center justify-between gap-2">
                 <p
                   className={`text-[9px] font-bold uppercase tracking-[0.14em] ${
-                    selectedCard ? "text-canvas/50" : "text-ink/35"
+                    selectedCard ? "text-canvas/50" : "text-ink/60"
                   }`}
                 >
                   {action}
                 </p>
                 <p
                   className={`text-[9px] font-semibold tabular-nums ${
-                    selectedCard ? "text-canvas/45" : "text-ink/30"
+                    selectedCard ? "text-canvas/45" : "text-ink/60"
                   }`}
                 >
                   R{offer.roundNumber}
@@ -174,14 +174,14 @@ export function OfferCompareRail({
               </div>
               <p
                 className={`mt-1.5 text-[11px] font-semibold tracking-tight truncate ${
-                  selectedCard ? "text-canvas/80" : "text-ink/55"
+                  selectedCard ? "text-canvas/80" : "text-ink/60"
                 }`}
               >
                 {title}
               </p>
               <p
                 className={`mt-0.5 text-[10px] truncate ${
-                  selectedCard ? "text-canvas/45" : "text-ink/35"
+                  selectedCard ? "text-canvas/45" : "text-ink/60"
                 }`}
               >
                 {labels[pk]}
@@ -199,7 +199,7 @@ export function OfferCompareRail({
                 Number.isFinite(Number(offer.marginPct)) && (
                   <p
                     className={`mt-1 text-[10px] tabular-nums ${
-                      selectedCard ? "text-canvas/50" : "text-ink/40"
+                      selectedCard ? "text-canvas/50" : "text-ink/60"
                     }`}
                   >
                     {Number(offer.marginPct).toFixed(1)}% margin
@@ -208,7 +208,7 @@ export function OfferCompareRail({
               {offer.comment && (
                 <p
                   className={`mt-2 line-clamp-2 text-[10px] leading-snug ${
-                    selectedCard ? "text-canvas/40" : "text-ink/35"
+                    selectedCard ? "text-canvas/40" : "text-ink/60"
                   }`}
                 >
                   {offer.comment}
@@ -221,7 +221,7 @@ export function OfferCompareRail({
 
       {selected && (
         <div className="mt-4 border-t border-border/50 pt-4">
-          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
             {selected.id === original?.id
               ? "Original offer"
               : partyKey(selected.party) === "CLIENT"
@@ -238,7 +238,7 @@ export function OfferCompareRail({
               original &&
               selected.id !== original.id &&
               vsOriginal.absolute !== 0 && (
-                <p className="text-[12px] text-ink/50">
+                <p className="text-[12px] text-ink/60">
                   {deltaCopy(
                     vsOriginal.absolute,
                     vsOriginal.pct,
@@ -251,7 +251,7 @@ export function OfferCompareRail({
               prior &&
               selected.id !== prior.id &&
               vsPrior.absolute !== 0 && (
-                <p className="text-[12px] text-ink/40">
+                <p className="text-[12px] text-ink/60">
                   {deltaCopy(
                     vsPrior.absolute,
                     vsPrior.pct,

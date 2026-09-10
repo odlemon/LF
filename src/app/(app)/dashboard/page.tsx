@@ -47,7 +47,7 @@ export default function DashboardPage() {
     return (
       <div className="mx-auto flex min-h-[60vh] w-full max-w-[1400px] flex-col items-center justify-center gap-2 px-5 text-center">
         <p className="text-sm font-semibold text-ink/70">Firm overview unavailable</p>
-        <p className="max-w-sm text-sm text-ink/45">{error}</p>
+        <p className="max-w-sm text-sm text-ink/60">{error}</p>
       </div>
     );
   }
@@ -74,19 +74,19 @@ export default function DashboardPage() {
       <div className="relative mx-auto flex w-full max-w-[1400px] flex-col gap-6 px-5 pt-6 sm:gap-7 sm:px-8 sm:pt-8 animate-fade-in">
         <header className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/35">
+            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/60">
               {firmName} · {today}
             </p>
             <h1 className="mt-2 text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
               {greeting}, {firstName}
             </h1>
-            <p className="mt-1.5 text-sm text-ink/50">
+            <p className="mt-1.5 text-sm text-ink/60">
               {isPartner
                 ? "Your client relationships, approvals, and live rate negotiations."
                 : "Firm overview — everything in motion across pricing and BD."}
             </p>
           </div>
-          <p className="shrink-0 text-[11px] font-semibold text-ink/35">{asOf}</p>
+          <p className="shrink-0 text-[11px] font-semibold text-ink/60">{asOf}</p>
         </header>
 
         {isPartner && (
@@ -99,13 +99,13 @@ export default function DashboardPage() {
                 <HiOutlineScale className="h-5 w-5" />
               </span>
               <div className="min-w-0 flex-1">
-                <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35">
+                <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
                   Rate negotiations
                 </p>
                 <h2 className="mt-1 text-base font-semibold tracking-tight text-ink">
                   Advise, counter, and close with clients
                 </h2>
-                <p className="mt-1.5 text-sm leading-relaxed text-ink/50">
+                <p className="mt-1.5 text-sm leading-relaxed text-ink/60">
                   Open live proposals, use the negotiation advisor, and protect
                   margin while you keep the relationship warm.
                 </p>
@@ -120,13 +120,13 @@ export default function DashboardPage() {
               className="group flex items-start gap-4 rounded-[1.5rem] border border-border/70 bg-field/80 p-5 transition-colors hover:border-ink/20"
             >
               <div className="min-w-0 flex-1">
-                <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35">
+                <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
                   Pricing approvals
                 </p>
                 <h2 className="mt-1 text-base font-semibold tracking-tight text-ink">
                   Scenarios waiting on your decision
                 </h2>
-                <p className="mt-1.5 text-sm leading-relaxed text-ink/50">
+                <p className="mt-1.5 text-sm leading-relaxed text-ink/60">
                   Review preferred scenarios before they go out as client fee
                   proposals.
                 </p>
@@ -146,7 +146,7 @@ export default function DashboardPage() {
               className="rounded-2xl border border-border/70 bg-surface p-4 animate-fade-in-up"
               style={{ animationDelay: `${i * 35}ms` }}
             >
-              <p className="text-[10px] font-bold uppercase leading-tight tracking-[0.11em] text-ink/35">
+              <p className="text-[10px] font-bold uppercase leading-tight tracking-[0.11em] text-ink/60">
                 {kpi.label}
               </p>
               <p className="mt-2 text-xl font-semibold tracking-tight text-ink tabular-nums sm:text-2xl">
@@ -155,7 +155,7 @@ export default function DashboardPage() {
               <p
                 className={`mt-1.5 text-[11px] font-semibold ${
                   kpi.delta === null
-                    ? "text-ink/30"
+                    ? "text-ink/60"
                     : kpi.positive
                       ? "text-emerald-700 dark:text-emerald-400"
                       : "text-amber-700 dark:text-amber-400"
@@ -163,7 +163,7 @@ export default function DashboardPage() {
               >
                 {kpi.delta ?? "no prior period"}
               </p>
-              <p className="mt-1 text-[10px] leading-snug text-ink/35">{kpi.caption}</p>
+              <p className="mt-1 text-[10px] leading-snug text-ink/60">{kpi.caption}</p>
             </article>
           ))}
         </section>
@@ -197,21 +197,21 @@ export default function DashboardPage() {
           <section className="overflow-hidden rounded-[1.5rem] border border-border/70 bg-surface lg:col-span-8">
             <div className="flex items-end justify-between gap-3 border-b border-border/60 px-5 py-4 sm:px-6">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+                <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
                   Live book
                 </p>
                 <h2 className="mt-1 text-base font-semibold tracking-tight text-ink">
                   Matters moving across the firm
                 </h2>
               </div>
-              <span className="text-[11px] font-semibold tabular-nums text-ink/35">
+              <span className="text-[11px] font-semibold tabular-nums text-ink/60">
                 {liveMatters.length} highlighted
               </span>
             </div>
             <div className="overflow-x-auto rates-scrollable">
               <table className="w-full min-w-[640px] text-left">
                 <thead>
-                  <tr className="border-b border-border/50 text-[10px] font-bold uppercase tracking-[0.12em] text-ink/35">
+                  <tr className="border-b border-border/50 text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">
                     <th className="px-5 py-3 font-bold sm:px-6">Matter</th>
                     <th className="px-3 py-3 font-bold">Stage</th>
                     <th className="px-3 py-3 font-bold">Value</th>
@@ -226,7 +226,7 @@ export default function DashboardPage() {
                         <p className="text-sm font-semibold tracking-tight text-ink">
                           {m.title}
                         </p>
-                        <p className="mt-0.5 text-[11px] text-ink/40">{m.client}</p>
+                        <p className="mt-0.5 text-[11px] text-ink/60">{m.client}</p>
                       </td>
                       <td className="px-3 py-3.5">
                         <span className="inline-flex rounded-md bg-field px-2 py-1 text-[11px] font-semibold text-ink/65">
@@ -236,8 +236,8 @@ export default function DashboardPage() {
                       <td className="px-3 py-3.5 text-sm font-semibold tabular-nums text-ink">
                         {m.value}
                       </td>
-                      <td className="px-3 py-3.5 text-xs text-ink/55">{m.owner}</td>
-                      <td className="px-5 py-3.5 text-right text-[11px] text-ink/35 sm:px-6">
+                      <td className="px-3 py-3.5 text-xs text-ink/60">{m.owner}</td>
+                      <td className="px-5 py-3.5 text-right text-[11px] text-ink/60 sm:px-6">
                         {m.updated}
                       </td>
                     </tr>
@@ -248,7 +248,7 @@ export default function DashboardPage() {
           </section>
 
           <section className="rounded-[1.5rem] border border-border/70 bg-field/70 p-5 sm:p-6 lg:col-span-4">
-            <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+            <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
               This week
             </p>
             <h2 className="mt-1 text-base font-semibold tracking-tight text-ink">
@@ -269,12 +269,12 @@ export default function DashboardPage() {
                   key={label}
                   className="flex items-baseline justify-between gap-3 border-b border-border/40 pb-3 last:border-0 last:pb-0"
                 >
-                  <dt className="text-xs font-medium text-ink/50">{label}</dt>
+                  <dt className="text-xs font-medium text-ink/60">{label}</dt>
                   <dd className="text-sm font-semibold tabular-nums text-ink">{value}</dd>
                 </div>
               ))}
             </dl>
-            <p className="mt-5 text-[11px] leading-relaxed text-ink/35">
+            <p className="mt-5 text-[11px] leading-relaxed text-ink/60">
               Deep cuts by matter, client, and discount land in Analytics — this
               page stays the firm-wide pulse.
             </p>

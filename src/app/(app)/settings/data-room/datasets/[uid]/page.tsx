@@ -132,7 +132,7 @@ export default function DatasetDetailPage() {
       <div>
         <Link
           href="/settings/data-room"
-          className="text-xs font-bold text-ink/40 hover:text-primary flex items-center gap-1 w-fit transition-colors py-1.5 -my-1.5 rounded"
+          className="text-xs font-bold text-ink/60 hover:text-primary flex items-center gap-1 w-fit transition-colors py-1.5 -my-1.5 rounded"
         >
           <HiArrowSmLeft className="w-4 h-4" /> Back to Data Room Overview
         </Link>
@@ -156,26 +156,26 @@ export default function DatasetDetailPage() {
             </div>
             
             {dataset.description && (
-              <p className="text-xs text-ink/55 font-medium leading-relaxed max-w-2xl">
+              <p className="text-xs text-ink/60 font-medium leading-relaxed max-w-2xl">
                 {dataset.description}
               </p>
             )}
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4 text-xs font-semibold text-ink/55">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4 text-xs font-semibold text-ink/60">
               <div>
-                <span className="block text-[9px] font-bold text-ink/40 uppercase tracking-wider mb-0.5">Source System</span>
+                <span className="block text-[9px] font-bold text-ink/60 uppercase tracking-wider mb-0.5">Source System</span>
                 <span className="text-ink/90">{dataset.sourceSystem || "Manual Upload"}</span>
               </div>
               <div>
-                <span className="block text-[9px] font-bold text-ink/40 uppercase tracking-wider mb-0.5">Covered Period</span>
+                <span className="block text-[9px] font-bold text-ink/60 uppercase tracking-wider mb-0.5">Covered Period</span>
                 <span className="text-ink/90">{renderPeriod(dataset.periodStart, dataset.periodEnd)}</span>
               </div>
               <div>
-                <span className="block text-[9px] font-bold text-ink/40 uppercase tracking-wider mb-0.5">Extracted Records</span>
+                <span className="block text-[9px] font-bold text-ink/60 uppercase tracking-wider mb-0.5">Extracted Records</span>
                 <span className="text-ink font-extrabold text-[13px]">{dataset.totalRecords} records</span>
               </div>
               <div>
-                <span className="block text-[9px] font-bold text-ink/40 uppercase tracking-wider mb-0.5">Files Ingested</span>
+                <span className="block text-[9px] font-bold text-ink/60 uppercase tracking-wider mb-0.5">Files Ingested</span>
                 <span className="text-ink/90">{dataset.processedDocuments} / {dataset.totalDocuments} files</span>
               </div>
             </div>
@@ -214,12 +214,12 @@ export default function DatasetDetailPage() {
               <table className="min-w-full divide-y divide-gray-100 text-xs">
                 <thead className="bg-field">
                   <tr>
-                    <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">File Name</th>
-                    <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Size</th>
-                    <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Status</th>
-                    <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Extracted</th>
-                    <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Mapping</th>
-                    <th className="px-5 py-4 text-right font-bold text-ink/55 uppercase tracking-wider w-28">Actions</th>
+                    <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">File Name</th>
+                    <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Size</th>
+                    <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Status</th>
+                    <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Extracted</th>
+                    <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Mapping</th>
+                    <th className="px-5 py-4 text-right font-bold text-ink/60 uppercase tracking-wider w-28">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100 font-semibold text-ink/80">
@@ -233,7 +233,7 @@ export default function DatasetDetailPage() {
                     ))
                   ) : documents.length === 0 ? (
                     <tr>
-                      <td colSpan={6} className="px-5 py-12 text-center text-ink/40">
+                      <td colSpan={6} className="px-5 py-12 text-center text-ink/60">
                         No documents registered inside this dataset yet. Drag-and-drop a file to begin ingestion.
                       </td>
                     </tr>
@@ -281,14 +281,14 @@ export default function DatasetDetailPage() {
                                       <button
                                         onClick={() => setActiveMappingDoc(doc)}
                                         title="Fix column mapping"
-                                        className="p-1.5 hover:bg-canvas text-ink/40 hover:text-primary rounded-lg cursor-pointer"
+                                        className="p-1.5 hover:bg-canvas text-ink/60 hover:text-primary rounded-lg cursor-pointer"
                                       >
                                         <HiCog className="w-4 h-4" />
                                       </button>
                                       <button
                                         onClick={() => handleRetry(doc.uid)}
                                         title="Retry processing"
-                                        className="p-1.5 hover:bg-canvas text-ink/40 hover:text-primary rounded-lg cursor-pointer"
+                                        className="p-1.5 hover:bg-canvas text-ink/60 hover:text-primary rounded-lg cursor-pointer"
                                       >
                                         <HiLightningBolt className="w-4 h-4" />
                                       </button>
@@ -296,13 +296,13 @@ export default function DatasetDetailPage() {
                                   )}
                                   <button
                                     onClick={() => setActiveLogDoc(doc)}
-                                    className="px-2.5 py-1.5 hover:bg-canvas rounded text-[10px] font-bold text-ink/55 hover:text-ink transition-colors"
+                                    className="px-2.5 py-1.5 hover:bg-canvas rounded text-[10px] font-bold text-ink/60 hover:text-ink transition-colors"
                                   >
                                     Log
                                   </button>
                                   <button
                                     onClick={() => setConfirmDeleteUid(doc.uid)}
-                                    className="p-1.5 hover:bg-red-50 text-ink/40 hover:text-red-700 rounded-lg transition-colors cursor-pointer"
+                                    className="p-1.5 hover:bg-red-50 text-ink/60 hover:text-red-700 rounded-lg transition-colors cursor-pointer"
                                   >
                                     <HiTrash className="w-4 h-4" />
                                   </button>

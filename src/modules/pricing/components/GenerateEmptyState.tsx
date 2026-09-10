@@ -27,13 +27,13 @@ export function GenerateEmptyState({
         }}
       />
       <div className="relative max-w-lg mx-auto px-6 text-center">
-        <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/35">
+        <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/60">
           Pricing workspace
         </p>
         <h2 className="mt-3 text-3xl sm:text-[2.5rem] font-semibold tracking-tight text-ink leading-[1.12]">
           {matterTitle || "This matter"}
         </h2>
-        <p className="mt-4 text-sm sm:text-[15px] text-ink/50 leading-relaxed max-w-md mx-auto">
+        <p className="mt-4 text-sm sm:text-[15px] text-ink/60 leading-relaxed max-w-md mx-auto">
           Start deep pricing research from the locked scope and firm rates.
           You can leave this page — work continues in the background and you will
           be notified when scenarios are ready.

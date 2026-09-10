@@ -127,7 +127,7 @@ export function EngagementPackWorkspace({
             </h2>
             {pack && <EngagementPackStatusBadge status={pack.status} />}
           </div>
-          <p className="mt-0.5 truncate text-xs text-ink/45">
+          <p className="mt-0.5 truncate text-xs text-ink/60">
             {pack?.matterTitle || "Letter of engagement and fee schedule"}
           </p>
         </div>
@@ -165,7 +165,7 @@ export function EngagementPackWorkspace({
           <button
             type="button"
             onClick={onClose}
-            className="rounded-lg p-2 text-ink/50 hover:bg-hover hover:text-ink"
+            className="rounded-lg p-2 text-ink/60 hover:bg-hover hover:text-ink"
             aria-label="Close"
           >
             <HiX className="h-5 w-5" />
@@ -188,7 +188,7 @@ export function EngagementPackWorkspace({
               className={`rounded-full px-3 py-1.5 text-xs font-semibold transition-colors ${
                 section === t.id
                   ? "bg-ink text-canvas"
-                  : "text-ink/50 hover:bg-hover hover:text-ink"
+                  : "text-ink/60 hover:bg-hover hover:text-ink"
               }`}
             >
               {t.label}
@@ -205,7 +205,7 @@ export function EngagementPackWorkspace({
         ) : pack ? (
           <div className="print:block">
             {mode === "portal" && pack.status === "ACKNOWLEDGED" && (
-              <p className="mx-auto mb-4 max-w-[720px] text-center text-xs font-medium text-ink/55 print:hidden">
+              <p className="mx-auto mb-4 max-w-[720px] text-center text-xs font-medium text-ink/60 print:hidden">
                 You acknowledged this engagement
                 {pack.acknowledgedAt
                   ? ` on ${new Date(pack.acknowledgedAt).toLocaleString("en-GB")}`

@@ -3,7 +3,7 @@ import React from "react";
 export function TypingIndicator() {
   return (
     <div className="flex justify-start mb-3 flex-col items-start">
-      <span className="text-xs text-ink/40 mb-1">Lysp</span>
+      <span className="text-xs text-ink/60 mb-1">Lysp</span>
       <div className="bg-surface border border-border/50 rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm">
         <div className="flex gap-1 items-center">
           <span

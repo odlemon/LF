@@ -28,13 +28,13 @@ export function PricingRequestCard({ request, clientName }: PricingRequestCardPr
       </div>
       <div className="flex flex-col gap-1 text-sm text-ink/65">
         <span>
-          <span className="font-semibold text-ink/55">Client:</span> {displayClient}
+          <span className="font-semibold text-ink/60">Client:</span> {displayClient}
         </span>
         <span>
-          <span className="font-semibold text-ink/55">Practice area:</span> {practiceArea}
+          <span className="font-semibold text-ink/60">Practice area:</span> {practiceArea}
         </span>
       </div>
-      <p className="text-xs text-ink/40 mt-3 font-medium">
+      <p className="text-xs text-ink/60 mt-3 font-medium">
         {formatRelativeTime(request.createdAt)}
       </p>
       {request.status === "SCOPE_CONFIRMED" && (

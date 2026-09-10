@@ -82,16 +82,16 @@ export function ScopePanel({
       <div className="flex-1 flex flex-col min-h-0 relative overflow-hidden">
         <div className="relative px-6 py-4 border-b border-border/60 shrink-0 flex items-center justify-between gap-3">
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35">
+            <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
               Matter scope
             </p>
-            <p className="text-sm text-ink/50 mt-0.5">Building your plan…</p>
+            <p className="text-sm text-ink/60 mt-0.5">Building your plan…</p>
           </div>
           {onCollapse && (
             <button
               type="button"
               onClick={onCollapse}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-[11px] font-semibold text-ink/45 hover:text-ink hover:bg-hover border border-transparent hover:border-border transition-colors"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-[11px] font-semibold text-ink/60 hover:text-ink hover:bg-hover border border-transparent hover:border-border transition-colors"
               aria-label="Collapse scope panel"
               title="Collapse scope"
             >
@@ -128,16 +128,16 @@ export function ScopePanel({
 
         <div className="relative px-6 py-4 border-b border-border/60 shrink-0 flex items-center justify-between gap-3">
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35">
+            <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
               Matter scope
             </p>
-            <p className="text-sm text-ink/50 mt-0.5">Waiting for a plan</p>
+            <p className="text-sm text-ink/60 mt-0.5">Waiting for a plan</p>
           </div>
           {onCollapse && (
             <button
               type="button"
               onClick={onCollapse}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-[11px] font-semibold text-ink/45 hover:text-ink hover:bg-hover border border-transparent hover:border-border transition-colors"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-[11px] font-semibold text-ink/60 hover:text-ink hover:bg-hover border border-transparent hover:border-border transition-colors"
               aria-label="Collapse scope panel"
               title="Collapse scope"
             >
@@ -149,13 +149,13 @@ export function ScopePanel({
 
         <div className="relative flex-1 flex flex-col items-center justify-center p-8 text-center">
           <div className="w-full max-w-sm">
-            <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35 mb-3">
+            <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60 mb-3">
               Matter scope
             </p>
             <h3 className="text-xl font-semibold text-ink tracking-tight">
               Your engagement plan
             </h3>
-            <p className="mt-2 text-sm leading-relaxed text-ink/45">
+            <p className="mt-2 text-sm leading-relaxed text-ink/60">
               Chat with Lysp about the matter. When you&apos;re ready, ask it to
               generate the scope — phases, hours, and assumptions will appear here.
             </p>
@@ -231,16 +231,16 @@ export function ScopePanel({
 
       <div className="relative px-6 py-4 border-b border-border/60 shrink-0 flex items-center justify-between gap-3 backdrop-blur-[2px]">
         <div>
-          <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35">
+          <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
             Matter scope
           </p>
-          <p className="text-sm text-ink/55 mt-0.5">
+          <p className="text-sm text-ink/60 mt-0.5">
             Review, refine, then confirm
           </p>
         </div>
         <div className="flex items-center gap-2 shrink-0">
           {readOnly && (
-            <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-ink/50 bg-surface/80 px-3 py-1.5 rounded-full border border-border">
+            <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-ink/60 bg-surface/80 px-3 py-1.5 rounded-full border border-border">
               Locked
             </span>
           )}
@@ -248,7 +248,7 @@ export function ScopePanel({
             <button
               type="button"
               onClick={onCollapse}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-[11px] font-semibold text-ink/45 hover:text-ink hover:bg-hover border border-transparent hover:border-border transition-colors"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-[11px] font-semibold text-ink/60 hover:text-ink hover:bg-hover border border-transparent hover:border-border transition-colors"
               aria-label="Collapse scope panel"
               title="Collapse scope"
             >
@@ -267,7 +267,7 @@ export function ScopePanel({
         />
 
         <div className="mb-2">
-          <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35 mb-4">
+          <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60 mb-4">
             Work plan
           </p>
           {sortedPhases.map((phase, index) => (
@@ -330,7 +330,7 @@ export function ScopePanel({
             <button
               type="button"
               onClick={() => setShowAddPhase(true)}
-              className="ml-10 mb-4 inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-ink/40 hover:text-ink transition-colors py-1.5"
+              className="ml-10 mb-4 inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-ink/60 hover:text-ink transition-colors py-1.5"
             >
               <HiPlus className="w-3.5 h-3.5" />
               Add Phase

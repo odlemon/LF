@@ -166,7 +166,7 @@ export default function ClientDashboardPage() {
               className="rounded-2xl border border-border/70 bg-surface p-4 sm:p-5 animate-fade-in-up"
               style={{ animationDelay: `${i * 40}ms` }}
             >
-              <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/35">
+              <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">
                 {kpi.label}
               </p>
               <p className="mt-2 text-xl font-semibold tracking-tight text-ink tabular-nums sm:text-2xl">
@@ -189,7 +189,7 @@ export default function ClientDashboardPage() {
           <section className="xl:col-span-7 rounded-[1.5rem] border border-border/70 bg-surface p-5 sm:p-6">
             <div className="flex items-end justify-between gap-3">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+                <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
                   Action required
                 </p>
                 <h2 className="mt-1 text-base font-semibold tracking-tight text-ink">
@@ -209,7 +209,7 @@ export default function ClientDashboardPage() {
               <div className="mt-8 flex flex-col items-center py-6 text-center">
                 <HiOutlineCheckCircle className="h-8 w-8 text-emerald-500" />
                 <p className="mt-3 text-sm font-semibold text-ink/75">You&apos;re clear</p>
-                <p className="mt-1 max-w-sm text-xs text-ink/45">
+                <p className="mt-1 max-w-sm text-xs text-ink/60">
                   When the firm sends a new fee proposal, it appears here with a deadline and one-click path into the rate coach.
                 </p>
               </div>
@@ -234,7 +234,7 @@ export default function ClientDashboardPage() {
                             </p>
                             <NegotiationStatusBadge status={item.status} />
                           </div>
-                          <p className="mt-1 text-xs text-ink/45">
+                          <p className="mt-1 text-xs text-ink/60">
                             Received {formatDate(item.sentAt)}
                             {item.responseDeadline
                               ? overdue
@@ -262,7 +262,7 @@ export default function ClientDashboardPage() {
 
           <section className="xl:col-span-5 flex flex-col gap-5">
             <div className="rounded-[1.5rem] border border-border/70 bg-surface p-5 sm:p-6">
-              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
                 Portfolio mix
               </p>
               <h2 className="mt-1 text-base font-semibold tracking-tight text-ink">
@@ -273,7 +273,7 @@ export default function ClientDashboardPage() {
                   <div key={b.key}>
                     <div className="mb-1.5 flex justify-between text-xs">
                       <span className="font-semibold text-ink/70">{b.label}</span>
-                      <span className="tabular-nums text-ink/45">{b.count}</span>
+                      <span className="tabular-nums text-ink/60">{b.count}</span>
                     </div>
                     <div className="h-2 overflow-hidden rounded-full bg-field">
                       <div
@@ -288,8 +288,8 @@ export default function ClientDashboardPage() {
 
             <div className="rounded-[1.5rem] border border-border/70 bg-surface p-5 sm:p-6">
               <div className="flex items-center gap-2">
-                <HiOutlineSparkles className="h-4 w-4 text-ink/45" />
-                <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+                <HiOutlineSparkles className="h-4 w-4 text-ink/60" />
+                <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
                   Rate coach
                 </p>
               </div>
@@ -310,7 +310,7 @@ export default function ClientDashboardPage() {
         <section className="overflow-hidden rounded-[1.5rem] border border-border/70 bg-surface">
           <div className="flex items-end justify-between gap-3 border-b border-border/60 px-5 py-4 sm:px-6">
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
                 Recent activity
               </p>
               <h2 className="mt-1 text-base font-semibold tracking-tight text-ink">
@@ -328,7 +328,7 @@ export default function ClientDashboardPage() {
           {loading ? (
             <div className="h-40 animate-pulse bg-field/40" />
           ) : recent.length === 0 ? (
-            <p className="px-6 py-12 text-center text-sm text-ink/45">
+            <p className="px-6 py-12 text-center text-sm text-ink/60">
               No proposals yet.
             </p>
           ) : (
@@ -346,7 +346,7 @@ export default function ClientDashboardPage() {
                       <p className="truncate text-sm font-semibold text-ink">
                         {item.matterTitle || "Fee proposal"}
                       </p>
-                      <p className="mt-0.5 text-xs text-ink/40">
+                      <p className="mt-0.5 text-xs text-ink/60">
                         Updated {relativeTime(item.updatedAt || item.sentAt)}
                       </p>
                     </div>

@@ -43,7 +43,7 @@ export function ActivateConfirmModal({
       size="md"
     >
       <div className="flex flex-col gap-6">
-        <p className="text-sm text-ink/55 leading-relaxed">
+        <p className="text-sm text-ink/60 leading-relaxed">
           This will set <span className="font-bold text-ink/90">{config.displayName}</span> as the active AI provider.{" "}
           {activeConfig && (
             <span>
@@ -64,7 +64,7 @@ export function ActivateConfirmModal({
           <button
             type="button"
             onClick={onClose}
-            className="w-full sm:flex-1 text-center text-xs font-bold text-ink/40 hover:text-ink/70 transition-colors py-3 cursor-pointer"
+            className="w-full sm:flex-1 text-center text-xs font-bold text-ink/60 hover:text-ink/70 transition-colors py-3 cursor-pointer"
           >
             Cancel
           </button>

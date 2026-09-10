@@ -102,7 +102,7 @@ export function ClientSidebar({ isMobileOpen = false, onMobileClose }: ClientSid
           {!isCollapsed && (
             <div className="min-w-0">
               <p className="text-[15px] font-semibold text-ink tracking-tight leading-none">Lysp</p>
-              <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-ink/40 leading-none">
+              <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-ink/60 leading-none">
                 Client Portal
               </p>
             </div>
@@ -112,7 +112,7 @@ export function ClientSidebar({ isMobileOpen = false, onMobileClose }: ClientSid
             onClick={toggleCollapsed}
             title={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
             aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-            className="ml-auto hidden md:inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-border bg-surface text-ink/50 hover:text-ink hover:bg-hover transition-colors cursor-pointer md:ml-auto"
+            className="ml-auto hidden md:inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-border bg-surface text-ink/60 hover:text-ink hover:bg-hover transition-colors cursor-pointer md:ml-auto"
           >
             {isCollapsed ? (
               <HiChevronDoubleRight className="w-3.5 h-3.5" />
@@ -139,7 +139,7 @@ export function ClientSidebar({ isMobileOpen = false, onMobileClose }: ClientSid
                 <p className="truncate text-[13px] font-semibold text-ink leading-tight">
                   {user.contactName}
                 </p>
-                <p className="truncate text-[11px] text-ink/45 leading-tight">{user.clientName}</p>
+                <p className="truncate text-[11px] text-ink/60 leading-tight">{user.clientName}</p>
               </div>
             )}
           </Link>
@@ -188,7 +188,7 @@ export function ClientSidebar({ isMobileOpen = false, onMobileClose }: ClientSid
             <HiOutlineLogout className="w-5 h-5 shrink-0" />
             {!isCollapsed && "Sign out"}
           </button>
-          {!isCollapsed && <p className="mt-2 px-4 text-[10px] text-ink/30">Secured by Lysp</p>}
+          {!isCollapsed && <p className="mt-2 px-4 text-[10px] text-ink/60">Secured by Lysp</p>}
         </div>
       </aside>
     </>

@@ -45,7 +45,7 @@ export default function FirmAccountPage() {
                 <h2 className="text-xl font-semibold tracking-tight text-ink">
                   {fullName}
                 </h2>
-                <p className="mt-0.5 text-sm text-ink/50">{user?.email}</p>
+                <p className="mt-0.5 text-sm text-ink/60">{user?.email}</p>
                 <div className="mt-3 flex flex-wrap gap-1.5">
                   {roles.map((role) => (
                     <span
@@ -58,7 +58,7 @@ export default function FirmAccountPage() {
                 </div>
               </div>
             </div>
-            <p className="mt-6 text-sm leading-relaxed text-ink/55">
+            <p className="mt-6 text-sm leading-relaxed text-ink/60">
               You are signed into the firm workspace. Partners lead client
               relationships, pricing approvals, and live rate negotiations.
             </p>
@@ -66,22 +66,22 @@ export default function FirmAccountPage() {
 
           <section className="lg:col-span-7 space-y-6">
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
                 Workspace
               </p>
               <dl className="mt-3 divide-y divide-border/50 border-y border-border/50">
                 <div className="flex items-baseline justify-between gap-4 py-3.5">
-                  <dt className="text-sm text-ink/50">Display name</dt>
+                  <dt className="text-sm text-ink/60">Display name</dt>
                   <dd className="text-sm font-semibold text-ink">{fullName}</dd>
                 </div>
                 <div className="flex items-baseline justify-between gap-4 py-3.5">
-                  <dt className="text-sm text-ink/50">Sign-in email</dt>
+                  <dt className="text-sm text-ink/60">Sign-in email</dt>
                   <dd className="text-sm font-semibold text-ink">{user?.email}</dd>
                 </div>
                 <div className="flex items-center justify-between gap-4 py-3.5">
                   <div>
                     <dt className="text-sm font-semibold text-ink">Appearance</dt>
-                    <dd className="mt-0.5 text-xs text-ink/45">
+                    <dd className="mt-0.5 text-xs text-ink/60">
                       Currently {theme === "dark" ? "dark" : "light"} mode
                     </dd>
                   </div>

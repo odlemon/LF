@@ -166,7 +166,7 @@ export default function RolesPage() {
               <HiShieldExclamation className="w-7 h-7 text-primary shrink-0" />
               Roles & Permissions
             </h1>
-            <p className="text-sm text-ink/55 mt-1">
+            <p className="text-sm text-ink/60 mt-1">
               Configure organizational roles, map granular permissions, and restrict platform access.
             </p>
           </div>
@@ -185,19 +185,19 @@ export default function RolesPage() {
         {isLoading && roles.length === 0 ? (
           <div className="bg-surface rounded-2xl border border-border/60 p-24 flex flex-col items-center justify-center gap-3">
             <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary/20 border-b-primary" />
-            <span className="text-xs font-semibold text-ink/40">Loading system security configurations...</span>
+            <span className="text-xs font-semibold text-ink/60">Loading system security configurations...</span>
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
             {/* Left Sidebar Pane: Role cards */}
             <div className="lg:col-span-4 flex flex-col gap-4">
-              <div className="px-1 text-[10px] font-extrabold text-ink/40 uppercase tracking-widest">
+              <div className="px-1 text-[10px] font-extrabold text-ink/60 uppercase tracking-widest">
                 Available Firm Roles ({roles.length})
               </div>
               <div className="flex flex-col gap-3 overflow-y-auto rates-scrollable max-h-[70vh] pr-1">
                 {roles.length === 0 ? (
-                  <div className="bg-surface rounded-2xl border border-border p-8 text-center text-ink/55 text-xs font-semibold">
+                  <div className="bg-surface rounded-2xl border border-border p-8 text-center text-ink/60 text-xs font-semibold">
                     No custom roles registered in this firm.
                   </div>
                 ) : (
@@ -232,12 +232,12 @@ export default function RolesPage() {
                           <h4 className={`font-semibold text-sm transition-colors ${isSelected ? "text-primary" : "text-ink"}`}>
                             {role.name}
                           </h4>
-                          <p className="text-xs text-ink/55 mt-1 line-clamp-2 leading-relaxed">
+                          <p className="text-xs text-ink/60 mt-1 line-clamp-2 leading-relaxed">
                             {role.description || "No specific description configured."}
                           </p>
                           <div className="flex items-center gap-1.5 mt-3.5">
                             <span className={`inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold border transition-colors ${
-                              isSelected ? aesthetic.glowingAccent : "bg-field text-ink/55 border-border"
+                              isSelected ? aesthetic.glowingAccent : "bg-field text-ink/60 border-border"
                             }`}>
                               {role.permissions?.length || 0} Operations Authorized
                             </span>
@@ -264,7 +264,7 @@ export default function RolesPage() {
                         </span>
                       </div>
                       <h3 className="text-lg font-bold text-ink mt-1.5">{activeRole.name}</h3>
-                      <p className="text-xs text-ink/55 mt-1 leading-normal">
+                      <p className="text-xs text-ink/60 mt-1 leading-normal">
                         {activeRole.description || "No operational description provided."}
                       </p>
                     </div>
@@ -289,7 +289,7 @@ export default function RolesPage() {
                   <div className="flex flex-col gap-6 overflow-y-auto pr-1 rates-scrollable max-h-[50vh]">
                     {Object.entries(permissionsByModule).map(([moduleName, modulePerms]) => (
                       <div key={moduleName} className="flex flex-col gap-3">
-                        <h5 className="text-[10px] font-extrabold text-ink/40 uppercase tracking-widest px-1">
+                        <h5 className="text-[10px] font-extrabold text-ink/60 uppercase tracking-widest px-1">
                           {moduleName} Module Controls
                         </h5>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -316,7 +316,7 @@ export default function RolesPage() {
                                       {category.label}
                                     </span>
                                   </div>
-                                  <span className="text-xs text-ink/55 mt-1.5 block leading-relaxed">
+                                  <span className="text-xs text-ink/60 mt-1.5 block leading-relaxed">
                                     {perm.description || "Grants platform operational clearance."}
                                   </span>
                                 </div>
@@ -355,7 +355,7 @@ export default function RolesPage() {
                     <HiLockOpen className="w-6 h-6" />
                   </div>
                   <span className="text-xs font-bold text-ink mt-2">No Active Selection</span>
-                  <span className="text-xs text-ink/40">Select a structural role from the sidebar to inspect and configure security rules.</span>
+                  <span className="text-xs text-ink/60">Select a structural role from the sidebar to inspect and configure security rules.</span>
                 </div>
               )}
             </div>
@@ -372,7 +372,7 @@ export default function RolesPage() {
                 <button
                   type="button"
                   onClick={() => setIsCreateOpen(false)}
-                  className="text-ink/40 hover:text-ink p-1 hover:bg-field rounded-full transition-colors cursor-pointer"
+                  className="text-ink/60 hover:text-ink p-1 hover:bg-field rounded-full transition-colors cursor-pointer"
                 >
                   <HiX className="w-5 h-5" />
                 </button>
@@ -380,7 +380,7 @@ export default function RolesPage() {
 
               <form onSubmit={handleCreateSubmit} className="p-6 space-y-5">
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-extrabold text-ink/40 uppercase tracking-widest">
+                  <label className="text-[10px] font-extrabold text-ink/60 uppercase tracking-widest">
                     Role Name
                   </label>
                   <Input aria-label="Role Name"
@@ -393,7 +393,7 @@ export default function RolesPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-extrabold text-ink/40 uppercase tracking-widest">
+                  <label className="text-[10px] font-extrabold text-ink/60 uppercase tracking-widest">
                     Role Description
                   </label>
                   <Textarea aria-label="Role Description"

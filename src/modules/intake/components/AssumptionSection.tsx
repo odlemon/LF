@@ -24,7 +24,7 @@ const GROUP_CONFIG: Record<
   },
   EXCLUDED: {
     label: "Excluded",
-    accent: "text-ink/55",
+    accent: "text-ink/60",
     dot: "bg-ink/25",
   },
   RISK: {
@@ -65,7 +65,7 @@ export function AssumptionSection({
     <section className="mt-2 pt-8 border-t border-border">
       <div className="flex items-end justify-between gap-3 mb-5">
         <div>
-          <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35">
+          <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
             Boundaries
           </p>
           <h4 className="text-base font-semibold text-ink tracking-tight mt-1">
@@ -75,7 +75,7 @@ export function AssumptionSection({
       </div>
 
       {!hasAny && !showForm && (
-        <p className="text-sm text-ink/40 mb-4">
+        <p className="text-sm text-ink/60 mb-4">
           No assumptions recorded yet. Add inclusions, exclusions, or risks.
         </p>
       )}
@@ -109,7 +109,7 @@ export function AssumptionSection({
                       <button
                         type="button"
                         onClick={() => onDelete(item.uid)}
-                        className="p-1 opacity-0 group-hover:opacity-100 text-ink/30 hover:text-red-500 shrink-0 transition-opacity"
+                        className="p-1 opacity-0 group-hover:opacity-100 text-ink/60 hover:text-red-500 shrink-0 transition-opacity"
                         aria-label="Delete assumption"
                       >
                         <HiTrash className="w-3.5 h-3.5" />
@@ -167,7 +167,7 @@ export function AssumptionSection({
           <button
             type="button"
             onClick={() => setShowForm(true)}
-            className="mt-5 inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-ink/45 hover:text-ink transition-colors py-1.5"
+            className="mt-5 inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-ink/60 hover:text-ink transition-colors py-1.5"
           >
             <HiPlus className="w-3.5 h-3.5" />
             Add Assumption

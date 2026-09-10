@@ -36,9 +36,9 @@ interface IdentityProviderFormModalProps {
 const inputClassName =
   "w-full px-5 py-2.5 bg-surface border border-border focus:border-primary focus:ring-primary/20 rounded-full text-xs text-ink/90 focus:outline-none focus:ring-2 font-medium";
 
-const labelClassName = "text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1 select-none";
+const labelClassName = "text-[10px] font-bold text-ink/60 uppercase tracking-wider pl-1 select-none";
 
-const hintClassName = "text-[10px] font-semibold text-ink/40 pl-1";
+const hintClassName = "text-[10px] font-semibold text-ink/60 pl-1";
 
 function errorMessage(err: unknown, fallback: string): string {
   const response = (err as { response?: { data?: { message?: string } } })?.response;
@@ -208,7 +208,7 @@ export function IdentityProviderFormModal({
               type="button"
               onClick={copyRedirectUri}
               disabled={!redirectUri}
-              className="shrink-0 p-2 rounded-full border border-border text-ink/50 hover:text-ink hover:border-ink/30 transition-colors cursor-pointer disabled:opacity-40"
+              className="shrink-0 p-2 rounded-full border border-border text-ink/60 hover:text-ink hover:border-ink/30 transition-colors cursor-pointer disabled:opacity-40"
               aria-label="Copy redirect URI"
             >
               <HiClipboardCopy className="w-4 h-4" />
@@ -280,7 +280,7 @@ export function IdentityProviderFormModal({
                 ["jwks", checked.jwkSetUri],
               ].map(([label, value]) => (
                 <div key={label} className="flex gap-2 min-w-0">
-                  <dt className="w-16 shrink-0 text-ink/35">{label}</dt>
+                  <dt className="w-16 shrink-0 text-ink/60">{label}</dt>
                   <dd className="truncate">{value}</dd>
                 </div>
               ))}
@@ -344,7 +344,7 @@ export function IdentityProviderFormModal({
           <button
             type="button"
             onClick={() => setManualEndpoints((v) => !v)}
-            className="text-[11px] font-bold text-ink/50 hover:text-ink transition-colors cursor-pointer py-1.5 -my-1.5"
+            className="text-[11px] font-bold text-ink/60 hover:text-ink transition-colors cursor-pointer py-1.5 -my-1.5"
           >
             {manualEndpoints
               ? "← Use an issuer URL instead"

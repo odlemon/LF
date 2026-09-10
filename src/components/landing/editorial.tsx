@@ -47,9 +47,9 @@ export function SectionHeader({
   descriptionClassName = "",
 }: SectionHeaderProps) {
   const isDark = tone === "dark";
-  const eyeColor = isDark ? "text-white/40" : "text-[#0a0a0a]/40";
+  const eyeColor = isDark ? "text-white/45" : "text-[#0a0a0a]/60";
   const titleColor = isDark ? "text-[#fefefc]" : "text-[#0a0a0a]";
-  const bodyColor = isDark ? "text-white/50" : "text-[#0a0a0a]/55";
+  const bodyColor = isDark ? "text-white/50" : "text-[#0a0a0a]/60";
 
   return (
     <div className={`max-w-3xl text-left ${className}`}>
@@ -89,9 +89,9 @@ export function PageHeroHeader({
   className = "",
 }: PageHeroHeaderProps) {
   const isDark = tone === "dark";
-  const eyeColor = isDark ? "text-white/40" : "text-[#0a0a0a]/40";
+  const eyeColor = isDark ? "text-white/45" : "text-[#0a0a0a]/60";
   const titleColor = isDark ? "text-[#fefefc]" : "text-[#0a0a0a]";
-  const bodyColor = isDark ? "text-white/50" : "text-[#0a0a0a]/55";
+  const bodyColor = isDark ? "text-white/50" : "text-[#0a0a0a]/60";
 
   return (
     <div className={`text-left ${className}`}>

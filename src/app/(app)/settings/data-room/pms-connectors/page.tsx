@@ -10,7 +10,7 @@ import { HiPlus, HiCloudUpload, HiLightningBolt, HiCheckCircle, HiXCircle, HiClo
 function SyncStatusBadge({ status }: { status?: string }) {
   if (!status) {
     return (
-      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase bg-field text-ink/40 border border-border/60">
+      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase bg-field text-ink/60 border border-border/60">
         <HiClock className="w-3 h-3" /> Never synced
       </span>
     );
@@ -89,7 +89,7 @@ export default function PmsConnectorsPage() {
           <h1 className="text-2xl font-bold text-ink tracking-tight flex items-center gap-2">
             <HiCloudUpload className="w-7 h-7 text-primary" /> PMS Connectors
           </h1>
-          <p className="text-sm text-ink/55 mt-1">
+          <p className="text-sm text-ink/60 mt-1">
             Sync historical matters and billing data directly from your practice management system.
           </p>
         </div>
@@ -101,11 +101,11 @@ export default function PmsConnectorsPage() {
       {/* Named-vendor integrations are a later phase; the generic REST connector
           is the one that actually runs today. */}
       <div className="bg-field/50 border border-border/50 rounded-3xl p-5">
-        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
           Coming next
         </p>
         <h2 className="mt-1.5 text-sm font-bold text-ink">Native practice-management integrations</h2>
-        <p className="mt-1 text-xs text-ink/55 max-w-2xl leading-relaxed">
+        <p className="mt-1 text-xs text-ink/60 max-w-2xl leading-relaxed">
           Direct, credentialed connectors for the systems most firms run on. Until these
           ship, the same data can be synced today through the Generic REST connector or
           imported as a file.
@@ -114,10 +114,10 @@ export default function PmsConnectorsPage() {
           {["Aderant", "Elite 3E", "Intapp", "SAP", "NetDocuments"].map((name) => (
             <span
               key={name}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border/70 bg-surface text-[11px] font-semibold text-ink/45"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border/70 bg-surface text-[11px] font-semibold text-ink/60"
             >
               {name}
-              <span className="text-[9px] font-bold uppercase tracking-wider text-ink/30">
+              <span className="text-[9px] font-bold uppercase tracking-wider text-ink/60">
                 Planned
               </span>
             </span>
@@ -130,13 +130,13 @@ export default function PmsConnectorsPage() {
           <table className="min-w-full divide-y divide-gray-100 text-xs">
             <thead className="bg-field">
               <tr>
-                <th className="px-5 py-3.5 text-left font-bold text-ink/55 uppercase tracking-wider">Name</th>
-                <th className="px-5 py-3.5 text-left font-bold text-ink/55 uppercase tracking-wider">System</th>
-                <th className="px-5 py-3.5 text-left font-bold text-ink/55 uppercase tracking-wider">Base URL</th>
-                <th className="px-5 py-3.5 text-left font-bold text-ink/55 uppercase tracking-wider">Schedule</th>
-                <th className="px-5 py-3.5 text-left font-bold text-ink/55 uppercase tracking-wider">Last Synced</th>
-                <th className="px-5 py-3.5 text-left font-bold text-ink/55 uppercase tracking-wider">Status</th>
-                <th className="px-5 py-3.5 text-right font-bold text-ink/55 uppercase tracking-wider">Actions</th>
+                <th className="px-5 py-3.5 text-left font-bold text-ink/60 uppercase tracking-wider">Name</th>
+                <th className="px-5 py-3.5 text-left font-bold text-ink/60 uppercase tracking-wider">System</th>
+                <th className="px-5 py-3.5 text-left font-bold text-ink/60 uppercase tracking-wider">Base URL</th>
+                <th className="px-5 py-3.5 text-left font-bold text-ink/60 uppercase tracking-wider">Schedule</th>
+                <th className="px-5 py-3.5 text-left font-bold text-ink/60 uppercase tracking-wider">Last Synced</th>
+                <th className="px-5 py-3.5 text-left font-bold text-ink/60 uppercase tracking-wider">Status</th>
+                <th className="px-5 py-3.5 text-right font-bold text-ink/60 uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 font-semibold text-ink/80">
@@ -150,7 +150,7 @@ export default function PmsConnectorsPage() {
                 ))
               ) : connectors.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="px-5 py-12 text-center text-ink/40">
+                  <td colSpan={7} className="px-5 py-12 text-center text-ink/60">
                     No PMS connectors configured yet. Click &quot;New Connector&quot; to sync your first practice-management system.
                   </td>
                 </tr>

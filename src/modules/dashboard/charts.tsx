@@ -34,7 +34,7 @@ function ChartTooltip({ active, payload, label, formatter }: TipProps) {
   if (!active || !payload?.length) return null;
   return (
     <div className="rounded-xl border border-border bg-surface px-3.5 py-2.5 shadow-[0_12px_32px_rgba(0,0,0,0.12)]">
-      <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/40 mb-1.5">
+      <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60 mb-1.5">
         {label}
       </p>
       <ul className="space-y-1">
@@ -44,7 +44,7 @@ function ChartTooltip({ active, payload, label, formatter }: TipProps) {
               className="h-1.5 w-1.5 rounded-full shrink-0"
               style={{ background: entry.color || INK }}
             />
-            <span className="text-ink/45">{entry.name}</span>
+            <span className="text-ink/60">{entry.name}</span>
             <span className="font-semibold tabular-nums ml-auto pl-3">
               {formatter
                 ? formatter(entry)
@@ -67,7 +67,7 @@ export function FeesTrendChart({ data }: { data: TrendPoint[] }) {
     <div className="flex flex-col h-full min-h-[280px]">
       <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
         <div>
-          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
             Commercial trend
           </p>
           <h3 className="mt-1 text-base font-semibold text-ink tracking-tight">
@@ -89,7 +89,7 @@ export function FeesTrendChart({ data }: { data: TrendPoint[] }) {
               className={`px-3 py-1.5 rounded-full transition-colors cursor-pointer ${
                 focus === key
                   ? "bg-ink text-on-primary"
-                  : "text-ink/50 hover:text-ink"
+                  : "text-ink/60 hover:text-ink"
               }`}
             >
               {label}
@@ -162,7 +162,7 @@ export function FeesTrendChart({ data }: { data: TrendPoint[] }) {
           </AreaChart>
         </ResponsiveContainer>
       </div>
-      <p className="mt-2 text-[11px] text-ink/35">Values in £000s · hover for detail</p>
+      <p className="mt-2 text-[11px] text-ink/60">Values in £000s · hover for detail</p>
     </div>
   );
 }
@@ -171,7 +171,7 @@ export function MarginWinRateChart({ data }: { data: TrendPoint[] }) {
   return (
     <div className="flex flex-col h-full min-h-[280px]">
       <div className="mb-4">
-        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
           Quality
         </p>
         <h3 className="mt-1 text-base font-semibold text-ink tracking-tight">
@@ -240,7 +240,7 @@ export function MarginWinRateChart({ data }: { data: TrendPoint[] }) {
           </LineChart>
         </ResponsiveContainer>
       </div>
-      <div className="mt-2 flex gap-4 text-[11px] text-ink/40 font-medium">
+      <div className="mt-2 flex gap-4 text-[11px] text-ink/60 font-medium">
         <span className="inline-flex items-center gap-1.5">
           <span className="h-0.5 w-4 bg-ink rounded-full" /> Margin
         </span>
@@ -257,7 +257,7 @@ export function PipelineStagesChart({ data }: { data: StagePoint[] }) {
   return (
     <div className="flex flex-col h-full min-h-[260px]">
       <div className="mb-4">
-        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
           Firm workflow
         </p>
         <h3 className="mt-1 text-base font-semibold text-ink tracking-tight">
@@ -324,7 +324,7 @@ export function PracticeMixChart({ data }: { data: PracticePoint[] }) {
   return (
     <div className="flex flex-col h-full min-h-[260px]">
       <div className="mb-4">
-        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
           Practice mix
         </p>
         <h3 className="mt-1 text-base font-semibold text-ink tracking-tight">
@@ -374,7 +374,7 @@ export function PracticeMixChart({ data }: { data: PracticePoint[] }) {
           </BarChart>
         </ResponsiveContainer>
       </div>
-      <p className="mt-2 text-[11px] text-ink/35">YTD accepted fees · hover a bar</p>
+      <p className="mt-2 text-[11px] text-ink/60">YTD accepted fees · hover a bar</p>
     </div>
   );
 }

@@ -17,9 +17,9 @@ function formatMoney(amount: number | null, currency: string | null | undefined)
 }
 
 function varianceTone(pct: number | null) {
-  if (pct == null) return "text-ink/40";
+  if (pct == null) return "text-ink/60";
   if (pct > 10) return "text-red-700";
-  if (pct < -10) return "text-ink/55";
+  if (pct < -10) return "text-ink/60";
   return "text-ink/70";
 }
 
@@ -34,14 +34,14 @@ export function ComparablesPanel({ requestUid, scenarioUid }: ComparablesPanelPr
   return (
     <div className="rounded-2xl border border-border bg-surface p-5">
       <div className="flex items-baseline justify-between gap-3 mb-1">
-        <h4 className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35">
+        <h4 className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
           Comparable matters
         </h4>
         {data && data.length > 0 && (
-          <span className="text-[11px] tabular-nums text-ink/35">{data.length}</span>
+          <span className="text-[11px] tabular-nums text-ink/60">{data.length}</span>
         )}
       </div>
-      <p className="text-[12px] text-ink/45 mb-4">
+      <p className="text-[12px] text-ink/60 mb-4">
         The past matters this price was built from.
       </p>
 
@@ -60,7 +60,7 @@ export function ComparablesPanel({ requestUid, scenarioUid }: ComparablesPanelPr
         <div className="overflow-x-auto -mx-1">
           <table className="w-full text-left text-[12px] min-w-[640px]">
             <thead>
-              <tr className="text-[10px] uppercase tracking-wide text-ink/35">
+              <tr className="text-[10px] uppercase tracking-wide text-ink/60">
                 <th className="font-semibold px-1 py-1.5">Matter</th>
                 <th className="font-semibold px-1 py-1.5">Practice</th>
                 <th className="font-semibold px-1 py-1.5 text-right">Fee</th>
@@ -77,10 +77,10 @@ export function ComparablesPanel({ requestUid, scenarioUid }: ComparablesPanelPr
                   <td className="px-1 py-2 max-w-[220px]">
                     <p className="font-medium text-ink/85 truncate">{c.matterTitle || "—"}</p>
                     {c.matterReference && (
-                      <p className="text-[10px] text-ink/35">{c.matterReference}</p>
+                      <p className="text-[10px] text-ink/60">{c.matterReference}</p>
                     )}
                   </td>
-                  <td className="px-1 py-2 text-ink/55">{c.practiceAreaCode || "—"}</td>
+                  <td className="px-1 py-2 text-ink/60">{c.practiceAreaCode || "—"}</td>
                   <td className="px-1 py-2 text-right tabular-nums text-ink/80">
                     {formatMoney(c.totalFee, c.currency)}
                   </td>
@@ -89,13 +89,13 @@ export function ComparablesPanel({ requestUid, scenarioUid }: ComparablesPanelPr
                       ? `${c.feeVariancePct > 0 ? "+" : ""}${c.feeVariancePct.toFixed(1)}%`
                       : "—"}
                   </td>
-                  <td className="px-1 py-2 text-right tabular-nums text-ink/55">
+                  <td className="px-1 py-2 text-right tabular-nums text-ink/60">
                     {c.hoursVariancePct != null ? `${c.hoursVariancePct.toFixed(1)}%` : "—"}
                   </td>
-                  <td className="px-1 py-2 text-right tabular-nums text-ink/55">
+                  <td className="px-1 py-2 text-right tabular-nums text-ink/60">
                     {c.marginPct != null ? `${c.marginPct.toFixed(1)}%` : "—"}
                   </td>
-                  <td className="px-1 py-2 text-ink/55">{c.outcome || "—"}</td>
+                  <td className="px-1 py-2 text-ink/60">{c.outcome || "—"}</td>
                   <td
                     className="px-1 py-2 text-right tabular-nums font-medium text-ink/70"
                     title={c.matchReasons.join(", ")}

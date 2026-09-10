@@ -39,10 +39,10 @@ export function DecisionModal({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-fade-in">
       <div className="bg-surface rounded-2xl border border-border shadow-[0_12px_40px_rgba(0,0,0,0.14)] w-full max-w-md p-6 animate-fade-in-up">
         <h3 className="text-lg font-semibold text-ink tracking-tight">{title}</h3>
-        <p className="mt-2 text-sm text-ink/50 leading-relaxed">
+        <p className="mt-2 text-sm text-ink/60 leading-relaxed">
           The submitter will be notified in real time.
         </p>
-        <label className="block mt-5 text-[11px] font-semibold text-ink/55 mb-1.5">
+        <label className="block mt-5 text-[11px] font-semibold text-ink/60 mb-1.5">
           Comment{requireComment ? "" : " (optional)"}
         </label>
         <textarea

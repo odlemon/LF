@@ -27,9 +27,9 @@ import type { PeriodParams, RateComplianceDto } from "@/modules/analytics/types"
 function Stat({ label, value, sub }: { label: string; value: string; sub?: string }) {
   return (
     <div className="bg-surface border border-border/70 rounded-2xl p-5">
-      <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35">{label}</p>
+      <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">{label}</p>
       <p className="mt-2 text-xl font-bold tabular-nums text-ink tracking-tight">{value}</p>
-      {sub && <p className="text-[11px] text-ink/45 mt-1">{sub}</p>}
+      {sub && <p className="text-[11px] text-ink/60 mt-1">{sub}</p>}
     </div>
   );
 }
@@ -107,7 +107,7 @@ export default function PracticeAreaDeepDivePage() {
           <div>
             <Link
               href="/analytics"
-              className="inline-flex items-center gap-1 text-xs font-bold text-ink/50 hover:text-ink transition-colors mb-2 py-1.5"
+              className="inline-flex items-center gap-1 text-xs font-bold text-ink/60 hover:text-ink transition-colors mb-2 py-1.5"
             >
               <HiArrowLeft className="w-3.5 h-3.5" />
               Firm health
@@ -115,7 +115,7 @@ export default function PracticeAreaDeepDivePage() {
             <h1 className="text-2xl font-bold text-ink tracking-tight">
               {metrics?.practiceAreaName ?? "Practice area"}
             </h1>
-            <p className="text-sm text-ink/55 mt-1">Deep dive — fees, margin, win rate and top matters.</p>
+            <p className="text-sm text-ink/60 mt-1">Deep dive — fees, margin, win rate and top matters.</p>
           </div>
           <PeriodFilter period={period} onChange={setPeriod} />
         </div>
@@ -155,28 +155,28 @@ export default function PracticeAreaDeepDivePage() {
 
           {/* Margin positioning strip */}
           <div className="bg-surface border border-border/70 rounded-2xl p-5">
-            <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35 mb-3">
+            <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60 mb-3">
               Positioning
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               <div>
-                <p className="text-xs font-semibold text-ink/50">Average achieved margin</p>
+                <p className="text-xs font-semibold text-ink/60">Average achieved margin</p>
                 <p className={`text-lg font-bold tabular-nums mt-1 ${metrics.marginVsTargetPts != null && metrics.marginVsTargetPts < 0 ? "text-red-600" : "text-ink"} dark:text-red-400`}>
                   {formatPct(metrics.avgMarginPct)}
                 </p>
               </div>
               <div>
-                <p className="text-xs font-semibold text-ink/50">Target margin</p>
+                <p className="text-xs font-semibold text-ink/60">Target margin</p>
                 <p className="text-lg font-bold tabular-nums text-ink mt-1">
                   {metrics.targetMarginPct != null ? formatPct(metrics.targetMarginPct) : "—"}
                 </p>
               </div>
               <div>
-                <p className="text-xs font-semibold text-ink/50">Market median rate</p>
+                <p className="text-xs font-semibold text-ink/60">Market median rate</p>
                 <p className="text-lg font-bold tabular-nums text-ink mt-1">
                   {formatRate(metrics.marketMedianRate)}
                   {metrics.marketMedianSource && (
-                    <span className="ml-2 text-[11px] font-semibold text-ink/40">
+                    <span className="ml-2 text-[11px] font-semibold text-ink/60">
                       ({metrics.marketMedianSource})
                     </span>
                   )}
@@ -220,35 +220,35 @@ export default function PracticeAreaDeepDivePage() {
           {/* Rate card compliance for this practice area (finance view only) */}
           {financeView && compliance && (
             <div className="bg-surface border border-border/70 rounded-2xl p-5">
-              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35 mb-3">
+              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60 mb-3">
                 Rate card compliance
               </p>
               {!compliance.activeRateCardPresent ? (
-                <p className="text-sm text-ink/55">No active rate card - compliance cannot be evaluated.</p>
+                <p className="text-sm text-ink/60">No active rate card - compliance cannot be evaluated.</p>
               ) : compliance.linesEvaluated === 0 && compliance.unmatchedCount === 0 ? (
-                <p className="text-sm text-ink/55">No priced matters in this practice area for the selected period.</p>
+                <p className="text-sm text-ink/60">No priced matters in this practice area for the selected period.</p>
               ) : (
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
                   <div>
-                    <p className="text-xs font-semibold text-ink/50">Compliant rate lines</p>
+                    <p className="text-xs font-semibold text-ink/60">Compliant rate lines</p>
                     <p className={`text-lg font-bold tabular-nums mt-1 ${compliance.compliantPct < 100 ? "text-amber-600" : "text-emerald-600"} dark:text-amber-400`}>
                       {formatPct(compliance.compliantPct)}
                     </p>
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-ink/50">Lines evaluated</p>
+                    <p className="text-xs font-semibold text-ink/60">Lines evaluated</p>
                     <p className="text-lg font-bold tabular-nums text-ink mt-1">
                       {formatNumber(compliance.linesEvaluated)}
                     </p>
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-ink/50">Off-card</p>
+                    <p className="text-xs font-semibold text-ink/60">Off-card</p>
                     <p className="text-lg font-bold tabular-nums text-ink mt-1">
                       {formatNumber(compliance.nonCompliantCount)}
                     </p>
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-ink/50">Unmatched</p>
+                    <p className="text-xs font-semibold text-ink/60">Unmatched</p>
                     <p className="text-lg font-bold tabular-nums text-ink mt-1">
                       {formatNumber(compliance.unmatchedCount)}
                     </p>
@@ -256,7 +256,7 @@ export default function PracticeAreaDeepDivePage() {
                 </div>
               )}
               {compliance.activeRateCardPresent && compliance.rateCardName && (
-                <p className="text-[11px] text-ink/40 mt-3">
+                <p className="text-[11px] text-ink/60 mt-3">
                   Card: {compliance.rateCardName}
                 </p>
               )}
@@ -267,7 +267,7 @@ export default function PracticeAreaDeepDivePage() {
           <div className="bg-surface rounded-2xl border border-border/60 overflow-hidden shadow-sm">
             <div className="px-6 py-4 border-b border-border">
               <h3 className="text-sm font-bold text-ink">Clients in this practice area</h3>
-              <p className="text-[11px] text-ink/45 mt-0.5">
+              <p className="text-[11px] text-ink/60 mt-0.5">
                 Relationship health from this practice area&apos;s priced work in the selected period.
               </p>
             </div>
@@ -283,7 +283,7 @@ export default function PracticeAreaDeepDivePage() {
                 <table className="w-full text-left text-sm border-collapse">
 
                   <thead>
-                    <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
+                    <tr className="bg-field/50 text-xs font-bold text-ink/60 border-b border-border">
                       <th className="px-6 py-4">Client</th>
                       <th className="px-6 py-4">Revenue</th>
                       <th className="px-6 py-4">Avg margin</th>
@@ -329,7 +329,7 @@ export default function PracticeAreaDeepDivePage() {
                 <table className="w-full text-left text-sm border-collapse">
 
                   <thead>
-                    <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
+                    <tr className="bg-field/50 text-xs font-bold text-ink/60 border-b border-border">
                       <th className="px-6 py-4">Pricing model</th>
                       <th className="px-6 py-4">Matters</th>
                       <th className="px-6 py-4">Share</th>
@@ -368,7 +368,7 @@ export default function PracticeAreaDeepDivePage() {
                 <table className="w-full text-left text-sm border-collapse">
 
                   <thead>
-                    <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
+                    <tr className="bg-field/50 text-xs font-bold text-ink/60 border-b border-border">
                       <th className="px-6 py-4">Matter</th>
                       <th className="px-6 py-4">Source</th>
                       <th className="px-6 py-4">Gross fees</th>

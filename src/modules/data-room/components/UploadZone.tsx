@@ -129,7 +129,7 @@ export function UploadZone({ onUpload, isUploading, progress }: UploadZoneProps)
               <span className="text-sm font-bold text-ink line-clamp-1 break-all px-4">
                 {selectedFile.name}
               </span>
-              <span className="text-xs font-semibold text-ink/40">
+              <span className="text-xs font-semibold text-ink/60">
                 {formatFileSize(selectedFile.size)}
               </span>
             </div>
@@ -142,7 +142,7 @@ export function UploadZone({ onUpload, isUploading, progress }: UploadZoneProps)
                     style={{ width: `${progress}%` }}
                   />
                 </div>
-                <div className="flex justify-between items-center text-[10px] font-bold text-ink/40 uppercase">
+                <div className="flex justify-between items-center text-[10px] font-bold text-ink/60 uppercase">
                   <span>Uploading file...</span>
                   <span className="text-ink font-extrabold">{progress}%</span>
                 </div>
@@ -161,7 +161,7 @@ export function UploadZone({ onUpload, isUploading, progress }: UploadZoneProps)
           </div>
         ) : (
           <div className="flex flex-col items-center text-center gap-3">
-            <div className="p-4 bg-canvas border border-border/50 text-ink/40 rounded-2xl group-hover:text-primary transition-colors">
+            <div className="p-4 bg-canvas border border-border/50 text-ink/60 rounded-2xl group-hover:text-primary transition-colors">
               <HiCloudUpload className="w-10 h-10" />
             </div>
             
@@ -169,7 +169,7 @@ export function UploadZone({ onUpload, isUploading, progress }: UploadZoneProps)
               <span className="text-sm font-bold text-ink/90">
                 Drag and drop your file here, or <span className="text-primary hover:underline font-extrabold">browse files</span>
               </span>
-              <span className="text-xs font-semibold text-ink/40">
+              <span className="text-xs font-semibold text-ink/60">
                 Supports CSV, Excel (XLSX, XLS), PDF, and Word (DOCX, DOC) up to 50MB
               </span>
             </div>
@@ -185,7 +185,7 @@ export function UploadZone({ onUpload, isUploading, progress }: UploadZoneProps)
 
       {success && (
         <div className="p-3.5 bg-hover border border-border/50 text-ink text-xs font-bold rounded-2xl flex items-center gap-2 animate-fade-in">
-          <HiCheckCircle className="w-5 h-5 text-ink/55 shrink-0" />
+          <HiCheckCircle className="w-5 h-5 text-ink/60 shrink-0" />
           File uploaded successfully! Processing will begin in the background.
         </div>
       )}

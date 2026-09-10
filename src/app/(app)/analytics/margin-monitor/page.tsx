@@ -105,7 +105,7 @@ export default function MarginMonitorPage() {
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
           <div>
             <h1 className="text-2xl font-bold text-ink tracking-tight">Margin Monitor</h1>
-            <p className="text-sm text-ink/55 mt-1">
+            <p className="text-sm text-ink/60 mt-1">
               AI-flagged pricing anomalies — review, resolve or mark as valid exceptions.
             </p>
           </div>
@@ -155,7 +155,7 @@ export default function MarginMonitorPage() {
       ) : (
         <>
           <div className="flex flex-wrap items-center gap-2 -mt-3">
-            <p className="text-xs font-semibold text-ink/45">
+            <p className="text-xs font-semibold text-ink/60">
               {anomalies.length} flag{anomalies.length === 1 ? "" : "s"} · Open anomalies: {openCount}
             </p>
             <span className="inline-flex items-center gap-1 text-[10px] font-bold text-red-700 bg-red-50 border border-red-200 rounded-full px-2 py-0.5">
@@ -192,12 +192,12 @@ export default function MarginMonitorPage() {
                       {formatAnomalyType(anomaly.anomalyType)}
                     </span>
                     {paName && (
-                      <span className="text-[11px] font-semibold text-ink/45">· {paName}</span>
+                      <span className="text-[11px] font-semibold text-ink/60">· {paName}</span>
                     )}
                     {cName && (
-                      <span className="text-[11px] font-semibold text-ink/45">· {cName}</span>
+                      <span className="text-[11px] font-semibold text-ink/60">· {cName}</span>
                     )}
-                    <span className="ml-auto text-[11px] text-ink/40">
+                    <span className="ml-auto text-[11px] text-ink/60">
                       {formatDateTime(anomaly.createdAt)}
                     </span>
                   </div>
@@ -207,19 +207,19 @@ export default function MarginMonitorPage() {
                       {anomaly.aiDescription}
                     </p>
                   ) : (
-                    <p className="mt-2.5 text-sm text-ink/55 leading-relaxed">
+                    <p className="mt-2.5 text-sm text-ink/60 leading-relaxed">
                       {anomaly.context ?? "No description available."}
                     </p>
                   )}
 
                   {anomaly.aiRootCause && (
-                    <p className="mt-1.5 text-xs text-ink/50 leading-relaxed line-clamp-1">
+                    <p className="mt-1.5 text-xs text-ink/60 leading-relaxed line-clamp-1">
                       <span className="font-bold text-ink/60">Root cause:</span>{" "}
                       {anomaly.aiRootCause}
                     </p>
                   )}
 
-                  <div className="mt-3 flex items-center gap-4 text-[11px] font-semibold text-ink/45 tabular-nums">
+                  <div className="mt-3 flex items-center gap-4 text-[11px] font-semibold text-ink/60 tabular-nums">
                     {anomaly.metricValue != null && (
                       <span>Value: {anomaly.metricValue.toLocaleString()}</span>
                     )}
@@ -227,7 +227,7 @@ export default function MarginMonitorPage() {
                       <span>Threshold: {anomaly.thresholdValue.toLocaleString()}</span>
                     )}
                     {anomaly.status !== "OPEN" && anomaly.resolutionNote && (
-                      <span className="text-ink/55 truncate max-w-[420px]">
+                      <span className="text-ink/60 truncate max-w-[420px]">
                         Note: {anomaly.resolutionNote}
                       </span>
                     )}

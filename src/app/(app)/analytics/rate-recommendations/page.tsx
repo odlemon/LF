@@ -54,7 +54,7 @@ export default function RateRecommendationsPage() {
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
           <div>
             <h1 className="text-2xl font-bold text-ink tracking-tight">Rate Recommendations</h1>
-            <p className="text-sm text-ink/55 mt-1">
+            <p className="text-sm text-ink/60 mt-1">
               Latest market-informed rate guidance per practice area and fee earner level.
             </p>
           </div>
@@ -79,7 +79,7 @@ export default function RateRecommendationsPage() {
         <div className="bg-surface rounded-2xl border border-border/60 overflow-hidden shadow-sm overflow-x-auto">
           <table className="w-full text-left text-sm border-collapse min-w-[980px]">
             <thead>
-              <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
+              <tr className="bg-field/50 text-xs font-bold text-ink/60 border-b border-border">
                 <th className="px-6 py-4">Practice area</th>
                 <th className="px-6 py-4">Level</th>
                 <th className="px-6 py-4">Current</th>
@@ -102,9 +102,9 @@ export default function RateRecommendationsPage() {
                     <td className="px-6 py-4">
                       <p className="font-semibold text-ink">{paName(rec.practiceAreaUid)}</p>
                       {rec.jurisdiction && (
-                        <p className="text-[11px] text-ink/45 mt-0.5">{rec.jurisdiction}</p>
+                        <p className="text-[11px] text-ink/60 mt-0.5">{rec.jurisdiction}</p>
                       )}
-                      <p className="text-[10px] text-ink/35 mt-1">{formatDateTime(rec.generatedAt)}</p>
+                      <p className="text-[10px] text-ink/60 mt-1">{formatDateTime(rec.generatedAt)}</p>
                     </td>
                     <td className="px-6 py-4 font-semibold text-ink">{rec.feeEarnerLevelCode}</td>
                     <td className="px-6 py-4 tabular-nums text-ink/80">{formatRate(rec.currentRate)}</td>
@@ -155,7 +155,7 @@ export default function RateRecommendationsPage() {
               {rec.reasoning ? (
                 <p className="text-xs text-ink/65 leading-relaxed">{rec.reasoning}</p>
               ) : (
-                <p className="text-xs text-ink/40 italic">No reasoning provided.</p>
+                <p className="text-xs text-ink/60 italic">No reasoning provided.</p>
               )}
             </div>
           ))}

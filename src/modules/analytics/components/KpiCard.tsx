@@ -26,7 +26,7 @@ export function KpiCard({ label, value, caption, delta, deltaValue, invert = fal
 
   return (
     <div className="bg-surface border border-border/70 rounded-2xl p-5 flex flex-col gap-2 min-w-0">
-      <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35 truncate">
+      <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60 truncate">
         {label}
       </p>
       {loading ? (
@@ -50,7 +50,7 @@ export function KpiCard({ label, value, caption, delta, deltaValue, invert = fal
             {delta}
           </span>
         ) : null}
-        {caption && <span className="text-[11px] font-medium text-ink/40 truncate">{caption}</span>}
+        {caption && <span className="text-[11px] font-medium text-ink/60 truncate">{caption}</span>}
       </div>
     </div>
   );

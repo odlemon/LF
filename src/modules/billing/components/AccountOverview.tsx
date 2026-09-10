@@ -70,20 +70,20 @@ export function AccountOverview({ account, onCreateAdjustment, showAdjustButton 
                 />
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/40">Remaining</span>
+                <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">Remaining</span>
                 <span className="text-lg font-semibold tabular-nums text-ink">{remainingPct.toFixed(0)}%</span>
               </div>
             </div>
 
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-ink/35">Available credits</p>
+              <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-ink/60">Available credits</p>
               <div className="mt-2 flex items-baseline gap-3">
                 <span className="text-5xl font-semibold tracking-tight text-ink tabular-nums sm:text-6xl">
                   {formatCredits(animatedBalance)}
                 </span>
-                <span className="text-sm font-medium text-ink/40">credits</span>
+                <span className="text-sm font-medium text-ink/60">credits</span>
               </div>
-              <div className="mt-2 flex items-center gap-4 text-xs text-ink/45">
+              <div className="mt-2 flex items-center gap-4 text-xs text-ink/60">
                 <span>{formatCredits(account.totalConsumed)} consumed</span>
                 <span className="h-1 w-1 rounded-full bg-ink/20" />
                 <span>{formatCredits(account.totalTopups)} allocated</span>
@@ -111,7 +111,7 @@ export function AccountOverview({ account, onCreateAdjustment, showAdjustButton 
         <div className="group relative overflow-hidden rounded-2xl border border-border/60 bg-surface p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)] transition-all hover:shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:border-ink/10">
           <div className="absolute inset-0 bg-gradient-to-br from-amber-500/[0.03] to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
           <div className="relative flex items-center justify-between">
-            <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/35">Consumed</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">Consumed</p>
             <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-amber-50 text-amber-700 ring-1 ring-amber-100">
               <HiTrendingDown className="h-4 w-4" />
             </span>
@@ -119,13 +119,13 @@ export function AccountOverview({ account, onCreateAdjustment, showAdjustButton 
           <p className="relative mt-3 text-2xl font-semibold tracking-tight text-ink tabular-nums">
             {formatCredits(account.totalConsumed)}
           </p>
-          <p className="relative mt-1 text-[11px] text-ink/40">credits used</p>
+          <p className="relative mt-1 text-[11px] text-ink/60">credits used</p>
         </div>
 
         <div className="group relative overflow-hidden rounded-2xl border border-border/60 bg-surface p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)] transition-all hover:shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:border-ink/10">
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/[0.03] to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
           <div className="relative flex items-center justify-between">
-            <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/35">Top-ups</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">Top-ups</p>
             <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100">
               <HiTrendingUp className="h-4 w-4" />
             </span>
@@ -133,19 +133,19 @@ export function AccountOverview({ account, onCreateAdjustment, showAdjustButton 
           <p className="relative mt-3 text-2xl font-semibold tracking-tight text-ink tabular-nums">
             {formatCredits(account.totalTopups)}
           </p>
-          <p className="relative mt-1 text-[11px] text-ink/40">credits added</p>
+          <p className="relative mt-1 text-[11px] text-ink/60">credits added</p>
         </div>
 
         <div className="group relative overflow-hidden rounded-2xl border border-border/60 bg-surface p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)] transition-all hover:shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:border-ink/10">
           <div className="absolute inset-0 bg-gradient-to-br from-ink/[0.02] to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
           <div className="relative flex items-center justify-between">
-            <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/35">Unit price</p>
-            <span className="text-[11px] font-semibold text-ink/35">per credit</span>
+            <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">Unit price</p>
+            <span className="text-[11px] font-semibold text-ink/60">per credit</span>
           </div>
           <p className="relative mt-3 text-2xl font-semibold tracking-tight text-ink tabular-nums">
             ${formatCredits(account.creditUnitPrice)}
           </p>
-          <p className="relative mt-1 text-[11px] text-ink/40">USD rate</p>
+          <p className="relative mt-1 text-[11px] text-ink/60">USD rate</p>
         </div>
       </div>
     </div>

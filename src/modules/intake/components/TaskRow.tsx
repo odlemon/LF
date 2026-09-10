@@ -92,7 +92,7 @@ export function TaskRow({
             onChange={(e) => setEstimatedHours(e.target.value)}
             className="w-20 px-3 py-2 text-sm border border-border rounded-full bg-surface tabular-nums focus:outline-none focus:ring-2 focus:ring-primary/20"
           />
-          <span className="text-xs text-ink/45">hrs</span>
+          <span className="text-xs text-ink/60">hrs</span>
           <button
             type="button"
             onClick={save}
@@ -106,7 +106,7 @@ export function TaskRow({
             type="button"
             onClick={cancel}
             disabled={isSaving}
-            className="p-1.5 text-ink/40 hover:bg-canvas rounded-lg"
+            className="p-1.5 text-ink/60 hover:bg-canvas rounded-lg"
             aria-label="Cancel"
           >
             <HiX className="w-4 h-4" />
@@ -132,14 +132,14 @@ export function TaskRow({
         <div className="flex items-center gap-1.5 self-center justify-end min-w-[4.5rem]">
           <span className="text-[13px] font-semibold tabular-nums text-ink/70">
             {task.estimatedHours}
-            <span className="text-[10px] font-medium text-ink/35 ml-0.5">h</span>
+            <span className="text-[10px] font-medium text-ink/60 ml-0.5">h</span>
           </span>
           {!readOnly && (
             <div className="flex opacity-0 group-hover:opacity-100 transition-opacity">
               <button
                 type="button"
                 onClick={() => setIsEditing(true)}
-                className="p-1 text-ink/30 hover:text-ink rounded"
+                className="p-1 text-ink/60 hover:text-ink rounded"
                 aria-label="Edit task"
               >
                 <HiPencil className="w-3.5 h-3.5" />
@@ -147,7 +147,7 @@ export function TaskRow({
               <button
                 type="button"
                 onClick={() => onDelete(phaseUid, task.uid)}
-                className="p-1 text-ink/30 hover:text-red-500 rounded"
+                className="p-1 text-ink/60 hover:text-red-500 rounded"
                 aria-label="Delete task"
               >
                 <HiTrash className="w-3.5 h-3.5" />

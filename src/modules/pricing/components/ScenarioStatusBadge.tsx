@@ -144,13 +144,13 @@ export function ScenarioStageRail({
   return (
     <div className={`w-full ${className}`}>
       <div className="flex items-center justify-between gap-2 mb-2">
-        <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35">
+        <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
           Pricing stage
         </p>
         <ScenarioStatusBadge status={status} size="sm" />
       </div>
       {generating ? (
-        <p className="text-xs text-ink/50">
+        <p className="text-xs text-ink/60">
           {scenarioStatusMeta(status).hint}
         </p>
       ) : rejected ? (
@@ -179,7 +179,7 @@ export function ScenarioStageRail({
                   />
                   <span
                     className={`text-[9px] sm:text-[10px] font-semibold truncate ${
-                      active ? "text-amber-900 dark:text-amber-200" : "text-ink/30"
+                      active ? "text-amber-900 dark:text-amber-200" : "text-ink/60"
                     }`}
                   >
                     {label}
@@ -213,7 +213,7 @@ export function ScenarioStageRail({
                 />
                 <span
                   className={`text-[9px] sm:text-[10px] font-semibold truncate ${
-                    active ? "text-ink" : done ? "text-ink/55" : "text-ink/30"
+                    active ? "text-ink" : done ? "text-ink/60" : "text-ink/60"
                   }`}
                 >
                   {label}

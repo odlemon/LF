@@ -169,7 +169,7 @@ export default function MatterLearningsPage() {
       <header className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div className="min-w-0">
           <h1 className="text-2xl font-bold tracking-tight text-ink">House view</h1>
-          <p className="mt-1 max-w-2xl text-sm leading-relaxed text-ink/55">
+          <p className="mt-1 max-w-2xl text-sm leading-relaxed text-ink/60">
             Where this firm has landed on pricing its own work. Every negotiation that closes adds
             its own entry, and the pricing agent reads them back when it scopes comparable work — so
             what the firm learns once stops being relearned deal by deal.
@@ -191,7 +191,7 @@ export default function MatterLearningsPage() {
           550px and the search field collapsed to the width of its own icon. */}
       <div className="flex flex-col gap-3 rounded-2xl border border-border bg-surface p-3 lg:flex-row lg:items-center">
         <div className="relative min-w-0 flex-1">
-          <HiOutlineSearch className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink/35" />
+          <HiOutlineSearch className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink/60" />
           <input
             type="search"
             value={query}
@@ -219,7 +219,7 @@ export default function MatterLearningsPage() {
 
       {/* Hidden while loading: the count is derived from state that is still empty, so it
           announced "0 positions" over a list of skeletons. */}
-      <div className="flex flex-wrap items-center gap-2 text-[12px] text-ink/50">
+      <div className="flex flex-wrap items-center gap-2 text-[12px] text-ink/60">
         {loading ? (
           <span className="h-4 w-40 animate-pulse rounded bg-field" />
         ) : (

@@ -114,13 +114,13 @@ export default function PortalNegotiationsPage() {
             })}
           </div>
           <div className="relative ml-auto">
-            <HiOutlineSearch className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink/35" />
+            <HiOutlineSearch className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink/60" />
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               aria-label="Search proposals"
               placeholder="Search…"
-              className="w-52 rounded-full border border-border bg-surface py-2 pl-9 pr-3 text-sm text-ink placeholder:text-ink/35 focus:outline-none focus:ring-2 focus:ring-primary/15"
+              className="w-52 rounded-full border border-border bg-surface py-2 pl-9 pr-3 text-sm text-ink placeholder:text-ink/60 focus:outline-none focus:ring-2 focus:ring-primary/15"
             />
           </div>
         </div>
@@ -143,7 +143,7 @@ export default function PortalNegotiationsPage() {
             <p className="text-sm font-semibold text-ink/75">
               {items.length === 0 ? "No proposals yet" : "Nothing matches"}
             </p>
-            <p className="mt-1.5 text-xs text-ink/45">
+            <p className="mt-1.5 text-xs text-ink/60">
               {items.length === 0
                 ? "When the firm sends a fee proposal, it lands here."
                 : "Try another filter or search."}
@@ -170,7 +170,7 @@ export default function PortalNegotiationsPage() {
                         </p>
                         <NegotiationStatusBadge status={item.status} />
                       </div>
-                      <p className="mt-1.5 text-xs text-ink/45">
+                      <p className="mt-1.5 text-xs text-ink/60">
                         Received {formatDate(item.sentAt)}
                         {item.responseDeadline && isOpenStatus(item.status)
                           ? overdue

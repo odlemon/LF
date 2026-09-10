@@ -126,7 +126,7 @@ export function ChatPanel({
               <h3 className="text-lg font-semibold text-ink tracking-tight">
                 Hi, I&apos;m Lysp.
               </h3>
-              <p className="text-sm text-ink/50 leading-relaxed">
+              <p className="text-sm text-ink/60 leading-relaxed">
                 Describe the matter, attach an RFP or brief, or ask for comparable
                 past scopes. When you&apos;re ready, ask me to generate the scope.
               </p>
@@ -211,7 +211,7 @@ export function ChatPanel({
         )}
 
         {chatMode === "SCOPE_CONFIRMED" && (
-          <p className="mb-2 text-center text-[11px] text-ink/40">
+          <p className="mb-2 text-center text-[11px] text-ink/60">
             Scope is locked — you can still ask questions.
           </p>
         )}
@@ -233,7 +233,7 @@ export function ChatPanel({
             type="button"
             onClick={() => fileInputRef.current?.click()}
             disabled={inputBlocked}
-            className="mb-1.5 ml-1.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink/55 hover:bg-hover hover:text-ink transition-colors disabled:opacity-50"
+            className="mb-1.5 ml-1.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink/60 hover:bg-hover hover:text-ink transition-colors disabled:opacity-50"
             aria-label="Attach file"
           >
             <HiPlus className="h-5 w-5" />
@@ -255,7 +255,7 @@ export function ChatPanel({
             }
             disabled={inputBlocked}
             rows={1}
-            className="composer-textarea flex-1 min-w-0 max-h-[168px] resize-none bg-transparent py-3.5 pr-1 text-[15px] leading-6 text-ink placeholder:text-ink/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1 focus-visible:ring-offset-surface disabled:cursor-not-allowed"
+            className="composer-textarea flex-1 min-w-0 max-h-[168px] resize-none bg-transparent py-3.5 pr-1 text-[15px] leading-6 text-ink placeholder:text-ink/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1 focus-visible:ring-offset-surface disabled:cursor-not-allowed"
           />
 
           {isAiThinking && onStopStreaming ? (
@@ -275,7 +275,7 @@ export function ChatPanel({
               className={`mb-1.5 mr-1.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-colors ${
                 canSend
                   ? "bg-primary text-on-primary hover:bg-primary-hover"
-                  : "bg-ink/10 text-ink/30 cursor-not-allowed"
+                  : "bg-ink/10 text-ink/60 cursor-not-allowed"
               }`}
               aria-label="Send message"
             >

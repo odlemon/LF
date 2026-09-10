@@ -97,7 +97,7 @@ export function HouseViewCitation({ requestUid }: { requestUid: string }) {
           aria-expanded={open}
           className="flex w-full items-center gap-2.5 px-4 py-2.5 text-left transition-colors hover:bg-hover cursor-pointer sm:px-6"
         >
-          <HiOutlineLightBulb className="h-4 w-4 shrink-0 text-ink/40" />
+          <HiOutlineLightBulb className="h-4 w-4 shrink-0 text-ink/60" />
           <span className="min-w-0 flex-1 truncate text-[12px] text-ink/60">
             Pricing this against{" "}
             <span className="font-semibold text-ink/80">
@@ -106,7 +106,7 @@ export function HouseViewCitation({ requestUid }: { requestUid: string }) {
             the firm already holds
           </span>
           <HiChevronDown
-            className={`h-4 w-4 shrink-0 text-ink/35 transition-transform ${open ? "rotate-180" : ""}`}
+            className={`h-4 w-4 shrink-0 text-ink/60 transition-transform ${open ? "rotate-180" : ""}`}
           />
         </button>
 
@@ -120,7 +120,7 @@ export function HouseViewCitation({ requestUid }: { requestUid: string }) {
                 <div className="flex items-start gap-2.5">
                   <span
                     className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full ${
-                      p.automatic ? "bg-ink text-on-primary" : "bg-field text-ink/50"
+                      p.automatic ? "bg-ink text-on-primary" : "bg-field text-ink/60"
                     }`}
                     aria-hidden
                   >
@@ -135,7 +135,7 @@ export function HouseViewCitation({ requestUid }: { requestUid: string }) {
                     <p className="mt-1 whitespace-pre-line text-[12px] leading-relaxed text-ink/60">
                       {p.learningText}
                     </p>
-                    <p className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-ink/40">
+                    <p className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-ink/60">
                       <span>{areaName(p.practiceAreaCode)}</span>
                       <span>·</span>
                       <span>
@@ -158,7 +158,7 @@ export function HouseViewCitation({ requestUid }: { requestUid: string }) {
                         type="button"
                         onClick={() => void remove(p)}
                         disabled={saving}
-                        className="inline-flex items-center gap-1 rounded-full border border-border px-3 py-1 text-[11px] font-semibold text-ink/50 transition-colors hover:border-danger/40 hover:text-danger disabled:opacity-50 cursor-pointer"
+                        className="inline-flex items-center gap-1 rounded-full border border-border px-3 py-1 text-[11px] font-semibold text-ink/60 transition-colors hover:border-danger/40 hover:text-danger disabled:opacity-50 cursor-pointer"
                       >
                         <HiTrash className="h-3 w-3" />
                         Does not apply
@@ -168,7 +168,7 @@ export function HouseViewCitation({ requestUid }: { requestUid: string }) {
                 </div>
               </article>
             ))}
-            <p className="text-[11px] leading-relaxed text-ink/40">
+            <p className="text-[11px] leading-relaxed text-ink/60">
               These are read by the agent before it scopes. A correction here changes what every
               future matter of this kind is told.
             </p>

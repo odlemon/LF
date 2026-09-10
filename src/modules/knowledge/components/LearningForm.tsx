@@ -22,7 +22,7 @@ const CLIENT_TYPES = [
   { value: "INDIVIDUAL", label: "Individual" },
 ];
 
-const LABEL = "text-[10px] font-bold uppercase tracking-wider text-ink/40 pl-1 select-none";
+const LABEL = "text-[10px] font-bold uppercase tracking-wider text-ink/60 pl-1 select-none";
 
 export function LearningForm({
   existing,
@@ -80,7 +80,7 @@ export function LearningForm({
           maxLength={200}
           autoFocus
         />
-        <span className="pl-1 text-[11px] text-ink/40">
+        <span className="pl-1 text-[11px] text-ink/60">
           Write the conclusion, not the topic. This is what a partner reads when scanning the list.
         </span>
       </div>
@@ -97,7 +97,7 @@ export function LearningForm({
           placeholder="Write it as you would explain it to a partner about to price this kind of matter. The pricing agent reads this text directly."
           maxLength={4000}
         />
-        <span className="pl-1 text-[11px] text-ink/40">{text.length} / 4000</span>
+        <span className="pl-1 text-[11px] text-ink/60">{text.length} / 4000</span>
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -133,7 +133,7 @@ export function LearningForm({
         />
       </div>
 
-      <p className="text-[12px] leading-relaxed text-ink/45">
+      <p className="text-[12px] leading-relaxed text-ink/60">
         Leaving both narrowing fields blank makes this apply to every matter. Narrow it only when
         the position genuinely stops holding elsewhere — one nobody sees is worth nothing.
       </p>

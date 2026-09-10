@@ -108,13 +108,13 @@ export default function CrossFirmUsagePage() {
       <div className="relative mx-auto flex w-full max-w-[1200px] flex-col gap-6 px-5 pt-8 sm:gap-7 sm:px-8 sm:pt-10">
         <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/35">
+            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/60">
               Lysp staff
             </p>
             <h1 className="mt-2 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
               Firm consumption
             </h1>
-            <p className="mt-2 max-w-lg text-sm text-ink/50">
+            <p className="mt-2 max-w-lg text-sm text-ink/60">
               Every firm&apos;s consumption for the period, ordered by credits used. Pilot and
               trial firms are shown but marked non-billable.
             </p>
@@ -161,7 +161,7 @@ export default function CrossFirmUsagePage() {
               <div className="overflow-x-auto">
                 <table className="w-full min-w-[760px] text-sm">
                   <thead>
-                    <tr className="border-b border-border text-left text-xs text-ink/45">
+                    <tr className="border-b border-border text-left text-xs text-ink/60">
                       <th className="pb-2 font-medium">Firm</th>
                       <th className="pb-2 font-medium">Contract</th>
                       <th className="pb-2 font-medium">Type</th>
@@ -194,7 +194,7 @@ export default function CrossFirmUsagePage() {
                         </td>
                         <td
                           className={`py-2.5 text-right tabular-nums ${
-                            r.overageCredits > 0 ? "text-red-600" : "text-ink/40"
+                            r.overageCredits > 0 ? "text-red-600" : "text-ink/60"
                           }`}
                         >
                           {r.overageCredits > 0
@@ -213,7 +213,7 @@ export default function CrossFirmUsagePage() {
                             className={`rounded-full px-2 py-0.5 text-xs ${
                               r.billable
                                 ? "bg-emerald-50 text-emerald-700"
-                                : "bg-field text-ink/50"
+                                : "bg-field text-ink/60"
                             }`}
                           >
                             {r.billable ? "Billable" : "No"}
@@ -230,7 +230,7 @@ export default function CrossFirmUsagePage() {
               <div className="rounded-[1.5rem] border border-border bg-surface p-6">
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/35">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/60">
                       Statement
                     </p>
                     <p className="mt-1 text-lg font-semibold text-ink">
@@ -247,7 +247,7 @@ export default function CrossFirmUsagePage() {
                     </Button>
                     <button
                       onClick={() => setSelected(null)}
-                      className="text-sm text-ink/50 hover:text-ink py-1.5 -my-1.5"
+                      className="text-sm text-ink/60 hover:text-ink py-1.5 -my-1.5"
                     >
                       Close
                     </button>
@@ -256,7 +256,7 @@ export default function CrossFirmUsagePage() {
                 <div className="mt-4 overflow-x-auto">
                   <table className="w-full min-w-[440px] text-sm">
                     <thead>
-                      <tr className="border-b border-border text-left text-xs text-ink/45">
+                      <tr className="border-b border-border text-left text-xs text-ink/60">
                         <th className="pb-2 font-medium">Event type</th>
                         <th className="pb-2 font-medium">Unit</th>
                         <th className="pb-2 text-right font-medium">Events</th>
@@ -294,7 +294,7 @@ export default function CrossFirmUsagePage() {
 function StatCard({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div className="rounded-2xl border border-border bg-surface p-4">
-      <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">{label}</p>
+      <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">{label}</p>
       <p className="mt-2 text-xl font-semibold tabular-nums text-ink">
         {typeof value === "number" ? value.toLocaleString() : value}
       </p>

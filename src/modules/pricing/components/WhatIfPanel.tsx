@@ -54,13 +54,13 @@ function StepperControl({
     <div className="rounded-2xl border border-border/50 bg-canvas/40 px-4 py-4">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/35">
+          <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">
             {label}
           </p>
           <p className="mt-2 text-[1.65rem] font-semibold tabular-nums tracking-tight text-ink leading-none">
             {valueLabel}
           </p>
-          <p className="mt-1.5 text-[11px] text-ink/40 leading-snug">{hint}</p>
+          <p className="mt-1.5 text-[11px] text-ink/60 leading-snug">{hint}</p>
         </div>
         <div className="flex items-center gap-1.5 shrink-0 pt-0.5">
           <button
@@ -335,29 +335,29 @@ export function WhatIfPanel({
     <div className="space-y-6">
       <div>
         <div className="flex items-baseline justify-between gap-3 mb-3">
-          <h4 className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35">
+          <h4 className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
             Scenario editor
           </h4>
           {dirty && (
-            <p className="text-[11px] text-ink/40">Unsaved changes</p>
+            <p className="text-[11px] text-ink/60">Unsaved changes</p>
           )}
         </div>
 
         <div className="space-y-2.5">
           <div className="rounded-2xl border border-border/50 bg-canvas/40 px-4 py-4">
-            <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/35">
+            <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">
               Name
             </p>
             <input
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="mt-2 w-full bg-transparent text-base font-semibold tracking-tight text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1 focus-visible:ring-offset-surface placeholder:text-ink/25"
+              className="mt-2 w-full bg-transparent text-base font-semibold tracking-tight text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1 focus-visible:ring-offset-surface placeholder:text-ink/60"
               placeholder="Scenario name"
             />
           </div>
 
           <div className="rounded-2xl border border-border/50 bg-canvas/40 px-4 py-4">
-            <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/35">
+            <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">
               Pricing model
             </p>
             <Select
@@ -392,22 +392,22 @@ export function WhatIfPanel({
 
           {showCap && (
             <div className="rounded-2xl border border-border/50 bg-canvas/40 px-4 py-4">
-              <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/35">
+              <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">
                 Fee cap
               </p>
               <div className="mt-2 flex items-baseline gap-1.5">
-                <span className="text-sm text-ink/40">
+                <span className="text-sm text-ink/60">
                   {scenario.currency || "GBP"}
                 </span>
                 <input
                   type="number"
                   value={capAmount}
                   onChange={(e) => setCapAmount(e.target.value)}
-                  className="w-full bg-transparent text-[1.65rem] font-semibold tabular-nums tracking-tight text-ink leading-none focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1 focus-visible:ring-offset-surface placeholder:text-ink/20"
+                  className="w-full bg-transparent text-[1.65rem] font-semibold tabular-nums tracking-tight text-ink leading-none focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1 focus-visible:ring-offset-surface placeholder:text-ink/60"
                   placeholder="Optional"
                 />
               </div>
-              <p className="mt-1.5 text-[11px] text-ink/40">
+              <p className="mt-1.5 text-[11px] text-ink/60">
                 Ceiling for capped or hybrid models
               </p>
             </div>
@@ -455,12 +455,12 @@ export function WhatIfPanel({
             onClick={() => setShowBreakdown((v) => !v)}
             className="text-left"
           >
-            <h4 className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35">
+            <h4 className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
               Fee breakdown
             </h4>
-            <p className="mt-1 text-[11px] text-ink/40">
+            <p className="mt-1 text-[11px] text-ink/60">
               Edit hours, rates, phases, or add lines · est.{" "}
-              <span className="tabular-nums font-semibold text-ink/55">
+              <span className="tabular-nums font-semibold text-ink/60">
                 {formatMoney(liveLineTotal, scenario.currency)}
               </span>{" "}
               before discount
@@ -498,12 +498,12 @@ export function WhatIfPanel({
                               })
                             }
                             placeholder="Work description"
-                            className="flex-1 min-w-0 bg-transparent text-sm font-medium text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1 focus-visible:ring-offset-surface placeholder:text-ink/30"
+                            className="flex-1 min-w-0 bg-transparent text-sm font-medium text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1 focus-visible:ring-offset-surface placeholder:text-ink/60"
                           />
                           <button
                             type="button"
                             onClick={() => removeLine(line.key)}
-                            className="p-1.5 rounded-lg text-ink/35 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors"
+                            className="p-1.5 rounded-lg text-ink/60 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors"
                             aria-label="Remove line"
                           >
                             <HiTrash className="h-4 w-4" />
@@ -511,7 +511,7 @@ export function WhatIfPanel({
                         </div>
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                           <label className="block">
-                            <span className="text-[10px] font-semibold uppercase tracking-wide text-ink/35">
+                            <span className="text-[10px] font-semibold uppercase tracking-wide text-ink/60">
                               Phase
                             </span>
                             <input
@@ -525,7 +525,7 @@ export function WhatIfPanel({
                             />
                           </label>
                           <label className="block">
-                            <span className="text-[10px] font-semibold uppercase tracking-wide text-ink/35">
+                            <span className="text-[10px] font-semibold uppercase tracking-wide text-ink/60">
                               Hours
                             </span>
                             <input
@@ -540,7 +540,7 @@ export function WhatIfPanel({
                             />
                           </label>
                           <label className="block">
-                            <span className="text-[10px] font-semibold uppercase tracking-wide text-ink/35">
+                            <span className="text-[10px] font-semibold uppercase tracking-wide text-ink/60">
                               Rate / h
                             </span>
                             <input
@@ -557,7 +557,7 @@ export function WhatIfPanel({
                             />
                           </label>
                           <label className="block">
-                            <span className="text-[10px] font-semibold uppercase tracking-wide text-ink/35">
+                            <span className="text-[10px] font-semibold uppercase tracking-wide text-ink/60">
                               Level
                             </span>
                             <Select
@@ -585,7 +585,7 @@ export function WhatIfPanel({
               </div>
             ))}
             {draftLines.length === 0 && (
-              <p className="text-sm text-ink/40 py-4 text-center">
+              <p className="text-sm text-ink/60 py-4 text-center">
                 No lines yet — add one to build the fee from scratch.
               </p>
             )}

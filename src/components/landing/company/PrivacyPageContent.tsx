@@ -129,12 +129,12 @@ export function PrivacyPageContent() {
             title="Privacy"
             description="Clear terms for how we handle personal information - and what we never do with your firm’s data."
           >
-            <p className="mt-8 text-[12px] text-[#0a0a0a]/35">
+            <p className="mt-8 text-[12px] text-[#0a0a0a]/60">
               Last updated August 4, 2026
               <span className="mx-2 text-[#0a0a0a]/20">·</span>
               <Link
                 href="/security"
-                className="font-semibold text-[#0a0a0a]/55 hover:text-[#0a0a0a] transition-colors inline-block py-1.5 -my-1.5"
+                className="font-semibold text-[#0a0a0a]/60 hover:text-[#0a0a0a] transition-colors inline-block py-1.5 -my-1.5"
               >
                 Security controls
               </Link>
@@ -172,7 +172,7 @@ export function PrivacyPageContent() {
                     aria-expanded={open}
                   >
                     <span className="flex items-baseline gap-4 min-w-0">
-                      <span className="text-[11px] font-semibold tabular-nums tracking-wider text-[#0a0a0a]/25 shrink-0 pt-1">
+                      <span className="text-[11px] font-semibold tabular-nums tracking-wider text-[#0a0a0a]/60 shrink-0 pt-1">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       <span className="text-[1.05rem] sm:text-[1.2rem] font-semibold tracking-tight group-hover:opacity-70 transition-opacity">
@@ -180,7 +180,7 @@ export function PrivacyPageContent() {
                       </span>
                     </span>
                     <HiChevronDown
-                      className={`mt-1 h-5 w-5 shrink-0 text-[#0a0a0a]/30 transition-transform duration-300 ${
+                      className={`mt-1 h-5 w-5 shrink-0 text-[#0a0a0a]/60 transition-transform duration-300 ${
                         open ? "rotate-180" : ""
                       }`}
                     />
@@ -194,7 +194,7 @@ export function PrivacyPageContent() {
                         {section.body.map((para) => (
                           <p
                             key={para.slice(0, 40)}
-                            className="text-[14px] sm:text-[15px] text-[#0a0a0a]/55 leading-relaxed"
+                            className="text-[14px] sm:text-[15px] text-[#0a0a0a]/60 leading-relaxed"
                           >
                             {para}
                           </p>
@@ -209,7 +209,7 @@ export function PrivacyPageContent() {
 
           <div className="mt-14 sm:mt-16 pt-10 border-t border-black/[0.06]">
             <p className="text-[13px] font-semibold tracking-[0.08em] text-[#0a0a0a]">Lysp</p>
-            <p className="mt-3 text-[15px] text-[#0a0a0a]/50 leading-relaxed max-w-sm">
+            <p className="mt-3 text-[15px] text-[#0a0a0a]/60 leading-relaxed max-w-sm">
               Privacy questions or data requests.
             </p>
             <a

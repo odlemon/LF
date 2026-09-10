@@ -168,10 +168,10 @@ export function DatePicker({
             : "border-border focus:ring-primary/20 focus:border-primary/80"
         }`}
       >
-        <span className={value ? "text-ink" : "text-ink/40"}>
+        <span className={value ? "text-ink" : "text-ink/60"}>
           {formatSelectedDate(value)}
         </span>
-        <HiCalendar className="w-4 h-4 text-ink/40" />
+        <HiCalendar className="w-4 h-4 text-ink/60" />
       </button>
       {error && (
         <span className="mt-1.5 block text-[10px] font-bold text-red-600 dark:text-red-400 pl-1">
@@ -206,7 +206,7 @@ export function DatePicker({
           {/* Weekday Names */}
           <div className="grid grid-cols-7 gap-1 text-center mb-1">
             {DAYS_OF_WEEK.map((d) => (
-              <span key={d} className="text-[11px] font-bold text-ink/40 uppercase tracking-wider">
+              <span key={d} className="text-[11px] font-bold text-ink/60 uppercase tracking-wider">
                 {d}
               </span>
             ))}
@@ -228,7 +228,7 @@ export function DatePicker({
                       ? "bg-primary text-on-primary font-bold shadow-md shadow-primary/20"
                       : isCurrentMonth
                       ? "text-ink hover:bg-canvas"
-                      : "text-ink/25 hover:bg-field"
+                      : "text-ink/60 hover:bg-field"
                   }`}
                 >
                   <span>{day}</span>

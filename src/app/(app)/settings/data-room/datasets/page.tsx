@@ -80,7 +80,7 @@ export default function DatasetsIndexPage() {
           <h1 className="text-2xl font-bold text-ink tracking-tight flex items-center gap-2">
             <HiDatabase className="w-7 h-7 text-primary" /> Datasets Batches
           </h1>
-          <p className="text-sm text-ink/55 mt-1">
+          <p className="text-sm text-ink/60 mt-1">
             Group your uploaded files by named ingestion batches to isolate data and track processing states.
           </p>
         </div>
@@ -139,14 +139,14 @@ export default function DatasetsIndexPage() {
           <table className="min-w-full divide-y divide-gray-100 text-xs">
             <thead className="bg-field">
               <tr>
-                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Dataset Name</th>
-                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Category</th>
-                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Source System</th>
-                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Files Count</th>
-                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Period Range</th>
-                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Status</th>
-                <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Extracted Records</th>
-                <th className="px-5 py-4 text-right font-bold text-ink/55 uppercase tracking-wider w-20">Actions</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Dataset Name</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Category</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Source System</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Files Count</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Period Range</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Status</th>
+                <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Extracted Records</th>
+                <th className="px-5 py-4 text-right font-bold text-ink/60 uppercase tracking-wider w-20">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 font-semibold text-ink/80">
@@ -160,7 +160,7 @@ export default function DatasetsIndexPage() {
                 ))
               ) : datasets.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="px-5 py-12 text-center text-ink/40">
+                  <td colSpan={8} className="px-5 py-12 text-center text-ink/60">
                     No datasets batches matched this criteria. Click &quot;New Dataset&quot; to define a new one.
                   </td>
                 </tr>
@@ -172,7 +172,7 @@ export default function DatasetsIndexPage() {
                         href={`/settings/data-room/datasets/${dataset.uid}`}
                         className="text-ink font-extrabold hover:text-primary hover:underline flex items-center gap-1.5 py-1.5 -my-1.5 rounded"
                       >
-                        <HiFolderOpen className="w-4.5 h-4.5 text-ink/40" />
+                        <HiFolderOpen className="w-4.5 h-4.5 text-ink/60" />
                         {dataset.name}
                       </Link>
                     </td>
@@ -211,7 +211,7 @@ export default function DatasetsIndexPage() {
                       ) : (
                         <button
                           onClick={() => setConfirmDeleteUid(dataset.uid)}
-                          className="p-1.5 hover:bg-red-50 rounded-lg text-ink/40 hover:text-red-700 transition-colors"
+                          className="p-1.5 hover:bg-red-50 rounded-lg text-ink/60 hover:text-red-700 transition-colors"
                         >
                           <HiTrash className="w-4.5 h-4.5" />
                         </button>

@@ -32,7 +32,7 @@ export function AiSuggestPanel({
     <div className="rounded-2xl border border-border/70 bg-surface p-5">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35">
+          <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
             {variant === "firm" ? "Negotiation advisor" : "Rate coach"}
           </p>
           <h3 className="mt-1 text-base font-semibold text-ink tracking-tight">
@@ -40,7 +40,7 @@ export function AiSuggestPanel({
               ? "AI recommendation"
               : "Suggested counter rates"}
           </h3>
-          <p className="mt-1 text-xs text-ink/45 leading-relaxed max-w-md">
+          <p className="mt-1 text-xs text-ink/60 leading-relaxed max-w-md">
             {variant === "firm"
               ? "Advisory only — you decide what to send. Guardrails block recommendations below the margin floor."
               : "Optional guidance for your counter. Your proposal is never auto-sent."}
@@ -97,7 +97,7 @@ export function AiSuggestPanel({
             </div>
           )}
           {variant === "firm" && (
-            <div className="flex flex-wrap gap-3 text-xs text-ink/55">
+            <div className="flex flex-wrap gap-3 text-xs text-ink/60">
               {suggestion.projectedMarginPct != null && (
                 <span>
                   Projected margin{" "}
@@ -122,7 +122,7 @@ export function AiSuggestPanel({
             </div>
           )}
           {suggestion.risks && suggestion.risks.length > 0 && (
-            <ul className="text-xs text-ink/50 space-y-1 list-disc pl-4">
+            <ul className="text-xs text-ink/60 space-y-1 list-disc pl-4">
               {suggestion.risks.map((r) => (
                 <li key={r}>{r}</li>
               ))}

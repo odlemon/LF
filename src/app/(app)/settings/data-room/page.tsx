@@ -74,7 +74,7 @@ export default function DataRoomOverviewPage() {
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-ink tracking-tight">Data Room</h1>
-          <p className="text-sm text-ink/55 mt-1 max-w-2xl leading-relaxed">
+          <p className="text-sm text-ink/60 mt-1 max-w-2xl leading-relaxed">
             Your firm&apos;s own history — past matters, time, billing and benchmarks. Everything
             ingested here is what the pricing agent reasons from.
           </p>
@@ -98,7 +98,7 @@ export default function DataRoomOverviewPage() {
             <h2 className="text-base font-bold text-ink">Ingested datasets</h2>
             <button
               onClick={() => setIsDatasetsOpen(true)}
-              className="text-xs font-semibold text-ink/55 hover:text-ink flex items-center py-1.5 -my-1.5 rounded gap-0.5 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1 focus-visible:ring-offset-surface transition-colors"
+              className="text-xs font-semibold text-ink/60 hover:text-ink flex items-center py-1.5 -my-1.5 rounded gap-0.5 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1 focus-visible:ring-offset-surface transition-colors"
             >
               View all datasets <HiChevronRight className="w-3.5 h-3.5" />
             </button>
@@ -109,19 +109,19 @@ export default function DataRoomOverviewPage() {
               <table className="min-w-full text-sm">
                 <thead className="bg-field/60 border-b border-border">
                   <tr>
-                    <th className="px-5 py-3.5 text-left font-bold text-ink/45 uppercase tracking-wider text-[10px]">
+                    <th className="px-5 py-3.5 text-left font-bold text-ink/60 uppercase tracking-wider text-[10px]">
                       Batch Name
                     </th>
-                    <th className="px-5 py-3.5 text-left font-bold text-ink/45 uppercase tracking-wider text-[10px]">
+                    <th className="px-5 py-3.5 text-left font-bold text-ink/60 uppercase tracking-wider text-[10px]">
                       Category
                     </th>
-                    <th className="px-5 py-3.5 text-left font-bold text-ink/45 uppercase tracking-wider text-[10px]">
+                    <th className="px-5 py-3.5 text-left font-bold text-ink/60 uppercase tracking-wider text-[10px]">
                       Files
                     </th>
-                    <th className="px-5 py-3.5 text-left font-bold text-ink/45 uppercase tracking-wider text-[10px]">
+                    <th className="px-5 py-3.5 text-left font-bold text-ink/60 uppercase tracking-wider text-[10px]">
                       Status
                     </th>
-                    <th className="px-5 py-3.5 text-right font-bold text-ink/45 uppercase tracking-wider text-[10px]">
+                    <th className="px-5 py-3.5 text-right font-bold text-ink/60 uppercase tracking-wider text-[10px]">
                       Records
                     </th>
                   </tr>
@@ -139,7 +139,7 @@ export default function DataRoomOverviewPage() {
                     <tr>
                       <td colSpan={5} className="px-5 py-12 text-center">
                         <p className="text-sm font-semibold text-ink/60">Nothing ingested yet.</p>
-                        <p className="mt-1 text-[13px] text-ink/40">
+                        <p className="mt-1 text-[13px] text-ink/60">
                           Create a dataset, then upload a matter, time or billing export into it.
                         </p>
                       </td>
@@ -156,7 +156,7 @@ export default function DataRoomOverviewPage() {
                           </button>
                         </td>
                         <td className="px-5 py-4">
-                          <span className="px-2 py-0.5 border border-border rounded-lg bg-field text-ink/55 font-bold text-[10px] uppercase tracking-wider">
+                          <span className="px-2 py-0.5 border border-border rounded-lg bg-field text-ink/60 font-bold text-[10px] uppercase tracking-wider">
                             {String(dataset.category).replace(/_/g, " ")}
                           </span>
                         </td>
@@ -184,10 +184,10 @@ export default function DataRoomOverviewPage() {
         <div className="flex flex-col gap-4">
           <div className="flex justify-between items-center px-1">
             <h2 className="text-base font-bold text-ink flex items-center gap-2">
-              <HiExclamationCircle className="w-4.5 h-4.5 text-ink/35" />
+              <HiExclamationCircle className="w-4.5 h-4.5 text-ink/60" />
               Needs review
             </h2>
-            <span className="text-xs font-semibold text-ink/40">
+            <span className="text-xs font-semibold text-ink/60">
               {attentionDocs.length === 0
                 ? "Nothing waiting"
                 : `${attentionDocs.length} ${attentionDocs.length === 1 ? "file" : "files"}`}
@@ -202,7 +202,7 @@ export default function DataRoomOverviewPage() {
             ) : attentionDocs.length === 0 ? (
               <div className="md:col-span-2 xl:col-span-3 bg-surface border border-border rounded-2xl px-6 py-8 text-center">
                 <p className="text-sm font-semibold text-ink/70">Every file has been read.</p>
-                <p className="mt-1 text-[13px] text-ink/45">
+                <p className="mt-1 text-[13px] text-ink/60">
                   Nothing is waiting on a mapping decision.
                 </p>
               </div>
@@ -238,7 +238,7 @@ export default function DataRoomOverviewPage() {
                     </button>
                     <button
                       onClick={() => setActiveLogDoc(doc)}
-                      className="px-2.5 py-1.5 hover:bg-canvas rounded-lg text-ink/40 hover:text-ink/70 transition-colors cursor-pointer text-[11px] font-bold"
+                      className="px-2.5 py-1.5 hover:bg-canvas rounded-lg text-ink/60 hover:text-ink/70 transition-colors cursor-pointer text-[11px] font-bold"
                     >
                       Log
                     </button>

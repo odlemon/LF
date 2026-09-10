@@ -13,7 +13,7 @@ const TONE_STYLES: Record<string, { chip: string; label: string }> = {
   WATCH: { chip: "bg-amber-50 text-amber-700", label: "Watch" },
   OPPORTUNITY: { chip: "bg-sky-50 text-sky-700", label: "Opportunity" },
   POSITIVE: { chip: "bg-emerald-50 text-emerald-700", label: "Healthy" },
-  NEUTRAL: { chip: "bg-field text-ink/50", label: "Note" },
+  NEUTRAL: { chip: "bg-field text-ink/60", label: "Note" },
 };
 
 function money(value: number | null): string {
@@ -44,14 +44,14 @@ function Change({
   reliable?: boolean;
 }) {
   if (!reliable) {
-    return <span className="text-[11px] text-ink/30">too little history</span>;
+    return <span className="text-[11px] text-ink/60">too little history</span>;
   }
   if (value === null) {
-    return <span className="text-[11px] text-ink/30">no prior period</span>;
+    return <span className="text-[11px] text-ink/60">no prior period</span>;
   }
   const rounded = Math.round(value * 10) / 10;
   if (Math.abs(rounded) < 0.05) {
-    return <span className="text-[11px] text-ink/40">flat</span>;
+    return <span className="text-[11px] text-ink/60">flat</span>;
   }
   const good = goodWhenUp ? rounded > 0 : rounded < 0;
   return (
@@ -74,7 +74,7 @@ function Metric({
 }) {
   return (
     <div className="rounded-2xl border border-border bg-field/40 p-4">
-      <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">{label}</p>
+      <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">{label}</p>
       <p className="mt-2 text-xl font-semibold tabular-nums text-ink">{value}</p>
       <p className="mt-1">{change}</p>
     </div>
@@ -134,7 +134,7 @@ export function ClientIntelligencePanel({ clientProfileUid }: Props) {
     <div className="rounded-2xl border border-border/60 bg-surface p-6 shadow-sm">
       <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2 border-b border-border pb-2">
         <h2 className="text-sm font-bold text-ink">Relationship Intelligence</h2>
-        <p className="text-[11px] text-ink/45">
+        <p className="text-[11px] text-ink/60">
           {data.periodFrom} → {data.periodTo}, against the same period a year earlier
         </p>
       </div>
@@ -191,34 +191,34 @@ export function ClientIntelligencePanel({ clientProfileUid }: Props) {
         <Metric
           label="Rounds to close"
           value={data.avgRoundsToClose === null ? "—" : data.avgRoundsToClose.toFixed(1)}
-          change={<span className="text-[11px] text-ink/40">how hard they negotiate</span>}
+          change={<span className="text-[11px] text-ink/60">how hard they negotiate</span>}
         />
         <Metric
           label="Days to close"
           value={data.avgDaysToClose === null ? "—" : data.avgDaysToClose.toFixed(0)}
-          change={<span className="text-[11px] text-ink/40">sent → decision</span>}
+          change={<span className="text-[11px] text-ink/60">sent → decision</span>}
         />
         <Metric
           label="Practice areas"
           value={`${data.practiceAreasUsed} / ${data.practiceAreasAvailable}`}
-          change={<span className="text-[11px] text-ink/40">instructed</span>}
+          change={<span className="text-[11px] text-ink/60">instructed</span>}
         />
         <Metric
           label="Discount given"
           value={money(data.discountCost)}
-          change={<span className="text-[11px] text-ink/40">this period</span>}
+          change={<span className="text-[11px] text-ink/60">this period</span>}
         />
       </div>
 
       {!data.trendReliable && (
-        <p className="mt-4 rounded-xl border border-border bg-field/50 p-3 text-xs text-ink/55">
+        <p className="mt-4 rounded-xl border border-border bg-field/50 p-3 text-xs text-ink/60">
           Too few settled matters in one of the two periods to read a reliable year-on-year
           trend, so movement signals are suppressed rather than reported from a single matter.
         </p>
       )}
 
       <div className="mt-5">
-        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">Signals</p>
+        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">Signals</p>
         <ul className="mt-3 flex flex-col gap-2.5">
           {data.signals.map((signal: ClientSignal, i: number) => {
             const tone = TONE_STYLES[signal.tone] ?? TONE_STYLES.NEUTRAL;
@@ -231,7 +231,7 @@ export function ClientIntelligencePanel({ clientProfileUid }: Props) {
                 </span>
                 <div>
                   <p className="text-sm font-medium text-ink">{signal.title}</p>
-                  <p className="text-[13px] leading-relaxed text-ink/55">{signal.detail}</p>
+                  <p className="text-[13px] leading-relaxed text-ink/60">{signal.detail}</p>
                 </div>
               </li>
             );
@@ -241,7 +241,7 @@ export function ClientIntelligencePanel({ clientProfileUid }: Props) {
 
       {data.practiceAreasUnusedNames.length > 0 && (
         <div className="mt-5 border-t border-border pt-4">
-          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
             Never instructed
           </p>
           <div className="mt-2 flex flex-wrap gap-1.5">

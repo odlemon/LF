@@ -41,7 +41,7 @@ export default function FeeEarnerLevelsPage() {
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-ink tracking-tight">Fee Earner Levels</h1>
-          <p className="text-sm text-ink/55 mt-1">Configure seniority rankings and billing levels for lawyers in the firm.</p>
+          <p className="text-sm text-ink/60 mt-1">Configure seniority rankings and billing levels for lawyers in the firm.</p>
         </div>
         <Button
           variant="primary"
@@ -65,7 +65,7 @@ export default function FeeEarnerLevelsPage() {
         </div>
       ) : levels.length === 0 ? (
         <div className="text-center py-12 bg-surface rounded-2xl border border-border/60 p-8 shadow-sm flex flex-col items-center justify-center gap-3">
-          <span className="text-sm text-ink/55">No levels registered yet. Click &apos;Add Level&apos; to define one.</span>
+          <span className="text-sm text-ink/60">No levels registered yet. Click &apos;Add Level&apos; to define one.</span>
         </div>
       ) : (
         <div className="bg-surface rounded-2xl border border-border/60 overflow-hidden shadow-sm">
@@ -83,10 +83,10 @@ export default function FeeEarnerLevelsPage() {
                     <h3 className="text-sm font-bold text-ink leading-tight">
                       {level.name}
                     </h3>
-                    <span className="text-[10px] font-bold text-ink/40 uppercase tracking-wider block mt-1">
+                    <span className="text-[10px] font-bold text-ink/60 uppercase tracking-wider block mt-1">
                       Code: {level.code}
                       {level.costRate != null && (
-                        <span className="ml-2 text-ink/45">· cost {level.costRate}/h</span>
+                        <span className="ml-2 text-ink/60">· cost {level.costRate}/h</span>
                       )}
                     </span>
                   </div>
@@ -98,12 +98,12 @@ export default function FeeEarnerLevelsPage() {
                   <button
                     type="button"
                     onClick={() => openEdit(level)}
-                    className="text-xs font-semibold text-ink/55 hover:text-ink transition-colors cursor-pointer px-2 py-1.5 -my-1.5 rounded"
+                    className="text-xs font-semibold text-ink/60 hover:text-ink transition-colors cursor-pointer px-2 py-1.5 -my-1.5 rounded"
                   >
                     Edit
                   </button>
-                  <span className="text-xs text-ink/55 font-medium flex items-center gap-1.5 bg-field px-3 py-1.5 rounded-lg border border-border">
-                    <HiScale className="w-3.5 h-3.5 text-ink/40" />
+                  <span className="text-xs text-ink/60 font-medium flex items-center gap-1.5 bg-field px-3 py-1.5 rounded-lg border border-border">
+                    <HiScale className="w-3.5 h-3.5 text-ink/60" />
                     Rank #{idx + 1}
                   </span>
                   

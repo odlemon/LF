@@ -80,7 +80,7 @@ export function NegotiationRoundTimeline({
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center">
         <p className="text-sm font-semibold text-ink">No rounds yet</p>
-        <p className="mt-1 max-w-xs text-xs leading-relaxed text-ink/45">
+        <p className="mt-1 max-w-xs text-xs leading-relaxed text-ink/60">
           Offers and counters will appear here as the negotiation unfolds.
         </p>
       </div>
@@ -92,10 +92,10 @@ export function NegotiationRoundTimeline({
   return (
     <div className="animate-fade-in">
       <div className="mb-5">
-        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
           Negotiation trail
         </p>
-        <p className="mt-1 text-sm text-ink/50">
+        <p className="mt-1 text-sm text-ink/60">
           {sorted.length} round{sorted.length === 1 ? "" : "s"} · newest first
         </p>
       </div>
@@ -141,7 +141,7 @@ export function NegotiationRoundTimeline({
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-ink/35">
+                      <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-ink/60">
                         Round {round.roundNumber}
                       </span>
                       <span
@@ -168,7 +168,7 @@ export function NegotiationRoundTimeline({
                     {delta != null && Math.abs(delta) >= 0.5 && (
                       <p
                         className={`mt-0.5 text-[11px] font-semibold tabular-nums ${
-                          delta < 0 ? "text-emerald-700" : "text-ink/45"
+                          delta < 0 ? "text-emerald-700" : "text-ink/60"
                         }`}
                       >
                         {delta < 0 ? "↓" : "↑"}{" "}
@@ -176,7 +176,7 @@ export function NegotiationRoundTimeline({
                       </p>
                     )}
                     {showMargin && round.marginPct != null && (
-                      <p className="mt-0.5 text-[11px] tabular-nums text-ink/40">
+                      <p className="mt-0.5 text-[11px] tabular-nums text-ink/60">
                         {Number(round.marginPct).toFixed(1)}% margin
                       </p>
                     )}
@@ -184,12 +184,12 @@ export function NegotiationRoundTimeline({
                 </div>
 
                 {round.comment && (
-                  <p className="mt-2 border-l-2 border-ink/10 pl-3 text-[13px] leading-relaxed text-ink/55">
+                  <p className="mt-2 border-l-2 border-ink/10 pl-3 text-[13px] leading-relaxed text-ink/60">
                     {round.comment}
                   </p>
                 )}
 
-                <p className="mt-2 text-[11px] tracking-wide text-ink/35">
+                <p className="mt-2 text-[11px] tracking-wide text-ink/60">
                   {round.createdAt ? formatDateTime(round.createdAt) : ""}
                   {round.createdByEmail ? ` · ${round.createdByEmail}` : ""}
                 </p>

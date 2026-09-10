@@ -171,7 +171,7 @@ export function RecordsBrowser() {
               />
             </div>
             <div className="flex flex-col gap-1">
-              <label className="text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1">Date From</label>
+              <label className="text-[10px] font-bold text-ink/60 uppercase tracking-wider pl-1">Date From</label>
               <DatePicker
                 value={pastMattersFilters.dateFrom}
                 onChange={(val) => {
@@ -181,7 +181,7 @@ export function RecordsBrowser() {
               />
             </div>
             <div className="flex flex-col gap-1">
-              <label className="text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1">Date To</label>
+              <label className="text-[10px] font-bold text-ink/60 uppercase tracking-wider pl-1">Date To</label>
               <DatePicker
                 value={pastMattersFilters.dateTo}
                 onChange={(val) => {
@@ -196,7 +196,7 @@ export function RecordsBrowser() {
         {activeTab === "time-entries" && (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             <div className="flex flex-col gap-1">
-              <label className="text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1">Matter Reference</label>
+              <label className="text-[10px] font-bold text-ink/60 uppercase tracking-wider pl-1">Matter Reference</label>
               <input aria-label="Matter Reference"
                 type="text"
                 placeholder="Search matter ref..."
@@ -221,7 +221,7 @@ export function RecordsBrowser() {
               />
             </div>
             <div className="flex flex-col gap-1">
-              <label className="text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1">Date From</label>
+              <label className="text-[10px] font-bold text-ink/60 uppercase tracking-wider pl-1">Date From</label>
               <DatePicker
                 value={timeEntriesFilters.dateFrom}
                 onChange={(val) => {
@@ -231,7 +231,7 @@ export function RecordsBrowser() {
               />
             </div>
             <div className="flex flex-col gap-1">
-              <label className="text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1">Date To</label>
+              <label className="text-[10px] font-bold text-ink/60 uppercase tracking-wider pl-1">Date To</label>
               <DatePicker
                 value={timeEntriesFilters.dateTo}
                 onChange={(val) => {
@@ -258,7 +258,7 @@ export function RecordsBrowser() {
               />
             </div>
             <div className="flex flex-col gap-1">
-              <label className="text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1">Date From</label>
+              <label className="text-[10px] font-bold text-ink/60 uppercase tracking-wider pl-1">Date From</label>
               <DatePicker
                 value={billingFilters.dateFrom}
                 onChange={(val) => {
@@ -268,7 +268,7 @@ export function RecordsBrowser() {
               />
             </div>
             <div className="flex flex-col gap-1">
-              <label className="text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1">Date To</label>
+              <label className="text-[10px] font-bold text-ink/60 uppercase tracking-wider pl-1">Date To</label>
               <DatePicker
                 value={billingFilters.dateTo}
                 onChange={(val) => {
@@ -295,7 +295,7 @@ export function RecordsBrowser() {
               />
             </div>
             <div className="flex flex-col gap-1">
-              <label className="text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1">Effective Year</label>
+              <label className="text-[10px] font-bold text-ink/60 uppercase tracking-wider pl-1">Effective Year</label>
               <input aria-label="Effective Year"
                 type="number"
                 placeholder="e.g. 2024"
@@ -325,7 +325,7 @@ export function RecordsBrowser() {
               />
             </div>
             <div className="flex flex-col gap-1">
-              <label className="text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1">Jurisdiction</label>
+              <label className="text-[10px] font-bold text-ink/60 uppercase tracking-wider pl-1">Jurisdiction</label>
               <input aria-label="Jurisdiction"
                 type="text"
                 placeholder="e.g. New York, UK"
@@ -338,7 +338,7 @@ export function RecordsBrowser() {
               />
             </div>
             <div className="flex flex-col gap-1">
-              <label className="text-[10px] font-bold text-ink/40 uppercase tracking-wider pl-1">Survey Year</label>
+              <label className="text-[10px] font-bold text-ink/60 uppercase tracking-wider pl-1">Survey Year</label>
               <input aria-label="Survey Year"
                 type="number"
                 placeholder="e.g. 2023"
@@ -367,65 +367,65 @@ export function RecordsBrowser() {
             <thead className="bg-field">
               {activeTab === "past-matters" && (
                 <tr>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Matter Ref</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Title</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Practice Area</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Client Type</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Total Fee</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Pricing Model</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Outcome</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">EndDate</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Complexity</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Matter Ref</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Title</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Practice Area</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Client Type</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Total Fee</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Pricing Model</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Outcome</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">EndDate</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Complexity</th>
                 </tr>
               )}
 
               {activeTab === "time-entries" && (
                 <tr>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Matter Ref</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Fee Earner</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Level</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Hours</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Task Description</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Entry Date</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Billed Rate</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Billed Amount</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Matter Ref</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Fee Earner</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Level</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Hours</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Task Description</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Entry Date</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Billed Rate</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Billed Amount</th>
                 </tr>
               )}
 
               {activeTab === "billing-history" && (
                 <tr>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Matter Ref</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Client</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Invoice Number</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Invoice Date</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Total Amount</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Paid Amount</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Outstanding</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Status</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Matter Ref</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Client</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Invoice Number</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Invoice Date</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Total Amount</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Paid Amount</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Outstanding</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Status</th>
                 </tr>
               )}
 
               {activeTab === "rate-card-history" && (
                 <tr>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Rate Card Name</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Fee Earner Level</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Practice Area</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Hourly Rate</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Currency</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Effective Year</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Rate Card Name</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Fee Earner Level</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Practice Area</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Hourly Rate</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Currency</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Effective Year</th>
                 </tr>
               )}
 
               {activeTab === "market-benchmarks" && (
                 <tr>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Source</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Practice Area</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Jurisdiction</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Level</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Low Rate</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Median Rate</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">High Rate</th>
-                  <th className="px-5 py-4 text-left font-bold text-ink/55 uppercase tracking-wider">Survey Year</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Source</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Practice Area</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Jurisdiction</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Level</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Low Rate</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Median Rate</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">High Rate</th>
+                  <th className="px-5 py-4 text-left font-bold text-ink/60 uppercase tracking-wider">Survey Year</th>
                 </tr>
               )}
             </thead>
@@ -441,7 +441,7 @@ export function RecordsBrowser() {
                 ))
               ) : records.length === 0 ? (
                 <tr>
-                  <td colSpan={10} className="px-5 py-12 text-center text-ink/40">
+                  <td colSpan={10} className="px-5 py-12 text-center text-ink/60">
                     No extracted historical records detected for this search query.
                   </td>
                 </tr>

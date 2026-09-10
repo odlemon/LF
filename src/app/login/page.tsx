@@ -9,7 +9,7 @@ import { HiArrowRight, HiEye, HiEyeOff, HiOutlineShieldCheck } from "react-icons
 import { getPublicApiBase } from "@/lib/api/baseUrl";
 
 const fieldClass =
-  "w-full rounded-full border border-black/[0.1] bg-[#f7f7f5] px-5 py-[0.95rem] text-[15px] text-[#0a0a0a] placeholder:text-[#0a0a0a]/28 outline-none transition-all duration-200 focus-visible:ring-4 focus-visible:ring-[#0a0a0a]/15 focus-visible:border-[#0a0a0a] disabled:opacity-60";
+  "w-full rounded-full border border-black/[0.1] bg-[#f7f7f5] px-5 py-[0.95rem] text-[15px] text-[#0a0a0a] placeholder:text-[#0a0a0a]/60 outline-none transition-all duration-200 focus-visible:ring-4 focus-visible:ring-[#0a0a0a]/15 focus-visible:border-[#0a0a0a] disabled:opacity-60";
 
 function LoginForm() {
   const { login } = useAuth();
@@ -92,7 +92,7 @@ function LoginForm() {
       <div>
         <label
           htmlFor="email"
-          className="block text-[11px] font-semibold tracking-[0.18em] uppercase text-[#0a0a0a]/40"
+          className="block text-[11px] font-semibold tracking-[0.18em] uppercase text-[#0a0a0a]/60"
         >
           Email
         </label>
@@ -112,7 +112,7 @@ function LoginForm() {
       <div>
         <label
           htmlFor="password"
-          className="block text-[11px] font-semibold tracking-[0.18em] uppercase text-[#0a0a0a]/40"
+          className="block text-[11px] font-semibold tracking-[0.18em] uppercase text-[#0a0a0a]/60"
         >
           Password
         </label>
@@ -131,7 +131,7 @@ function LoginForm() {
           <button
             type="button"
             onClick={() => setShowPassword((v) => !v)}
-            className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full p-1.5 text-[#0a0a0a]/35 hover:text-[#0a0a0a]/70 transition-colors cursor-pointer"
+            className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full p-1.5 text-[#0a0a0a]/60 hover:text-[#0a0a0a]/70 transition-colors cursor-pointer"
             aria-label={showPassword ? "Hide password" : "Show password"}
           >
             {showPassword ? <HiEyeOff className="h-5 w-5" /> : <HiEye className="h-5 w-5" />}
@@ -159,7 +159,7 @@ function LoginForm() {
 
       <div className="mt-6 flex items-center gap-3">
         <span className="h-px flex-1 bg-black/[0.06]" />
-        <span className="text-[11px] font-semibold tracking-[0.14em] uppercase text-[#0a0a0a]/30">
+        <span className="text-[11px] font-semibold tracking-[0.14em] uppercase text-[#0a0a0a]/60">
           or
         </span>
         <span className="h-px flex-1 bg-black/[0.06]" />
@@ -273,7 +273,7 @@ export default function LoginPage() {
           <div className="relative hidden lg:flex items-center justify-end px-10 xl:px-14 pt-9">
             <Link
               href="/"
-              className="text-[13px] font-medium text-[#0a0a0a]/40 hover:text-[#0a0a0a] transition-colors py-1.5 -my-1.5"
+              className="text-[13px] font-medium text-[#0a0a0a]/60 hover:text-[#0a0a0a] transition-colors py-1.5 -my-1.5"
             >
               Back to site
             </Link>
@@ -281,14 +281,14 @@ export default function LoginPage() {
 
           <div className="relative flex flex-1 flex-col justify-center px-6 sm:px-10 lg:px-12 xl:px-16 py-10 sm:py-12 lg:py-8 pb-[max(2.5rem,env(safe-area-inset-bottom))]">
             <div className="w-full max-w-[400px] mx-auto lg:mx-0">
-              <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#0a0a0a]/35">
+              <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#0a0a0a]/60">
                 Workspace
               </p>
 
               <h2 className="mt-6 text-[1.9rem] sm:text-[2.25rem] font-semibold tracking-tight leading-[1.08]">
                 Welcome back.
               </h2>
-              <p className="mt-3 text-[15px] text-[#0a0a0a]/50 leading-relaxed">
+              <p className="mt-3 text-[15px] text-[#0a0a0a]/60 leading-relaxed">
                 Firm workspace sign-in.
               </p>
 
@@ -297,7 +297,7 @@ export default function LoginPage() {
               </div>
 
               <div className="mt-10 pt-8 border-t border-black/[0.06]">
-                <p className="text-[13px] text-[#0a0a0a]/45 leading-relaxed">
+                <p className="text-[13px] text-[#0a0a0a]/60 leading-relaxed">
                   <Link
                     href="/login/forgot"
                     className="font-semibold text-[#0a0a0a]/70 hover:text-[#0a0a0a] underline underline-offset-4 inline-block py-1.5 -my-1.5"
@@ -331,7 +331,7 @@ export default function LoginPage() {
           </div>
 
           <footer className="relative hidden lg:block px-10 xl:px-14 pb-9">
-            <p className="text-[11px] text-[#0a0a0a]/28 tracking-wide">
+            <p className="text-[11px] text-[#0a0a0a]/60 tracking-wide">
               Privileged commercial data · Encrypted in transit
             </p>
           </footer>

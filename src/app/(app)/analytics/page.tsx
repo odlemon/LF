@@ -61,7 +61,7 @@ export default function AnalyticsFirmHealthPage() {
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
           <div>
             <h1 className="text-2xl font-bold text-ink tracking-tight">Analytics</h1>
-            <p className="text-sm text-ink/55 mt-1">
+            <p className="text-sm text-ink/60 mt-1">
               Pricing intelligence across the firm — revenue, margin, win rate and cycle time.
             </p>
           </div>
@@ -133,11 +133,11 @@ export default function AnalyticsFirmHealthPage() {
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="text-sm font-bold text-ink">Margin Monitor</p>
-                  <p className="text-xs text-ink/50 mt-0.5">
+                  <p className="text-xs text-ink/60 mt-0.5">
                     AI-flagged pricing anomalies needing review
                   </p>
                 </div>
-                <HiChevronRight className="w-4 h-4 text-ink/30 group-hover:text-ink group-hover:translate-x-0.5 transition-all" />
+                <HiChevronRight className="w-4 h-4 text-ink/60 group-hover:text-ink group-hover:translate-x-0.5 transition-all" />
               </Link>
               <Link
                 href="/analytics/rate-compliance"
@@ -148,11 +148,11 @@ export default function AnalyticsFirmHealthPage() {
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="text-sm font-bold text-ink">Rate Compliance</p>
-                  <p className="text-xs text-ink/50 mt-0.5">
+                  <p className="text-xs text-ink/60 mt-0.5">
                     Proposed rates vs the active rate card
                   </p>
                 </div>
-                <HiChevronRight className="w-4 h-4 text-ink/30 group-hover:text-ink group-hover:translate-x-0.5 transition-all" />
+                <HiChevronRight className="w-4 h-4 text-ink/60 group-hover:text-ink group-hover:translate-x-0.5 transition-all" />
               </Link>
             </div>
           )}
@@ -162,7 +162,7 @@ export default function AnalyticsFirmHealthPage() {
             <div className="lg:col-span-3 bg-surface border border-border/70 rounded-2xl p-5">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
                     Profitability
                   </p>
                   <h3 className="mt-1 text-base font-semibold text-ink tracking-tight">
@@ -193,7 +193,7 @@ export default function AnalyticsFirmHealthPage() {
                           <p className="text-sm font-bold text-ink truncate">
                             {row.practiceAreaName}
                           </p>
-                          <p className="text-[11px] text-ink/45 mt-0.5">
+                          <p className="text-[11px] text-ink/60 mt-0.5">
                             {formatNumber(row.mattersPriced)}{" "}
                             {row.mattersPriced === 1 ? "matter" : "matters"} · win rate{" "}
                             {formatPct(row.winRatePct, 0)}
@@ -203,7 +203,7 @@ export default function AnalyticsFirmHealthPage() {
                           <p className="text-sm font-bold tabular-nums text-ink">
                             {formatPct(row.avgMarginPct)}
                           </p>
-                          <p className="text-[11px] text-ink/45 mt-0.5">
+                          <p className="text-[11px] text-ink/60 mt-0.5">
                             {formatMoney(row.revenueBilled, true)} billed
                           </p>
                         </div>
@@ -219,7 +219,7 @@ export default function AnalyticsFirmHealthPage() {
                             {formatDelta(row.marginVsTargetPts, "pts")} vs target
                           </span>
                         ) : null}
-                        <HiChevronRight className="w-4 h-4 text-ink/25 group-hover:text-ink shrink-0 transition-colors" />
+                        <HiChevronRight className="w-4 h-4 text-ink/60 group-hover:text-ink shrink-0 transition-colors" />
                       </Link>
                     );
                   })}
@@ -230,7 +230,7 @@ export default function AnalyticsFirmHealthPage() {
             {/* Top clients by revenue */}
             <div className="lg:col-span-2 bg-surface border border-border/70 rounded-2xl p-5">
               <div className="mb-4">
-                <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+                <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
                   Client concentration
                 </p>
                 <h3 className="mt-1 text-base font-semibold text-ink tracking-tight">
@@ -253,12 +253,12 @@ export default function AnalyticsFirmHealthPage() {
                       key={client.clientProfileUid}
                       className="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-field/60 transition-colors"
                     >
-                      <span className="w-6 h-6 rounded-full bg-field border border-border text-[10px] font-bold text-ink/55 flex items-center justify-center shrink-0">
+                      <span className="w-6 h-6 rounded-full bg-field border border-border text-[10px] font-bold text-ink/60 flex items-center justify-center shrink-0">
                         {index + 1}
                       </span>
                       <div className="min-w-0 flex-1">
                         <p className="text-sm font-bold text-ink truncate">{client.clientName}</p>
-                        <p className="text-[11px] text-ink/45 mt-0.5">
+                        <p className="text-[11px] text-ink/60 mt-0.5">
                           margin {formatPct(client.avgMarginPct)} · win rate{" "}
                           {formatPct(client.winRatePct, 0)}
                         </p>

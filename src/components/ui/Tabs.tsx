@@ -41,7 +41,7 @@ export function Tabs<T extends string>({ tabs, activeId, onChange, className = "
             {typeof tab.count === "number" && (
               <span
                 className={`ml-1.5 text-[11px] tabular-nums ${
-                  isActive ? "text-on-primary/70" : "text-ink/35"
+                  isActive ? "text-on-primary/70" : "text-ink/60"
                 }`}
               >
                 {tab.count}

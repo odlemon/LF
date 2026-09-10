@@ -53,13 +53,13 @@ export function SecondmentUsageModal({ isOpen, onClose, onSave, remainingHours }
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 text-ink/40 hover:text-ink/65 p-1 rounded-lg hover:bg-field transition-colors"
+          className="absolute top-4 right-4 text-ink/60 hover:text-ink/65 p-1 rounded-lg hover:bg-field transition-colors"
         >
           <HiX className="w-5 h-5" />
         </button>
 
         <h3 className="text-lg font-bold text-ink mb-1 pr-8">Record Secondment Usage</h3>
-        <p className="text-xs text-ink/55 mb-4">{remainingHours}h remaining of the annual allowance.</p>
+        <p className="text-xs text-ink/60 mb-4">{remainingHours}h remaining of the annual allowance.</p>
 
         {modalError && (
           <FormError message={modalError} />

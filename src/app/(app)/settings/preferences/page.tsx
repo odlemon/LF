@@ -37,13 +37,13 @@ export default function FirmPreferencesPage() {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
           <section className="lg:col-span-5 space-y-6">
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
                 Appearance
               </p>
               <div className="mt-3 flex items-center justify-between gap-4 border-y border-border/50 py-4">
                 <div>
                   <p className="text-sm font-semibold text-ink">Theme</p>
-                  <p className="mt-0.5 text-xs text-ink/45">
+                  <p className="mt-0.5 text-xs text-ink/60">
                     Currently {theme === "dark" ? "dark" : "light"} mode
                   </p>
                 </div>
@@ -52,13 +52,13 @@ export default function FirmPreferencesPage() {
             </div>
 
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
                 Session
               </p>
               <div className="mt-3 flex flex-wrap items-center justify-between gap-3 border-y border-border/50 py-4">
                 <div>
                   <p className="text-sm font-semibold text-ink">Sign out</p>
-                  <p className="mt-0.5 text-xs text-ink/45">{user?.email}</p>
+                  <p className="mt-0.5 text-xs text-ink/60">{user?.email}</p>
                 </div>
                 <Button
                   variant="secondary"
@@ -74,7 +74,7 @@ export default function FirmPreferencesPage() {
           </section>
 
           <section className="lg:col-span-7">
-            <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+            <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
               {isPartner ? "Partner shortcuts" : "Firm"}
             </p>
             <div className="mt-3 grid gap-3 sm:grid-cols-2">
@@ -85,7 +85,7 @@ export default function FirmPreferencesPage() {
                     className="rounded-2xl border border-border/70 bg-surface p-4 transition-colors hover:border-ink/20"
                   >
                     <p className="text-sm font-semibold text-ink py-1.5 -my-1.5">Negotiations</p>
-                    <p className="mt-1 text-xs leading-relaxed text-ink/45">
+                    <p className="mt-1 text-xs leading-relaxed text-ink/60">
                       Live fee proposals and counters with your clients.
                     </p>
                   </Link>
@@ -94,7 +94,7 @@ export default function FirmPreferencesPage() {
                     className="rounded-2xl border border-border/70 bg-surface p-4 transition-colors hover:border-ink/20"
                   >
                     <p className="text-sm font-semibold text-ink py-1.5 -my-1.5">Approvals</p>
-                    <p className="mt-1 text-xs leading-relaxed text-ink/45">
+                    <p className="mt-1 text-xs leading-relaxed text-ink/60">
                       Preferred scenarios waiting on your sign-off.
                     </p>
                   </Link>
@@ -103,7 +103,7 @@ export default function FirmPreferencesPage() {
                     className="rounded-2xl border border-border/70 bg-surface p-4 transition-colors hover:border-ink/20"
                   >
                     <p className="text-sm font-semibold text-ink py-1.5 -my-1.5">Clients</p>
-                    <p className="mt-1 text-xs leading-relaxed text-ink/45">
+                    <p className="mt-1 text-xs leading-relaxed text-ink/60">
                       Relationship profiles tied to your book.
                     </p>
                   </Link>
@@ -112,7 +112,7 @@ export default function FirmPreferencesPage() {
                     className="rounded-2xl border border-border/70 bg-field/80 p-4 transition-colors hover:border-ink/20"
                   >
                     <p className="text-sm font-semibold text-ink py-1.5 -my-1.5">Profile</p>
-                    <p className="mt-1 text-xs leading-relaxed text-ink/45">
+                    <p className="mt-1 text-xs leading-relaxed text-ink/60">
                       Name, email, and how you appear in the firm.
                     </p>
                   </Link>
@@ -126,13 +126,13 @@ export default function FirmPreferencesPage() {
                   <p className="text-sm font-semibold text-ink py-1.5 -my-1.5">
                     Firm configuration
                   </p>
-                  <p className="mt-1 text-xs leading-relaxed text-ink/45">
+                  <p className="mt-1 text-xs leading-relaxed text-ink/60">
                     Practice areas, rate cards, users, and more.
                   </p>
                 </Link>
               )}
               {!isPartner && !canFirmSettings && (
-                <p className="text-sm text-ink/45 sm:col-span-2">
+                <p className="text-sm text-ink/60 sm:col-span-2">
                   No additional firm settings are available for your role.
                 </p>
               )}

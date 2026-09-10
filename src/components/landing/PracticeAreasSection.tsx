@@ -116,7 +116,7 @@ export function PracticeAreasSection() {
             className="max-w-2xl"
           />
 
-          <p className="max-w-sm xl:max-w-xs text-[13px] sm:text-[15px] leading-relaxed text-white/40 xl:pb-2 text-left">
+          <p className="max-w-sm xl:max-w-xs text-[13px] sm:text-[15px] leading-relaxed text-white/45 xl:pb-2 text-left">
             Open a chamber. The building holds the atmosphere - the pricing motion is yours.
           </p>
         </div>
@@ -324,7 +324,7 @@ export function PracticeAreasSection() {
         </div>
 
         <div className="mt-8 sm:mt-10 lg:mt-12 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 border-t border-white/10 pt-5 sm:pt-6">
-          <p className="text-[11px] sm:text-[12px] tracking-[0.18em] uppercase text-white/35">
+          <p className="text-[11px] sm:text-[12px] tracking-[0.18em] uppercase text-white/45">
             {String(activeIndex + 1).padStart(2, "0")} /{" "}
             {String(PRACTICES.length).padStart(2, "0")}
             <span className="mx-2 sm:mx-3 text-white/20">·</span>

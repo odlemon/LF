@@ -49,7 +49,7 @@ export function LearningDetail({
             <Badge variant="neutral">{learning.clientType.replace(/_/g, " ")}</Badge>
           )}
         </div>
-        <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] text-ink/45">
+        <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] text-ink/60">
           {captured ? (
             <span className="inline-flex items-center gap-1.5 font-medium text-ink/60">
               <HiOutlineSparkles className="h-3.5 w-3.5" />
@@ -73,7 +73,7 @@ export function LearningDetail({
         {sections.map((section, i) => (
           <section key={i} className="flex flex-col gap-1.5">
             {section.heading && (
-              <h3 className="text-[10px] font-bold uppercase tracking-wider text-ink/40">
+              <h3 className="text-[10px] font-bold uppercase tracking-wider text-ink/60">
                 {section.heading}
               </h3>
             )}
@@ -98,7 +98,7 @@ export function LearningDetail({
       </div>
 
       {captured && (
-        <p className="text-[12px] leading-relaxed text-ink/45">
+        <p className="text-[12px] leading-relaxed text-ink/60">
           The pricing agent reads this when scoping comparable work. Revise it if the firm&apos;s
           position has moved — a correction here changes what every future scope is told.
         </p>

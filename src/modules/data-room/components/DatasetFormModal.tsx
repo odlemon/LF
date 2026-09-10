@@ -78,14 +78,14 @@ export function DatasetFormModal({ isOpen, onClose, onSave }: DatasetFormModalPr
         )}
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-[11px] font-bold text-ink/40 uppercase tracking-wider">Dataset Name *</label>
+          <label className="text-[11px] font-bold text-ink/60 uppercase tracking-wider">Dataset Name *</label>
           <input aria-label="Dataset Name"
             type="text"
             required
             placeholder="e.g. Ingestion 2024 - Corporate Matters"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full px-5 py-3 bg-field border border-border rounded-full text-sm font-semibold text-ink placeholder:text-ink/30 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/80 transition-all duration-200"
+            className="w-full px-5 py-3 bg-field border border-border rounded-full text-sm font-semibold text-ink placeholder:text-ink/60 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/80 transition-all duration-200"
           />
         </div>
 
@@ -100,35 +100,35 @@ export function DatasetFormModal({ isOpen, onClose, onSave }: DatasetFormModalPr
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-[11px] font-bold text-ink/40 uppercase tracking-wider">Source System</label>
+          <label className="text-[11px] font-bold text-ink/60 uppercase tracking-wider">Source System</label>
           <input aria-label="Source System"
             type="text"
             placeholder="e.g. Aderant, Elite 3E, InTapp"
             value={sourceSystem}
             onChange={(e) => setSourceSystem(e.target.value)}
-            className="w-full px-5 py-3 bg-field border border-border rounded-full text-sm font-semibold text-ink placeholder:text-ink/30 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/80 transition-all duration-200"
+            className="w-full px-5 py-3 bg-field border border-border rounded-full text-sm font-semibold text-ink placeholder:text-ink/60 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/80 transition-all duration-200"
           />
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div className="flex flex-col gap-1.5">
-            <label className="text-[11px] font-bold text-ink/40 uppercase tracking-wider">Period Start</label>
+            <label className="text-[11px] font-bold text-ink/60 uppercase tracking-wider">Period Start</label>
             <DatePicker value={periodStart} onChange={setPeriodStart} placeholder="Start date..." />
           </div>
           <div className="flex flex-col gap-1.5">
-            <label className="text-[11px] font-bold text-ink/40 uppercase tracking-wider">Period End</label>
+            <label className="text-[11px] font-bold text-ink/60 uppercase tracking-wider">Period End</label>
             <DatePicker value={periodEnd} onChange={setPeriodEnd} placeholder="End date..." />
           </div>
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-[11px] font-bold text-ink/40 uppercase tracking-wider">Description</label>
+          <label className="text-[11px] font-bold text-ink/60 uppercase tracking-wider">Description</label>
           <textarea aria-label="Description"
             placeholder="Provide context or instructions for this historical billing batch..."
             rows={3}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full px-5 py-3.5 bg-field border border-border rounded-2xl text-sm font-semibold text-ink placeholder:text-ink/30 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/80 transition-all duration-200 resize-none"
+            className="w-full px-5 py-3.5 bg-field border border-border rounded-2xl text-sm font-semibold text-ink placeholder:text-ink/60 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/80 transition-all duration-200 resize-none"
           />
         </div>
 

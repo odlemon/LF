@@ -189,7 +189,7 @@ export default function VolumeDiscountDetailPage() {
               {program.status}
             </span>
           </div>
-          <p className="text-sm text-ink/55 mt-1">
+          <p className="text-sm text-ink/60 mt-1">
             Client: {clientName || program.clientProfileUid} • {program.currency}
           </p>
         </div>
@@ -218,31 +218,31 @@ export default function VolumeDiscountDetailPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-surface border border-border/70 rounded-2xl p-5">
-          <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/35">Cumulative Spend</p>
+          <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">Cumulative Spend</p>
           <p className="mt-2 text-2xl font-semibold tabular-nums text-ink">
             {formatMoney(dashboard.cumulativeSpend, program.currency)}
           </p>
         </div>
         <div className="bg-surface border border-border/70 rounded-2xl p-5">
-          <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/35">Current Tier</p>
+          <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">Current Tier</p>
           <p className="mt-2 text-2xl font-semibold tabular-nums text-ink">
             {dashboard.currentTierName || "—"}
           </p>
-          <p className="text-xs text-ink/55 mt-1">{dashboard.currentDiscountPct}% discount</p>
+          <p className="text-xs text-ink/60 mt-1">{dashboard.currentDiscountPct}% discount</p>
         </div>
         <div className="bg-surface border border-border/70 rounded-2xl p-5">
-          <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/35">Next Tier</p>
+          <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">Next Tier</p>
           <p className="mt-2 text-2xl font-semibold tabular-nums text-ink">
             {dashboard.nextTierName || "—"}
           </p>
-          <p className="text-xs text-ink/55 mt-1">
+          <p className="text-xs text-ink/60 mt-1">
             {dashboard.nextThreshold
               ? `${formatMoney(dashboard.nextThreshold, program.currency)} at ${dashboard.nextDiscountPct}%`
               : "Max tier reached"}
           </p>
         </div>
         <div className="bg-surface border border-border/70 rounded-2xl p-5">
-          <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/35">Savings to Date</p>
+          <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">Savings to Date</p>
           <p className="mt-2 text-2xl font-semibold tabular-nums text-emerald-700 dark:text-emerald-400">
             {formatMoney(dashboard.savingsToDate, program.currency)}
           </p>
@@ -253,13 +253,13 @@ export default function VolumeDiscountDetailPage() {
         <h2 className="text-xs font-bold text-ink/80 uppercase tracking-wider mb-2">Program Details</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/35">Period</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">Period</p>
             <p className="text-ink mt-1">
               {formatDate(program.periodStart)} — {formatDate(program.periodEnd)}
             </p>
           </div>
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/35">Client</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">Client</p>
             <p className="text-ink mt-1">{clientName || program.clientProfileUid}</p>
           </div>
         </div>
@@ -276,7 +276,7 @@ export default function VolumeDiscountDetailPage() {
           )}
         </div>
         {!panel ? (
-          <p className="text-sm text-ink/55">
+          <p className="text-sm text-ink/60">
             No panel agreement on this programme yet. Add one to track renewal dates, MFN
             terms, and secondment credits.
           </p>
@@ -284,19 +284,19 @@ export default function VolumeDiscountDetailPage() {
           <div className="flex flex-col gap-5">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/35">Agreement Period</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">Agreement Period</p>
                 <p className="text-sm text-ink mt-1">
                   {formatDate(panel.agreementPeriodStart)} — {formatDate(panel.agreementPeriodEnd)}
                 </p>
               </div>
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/35">Renewal Date</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">Renewal Date</p>
                 <p className="text-sm text-ink mt-1">
                   {panel.renewalDate ? formatDate(panel.renewalDate) : "—"}
                 </p>
               </div>
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/35">MFN Status</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">MFN Status</p>
                 <span
                   className={`inline-flex items-center gap-1 mt-1 px-2.5 py-0.5 rounded-lg text-[10px] font-bold border uppercase tracking-wider ${
                     panel.mfnEnabled
@@ -316,12 +316,12 @@ export default function VolumeDiscountDetailPage() {
                   <HiOutlineClock className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/35">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">
                     Secondment Credit
                   </p>
                   <p className="text-sm font-semibold text-ink mt-0.5">
                     {panel.secondmentCreditHoursUsed}h used of {panel.secondmentCreditHours}h
-                    <span className="text-ink/50 font-normal">
+                    <span className="text-ink/60 font-normal">
                       {" "}
                       ({(panel.secondmentCreditHours - panel.secondmentCreditHoursUsed).toFixed(1)}h remaining)
                     </span>
@@ -351,7 +351,7 @@ export default function VolumeDiscountDetailPage() {
         <div className="flex flex-wrap items-baseline justify-between gap-2 mb-1">
           <h2 className="text-xs font-bold text-ink/80 uppercase tracking-wider">Tier Credits</h2>
           {creditsOwed > 0 && (
-            <p className="text-xs text-ink/55">
+            <p className="text-xs text-ink/60">
               <span className="font-semibold text-ink tabular-nums">
                 {formatMoney(creditsOwed, program.currency)}
               </span>{" "}
@@ -359,20 +359,20 @@ export default function VolumeDiscountDetailPage() {
             </p>
           )}
         </div>
-        <p className="text-xs text-ink/55 mb-4 max-w-2xl">
+        <p className="text-xs text-ink/60 mb-4 max-w-2xl">
           Each upgrade credits the client the difference between their new rate and their old one,
           across everything they had already spent. Work billed after an upgrade carries the new
           rate on the invoice, so it is not credited here.
         </p>
         {crossings.length === 0 ? (
-          <p className="text-sm text-ink/55">
+          <p className="text-sm text-ink/60">
             No tier has been crossed yet, so no credit is owed.
           </p>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm border-collapse">
               <thead>
-                <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
+                <tr className="bg-field/50 text-xs font-bold text-ink/60 border-b border-border">
                   <th className="px-4 py-3">Date</th>
                   <th className="px-4 py-3">Upgrade</th>
                   <th className="px-4 py-3">Spend at Upgrade</th>
@@ -410,12 +410,12 @@ export default function VolumeDiscountDetailPage() {
       <div className="bg-surface border border-border/60 rounded-2xl p-6">
         <h2 className="text-xs font-bold text-ink/80 uppercase tracking-wider mb-4">Recent Spend</h2>
         {spendRecords.length === 0 ? (
-          <p className="text-sm text-ink/55">No spend records yet.</p>
+          <p className="text-sm text-ink/60">No spend records yet.</p>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm border-collapse">
               <thead>
-                <tr className="bg-field/50 text-xs font-bold text-ink/55 border-b border-border">
+                <tr className="bg-field/50 text-xs font-bold text-ink/60 border-b border-border">
                   <th className="px-4 py-3">Date</th>
                   <th className="px-4 py-3">Invoice</th>
                   <th className="px-4 py-3">Amount</th>

@@ -152,12 +152,12 @@ export function AboutPageContent() {
         <div className="relative mx-auto max-w-[1200px] px-5 sm:px-8 lg:px-10 py-20 sm:py-28">
           <div className="max-w-2xl">
             <span className={`block h-px w-12 bg-white/25 mb-5 ${line}`} />
-            <p className="text-[11px] font-semibold tracking-[0.28em] uppercase text-white/35">
+            <p className="text-[11px] font-semibold tracking-[0.28em] uppercase text-white/45">
               What we are building
             </p>
             <h2 className="mt-4 text-2xl sm:text-4xl font-semibold tracking-tight text-balance leading-[1.1]">
               One commercial system.
-              <span className="block text-white/40 mt-2">The full pricing lifecycle.</span>
+              <span className="block text-white/45 mt-2">The full pricing lifecycle.</span>
             </h2>
           </div>
 
@@ -167,7 +167,7 @@ export function AboutPageContent() {
                 key={item.step}
                 className="group grid grid-cols-1 sm:grid-cols-12 gap-3 sm:gap-8 py-8 sm:py-10"
               >
-                <p className="sm:col-span-2 text-[13px] font-semibold tabular-nums tracking-[0.2em] text-white/30 group-hover:text-white/55 transition-colors">
+                <p className="sm:col-span-2 text-[13px] font-semibold tabular-nums tracking-[0.2em] text-white/45 group-hover:text-white/55 transition-colors">
                   {item.step}
                 </p>
                 <h3 className="sm:col-span-4 text-[18px] sm:text-[20px] font-semibold tracking-tight">
@@ -187,7 +187,7 @@ export function AboutPageContent() {
         <div className="mx-auto max-w-[1200px] px-5 sm:px-8 lg:px-10 py-20 sm:py-28">
           <div className="max-w-xl mb-14 sm:mb-16">
             <span className={`block h-px w-12 bg-[#0a0a0a]/30 mb-5 ${line}`} />
-            <p className="text-[11px] font-semibold tracking-[0.28em] uppercase text-[#0a0a0a]/40">
+            <p className="text-[11px] font-semibold tracking-[0.28em] uppercase text-[#0a0a0a]/60">
               Principles
             </p>
             <h2 className="mt-4 text-2xl sm:text-4xl font-semibold tracking-tight text-balance leading-[1.1]">
@@ -201,14 +201,14 @@ export function AboutPageContent() {
                 key={item.num}
                 className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 py-10 sm:py-12 border-b border-black/[0.08]"
               >
-                <p className="md:col-span-2 text-[28px] sm:text-[32px] font-semibold tracking-tight text-[#0a0a0a]/20 leading-none">
+                <p className="md:col-span-2 text-[28px] sm:text-[32px] font-semibold tracking-tight text-[#0a0a0a]/60 leading-none">
                   {item.num}
                 </p>
                 <div className="md:col-span-10 max-w-2xl">
                   <h3 className="text-[1.35rem] sm:text-[1.6rem] font-semibold tracking-tight leading-snug">
                     {item.title}
                   </h3>
-                  <p className="mt-3 text-[15px] sm:text-base text-[#0a0a0a]/55 leading-relaxed">
+                  <p className="mt-3 text-[15px] sm:text-base text-[#0a0a0a]/60 leading-relaxed">
                     {item.body}
                   </p>
                 </div>

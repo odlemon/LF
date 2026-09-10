@@ -50,7 +50,7 @@ function UseCaseCopy({
 }) {
   return (
     <div className="relative flex flex-col justify-center min-w-0">
-      <p className="text-[12px] sm:text-[13px] font-semibold tracking-[0.2em] uppercase text-[#0a0a0a]/40">
+      <p className="text-[12px] sm:text-[13px] font-semibold tracking-[0.2em] uppercase text-[#0a0a0a]/60">
         {String(index + 1).padStart(2, "0")}
       </p>
       <h3 className="mt-2 sm:mt-3 lg:mt-4 text-balance text-[1.45rem] sm:text-3xl lg:text-[2.35rem] xl:text-[2.6rem] font-semibold tracking-tight text-[#0a0a0a] leading-[1.1]">
@@ -153,7 +153,7 @@ function PlatformIntro({ compact = false }: { compact?: boolean }) {
             }`}
           >
             How elite firms use Lysp
-            <span className="block text-white/40 mt-1.5 sm:mt-2">
+            <span className="block text-white/45 mt-1.5 sm:mt-2">
               from RFP to accepted fee.
             </span>
           </h2>
@@ -253,7 +253,7 @@ function MobilePlatform() {
             id={active.id}
             active
           />
-          <p className="mt-4 text-[12px] text-[#0a0a0a]/35">Swipe left or right to explore</p>
+          <p className="mt-4 text-[12px] text-[#0a0a0a]/60">Swipe left or right to explore</p>
         </div>
       </div>
 

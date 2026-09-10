@@ -69,9 +69,9 @@ export default function BillingPage() {
         {/* Header */}
         <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between animate-fade-in-up">
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/35">Credit account</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/60">Credit account</p>
             <h1 className="mt-2 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">Billing</h1>
-            <p className="mt-2 text-sm text-ink/50 max-w-md">
+            <p className="mt-2 text-sm text-ink/60 max-w-md">
               Monitor your credit balance, track feature usage, and manage top-ups.
             </p>
           </div>

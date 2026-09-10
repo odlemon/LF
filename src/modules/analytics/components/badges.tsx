@@ -29,7 +29,7 @@ export function AnomalyStatusBadge({ status }: { status: AnomalyStatus }) {
 }
 
 export function ConfidenceBadge({ confidence }: { confidence: string | null }) {
-  if (!confidence) return <span className="text-ink/40">—</span>;
+  if (!confidence) return <span className="text-ink/60">—</span>;
   const normalized = confidence.toUpperCase();
   const variant =
     normalized === "HIGH" ? "success" : normalized === "MEDIUM" ? "warning" : "neutral";
@@ -38,7 +38,7 @@ export function ConfidenceBadge({ confidence }: { confidence: string | null }) {
 
 /** Pricing power: positive = firm can push rates up. */
 export function PricingPowerBadge({ pricingPower }: { pricingPower: boolean | null }) {
-  if (pricingPower == null) return <span className="text-ink/40">—</span>;
+  if (pricingPower == null) return <span className="text-ink/60">—</span>;
   return pricingPower ? (
     <Badge variant="success">Positive</Badge>
   ) : (

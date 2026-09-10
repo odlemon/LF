@@ -24,7 +24,7 @@ function SsoCallbackHandler() {
   }, [router, searchParams]);
 
   return (
-    <div className="flex items-center gap-3 text-[#0a0a0a]/50">
+    <div className="flex items-center gap-3 text-[#0a0a0a]/60">
       <span className="h-4 w-4 animate-spin rounded-full border-2 border-current/30 border-t-current" />
       <span className="text-[14px]">Signing you in…</span>
     </div>
@@ -42,7 +42,7 @@ export default function SsoCallbackPage() {
     <div className="flex min-h-[100svh] items-center justify-center bg-[#fefefc]">
       <Suspense
         fallback={
-          <div className="flex items-center gap-3 text-[#0a0a0a]/50">
+          <div className="flex items-center gap-3 text-[#0a0a0a]/60">
             <span className="h-4 w-4 animate-spin rounded-full border-2 border-current/30 border-t-current" />
             <span className="text-[14px]">Signing you in…</span>
           </div>

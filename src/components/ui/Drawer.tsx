@@ -57,7 +57,7 @@ export function Drawer({ isOpen, onClose, title, children, size = "xl" }: Drawer
           <button
             onClick={onClose}
             type="button"
-            className="p-2 text-ink/40 hover:text-ink/70 rounded-lg hover:bg-field transition-colors cursor-pointer"
+            className="p-2 text-ink/60 hover:text-ink/70 rounded-lg hover:bg-field transition-colors cursor-pointer"
           >
             <HiX className="w-5 h-5" />
           </button>

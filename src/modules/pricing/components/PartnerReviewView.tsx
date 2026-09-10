@@ -90,13 +90,13 @@ export function PartnerReviewView({
 
       <div className="relative flex items-center justify-between px-6 py-3.5 border-b border-border bg-surface shrink-0">
         <div className="min-w-0">
-          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/35">
+          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
             Partner review
           </p>
           <h1 className="text-base font-semibold text-ink truncate tracking-tight mt-0.5">
             {matterTitle}
           </h1>
-          <p className="text-xs text-ink/50 truncate mt-0.5">{clientName}</p>
+          <p className="text-xs text-ink/60 truncate mt-0.5">{clientName}</p>
         </div>
         <Button variant="secondary" onClick={onBack}>
           Back to approvals
@@ -187,13 +187,13 @@ export function PartnerReviewView({
             {canSend && (
               <div className="border-t border-border/60 bg-gradient-to-r from-field/50 via-surface to-surface px-5 py-4 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
                 <div className="min-w-0">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
                     Next step
                   </p>
                   <p className="mt-1 text-sm font-semibold text-ink tracking-tight">
                     Send approved rates to {clientName}
                   </p>
-                  <p className="mt-0.5 text-xs text-ink/45 leading-relaxed">
+                  <p className="mt-0.5 text-xs text-ink/60 leading-relaxed">
                     Opens negotiation on the portal — no need to pick the client
                     again.
                   </p>
@@ -237,7 +237,7 @@ export function PartnerReviewView({
 
           {scenario.aiReasoning && (
             <section className="mt-6 rounded-2xl border border-border/70 bg-surface p-5 sm:p-6">
-              <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35">
+              <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
                 Why this price
               </p>
               <p className="mt-3 text-sm text-ink/70 leading-relaxed whitespace-pre-wrap">
@@ -261,7 +261,7 @@ export function PartnerReviewView({
 
           <section className="mt-6 rounded-2xl border border-border/70 bg-surface overflow-hidden">
             <div className="px-5 sm:px-6 py-4 border-b border-border/60">
-              <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/35">
+              <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
                 Fee breakdown
               </p>
               <h2 className="mt-1 text-base font-semibold text-ink tracking-tight">
@@ -271,7 +271,7 @@ export function PartnerReviewView({
             <div className="divide-y divide-border/50">
               {[...byPhase.entries()].map(([phase, phaseLines]) => (
                 <div key={phase} className="px-5 sm:px-6 py-4">
-                  <p className="text-xs font-semibold text-ink/55 mb-2">{phase}</p>
+                  <p className="text-xs font-semibold text-ink/60 mb-2">{phase}</p>
                   <ul className="space-y-2">
                     {phaseLines.map((line) => (
                       <li
@@ -282,7 +282,7 @@ export function PartnerReviewView({
                           <p className="text-ink/80 font-medium truncate">
                             {line.description || line.feeEarnerLevelName || "Line"}
                           </p>
-                          <p className="text-[11px] text-ink/40 mt-0.5">
+                          <p className="text-[11px] text-ink/60 mt-0.5">
                             {Number(line.hours).toFixed(1)}h ·{" "}
                             {formatMoney(Number(line.hourlyRate), scenario.currency)}
                             /h
@@ -297,7 +297,7 @@ export function PartnerReviewView({
                 </div>
               ))}
               {lines.length === 0 && (
-                <p className="px-5 py-8 text-sm text-ink/40 text-center">
+                <p className="px-5 py-8 text-sm text-ink/60 text-center">
                   No line items on this scenario.
                 </p>
               )}
@@ -308,7 +308,7 @@ export function PartnerReviewView({
 
       {(pending || !canSend) && (
         <div className="relative shrink-0 border-t border-border bg-surface/95 backdrop-blur-sm px-6 py-3.5 flex flex-wrap items-center justify-between gap-3">
-          <p className="text-xs text-ink/45 max-w-md">
+          <p className="text-xs text-ink/60 max-w-md">
             {pending
               ? scenario.changeSummaryJson
                 ? "Review the change trail against your correction request, then decide."

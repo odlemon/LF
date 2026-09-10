@@ -206,7 +206,7 @@ export function Sidebar({ isMobileOpen = false, onMobileClose }: SidebarProps = 
           <Link
             href="/settings/firm"
             onClick={onMobileClose}
-            className="inline-flex shrink-0 items-center rounded-lg px-2 py-1.5 text-[11px] font-semibold text-ink/45 transition-colors hover:bg-hover hover:text-ink"
+            className="inline-flex shrink-0 items-center rounded-lg px-2 py-1.5 text-[11px] font-semibold text-ink/60 transition-colors hover:bg-hover hover:text-ink"
           >
             Firm
           </Link>
@@ -216,7 +216,7 @@ export function Sidebar({ isMobileOpen = false, onMobileClose }: SidebarProps = 
           onClick={toggleCollapsed}
           title={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
           aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-          className="hidden md:inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-border bg-surface text-ink/50 hover:text-ink hover:bg-hover transition-colors cursor-pointer"
+          className="hidden md:inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-border bg-surface text-ink/60 hover:text-ink hover:bg-hover transition-colors cursor-pointer"
         >
           {isCollapsed ? (
             <HiChevronDoubleRight className="w-3.5 h-3.5" />
@@ -238,7 +238,7 @@ export function Sidebar({ isMobileOpen = false, onMobileClose }: SidebarProps = 
             ) : (
               <button
                 onClick={() => setIsSettingsOpen(!isSettingsOpen)}
-                className="flex items-center justify-between px-4 py-2 text-[11px] font-semibold text-ink/35 uppercase tracking-[0.18em] hover:text-ink/70 transition-colors w-full text-left cursor-pointer"
+                className="flex items-center justify-between px-4 py-2 text-[11px] font-semibold text-ink/60 uppercase tracking-[0.18em] hover:text-ink/70 transition-colors w-full text-left cursor-pointer"
               >
                 <span>Settings</span>
                 {isSettingsOpen ? (
@@ -266,7 +266,7 @@ export function Sidebar({ isMobileOpen = false, onMobileClose }: SidebarProps = 
         {!isPartnerOnly && checkPermission(PERMISSIONS.AUDIT_READ) && (
           <div className="flex flex-col gap-0.5 border-t border-border pt-4 mt-2">
             {!isCollapsed && (
-              <span className="px-4 py-2 text-[11px] font-semibold text-ink/35 uppercase tracking-[0.18em] block">
+              <span className="px-4 py-2 text-[11px] font-semibold text-ink/60 uppercase tracking-[0.18em] block">
                 Audit
               </span>
             )}

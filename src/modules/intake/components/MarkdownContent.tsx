@@ -96,7 +96,7 @@ export function MarkdownContent({ content, className = "" }: MarkdownContentProp
             </div>
           ),
           thead: ({ children }) => (
-            <thead className="bg-field/80 text-ink/55">{children}</thead>
+            <thead className="bg-field/80 text-ink/60">{children}</thead>
           ),
           tbody: ({ children }) => <tbody className="bg-surface">{children}</tbody>,
           tr: ({ children }) => (

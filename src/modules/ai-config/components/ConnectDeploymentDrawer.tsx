@@ -26,7 +26,7 @@ import {
  * resource needs a deployment name and a dated API version; a private gateway needs neither.
  */
 
-const LABEL = "text-[10px] font-bold uppercase tracking-wider text-ink/40 pl-1 select-none";
+const LABEL = "text-[10px] font-bold uppercase tracking-wider text-ink/60 pl-1 select-none";
 
 const KIND_OPTIONS: { value: DeploymentKind; label: string }[] = [
   { value: "AZURE", label: "Azure OpenAI in our tenant" },
@@ -163,7 +163,7 @@ export function ConnectDeploymentDrawer({
             onChange={(v) => setKind(v as DeploymentKind)}
             options={KIND_OPTIONS}
           />
-          <p className="pl-1 text-[12px] leading-relaxed text-ink/50">{KIND_BLURB[kind]}</p>
+          <p className="pl-1 text-[12px] leading-relaxed text-ink/60">{KIND_BLURB[kind]}</p>
         </div>
 
         {kind === "AZURE" && (
@@ -178,7 +178,7 @@ export function ConnectDeploymentDrawer({
                 onChange={(e) => setBaseUrl(e.target.value)}
                 placeholder="https://acme-legal.openai.azure.com"
               />
-              <span className="pl-1 text-[11px] text-ink/40">
+              <span className="pl-1 text-[11px] text-ink/60">
                 From Azure AI Foundry, Keys and Endpoint. The region in this hostname is where
                 requests are processed.
               </span>
@@ -194,7 +194,7 @@ export function ConnectDeploymentDrawer({
                   onChange={(e) => setDeploymentName(e.target.value)}
                   placeholder="gpt-4o-pricing"
                 />
-                <span className="pl-1 text-[11px] text-ink/40">
+                <span className="pl-1 text-[11px] text-ink/60">
                   What you named it, not the model.
                 </span>
               </div>
@@ -208,7 +208,7 @@ export function ConnectDeploymentDrawer({
                   onChange={(e) => setApiVersion(e.target.value)}
                   placeholder={DEFAULT_API_VERSION}
                 />
-                <span className="pl-1 text-[11px] text-ink/40">
+                <span className="pl-1 text-[11px] text-ink/60">
                   Azure dates its API. Wrong version, opaque failure.
                 </span>
               </div>
@@ -227,7 +227,7 @@ export function ConnectDeploymentDrawer({
               onChange={(e) => setBaseUrl(e.target.value)}
               placeholder="https://ai-gateway.acmelaw.com/v1"
             />
-            <span className="pl-1 text-[11px] text-ink/40">
+            <span className="pl-1 text-[11px] text-ink/60">
               Anything that answers the OpenAI wire format. Include the version path if your
               gateway expects one.
             </span>
@@ -271,7 +271,7 @@ export function ConnectDeploymentDrawer({
             <button
               type="button"
               onClick={() => setShowKey((v) => !v)}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-ink/40 transition-colors hover:text-ink cursor-pointer"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-ink/60 transition-colors hover:text-ink cursor-pointer"
               aria-label={showKey ? "Hide credential" : "Show credential"}
             >
               {showKey ? <HiEyeOff className="h-4 w-4" /> : <HiEye className="h-4 w-4" />}
@@ -280,8 +280,8 @@ export function ConnectDeploymentDrawer({
         </div>
 
         <div className="flex items-start gap-2.5 rounded-2xl border border-border bg-canvas p-4">
-          <HiOutlineShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-ink/45" />
-          <p className="text-[12px] leading-relaxed text-ink/55">
+          <HiOutlineShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-ink/60" />
+          <p className="text-[12px] leading-relaxed text-ink/60">
             The credential is encrypted before it is stored and is never returned by the API — not
             to this screen, not to anyone. Only the last four characters are ever shown again.
           </p>

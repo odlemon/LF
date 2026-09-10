@@ -107,7 +107,7 @@ export function CustomersSection() {
     >
       <div className="mx-auto max-w-[1200px] px-5 sm:px-8 lg:px-10">
         <div className="mb-8">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#0a0a0a]/40">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#0a0a0a]/60">
             Our customers
           </p>
         </div>

@@ -126,7 +126,7 @@ export function NewRequestModal({ isOpen, onClose, onCreate }: NewRequestModalPr
           ) : clients.length === 0 ? (
             <div className="p-4 bg-field border border-border rounded-xl text-center">
               <p className="text-sm font-semibold text-ink/65">No clients available</p>
-              <p className="text-xs text-ink/55 mt-1">
+              <p className="text-xs text-ink/60 mt-1">
                 Contact your administrator or use seed data in development.
               </p>
             </div>

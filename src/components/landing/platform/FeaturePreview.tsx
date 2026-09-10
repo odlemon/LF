@@ -18,7 +18,7 @@ function Stage({ children }: { children: React.ReactNode }) {
 
 function StageLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-white/35">
+    <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-white/45">
       {children}
     </p>
   );
@@ -52,7 +52,7 @@ function FineTabs<T extends string>({
             aria-selected={active}
             onClick={() => onChange(tab.id)}
             className={`relative px-3.5 sm:px-4 py-3.5 text-[12px] sm:text-[13px] font-semibold tracking-tight transition-colors cursor-pointer ${
-              active ? "text-[#fefefc]" : "text-white/40 hover:text-white/70"
+              active ? "text-[#fefefc]" : "text-white/45 hover:text-white/70"
             }`}
           >
             {tab.label}
@@ -86,7 +86,7 @@ function StageHeader({
         <p className="mt-1.5 text-[17px] sm:text-[18px] font-semibold tracking-tight truncate">
           {title}
         </p>
-        {meta ? <p className="mt-0.5 text-[13px] text-white/40 truncate">{meta}</p> : null}
+        {meta ? <p className="mt-0.5 text-[13px] text-white/45 truncate">{meta}</p> : null}
       </div>
       {badge ? (
         <span className="shrink-0 rounded-full border border-white/15 bg-white/[0.06] px-3 py-1 text-[11px] font-semibold text-white/70">
@@ -126,7 +126,7 @@ function PricingMock() {
           <div className="grid h-full grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-3">
               <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-4">
-                <p className="text-[11px] font-semibold text-white/35">Lysp</p>
+                <p className="text-[11px] font-semibold text-white/45">Lysp</p>
                 <p className="mt-1.5 text-[13px] leading-relaxed text-white/70">
                   Cross-border SPA. Diligence, negotiation, dual regulatory, close Q3. Attach the RFP
                   and I will build the phases.
@@ -138,7 +138,7 @@ function PricingMock() {
                   Standard DD plus SPA. Exclude antitrust filing. Dual jurisdiction is the risk.
                 </p>
               </div>
-              <p className="text-[11px] text-white/30">RFP_Meridian.pdf · OCG_Apex.pdf</p>
+              <p className="text-[11px] text-white/45">RFP_Meridian.pdf · OCG_Apex.pdf</p>
             </div>
             <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-4 flex flex-col justify-between">
               <div>
@@ -151,7 +151,7 @@ function PricingMock() {
                     ["Jurisdictions", "UK · Germany"],
                   ].map(([k, v]) => (
                     <li key={k} className="flex justify-between gap-3 border-b border-white/[0.06] pb-2">
-                      <span className="text-white/40">{k}</span>
+                      <span className="text-white/45">{k}</span>
                       <span className="font-medium text-white/80">{v}</span>
                     </li>
                   ))}
@@ -166,7 +166,7 @@ function PricingMock() {
             <div className="flex items-center justify-between gap-3 rounded-2xl border border-white/[0.08] bg-white/[0.03] px-4 py-3">
               <div>
                 <p className="text-[13px] font-semibold">Scoped matter</p>
-                <p className="mt-0.5 text-[11px] text-white/35">1,005h · 4 comps from firm history</p>
+                <p className="mt-0.5 text-[11px] text-white/45">1,005h · 4 comps from firm history</p>
               </div>
               <p className="text-[28px] font-semibold tabular-nums tracking-tight">87%</p>
             </div>
@@ -182,7 +182,7 @@ function PricingMock() {
                   className="grid grid-cols-[1.3fr_1fr_0.55fr_0.85fr] gap-2 rounded-xl border border-white/[0.06] px-3.5 py-2.5 text-[12px]"
                 >
                   <span className="font-semibold text-white/85 truncate">{row.phase}</span>
-                  <span className="text-white/35 truncate">{row.mix}</span>
+                  <span className="text-white/45 truncate">{row.mix}</span>
                   <span className="tabular-nums text-white/45">{row.hrs}</span>
                   <span className="tabular-nums text-right font-semibold text-white/80">{row.fee}</span>
                 </div>
@@ -206,7 +206,7 @@ function PricingMock() {
           <div className="flex h-full flex-col">
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
               <div>
-                <p className="text-[13px] text-white/40">Recommended fixed fee</p>
+                <p className="text-[13px] text-white/45">Recommended fixed fee</p>
                 <p className="mt-1 text-[3.25rem] sm:text-5xl font-semibold tracking-tight tabular-nums leading-none">
                   $485,000
                 </p>
@@ -219,7 +219,7 @@ function PricingMock() {
                   ["Floor", "38%"],
                 ].map(([k, v]) => (
                   <div key={k}>
-                    <p className="text-white/30 text-[10px] uppercase tracking-wider font-semibold">
+                    <p className="text-white/45 text-[10px] uppercase tracking-wider font-semibold">
                       {k}
                     </p>
                     <p className="mt-0.5 font-semibold tabular-nums">{v}</p>
@@ -227,7 +227,7 @@ function PricingMock() {
                 ))}
               </div>
             </div>
-            <p className="mt-4 text-[12px] text-white/35">
+            <p className="mt-4 text-[12px] text-white/45">
               Above minimum target profit margin · Active rate card USD 2026
             </p>
             <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -241,7 +241,7 @@ function PricingMock() {
                   className="rounded-xl border border-white/[0.07] bg-white/[0.03] px-3.5 py-3"
                 >
                   <p className="truncate text-[12px] font-medium text-white/80">{c.matter}</p>
-                  <div className="mt-1 flex justify-between text-[11px] text-white/35">
+                  <div className="mt-1 flex justify-between text-[11px] text-white/45">
                     <span>{c.year}</span>
                     <span className="tabular-nums text-white/60">{c.fee}</span>
                     <span className="tabular-nums">{c.delta}</span>
@@ -368,7 +368,7 @@ function NegotiationMock() {
             className={`rounded-full px-3 py-1.5 text-[11px] font-semibold cursor-pointer ${
               roundId === r.id
                 ? "bg-[#fefefc] text-[#0a0a0a]"
-                : "bg-white/[0.05] text-white/40 hover:text-white/70"
+                : "bg-white/[0.05] text-white/45 hover:text-white/70"
             }`}
           >
             {r.label}
@@ -385,14 +385,14 @@ function NegotiationMock() {
                 <p className="mt-3 text-[2rem] sm:text-[2.5rem] font-semibold tabular-nums tracking-tight leading-none">
                   {round.firm}
                 </p>
-                <p className="mt-3 text-[12px] text-white/35">Projected margin {round.margin}</p>
+                <p className="mt-3 text-[12px] text-white/45">Projected margin {round.margin}</p>
               </div>
               <div className="rounded-2xl border border-white/[0.12] bg-white/[0.06] p-5">
                 <StageLabel>Client counter</StageLabel>
                 <p className="mt-3 text-[2rem] sm:text-[2.5rem] font-semibold tabular-nums tracking-tight leading-none">
                   {round.client}
                 </p>
-                <p className="mt-3 text-[12px] text-white/35">Portal submission</p>
+                <p className="mt-3 text-[12px] text-white/45">Portal submission</p>
               </div>
             </div>
             <p className="text-[13px] text-white/50 leading-relaxed">{round.note}</p>
@@ -406,7 +406,7 @@ function NegotiationMock() {
                   key={k}
                   className="rounded-xl border border-white/[0.07] bg-white/[0.03] px-3 py-3"
                 >
-                  <p className="text-[9px] font-semibold uppercase tracking-wider text-white/30">
+                  <p className="text-[9px] font-semibold uppercase tracking-wider text-white/45">
                     {k}
                   </p>
                   <p className="mt-1 text-[14px] font-semibold tabular-nums">{v}</p>
@@ -418,7 +418,7 @@ function NegotiationMock() {
 
         {tab === "trail" && (
           <div className="h-full overflow-hidden rounded-2xl border border-white/[0.07]">
-            <div className="border-b border-white/[0.06] px-4 py-2.5 text-[11px] text-white/35">
+            <div className="border-b border-white/[0.06] px-4 py-2.5 text-[11px] text-white/45">
               Attributable actions · Round {round.id}
             </div>
             {round.log.map((row) => (
@@ -426,9 +426,9 @@ function NegotiationMock() {
                 key={row.time + row.who}
                 className="flex gap-3 border-b border-white/[0.05] px-4 py-3.5 last:border-0"
               >
-                <span className="w-16 shrink-0 text-[11px] font-semibold text-white/40">{row.who}</span>
+                <span className="w-16 shrink-0 text-[11px] font-semibold text-white/45">{row.who}</span>
                 <span className="min-w-0 flex-1 text-[13px] text-white/75">{row.text}</span>
-                <span className="shrink-0 text-[11px] tabular-nums text-white/25">{row.time}</span>
+                <span className="shrink-0 text-[11px] tabular-nums text-white/45">{row.time}</span>
               </div>
             ))}
           </div>
@@ -462,7 +462,7 @@ function NegotiationMock() {
               >
                 <div>
                   <p className="text-[13px] font-semibold">{row.role}</p>
-                  <p className="mt-0.5 text-[12px] text-white/40">{row.name}</p>
+                  <p className="mt-0.5 text-[12px] text-white/45">{row.name}</p>
                   <p className="mt-2 text-[12px] text-white/55 leading-snug">{row.detail}</p>
                 </div>
                 <span className="shrink-0 rounded-full border border-white/12 px-2.5 py-1 text-[10px] font-semibold text-white/65">
@@ -553,7 +553,7 @@ function DiscountsMock() {
               className={`rounded-full px-3 py-1.5 text-[11px] font-semibold cursor-pointer ${
                 bookId === c.id
                   ? "bg-[#fefefc] text-[#0a0a0a]"
-                  : "bg-white/[0.05] text-white/40"
+                  : "bg-white/[0.05] text-white/45"
               }`}
             >
               {c.name.split(" ")[0]}
@@ -578,7 +578,7 @@ function DiscountsMock() {
           <div className="flex h-full flex-col">
             <div className="flex items-end justify-between gap-4">
               <div>
-                <p className="text-[13px] text-white/40">YTD spend</p>
+                <p className="text-[13px] text-white/45">YTD spend</p>
                 <p className="mt-1 text-[3rem] sm:text-[3.5rem] font-semibold tracking-tight tabular-nums leading-none">
                   {book.spendLabel}
                 </p>
@@ -587,7 +587,7 @@ function DiscountsMock() {
                 <p className="text-[14px] font-semibold">
                   Tier {book.tier} · {book.discount}%
                 </p>
-                <p className="mt-1 text-[12px] text-white/35">
+                <p className="mt-1 text-[12px] text-white/45">
                   {book.remaining === "-"
                     ? "Top tier reached"
                     : `${book.remaining} to ${book.nextDiscount}%`}
@@ -615,7 +615,7 @@ function DiscountsMock() {
                 </div>
               ))}
             </div>
-            <p className="mt-auto pt-6 text-[12px] text-white/35 leading-relaxed">
+            <p className="mt-auto pt-6 text-[12px] text-white/45 leading-relaxed">
               Same number for BD and finance. Updates as matters close.
             </p>
           </div>
@@ -637,7 +637,7 @@ function DiscountsMock() {
                     Tier {b.tier}
                     {b.active ? " · current" : ""}
                   </p>
-                  <p className="mt-0.5 text-[12px] text-white/40">
+                  <p className="mt-0.5 text-[12px] text-white/45">
                     {b.from} to {b.to}
                   </p>
                 </div>
@@ -649,7 +649,7 @@ function DiscountsMock() {
 
         {tab === "matters" && (
           <div className="h-full overflow-hidden rounded-2xl border border-white/[0.07]">
-            <div className="grid grid-cols-[1.4fr_0.7fr_0.7fr] gap-2 border-b border-white/[0.06] px-4 py-2.5 text-[10px] font-semibold uppercase tracking-wider text-white/30">
+            <div className="grid grid-cols-[1.4fr_0.7fr_0.7fr] gap-2 border-b border-white/[0.06] px-4 py-2.5 text-[10px] font-semibold uppercase tracking-wider text-white/45">
               <span>Counted matter</span>
               <span>Fee</span>
               <span>Closed</span>
@@ -661,10 +661,10 @@ function DiscountsMock() {
               >
                 <span className="font-medium text-white/80 truncate">{m.matter}</span>
                 <span className="tabular-nums text-white/55">{m.fee}</span>
-                <span className="text-white/40">{m.when}</span>
+                <span className="text-white/45">{m.when}</span>
               </div>
             ))}
-            <p className="px-4 py-3 text-[11px] text-white/30">
+            <p className="px-4 py-3 text-[11px] text-white/45">
               {book.matters} matters counted YTD · only closed work advances the tier
             </p>
           </div>
@@ -740,12 +740,12 @@ function AnalyticsMock() {
                   <p className="mt-2 text-[1.5rem] sm:text-[1.85rem] font-semibold tabular-nums tracking-tight">
                     {m.value}
                   </p>
-                  <p className="mt-1 text-[11px] text-white/40">{m.delta}</p>
+                  <p className="mt-1 text-[11px] text-white/45">{m.delta}</p>
                 </div>
               ))}
             </div>
             <div className="min-h-0 flex-1 rounded-2xl border border-white/[0.08] bg-white/[0.03] p-4 flex flex-col">
-              <div className="flex justify-between text-[11px] text-white/35">
+              <div className="flex justify-between text-[11px] text-white/45">
                 <span>Win rate by week</span>
                 <span className="tabular-nums">
                   {hover !== null ? `W${hover + 1}: ${perf.bars[hover]}%` : "Hover"}
@@ -782,7 +782,7 @@ function AnalyticsMock() {
 
         {tab === "practices" && (
           <div className="h-full overflow-hidden rounded-2xl border border-white/[0.07]">
-            <div className="grid grid-cols-[1.3fr_0.55fr_0.55fr_0.55fr_0.7fr] gap-2 border-b border-white/[0.06] bg-white/[0.03] px-4 py-2.5 text-[9px] font-semibold uppercase tracking-wider text-white/30">
+            <div className="grid grid-cols-[1.3fr_0.55fr_0.55fr_0.55fr_0.7fr] gap-2 border-b border-white/[0.06] bg-white/[0.03] px-4 py-2.5 text-[9px] font-semibold uppercase tracking-wider text-white/45">
               <span>Practice</span>
               <span>Win</span>
               <span>Margin</span>
@@ -813,17 +813,17 @@ function AnalyticsMock() {
               >
                 <div className="min-w-0">
                   <p className="text-[13px] font-semibold text-white/90">{row.signal}</p>
-                  <p className="mt-1 text-[12px] text-white/40">{row.desk}</p>
+                  <p className="mt-1 text-[12px] text-white/45">{row.desk}</p>
                 </div>
                 <div className="shrink-0 text-right">
                   <p className="text-[14px] font-semibold tabular-nums">{row.impact}</p>
-                  <p className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-white/35">
+                  <p className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-white/45">
                     {row.severity}
                   </p>
                 </div>
               </div>
             ))}
-            <p className="mt-auto pt-2 text-[12px] text-white/30 leading-relaxed">
+            <p className="mt-auto pt-2 text-[12px] text-white/45 leading-relaxed">
               Flags surface before write-downs compound. Drill into the desk that moved the number.
             </p>
           </div>

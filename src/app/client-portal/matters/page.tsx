@@ -66,7 +66,7 @@ export default function ClientMatterHistoryPage() {
               className="rounded-2xl border border-border/70 bg-surface p-5 animate-fade-in-up"
               style={{ animationDelay: `${i * 40}ms` }}
             >
-              <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/35">
+              <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">
                 {k.label}
               </p>
               <p className="mt-2 text-2xl font-semibold tabular-nums text-ink">
@@ -84,7 +84,7 @@ export default function ClientMatterHistoryPage() {
               ))}
             </div>
           ) : sorted.length === 0 ? (
-            <p className="px-5 py-14 text-center text-sm text-ink/45">
+            <p className="px-5 py-14 text-center text-sm text-ink/60">
               No history yet. Fee conversations will appear as they happen.
             </p>
           ) : (
@@ -102,7 +102,7 @@ export default function ClientMatterHistoryPage() {
                       <p className="truncate text-sm font-semibold text-ink">
                         {item.matterTitle || "Fee proposal"}
                       </p>
-                      <p className="mt-0.5 text-xs text-ink/45">
+                      <p className="mt-0.5 text-xs text-ink/60">
                         Received {formatDate(item.sentAt)} · Updated{" "}
                         {relativeTime(item.updatedAt || item.sentAt)}
                       </p>
