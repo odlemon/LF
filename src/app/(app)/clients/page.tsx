@@ -90,7 +90,10 @@ export default function ClientsPage() {
               {clients.map((client) => (
                 <tr key={client.uid} className="hover:bg-field/50 text-ink transition-colors">
                   <td className="px-6 py-4 font-bold">
-                    <Link href={`/clients/${client.uid}`} className="hover:text-primary hover:underline">
+                    <Link
+                      href={`/clients/${client.uid}`}
+                      className="inline-flex items-center py-1.5 -my-1.5 rounded hover:text-primary hover:underline"
+                    >
                       {client.name}
                     </Link>
                   </td>
