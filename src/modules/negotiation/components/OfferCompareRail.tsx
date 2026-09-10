@@ -122,7 +122,7 @@ export function OfferCompareRail({
             onSelect(offers[selectedIdx - 1].id);
           }
         }}
-        className="rates-scrollable -mx-1 flex gap-2.5 overflow-x-auto px-1 pb-2 scroll-smooth snap-x snap-mandatory focus:outline-none"
+        className="rates-scrollable -mx-1 flex gap-2.5 overflow-x-auto px-1 pb-2 scroll-smooth snap-x snap-mandatory focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1 focus-visible:ring-offset-surface"
       >
         {offers.map((offer, idx) => {
           const isOriginal =

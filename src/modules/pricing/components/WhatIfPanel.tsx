@@ -351,7 +351,7 @@ export function WhatIfPanel({
             <input
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="mt-2 w-full bg-transparent text-base font-semibold tracking-tight text-ink focus:outline-none placeholder:text-ink/25"
+              className="mt-2 w-full bg-transparent text-base font-semibold tracking-tight text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1 focus-visible:ring-offset-surface placeholder:text-ink/25"
               placeholder="Scenario name"
             />
           </div>
@@ -403,7 +403,7 @@ export function WhatIfPanel({
                   type="number"
                   value={capAmount}
                   onChange={(e) => setCapAmount(e.target.value)}
-                  className="w-full bg-transparent text-[1.65rem] font-semibold tabular-nums tracking-tight text-ink leading-none focus:outline-none placeholder:text-ink/20"
+                  className="w-full bg-transparent text-[1.65rem] font-semibold tabular-nums tracking-tight text-ink leading-none focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1 focus-visible:ring-offset-surface placeholder:text-ink/20"
                   placeholder="Optional"
                 />
               </div>
@@ -498,7 +498,7 @@ export function WhatIfPanel({
                               })
                             }
                             placeholder="Work description"
-                            className="flex-1 min-w-0 bg-transparent text-sm font-medium text-ink focus:outline-none placeholder:text-ink/30"
+                            className="flex-1 min-w-0 bg-transparent text-sm font-medium text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1 focus-visible:ring-offset-surface placeholder:text-ink/30"
                           />
                           <button
                             type="button"

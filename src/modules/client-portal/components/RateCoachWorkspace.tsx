@@ -243,7 +243,7 @@ export function RateCoachWorkspace({
                 ? "Ask anything — or say submit / accept"
                 : "Ask about this closed negotiation…"
             }
-            className="composer-textarea max-h-28 min-h-[40px] flex-1 resize-none bg-transparent px-2 py-2 text-sm text-ink placeholder:text-ink/35 focus:outline-none"
+            className="composer-textarea max-h-28 min-h-[40px] flex-1 resize-none bg-transparent px-2 py-2 text-sm text-ink placeholder:text-ink/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1 focus-visible:ring-offset-surface"
           />
           {streaming ? (
             <Button

@@ -277,7 +277,7 @@ export default function AnalyticsFirmHealthPage() {
           <div className="flex justify-end">
             <Link
               href="/analytics/win-rate"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:underline"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:underline py-1.5 -my-1.5"
             >
               Proposal performance & win rates
               <HiChevronRight className="w-3.5 h-3.5" />

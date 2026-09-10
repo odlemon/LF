@@ -246,7 +246,7 @@ export default function FileStoragePage() {
                       <span className="text-sm font-bold">{error}</span>
                       <button
                         onClick={fetchFiles}
-                        className="text-xs font-bold text-primary hover:underline mt-1 cursor-pointer"
+                        className="text-xs font-bold text-primary hover:underline py-1.5 -my-1.5 mt-1 cursor-pointer"
                       >
                         Try again
                       </button>

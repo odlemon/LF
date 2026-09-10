@@ -98,7 +98,7 @@ export default function DataRoomOverviewPage() {
             <h2 className="text-base font-bold text-ink">Ingested datasets</h2>
             <button
               onClick={() => setIsDatasetsOpen(true)}
-              className="text-xs font-semibold text-ink/55 hover:text-ink flex items-center gap-0.5 cursor-pointer focus:outline-none transition-colors"
+              className="text-xs font-semibold text-ink/55 hover:text-ink flex items-center py-1.5 -my-1.5 rounded gap-0.5 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1 focus-visible:ring-offset-surface transition-colors"
             >
               View all datasets <HiChevronRight className="w-3.5 h-3.5" />
             </button>
@@ -150,7 +150,7 @@ export default function DataRoomOverviewPage() {
                         <td className="px-5 py-4">
                           <button
                             onClick={() => setActiveDatasetUid(dataset.uid)}
-                            className="text-ink font-semibold hover:underline text-left cursor-pointer focus:outline-none"
+                            className="text-ink font-semibold hover:underline text-left cursor-pointer py-1.5 -my-1.5 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1 focus-visible:ring-offset-surface"
                           >
                             {dataset.name}
                           </button>

@@ -168,7 +168,7 @@ export function DatasetsListDrawerContent({
                     <td className="px-5 py-4">
                       <button
                         onClick={() => onSelectDataset(dataset.uid)}
-                        className="text-ink font-extrabold hover:text-primary hover:underline flex items-center gap-1.5 text-left cursor-pointer focus:outline-none"
+                        className="text-ink font-extrabold hover:text-primary hover:underline flex items-center py-1.5 -my-1.5 rounded gap-1.5 text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1 focus-visible:ring-offset-surface"
                       >
                         <HiFolderOpen className="w-4.5 h-4.5 text-ink/40 shrink-0" />
                         <span>{dataset.name}</span>

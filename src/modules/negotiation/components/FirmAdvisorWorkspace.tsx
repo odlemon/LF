@@ -214,7 +214,7 @@ export function FirmAdvisorWorkspace({
             placeholder={
               open ? "Ask — or say submit / accept" : "Ask about this closed negotiation…"
             }
-            className="max-h-24 min-h-[36px] flex-1 resize-none bg-transparent px-1 py-1.5 text-sm text-ink focus:outline-none"
+            className="max-h-24 min-h-[36px] flex-1 resize-none bg-transparent px-1 py-1.5 text-sm text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1 focus-visible:ring-offset-surface"
           />
           {streaming ? (
             <Button variant="secondary" className="!h-9 !w-9 !min-w-0 !rounded-full !p-0" onClick={stop}>

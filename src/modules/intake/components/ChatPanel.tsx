@@ -255,7 +255,7 @@ export function ChatPanel({
             }
             disabled={inputBlocked}
             rows={1}
-            className="composer-textarea flex-1 min-w-0 max-h-[168px] resize-none bg-transparent py-3.5 pr-1 text-[15px] leading-6 text-ink placeholder:text-ink/35 focus:outline-none disabled:cursor-not-allowed"
+            className="composer-textarea flex-1 min-w-0 max-h-[168px] resize-none bg-transparent py-3.5 pr-1 text-[15px] leading-6 text-ink placeholder:text-ink/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1 focus-visible:ring-offset-surface disabled:cursor-not-allowed"
           />
 
           {isAiThinking && onStopStreaming ? (

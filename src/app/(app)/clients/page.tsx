@@ -110,7 +110,7 @@ export default function ClientsPage() {
                   <td className="px-6 py-4 text-right">
                     <Link
                       href={`/clients/${client.uid}`}
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:underline"
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:underline py-1.5 -my-1.5"
                     >
                       View Profile
                       <HiExternalLink className="w-3.5 h-3.5" />

@@ -188,7 +188,7 @@ export function ProcessingLogModal({ isOpen, onClose, documentUid, fileName }: P
                     {activeAttempt.rowErrors.length > 20 && !showAllErrors && (
                       <button
                         onClick={() => setShowAllErrors(true)}
-                        className="text-xs font-bold text-primary hover:underline text-center w-full mt-1 cursor-pointer"
+                        className="text-xs font-bold text-primary hover:underline py-1.5 -my-1.5 text-center w-full mt-1 cursor-pointer"
                       >
                         View all {activeAttempt.rowErrors.length} errors
                       </button>

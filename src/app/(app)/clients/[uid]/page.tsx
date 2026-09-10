@@ -280,7 +280,7 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
             <h2 className="text-sm font-bold text-ink">Portal Logins</h2>
             <button
               onClick={() => setIsInviteModalOpen(true)}
-              className="text-xs font-bold text-primary hover:underline flex items-center gap-1 transition-colors"
+              className="text-xs font-bold text-primary hover:underline py-1.5 -my-1.5 flex items-center gap-1 transition-colors"
             >
               <HiPlus className="w-3.5 h-3.5" />
               Invite
