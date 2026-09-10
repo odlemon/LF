@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useCallback } from "react";
 import * as api from "@/lib/api/modules/firm.api";
+import { currentFirmUid } from "@/lib/auth/currentFirm";
 import {
   Firm,
   PracticeArea,
@@ -21,13 +22,25 @@ import {
   ApprovalStageDefinition,
 } from "../types";
 
-export function useFirmDetails(uid: string = "firm_acme_123") {
+/**
+ * @param explicitUid a firm other than the caller's own. Defaults to the signed-in user's firm,
+ *   which used to be a hardcoded "firm_acme_123" — a uid from before the platform had more than
+ *   one firm. Settings > Firm therefore asked for a firm that does not exist and rendered "Firm
+ *   not found" on every deployment.
+ */
+export function useFirmDetails(explicitUid?: string) {
+  const uid = explicitUid ?? currentFirmUid();
   const [firm, setFirm] = useState<Firm | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   const fetchFirm = useCallback(async () => {
     await Promise.resolve();
+    if (!uid) {
+      setError("No firm is associated with this session.");
+      setIsLoading(false);
+      return;
+    }
     setIsLoading(true);
     setError(null);
     try {
@@ -41,6 +54,10 @@ export function useFirmDetails(uid: string = "firm_acme_123") {
   }, [uid]);
 
   const updateFirm = useCallback(async (data: Partial<Firm>) => {
+    if (!uid) {
+      setError("No firm is associated with this session.");
+      return;
+    }
     setIsLoading(true);
     setError(null);
     try {
