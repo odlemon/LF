@@ -100,7 +100,11 @@ export default function VolumeDiscountsPage() {
 
   const formatDate = (date: string) => {
     if (!date) return "—";
-    return new Date(date + "T00:00:00").toLocaleDateString("en-GB", {
+    // Tolerate both a plain date and a full timestamp; appending a time to a timestamp
+    // renders "Invalid Date".
+    const parsed = new Date(date.includes("T") ? date : date + "T00:00:00");
+    if (Number.isNaN(parsed.getTime())) return "—";
+    return parsed.toLocaleDateString("en-GB", {
       day: "numeric",
       month: "short",
       year: "numeric",

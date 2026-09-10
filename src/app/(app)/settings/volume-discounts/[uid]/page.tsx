@@ -141,9 +141,13 @@ export default function VolumeDiscountDetailPage() {
     }
   };
 
+  // Spend dates arrive as a plain date and need a time before they parse consistently;
+  // a tier crossing arrives as a full timestamp and must not have one appended.
   const formatDate = (date: string) => {
     if (!date) return "—";
-    return new Date(date + "T00:00:00").toLocaleDateString("en-GB", {
+    const parsed = new Date(date.includes("T") ? date : date + "T00:00:00");
+    if (Number.isNaN(parsed.getTime())) return "—";
+    return parsed.toLocaleDateString("en-GB", {
       day: "numeric",
       month: "short",
       year: "numeric",
