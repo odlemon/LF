@@ -187,7 +187,9 @@ export default function MatterLearningsPage() {
         </div>
       </header>
 
-      <div className="flex flex-col gap-3 rounded-2xl border border-border bg-surface p-3 sm:flex-row sm:items-center">
+      {/* Stacks until lg, not sm: with the sidebar open at ~800px the three controls shared about
+          550px and the search field collapsed to the width of its own icon. */}
+      <div className="flex flex-col gap-3 rounded-2xl border border-border bg-surface p-3 lg:flex-row lg:items-center">
         <div className="relative min-w-0 flex-1">
           <HiOutlineSearch className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink/35" />
           <input
@@ -199,7 +201,7 @@ export default function MatterLearningsPage() {
             className="w-full rounded-full border border-border bg-canvas py-2.5 pl-11 pr-4 text-sm text-ink placeholder-ink/35 transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
           />
         </div>
-        <div className="grid grid-cols-1 gap-3 sm:w-auto sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:w-[27rem] lg:shrink-0">
           <Select
             value={practiceArea}
             onChange={setPracticeArea}
