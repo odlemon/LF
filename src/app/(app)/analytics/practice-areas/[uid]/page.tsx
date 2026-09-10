@@ -297,7 +297,7 @@ export default function PracticeAreaDeepDivePage() {
                         <td className="px-6 py-3.5">
                           <Link
                             href={`/clients/${client.clientProfileUid}`}
-                            className="font-semibold text-ink hover:text-primary transition-colors"
+                            className="inline-flex items-center py-1.5 -my-1.5 rounded font-semibold text-ink hover:text-primary transition-colors"
                           >
                             {client.clientName ?? client.clientProfileUid}
                           </Link>
@@ -383,7 +383,7 @@ export default function PracticeAreaDeepDivePage() {
                           {matter.source === "NEGOTIATION" ? (
                             <Link
                               href={`/negotiations/${matter.uid}`}
-                              className="font-semibold text-ink hover:text-primary transition-colors"
+                              className="inline-flex items-center py-1.5 -my-1.5 rounded font-semibold text-ink hover:text-primary transition-colors"
                             >
                               {matter.title}
                             </Link>
