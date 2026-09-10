@@ -22,14 +22,18 @@ export default function ClientDiscountStatusPage() {
         const data = await volumeDiscountApi.listPortalPrograms();
         if (!isActive) return;
         setPrograms(data);
+        setLoading(false);
+
+        // Fetched together, not one after another: a client on a slow connection should not
+        // wait through one round trip per programme before seeing any of their own figures.
+        const results = await Promise.allSettled(
+          data.map((p) => volumeDiscountApi.getPortalDashboard(p.uid)),
+        );
         const dashboardMap: Record<string, VolumeDiscountDashboard> = {};
-        for (const p of data) {
-          try {
-            dashboardMap[p.uid] = await volumeDiscountApi.getPortalDashboard(p.uid);
-          } catch {
-            // dashboard may fail for inactive programs
-          }
-        }
+        results.forEach((result, i) => {
+          // A dashboard can legitimately fail for an inactive programme.
+          if (result.status === "fulfilled") dashboardMap[data[i].uid] = result.value;
+        });
         if (isActive) {
           setDashboards(dashboardMap);
         }

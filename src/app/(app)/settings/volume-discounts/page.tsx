@@ -29,16 +29,21 @@ export default function VolumeDiscountsPage() {
     try {
       const data = await volumeDiscountApi.listPrograms();
       setPrograms(data);
-      const dashboardMap: Record<string, VolumeDiscountDashboard> = {};
-      for (const p of data) {
-        try {
-          dashboardMap[p.uid] = await volumeDiscountApi.getDashboard(p.uid);
-        } catch {
-          // dashboard may fail for draft programs
-        }
-      }
-      setDashboards(dashboardMap);
       setError(null);
+      // Show the table as soon as the programmes are known. Each row's spend figures arrive
+      // after, together, rather than the whole page waiting on one request per programme in
+      // turn — which grew with the number of programmes and left the page blank meanwhile.
+      setIsLoading(false);
+
+      const results = await Promise.allSettled(
+        data.map((p) => volumeDiscountApi.getDashboard(p.uid)),
+      );
+      const dashboardMap: Record<string, VolumeDiscountDashboard> = {};
+      results.forEach((result, i) => {
+        // A dashboard can legitimately fail for a draft programme; the row still belongs here.
+        if (result.status === "fulfilled") dashboardMap[data[i].uid] = result.value;
+      });
+      setDashboards(dashboardMap);
     } catch (err: any) {
       setError(err.response?.data?.message || err.message || "Failed to load programs");
     } finally {
