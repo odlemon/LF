@@ -161,7 +161,7 @@ export default function PracticeAreaDeepDivePage() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               <div>
                 <p className="text-xs font-semibold text-ink/50">Average achieved margin</p>
-                <p className={`text-lg font-bold tabular-nums mt-1 ${metrics.marginVsTargetPts != null && metrics.marginVsTargetPts < 0 ? "text-red-600" : "text-ink"}`}>
+                <p className={`text-lg font-bold tabular-nums mt-1 ${metrics.marginVsTargetPts != null && metrics.marginVsTargetPts < 0 ? "text-red-600" : "text-ink"} dark:text-red-400`}>
                   {formatPct(metrics.avgMarginPct)}
                 </p>
               </div>
@@ -231,7 +231,7 @@ export default function PracticeAreaDeepDivePage() {
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
                   <div>
                     <p className="text-xs font-semibold text-ink/50">Compliant rate lines</p>
-                    <p className={`text-lg font-bold tabular-nums mt-1 ${compliance.compliantPct < 100 ? "text-amber-600" : "text-emerald-600"}`}>
+                    <p className={`text-lg font-bold tabular-nums mt-1 ${compliance.compliantPct < 100 ? "text-amber-600" : "text-emerald-600"} dark:text-amber-400`}>
                       {formatPct(compliance.compliantPct)}
                     </p>
                   </div>
@@ -392,7 +392,7 @@ export default function PracticeAreaDeepDivePage() {
                           )}
                           {matter.marginPct < 10 && (
                             <span
-                              className="ml-2 inline-flex items-center gap-1 text-[10px] font-bold text-red-600"
+                              className="ml-2 inline-flex items-center gap-1 text-[10px] font-bold text-red-600 dark:text-red-400"
                               title="Low margin matter"
                             >
                               <HiExclamation className="w-3 h-3" />

@@ -55,7 +55,7 @@ function Change({
   }
   const good = goodWhenUp ? rounded > 0 : rounded < 0;
   return (
-    <span className={`text-[11px] tabular-nums ${good ? "text-emerald-700" : "text-amber-700"}`}>
+    <span className={`text-[11px] tabular-nums ${good ? "text-emerald-700" : "text-amber-700"} dark:text-emerald-400`}>
       {rounded > 0 ? "+" : ""}
       {rounded}
       {suffix}

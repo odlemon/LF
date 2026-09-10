@@ -69,7 +69,7 @@ export function EntitlementBar({ consumed, entitlement, usagePct, overage }: Pro
             />
           </div>
           {overage > 0 && (
-            <p className="mt-3 text-sm text-red-600">
+            <p className="mt-3 text-sm text-red-600 dark:text-red-400">
               {overage.toLocaleString(undefined, { maximumFractionDigits: 3 })} credits over
               entitlement. Work is never blocked — this is carried to your next invoice.
             </p>

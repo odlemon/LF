@@ -230,7 +230,7 @@ export default function VolumeDiscountsPage() {
                           <td className="px-6 py-4 text-xs text-ink/70">
                             {dashboard?.currentTierName || "—"}
                           </td>
-                          <td className="px-6 py-4 tabular-nums text-emerald-700 font-medium">
+                          <td className="px-6 py-4 tabular-nums text-emerald-700 font-medium dark:text-emerald-400">
                             {dashboard ? formatMoney(dashboard.savingsToDate, program.currency) : "—"}
                           </td>
                           <td className="px-6 py-4 text-right">

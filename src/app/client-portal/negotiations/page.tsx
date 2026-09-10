@@ -133,7 +133,7 @@ export default function PortalNegotiationsPage() {
           </div>
         ) : error ? (
           <div className="rounded-[1.25rem] border border-red-200/70 bg-red-50/40 px-5 py-10 text-center">
-            <p className="text-sm text-red-800">{error}</p>
+            <p className="text-sm text-red-800 dark:text-red-400">{error}</p>
             <Button variant="secondary" className="mt-3" onClick={() => void load()}>
               Retry
             </Button>

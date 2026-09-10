@@ -91,7 +91,7 @@ export function SendToClientModal({
         </div>
 
         {!canSend && (
-          <p className="mt-4 text-xs text-red-600">
+          <p className="mt-4 text-xs text-red-600 dark:text-red-400">
             This pricing request has no client linked. Fix the request before
             sending.
           </p>

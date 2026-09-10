@@ -243,7 +243,7 @@ export default function VolumeDiscountDetailPage() {
         </div>
         <div className="bg-surface border border-border/70 rounded-2xl p-5">
           <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/35">Savings to Date</p>
-          <p className="mt-2 text-2xl font-semibold tabular-nums text-emerald-700">
+          <p className="mt-2 text-2xl font-semibold tabular-nums text-emerald-700 dark:text-emerald-400">
             {formatMoney(dashboard.savingsToDate, program.currency)}
           </p>
         </div>

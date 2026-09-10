@@ -241,7 +241,7 @@ export default function FileStoragePage() {
               ) : error ? (
                 <tr>
                   <td colSpan={7} className="px-5 py-12 text-center">
-                    <div className="flex flex-col items-center gap-2 text-red-600">
+                    <div className="flex flex-col items-center gap-2 text-red-600 dark:text-red-400">
                       <HiExclamation className="w-6 h-6" />
                       <span className="text-sm font-bold">{error}</span>
                       <button

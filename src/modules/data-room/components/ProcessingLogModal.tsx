@@ -89,7 +89,7 @@ export function ProcessingLogModal({ isOpen, onClose, documentUid, fileName }: P
                   </div>
                   <div className="bg-field/50 border border-border rounded-2xl p-4 text-center">
                     <span className="text-[10px] font-bold text-ink/40 uppercase tracking-wider block mb-1">Rows Failed</span>
-                    <span className={`text-base font-extrabold ${activeAttempt.rowsFailed > 0 ? "text-red-600" : "text-ink"}`}>
+                    <span className={`text-base font-extrabold ${activeAttempt.rowsFailed > 0 ? "text-red-600" : "text-ink"} dark:text-red-400`}>
                       {activeAttempt.rowsFailed}
                     </span>
                   </div>
@@ -161,15 +161,15 @@ export function ProcessingLogModal({ isOpen, onClose, documentUid, fileName }: P
                 {/* Row Errors Breakdown (limit to 20 errors initially) */}
                 {activeAttempt.rowErrors && activeAttempt.rowErrors.length > 0 && (
                   <div className="flex flex-col gap-2">
-                    <span className="text-xs font-bold text-ink/55 uppercase tracking-wider text-red-700">
+                    <span className="text-xs font-bold text-ink/55 uppercase tracking-wider text-red-700 dark:text-red-400">
                       Row Error Logs ({activeAttempt.rowErrors.length} errors)
                     </span>
                     <div className="border border-red-100 rounded-2xl overflow-hidden bg-surface shadow-sm max-h-56 overflow-y-auto rates-scrollable pr-1">
                       <table className="min-w-full divide-y divide-red-50 text-[11px]">
                         <thead className="bg-red-50/30">
                           <tr>
-                            <th className="px-4 py-2 text-left font-bold text-red-800 uppercase tracking-wider w-16">Row</th>
-                            <th className="px-4 py-2 text-left font-bold text-red-800 uppercase tracking-wider">Diagnostic Reason</th>
+                            <th className="px-4 py-2 text-left font-bold text-red-800 uppercase tracking-wider w-16 dark:text-red-400">Row</th>
+                            <th className="px-4 py-2 text-left font-bold text-red-800 uppercase tracking-wider dark:text-red-400">Diagnostic Reason</th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-red-50 font-semibold text-gray-700">
@@ -178,7 +178,7 @@ export function ProcessingLogModal({ isOpen, onClose, documentUid, fileName }: P
                             : activeAttempt.rowErrors.slice(0, 20)
                           ).map((err, i) => (
                             <tr key={i}>
-                              <td className="px-4 py-2 text-red-700 font-bold">#{err.rowNumber}</td>
+                              <td className="px-4 py-2 text-red-700 font-bold dark:text-red-400">#{err.rowNumber}</td>
                               <td className="px-4 py-2 break-all">{err.errorMessage}</td>
                             </tr>
                           ))}

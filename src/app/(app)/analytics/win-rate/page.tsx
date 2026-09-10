@@ -39,8 +39,8 @@ function WinRateTable({ rows, labelFor }: { rows: WinRateRow[]; labelFor?: (v: s
               <td className="px-6 py-3.5 font-semibold text-ink">
                 {labelFor ? labelFor(row.dimensionValue) : row.dimensionValue}
               </td>
-              <td className="px-6 py-3.5 tabular-nums text-emerald-700 font-medium">{row.wins}</td>
-              <td className="px-6 py-3.5 tabular-nums text-red-600 font-medium">{row.losses}</td>
+              <td className="px-6 py-3.5 tabular-nums text-emerald-700 font-medium dark:text-emerald-400">{row.wins}</td>
+              <td className="px-6 py-3.5 tabular-nums text-red-600 font-medium dark:text-red-400">{row.losses}</td>
               <td className="px-6 py-3.5 tabular-nums font-bold text-ink">{formatPct(row.winRatePct)}</td>
               <td className="px-6 py-3.5 tabular-nums text-ink/80">{formatRounds(row.avgRoundsToClose)}</td>
               <td className="px-6 py-3.5 tabular-nums text-ink/80">{formatDays(row.avgDaysToClose)}</td>

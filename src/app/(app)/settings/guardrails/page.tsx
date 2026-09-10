@@ -129,7 +129,7 @@ export default function GuardrailsPage() {
                 }}
                 className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold text-amber-700 bg-amber-50 hover:bg-amber-100 border border-amber-200/40 transition-all cursor-pointer select-none"
               >
-                <HiLockOpen className="w-3.5 h-3.5 text-amber-600" />
+                <HiLockOpen className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
                 <span>Settings Unlocked</span>
               </button>
             )}
@@ -235,7 +235,7 @@ export default function GuardrailsPage() {
                 </div>
                 
                 <div className="p-3.5 bg-amber-50/20 border border-amber-100 rounded-2xl flex flex-col gap-1">
-                  <span className="text-[9px] font-extrabold text-amber-700 bg-amber-55 self-start px-2 py-0.5 rounded-lg uppercase tracking-wider">
+                  <span className="text-[9px] font-extrabold text-amber-700 bg-amber-55 self-start px-2 py-0.5 rounded-lg uppercase tracking-wider dark:text-amber-400">
                     Partner Sign-Off
                   </span>
                   <span className="text-[13px] font-extrabold text-ink mt-1">{discountAutoMaxPct}% to {discountPartnerMaxPct}%</span>
@@ -326,7 +326,7 @@ export default function GuardrailsPage() {
               <div className="p-4 bg-red-50/40 border border-red-100/60 rounded-2xl flex gap-3">
                 <HiXCircle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
                 <div className="flex flex-col gap-0.5">
-                  <span className="text-[10px] font-extrabold text-red-800 uppercase tracking-wide">Auto-Reject Zone</span>
+                  <span className="text-[10px] font-extrabold text-red-800 uppercase tracking-wide dark:text-red-400">Auto-Reject Zone</span>
                   <span className="text-xs font-bold text-ink mt-0.5">Margins 0% to {rejectLimit}%</span>
                   <span className="text-[10px] text-ink/55 mt-0.5 leading-normal">
                     Matter proposals falling below this minimum are automatically flagged as unprofitable and blocked.
@@ -338,7 +338,7 @@ export default function GuardrailsPage() {
               <div className="p-4 bg-amber-50/40 border border-amber-100/60 rounded-2xl flex gap-3">
                 <HiExclamation className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
                 <div className="flex flex-col gap-0.5">
-                  <span className="text-[10px] font-extrabold text-amber-800 uppercase tracking-wide">Partner Oversight Zone</span>
+                  <span className="text-[10px] font-extrabold text-amber-800 uppercase tracking-wide dark:text-amber-400">Partner Oversight Zone</span>
                   <span className="text-xs font-bold text-ink mt-0.5">Margins {rejectLimit}% to {warningLimit}%</span>
                   <span className="text-[10px] text-ink/55 mt-0.5 leading-normal">
                     Bids trigger partner-level margin validation and review warnings before matter onboarding.

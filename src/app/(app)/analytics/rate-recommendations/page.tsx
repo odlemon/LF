@@ -112,7 +112,7 @@ export default function RateRecommendationsPage() {
                       <span className="tabular-nums font-bold text-ink">{formatRate(rec.recommendedRate)}</span>
                       {delta != null && Math.abs(delta) >= 0.05 && (
                         <span
-                          className={`ml-2 text-[10px] font-bold ${delta > 0 ? "text-emerald-700" : "text-red-600"}`}
+                          className={`ml-2 text-[10px] font-bold ${delta > 0 ? "text-emerald-700" : "text-red-600"} dark:text-emerald-400`}
                         >
                           {delta > 0 ? "+" : ""}
                           {delta.toFixed(1)}%

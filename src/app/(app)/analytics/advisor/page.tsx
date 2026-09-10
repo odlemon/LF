@@ -32,7 +32,7 @@ function ToolBubble({ bubble }: { bubble: AdvisorBubble }) {
         {bubble.toolStatus === "running" ? (
           <HiCog className="w-3.5 h-3.5 text-ink/50 animate-spin" />
         ) : bubble.toolStatus === "success" ? (
-          <HiCheckCircle className="w-3.5 h-3.5 text-emerald-600" />
+          <HiCheckCircle className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
         ) : (
           <HiXCircle className="w-3.5 h-3.5 text-red-500" />
         )}

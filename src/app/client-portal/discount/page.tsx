@@ -175,7 +175,7 @@ export default function ClientDiscountStatusPage() {
                     <div className="pt-2 border-t border-border/50">
                       <p className="text-xs text-ink/55">
                         Savings to date:{" "}
-                        <span className="font-semibold text-emerald-700">
+                        <span className="font-semibold text-emerald-700 dark:text-emerald-400">
                           {formatMoney(dashboard.savingsToDate, program.currency)}
                         </span>
                       </p>

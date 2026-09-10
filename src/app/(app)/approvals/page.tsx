@@ -191,7 +191,7 @@ export default function ApprovalsPage() {
             ))}
           </div>
         ) : error ? (
-          <p className="text-sm text-red-600">{error}</p>
+          <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
         ) : items.length === 0 ? (
           <div className="rounded-2xl border border-border/70 bg-surface px-6 py-14 text-center">
             <p className="text-sm font-semibold text-ink/70">{emptyCopy.title}</p>

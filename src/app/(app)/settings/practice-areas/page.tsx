@@ -132,7 +132,7 @@ export default function PracticeAreasPage() {
                 {area.active ? (
                   confirmDeactivateUid === area.uid ? (
                     <div className="flex items-center gap-2 animate-fade-in">
-                      <span className="text-xs font-medium text-red-600">Are you sure?</span>
+                      <span className="text-xs font-medium text-red-600 dark:text-red-400">Are you sure?</span>
                       <button
                         onClick={() => handleDeactivate(area.uid)}
                         className="p-1 text-ink/70 hover:bg-hover rounded transition-colors"
@@ -149,7 +149,7 @@ export default function PracticeAreasPage() {
                   ) : (
                     <button
                       onClick={() => setConfirmDeactivateUid(area.uid)}
-                      className="text-xs font-semibold text-red-600 hover:text-red-800 transition-colors py-1.5 -my-1.5 rounded"
+                      className="text-xs font-semibold text-red-600 hover:text-red-800 transition-colors py-1.5 -my-1.5 rounded dark:text-red-400"
                     >
                       Deactivate
                     </button>

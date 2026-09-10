@@ -493,7 +493,7 @@ export default function PricingRequestWorkspacePage() {
   if (error || !request) {
     return (
       <div className="p-8">
-        <p className="text-red-600 text-sm font-medium">{error ?? "Request not found"}</p>
+        <p className="text-red-600 text-sm font-medium dark:text-red-400">{error ?? "Request not found"}</p>
         <Button variant="secondary" className="mt-4" onClick={() => router.push("/pricing-requests")}>
           Back to list
         </Button>

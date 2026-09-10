@@ -19,7 +19,7 @@ export function MustChangePasswordBanner() {
           <HiOutlineKey className="mt-0.5 h-4 w-4 shrink-0" />
           <div>
             <p className="text-sm font-semibold">Update your password</p>
-            <p className="text-xs text-amber-900/70">
+            <p className="text-xs text-amber-900/70 dark:text-amber-400">
               Your account still uses a temporary password. Set a new one to keep this workspace secure.
             </p>
           </div>

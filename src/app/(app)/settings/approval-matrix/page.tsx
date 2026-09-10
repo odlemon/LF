@@ -142,7 +142,7 @@ export default function ApprovalMatrixPage() {
                     <button
                       type="button"
                       onClick={() => removeStage(index)}
-                      className="p-2 text-ink/40 hover:text-red-600 hover:bg-hover rounded-full transition-all"
+                      className="p-2 text-ink/40 hover:text-red-600 hover:bg-hover rounded-full transition-all dark:text-red-400"
                       aria-label="Remove stage"
                     >
                       <HiTrash className="w-4 h-4" />

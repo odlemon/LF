@@ -514,7 +514,7 @@ export function RecordsBrowser() {
                         <td className="px-5 py-4">{new Date(rec.invoiceDate).toLocaleDateString()}</td>
                         <td className="px-5 py-4 text-ink">{formatCurrency(rec.totalAmount)}</td>
                         <td className="px-5 py-4 text-ink/70">{formatCurrency(rec.paidAmount)}</td>
-                        <td className="px-5 py-4 text-red-600">{formatCurrency(rec.outstandingAmount)}</td>
+                        <td className="px-5 py-4 text-red-600 dark:text-red-400">{formatCurrency(rec.outstandingAmount)}</td>
                         <td className="px-5 py-4">
                           <span
                             className={`inline-flex px-2 py-0.5 rounded-full border text-[10px] font-bold ${

@@ -45,7 +45,7 @@ export function RecentTransactions({
       </div>
       {error ? (
         <div className="rounded-[1.5rem] border border-border/60 bg-surface p-6 text-center shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
-          <p className="text-sm font-medium text-red-600">{error}</p>
+          <p className="text-sm font-medium text-red-600 dark:text-red-400">{error}</p>
           <button
             onClick={load}
             className="mt-3 text-xs font-semibold text-ink/60 underline underline-offset-4 hover:text-ink py-1.5"

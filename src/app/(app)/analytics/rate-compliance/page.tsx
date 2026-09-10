@@ -81,13 +81,13 @@ export default function RateCompliancePage() {
                 </div>
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-wider text-ink/40">Compliant</p>
-                  <p className="mt-1 text-lg font-bold tabular-nums text-emerald-700">
+                  <p className="mt-1 text-lg font-bold tabular-nums text-emerald-700 dark:text-emerald-400">
                     {formatNumber(compliance.compliantCount)}
                   </p>
                 </div>
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-wider text-ink/40">Non-compliant</p>
-                  <p className="mt-1 text-lg font-bold tabular-nums text-red-600">
+                  <p className="mt-1 text-lg font-bold tabular-nums text-red-600 dark:text-red-400">
                     {formatNumber(compliance.nonCompliantCount)}
                   </p>
                 </div>
@@ -142,13 +142,13 @@ export default function RateCompliancePage() {
                           <td className="px-6 py-3.5 tabular-nums text-ink/80">
                             {formatNumber(level.lineCount)}
                           </td>
-                          <td className="px-6 py-3.5 tabular-nums text-emerald-700 font-medium">
+                          <td className="px-6 py-3.5 tabular-nums text-emerald-700 font-medium dark:text-emerald-400">
                             {formatNumber(level.compliantCount)}
                           </td>
-                          <td className={`px-6 py-3.5 tabular-nums ${level.belowCardCount > 0 ? "text-red-600 font-bold" : "text-ink/50"}`}>
+                          <td className={`px-6 py-3.5 tabular-nums ${level.belowCardCount > 0 ? "text-red-600 font-bold" : "text-ink/50"} dark:text-red-400`}>
                             {formatNumber(level.belowCardCount)}
                           </td>
-                          <td className={`px-6 py-3.5 tabular-nums ${level.aboveCardCount > 0 ? "text-amber-600 font-bold" : "text-ink/50"}`}>
+                          <td className={`px-6 py-3.5 tabular-nums ${level.aboveCardCount > 0 ? "text-amber-600 font-bold" : "text-ink/50"} dark:text-amber-400`}>
                             {formatNumber(level.aboveCardCount)}
                           </td>
                           <td className="px-6 py-3.5 tabular-nums text-ink/80">

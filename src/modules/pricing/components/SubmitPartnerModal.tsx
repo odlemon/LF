@@ -71,7 +71,7 @@ export function SubmitPartnerModal({
           {loadingList ? (
             <div className="h-10 rounded-xl border border-border bg-field animate-pulse" />
           ) : loadError ? (
-            <p className="text-xs text-red-600">{loadError}</p>
+            <p className="text-xs text-red-600 dark:text-red-400">{loadError}</p>
           ) : approvers.length === 0 ? (
             <p className="text-xs text-ink/50 leading-relaxed">
               No partners or admins found for this firm. Assign the PARTNER
