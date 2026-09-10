@@ -9,7 +9,7 @@ import { HiArrowRight, HiEye, HiEyeOff, HiOutlineShieldCheck } from "react-icons
 import { getPublicApiBase } from "@/lib/api/baseUrl";
 
 const fieldClass =
-  "w-full rounded-full border border-black/[0.1] bg-[#f7f7f5] px-5 py-[0.95rem] text-[15px] text-[#0a0a0a] placeholder:text-[#0a0a0a]/28 outline-none transition-all duration-200 focus:border-[#0a0a0a]/40 focus:bg-white focus:shadow-[0_0_0_4px_rgba(10,10,10,0.045)] disabled:opacity-60";
+  "w-full rounded-full border border-black/[0.1] bg-[#f7f7f5] px-5 py-[0.95rem] text-[15px] text-[#0a0a0a] placeholder:text-[#0a0a0a]/28 outline-none transition-all duration-200 focus-visible:ring-4 focus-visible:ring-[#0a0a0a]/15 focus-visible:border-[#0a0a0a] disabled:opacity-60";
 
 function LoginForm() {
   const { login } = useAuth();

@@ -42,7 +42,7 @@ function ClientLoginForm() {
   };
 
   const field =
-    "w-full rounded-2xl border border-black/[0.08] bg-[#f6f6f3] px-5 py-[0.95rem] text-[15px] text-[#0a0a0a] placeholder:text-[#0a0a0a]/30 outline-none transition-all duration-200 focus:border-[#0a0a0a]/30 focus:bg-white focus:ring-4 focus:ring-black/[0.04] disabled:opacity-60";
+    "w-full rounded-2xl border border-black/[0.08] bg-[#f6f6f3] px-5 py-[0.95rem] text-[15px] text-[#0a0a0a] placeholder:text-[#0a0a0a]/30 outline-none transition-all duration-200 focus-visible:ring-4 focus-visible:ring-[#0a0a0a]/15 focus-visible:border-[#0a0a0a] focus:bg-white focus:ring-4 focus:ring-black/[0.04] disabled:opacity-60";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5" noValidate>

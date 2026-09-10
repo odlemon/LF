@@ -202,7 +202,7 @@ export function ContactPageContent() {
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="mt-2 w-full border-0 border-b border-black/15 bg-transparent px-0 py-3 text-[15px] outline-none focus:border-[#0a0a0a] transition-colors placeholder:text-[#0a0a0a]/25"
+                    className="mt-2 w-full border-0 border-b border-black/15 bg-transparent px-0 py-3 text-[15px] outline-none focus-visible:ring-4 focus-visible:ring-[#0a0a0a]/15 focus-visible:border-[#0a0a0a] transition-colors placeholder:text-[#0a0a0a]/25"
                     placeholder="Your name"
                   />
                 </label>
@@ -215,7 +215,7 @@ export function ContactPageContent() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="mt-2 w-full border-0 border-b border-black/15 bg-transparent px-0 py-3 text-[15px] outline-none focus:border-[#0a0a0a] transition-colors placeholder:text-[#0a0a0a]/25"
+                    className="mt-2 w-full border-0 border-b border-black/15 bg-transparent px-0 py-3 text-[15px] outline-none focus-visible:ring-4 focus-visible:ring-[#0a0a0a]/15 focus-visible:border-[#0a0a0a] transition-colors placeholder:text-[#0a0a0a]/25"
                     placeholder="you@firm.com"
                   />
                 </label>
@@ -228,7 +228,7 @@ export function ContactPageContent() {
                 <input
                   value={firm}
                   onChange={(e) => setFirm(e.target.value)}
-                  className="mt-2 w-full border-0 border-b border-black/15 bg-transparent px-0 py-3 text-[15px] outline-none focus:border-[#0a0a0a] transition-colors placeholder:text-[#0a0a0a]/25"
+                  className="mt-2 w-full border-0 border-b border-black/15 bg-transparent px-0 py-3 text-[15px] outline-none focus-visible:ring-4 focus-visible:ring-[#0a0a0a]/15 focus-visible:border-[#0a0a0a] transition-colors placeholder:text-[#0a0a0a]/25"
                   placeholder="Optional"
                 />
               </label>
@@ -242,7 +242,7 @@ export function ContactPageContent() {
                   rows={4}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="mt-2 w-full resize-y border-0 border-b border-black/15 bg-transparent px-0 py-3 text-[15px] outline-none focus:border-[#0a0a0a] transition-colors placeholder:text-[#0a0a0a]/25"
+                  className="mt-2 w-full resize-y border-0 border-b border-black/15 bg-transparent px-0 py-3 text-[15px] outline-none focus-visible:ring-4 focus-visible:ring-[#0a0a0a]/15 focus-visible:border-[#0a0a0a] transition-colors placeholder:text-[#0a0a0a]/25"
                   placeholder="What should we know?"
                 />
               </label>
