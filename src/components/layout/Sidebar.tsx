@@ -200,11 +200,13 @@ export function Sidebar({ isMobileOpen = false, onMobileClose }: SidebarProps = 
         <Link href="/dashboard" className="inline-flex items-center shrink-0" aria-label="Lysp home" onClick={onMobileClose}>
           <PlatformLogo size={40} />
         </Link>
+        {/* Rendered 17px tall, under the 24x24 WCAG 2.2 AA target size and awkward to hit on a
+            phone. Padded to a real target without changing how it looks. */}
         {!isPartnerOnly && !isCollapsed && (
           <Link
             href="/settings/firm"
             onClick={onMobileClose}
-            className="text-[11px] font-semibold text-ink/45 hover:text-ink shrink-0"
+            className="inline-flex shrink-0 items-center rounded-lg px-2 py-1.5 text-[11px] font-semibold text-ink/45 transition-colors hover:bg-hover hover:text-ink"
           >
             Firm
           </Link>
