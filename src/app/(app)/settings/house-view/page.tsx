@@ -217,12 +217,18 @@ export default function MatterLearningsPage() {
         </div>
       </div>
 
+      {/* Hidden while loading: the count is derived from state that is still empty, so it
+          announced "0 positions" over a list of skeletons. */}
       <div className="flex flex-wrap items-center gap-2 text-[12px] text-ink/50">
+        {loading ? (
+          <span className="h-4 w-40 animate-pulse rounded bg-field" />
+        ) : (
         <span>
           {visible.length} {visible.length === 1 ? "position" : "positions"}
           {filtered && items.length !== visible.length ? ` of ${items.length}` : ""}
         </span>
-        {!filtered && (
+        )}
+        {!loading && !filtered && (
           <>
             <span className="text-ink/30">·</span>
             <span>
@@ -232,7 +238,7 @@ export default function MatterLearningsPage() {
             </span>
           </>
         )}
-        {filtered && (
+        {!loading && filtered && (
           <button
             type="button"
             onClick={clearFilters}
