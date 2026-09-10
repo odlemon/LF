@@ -110,8 +110,11 @@ export function HouseViewCitation({ requestUid }: { requestUid: string }) {
           />
         </button>
 
+        {/* Capped and scrollable: three closed-negotiation write-ups run to several hundred words
+            each, and expanded at full height they pushed the conversation this band is supposed
+            to explain off the screen. */}
         {open && (
-          <div className="flex flex-col gap-2.5 px-4 pb-4 sm:px-6">
+          <div className="flex max-h-[45vh] flex-col gap-2.5 overflow-y-auto px-4 pb-4 sm:px-6">
             {positions.map((p) => (
               <article key={p.uid} className="rounded-2xl border border-border bg-surface p-4">
                 <div className="flex items-start gap-2.5">
