@@ -65,7 +65,7 @@ export function ConfidenceBreakdown({
           e.stopPropagation();
           setOpen((v) => !v);
         }}
-        className={`inline-flex items-center gap-1 rounded-md transition-colors ${
+        className={`inline-flex items-center gap-1 rounded-md py-1 -my-1 transition-colors ${
           compact ? "text-[11px] font-medium" : "text-sm font-semibold"
         } ${triggerTone}`}
       >
