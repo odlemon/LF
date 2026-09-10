@@ -206,7 +206,7 @@ export default function DatasetDetailPage() {
                 </span>
               )}
             </div>
-            <span className="text-xs font-semibold text-gray-500">({documents.length} files)</span>
+            <span className="text-xs font-semibold text-ink/60">({documents.length} files)</span>
           </div>
 
           <div className="bg-surface border border-border/60 rounded-3xl overflow-hidden shadow-sm">

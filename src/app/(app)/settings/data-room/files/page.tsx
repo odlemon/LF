@@ -301,7 +301,7 @@ export default function FileStoragePage() {
                     <td className="px-5 py-4 text-ink/65">{formatFileSize(file.fileSize)}</td>
                     <td className="px-5 py-4">{getStatusBadge(file.status)}</td>
                     <td className="px-5 py-4 text-ink/65 whitespace-nowrap">{formatDate(file.uploadedAt)}</td>
-                    <td className="px-5 py-4 text-ink/65">{file.uploadedBy || <span className="text-gray-300">-</span>}</td>
+                    <td className="px-5 py-4 text-ink/65">{file.uploadedBy || <span className="text-ink/60">-</span>}</td>
                     <td className="px-5 py-4 text-right">
                       {confirmDeleteUid === file.uid ? (
                         <div className="flex gap-1.5 justify-end items-center">
