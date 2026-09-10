@@ -311,13 +311,17 @@ function AuditTrailContent() {
                             <span className="font-mono text-xs text-ink/55 shrink-0">
                               {event.entityUid.substring(0, 10)}...
                             </span>
+                            {/* These rendered at 22x22, which fails WCAG 2.2 AA target size
+                                (24x24 minimum) and is genuinely hard to hit on a phone. Sized
+                                to a real target; the icon inside stays small. */}
                             <button
                               type="button"
                               onClick={() => copyToClipboard(event.entityUid!, "Entity ID")}
-                              className="text-ink/40 hover:text-primary transition-colors p-1"
+                              className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-ink/40 transition-colors hover:bg-primary/5 hover:text-primary cursor-pointer"
                               title="Copy Full Entity ID"
+                              aria-label="Copy the full entity ID"
                             >
-                              <HiClipboardCopy className="w-3.5 h-3.5" />
+                              <HiClipboardCopy className="h-3.5 w-3.5" />
                             </button>
                           </div>
                         ) : (
@@ -328,10 +332,11 @@ function AuditTrailContent() {
                         <button
                           type="button"
                           onClick={() => openDetails(event)}
-                          className="p-1.5 text-ink/55 hover:text-primary hover:bg-primary/5 rounded-lg transition-all"
+                          className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-ink/55 transition-all hover:bg-primary/5 hover:text-primary cursor-pointer"
                           title="View Log Details"
+                          aria-label="View this audit entry in full"
                         >
-                          <HiEye className="w-4 h-4" />
+                          <HiEye className="h-4 w-4" />
                         </button>
                       </td>
                     </tr>
