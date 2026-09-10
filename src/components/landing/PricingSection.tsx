@@ -303,12 +303,12 @@ export function PricingSection() {
                         setMatters(clamp(Number(e.target.value), MATTERS_MIN, MATTERS_MAX))
                       }
                       className="absolute inset-0 w-full h-2 appearance-none bg-transparent cursor-pointer
-                        [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-[22px] [&::-webkit-slider-thumb]:w-[22px]
+                        [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-[24px] [&::-webkit-slider-thumb]:w-[24px]
                         [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white
                         [&::-webkit-slider-thumb]:border [&::-webkit-slider-thumb]:border-black/10
                         [&::-webkit-slider-thumb]:shadow-[0_2px_8px_rgba(10,10,10,0.18),0_0_0_4px_rgba(10,10,10,0.04)]
                         [&::-webkit-slider-thumb]:relative [&::-webkit-slider-thumb]:z-10
-                        [&::-moz-range-thumb]:h-[22px] [&::-moz-range-thumb]:w-[22px] [&::-moz-range-thumb]:rounded-full
+                        [&::-moz-range-thumb]:h-[24px] [&::-moz-range-thumb]:w-[24px] [&::-moz-range-thumb]:rounded-full
                         [&::-moz-range-thumb]:border [&::-moz-range-thumb]:border-black/10 [&::-moz-range-thumb]:bg-white
                         [&::-moz-range-track]:bg-transparent"
                     />

@@ -112,7 +112,7 @@ export function FooterSection() {
               <ul className="mt-5 flex flex-col gap-3">
                 {col.links.map((link) => {
                   const className =
-                    "text-[14px] text-white/55 hover:text-white transition-colors cursor-pointer";
+                    "text-[14px] text-white/55 hover:text-white transition-colors cursor-pointer inline-block py-1.5 -my-1.5";
                   if ("external" in link && link.external) {
                     return (
                       <li key={link.label}>

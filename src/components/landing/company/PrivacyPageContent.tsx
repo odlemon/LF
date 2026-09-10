@@ -134,7 +134,7 @@ export function PrivacyPageContent() {
               <span className="mx-2 text-[#0a0a0a]/20">·</span>
               <Link
                 href="/security"
-                className="font-semibold text-[#0a0a0a]/55 hover:text-[#0a0a0a] transition-colors"
+                className="font-semibold text-[#0a0a0a]/55 hover:text-[#0a0a0a] transition-colors inline-block py-1.5 -my-1.5"
               >
                 Security controls
               </Link>
@@ -149,7 +149,7 @@ export function PrivacyPageContent() {
           <p className="text-[15px] sm:text-[17px] font-medium leading-relaxed text-white/75 text-balance">
             We do not sell personal information. Customer Data is not used to train shared models.
             Encryption, access control, and audit commitments are detailed on our{" "}
-            <Link href="/security" className="text-white underline underline-offset-4 decoration-white/30 hover:decoration-white/70">
+            <Link href="/security" className="text-white underline underline-offset-4 decoration-white/30 hover:decoration-white/70 inline-block py-1.5 -my-1.5">
               Security
             </Link>{" "}
             page.
