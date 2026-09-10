@@ -79,8 +79,10 @@ function StepDots({
   activeIndex: number;
   onSelect: (i: number) => void;
 }) {
+  // The dot is the mark, not the target: each button is a 24px box with the dot inside, so it
+  // can actually be tapped. The gap comes off the container so the dots stay where they were.
   return (
-    <div className="flex items-center gap-2" role="tablist" aria-label="Product steps">
+    <div className="flex items-center -mx-1.5" role="tablist" aria-label="Product steps">
       {USE_CASES.map((uc, i) => (
         <button
           key={uc.id}
@@ -89,12 +91,16 @@ function StepDots({
           aria-selected={i === activeIndex}
           aria-label={uc.label}
           onClick={() => onSelect(i)}
-          className={`h-1.5 rounded-full transition-all duration-300 ${
-            i === activeIndex
-              ? "w-8 bg-[#0a0a0a]"
-              : "w-1.5 bg-[#0a0a0a]/20 hover:bg-[#0a0a0a]/40"
-          }`}
-        />
+          className="group flex h-6 min-w-6 items-center justify-center px-1.5"
+        >
+          <span
+            className={`h-1.5 rounded-full transition-all duration-300 ${
+              i === activeIndex
+                ? "w-8 bg-[#0a0a0a]"
+                : "w-1.5 bg-[#0a0a0a]/20 group-hover:bg-[#0a0a0a]/40"
+            }`}
+          />
+        </button>
       ))}
     </div>
   );

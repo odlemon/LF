@@ -247,7 +247,7 @@ export default function CrossFirmUsagePage() {
                     </Button>
                     <button
                       onClick={() => setSelected(null)}
-                      className="text-sm text-ink/50 hover:text-ink"
+                      className="text-sm text-ink/50 hover:text-ink py-1.5 -my-1.5"
                     >
                       Close
                     </button>

@@ -332,23 +332,27 @@ export function PracticeAreasSection() {
               {active.label}
             </span>
           </p>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center -mx-1.5">
             {PRACTICES.map((p) => (
               <button
                 key={`dot-${p.id}`}
                 type="button"
                 aria-label={p.label}
                 onClick={() => setActiveId(p.id)}
-                className="h-1.5 rounded-full cursor-pointer"
-                style={{
-                  width: p.id === activeId ? "2rem" : "0.375rem",
-                  backgroundColor:
-                    p.id === activeId ? "#fefefc" : "rgba(255,255,255,0.25)",
-                  transition: reduceMotion
-                    ? undefined
-                    : `width 500ms ${EASE}, background-color 500ms ${EASE}`,
-                }}
-              />
+                className="flex h-6 min-w-6 cursor-pointer items-center justify-center px-1.5"
+              >
+                <span
+                  className="h-1.5 rounded-full"
+                  style={{
+                    width: p.id === activeId ? "2rem" : "0.375rem",
+                    backgroundColor:
+                      p.id === activeId ? "#fefefc" : "rgba(255,255,255,0.25)",
+                    transition: reduceMotion
+                      ? undefined
+                      : `width 500ms ${EASE}, background-color 500ms ${EASE}`,
+                  }}
+                />
+              </button>
             ))}
           </div>
         </div>

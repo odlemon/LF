@@ -93,7 +93,7 @@ export default function FirmAccountPage() {
             <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border/50 pt-5">
               <Link
                 href="/settings/preferences"
-                className="text-sm font-semibold text-ink underline-offset-2 hover:underline"
+                className="text-sm font-semibold text-ink underline-offset-2 hover:underline py-1.5 -my-1.5"
               >
                 Open settings
               </Link>

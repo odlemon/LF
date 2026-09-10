@@ -84,7 +84,7 @@ export default function FirmPreferencesPage() {
                     href="/negotiations"
                     className="rounded-2xl border border-border/70 bg-surface p-4 transition-colors hover:border-ink/20"
                   >
-                    <p className="text-sm font-semibold text-ink">Negotiations</p>
+                    <p className="text-sm font-semibold text-ink py-1.5 -my-1.5">Negotiations</p>
                     <p className="mt-1 text-xs leading-relaxed text-ink/45">
                       Live fee proposals and counters with your clients.
                     </p>
@@ -93,7 +93,7 @@ export default function FirmPreferencesPage() {
                     href="/approvals"
                     className="rounded-2xl border border-border/70 bg-surface p-4 transition-colors hover:border-ink/20"
                   >
-                    <p className="text-sm font-semibold text-ink">Approvals</p>
+                    <p className="text-sm font-semibold text-ink py-1.5 -my-1.5">Approvals</p>
                     <p className="mt-1 text-xs leading-relaxed text-ink/45">
                       Preferred scenarios waiting on your sign-off.
                     </p>
@@ -102,7 +102,7 @@ export default function FirmPreferencesPage() {
                     href="/clients"
                     className="rounded-2xl border border-border/70 bg-surface p-4 transition-colors hover:border-ink/20"
                   >
-                    <p className="text-sm font-semibold text-ink">Clients</p>
+                    <p className="text-sm font-semibold text-ink py-1.5 -my-1.5">Clients</p>
                     <p className="mt-1 text-xs leading-relaxed text-ink/45">
                       Relationship profiles tied to your book.
                     </p>
@@ -111,7 +111,7 @@ export default function FirmPreferencesPage() {
                     href="/account"
                     className="rounded-2xl border border-border/70 bg-field/80 p-4 transition-colors hover:border-ink/20"
                   >
-                    <p className="text-sm font-semibold text-ink">Profile</p>
+                    <p className="text-sm font-semibold text-ink py-1.5 -my-1.5">Profile</p>
                     <p className="mt-1 text-xs leading-relaxed text-ink/45">
                       Name, email, and how you appear in the firm.
                     </p>
@@ -123,7 +123,7 @@ export default function FirmPreferencesPage() {
                   href="/settings/firm"
                   className="rounded-2xl border border-border/70 bg-surface p-4 transition-colors hover:border-ink/20 sm:col-span-2"
                 >
-                  <p className="text-sm font-semibold text-ink">
+                  <p className="text-sm font-semibold text-ink py-1.5 -my-1.5">
                     Firm configuration
                   </p>
                   <p className="mt-1 text-xs leading-relaxed text-ink/45">

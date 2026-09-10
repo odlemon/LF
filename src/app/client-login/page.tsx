@@ -214,7 +214,7 @@ export default function ClientLoginPage() {
                 <p className="text-[13px] leading-relaxed text-[#0a0a0a]/45">
                   <Link
                     href="/client-login/forgot"
-                    className="font-semibold text-[#0a0a0a]/70 hover:text-[#0a0a0a] underline underline-offset-4"
+                    className="font-semibold text-[#0a0a0a]/70 hover:text-[#0a0a0a] underline underline-offset-4 inline-block py-1.5 -my-1.5"
                   >
                     Forgot your password?
                   </Link>

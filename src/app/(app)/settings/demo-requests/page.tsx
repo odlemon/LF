@@ -270,7 +270,7 @@ export default function DemoRequestsPage() {
                   href={`mailto:${selected.workEmail}?subject=${encodeURIComponent(
                     "Your Lysp demo"
                   )}`}
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-ink hover:underline"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-ink hover:underline py-1.5 -my-1.5"
                 >
                   <HiOutlineMail className="w-4 h-4" />
                   Reply to {selected.fullName}

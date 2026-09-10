@@ -300,7 +300,7 @@ export default function LoginPage() {
                 <p className="text-[13px] text-[#0a0a0a]/45 leading-relaxed">
                   <Link
                     href="/login/forgot"
-                    className="font-semibold text-[#0a0a0a]/70 hover:text-[#0a0a0a] underline underline-offset-4"
+                    className="font-semibold text-[#0a0a0a]/70 hover:text-[#0a0a0a] underline underline-offset-4 inline-block py-1.5 -my-1.5"
                   >
                     Forgot your password?
                   </Link>
@@ -321,7 +321,7 @@ export default function LoginPage() {
                       error on every visit to the sign-in page, for a link nobody had clicked. */}
                   <a
                     href="https://lysp.ai/contact"
-                    className="font-semibold text-[#0a0a0a] underline-offset-4 hover:underline"
+                    className="font-semibold text-[#0a0a0a] underline-offset-4 hover:underline inline-block py-1.5 -my-1.5"
                   >
                     Contact us
                   </a>
