@@ -114,7 +114,7 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
       <div>
         <Link
           href="/clients"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-ink/55 hover:text-ink transition-colors mb-4"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-ink/55 hover:text-ink transition-colors mb-4 py-1.5 -mt-1.5 rounded"
         >
           <HiArrowLeft className="w-3.5 h-3.5" />
           Back to Clients

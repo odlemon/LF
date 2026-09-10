@@ -132,7 +132,7 @@ export default function DatasetDetailPage() {
       <div>
         <Link
           href="/settings/data-room"
-          className="text-xs font-bold text-ink/40 hover:text-primary flex items-center gap-1 w-fit transition-colors"
+          className="text-xs font-bold text-ink/40 hover:text-primary flex items-center gap-1 w-fit transition-colors py-1.5 -my-1.5 rounded"
         >
           <HiArrowSmLeft className="w-4 h-4" /> Back to Data Room Overview
         </Link>
