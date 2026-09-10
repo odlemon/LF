@@ -1,224 +1,173 @@
 "use client";
 
 import React, { useState } from "react";
+import { HiOutlineExclamationCircle, HiPlus, HiRefresh } from "react-icons/hi";
 import { PermissionGate } from "@/components/shared/PermissionGate";
 import { Alert } from "@/components/ui/Alert";
-import { useAiProviders, useActiveProvider } from "@/modules/ai-config/hooks/useAiConfig";
-import { AiProvider, AiProviderConfig } from "@/modules/ai-config/types";
-import { ProviderCard } from "@/modules/ai-config/components/ProviderCard";
-import { AddEditKeyModal } from "@/modules/ai-config/components/AddEditKeyModal";
-import { TestConnectionModal } from "@/modules/ai-config/components/TestConnectionModal";
+import { Button } from "@/components/ui/Button";
+import { EmptyState } from "@/components/ui/EmptyState";
+import { useActiveProvider, useAiProviders } from "@/modules/ai-config/hooks/useAiConfig";
+import type { AiProviderConfig } from "@/modules/ai-config/types";
+import { ConnectDeploymentDrawer } from "@/modules/ai-config/components/ConnectDeploymentDrawer";
+import { DataHandlingPanel } from "@/modules/ai-config/components/DataHandlingPanel";
+import { DeploymentRow } from "@/modules/ai-config/components/DeploymentRow";
 import { ActivateConfirmModal } from "@/modules/ai-config/components/ActivateConfirmModal";
 import { RemoveConfirmModal } from "@/modules/ai-config/components/RemoveConfirmModal";
-import { HiCheckCircle, HiExclamation } from "react-icons/hi";
+import { TestConnectionModal } from "@/modules/ai-config/components/TestConnectionModal";
 
+/**
+ * Model deployments.
+ *
+ * This screen used to be four cards — Anthropic, OpenAI, Gemini, DeepSeek — each asking for that
+ * vendor's consumer API key. No firm of this size buys inference that way. They hold capacity in
+ * their own cloud tenant, in a region their clients have approved, under an agreement their
+ * general counsel has read, and they expect software to point at it.
+ *
+ * So the unit here is a deployment, not a vendor: where does inference run, under whose contract,
+ * and what leaves the building to get there. The vendor is a detail of the deployment.
+ */
 export default function AiConfigPage() {
   const { providers, isLoading: providersLoading, refetch: refetchProviders } = useAiProviders();
   const { activeProvider, isLoading: activeLoading, refetch: refetchActive } = useActiveProvider();
 
-  // Modals state
-  const [selectedProvider, setSelectedProvider] = useState<AiProvider>("ANTHROPIC");
-  const [addEditConfig, setAddEditConfig] = useState<AiProviderConfig | null>(null);
-  const [isAddEditOpen, setIsAddEditOpen] = useState(false);
+  const [connectOpen, setConnectOpen] = useState(false);
+  const [editing, setEditing] = useState<AiProviderConfig | null>(null);
 
   const [testConfig, setTestConfig] = useState<AiProviderConfig | null>(null);
-  const [isTestOpen, setIsTestOpen] = useState(false);
-
   const [activateConfig, setActivateConfig] = useState<AiProviderConfig | null>(null);
-  const [isActivateOpen, setIsActivateOpen] = useState(false);
-
   const [removeConfig, setRemoveConfig] = useState<AiProviderConfig | null>(null);
-  const [isRemoveOpen, setIsRemoveOpen] = useState(false);
 
-  const isGlobalLoading = providersLoading || activeLoading;
+  const loading = providersLoading || activeLoading;
 
-  const handleRefreshAll = () => {
+  const refreshAll = () => {
     refetchProviders();
     refetchActive();
   };
 
-  const handleAddKey = (provider: AiProvider) => {
-    setSelectedProvider(provider);
-    setAddEditConfig(null);
-    setIsAddEditOpen(true);
+  const connect = () => {
+    setEditing(null);
+    setConnectOpen(true);
   };
 
-  const handleEditKey = (provider: AiProvider, config: AiProviderConfig) => {
-    setSelectedProvider(provider);
-    setAddEditConfig(config);
-    setIsAddEditOpen(true);
+  const edit = (config: AiProviderConfig) => {
+    setEditing(config);
+    setConnectOpen(true);
   };
 
-  const handleTestConnection = (config: AiProviderConfig) => {
-    setTestConfig(config);
-    setIsTestOpen(true);
-  };
-
-  const handleActivateProvider = (config: AiProviderConfig) => {
-    setActivateConfig(config);
-    setIsActivateOpen(true);
-  };
-
-  const handleRemoveConfig = (config: AiProviderConfig) => {
-    setRemoveConfig(config);
-    setIsRemoveOpen(true);
-  };
-
-  const formatTestedDate = (dateStr: string | null) => {
-    if (!dateStr) return "";
-    try {
-      return new Date(dateStr).toLocaleString(undefined, {
-        month: "short",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-      });
-    } catch {
-      return dateStr;
-    }
-  };
-
-  const providerList: AiProvider[] = ["ANTHROPIC", "OPENAI", "GEMINI", "DEEPSEEK"];
+  // The active row first: it is the one answering every question anybody asks about this screen.
+  const ordered = [...providers].sort((a, b) => Number(b.active) - Number(a.active));
 
   return (
     <PermissionGate
       permission="AI_CONFIG_READ"
       fallback={
-        <div className="p-8 max-w-5xl w-full mx-auto">
+        <div className="mx-auto w-full max-w-5xl p-8">
           <Alert variant="error" message="You do not have permission to view AI configuration." />
         </div>
       }
     >
-      <div className="p-8 max-w-5xl w-full mx-auto flex flex-col gap-6">
-        {/* Page Header */}
-        <div>
-          <h1 className="text-2xl font-bold text-ink tracking-tight">AI Configuration</h1>
-          <p className="text-sm text-ink/55 mt-1">
-            Configure the AI provider that powers Lysp&apos;s pricing intelligence. Only one provider can be active at a time.
-          </p>
-        </div>
-
-        {/* Active Provider Banner */}
-        {isGlobalLoading ? (
-          <div className="h-[90px] bg-field rounded-2xl animate-pulse" />
-        ) : activeProvider ? (
-          <div className="bg-hover border border-border rounded-2xl p-5 flex items-center gap-4 animate-fade-in shadow-sm shadow-black/5">
-            <HiCheckCircle className="w-8 h-8 text-ink/70 shrink-0" />
-            <div className="flex-1 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
-              <div>
-                <h4 className="text-sm font-bold text-ink">
-                  Active Provider: {activeProvider.displayName}
-                </h4>
-                <p className="text-xs text-ink/80 font-semibold mt-0.5">
-                  Model: {activeProvider.modelName}
-                </p>
-              </div>
-              <div className="shrink-0">
-                {activeProvider.lastTestResult === "SUCCESS" ? (
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-lg text-[10px] font-bold bg-hover text-ink border border-border tracking-wide uppercase">
-                    Last tested: {formatTestedDate(activeProvider.lastTestedAt)}
-                  </span>
-                ) : activeProvider.lastTestResult === "FAILED" ? (
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-lg text-[10px] font-bold bg-red-100 text-red-800 border border-red-200 tracking-wide uppercase">
-                    Last test failed: {formatTestedDate(activeProvider.lastTestedAt)}
-                  </span>
-                ) : (
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-lg text-[10px] font-bold bg-canvas text-ink/55 border border-border tracking-wide uppercase">
-                    Not yet tested
-                  </span>
-                )}
-              </div>
-            </div>
+      <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 p-4 sm:p-8">
+        <header className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+          <div className="min-w-0">
+            <h1 className="text-2xl font-bold tracking-tight text-ink">AI configuration</h1>
+            <p className="mt-1 max-w-2xl text-sm leading-relaxed text-ink/55">
+              Where Lysp sends a pricing request to be reasoned about. Point it at your own Azure
+              OpenAI resource or private gateway and the matter text never leaves your tenant. One
+              deployment serves the firm at a time.
+            </p>
           </div>
-        ) : (
-          <div className="bg-yellow-50 border border-yellow-200 rounded-2xl p-5 flex items-start gap-4 animate-fade-in shadow-sm shadow-amber-500/5">
-            <HiExclamation className="w-5 h-5 text-yellow-600 shrink-0 mt-0.5" />
-            <div className="flex flex-col gap-0.5">
-              <h4 className="text-sm font-bold text-yellow-900">No active AI provider configured</h4>
-              <p className="text-xs text-yellow-700 font-semibold leading-relaxed">
-                Add a provider below and activate it before using any AI features.
+          <div className="flex shrink-0 items-center gap-2">
+            <Button variant="secondary" onClick={refreshAll}>
+              <HiRefresh className="h-4 w-4" />
+              Refresh
+            </Button>
+            <Button variant="primary" onClick={connect}>
+              <HiPlus className="h-4 w-4" />
+              Connect a deployment
+            </Button>
+          </div>
+        </header>
+
+        {!loading && !activeProvider && (
+          <div className="flex items-start gap-3 rounded-2xl border border-warning/30 bg-warning/5 p-5">
+            <HiOutlineExclamationCircle className="mt-0.5 h-5 w-5 shrink-0 text-warning" />
+            <div>
+              <h2 className="text-sm font-bold text-ink">No deployment in use</h2>
+              <p className="mt-0.5 text-[13px] leading-relaxed text-ink/60">
+                Every AI feature in Lysp is unavailable until one of the deployments below is
+                selected.
               </p>
             </div>
           </div>
         )}
 
-        {/* Providers Grid */}
-        {isGlobalLoading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-            <div className="h-44 bg-field rounded-2xl animate-pulse" />
-            <div className="h-44 bg-field rounded-2xl animate-pulse" />
-            <div className="h-44 bg-field rounded-2xl animate-pulse" />
-            <div className="h-44 bg-field rounded-2xl animate-pulse" />
+        {loading ? (
+          <div className="flex flex-col gap-3">
+            {[1, 2].map((i) => (
+              <div
+                key={i}
+                className="h-[104px] animate-pulse rounded-2xl border border-border bg-surface"
+              />
+            ))}
           </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-            {providerList.map((providerVal) => {
-              const config = providers.find((p) => p.provider === providerVal) || null;
-              const isActive = activeProvider ? activeProvider.provider === providerVal : false;
-
-              return (
-                <ProviderCard
-                  key={providerVal}
-                  provider={providerVal}
-                  config={config}
-                  isActive={isActive}
-                  onAdd={handleAddKey}
-                  onEdit={handleEditKey}
-                  onActivate={handleActivateProvider}
-                  onTest={handleTestConnection}
-                  onRemove={handleRemoveConfig}
-                />
-              );
-            })}
-          </div>
-        )}
-
-        {/* Modals */}
-        {isAddEditOpen && (
-          <AddEditKeyModal
-            isOpen={isAddEditOpen}
-            onClose={() => setIsAddEditOpen(false)}
-            provider={selectedProvider}
-            existingConfig={addEditConfig}
-            onSuccess={handleRefreshAll}
+        ) : ordered.length === 0 ? (
+          <EmptyState
+            title="No deployment connected"
+            description="Connect your Azure OpenAI resource, a gateway you operate, or — to get started quickly — Lysp's managed capacity."
           />
+        ) : (
+          <div className="flex flex-col gap-3">
+            {ordered.map((config) => (
+              <DeploymentRow
+                key={config.id}
+                config={config}
+                isActive={config.active}
+                onActivate={setActivateConfig}
+                onTest={setTestConfig}
+                onEdit={edit}
+                onRemove={setRemoveConfig}
+                busy={loading}
+              />
+            ))}
+          </div>
         )}
 
-        {isTestOpen && testConfig && (
+        {!loading && <DataHandlingPanel config={activeProvider ?? null} />}
+
+        <ConnectDeploymentDrawer
+          isOpen={connectOpen}
+          onClose={() => setConnectOpen(false)}
+          existing={editing}
+          onSaved={refreshAll}
+        />
+
+        {testConfig && (
           <TestConnectionModal
-            isOpen={isTestOpen}
+            isOpen
             onClose={() => {
-              setIsTestOpen(false);
               setTestConfig(null);
-              // Refresh to capture test outcome badge state updates
-              handleRefreshAll();
+              refreshAll();
             }}
             config={testConfig}
           />
         )}
 
-        {isActivateOpen && activateConfig && (
+        {activateConfig && (
           <ActivateConfirmModal
-            isOpen={isActivateOpen}
-            onClose={() => {
-              setIsActivateOpen(false);
-              setActivateConfig(null);
-            }}
+            isOpen
+            onClose={() => setActivateConfig(null)}
             config={activateConfig}
             activeConfig={activeProvider}
-            onSuccess={handleRefreshAll}
+            onSuccess={refreshAll}
           />
         )}
 
-        {isRemoveOpen && removeConfig && (
+        {removeConfig && (
           <RemoveConfirmModal
-            isOpen={isRemoveOpen}
-            onClose={() => {
-              setIsRemoveOpen(false);
-              setRemoveConfig(null);
-            }}
+            isOpen
+            onClose={() => setRemoveConfig(null)}
             config={removeConfig}
-            onSuccess={handleRefreshAll}
+            onSuccess={refreshAll}
           />
         )}
       </div>
