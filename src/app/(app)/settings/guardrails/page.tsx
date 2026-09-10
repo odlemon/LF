@@ -235,7 +235,7 @@ export default function GuardrailsPage() {
                 </div>
                 
                 <div className="p-3.5 bg-amber-50/20 border border-amber-100 rounded-2xl flex flex-col gap-1">
-                  <span className="text-[9px] font-extrabold text-amber-700 bg-amber-55 self-start px-2 py-0.5 rounded-lg uppercase tracking-wider dark:text-amber-400">
+                  <span className="text-[9px] font-extrabold text-amber-700 bg-amber-50 self-start px-2 py-0.5 rounded-lg uppercase tracking-wider">
                     Partner Sign-Off
                   </span>
                   <span className="text-[13px] font-extrabold text-ink mt-1">{discountAutoMaxPct}% to {discountPartnerMaxPct}%</span>
@@ -243,7 +243,7 @@ export default function GuardrailsPage() {
                 </div>
 
                 <div className="p-3.5 bg-purple-50/20 border border-purple-100 rounded-2xl flex flex-col gap-1">
-                  <span className="text-[9px] font-extrabold text-purple-700 bg-purple-55 self-start px-2 py-0.5 rounded-lg uppercase tracking-wider">
+                  <span className="text-[9px] font-extrabold text-purple-700 bg-purple-50 self-start px-2 py-0.5 rounded-lg uppercase tracking-wider">
                     Committee Review
                   </span>
                   <span className="text-[13px] font-extrabold text-ink mt-1">Above {discountPartnerMaxPct}%</span>
