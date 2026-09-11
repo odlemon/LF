@@ -37,11 +37,12 @@ export function useUsers() {
   const addUser = async (userData: UserInput) => {
     setIsLoading(true);
     try {
-      await usersApi.createUser(userData as unknown as Record<string, unknown>);
-      toast.success("User created successfully");
+      const { email, firstName, lastName, phoneNumber } = userData;
+      await usersApi.inviteUser({ email, firstName, lastName, phoneNumber });
+      toast.success(`Invitation sent to ${userData.email}`);
       await loadUsers();
     } catch (err: unknown) {
-      let msg = "Failed to create user";
+      let msg = "Failed to send invitation";
       const errorObj = err as Record<string, unknown>;
       if (errorObj && typeof errorObj === "object" && "response" in errorObj) {
         const responseObj = errorObj.response as Record<string, unknown>;

@@ -127,6 +127,7 @@ export const ENDPOINTS = {
   USERS: {
     LIST: "/api/v1/users",
     CREATE: "/api/v1/users",
+    INVITE: "/api/v1/users/invite",
     DETAIL: (uid: string) => `/api/v1/users/${uid}`,
     DEACTIVATE: (uid: string) => `/api/v1/users/${uid}/deactivate`,
     ASSIGN_ROLE: (userUid: string, roleUid: string) => `/api/v1/users/${userUid}/roles/${roleUid}`,

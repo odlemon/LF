@@ -25,7 +25,6 @@ interface UserFormState {
   firstName: string;
   lastName: string;
   phoneNumber: string;
-  password?: string;
 }
 
 export default function UsersPage() {
@@ -50,7 +49,6 @@ export default function UsersPage() {
     firstName: "",
     lastName: "",
     phoneNumber: "",
-    password: "",
   });
 
   const [isRoleModalOpen, setIsRoleModalOpen] = useState(false);
@@ -66,7 +64,6 @@ export default function UsersPage() {
       firstName: "",
       lastName: "",
       phoneNumber: "",
-      password: "",
     });
     setIsFormOpen(true);
   };
@@ -305,7 +302,7 @@ export default function UsersPage() {
             <div className="bg-surface rounded-2xl shadow-xl w-full max-w-xl max-h-[90vh] overflow-hidden flex flex-col border border-border/50">
               <div className="px-6 py-4.5 border-b border-border flex items-center justify-between">
                 <h3 className="text-lg font-semibold text-ink">
-                  {editingUserUid ? "Edit User Details" : "Create New User"}
+                  {editingUserUid ? "Edit User Details" : "Invite a New User"}
                 </h3>
                 <button
                   onClick={() => setIsFormOpen(false)}
@@ -374,19 +371,10 @@ export default function UsersPage() {
                 </div>
 
                 {!editingUserUid && (
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-ink/60 uppercase tracking-wider">
-                      Initial Password
-                    </label>
-                    <Input aria-label="Initial Password"
-                      type="password"
-                      required
-                      value={formState.password || ""}
-                      onChange={(e) =>
-                        setFormState({ ...formState, password: e.target.value })
-                      }
-                    />
-                  </div>
+                  <p className="text-[13px] leading-relaxed text-ink/60 bg-field/50 border border-border/50 rounded-xl px-4 py-3">
+                    They will get an email with a link to set their own password. Assign roles
+                    once they have accepted.
+                  </p>
                 )}
 
                 <div className="pt-4 border-t border-border flex items-center justify-end gap-3">
@@ -399,7 +387,7 @@ export default function UsersPage() {
                     Cancel
                   </Button>
                   <Button type="submit" variant="primary" loading={isSaving}>
-                    {editingUserUid ? "Save Changes" : "Create User"}
+                    {editingUserUid ? "Save Changes" : "Send Invitation"}
                   </Button>
                 </div>
               </form>

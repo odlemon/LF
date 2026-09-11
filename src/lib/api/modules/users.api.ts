@@ -17,6 +17,11 @@ export const usersApi = {
     return response.data;
   },
 
+  inviteUser: async (userData: Record<string, unknown>) => {
+    const response = await apiClient.post(ENDPOINTS.USERS.INVITE, userData);
+    return response.data;
+  },
+
   updateUser: async (uid: string, userData: Record<string, unknown>) => {
     const response = await apiClient.put(ENDPOINTS.USERS.DETAIL(uid), userData);
     return response.data;
