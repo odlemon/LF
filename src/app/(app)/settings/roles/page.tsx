@@ -210,6 +210,15 @@ export default function RolesPage() {
                       <div
                         key={role.uid}
                         onClick={() => handleSelectRole(role)}
+                        role="button"
+                        tabIndex={0}
+                        aria-pressed={isSelected}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            handleSelectRole(role);
+                          }
+                        }}
                         className={`bg-surface rounded-2xl p-5 border transition-all cursor-pointer flex items-start gap-4 relative overflow-hidden select-none group ${
                           isSelected
                             ? "border-primary shadow-md ring-2 ring-primary/5"
@@ -301,6 +310,15 @@ export default function RolesPage() {
                               <div
                                 key={perm.uid}
                                 onClick={() => handlePermissionToggle(perm.uid)}
+                                role="checkbox"
+                                aria-checked={isChecked}
+                                tabIndex={0}
+                                onKeyDown={(e) => {
+                                  if (e.key === "Enter" || e.key === " ") {
+                                    e.preventDefault();
+                                    handlePermissionToggle(perm.uid);
+                                  }
+                                }}
                                 className={`flex items-start justify-between gap-4 p-4.5 rounded-2xl border transition-all duration-200 cursor-pointer select-none group relative ${
                                   isChecked
                                     ? "bg-primary/[0.01] border-primary/80 shadow-sm"

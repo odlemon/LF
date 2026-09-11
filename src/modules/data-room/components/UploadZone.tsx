@@ -97,12 +97,28 @@ export function UploadZone({ onUpload, isUploading, progress }: UploadZoneProps)
 
   return (
     <div className="flex flex-col gap-4 w-full">
+      {/* Drag-and-drop has no keyboard equivalent by nature, and there is no separate
+          "Browse" button elsewhere in this component -- clicking here is the only way to
+          open the file picker, so it must also open on Enter/Space from the keyboard. */}
       <div
         onDragEnter={handleDrag}
         onDragOver={handleDrag}
         onDragLeave={handleDrag}
         onDrop={handleDrop}
         onClick={selectedFile ? undefined : triggerFileSelect}
+        role={selectedFile ? undefined : "button"}
+        tabIndex={selectedFile ? undefined : 0}
+        aria-label={selectedFile ? undefined : "Choose a file to upload"}
+        onKeyDown={
+          selectedFile
+            ? undefined
+            : (e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  triggerFileSelect();
+                }
+              }
+        }
         className={`border-2 border-dashed rounded-3xl p-8 flex flex-col items-center justify-center gap-4 transition-all duration-200 cursor-pointer select-none ${
           dragActive
             ? "border-primary bg-primary/5 shadow-md shadow-primary/10"

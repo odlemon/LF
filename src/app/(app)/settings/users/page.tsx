@@ -459,6 +459,15 @@ export default function UsersPage() {
                             <div
                               key={role.uid}
                               onClick={() => handleRoleToggle(role.uid, hasRole)}
+                              role="checkbox"
+                              aria-checked={hasRole}
+                              tabIndex={0}
+                              onKeyDown={(e) => {
+                                if (e.key === "Enter" || e.key === " ") {
+                                  e.preventDefault();
+                                  handleRoleToggle(role.uid, hasRole);
+                                }
+                              }}
                               className={`group flex items-center justify-between p-4 rounded-xl border transition-all duration-200 cursor-pointer ${
                                 hasRole
                                   ? "border-primary bg-primary/[0.02] shadow-sm"
