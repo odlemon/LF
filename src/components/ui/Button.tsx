@@ -14,6 +14,7 @@ export function Button({
   children,
   className = "",
   disabled,
+  type = "button",
   ...props
 }: ButtonProps) {
   // whitespace-nowrap: without it a two-word label ("Add Client", "New Request") wrapped
@@ -47,6 +48,7 @@ export function Button({
 
   return (
     <button
+      type={type}
       disabled={disabled || loading}
       className={`${baseStyles} ${variantStyles} ${className}`}
       {...props}
