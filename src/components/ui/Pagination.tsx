@@ -22,6 +22,7 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
       <div className="flex items-center gap-1.5">
         <button
           onClick={() => onPageChange(Math.max(0, currentPage - 1))}
+          aria-label="Previous page"
           disabled={currentPage === 0 || displayPages <= 1}
           type="button"
           className="p-2 border border-border/60 rounded-lg text-ink/60 hover:text-ink hover:bg-field disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent transition-all shrink-0 cursor-pointer select-none"
@@ -49,6 +50,7 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
 
         <button
           onClick={() => onPageChange(Math.min(displayPages - 1, currentPage + 1))}
+          aria-label="Next page"
           disabled={currentPage === displayPages - 1 || displayPages <= 1}
           type="button"
           className="p-2 border border-border/60 rounded-lg text-ink/60 hover:text-ink hover:bg-field disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent transition-all shrink-0 cursor-pointer select-none"

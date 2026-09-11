@@ -287,6 +287,7 @@ export function DatasetDetailDrawerContent({ datasetUid }: DatasetDetailDrawerCo
                                   </button>
                                   <button
                                     onClick={() => setConfirmDeleteUid(doc.uid)}
+                                    aria-label="Delete document"
                                     className="p-1 hover:bg-red-50 text-ink/60 hover:text-red-700 rounded-lg transition-colors cursor-pointer"
                                   >
                                     <HiTrash className="w-4 h-4" />

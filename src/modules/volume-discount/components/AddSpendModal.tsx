@@ -70,6 +70,7 @@ export function AddSpendModal({ isOpen, onClose, onSave, defaultCurrency = "GBP"
         <button
           type="button"
           onClick={onClose}
+          aria-label="Close"
           className="absolute top-4 right-4 text-ink/60 hover:text-ink/65 p-1 rounded-lg hover:bg-field transition-colors"
         >
           <HiX className="w-5 h-5" />

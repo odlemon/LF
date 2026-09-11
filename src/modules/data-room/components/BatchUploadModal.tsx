@@ -144,6 +144,7 @@ export function BatchUploadModal({ isOpen, onClose, onUpload }: BatchUploadModal
                   <button
                     disabled={isUploading}
                     onClick={() => removeFile(idx)}
+                    aria-label="Remove file"
                     type="button"
                     className="p-1 hover:bg-hover/50 rounded-lg text-ink/60 hover:text-red-500 cursor-pointer disabled:opacity-50"
                   >

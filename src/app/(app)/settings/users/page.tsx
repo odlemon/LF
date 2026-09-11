@@ -227,6 +227,7 @@ export default function UsersPage() {
                                 setActiveUserUid(user.uid);
                                 setIsRoleModalOpen(true);
                               }}
+                              aria-label="Manage roles"
                               className="inline-flex items-center justify-center p-1.5 text-ink/60 hover:text-primary hover:bg-primary/5 rounded-lg transition-all cursor-pointer"
                             >
                               <HiUserGroup className="w-4.5 h-4.5" />
@@ -235,6 +236,7 @@ export default function UsersPage() {
                           <PermissionGate permission={PERMISSIONS.USER_UPDATE}>
                             <button
                               onClick={() => openEditModal(user)}
+                              aria-label="Edit user"
                               className="inline-flex items-center justify-center p-1.5 text-ink/60 hover:text-primary hover:bg-primary/5 rounded-lg transition-all cursor-pointer"
                             >
                               <HiPencil className="w-4.5 h-4.5" />
@@ -307,6 +309,7 @@ export default function UsersPage() {
                 </h3>
                 <button
                   onClick={() => setIsFormOpen(false)}
+                  aria-label="Close"
                   className="text-ink/60 hover:text-ink/65 p-1 hover:bg-field rounded-full"
                 >
                   <HiX className="w-5 h-5" />
@@ -413,6 +416,7 @@ export default function UsersPage() {
                 </h3>
                 <button
                   onClick={() => setIsRoleModalOpen(false)}
+                  aria-label="Close"
                   className="text-ink/60 hover:text-ink/65 p-1 hover:bg-field rounded-full"
                 >
                   <HiX className="w-5 h-5" />

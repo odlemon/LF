@@ -211,6 +211,7 @@ export default function DatasetsIndexPage() {
                       ) : (
                         <button
                           onClick={() => setConfirmDeleteUid(dataset.uid)}
+                          aria-label="Delete dataset"
                           className="p-1.5 hover:bg-red-50 rounded-lg text-ink/60 hover:text-red-700 transition-colors"
                         >
                           <HiTrash className="w-4.5 h-4.5" />

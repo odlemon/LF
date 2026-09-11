@@ -39,7 +39,8 @@ export function Drawer({ isOpen, onClose, title, children, size = "xl" }: Drawer
 
   return (
     <div className="fixed inset-0 z-50 overflow-hidden flex justify-end">
-      {/* Overlay backdrop */}
+      {/* Overlay backdrop -- a plain div, never focusable or announced, so the accessible
+          name for dismissing this drawer belongs on the button below instead. */}
       <div
         className="fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-300 animate-fade-in"
         onClick={onClose}
@@ -57,6 +58,7 @@ export function Drawer({ isOpen, onClose, title, children, size = "xl" }: Drawer
           <button
             onClick={onClose}
             type="button"
+            aria-label={`Close ${title}`}
             className="p-2 text-ink/60 hover:text-ink/70 rounded-lg hover:bg-field transition-colors cursor-pointer"
           >
             <HiX className="w-5 h-5" />

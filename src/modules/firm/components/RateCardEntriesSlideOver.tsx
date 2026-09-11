@@ -92,6 +92,7 @@ export function RateCardEntriesSlideOver({
           </div>
           <button
             onClick={onClose}
+            aria-label="Close"
             className="p-2 text-ink/60 hover:text-ink/65 rounded-lg hover:bg-field transition-colors"
           >
             <HiX className="w-5 h-5" />
@@ -139,6 +140,7 @@ export function RateCardEntriesSlideOver({
                             <td className="px-4 py-3 text-center">
                               <button
                                 onClick={() => deleteEntry(entry.uid)}
+                                aria-label="Delete rate card entry"
                                 className="text-red-500 hover:text-red-700 p-1 rounded hover:bg-red-50 transition-colors"
                               >
                                 <HiTrash className="w-4 h-4" />

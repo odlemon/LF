@@ -187,6 +187,7 @@ export function DatePicker({
             <button
               type="button"
               onClick={handlePrevMonth}
+              aria-label="Previous month"
               className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-canvas text-ink/65 transition-colors cursor-pointer"
             >
               <HiChevronLeft className="w-4 h-4" />
@@ -197,6 +198,7 @@ export function DatePicker({
             <button
               type="button"
               onClick={handleNextMonth}
+              aria-label="Next month"
               className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-canvas text-ink/65 transition-colors cursor-pointer"
             >
               <HiChevronRight className="w-4 h-4" />

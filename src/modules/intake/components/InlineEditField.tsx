@@ -118,6 +118,7 @@ export function InlineEditField({
       <button
         type="button"
         onClick={save}
+        aria-label="Save"
         disabled={isSaving}
         className="p-1 text-ink/70 hover:bg-hover rounded"
       >
@@ -126,6 +127,7 @@ export function InlineEditField({
       <button
         type="button"
         onClick={cancel}
+        aria-label="Cancel"
         disabled={isSaving}
         className="p-1 text-ink/60 hover:bg-field rounded"
       >

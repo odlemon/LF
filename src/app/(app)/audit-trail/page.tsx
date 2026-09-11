@@ -388,6 +388,7 @@ function AuditTrailContent() {
                   <button
                     type="button"
                     onClick={() => copyToClipboard(selectedEvent.actorUid, "Actor UID")}
+                    aria-label="Copy actor UID"
                     className="text-ink/60 hover:text-primary transition-colors"
                   >
                     <HiClipboardCopy className="w-3.5 h-3.5" />
@@ -414,6 +415,7 @@ function AuditTrailContent() {
                     <button
                       type="button"
                       onClick={() => copyToClipboard(selectedEvent.entityUid!, "Entity UID")}
+                      aria-label="Copy entity UID"
                       className="text-ink/60 hover:text-primary transition-colors"
                     >
                       <HiClipboardCopy className="w-3.5 h-3.5" />

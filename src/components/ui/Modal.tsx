@@ -36,7 +36,8 @@ export function Modal({ isOpen, onClose, title, children, size = "lg" }: ModalPr
 
   return (
     <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in">
-      {/* Backdrop click dismisser */}
+      {/* Backdrop click dismisser -- a plain div, never focusable or announced, so the
+          accessible name for dismissing this modal belongs on the button below instead. */}
       <div className="absolute inset-0 cursor-default" onClick={onClose} />
 
       <div className={`bg-surface rounded-2xl ${widthClass} w-full shadow-2xl relative animate-fade-in-up border border-border/40 z-50 overflow-hidden flex flex-col max-h-[85vh]`}>
@@ -47,6 +48,7 @@ export function Modal({ isOpen, onClose, title, children, size = "lg" }: ModalPr
           <button
             onClick={onClose}
             type="button"
+            aria-label={`Close ${title}`}
             className="p-1.5 text-ink/60 hover:text-ink/70 rounded-lg hover:bg-field transition-colors cursor-pointer"
           >
             <HiX className="w-4.5 h-4.5" />

@@ -115,6 +115,7 @@ export default function SsoAdminPage() {
                     <td className="px-5 py-4 text-right">
                       <button
                         onClick={() => openEdit(p)}
+                        aria-label="Edit identity provider"
                         className="p-1.5 hover:bg-field rounded-lg text-ink/60 hover:text-ink/80 transition-colors"
                       >
                         <HiPencil className="w-4.5 h-4.5" />

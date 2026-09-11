@@ -372,6 +372,7 @@ export default function RolesPage() {
                 <button
                   type="button"
                   onClick={() => setIsCreateOpen(false)}
+                  aria-label="Close"
                   className="text-ink/60 hover:text-ink p-1 hover:bg-field rounded-full transition-colors cursor-pointer"
                 >
                   <HiX className="w-5 h-5" />

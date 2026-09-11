@@ -135,12 +135,14 @@ export default function PracticeAreasPage() {
                       <span className="text-xs font-medium text-red-600 dark:text-red-400">Are you sure?</span>
                       <button
                         onClick={() => handleDeactivate(area.uid)}
+                        aria-label="Confirm deactivation"
                         className="p-1 text-ink/70 hover:bg-hover rounded transition-colors"
                       >
                         <HiCheck className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => setConfirmDeactivateUid(null)}
+                        aria-label="Cancel deactivation"
                         className="p-1 text-ink/60 hover:bg-field rounded transition-colors"
                       >
                         <HiX className="w-4 h-4" />

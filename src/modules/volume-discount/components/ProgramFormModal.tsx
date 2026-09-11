@@ -94,6 +94,7 @@ export function ProgramFormModal({ isOpen, onClose, onSave, clients }: ProgramFo
         <button
           type="button"
           onClick={onClose}
+          aria-label="Close"
           className="absolute top-4 right-4 text-ink/60 hover:text-ink/65 p-1 rounded-lg hover:bg-field transition-colors"
         >
           <HiX className="w-5 h-5" />
@@ -204,6 +205,7 @@ export function ProgramFormModal({ isOpen, onClose, onSave, clients }: ProgramFo
                 <button
                   type="button"
                   onClick={() => removeTier(index)}
+                  aria-label="Remove tier"
                   disabled={tiers.length === 1}
                   className="p-2.5 rounded-full text-red-500 hover:bg-red-50 transition-colors disabled:opacity-30 disabled:hover:bg-transparent"
                 >
