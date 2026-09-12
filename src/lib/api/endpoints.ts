@@ -77,6 +77,9 @@ export const ENDPOINTS = {
       `/api/v1/pricing-requests/${uid}/scenarios/${scenarioUid}/return`,
     SCENARIO_COMPARABLES: (uid: string, scenarioUid: string) =>
       `/api/v1/pricing-requests/${uid}/scenarios/${scenarioUid}/comparables`,
+    CONFLICTS_CHECK: (uid: string) => `/api/v1/pricing-requests/${uid}/conflicts-check`,
+    CONFLICTS_CHECK_CLEAR: (uid: string) =>
+      `/api/v1/pricing-requests/${uid}/conflicts-check/clear`,
   },
   PRICING_APPROVERS: "/api/v1/pricing-approvers",
   PRICING_APPROVAL_PACK: (scenarioUid: string) =>
