@@ -1,18 +1,9 @@
 import React from "react";
 import Link from "next/link";
 import { HiOutlineArrowRight, HiOutlineChevronRight } from "react-icons/hi";
-import { PricingRequest, PricingRequestStatus } from "../types";
+import { PricingRequest } from "../types";
 import { IntakeStatusBadge } from "./IntakeStatusBadge";
 import { formatRelativeTime } from "@/lib/utils/format";
-
-/** Same hue family IntakeStatusBadge uses per status, as a quiet scan-down-the-list accent. */
-const STATUS_ACCENT: Record<PricingRequestStatus, string> = {
-  DRAFT: "bg-ink/15",
-  IN_PROGRESS: "bg-blue-400",
-  SCOPE_GENERATED: "bg-amber-400",
-  SCOPE_CONFIRMED: "bg-emerald-400",
-  CANCELLED: "bg-red-400",
-};
 
 interface PricingRequestCardProps {
   request: PricingRequest;
@@ -37,7 +28,7 @@ export function PricingRequestCard({ request, clientName, style }: PricingReques
     >
       <span
         aria-hidden="true"
-        className={`absolute inset-y-2.5 left-0 w-[3px] rounded-full transition-all group-hover:inset-y-1.5 ${STATUS_ACCENT[request.status]}`}
+        className="absolute inset-y-4 left-0 w-[3px] rounded-full bg-primary opacity-0 transition-all group-hover:inset-y-1.5 group-hover:opacity-100"
       />
 
       <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-semibold text-on-primary">

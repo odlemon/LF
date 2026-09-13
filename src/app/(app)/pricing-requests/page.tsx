@@ -35,13 +35,20 @@ function PricingRequestCardSkeleton() {
   );
 }
 
-/** Today / Yesterday / This week / Earlier — Linear-style recency grouping. */
+/**
+ * Today / Yesterday / This week / Earlier — Linear-style recency grouping.
+ * Mirrors formatRelativeTime's own elapsed-hours day count exactly (not a calendar-
+ * day-boundary calculation) so a row's own "Yesterday"/"3 days ago" text can never
+ * land in a section header that says something else.
+ */
 function recencyBucket(dateStr: string): string {
-  const startOfDay = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
-  const diffDays = Math.round((startOfDay(new Date()) - startOfDay(new Date(dateStr))) / 86400000);
-  if (diffDays <= 0) return "Today";
+  const diffMs = Date.now() - new Date(dateStr).getTime();
+  const diffMins = Math.floor(diffMs / 60000);
+  const diffHrs = Math.floor(diffMins / 60);
+  const diffDays = Math.floor(diffHrs / 24);
+  if (diffMs < 0 || diffDays < 1) return "Today";
   if (diffDays === 1) return "Yesterday";
-  if (diffDays <= 7) return "This week";
+  if (diffDays < 7) return "This week";
   return "Earlier";
 }
 
