@@ -167,7 +167,7 @@ export default function PortalNegotiationDetailPage() {
         <button
           type="button"
           onClick={() => router.push("/client-portal/negotiations")}
-          className="rounded-lg p-2 text-ink/60 hover:bg-hover hover:text-ink"
+          className="rounded-full p-2 text-ink/60 hover:bg-hover hover:text-ink"
           aria-label="Back"
         >
           <HiArrowLeft className="h-5 w-5" />
@@ -457,7 +457,7 @@ export default function PortalNegotiationDetailPage() {
                 onChange={(e) => setComment(e.target.value)}
                 rows={2}
                 placeholder="Note to the firm (optional)"
-                className="w-full resize-none rounded-xl border border-border bg-field px-3 py-2.5 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-primary/15"
+                className="w-full resize-none rounded-2xl border border-border bg-field px-3 py-2.5 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-primary/15"
               />
               <div className="flex flex-wrap justify-end gap-2">
                 <Button

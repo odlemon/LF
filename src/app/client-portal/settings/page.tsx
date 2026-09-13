@@ -124,7 +124,7 @@ export default function ClientSettingsPage() {
                 autoComplete="current-password"
                 value={currentPassword}
                 onChange={(e) => setCurrentPassword(e.target.value)}
-                className="h-11 w-full rounded-xl border border-border bg-field px-3.5 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-primary/15"
+                className="h-11 w-full rounded-full border border-border bg-field px-3.5 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-primary/15"
               />
             </label>
             <label className="block">
@@ -136,7 +136,7 @@ export default function ClientSettingsPage() {
                 autoComplete="new-password"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                className="h-11 w-full rounded-xl border border-border bg-field px-3.5 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-primary/15"
+                className="h-11 w-full rounded-full border border-border bg-field px-3.5 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-primary/15"
               />
             </label>
             <label className="block">
@@ -148,7 +148,7 @@ export default function ClientSettingsPage() {
                 autoComplete="new-password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="h-11 w-full rounded-xl border border-border bg-field px-3.5 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-primary/15"
+                className="h-11 w-full rounded-full border border-border bg-field px-3.5 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-primary/15"
               />
             </label>
             <Button

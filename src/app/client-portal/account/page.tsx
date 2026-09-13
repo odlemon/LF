@@ -105,7 +105,7 @@ export default function ClientAccountPage() {
               <input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="h-11 w-full rounded-xl border border-border bg-field px-3.5 text-sm font-semibold text-ink focus:outline-none focus:ring-2 focus:ring-primary/15"
+                className="h-11 w-full rounded-full border border-border bg-field px-3.5 text-sm font-semibold text-ink focus:outline-none focus:ring-2 focus:ring-primary/15"
                 maxLength={200}
               />
             </label>
