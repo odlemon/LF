@@ -5,6 +5,7 @@ import { useRoles } from "@/modules/roles/hooks/useRoles";
 import { PermissionGate } from "@/components/shared/PermissionGate";
 import { PERMISSIONS } from "@/lib/utils/permissions";
 import { Button } from "@/components/ui/Button";
+import { Badge } from "@/components/ui/Badge";
 import { Input, Textarea } from "@/components/ui/Input";
 import { 
   HiPlus, 
@@ -21,51 +22,53 @@ import {
 } from "react-icons/hi";
 import { Role } from "@/modules/roles/types";
 
-// Helper to determine premium role aesthetic details dynamically
+// Helper to determine premium role aesthetic details dynamically.
+// Colors are drawn from the same token/semantic palette as Badge (primary/warning/info),
+// never raw hues like purple/indigo/yellow that fall outside the design system.
 const getRoleIconAndColor = (roleName: string) => {
   const name = roleName.toLowerCase();
   if (name.includes("admin") || name.includes("owner")) {
     return {
       icon: HiShieldCheck,
-      bgColor: "bg-indigo-50 text-indigo-600 border-indigo-100",
-      activeBg: "bg-indigo-600 text-white shadow-lg shadow-indigo-200/40",
-      accentBg: "border-indigo-500",
-      glowingAccent: "bg-indigo-500/10 text-indigo-700 border-indigo-200"
+      bgColor: "bg-primary/10 text-primary border-primary/10",
+      activeBg: "bg-primary text-on-primary shadow-lg shadow-primary/20",
+      accentBg: "border-primary",
+      badgeVariant: "primary" as const,
     };
   }
   if (name.includes("audit") || name.includes("complia")) {
     return {
       icon: HiEye,
-      bgColor: "bg-amber-50 text-amber-700 border-amber-100",
-      activeBg: "bg-amber-500 text-white shadow-lg shadow-amber-200/40",
+      bgColor: "bg-amber-50 text-amber-700 border-amber-200",
+      activeBg: "bg-amber-600 text-on-primary shadow-lg shadow-amber-200/40",
       accentBg: "border-amber-500",
-      glowingAccent: "bg-amber-500/10 text-amber-700 border-amber-200"
+      badgeVariant: "warning" as const,
     };
   }
   if (name.includes("read") || name.includes("view") || name.includes("guest")) {
     return {
       icon: HiKey,
       bgColor: "bg-hover text-ink/70 border-border",
-      activeBg: "bg-black text-white shadow-lg shadow-black/5",
+      activeBg: "bg-primary text-on-primary shadow-lg shadow-primary/10",
       accentBg: "border-primary",
-      glowingAccent: "bg-primary/10 text-ink/80 border-border"
+      badgeVariant: "neutral" as const,
     };
   }
   if (name.includes("user") || name.includes("member") || name.includes("staff")) {
     return {
       icon: HiUsers,
-      bgColor: "bg-blue-50 text-blue-600 border-blue-100",
-      activeBg: "bg-blue-600 text-white shadow-lg shadow-blue-200/40",
+      bgColor: "bg-blue-50 text-blue-700 border-blue-100",
+      activeBg: "bg-blue-600 text-on-primary shadow-lg shadow-blue-200/40",
       accentBg: "border-blue-500",
-      glowingAccent: "bg-blue-500/10 text-blue-700 border-blue-200"
+      badgeVariant: "info" as const,
     };
   }
   return {
     icon: HiLockClosed,
-    bgColor: "bg-purple-50 text-purple-600 border-purple-100",
-    activeBg: "bg-purple-600 text-white shadow-lg shadow-purple-200/40",
-    accentBg: "border-purple-500",
-    glowingAccent: "bg-purple-500/10 text-purple-700 border-purple-200"
+    bgColor: "bg-primary/10 text-primary border-primary/10",
+    activeBg: "bg-primary text-on-primary shadow-lg shadow-primary/20",
+    accentBg: "border-primary",
+    badgeVariant: "primary" as const,
   };
 };
 
@@ -73,15 +76,15 @@ const getRoleIconAndColor = (roleName: string) => {
 const getPermissionBadge = (permUid: string) => {
   const uid = permUid.toLowerCase();
   if (uid.includes("delete") || uid.includes("remove") || uid.includes("deactivate")) {
-    return { label: "Danger", color: "bg-red-50 text-red-700 border-red-100" };
+    return { label: "Danger", variant: "error" as const };
   }
   if (uid.includes("create") || uid.includes("add") || uid.includes("write") || uid.includes("submit")) {
-    return { label: "Create", color: "bg-hover text-ink/80 border-border" };
+    return { label: "Create", variant: "neutral" as const };
   }
   if (uid.includes("update") || uid.includes("edit") || uid.includes("modify") || uid.includes("assign")) {
-    return { label: "Update", color: "bg-blue-50 text-blue-700 border-blue-100" };
+    return { label: "Update", variant: "info" as const };
   }
-  return { label: "Read", color: "bg-purple-50 text-purple-700 border-purple-100" };
+  return { label: "Read", variant: "primary" as const };
 };
 
 export default function RolesPage() {
@@ -222,7 +225,7 @@ export default function RolesPage() {
                         className={`bg-surface rounded-2xl p-5 border transition-all cursor-pointer flex items-start gap-4 relative overflow-hidden select-none group ${
                           isSelected
                             ? "border-primary shadow-md ring-2 ring-primary/5"
-                            : "border-border/60 hover:border-gray-300 shadow-sm"
+                            : "border-border/60 hover:border-ink/20 shadow-sm"
                         }`}
                       >
                         {/* Selected vertical stripe glow */}
@@ -245,11 +248,9 @@ export default function RolesPage() {
                             {role.description || "No specific description configured."}
                           </p>
                           <div className="flex items-center gap-1.5 mt-3.5">
-                            <span className={`inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold border transition-colors ${
-                              isSelected ? aesthetic.glowingAccent : "bg-field text-ink/60 border-border"
-                            }`}>
+                            <Badge variant={isSelected ? aesthetic.badgeVariant : "neutral"}>
                               {role.permissions?.length || 0} Operations Authorized
-                            </span>
+                            </Badge>
                           </div>
                         </div>
                       </div>
@@ -268,9 +269,7 @@ export default function RolesPage() {
                   <div className="flex items-start justify-between border-b border-border pb-5 gap-4">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-extrabold text-primary bg-primary/10 border border-primary/10 px-2 py-0.5 rounded-full uppercase tracking-wider">
-                          Active Role
-                        </span>
+                        <Badge variant="primary">Active Role</Badge>
                       </div>
                       <h3 className="text-lg font-bold text-ink mt-1.5">{activeRole.name}</h3>
                       <p className="text-xs text-ink/60 mt-1 leading-normal">
@@ -285,7 +284,7 @@ export default function RolesPage() {
                         className="inline-flex items-center whitespace-nowrap gap-1.5 px-4.5 py-2.5 bg-primary hover:bg-primary-hover text-on-primary rounded-full text-xs font-bold shadow-md shadow-primary/10 hover:shadow-lg transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed select-none shrink-0"
                       >
                         {isSavingPermissions ? (
-                          <div className="w-4 h-4 animate-spin rounded-full border-2 border-white/20 border-b-white" />
+                          <div className="w-4 h-4 animate-spin rounded-full border-2 border-on-primary/20 border-b-on-primary" />
                         ) : (
                           <HiSave className="w-4 h-4" />
                         )}
@@ -322,7 +321,7 @@ export default function RolesPage() {
                                 className={`flex items-start justify-between gap-4 p-4.5 rounded-2xl border transition-all duration-200 cursor-pointer select-none group relative ${
                                   isChecked
                                     ? "bg-primary/[0.01] border-primary/80 shadow-sm"
-                                    : "border-border hover:border-gray-300 bg-surface"
+                                    : "border-border hover:border-ink/20 bg-surface"
                                 }`}
                               >
                                 <div className="flex-1 pr-2">
@@ -330,9 +329,7 @@ export default function RolesPage() {
                                     <span className={`text-sm font-bold transition-colors ${isChecked ? "text-primary" : "text-ink"}`}>
                                       {perm.name}
                                     </span>
-                                    <span className={`inline-flex px-1.5 py-0.2 rounded text-[9px] font-extrabold border uppercase tracking-wider ${category.color}`}>
-                                      {category.label}
-                                    </span>
+                                    <Badge variant={category.variant}>{category.label}</Badge>
                                   </div>
                                   <span className="text-xs text-ink/60 mt-1.5 block leading-relaxed">
                                     {perm.description || "Grants platform operational clearance."}
@@ -440,7 +437,7 @@ export default function RolesPage() {
                     className="inline-flex items-center whitespace-nowrap gap-1.5 px-5 py-2 bg-primary hover:bg-primary-hover text-on-primary rounded-full text-xs font-bold shadow-md shadow-primary/10 hover:shadow-lg transition-all cursor-pointer disabled:opacity-50"
                   >
                     {isSaving && (
-                      <div className="w-3.5 h-3.5 animate-spin rounded-full border-2 border-white/20 border-b-white" />
+                      <div className="w-3.5 h-3.5 animate-spin rounded-full border-2 border-on-primary/20 border-b-on-primary" />
                     )}
                     {isSaving ? "Creating..." : "Confirm & Create"}
                   </button>

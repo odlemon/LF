@@ -6,6 +6,7 @@ import { useRoles } from "@/modules/roles/hooks/useRoles";
 import { PermissionGate } from "@/components/shared/PermissionGate";
 import { PERMISSIONS } from "@/lib/utils/permissions";
 import { Button } from "@/components/ui/Button";
+import { Badge } from "@/components/ui/Badge";
 import { Input } from "@/components/ui/Input";
 import { User } from "@/modules/users/types";
 import { useAuth } from "@/hooks/useAuth";
@@ -174,7 +175,7 @@ export default function UsersPage() {
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100">
+                <tbody className="divide-y divide-border/50">
                   {users.length === 0 ? (
                     <tr>
                       <td colSpan={5} className="px-6 py-12 text-center text-ink/60">
@@ -194,12 +195,9 @@ export default function UsersPage() {
                           <div className="flex flex-wrap gap-1.5">
                             {user.roles && user.roles.length > 0 ? (
                               user.roles.map((role) => (
-                                <span
-                                  key={role.uid}
-                                  className="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold bg-primary/10 text-primary border border-primary/10"
-                                >
+                                <Badge key={role.uid} variant="primary">
                                   {role.name}
-                                </span>
+                                </Badge>
                               ))
                             ) : (
                               <span className="text-xs text-ink/60 font-medium">No roles</span>
@@ -207,15 +205,9 @@ export default function UsersPage() {
                           </div>
                         </td>
                         <td className="px-6 py-4.5">
-                          <span
-                            className={`inline-flex items-center px-3 py-1 rounded-lg text-xs font-semibold ${
-                              user.active
-                                ? "bg-hover text-ink border border-border"
-                                : "bg-red-50 text-red-700 border border-red-100"
-                            }`}
-                          >
+                          <Badge variant={user.active ? "success" : "neutral"}>
                             {user.active ? "Active" : "Inactive"}
-                          </span>
+                          </Badge>
                         </td>
                         <td className="px-6 py-4.5 text-right space-x-2">
                           <PermissionGate permission={PERMISSIONS.ROLE_UPDATE}>
@@ -225,7 +217,7 @@ export default function UsersPage() {
                                 setIsRoleModalOpen(true);
                               }}
                               aria-label="Manage roles"
-                              className="inline-flex items-center justify-center p-1.5 text-ink/60 hover:text-primary hover:bg-primary/5 rounded-lg transition-all cursor-pointer"
+                              className="inline-flex items-center justify-center p-1.5 text-ink/60 hover:text-primary hover:bg-primary/5 rounded-full transition-all cursor-pointer"
                             >
                               <HiUserGroup className="w-4.5 h-4.5" />
                             </button>
@@ -234,7 +226,7 @@ export default function UsersPage() {
                             <button
                               onClick={() => openEditModal(user)}
                               aria-label="Edit user"
-                              className="inline-flex items-center justify-center p-1.5 text-ink/60 hover:text-primary hover:bg-primary/5 rounded-lg transition-all cursor-pointer"
+                              className="inline-flex items-center justify-center p-1.5 text-ink/60 hover:text-primary hover:bg-primary/5 rounded-full transition-all cursor-pointer"
                             >
                               <HiPencil className="w-4.5 h-4.5" />
                             </button>
@@ -247,19 +239,19 @@ export default function UsersPage() {
                                 }
                                 handleToggleDeactivation(user.uid);
                               }}
-                              className={`inline-flex items-center justify-center p-1.5 rounded-lg transition-all ${
+                              className={`inline-flex items-center justify-center p-1.5 rounded-full transition-all ${
                                 currentUser?.id === user.uid
-                                  ? "text-gray-300 cursor-not-allowed opacity-40"
+                                  ? "text-ink/30 cursor-not-allowed opacity-40"
                                   : "text-ink/60 hover:text-primary hover:bg-primary/5 cursor-pointer"
                               }`}
                               title={currentUser?.id === user.uid ? "Cannot deactivate own account" : undefined}
                             >
                               {processingUserUid === user.uid && processingAction === "deactivate" ? (
-                                <div className={`w-4.5 h-4.5 animate-spin rounded-full border-2 ${user.active ? "border-yellow-600/20 border-b-yellow-600" : "border-primary/20 border-b-primary"}`} />
+                                <div className={`w-4.5 h-4.5 animate-spin rounded-full border-2 ${user.active ? "border-amber-600/20 border-b-amber-600" : "border-primary/20 border-b-primary"}`} />
                               ) : user.active ? (
-                                <HiX className={`w-4.5 h-4.5 ${currentUser?.id === user.uid ? "text-gray-300" : "text-yellow-600"}`} />
+                                <HiX className={`w-4.5 h-4.5 ${currentUser?.id === user.uid ? "text-ink/30" : "text-amber-600"}`} />
                               ) : (
-                                <HiCheck className={`w-4.5 h-4.5 ${currentUser?.id === user.uid ? "text-gray-300" : "text-ink/70"}`} />
+                                <HiCheck className={`w-4.5 h-4.5 ${currentUser?.id === user.uid ? "text-ink/30" : "text-ink/70"}`} />
                               )}
                             </button>
                           </PermissionGate>
@@ -273,15 +265,15 @@ export default function UsersPage() {
                                 }
                                 handleRemoveUser(user.uid);
                               }}
-                              className={`inline-flex items-center justify-center p-1.5 rounded-lg transition-all ${
+                              className={`inline-flex items-center justify-center p-1.5 rounded-full transition-all ${
                                 currentUser?.id === user.uid
-                                  ? "text-gray-300 cursor-not-allowed opacity-40"
+                                  ? "text-ink/30 cursor-not-allowed opacity-40"
                                   : "text-ink/60 hover:text-red-700 hover:bg-red-50 cursor-pointer"
                               }`}
                               title={currentUser?.id === user.uid ? "Cannot delete own account" : undefined}
                             >
                               {processingUserUid === user.uid && processingAction === "delete" ? (
-                                <div className="w-4.5 h-4.5 animate-spin rounded-full border-2 border-red-200 border-b-red-650" />
+                                <div className="w-4.5 h-4.5 animate-spin rounded-full border-2 border-red-200 border-b-red-600" />
                               ) : (
                                 <HiTrash className="w-4.5 h-4.5" />
                               )}
@@ -459,7 +451,7 @@ export default function UsersPage() {
                               className={`group flex items-center justify-between p-4 rounded-xl border transition-all duration-200 cursor-pointer ${
                                 hasRole
                                   ? "border-primary bg-primary/[0.02] shadow-sm"
-                                  : "border-border/80 bg-surface hover:border-gray-300 hover:bg-field/30"
+                                  : "border-border/80 bg-surface hover:border-ink/20 hover:bg-field/30"
                               }`}
                             >
                               <div className="flex-1 pr-4">
@@ -472,8 +464,8 @@ export default function UsersPage() {
                               </div>
                               <div className={`w-5 h-5 rounded-md border flex items-center justify-center transition-all duration-200 shrink-0 ${
                                 hasRole
-                                  ? "bg-primary border-primary text-white"
-                                  : "border-gray-400 bg-surface group-hover:border-primary"
+                                  ? "bg-primary border-primary text-on-primary"
+                                  : "border-ink/30 bg-surface group-hover:border-primary"
                               }`}>
                                 {hasRole && <HiCheck className="w-3.5 h-3.5 stroke-[2.5]" />}
                               </div>
