@@ -20,7 +20,10 @@ export const metadata: Metadata = {
   // Without this, Next cannot turn the generated card's relative path into the absolute URL
   // that Open Graph requires, and every crawler silently drops the image.
   metadataBase: new URL(SITE_URL),
-  title: "Lysp - Pricing intelligence for elite law firms",
+  // A plain string still runs through the root layout's "%s | Lysp" template, so this must
+  // not repeat the brand name itself -- it previously did, producing "Lysp - Pricing
+  // intelligence for elite law firms | Lysp" in the tab.
+  title: "Pricing intelligence for elite law firms",
   description:
     "Pricing intelligence for elite law firms. Consolidate billing, rate, and matter data to improve realization and revenue predictability.",
   openGraph: {

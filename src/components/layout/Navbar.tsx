@@ -110,10 +110,14 @@ export function Navbar({ onMenuClick }: NavbarProps = {}) {
     const segments = pathname.split("/").filter(Boolean);
     if (segments.length === 0) return "Dashboard";
 
+    // A plain-letter route segment of 8+ characters (e.g. "preferences") satisfied the old
+    // alphanumeric-only checks below, so /settings/preferences read its parent's title as if
+    // "preferences" were a UID and singularized "Settings" to "Setting". Every real ID this
+    // app generates (TSIDs, UUID prefixes) mixes in a digit, so requiring one excludes plain
+    // words without excluding any real id.
     const looksLikeUid = (value: string) =>
-      /^[0-9A-Z]{10,}$/i.test(value) ||
       /^[0-9a-f]{8}-[0-9a-f]{4}-/i.test(value) ||
-      /^[0-9A-Z]{8,16}$/i.test(value);
+      (/^[0-9A-Z]{8,}$/i.test(value) && /\d/.test(value));
 
     const ROUTE_TITLES: Record<string, string> = {
       "pricing-requests": "Pricing Requests",

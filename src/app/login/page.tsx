@@ -163,6 +163,18 @@ function LoginForm() {
             Continue with SSO
             <HiArrowRight className="h-4 w-4" />
           </button>
+          {/*
+            An escape hatch, not the primary path: a firm's SSO domain can still have accounts
+            that sign in with a password (a break-glass admin, someone not yet enrolled), so
+            detecting a provider must not be a dead end into SSO with no way out.
+          */}
+          <button
+            type="button"
+            onClick={() => setStep("password")}
+            className="w-full text-center text-[13px] font-semibold text-[#0a0a0a]/60 hover:text-[#0a0a0a] transition-colors py-1.5 cursor-pointer"
+          >
+            Sign in with a password instead
+          </button>
         </div>
       )}
 

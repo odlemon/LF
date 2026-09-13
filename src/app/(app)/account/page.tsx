@@ -50,7 +50,7 @@ export default function FirmAccountPage() {
                   {roles.map((role) => (
                     <span
                       key={role}
-                      className="rounded-md border border-border bg-field px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-ink/60"
+                      className="rounded-full border border-border bg-field px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-ink/60"
                     >
                       {role.replace(/_/g, " ")}
                     </span>
