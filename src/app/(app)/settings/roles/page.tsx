@@ -228,7 +228,7 @@ export default function RolesPage() {
                             handleSelectRole(role);
                           }
                         }}
-                        className={`bg-surface rounded-2xl p-5 border transition-all cursor-pointer flex items-start gap-4 relative overflow-hidden select-none group ${
+                        className={`bg-surface rounded-2xl p-5 border transition-all cursor-pointer flex items-start gap-4 relative overflow-hidden select-none group shrink-0 ${
                           isSelected
                             ? "border-primary shadow-md ring-2 ring-primary/5"
                             : "border-border/60 hover:border-ink/20 shadow-sm"
@@ -302,7 +302,7 @@ export default function RolesPage() {
                   {/* Core checklist items nested by module */}
                   <div className="flex flex-col gap-6 overflow-y-auto pr-1 rates-scrollable max-h-[50vh]">
                     {Object.entries(permissionsByModule).map(([moduleName, modulePerms]) => (
-                      <div key={moduleName} className="flex flex-col gap-3">
+                      <div key={moduleName} className="flex flex-col gap-3 shrink-0">
                         <h5 className="text-[10px] font-extrabold text-ink/60 uppercase tracking-widest px-1">
                           {moduleName} Module Controls
                         </h5>
