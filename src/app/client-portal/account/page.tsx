@@ -47,9 +47,9 @@ export default function ClientAccountPage() {
               {user?.contactName}
             </h2>
             <p className="mt-0.5 text-sm text-ink/60">{user?.clientName}</p>
-            <p className="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-ink/60">
+            <span className="mt-1.5 inline-block rounded-full border border-border bg-field px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-ink/60">
               {user?.roleLabel || "Client representative"}
-            </p>
+            </span>
           </div>
         </section>
 
