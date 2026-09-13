@@ -23,21 +23,13 @@ const TABS: { id: ListFilterTab; label: string }[] = [
 
 function PricingRequestCardSkeleton() {
   return (
-    <div className="flex flex-col gap-4 rounded-2xl border border-border/60 bg-surface p-5 shadow-sm animate-pulse">
-      <div className="flex items-start justify-between gap-3">
-        <div className="h-5 w-2/3 rounded-md bg-field" />
-        <div className="h-6 w-24 shrink-0 rounded-lg bg-field" />
+    <div className="flex items-center gap-4 py-4 animate-pulse">
+      <div className="h-9 w-9 shrink-0 rounded-full bg-field" />
+      <div className="min-w-0 flex-1 flex flex-col gap-2">
+        <div className="h-4 w-2/5 rounded bg-field" />
+        <div className="h-3 w-1/3 rounded bg-field" />
       </div>
-      <div className="flex items-center gap-3">
-        <div className="h-9 w-9 shrink-0 rounded-full bg-field" />
-        <div className="flex flex-col gap-1.5">
-          <div className="h-3.5 w-32 rounded bg-field" />
-          <div className="h-3 w-20 rounded bg-field" />
-        </div>
-      </div>
-      <div className="border-t border-border/50 pt-3">
-        <div className="h-3 w-16 rounded bg-field" />
-      </div>
+      <div className="h-5 w-20 shrink-0 rounded-lg bg-field" />
     </div>
   );
 }
@@ -57,7 +49,7 @@ export default function PricingRequestsPage() {
   };
 
   return (
-    <div className="p-8 max-w-6xl w-full mx-auto flex flex-col gap-6">
+    <div className="p-8 max-w-5xl w-full mx-auto flex flex-col gap-6">
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
           <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/60">Intake</p>
@@ -79,8 +71,8 @@ export default function PricingRequestsPage() {
       {error && <Alert variant="error" message={error} />}
 
       {isLoading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {Array.from({ length: 4 }).map((_, i) => (
+        <div className="divide-y divide-border/40 border-y border-border/50">
+          {Array.from({ length: 5 }).map((_, i) => (
             <PricingRequestCardSkeleton key={i} />
           ))}
         </div>
@@ -90,7 +82,7 @@ export default function PricingRequestsPage() {
           description="Start a new request to begin scoping a matter with AI."
         />
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="divide-y divide-border/40 border-y border-border/50">
           {requests.map((req) => (
             <PricingRequestCard key={req.uid} request={req} />
           ))}
