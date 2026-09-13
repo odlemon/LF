@@ -5,23 +5,71 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AuthProvider } from "@/context/AuthContext";
 import { useAuth } from "@/hooks/useAuth";
-import { HiArrowRight, HiEye, HiEyeOff, HiOutlineShieldCheck } from "react-icons/hi";
+import { HiArrowLeft, HiArrowRight, HiEye, HiEyeOff, HiOutlineShieldCheck } from "react-icons/hi";
 import { getPublicApiBase } from "@/lib/api/baseUrl";
 
 const fieldClass =
   "w-full rounded-full border border-black/[0.1] bg-[#f7f7f5] px-5 py-[0.95rem] text-[15px] text-[#0a0a0a] placeholder:text-[#0a0a0a]/60 outline-none transition-all duration-200 focus-visible:ring-4 focus-visible:ring-[#0a0a0a]/15 focus-visible:border-[#0a0a0a] disabled:opacity-60";
 
+const primaryButtonClass =
+  "mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#0a0a0a] px-6 py-[0.95rem] text-[15px] font-semibold text-[#fefefc] shadow-[0_14px_40px_-20px_rgba(10,10,10,0.55)] transition-all duration-200 hover:bg-black hover:shadow-[0_18px_48px_-18px_rgba(10,10,10,0.6)] active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed disabled:shadow-none cursor-pointer";
+
+const backToEmailClass =
+  "inline-flex items-center gap-2 text-[13px] font-semibold text-[#0a0a0a]/60 hover:text-[#0a0a0a] transition-colors py-1 -my-1 cursor-pointer";
+
+type Step = "email" | "checking" | "password" | "sso";
+
 function LoginForm() {
   const { login } = useAuth();
   const router = useRouter();
+  const [step, setStep] = useState<Step>("email");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [providerName, setProviderName] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [ssoBusy, setSsoBusy] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  /**
+   * Resolve which identity provider owns this address (if any), then branch the form instead
+   * of showing both a password field and a separate SSO button and making the person choose.
+   * A domain with no SSO provider is not an error — it's the ordinary case — so a 404 here
+   * just continues to the password step. A network/server hiccup on the *lookup* fails open
+   * to the password step too, rather than blocking sign-in over a check that isn't essential.
+   */
+  const handleContinue = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const address = email.trim();
+    if (!address.includes("@")) {
+      setError("Enter a valid email address.");
+      return;
+    }
+    setError(null);
+    setStep("checking");
+    try {
+      const res = await fetch(
+        `${getPublicApiBase()}/api/v1/sso/provider-for-email?email=${encodeURIComponent(address)}`
+      );
+      if (res.ok) {
+        const { providerName: found } = await res.json();
+        setProviderName(found);
+        setStep("sso");
+        return;
+      }
+    } catch {
+      // fall through to password
+    }
+    setStep("password");
+  };
+
+  const handleBack = () => {
+    setStep("email");
+    setPassword("");
+    setProviderName(null);
+    setError(null);
+  };
+
+  const handlePasswordSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
@@ -44,42 +92,13 @@ function LoginForm() {
     }
   };
 
-  /**
-   * Resolve which identity provider owns this address, then hand off to it.
-   *
-   * The registration id used to be hardcoded, which meant the button pointed at whatever
-   * provider happened to be configured when the page was written — after the demo fixture was
-   * retired it led somewhere that no longer existed. A login page is shared by every firm, so
-   * it cannot simply list the providers either: that would publish the client list. Asking by
-   * domain keeps the answer to something the person typing already knows.
-   */
-  const handleSso = async () => {
-    const address = email.trim();
-    if (!address.includes("@")) {
-      setError("Enter your work email first, then choose Sign in with SSO.");
-      return;
-    }
-    setError(null);
-    setSsoBusy(true);
-    try {
-      const res = await fetch(
-        `${getPublicApiBase()}/api/v1/sso/provider-for-email?email=${encodeURIComponent(address)}`
-      );
-      if (!res.ok) {
-        setError("Single sign-on is not set up for that email domain.");
-        return;
-      }
-      const { providerName } = await res.json();
-      window.location.href = `${getPublicApiBase()}/api/oauth2/authorization/${encodeURIComponent(providerName)}`;
-    } catch {
-      setError("Could not reach single sign-on. Try again, or sign in with your password.");
-    } finally {
-      setSsoBusy(false);
-    }
+  const handleSsoContinue = () => {
+    if (!providerName) return;
+    window.location.href = `${getPublicApiBase()}/api/oauth2/authorization/${encodeURIComponent(providerName)}`;
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full space-y-5">
+    <div className="w-full space-y-5">
       {error ? (
         <div
           role="alert"
@@ -89,97 +108,116 @@ function LoginForm() {
         </div>
       ) : null}
 
-      <div>
-        <label
-          htmlFor="email"
-          className="block text-[11px] font-semibold tracking-[0.18em] uppercase text-[#0a0a0a]/60"
-        >
-          Email
-        </label>
-        <input
-          id="email"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          autoComplete="email"
-          className={`mt-2.5 ${fieldClass}`}
-          placeholder="name@lawfirm.com"
-          required
-          disabled={isLoading}
-        />
-      </div>
+      {(step === "email" || step === "checking") && (
+        <form onSubmit={handleContinue} className="space-y-5">
+          <div>
+            <label
+              htmlFor="email"
+              className="block text-[11px] font-semibold tracking-[0.18em] uppercase text-[#0a0a0a]/60"
+            >
+              Email
+            </label>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              autoComplete="email"
+              autoFocus
+              className={`mt-2.5 ${fieldClass}`}
+              placeholder="name@lawfirm.com"
+              required
+              disabled={step === "checking"}
+            />
+          </div>
+          <button type="submit" disabled={step === "checking"} className={primaryButtonClass}>
+            {step === "checking" ? (
+              <span className="inline-flex items-center gap-2">
+                <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+                Checking…
+              </span>
+            ) : (
+              <>
+                Continue
+                <HiArrowRight className="h-4 w-4" />
+              </>
+            )}
+          </button>
+        </form>
+      )}
 
-      <div>
-        <label
-          htmlFor="password"
-          className="block text-[11px] font-semibold tracking-[0.18em] uppercase text-[#0a0a0a]/60"
-        >
-          Password
-        </label>
-        <div className="relative mt-2.5">
-          <input
-            id="password"
-            type={showPassword ? "text" : "password"}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete="current-password"
-            className={`${fieldClass} pr-12`}
-            placeholder="Your password"
-            required
-            disabled={isLoading}
-          />
-          <button
-            type="button"
-            onClick={() => setShowPassword((v) => !v)}
-            className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full p-1.5 text-[#0a0a0a]/60 hover:text-[#0a0a0a]/70 transition-colors cursor-pointer"
-            aria-label={showPassword ? "Hide password" : "Show password"}
-          >
-            {showPassword ? <HiEyeOff className="h-5 w-5" /> : <HiEye className="h-5 w-5" />}
+      {step === "sso" && (
+        <div className="space-y-5">
+          <button type="button" onClick={handleBack} className={backToEmailClass}>
+            <HiArrowLeft className="h-3.5 w-3.5" />
+            {email}
+          </button>
+          <div className="flex items-start gap-3 rounded-2xl border border-black/[0.08] bg-[#f7f7f5] px-5 py-4 text-[14px] leading-relaxed text-[#0a0a0a]/75">
+            <HiOutlineShieldCheck className="h-5 w-5 shrink-0 mt-0.5 text-[#0a0a0a]/60" />
+            <span>
+              Your firm signs in with single sign-on. You&apos;ll continue on your
+              organization&apos;s login page.
+            </span>
+          </div>
+          <button type="button" onClick={handleSsoContinue} className={primaryButtonClass}>
+            Continue with SSO
+            <HiArrowRight className="h-4 w-4" />
           </button>
         </div>
-      </div>
+      )}
 
-      <button
-        type="submit"
-        disabled={isLoading}
-        className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#0a0a0a] px-6 py-[0.95rem] text-[15px] font-semibold text-[#fefefc] shadow-[0_14px_40px_-20px_rgba(10,10,10,0.55)] transition-all duration-200 hover:bg-black hover:shadow-[0_18px_48px_-18px_rgba(10,10,10,0.6)] active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed disabled:shadow-none cursor-pointer"
-      >
-        {isLoading ? (
-          <span className="inline-flex items-center gap-2">
-            <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
-            Signing in
-          </span>
-        ) : (
-          <>
-            Sign in
-            <HiArrowRight className="h-4 w-4" />
-          </>
-        )}
-      </button>
-
-      <div className="mt-6 flex items-center gap-3">
-        <span className="h-px flex-1 bg-black/[0.06]" />
-        <span className="text-[11px] font-semibold tracking-[0.14em] uppercase text-[#0a0a0a]/60">
-          or
-        </span>
-        <span className="h-px flex-1 bg-black/[0.06]" />
-      </div>
-
-      {/*
-        Inside the form on purpose: it needs the address already typed above to work out which
-        identity provider owns it. It sat outside until now, which is part of why it could only
-        ever point at one hardcoded provider.
-      */}
-      <button
-        type="button"
-        onClick={handleSso}
-        disabled={ssoBusy}
-        className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full border border-black/[0.1] bg-white px-6 py-[0.95rem] text-[15px] font-semibold text-[#0a0a0a] transition-all duration-200 hover:bg-black/[0.03] active:scale-[0.99] disabled:opacity-60 cursor-pointer"
-      >
-        <HiOutlineShieldCheck className="h-4 w-4" />
-        {ssoBusy ? "Redirecting…" : "Sign in with SSO"}
-      </button>
-    </form>
+      {step === "password" && (
+        <form onSubmit={handlePasswordSubmit} className="space-y-5">
+          <button type="button" onClick={handleBack} className={backToEmailClass}>
+            <HiArrowLeft className="h-3.5 w-3.5" />
+            {email}
+          </button>
+          <div>
+            <label
+              htmlFor="password"
+              className="block text-[11px] font-semibold tracking-[0.18em] uppercase text-[#0a0a0a]/60"
+            >
+              Password
+            </label>
+            <div className="relative mt-2.5">
+              <input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
+                autoFocus
+                className={`${fieldClass} pr-12`}
+                placeholder="Your password"
+                required
+                disabled={isLoading}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((v) => !v)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full p-1.5 text-[#0a0a0a]/60 hover:text-[#0a0a0a]/70 transition-colors cursor-pointer"
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? <HiEyeOff className="h-5 w-5" /> : <HiEye className="h-5 w-5" />}
+              </button>
+            </div>
+          </div>
+          <button type="submit" disabled={isLoading} className={primaryButtonClass}>
+            {isLoading ? (
+              <span className="inline-flex items-center gap-2">
+                <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+                Signing in
+              </span>
+            ) : (
+              <>
+                Sign in
+                <HiArrowRight className="h-4 w-4" />
+              </>
+            )}
+          </button>
+        </form>
+      )}
+    </div>
   );
 }
 
