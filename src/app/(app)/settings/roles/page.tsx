@@ -72,19 +72,25 @@ const getRoleIconAndColor = (roleName: string) => {
   };
 };
 
-// Helper to determine security operation tags based on standard UID boundaries
-const getPermissionBadge = (permUid: string) => {
-  const uid = permUid.toLowerCase();
-  if (uid.includes("delete") || uid.includes("remove") || uid.includes("deactivate")) {
-    return { label: "Danger", variant: "error" as const };
+// Helper to determine security operation tags from the permission's own action field
+// (CREATE/READ/UPDATE/DELETE/APPROVE/ADMIN/WRITE, set authoritatively by the backend's
+// PermissionDefinition registrars — not guessed from the opaque permission uid).
+const getPermissionBadge = (action: string) => {
+  switch ((action || "").toUpperCase()) {
+    case "DELETE":
+      return { label: "Danger", variant: "error" as const };
+    case "APPROVE":
+      return { label: "Approve", variant: "warning" as const };
+    case "ADMIN":
+      return { label: "Admin", variant: "primary" as const };
+    case "UPDATE":
+      return { label: "Update", variant: "info" as const };
+    case "CREATE":
+    case "WRITE":
+      return { label: "Create", variant: "success" as const };
+    default:
+      return { label: "Read", variant: "neutral" as const };
   }
-  if (uid.includes("create") || uid.includes("add") || uid.includes("write") || uid.includes("submit")) {
-    return { label: "Create", variant: "neutral" as const };
-  }
-  if (uid.includes("update") || uid.includes("edit") || uid.includes("modify") || uid.includes("assign")) {
-    return { label: "Update", variant: "info" as const };
-  }
-  return { label: "Read", variant: "primary" as const };
 };
 
 export default function RolesPage() {
@@ -303,7 +309,7 @@ export default function RolesPage() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           {modulePerms.map((perm) => {
                             const isChecked = selectedPermissionUids.includes(perm.uid);
-                            const category = getPermissionBadge(perm.uid);
+                            const category = getPermissionBadge(perm.action);
 
                             return (
                               <div
