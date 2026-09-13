@@ -192,7 +192,7 @@ export function ContractFormModal({ open, onClose, existing, onSaved }: Props) {
             />
           </Field>
 
-          <Field label="AI Credit Entitlement">
+          <Field label="Credit Entitlement">
             <input
               type="number"
               min={0}

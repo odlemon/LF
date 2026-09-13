@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { usePermission } from "@/hooks/usePermission";
@@ -47,21 +47,63 @@ export function AnalyticsTabs() {
     return true;
   });
 
+  const isTabActive = (tab: TabDef) =>
+    tab.route === "/analytics"
+      ? pathname === "/analytics" || pathname.startsWith("/analytics/practice-areas")
+      : pathname === tab.route || pathname.startsWith(`${tab.route}/`);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const linkRefs = useRef<Map<string, HTMLAnchorElement>>(new Map());
+  const [indicator, setIndicator] = useState<{ left: number; top: number; width: number; height: number } | null>(
+    null
+  );
+  const activeRoute = visible.find(isTabActive)?.route;
+
+  const measure = () => {
+    const el = activeRoute ? linkRefs.current.get(activeRoute) : null;
+    if (!el) return;
+    setIndicator({ left: el.offsetLeft, top: el.offsetTop, width: el.offsetWidth, height: el.offsetHeight });
+  };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(measure, [activeRoute, visible.length]);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container || typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(measure);
+    observer.observe(container);
+    return () => observer.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <div className="flex flex-wrap gap-1.5 border-b border-border pb-4">
+    <div
+      ref={containerRef}
+      role="tablist"
+      className="relative mb-4 inline-flex flex-wrap gap-1 rounded-full border border-border bg-field p-1"
+    >
+      {indicator && (
+        <span
+          aria-hidden="true"
+          className="absolute rounded-full bg-ink shadow-sm transition-[left,top,width,height] duration-300 ease-out"
+          style={{ left: indicator.left, top: indicator.top, width: indicator.width, height: indicator.height }}
+        />
+      )}
       {visible.map((tab) => {
-        const isActive =
-          tab.route === "/analytics"
-            ? pathname === "/analytics" || pathname.startsWith("/analytics/practice-areas")
-            : pathname === tab.route || pathname.startsWith(`${tab.route}/`);
+        const isActive = isTabActive(tab);
         return (
           <Link
             key={tab.route}
             href={tab.route}
-            className={`px-4 py-2 rounded-full text-xs font-bold transition-all ${
-              isActive
-                ? "bg-ink text-on-primary shadow-sm"
-                : "bg-field text-ink/60 hover:text-ink hover:bg-hover border border-border"
+            ref={(node) => {
+              if (node) linkRefs.current.set(tab.route, node);
+              else linkRefs.current.delete(tab.route);
+            }}
+            role="tab"
+            aria-selected={isActive}
+            className={`relative z-10 rounded-full px-4 py-2 text-xs font-bold transition-colors ${
+              isActive ? "text-on-primary" : "text-ink/60 hover:text-ink"
             }`}
           >
             {tab.label}

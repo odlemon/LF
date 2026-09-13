@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export interface TabItem<T extends string = string> {
   id: T;
@@ -15,34 +15,81 @@ interface TabsProps<T extends string> {
   className?: string;
 }
 
+interface IndicatorRect {
+  left: number;
+  top: number;
+  width: number;
+  height: number;
+}
+
 /**
- * Canonical filter/segment tab bar, extracted from the pattern AnalyticsTabs already
- * established across seven routes: rounded-full pills, bg-ink for the active pill.
- * Negotiations, pricing requests, and approvals each hand-rolled a close variant of
- * this (a pill bar, or an underline bar) before consolidating onto this component.
+ * Canonical filter/segment tab bar. A single indicator pill slides between tabs
+ * (measured off the active button's offsetLeft/Top so it tracks wrapped rows too)
+ * rather than each tab independently flipping its own background — that read as a
+ * row of buttons, not a connected tab control.
  */
 export function Tabs<T extends string>({ tabs, activeId, onChange, className = "" }: TabsProps<T>) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const tabRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
+  const [indicator, setIndicator] = useState<IndicatorRect | null>(null);
+
+  const measure = () => {
+    const el = tabRefs.current.get(activeId);
+    if (!el) return;
+    setIndicator({
+      left: el.offsetLeft,
+      top: el.offsetTop,
+      width: el.offsetWidth,
+      height: el.offsetHeight,
+    });
+  };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(measure, [activeId, tabs]);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container || typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(measure);
+    observer.observe(container);
+    return () => observer.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <div className={`flex flex-wrap gap-1.5 ${className}`}>
+    <div
+      ref={containerRef}
+      role="tablist"
+      className={`relative inline-flex flex-wrap gap-1 rounded-full border border-border bg-field p-1 ${className}`}
+    >
+      {indicator && (
+        <span
+          aria-hidden="true"
+          className="absolute rounded-full bg-ink shadow-sm transition-[left,top,width,height] duration-300 ease-out"
+          style={{ left: indicator.left, top: indicator.top, width: indicator.width, height: indicator.height }}
+        />
+      )}
       {tabs.map((tab) => {
         const isActive = tab.id === activeId;
         return (
           <button
             key={tab.id}
+            ref={(node) => {
+              if (node) tabRefs.current.set(tab.id, node);
+              else tabRefs.current.delete(tab.id);
+            }}
             type="button"
+            role="tab"
+            aria-selected={isActive}
             onClick={() => onChange(tab.id)}
-            className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
-              isActive
-                ? "bg-ink text-on-primary shadow-sm"
-                : "bg-field text-ink/60 hover:text-ink hover:bg-hover border border-border"
+            className={`relative z-10 rounded-full px-4 py-2 text-xs font-bold transition-colors cursor-pointer ${
+              isActive ? "text-on-primary" : "text-ink/60 hover:text-ink"
             }`}
           >
             {tab.label}
             {typeof tab.count === "number" && (
               <span
-                className={`ml-1.5 text-[11px] tabular-nums ${
-                  isActive ? "text-on-primary/70" : "text-ink/60"
-                }`}
+                className={`ml-1.5 text-[11px] tabular-nums ${isActive ? "text-on-primary/70" : "text-ink/60"}`}
               >
                 {tab.count}
               </span>
