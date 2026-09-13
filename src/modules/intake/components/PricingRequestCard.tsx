@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { HiOutlineArrowRight } from "react-icons/hi";
 import { PricingRequest } from "../types";
 import { IntakeStatusBadge } from "./IntakeStatusBadge";
 import { formatRelativeTime } from "@/lib/utils/format";
@@ -10,38 +11,45 @@ interface PricingRequestCardProps {
 }
 
 export function PricingRequestCard({ request, clientName }: PricingRequestCardProps) {
-  const displayClient = clientName ?? request.clientName ?? "-";
-  const practiceArea = request.practiceAreaName ?? "-";
+  const displayClient = clientName ?? request.clientName ?? "Unassigned client";
+  const practiceArea = request.practiceAreaName;
   const href =
     request.status === "SCOPE_CONFIRMED"
       ? `/pricing-requests/${request.uid}/pricing`
       : `/pricing-requests/${request.uid}`;
+  const initial = displayClient.trim().charAt(0).toUpperCase() || "?";
 
   return (
     <Link
       href={href}
-      className="block bg-surface rounded-2xl border border-border/60 p-5 shadow-sm hover:shadow-md hover:border-primary/30 transition-all"
+      className="group flex flex-col gap-4 rounded-2xl border border-border/60 bg-surface p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-lg"
     >
-      <div className="flex items-start justify-between gap-3 mb-3">
-        <h3 className="text-base font-bold text-ink line-clamp-2">{request.matterTitle}</h3>
-        <IntakeStatusBadge status={request.status} />
+      <div className="flex items-start justify-between gap-3">
+        <h3 className="text-base font-bold leading-snug tracking-tight text-ink line-clamp-2 transition-colors group-hover:text-primary">
+          {request.matterTitle}
+        </h3>
+        <IntakeStatusBadge status={request.status} className="shrink-0" />
       </div>
-      <div className="flex flex-col gap-1 text-sm text-ink/65">
-        <span>
-          <span className="font-semibold text-ink/60">Client:</span> {displayClient}
-        </span>
-        <span>
-          <span className="font-semibold text-ink/60">Practice area:</span> {practiceArea}
-        </span>
+
+      <div className="flex items-center gap-3">
+        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-semibold text-on-primary">
+          {initial}
+        </div>
+        <div className="min-w-0">
+          <p className="truncate text-sm font-semibold text-ink">{displayClient}</p>
+          {practiceArea && <p className="truncate text-xs text-ink/60">{practiceArea}</p>}
+        </div>
       </div>
-      <p className="text-xs text-ink/60 mt-3 font-medium">
-        {formatRelativeTime(request.createdAt)}
-      </p>
-      {request.status === "SCOPE_CONFIRMED" && (
-        <p className="text-xs font-semibold text-ink/70 mt-3">
-          Continue to pricing →
-        </p>
-      )}
+
+      <div className="flex items-center justify-between gap-3 border-t border-border/50 pt-3 text-xs font-medium text-ink/60">
+        <span>{formatRelativeTime(request.createdAt)}</span>
+        {request.status === "SCOPE_CONFIRMED" && (
+          <span className="inline-flex items-center gap-1 font-semibold text-ink transition-all group-hover:gap-1.5">
+            Continue to pricing
+            <HiOutlineArrowRight className="h-3.5 w-3.5" />
+          </span>
+        )}
+      </div>
     </Link>
   );
 }

@@ -1,7 +1,6 @@
 import React from "react";
+import { Badge, type BadgeVariant } from "@/components/ui/Badge";
 import { PricingRequestStatus, ChatMode } from "../types";
-
-type BadgeVariant = "neutral" | "info" | "warning" | "success" | "error";
 
 const STATUS_CONFIG: Record<
   PricingRequestStatus,
@@ -24,14 +23,6 @@ const CHAT_MODE_CONFIG: Record<
   SCOPE_CONFIRMED: { variant: "success", label: "Confirmed" },
 };
 
-const VARIANT_STYLES: Record<BadgeVariant, string> = {
-  neutral: "bg-canvas text-ink/80 border-border/60",
-  info: "bg-blue-50 text-blue-700 border-blue-200/60",
-  warning: "bg-amber-50 text-amber-700 border-amber-200/60",
-  success: "bg-hover text-ink/80 border-border/60",
-  error: "bg-red-50 text-red-700 border-red-200/60",
-};
-
 interface IntakeStatusBadgeProps {
   status: PricingRequestStatus;
   className?: string;
@@ -40,11 +31,9 @@ interface IntakeStatusBadgeProps {
 export function IntakeStatusBadge({ status, className = "" }: IntakeStatusBadgeProps) {
   const config = STATUS_CONFIG[status] ?? STATUS_CONFIG.DRAFT;
   return (
-    <span
-      className={`inline-flex items-center px-2.5 py-1 text-xs font-semibold rounded-full border ${VARIANT_STYLES[config.variant]} ${className}`}
-    >
+    <Badge variant={config.variant} className={className}>
       {config.label}
-    </span>
+    </Badge>
   );
 }
 
@@ -56,10 +45,8 @@ interface ChatModeBadgeProps {
 export function ChatModeBadge({ chatMode, className = "" }: ChatModeBadgeProps) {
   const config = CHAT_MODE_CONFIG[chatMode] ?? CHAT_MODE_CONFIG.GENERAL;
   return (
-    <span
-      className={`inline-flex items-center px-2.5 py-1 text-xs font-semibold rounded-full border ${VARIANT_STYLES[config.variant]} ${className}`}
-    >
+    <Badge variant={config.variant} className={className}>
       {config.label}
-    </span>
+    </Badge>
   );
 }

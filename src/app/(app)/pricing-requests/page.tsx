@@ -23,16 +23,21 @@ const TABS: { id: ListFilterTab; label: string }[] = [
 
 function PricingRequestCardSkeleton() {
   return (
-    <div className="bg-surface rounded-2xl border border-border/60 p-5 shadow-sm animate-pulse">
-      <div className="flex items-start justify-between gap-3 mb-3">
-        <div className="h-5 bg-field rounded-md w-2/3" />
-        <div className="h-6 bg-field rounded-full w-24 shrink-0" />
+    <div className="flex flex-col gap-4 rounded-2xl border border-border/60 bg-surface p-5 shadow-sm animate-pulse">
+      <div className="flex items-start justify-between gap-3">
+        <div className="h-5 w-2/3 rounded-md bg-field" />
+        <div className="h-6 w-24 shrink-0 rounded-lg bg-field" />
       </div>
-      <div className="flex flex-col gap-2 mt-4">
-        <div className="h-3.5 bg-field rounded w-1/2" />
-        <div className="h-3.5 bg-field rounded w-2/5" />
+      <div className="flex items-center gap-3">
+        <div className="h-9 w-9 shrink-0 rounded-full bg-field" />
+        <div className="flex flex-col gap-1.5">
+          <div className="h-3.5 w-32 rounded bg-field" />
+          <div className="h-3 w-20 rounded bg-field" />
+        </div>
       </div>
-      <div className="h-3 bg-field rounded w-16 mt-4" />
+      <div className="border-t border-border/50 pt-3">
+        <div className="h-3 w-16 rounded bg-field" />
+      </div>
     </div>
   );
 }
@@ -55,7 +60,8 @@ export default function PricingRequestsPage() {
     <div className="p-8 max-w-6xl w-full mx-auto flex flex-col gap-6">
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-ink tracking-tight">Pricing Requests</h1>
+          <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/60">Intake</p>
+          <h1 className="mt-1 text-2xl font-bold text-ink tracking-tight">Pricing Requests</h1>
           <p className="text-sm text-ink/60 mt-1">
             Scope matters with AI-assisted conversational intake.
           </p>
