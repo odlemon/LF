@@ -6,6 +6,7 @@ import { usePracticeAreas, useFeeEarnerLevels } from "@/modules/firm/hooks/useFi
 import { Pagination } from "@/components/ui/Pagination";
 import { DatePicker } from "@/components/ui/DatePicker";
 import { Select } from "@/components/ui/Select";
+import { Tabs } from "@/components/ui/Tabs";
 import { HiScale, HiClock, HiCurrencyDollar, HiPresentationChartLine, HiChartBar } from "react-icons/hi";
 
 type RecordType = "past-matters" | "time-entries" | "billing-history" | "rate-card-history" | "market-benchmarks";
@@ -88,34 +89,19 @@ export function RecordsBrowser() {
   return (
     <div className="flex flex-col gap-6 w-full text-ink/90">
       {/* 5-Tab Bar Header */}
-      <div className="bg-surface p-1 rounded-full border border-border/50 flex overflow-x-auto shrink-0 shadow-sm rates-scrollable gap-1">
-        {(
-          [
-            { id: "past-matters", label: "Past Matters", icon: HiScale },
-            { id: "time-entries", label: "Time Entries", icon: HiClock },
-            { id: "billing-history", label: "Billing History", icon: HiCurrencyDollar },
-            { id: "rate-card-history", label: "Rate Card History", icon: HiPresentationChartLine },
-            { id: "market-benchmarks", label: "Market Benchmarks", icon: HiChartBar },
-          ] as const
-        ).map((tab) => {
-          const TabIcon = tab.icon;
-          const isActive = activeTab === tab.id;
-          return (
-            <button
-              key={tab.id}
-              onClick={() => handleTabChange(tab.id)}
-              className={`flex items-center gap-2 px-5 py-2.5 text-xs font-bold rounded-full transition-all shrink-0 cursor-pointer ${
-                isActive
-                  ? "bg-primary text-on-primary shadow-md shadow-primary/20"
-                  : "text-ink/65 hover:bg-canvas hover:text-ink"
-              }`}
-            >
-              <TabIcon className="w-4 h-4" />
-              {tab.label}
-            </button>
-          );
-        })}
-      </div>
+      <Tabs
+        scrollable
+        className="shadow-sm"
+        tabs={[
+          { id: "past-matters", label: "Past Matters", icon: HiScale },
+          { id: "time-entries", label: "Time Entries", icon: HiClock },
+          { id: "billing-history", label: "Billing History", icon: HiCurrencyDollar },
+          { id: "rate-card-history", label: "Rate Card History", icon: HiPresentationChartLine },
+          { id: "market-benchmarks", label: "Market Benchmarks", icon: HiChartBar },
+        ]}
+        activeId={activeTab}
+        onChange={handleTabChange}
+      />
 
       {/* Filter Bars Section */}
       <div className="bg-field/50 border border-border/40 rounded-3xl p-5 shadow-sm">

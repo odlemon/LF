@@ -4,6 +4,7 @@
 import React, { useState } from "react";
 import { useRateCards } from "@/modules/firm/hooks/useFirm";
 import { Button } from "@/components/ui/Button";
+import { Tabs } from "@/components/ui/Tabs";
 import { RateCardFormModal } from "@/modules/firm/components/RateCardFormModal";
 import { RateCardEntriesSlideOver } from "@/modules/firm/components/RateCardEntriesSlideOver";
 import { ActivateRateCardModal } from "@/modules/firm/components/ActivateRateCardModal";
@@ -84,35 +85,15 @@ export default function RateCardsPage() {
       )}
 
       {!isLoading && offices.length > 0 && (
-        <div className="flex flex-wrap items-center gap-2">
-          <button
-            onClick={() => setOfficeFilter("ALL")}
-            className={`px-3.5 py-1.5 text-xs font-bold rounded-full transition-all ${
-              officeFilter === "ALL" ? "bg-ink text-on-primary" : "bg-field text-ink/60 hover:bg-hover"
-            }`}
-          >
-            All offices
-          </button>
-          <button
-            onClick={() => setOfficeFilter("")}
-            className={`px-3.5 py-1.5 text-xs font-bold rounded-full transition-all ${
-              officeFilter === "" ? "bg-ink text-on-primary" : "bg-field text-ink/60 hover:bg-hover"
-            }`}
-          >
-            Firm default
-          </button>
-          {offices.map((office) => (
-            <button
-              key={office}
-              onClick={() => setOfficeFilter(office)}
-              className={`px-3.5 py-1.5 text-xs font-bold rounded-full transition-all ${
-                officeFilter === office ? "bg-ink text-on-primary" : "bg-field text-ink/60 hover:bg-hover"
-              }`}
-            >
-              {office}
-            </button>
-          ))}
-        </div>
+        <Tabs
+          tabs={[
+            { id: "ALL", label: "All offices" },
+            { id: "", label: "Firm default" },
+            ...offices.map((office) => ({ id: office, label: office })),
+          ]}
+          activeId={officeFilter}
+          onChange={setOfficeFilter}
+        />
       )}
 
       {isLoading ? (

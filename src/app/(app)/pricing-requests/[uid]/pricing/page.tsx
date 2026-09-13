@@ -14,6 +14,7 @@ import { GenerateProgress } from "@/modules/pricing/components/GenerateProgress"
 import { PartnerReviewView } from "@/modules/pricing/components/PartnerReviewView";
 import { PricingWorkspaceSkeleton } from "@/modules/pricing/components/PricingWorkspaceSkeleton";
 import { ScenarioCard } from "@/modules/pricing/components/ScenarioCard";
+import { Tabs } from "@/components/ui/Tabs";
 import { ScenarioDetail } from "@/modules/pricing/components/ScenarioDetail";
 import {
   ScenarioStageRail,
@@ -379,22 +380,16 @@ export default function PricingWorkspacePage() {
                     </p>
                   )}
                 </div>
-                <div className="mt-4 flex gap-2 overflow-x-auto pb-1">
-                  {workspace.scenarios.map((s) => (
-                    <button
-                      key={`chip-${s.id}`}
-                      type="button"
-                      onClick={() => workspace.selectScenario(s.id)}
-                      className={`shrink-0 rounded-full px-3 py-1.5 text-[11px] font-semibold tracking-tight transition-colors ${
-                        workspace.selectedUid === s.id
-                          ? "bg-ink text-on-primary"
-                          : "bg-field text-ink/60 hover:text-ink"
-                      }`}
-                    >
-                      {PRICING_MODEL_LABELS[s.pricingModel] ?? s.pricingModel}
-                    </button>
-                  ))}
-                </div>
+                <Tabs
+                  scrollable
+                  className="mt-4"
+                  tabs={workspace.scenarios.map((s) => ({
+                    id: s.id,
+                    label: PRICING_MODEL_LABELS[s.pricingModel] ?? s.pricingModel,
+                  }))}
+                  activeId={workspace.selectedUid ?? ""}
+                  onChange={workspace.selectScenario}
+                />
               </div>
 
               <div className="grid gap-3">

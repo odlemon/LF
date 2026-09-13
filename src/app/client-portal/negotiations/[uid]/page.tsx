@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { HiArrowLeft, HiOutlineChatAlt2, HiOutlineDocumentText } from "react-icons/hi";
 import { Button } from "@/components/ui/Button";
+import { Tabs } from "@/components/ui/Tabs";
 import * as negotiationApi from "@/modules/negotiation/api";
 import { NegotiationRoundTimeline } from "@/modules/negotiation/components/NegotiationRoundTimeline";
 import { NegotiationStatusBadge } from "@/modules/negotiation/components/NegotiationStatusBadge";
@@ -204,26 +205,15 @@ export default function PortalNegotiationDetailPage() {
               : ""}
           </p>
         </div>
-        <div className="flex gap-1 rounded-full bg-field p-1 lg:hidden">
-          <button
-            type="button"
-            onClick={() => setMobilePane("coach")}
-            className={`rounded-full px-3 py-1.5 text-[11px] font-semibold ${
-              mobilePane === "coach" ? "bg-surface text-ink shadow-sm" : "text-ink/60"
-            }`}
-          >
-            Coach
-          </button>
-          <button
-            type="button"
-            onClick={() => setMobilePane("rates")}
-            className={`rounded-full px-3 py-1.5 text-[11px] font-semibold ${
-              mobilePane === "rates" ? "bg-surface text-ink shadow-sm" : "text-ink/60"
-            }`}
-          >
-            Rates
-          </button>
-        </div>
+        <Tabs
+          className="lg:hidden"
+          tabs={[
+            { id: "coach", label: "Coach" },
+            { id: "rates", label: "Rates" },
+          ]}
+          activeId={mobilePane}
+          onChange={setMobilePane}
+        />
       </div>
 
       {pack && (pack.status === "SENT" || pack.status === "ACKNOWLEDGED") && (
@@ -310,30 +300,15 @@ export default function PortalNegotiationDetailPage() {
             mobilePane === "rates" ? "flex" : "hidden lg:flex"
           }`}
         >
-          <div className="flex shrink-0 items-center gap-1 border-b border-border/60 px-4 py-2">
-            {(
-              [
-                { id: "rates" as const, label: "Rate card", icon: HiOutlineDocumentText },
-                { id: "history" as const, label: "History", icon: HiOutlineChatAlt2 },
-              ] as const
-            ).map((t) => {
-              const Icon = t.icon;
-              return (
-                <button
-                  key={t.id}
-                  type="button"
-                  onClick={() => setRail(t.id)}
-                  className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold transition-colors ${
-                    rail === t.id
-                      ? "bg-ink text-canvas"
-                      : "text-ink/60 hover:bg-hover hover:text-ink"
-                  }`}
-                >
-                  <Icon className="h-3.5 w-3.5" />
-                  {t.label}
-                </button>
-              );
-            })}
+          <div className="shrink-0 border-b border-border/60 px-4 py-2">
+            <Tabs
+              tabs={[
+                { id: "rates", label: "Rate card", icon: HiOutlineDocumentText },
+                { id: "history", label: "History", icon: HiOutlineChatAlt2 },
+              ]}
+              activeId={rail}
+              onChange={setRail}
+            />
           </div>
 
           <div className="min-h-0 flex-1 overflow-y-auto rates-scrollable p-4 sm:p-5">

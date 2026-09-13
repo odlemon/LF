@@ -15,6 +15,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { Tabs } from "@/components/ui/Tabs";
 import type { PracticePoint, StagePoint, TrendPoint } from "./demoData";
 
 const INK = "#0a0a0a";
@@ -74,28 +75,15 @@ export function FeesTrendChart({ data }: { data: TrendPoint[] }) {
             Fees won vs active pipeline
           </h3>
         </div>
-        <div className="flex rounded-full border border-border bg-field p-0.5 text-[11px] font-semibold">
-          {(
-            [
-              ["both", "Both"],
-              ["won", "Fees won"],
-              ["pipeline", "Pipeline"],
-            ] as const
-          ).map(([key, label]) => (
-            <button
-              key={key}
-              type="button"
-              onClick={() => setFocus(key)}
-              className={`px-3 py-1.5 rounded-full transition-colors cursor-pointer ${
-                focus === key
-                  ? "bg-ink text-on-primary"
-                  : "text-ink/60 hover:text-ink"
-              }`}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
+        <Tabs
+          tabs={[
+            { id: "both", label: "Both" },
+            { id: "won", label: "Fees won" },
+            { id: "pipeline", label: "Pipeline" },
+          ]}
+          activeId={focus}
+          onChange={setFocus}
+        />
       </div>
 
       <div className="flex-1 w-full min-h-[220px]">

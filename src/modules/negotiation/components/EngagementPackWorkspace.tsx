@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { HiOutlinePrinter, HiX } from "react-icons/hi";
 import { Button } from "@/components/ui/Button";
+import { Tabs } from "@/components/ui/Tabs";
 import * as negotiationApi from "../api";
 import type { EngagementPack } from "../types";
 import {
@@ -174,26 +175,15 @@ export function EngagementPackWorkspace({
       </div>
 
       {pack && (
-        <div className="flex shrink-0 justify-center gap-1 border-b border-border/50 bg-surface/80 px-4 py-2 print:hidden">
-          {(
-            [
-              { id: "letter" as const, label: "Engagement letter" },
-              { id: "schedule" as const, label: "Fee schedule" },
-            ] as const
-          ).map((t) => (
-            <button
-              key={t.id}
-              type="button"
-              onClick={() => setSection(t.id)}
-              className={`rounded-full px-3 py-1.5 text-xs font-semibold transition-colors ${
-                section === t.id
-                  ? "bg-ink text-canvas"
-                  : "text-ink/60 hover:bg-hover hover:text-ink"
-              }`}
-            >
-              {t.label}
-            </button>
-          ))}
+        <div className="flex shrink-0 justify-center border-b border-border/50 bg-surface/80 px-4 py-2 print:hidden">
+          <Tabs
+            tabs={[
+              { id: "letter", label: "Engagement letter" },
+              { id: "schedule", label: "Fee schedule" },
+            ]}
+            activeId={section}
+            onChange={setSection}
+          />
         </div>
       )}
 
