@@ -9,6 +9,7 @@ import {
   HiOutlineDocumentText,
 } from "react-icons/hi";
 import { Button } from "@/components/ui/Button";
+import { Textarea } from "@/components/ui/Input";
 import { AuditTrailPanel } from "@/components/shared/AuditTrailPanel";
 import * as negotiationApi from "@/modules/negotiation/api";
 import { FirmAdvisorWorkspace } from "@/modules/negotiation/components/FirmAdvisorWorkspace";
@@ -153,7 +154,7 @@ export default function NegotiationDetailPage() {
     return (
       <div className="flex h-[calc(100vh-4rem)] min-h-0 flex-col bg-canvas">
         <div className="flex shrink-0 items-center gap-2.5 border-b border-border/60 bg-surface/90 px-4 py-3 sm:px-5">
-          <div className="h-9 w-9 animate-pulse rounded-lg bg-field/60" />
+          <div className="h-9 w-9 animate-pulse rounded-full bg-field/60" />
           <div className="flex flex-col gap-2">
             <div className="h-4 w-48 animate-pulse rounded-full bg-field/60" />
             <div className="h-3 w-32 animate-pulse rounded-full bg-field/60" />
@@ -193,7 +194,7 @@ export default function NegotiationDetailPage() {
           <button
             type="button"
             onClick={() => router.push("/negotiations")}
-            className="mt-0.5 rounded-lg p-2 text-ink/60 hover:bg-hover hover:text-ink"
+            className="mt-0.5 rounded-full p-2 text-ink/60 hover:bg-hover hover:text-ink"
             aria-label="Back"
           >
             <HiArrowLeft className="h-5 w-5" />
@@ -535,12 +536,11 @@ export default function NegotiationDetailPage() {
 
           {open && (
             <div className="shrink-0 space-y-3 border-t border-border/60 bg-surface p-4">
-              <textarea
+              <Textarea
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 rows={2}
                 placeholder="Note to client (optional)"
-                className="w-full resize-none rounded-xl border border-border bg-field px-3 py-2.5 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-primary/15"
               />
               <div className="flex flex-wrap justify-end gap-2">
                 <Button

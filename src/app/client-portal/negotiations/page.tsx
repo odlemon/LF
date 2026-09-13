@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { HiOutlineSearch, HiOutlineSparkles } from "react-icons/hi";
 import { Button } from "@/components/ui/Button";
+import { Tabs } from "@/components/ui/Tabs";
 import * as negotiationApi from "@/modules/negotiation/api";
 import { NegotiationStatusBadge } from "@/modules/negotiation/components/NegotiationStatusBadge";
 import type { NegotiationListItem } from "@/modules/negotiation/types";
@@ -93,26 +94,11 @@ export default function PortalNegotiationsPage() {
         />
 
         <div className="flex flex-wrap items-center gap-3">
-          <div className="flex flex-wrap gap-1.5">
-            {FILTERS.map((f) => {
-              const active = filter === f.key;
-              return (
-                <button
-                  key={f.key}
-                  type="button"
-                  onClick={() => setFilter(f.key)}
-                  className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold transition-colors ${
-                    active
-                      ? "bg-ink text-canvas shadow-sm"
-                      : "bg-surface text-ink/60 ring-1 ring-border/70 hover:text-ink"
-                  }`}
-                >
-                  {f.label}
-                  <span className="tabular-nums opacity-70">{counts[f.key]}</span>
-                </button>
-              );
-            })}
-          </div>
+          <Tabs
+            tabs={FILTERS.map((f) => ({ id: f.key, label: f.label, count: counts[f.key] }))}
+            activeId={filter}
+            onChange={setFilter}
+          />
           <div className="relative ml-auto">
             <HiOutlineSearch className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink/60" />
             <input
