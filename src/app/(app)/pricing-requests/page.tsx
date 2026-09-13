@@ -23,7 +23,8 @@ const TABS: { id: ListFilterTab; label: string }[] = [
 
 function PricingRequestCardSkeleton() {
   return (
-    <div className="flex items-center gap-4 py-4 animate-pulse">
+    <div className="relative flex items-center gap-4 py-4 pl-4 animate-pulse">
+      <div className="absolute inset-y-2.5 left-0 w-[3px] rounded-full bg-field" />
       <div className="h-9 w-9 shrink-0 rounded-full bg-field" />
       <div className="min-w-0 flex-1 flex flex-col gap-2">
         <div className="h-4 w-2/5 rounded bg-field" />
@@ -34,6 +35,18 @@ function PricingRequestCardSkeleton() {
   );
 }
 
+/** Today / Yesterday / This week / Earlier — Linear-style recency grouping. */
+function recencyBucket(dateStr: string): string {
+  const startOfDay = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+  const diffDays = Math.round((startOfDay(new Date()) - startOfDay(new Date(dateStr))) / 86400000);
+  if (diffDays <= 0) return "Today";
+  if (diffDays === 1) return "Yesterday";
+  if (diffDays <= 7) return "This week";
+  return "Earlier";
+}
+
+const BUCKET_ORDER = ["Today", "Yesterday", "This week", "Earlier"];
+
 export default function PricingRequestsPage() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<ListFilterTab>("all");
@@ -41,6 +54,12 @@ export default function PricingRequestsPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { requests, isLoading, error, createRequest } = usePricingRequests(activeTab, page);
+
+  const groups = BUCKET_ORDER.map((label) => ({
+    label,
+    items: requests.filter((r) => recencyBucket(r.createdAt) === label),
+  })).filter((g) => g.items.length > 0);
+  let rowIndex = 0;
 
   const handleCreate = async (command: Parameters<typeof createRequest>[0]) => {
     const created = await createRequest(command);
@@ -82,9 +101,25 @@ export default function PricingRequestsPage() {
           description="Start a new request to begin scoping a matter with AI."
         />
       ) : (
-        <div className="divide-y divide-border/40 border-y border-border/50">
-          {requests.map((req) => (
-            <PricingRequestCard key={req.uid} request={req} />
+        <div className="flex flex-col gap-6">
+          {groups.map((group) => (
+            <div key={group.label}>
+              <p className="mb-2 px-1 text-[10px] font-bold uppercase tracking-[0.16em] text-ink/40">
+                {group.label}
+              </p>
+              <div className="divide-y divide-border/40 border-y border-border/50">
+                {group.items.map((req) => {
+                  const delay = Math.min(rowIndex++, 10) * 30;
+                  return (
+                    <PricingRequestCard
+                      key={req.uid}
+                      request={req}
+                      style={{ animationDelay: `${delay}ms` }}
+                    />
+                  );
+                })}
+              </div>
+            </div>
           ))}
         </div>
       )}

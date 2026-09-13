@@ -1,16 +1,26 @@
 import React from "react";
 import Link from "next/link";
 import { HiOutlineArrowRight, HiOutlineChevronRight } from "react-icons/hi";
-import { PricingRequest } from "../types";
+import { PricingRequest, PricingRequestStatus } from "../types";
 import { IntakeStatusBadge } from "./IntakeStatusBadge";
 import { formatRelativeTime } from "@/lib/utils/format";
+
+/** Same hue family IntakeStatusBadge uses per status, as a quiet scan-down-the-list accent. */
+const STATUS_ACCENT: Record<PricingRequestStatus, string> = {
+  DRAFT: "bg-ink/15",
+  IN_PROGRESS: "bg-blue-400",
+  SCOPE_GENERATED: "bg-amber-400",
+  SCOPE_CONFIRMED: "bg-emerald-400",
+  CANCELLED: "bg-red-400",
+};
 
 interface PricingRequestCardProps {
   request: PricingRequest;
   clientName?: string;
+  style?: React.CSSProperties;
 }
 
-export function PricingRequestCard({ request, clientName }: PricingRequestCardProps) {
+export function PricingRequestCard({ request, clientName, style }: PricingRequestCardProps) {
   const displayClient = clientName ?? request.clientName ?? "Unassigned client";
   const practiceArea = request.practiceAreaName;
   const href =
@@ -22,8 +32,14 @@ export function PricingRequestCard({ request, clientName }: PricingRequestCardPr
   return (
     <Link
       href={href}
-      className="group flex items-center gap-4 py-4 transition-colors hover:bg-hover/40"
+      style={style}
+      className="group relative flex items-center gap-4 py-4 pl-4 pr-1 transition-colors hover:bg-hover/40 animate-fade-in-up"
     >
+      <span
+        aria-hidden="true"
+        className={`absolute inset-y-2.5 left-0 w-[3px] rounded-full transition-all group-hover:inset-y-1.5 ${STATUS_ACCENT[request.status]}`}
+      />
+
       <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-semibold text-on-primary">
         {initial}
       </div>
@@ -49,7 +65,9 @@ export function PricingRequestCard({ request, clientName }: PricingRequestCardPr
           <HiOutlineArrowRight className="h-3.5 w-3.5" />
         </span>
       ) : (
-        <HiOutlineChevronRight className="h-4 w-4 shrink-0 text-ink/30 transition-colors group-hover:text-ink/60" />
+        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full transition-colors group-hover:bg-field">
+          <HiOutlineChevronRight className="h-4 w-4 text-ink/30 transition-colors group-hover:text-ink/70" />
+        </span>
       )}
     </Link>
   );
