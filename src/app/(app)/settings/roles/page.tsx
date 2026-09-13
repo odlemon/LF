@@ -192,9 +192,15 @@ export default function RolesPage() {
         </div>
 
         {isLoading && roles.length === 0 ? (
-          <div className="bg-surface rounded-2xl border border-border/60 p-24 flex flex-col items-center justify-center gap-3">
-            <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary/20 border-b-primary" />
-            <span className="text-xs font-semibold text-ink/60">Loading system security configurations...</span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div className="lg:col-span-4 flex flex-col gap-3">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="h-28 bg-field/60 rounded-2xl animate-pulse" />
+              ))}
+            </div>
+            <div className="lg:col-span-8">
+              <div className="h-[520px] bg-field/60 rounded-2xl animate-pulse" />
+            </div>
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">

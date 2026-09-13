@@ -143,8 +143,26 @@ export default function PortalNegotiationDetailPage() {
 
   if (loading) {
     return (
-      <div className="flex h-[calc(100vh-3.5rem)] items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-ink" />
+      <div className="flex h-[calc(100vh-3.5rem)] min-h-0 flex-col bg-canvas">
+        <div className="flex shrink-0 items-center gap-3 border-b border-border/60 bg-surface/90 px-4 py-3 sm:px-5">
+          <div className="h-9 w-9 animate-pulse rounded-full bg-field/60" />
+          <div className="flex flex-col gap-2">
+            <div className="h-4 w-48 animate-pulse rounded-full bg-field/60" />
+            <div className="h-3 w-32 animate-pulse rounded-full bg-field/60" />
+          </div>
+        </div>
+        <div className="grid min-h-0 flex-1 lg:grid-cols-12">
+          <div className="hidden min-h-0 flex-col gap-3 border-r border-border/60 p-4 sm:p-5 lg:col-span-7 lg:flex">
+            <div className="h-16 w-2/3 animate-pulse rounded-2xl bg-field/60" />
+            <div className="ml-auto h-16 w-1/2 animate-pulse rounded-2xl bg-field/60" />
+            <div className="h-16 w-3/5 animate-pulse rounded-2xl bg-field/60" />
+          </div>
+          <div className="col-span-full flex min-h-0 flex-col gap-3 bg-surface p-4 sm:p-5 lg:col-span-5">
+            <div className="h-40 animate-pulse rounded-2xl bg-field/60" />
+            <div className="h-40 animate-pulse rounded-2xl bg-field/60" />
+            <div className="h-40 animate-pulse rounded-2xl bg-field/60" />
+          </div>
+        </div>
       </div>
     );
   }

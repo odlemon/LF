@@ -62,9 +62,10 @@ export function AuditTrailPanel({
       </div>
 
       {isLoading ? (
-        // Inline Loading Spinner
-        <div className="flex items-center justify-center py-8">
-          <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary" />
+        <div className="flex flex-col gap-3 pl-2">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <div key={i} className="h-3.5 w-4/5 animate-pulse rounded-full bg-field/60" />
+          ))}
         </div>
       ) : events.length === 0 ? (
         // Small muted message if no events exist

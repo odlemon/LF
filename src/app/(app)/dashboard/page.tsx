@@ -37,8 +37,27 @@ export default function DashboardPage() {
 
   if (loading) {
     return (
-      <div className="flex min-h-[60vh] items-center justify-center">
-        <div className="h-6 w-6 animate-spin rounded-full border-2 border-ink/15 border-t-ink/60" />
+      <div className="relative mx-auto flex w-full max-w-[1400px] flex-col gap-6 px-5 pt-6 sm:gap-7 sm:px-8 sm:pt-8">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div className="flex flex-col gap-2">
+            <div className="h-3 w-40 animate-pulse rounded-full bg-field/60" />
+            <div className="h-7 w-64 animate-pulse rounded-full bg-field/60" />
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-6">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="h-24 animate-pulse rounded-2xl bg-field/60" />
+          ))}
+        </div>
+        <div className="grid grid-cols-1 gap-4 sm:gap-5 xl:grid-cols-12">
+          <div className="h-64 animate-pulse rounded-[1.5rem] bg-field/60 xl:col-span-7" />
+          <div className="h-64 animate-pulse rounded-[1.5rem] bg-field/60 xl:col-span-5" />
+        </div>
+        <div className="grid grid-cols-1 gap-4 sm:gap-5 xl:grid-cols-12">
+          <div className="h-56 animate-pulse rounded-[1.5rem] bg-field/60 xl:col-span-5" />
+          <div className="h-56 animate-pulse rounded-[1.5rem] bg-field/60 xl:col-span-7" />
+        </div>
+        <div className="h-72 animate-pulse rounded-[1.5rem] bg-field/60" />
       </div>
     );
   }

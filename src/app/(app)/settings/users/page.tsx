@@ -149,8 +149,10 @@ export default function UsersPage() {
         </div>
 
         {usersLoading ? (
-          <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
+          <div className="bg-surface rounded-2xl shadow-sm border border-border/50 p-4 flex flex-col gap-3">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="h-14 bg-field/60 rounded-xl animate-pulse" />
+            ))}
           </div>
         ) : (
           <div className="bg-surface rounded-2xl shadow-sm border border-border/50 overflow-hidden">
@@ -417,8 +419,10 @@ export default function UsersPage() {
                 </div>
 
                 {rolesLoading ? (
-                  <div className="flex justify-center items-center h-32">
-                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary" />
+                  <div className="flex flex-col gap-2.5">
+                    {Array.from({ length: 4 }).map((_, i) => (
+                      <div key={i} className="h-16 bg-field/60 rounded-xl animate-pulse" />
+                    ))}
                   </div>
                 ) : (
                   <div className="space-y-3">
