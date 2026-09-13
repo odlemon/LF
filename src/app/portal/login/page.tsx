@@ -62,8 +62,14 @@ function PortalLoginHandler() {
 
   return (
     <div className={`${CARD_CLASS} animate-fade-in-up`}>
-      <div className="w-12 h-12 rounded-full bg-red-50 dark:bg-red-950/40 flex items-center justify-center">
-        <HiXCircle className="w-8 h-8 text-red-600 dark:text-red-400" />
+      {/*
+        No dark: variant here on purpose -- like every other pre-auth page (/login,
+        /client-login), this route isn't wrapped in ThemeProvider, so a `.dark` class is
+        never applied to it regardless of the visitor's preference. Adding dark: classes
+        here would be dead code implying a capability this page structurally doesn't have.
+      */}
+      <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center">
+        <HiXCircle className="w-8 h-8 text-red-500" />
       </div>
       <div>
         <h1 className="text-xl font-bold text-ink mb-1.5">Verification Failed</h1>
