@@ -1,5 +1,6 @@
 "use client";
 
+import { Badge, type BadgeVariant } from "@/components/ui/Badge";
 import type { EngagementPack } from "../types";
 import { formatMoney } from "../utils";
 
@@ -100,6 +101,17 @@ export function EngagementPackDocument({ pack, section = "letter" }: Props) {
   );
 }
 
+function engagementPackStatusVariant(status?: string | null): BadgeVariant {
+  switch (status) {
+    case "SENT":
+      return "info";
+    case "ACKNOWLEDGED":
+      return "success";
+    default:
+      return "neutral";
+  }
+}
+
 export function EngagementPackStatusBadge({
   status,
 }: {
@@ -113,9 +125,5 @@ export function EngagementPackStatusBadge({
         : status === "DRAFT"
           ? "Draft"
           : status || "—";
-  return (
-    <span className="inline-flex items-center rounded-full border border-border/80 bg-field px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">
-      {label}
-    </span>
-  );
+  return <Badge variant={engagementPackStatusVariant(status)}>{label}</Badge>;
 }

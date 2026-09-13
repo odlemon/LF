@@ -119,7 +119,7 @@ export function RateCardEditor({
                         };
                         onChange(next);
                       }}
-                      className="h-9 w-[5.75rem] rounded-lg border border-border bg-field px-2 text-right text-sm font-semibold tabular-nums text-ink focus:outline-none focus:ring-2 focus:ring-primary/15"
+                      className="h-9 w-[5.75rem] rounded-full border border-border bg-field px-2 text-right text-sm font-semibold tabular-nums text-ink focus:outline-none focus:ring-2 focus:ring-primary/15"
                     />
                     <span className="text-[11px] text-ink/60">/hr</span>
                   </div>

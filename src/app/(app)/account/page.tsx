@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { useAuth } from "@/hooks/useAuth";
@@ -48,12 +49,7 @@ export default function FirmAccountPage() {
                 <p className="mt-0.5 text-sm text-ink/60">{user?.email}</p>
                 <div className="mt-3 flex flex-wrap gap-1.5">
                   {roles.map((role) => (
-                    <span
-                      key={role}
-                      className="rounded-full border border-border bg-field px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-ink/60"
-                    >
-                      {role.replace(/_/g, " ")}
-                    </span>
+                    <Badge key={role}>{role.replace(/_/g, " ")}</Badge>
                   ))}
                 </div>
               </div>

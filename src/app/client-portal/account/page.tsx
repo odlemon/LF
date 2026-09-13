@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { HiOutlineOfficeBuilding, HiOutlineMail, HiOutlineGlobe } from "react-icons/hi";
+import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { useClientAuth } from "@/hooks/useClientAuth";
 import { updatePortalMe } from "@/modules/client-portal/api";
@@ -47,9 +48,7 @@ export default function ClientAccountPage() {
               {user?.contactName}
             </h2>
             <p className="mt-0.5 text-sm text-ink/60">{user?.clientName}</p>
-            <span className="mt-1.5 inline-block rounded-full border border-border bg-field px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-ink/60">
-              {user?.roleLabel || "Client representative"}
-            </span>
+            <Badge className="mt-1.5">{user?.roleLabel || "Client representative"}</Badge>
           </div>
         </section>
 

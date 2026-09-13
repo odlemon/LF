@@ -165,7 +165,7 @@ export function EngagementPackWorkspace({
           <button
             type="button"
             onClick={onClose}
-            className="rounded-lg p-2 text-ink/60 hover:bg-hover hover:text-ink"
+            className="rounded-full p-2 text-ink/60 hover:bg-hover hover:text-ink"
             aria-label="Close"
           >
             <HiX className="h-5 w-5" />
