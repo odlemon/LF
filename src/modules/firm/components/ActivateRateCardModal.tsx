@@ -44,7 +44,7 @@ export function ActivateRateCardModal({
         <button
           onClick={onClose}
           aria-label="Close"
-          className="absolute top-4 right-4 text-ink/60 hover:text-ink/65 transition-colors"
+          className="absolute top-4 right-4 text-ink/60 hover:text-ink/65 p-1 rounded-full hover:bg-field transition-colors"
         >
           <HiX size={20} />
         </button>

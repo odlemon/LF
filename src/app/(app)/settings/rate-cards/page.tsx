@@ -143,10 +143,10 @@ export default function RateCardsPage() {
                           Effective: {card.effectiveDate} {card.expiryDate ? `to ${card.expiryDate}` : "(No expiry)"}
                         </p>
                         <div className="flex items-center gap-2 mt-2.5">
-                          <span className="inline-flex items-center gap-1 text-[10px] font-bold text-ink/80 bg-hover/50 px-2 py-0.5 rounded uppercase tracking-wider border border-border">
+                          <span className="inline-flex items-center gap-1 text-[10px] font-bold text-ink/80 bg-hover/50 px-2 py-0.5 rounded-lg uppercase tracking-wider border border-border">
                             Currency: {card.currency}
                           </span>
-                          <span className="inline-flex items-center gap-1 text-[10px] font-bold text-ink/80 bg-hover/50 px-2 py-0.5 rounded uppercase tracking-wider border border-border">
+                          <span className="inline-flex items-center gap-1 text-[10px] font-bold text-ink/80 bg-hover/50 px-2 py-0.5 rounded-lg uppercase tracking-wider border border-border">
                             Office: {card.officeCode || "Firm default"}
                           </span>
                         </div>
@@ -190,7 +190,7 @@ export default function RateCardsPage() {
                         <th className="px-6 py-4 text-right">Actions</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-100/60">
+                    <tbody className="divide-y divide-border/50">
                       {draftCards.map((card) => (
                         <tr key={card.uid} className="hover:bg-field/40 text-ink transition-colors">
                           <td className="px-6 py-4 font-semibold text-ink flex items-center gap-3">
@@ -246,7 +246,7 @@ export default function RateCardsPage() {
                         <th className="px-6 py-4 text-right"></th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-100/60">
+                    <tbody className="divide-y divide-border/50">
                       {archivedCards.map((card) => (
                         <tr key={card.uid} className="opacity-60 text-ink/90 bg-field/20 hover:bg-field/40 transition-colors">
                           <td className="px-6 py-4 font-semibold flex items-center gap-3">

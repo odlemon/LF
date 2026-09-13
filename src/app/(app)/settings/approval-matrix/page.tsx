@@ -104,7 +104,7 @@ export default function ApprovalMatrixPage() {
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <span className="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-xs font-bold shrink-0">
+                    <span className="w-8 h-8 rounded-lg border border-primary/10 bg-primary/10 text-primary flex items-center justify-center text-xs font-bold shrink-0">
                       {index + 1}
                     </span>
                     <div className="flex flex-col gap-1">

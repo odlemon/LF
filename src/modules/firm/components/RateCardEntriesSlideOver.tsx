@@ -93,7 +93,7 @@ export function RateCardEntriesSlideOver({
           <button
             onClick={onClose}
             aria-label="Close"
-            className="p-2 text-ink/60 hover:text-ink/65 rounded-lg hover:bg-field transition-colors"
+            className="p-2 text-ink/60 hover:text-ink/65 rounded-full hover:bg-field transition-colors"
           >
             <HiX className="w-5 h-5" />
           </button>
@@ -127,7 +127,7 @@ export function RateCardEntriesSlideOver({
                         {!isCardReadOnly && <th className="px-4 py-3 text-center w-12"></th>}
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-100">
+                    <tbody className="divide-y divide-border/50">
                       {entries.map((entry) => (
                         <tr key={entry.uid} className="hover:bg-field/50 text-ink transition-colors">
                           <td className="px-4 py-3 font-medium">{getLevelName(entry.feeEarnerLevelUid)}</td>
@@ -141,7 +141,7 @@ export function RateCardEntriesSlideOver({
                               <button
                                 onClick={() => deleteEntry(entry.uid)}
                                 aria-label="Delete rate card entry"
-                                className="text-red-500 hover:text-red-700 p-1 rounded hover:bg-red-50 transition-colors"
+                                className="text-red-500 hover:text-red-700 p-1 rounded-full hover:bg-red-50 transition-colors"
                               >
                                 <HiTrash className="w-4 h-4" />
                               </button>

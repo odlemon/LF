@@ -85,7 +85,7 @@ export function AuditTrailPanel({
               return (
                 <div key={event.id} className="relative text-xs leading-normal">
                   {/* Timeline Circle Bullet */}
-                  <span className={`absolute -left-[30px] top-1 w-2.5 h-2.5 rounded-full ring-4 ring-white ${circleBgColor}`} />
+                  <span className={`absolute -left-[30px] top-1 w-2.5 h-2.5 rounded-full ring-4 ring-surface ${circleBgColor}`} />
                   
                   <div className="text-ink/65">
                     <strong className="font-bold text-ink pr-1 hover:text-primary transition-colors">

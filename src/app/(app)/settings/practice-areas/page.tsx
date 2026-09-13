@@ -3,6 +3,7 @@
 
 import React, { useState } from "react";
 import { usePracticeAreas } from "@/modules/firm/hooks/useFirm";
+import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { PracticeAreaFormModal } from "@/modules/firm/components/PracticeAreaFormModal";
 import { PracticeArea } from "@/modules/firm/types";
@@ -99,19 +100,13 @@ export default function PracticeAreasPage() {
                     <span className="text-[15px] font-bold text-ink leading-tight">
                       {area.name}
                     </span>
-                    <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-canvas text-ink/80 uppercase">
-                      {area.code}
-                    </span>
+                    <Badge>{area.code}</Badge>
                   </div>
                   <span>
                     {area.active ? (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-hover text-ink/80 border border-border uppercase tracking-wide">
-                        Active
-                      </span>
+                      <Badge variant="success">Active</Badge>
                     ) : (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-canvas text-ink/60 border border-border uppercase tracking-wide">
-                        Inactive
-                      </span>
+                      <Badge variant="neutral">Inactive</Badge>
                     )}
                   </span>
                 </div>
@@ -123,7 +118,7 @@ export default function PracticeAreasPage() {
               <div className="flex items-center justify-between gap-4 pt-3 border-t border-border">
                 <button
                   onClick={() => handleOpenEdit(area)}
-                  className="text-xs font-semibold text-ink/65 hover:text-primary flex items-center gap-1.5 transition-colors py-1.5 -my-1.5 rounded"
+                  className="text-xs font-semibold text-ink/65 hover:text-primary flex items-center gap-1.5 transition-colors py-1.5 -my-1.5 rounded-full"
                 >
                   <HiPencil className="w-3.5 h-3.5" />
                   Edit
@@ -136,14 +131,14 @@ export default function PracticeAreasPage() {
                       <button
                         onClick={() => handleDeactivate(area.uid)}
                         aria-label="Confirm deactivation"
-                        className="p-1 text-ink/70 hover:bg-hover rounded transition-colors"
+                        className="p-1 text-ink/70 hover:bg-hover rounded-full transition-colors"
                       >
                         <HiCheck className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => setConfirmDeactivateUid(null)}
                         aria-label="Cancel deactivation"
-                        className="p-1 text-ink/60 hover:bg-field rounded transition-colors"
+                        className="p-1 text-ink/60 hover:bg-field rounded-full transition-colors"
                       >
                         <HiX className="w-4 h-4" />
                       </button>
@@ -151,7 +146,7 @@ export default function PracticeAreasPage() {
                   ) : (
                     <button
                       onClick={() => setConfirmDeactivateUid(area.uid)}
-                      className="text-xs font-semibold text-red-600 hover:text-red-800 transition-colors py-1.5 -my-1.5 rounded dark:text-red-400"
+                      className="text-xs font-semibold text-red-600 hover:text-red-800 transition-colors py-1.5 -my-1.5 rounded-full dark:text-red-400"
                     >
                       Deactivate
                     </button>
