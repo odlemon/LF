@@ -30,6 +30,7 @@ import {
   HiOutlineCloudUpload,
   HiOutlineKey,
   HiOutlineOfficeBuilding,
+  HiOutlineIdentification,
   HiChevronDoubleLeft,
   HiChevronDoubleRight,
   HiOutlineInboxIn,
@@ -87,22 +88,43 @@ export function Sidebar({ isMobileOpen = false, onMobileClose }: SidebarProps = 
     { label: "Demo Requests", route: "/settings/demo-requests", permission: PERMISSIONS.DEMO_REQUEST_READ, icon: HiOutlineInboxIn },
   ];
 
-  const settingsNavItems: NavItem[] = [
-    { label: "Practice Areas", route: "/settings/practice-areas", permission: PERMISSIONS.PRACTICE_AREA_READ, icon: HiFolder },
-    { label: "Fee Earner Levels", route: "/settings/fee-earner-levels", permission: "FEE_EARNER_READ", icon: HiScale },
-    { label: "Rate Cards", route: "/settings/rate-cards", permission: PERMISSIONS.RATE_CARD_READ, icon: HiDatabase },
-    { label: "FX Rates", route: "/settings/fx-rates", permission: PERMISSIONS.FIRM_READ, icon: HiOutlineSwitchHorizontal },
-    { label: "Approval Matrix", route: "/settings/approval-matrix", permission: PERMISSIONS.FIRM_READ, icon: HiOutlineClipboardCheck },
-    { label: "Volume Discounts", route: "/settings/volume-discounts", permission: "VOLUME_DISCOUNT_PROGRAM_READ", icon: HiOutlineTrendingDown },
-    { label: "Billing & Usage", route: "/settings/billing", permission: [PERMISSIONS.BILLING_ACCOUNT_READ, PERMISSIONS.USAGE_READ], icon: HiReceiptRefund },
-    { label: "Firm Consumption", route: "/settings/usage/firms", permission: PERMISSIONS.USAGE_CROSS_FIRM_READ, icon: HiOutlineOfficeBuilding },
-    { label: "Guardrails", route: "/settings/guardrails", permission: PERMISSIONS.FIRM_READ, icon: HiShieldCheck },
-    { label: "Data Room", route: "/settings/data-room", permission: "DATAROOM_READ", icon: HiDatabase },
-    { label: "PMS Connectors", route: "/settings/data-room/pms-connectors", permission: "DATAROOM_READ", icon: HiOutlineCloudUpload },
-    { label: "Users", route: "/settings/users", permission: PERMISSIONS.USER_READ, icon: HiUsers },
-    { label: "Roles", route: "/settings/roles", permission: PERMISSIONS.ROLE_READ, icon: HiLockClosed },
-    { label: "AI Configuration", route: "/settings/ai-config", permission: "AI_CONFIG_READ", icon: HiChip },
-    { label: "SSO Admin", route: "/settings/sso", permission: PERMISSIONS.FIRM_READ, icon: HiOutlineKey },
+  const settingsNavGroups: { heading: string; items: NavItem[] }[] = [
+    {
+      heading: "Firm Setup",
+      items: [
+        { label: "Firm Profile", route: "/settings/firm", permission: PERMISSIONS.FIRM_READ, icon: HiOutlineIdentification },
+        { label: "Practice Areas", route: "/settings/practice-areas", permission: PERMISSIONS.PRACTICE_AREA_READ, icon: HiFolder },
+        { label: "Fee Earner Levels", route: "/settings/fee-earner-levels", permission: "FEE_EARNER_READ", icon: HiScale },
+        { label: "Rate Cards", route: "/settings/rate-cards", permission: PERMISSIONS.RATE_CARD_READ, icon: HiDatabase },
+        { label: "FX Rates", route: "/settings/fx-rates", permission: PERMISSIONS.FIRM_READ, icon: HiOutlineSwitchHorizontal },
+        { label: "Approval Matrix", route: "/settings/approval-matrix", permission: PERMISSIONS.FIRM_READ, icon: HiOutlineClipboardCheck },
+        { label: "Guardrails", route: "/settings/guardrails", permission: PERMISSIONS.FIRM_READ, icon: HiShieldCheck },
+      ],
+    },
+    {
+      heading: "Billing & Usage",
+      items: [
+        { label: "Billing & Usage", route: "/settings/billing", permission: [PERMISSIONS.BILLING_ACCOUNT_READ, PERMISSIONS.USAGE_READ], icon: HiReceiptRefund },
+        { label: "Volume Discounts", route: "/settings/volume-discounts", permission: "VOLUME_DISCOUNT_PROGRAM_READ", icon: HiOutlineTrendingDown },
+        { label: "Firm Consumption", route: "/settings/usage/firms", permission: PERMISSIONS.USAGE_CROSS_FIRM_READ, icon: HiOutlineOfficeBuilding },
+      ],
+    },
+    {
+      heading: "Data & AI",
+      items: [
+        { label: "Data Room", route: "/settings/data-room", permission: "DATAROOM_READ", icon: HiDatabase },
+        { label: "PMS Connectors", route: "/settings/data-room/pms-connectors", permission: "DATAROOM_READ", icon: HiOutlineCloudUpload },
+        { label: "AI Configuration", route: "/settings/ai-config", permission: "AI_CONFIG_READ", icon: HiChip },
+      ],
+    },
+    {
+      heading: "Access & Security",
+      items: [
+        { label: "Users", route: "/settings/users", permission: PERMISSIONS.USER_READ, icon: HiUsers },
+        { label: "Roles", route: "/settings/roles", permission: PERMISSIONS.ROLE_READ, icon: HiLockClosed },
+        { label: "SSO Admin", route: "/settings/sso", permission: PERMISSIONS.FIRM_READ, icon: HiOutlineKey },
+      ],
+    },
   ];
 
   const renderItem = (item: NavItem) => {
@@ -175,9 +197,14 @@ export function Sidebar({ isMobileOpen = false, onMobileClose }: SidebarProps = 
     }
     return checkNavPermission(i.permission);
   });
-  const visibleSettingsItems = isPartnerOnly
+  const visibleSettingsGroups = isPartnerOnly
     ? []
-    : settingsNavItems.filter((i) => checkNavPermission(i.permission));
+    : settingsNavGroups
+        .map((group) => ({
+          heading: group.heading,
+          items: group.items.filter((i) => checkNavPermission(i.permission)),
+        }))
+        .filter((group) => group.items.length > 0);
 
   return (
     <>
@@ -201,17 +228,6 @@ export function Sidebar({ isMobileOpen = false, onMobileClose }: SidebarProps = 
         <Link href="/dashboard" className="inline-flex items-center shrink-0" aria-label="Lysp home" onClick={onMobileClose}>
           <PlatformLogo size={40} />
         </Link>
-        {/* Rendered 17px tall, under the 24x24 WCAG 2.2 AA target size and awkward to hit on a
-            phone. Padded to a real target without changing how it looks. */}
-        {!isPartnerOnly && !isCollapsed && (
-          <Link
-            href="/settings/firm"
-            onClick={onMobileClose}
-            className="inline-flex shrink-0 items-center rounded-lg px-2 py-1.5 text-[11px] font-semibold text-ink/60 transition-colors hover:bg-hover hover:text-ink"
-          >
-            Firm
-          </Link>
-        )}
         <button
           type="button"
           onClick={toggleCollapsed}
@@ -232,7 +248,7 @@ export function Sidebar({ isMobileOpen = false, onMobileClose }: SidebarProps = 
           {visibleMainItems.map(renderItem)}
         </div>
 
-        {visibleSettingsItems.length > 0 && (
+        {visibleSettingsGroups.length > 0 && (
           <div className="flex flex-col gap-0.5">
             {isCollapsed ? (
               <div className="my-2 border-t border-border" aria-hidden />
@@ -254,11 +270,20 @@ export function Sidebar({ isMobileOpen = false, onMobileClose }: SidebarProps = 
                 group always shows; the toggle only applies to the expanded rail. */}
             {(isSettingsOpen || isCollapsed) && (
               <div
-                className={`flex flex-col gap-0.5 transition-all duration-300 animate-fade-in ${
+                className={`flex flex-col gap-3 transition-all duration-300 animate-fade-in ${
                   isCollapsed ? "" : "pl-1"
                 }`}
               >
-                {visibleSettingsItems.map(renderItem)}
+                {visibleSettingsGroups.map((group) => (
+                  <div key={group.heading} className="flex flex-col gap-0.5">
+                    {!isCollapsed && (
+                      <div className="px-4 pb-1 pt-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-ink/40">
+                        {group.heading}
+                      </div>
+                    )}
+                    {group.items.map(renderItem)}
+                  </div>
+                ))}
               </div>
             )}
           </div>
