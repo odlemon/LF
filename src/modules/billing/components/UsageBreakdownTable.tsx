@@ -23,10 +23,10 @@ export function UsageBreakdownTable({ title, caption, rows, emptyMessage }: Prop
           {emptyMessage ?? "Nothing recorded for this period yet."}
         </p>
       ) : (
-        <div className="mt-4 overflow-x-auto">
+        <div className="mt-4 max-h-72 overflow-y-auto overflow-x-auto rates-scrollable">
           <table className="w-full min-w-[380px] text-sm">
             <thead>
-              <tr className="border-b border-border text-left text-xs text-ink/60">
+              <tr className="sticky top-0 border-b border-border bg-surface text-left text-xs text-ink/60">
                 <th className="pb-2 font-medium">Bucket</th>
                 <th className="pb-2 text-right font-medium">Events</th>
                 <th className="pb-2 text-right font-medium">AI tokens</th>

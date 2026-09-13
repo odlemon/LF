@@ -1,28 +1,92 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { billingApi } from "@/lib/api/modules/billing.api";
+import { meteringApi } from "@/lib/api/modules/metering.api";
 import { PERMISSIONS, hasPermission } from "@/lib/utils/permissions";
 import { useAuth } from "@/hooks/useAuth";
 import { AccountOverview } from "@/modules/billing/components/AccountOverview";
 import { UsageChart } from "@/modules/billing/components/UsageChart";
 import { RecentTransactions } from "@/modules/billing/components/RecentTransactions";
+import { EntitlementBar } from "@/modules/billing/components/EntitlementBar";
+import { UsageBreakdownTable } from "@/modules/billing/components/UsageBreakdownTable";
+import { ContractFormModal } from "@/modules/billing/components/ContractFormModal";
 import { Button } from "@/components/ui/Button";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { Select } from "@/components/ui/Select";
+import { Tabs } from "@/components/ui/Tabs";
 import toast from "react-hot-toast";
-import { HiOutlineReceiptRefund } from "react-icons/hi";
+import {
+  HiOutlineReceiptRefund,
+  HiOutlineChartBar,
+  HiOutlineDocumentDownload,
+  HiOutlineDownload,
+  HiOutlinePencilAlt,
+} from "react-icons/hi";
+import type {
+  AiDetailRow,
+  BreakdownRow,
+  ConsumptionSnapshot,
+  FirmContract,
+  LineItemRow,
+} from "@/modules/billing/metering.types";
+
+/** Last 6 months, newest first, as the yyyy-MM keys the backend groups by. */
+function recentPeriods(count = 6): string[] {
+  const out: string[] = [];
+  const now = new Date();
+  for (let i = 0; i < count; i++) {
+    const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    out.push(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`);
+  }
+  return out;
+}
+
+type Tab = "overview" | "usage";
 
 export default function BillingPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { user } = useAuth();
+
+  const canSeeBillingTab = user?.permissions
+    ? hasPermission(user.permissions, PERMISSIONS.BILLING_ACCOUNT_READ)
+    : false;
+  const canSeeUsageTab = user?.permissions
+    ? hasPermission(user.permissions, PERMISSIONS.USAGE_READ)
+    : false;
+  const canAdjust = user?.permissions
+    ? hasPermission(user.permissions, PERMISSIONS.BILLING_ADJUSTMENT_CREATE)
+    : false;
+  const canSeeUserDetail = user?.permissions
+    ? hasPermission(user.permissions, PERMISSIONS.USAGE_USER_DETAIL_READ)
+    : false;
+  const canManageContract = user?.permissions
+    ? hasPermission(user.permissions, PERMISSIONS.CONTRACT_MANAGE)
+    : false;
+
+  const [activeTab, setActiveTab] = useState<Tab>(
+    searchParams.get("tab") === "usage" ? "usage" : "overview"
+  );
+
+  // Once permissions resolve, if the current tab turns out not to be visible
+  // to this user but the other one is, land on the one they can actually see.
+  useEffect(() => {
+    if (activeTab === "overview" && !canSeeBillingTab && canSeeUsageTab) {
+      setActiveTab("usage");
+    } else if (activeTab === "usage" && !canSeeUsageTab && canSeeBillingTab) {
+      setActiveTab("overview");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [canSeeBillingTab, canSeeUsageTab]);
+
+  // --- Overview (credit account) state ---
   const [account, setAccount] = useState<any>(null);
   const [transactions, setTransactions] = useState<any[]>([]);
-  const [usageSummary, setUsageSummary] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  const canAdjust = user?.permissions ? hasPermission(user.permissions, PERMISSIONS.BILLING_ADJUSTMENT_CREATE) : false;
+  const [chartUsageSummary, setChartUsageSummary] = useState<any[]>([]);
+  const [billingLoading, setBillingLoading] = useState(true);
+  const [billingError, setBillingError] = useState<string | null>(null);
 
   const getDefaultDateRange = () => {
     const to = new Date();
@@ -32,7 +96,7 @@ export default function BillingPage() {
     return { from: formatDate(from), to: formatDate(to) };
   };
 
-  const load = useCallback(async () => {
+  const loadBilling = useCallback(async () => {
     try {
       const { from, to } = getDefaultDateRange();
       const [accountData, txData, usageData] = await Promise.all([
@@ -42,18 +106,119 @@ export default function BillingPage() {
       ]);
       setAccount(accountData);
       setTransactions(txData.content || txData);
-      setUsageSummary(usageData);
-      setError(null);
+      setChartUsageSummary(usageData);
+      setBillingError(null);
     } catch (err: any) {
-      setError(err.response?.data?.message || err.message || "Failed to load billing data");
+      setBillingError(err.response?.data?.message || err.message || "Failed to load billing data");
     } finally {
-      setIsLoading(false);
+      setBillingLoading(false);
     }
   }, []);
 
   useEffect(() => {
-    void load();
-  }, [load]);
+    if (canSeeBillingTab) void loadBilling();
+    else setBillingLoading(false);
+  }, [loadBilling, canSeeBillingTab]);
+
+  // --- Usage (consumption/metering) state ---
+  const periods = recentPeriods();
+  const [period, setPeriod] = useState(periods[0]);
+
+  const [snapshot, setSnapshot] = useState<ConsumptionSnapshot | null>(null);
+  const [byOffice, setByOffice] = useState<BreakdownRow[]>([]);
+  const [byPractice, setByPractice] = useState<BreakdownRow[]>([]);
+  const [byClient, setByClient] = useState<BreakdownRow[]>([]);
+  const [byUser, setByUser] = useState<BreakdownRow[]>([]);
+  const [aiDetail, setAiDetail] = useState<AiDetailRow[]>([]);
+  const [lineItems, setLineItems] = useState<LineItemRow[]>([]);
+  const [contract, setContract] = useState<FirmContract | null>(null);
+  const [contractModalOpen, setContractModalOpen] = useState(false);
+  const [usageLoading, setUsageLoading] = useState(true);
+  const [usageError, setUsageError] = useState<string | null>(null);
+
+  const loadUsage = useCallback(async () => {
+    setUsageLoading(true);
+    try {
+      const [snap, office, practice, client, ai, statement] = await Promise.all([
+        meteringApi.getSummary(period),
+        meteringApi.getByOffice(period),
+        meteringApi.getByPracticeArea(period),
+        meteringApi.getByClient(period),
+        meteringApi.getAiDetail(period),
+        meteringApi.getStatement(period),
+      ]);
+      setSnapshot(snap);
+      setByOffice(office);
+      setByPractice(practice);
+      setByClient(client);
+      setAiDetail(ai);
+      setLineItems(statement.lineItems ?? []);
+      // An uncontracted firm is a normal state, not an error — the API answers 204.
+      try {
+        setContract(await meteringApi.getContract());
+      } catch {
+        setContract(null);
+      }
+
+      // Per-person figures are separately permissioned; a 403 here must not blank the page.
+      if (canSeeUserDetail) {
+        try {
+          setByUser(await meteringApi.getByUser(period));
+        } catch {
+          setByUser([]);
+        }
+      } else {
+        setByUser([]);
+      }
+      setUsageError(null);
+    } catch (err: any) {
+      setUsageError(err.response?.data?.message || err.message || "Failed to load usage data");
+    } finally {
+      setUsageLoading(false);
+    }
+  }, [period, canSeeUserDetail]);
+
+  useEffect(() => {
+    if (canSeeUsageTab) void loadUsage();
+    else setUsageLoading(false);
+  }, [loadUsage, canSeeUsageTab]);
+
+  const save = (blob: Blob, filename: string) => {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const downloadCsv = async () => {
+    try {
+      const csv = await meteringApi.getStatementCsv(period);
+      save(new Blob([csv], { type: "text/csv;charset=utf-8" }), `lysp-usage-${period}.csv`);
+    } catch (err: any) {
+      toast.error(err.response?.data?.message || "Could not export the statement");
+    }
+  };
+
+  const downloadPdf = async () => {
+    try {
+      const pdf = await meteringApi.getStatementPdf(period);
+      save(new Blob([pdf], { type: "application/pdf" }), `lysp-statement-${period}.pdf`);
+    } catch (err: any) {
+      toast.error(err.response?.data?.message || "Could not render the statement");
+    }
+  };
+
+  const showTabs = canSeeBillingTab && canSeeUsageTab;
+  const heading = showTabs ? "Billing" : activeTab === "usage" ? "Usage & Billing" : "Billing";
+  const eyebrow = showTabs || activeTab === "overview" ? "Credit account" : "Consumption";
+  const subtitle =
+    showTabs
+      ? "Monitor your credit balance, track feature usage, and manage top-ups."
+      : activeTab === "overview"
+        ? "Monitor your credit balance, track feature usage, and manage top-ups."
+        : "What your firm consumed this period, attributed to office, practice area and client. Figures come from recorded events, not estimates — AI token counts are the exact numbers the model provider returned.";
 
   return (
     <div className="relative min-h-full pb-16">
@@ -69,61 +234,355 @@ export default function BillingPage() {
         {/* Header */}
         <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between animate-fade-in-up">
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/60">Credit account</p>
-            <h1 className="mt-2 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">Billing</h1>
-            <p className="mt-2 text-sm text-ink/60 max-w-md">
-              Monitor your credit balance, track feature usage, and manage top-ups.
-            </p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/60">{eyebrow}</p>
+            <h1 className="mt-2 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">{heading}</h1>
+            <p className="mt-2 max-w-lg text-sm text-ink/60">{subtitle}</p>
           </div>
-          {canAdjust && (
-            <Button variant="cta" onClick={() => router.push("/settings/billing/adjust")} className="shrink-0">
-              <HiOutlineReceiptRefund className="h-4 w-4" />
-              Adjust credits
-            </Button>
-          )}
+          <div className="flex shrink-0 items-center gap-2">
+            {activeTab === "overview" && canAdjust && (
+              <Button variant="cta" onClick={() => router.push("/settings/billing/adjust")}>
+                <HiOutlineReceiptRefund className="h-4 w-4" />
+                Adjust credits
+              </Button>
+            )}
+            {activeTab === "usage" && canSeeUsageTab && (
+              <>
+                <Select
+                  className="w-44"
+                  value={period}
+                  onChange={setPeriod}
+                  options={periods.map((p) => ({ value: p, label: p }))}
+                  placeholder="Billing period"
+                />
+                <Button variant="secondary" onClick={downloadCsv}>
+                  <HiOutlineDownload className="h-4 w-4" />
+                  CSV
+                </Button>
+                <Button variant="cta" onClick={downloadPdf}>
+                  <HiOutlineDocumentDownload className="h-4 w-4" />
+                  Statement PDF
+                </Button>
+              </>
+            )}
+          </div>
         </header>
 
-        {error && (
-          <div className="rounded-2xl border border-red-200 bg-red-50/80 p-4 text-sm font-medium text-red-700 animate-fade-in backdrop-blur-sm">
-            {error}
-          </div>
+        {showTabs && (
+          <Tabs
+            tabs={[
+              { id: "overview", label: "Overview" },
+              { id: "usage", label: "Usage" },
+            ]}
+            activeId={activeTab}
+            onChange={setActiveTab}
+          />
         )}
 
-        {isLoading ? (
-          <div className="flex flex-col gap-6">
-            <div className="h-48 bg-field/60 rounded-[1.75rem] animate-pulse" />
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-              {Array.from({ length: 3 }).map((_, i) => (
-                <div key={i} className="h-28 bg-field/60 rounded-2xl animate-pulse" />
-              ))}
-            </div>
-            <div className="h-[340px] bg-field/60 rounded-[1.5rem] animate-pulse" />
-            <div className="h-72 bg-field/60 rounded-[1.5rem] animate-pulse" />
-          </div>
-        ) : account ? (
-          <>
-            <AccountOverview account={account} showAdjustButton={canAdjust} />
-
-            <div className="grid grid-cols-1 gap-5 xl:grid-cols-12">
-              <section className="xl:col-span-5">
-                <UsageChart data={usageSummary} loading={isLoading} />
-              </section>
-
-              <section className="xl:col-span-7">
-                <RecentTransactions limit={10} />
-              </section>
-            </div>
-          </>
-        ) : (
+        {!canSeeBillingTab && !canSeeUsageTab && user && (
           <div className="mt-16">
             <EmptyState
               icon={<HiOutlineReceiptRefund className="w-5.5 h-5.5" />}
-              title="No billing data available"
-              description="Your firm credit account has not been activated yet."
+              title="No billing access"
+              description="You don't hold a permission that grants billing or usage visibility."
             />
           </div>
         )}
+
+        {activeTab === "overview" && canSeeBillingTab && (
+          <>
+            {billingError && (
+              <div className="rounded-2xl border border-red-200 bg-red-50/80 p-4 text-sm font-medium text-red-700 animate-fade-in backdrop-blur-sm">
+                {billingError}
+              </div>
+            )}
+
+            {billingLoading ? (
+              <div className="flex flex-col gap-6">
+                <div className="h-48 bg-field/60 rounded-[1.75rem] animate-pulse" />
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                  {Array.from({ length: 3 }).map((_, i) => (
+                    <div key={i} className="h-28 bg-field/60 rounded-2xl animate-pulse" />
+                  ))}
+                </div>
+                <div className="h-[340px] bg-field/60 rounded-[1.5rem] animate-pulse" />
+                <div className="h-72 bg-field/60 rounded-[1.5rem] animate-pulse" />
+              </div>
+            ) : account ? (
+              <>
+                <AccountOverview account={account} showAdjustButton={canAdjust} />
+
+                <div className="grid grid-cols-1 gap-5 xl:grid-cols-12">
+                  <section className="xl:col-span-5">
+                    <UsageChart data={chartUsageSummary} loading={billingLoading} />
+                  </section>
+
+                  <section className="xl:col-span-7">
+                    <RecentTransactions limit={10} />
+                  </section>
+                </div>
+              </>
+            ) : (
+              <div className="mt-16">
+                <EmptyState
+                  icon={<HiOutlineReceiptRefund className="w-5.5 h-5.5" />}
+                  title="No billing data available"
+                  description="Your firm credit account has not been activated yet."
+                />
+              </div>
+            )}
+          </>
+        )}
+
+        {activeTab === "usage" && canSeeUsageTab && (
+          <>
+            {usageError && (
+              <div className="rounded-2xl border border-red-200 bg-red-50/80 p-4 text-sm font-medium text-red-700">
+                {usageError}
+              </div>
+            )}
+
+            {usageLoading ? (
+              <div className="flex flex-col gap-6">
+                <div className="h-40 animate-pulse rounded-[1.5rem] bg-field/60" />
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-4">
+                  {Array.from({ length: 4 }).map((_, i) => (
+                    <div key={i} className="h-24 animate-pulse rounded-2xl bg-field/60" />
+                  ))}
+                </div>
+                <div className="h-72 animate-pulse rounded-[1.5rem] bg-field/60" />
+              </div>
+            ) : snapshot ? (
+              <>
+                <div className="rounded-[1.5rem] border border-border bg-surface p-6">
+                  <div className="flex flex-wrap items-start justify-between gap-4">
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/60">
+                        Contract
+                      </p>
+                      {contract ? (
+                        <>
+                          <p className="mt-2 text-lg font-semibold text-ink">
+                            {contract.contractReference}
+                          </p>
+                          <p className="mt-1 text-sm text-ink/60">
+                            {contract.contractType} · {contract.currency} ·{" "}
+                            {contract.periodStart} to {contract.periodEnd}
+                            {contract.renewalDate ? ` · renews ${contract.renewalDate}` : ""}
+                          </p>
+                        </>
+                      ) : (
+                        <p className="mt-2 max-w-md text-sm text-ink/60">
+                          No contract recorded. Consumption is still metered in full — an
+                          entitlement only changes what this page reports it against.
+                        </p>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {contract && (
+                        <span
+                          className={`rounded-full px-2.5 py-1 text-xs ${
+                            contract.billable
+                              ? "bg-emerald-50 text-emerald-700"
+                              : "bg-field text-ink/60"
+                          }`}
+                        >
+                          {contract.billable ? "Billable" : "Not billable"}
+                        </span>
+                      )}
+                      {canManageContract && (
+                        <Button variant="secondary" onClick={() => setContractModalOpen(true)}>
+                          <HiOutlinePencilAlt className="h-4 w-4" />
+                          {contract ? "Update" : "Add contract"}
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                <EntitlementBar
+                  consumed={snapshot.consumedCredits}
+                  entitlement={snapshot.creditEntitlement}
+                  usagePct={snapshot.usagePct}
+                  overage={snapshot.overageCredits}
+                />
+
+                <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+                  <StatCard label="AI calls" value={snapshot.aiCalls} />
+                  <StatCard
+                    label="Tokens in / out"
+                    value={`${snapshot.aiInputTokens.toLocaleString()} / ${snapshot.aiOutputTokens.toLocaleString()}`}
+                  />
+                  <StatCard
+                    label="Active seats"
+                    value={
+                      snapshot.seatEntitlement
+                        ? `${snapshot.activeSeats} / ${snapshot.seatEntitlement}`
+                        : snapshot.activeSeats
+                    }
+                  />
+                  <StatCard label="Documents processed" value={snapshot.documentsProcessed} />
+                </div>
+
+                <div className="grid grid-cols-1 gap-5 xl:grid-cols-2">
+                  <UsageBreakdownTable
+                    title="By office"
+                    caption="Cost centre attribution for internal recharge."
+                    rows={byOffice}
+                  />
+                  <UsageBreakdownTable
+                    title="By practice area"
+                    caption="Which practices are actually using the platform."
+                    rows={byPractice}
+                  />
+                  <UsageBreakdownTable
+                    title="By client"
+                    caption="Consumption traceable to a client matter."
+                    rows={byClient}
+                  />
+                  {canSeeUserDetail ? (
+                    <UsageBreakdownTable
+                      title="By user"
+                      caption="Per-person figures. Restricted to admins holding USAGE_USER_DETAIL_READ."
+                      rows={byUser}
+                    />
+                  ) : (
+                    <div className="rounded-[1.5rem] border border-border bg-surface p-6">
+                      <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/60">
+                        By user
+                      </p>
+                      <p className="mt-4 text-sm text-ink/60">
+                        Per-person usage is restricted. It needs the USAGE_USER_DETAIL_READ
+                        permission, kept separate so firm-level reporting does not expose
+                        individual lawyers&apos; activity by default.
+                      </p>
+                    </div>
+                  )}
+                </div>
+
+                <div className="rounded-[1.5rem] border border-border bg-surface p-6">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/60">
+                    AI detail
+                  </p>
+                  <p className="mt-1.5 text-xs text-ink/60">
+                    Exact provider-reported token counts per model and feature.
+                  </p>
+                  {aiDetail.length === 0 ? (
+                    <p className="mt-4 text-sm text-ink/60">No AI calls recorded this period.</p>
+                  ) : (
+                    <div className="mt-4 max-h-72 overflow-y-auto overflow-x-auto rates-scrollable">
+                      <table className="w-full min-w-[560px] text-sm">
+                        <thead>
+                          <tr className="sticky top-0 border-b border-border bg-surface text-left text-xs text-ink/60">
+                            <th className="pb-2 font-medium">Provider</th>
+                            <th className="pb-2 font-medium">Model</th>
+                            <th className="pb-2 font-medium">Feature</th>
+                            <th className="pb-2 text-right font-medium">Calls</th>
+                            <th className="pb-2 text-right font-medium">In</th>
+                            <th className="pb-2 text-right font-medium">Out</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {aiDetail.map((row, i) => (
+                            <tr
+                              key={`${row.provider}-${row.model}-${row.feature}-${i}`}
+                              className="border-b border-border/50 last:border-0"
+                            >
+                              <td className="py-2.5 text-ink">{row.provider}</td>
+                              <td className="py-2.5 text-ink/70">{row.model}</td>
+                              <td className="py-2.5 text-ink/70">{row.feature}</td>
+                              <td className="py-2.5 text-right tabular-nums text-ink/70">
+                                {row.calls.toLocaleString()}
+                              </td>
+                              <td className="py-2.5 text-right tabular-nums text-ink/70">
+                                {row.inputTokens.toLocaleString()}
+                              </td>
+                              <td className="py-2.5 text-right tabular-nums text-ink/70">
+                                {row.outputTokens.toLocaleString()}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+                </div>
+
+                <div className="rounded-[1.5rem] border border-border bg-surface p-6">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/60">
+                    Statement line items
+                  </p>
+                  <p className="mt-1.5 text-xs text-ink/60">
+                    Every metered event type for {period}. This is what the CSV export contains.
+                  </p>
+                  {lineItems.length === 0 ? (
+                    <p className="mt-4 text-sm text-ink/60">Nothing recorded this period.</p>
+                  ) : (
+                    <div className="mt-4 max-h-72 overflow-y-auto overflow-x-auto rates-scrollable">
+                      <table className="w-full min-w-[440px] text-sm">
+                        <thead>
+                          <tr className="sticky top-0 border-b border-border bg-surface text-left text-xs text-ink/60">
+                            <th className="pb-2 font-medium">Event type</th>
+                            <th className="pb-2 font-medium">Unit</th>
+                            <th className="pb-2 text-right font-medium">Events</th>
+                            <th className="pb-2 text-right font-medium">Quantity</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {lineItems.map((li, i) => (
+                            <tr
+                              key={`${li.eventType}-${li.unit}-${i}`}
+                              className="border-b border-border/50 last:border-0"
+                            >
+                              <td className="py-2.5 text-ink">{li.eventType}</td>
+                              <td className="py-2.5 text-ink/70">{li.unit}</td>
+                              <td className="py-2.5 text-right tabular-nums text-ink/70">
+                                {li.events.toLocaleString()}
+                              </td>
+                              <td className="py-2.5 text-right tabular-nums text-ink/70">
+                                {Number(li.quantity).toLocaleString()}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+                </div>
+              </>
+            ) : (
+              <div className="mt-16">
+                <EmptyState
+                  icon={<HiOutlineChartBar className="h-5.5 w-5.5" />}
+                  title="No usage recorded"
+                  description="Nothing has been metered for this period yet."
+                />
+              </div>
+            )}
+          </>
+        )}
       </div>
+
+      <ContractFormModal
+        open={contractModalOpen}
+        onClose={() => setContractModalOpen(false)}
+        existing={contract}
+        onSaved={(saved) => {
+          setContract(saved);
+          // Entitlement figures on this tab derive from the contract, so reload them.
+          void loadUsage();
+        }}
+      />
+    </div>
+  );
+}
+
+function StatCard({ label, value }: { label: string; value: React.ReactNode }) {
+  return (
+    <div className="rounded-2xl border border-border bg-surface p-4">
+      <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">{label}</p>
+      <p className="mt-2 text-xl font-semibold tabular-nums text-ink">
+        {typeof value === "number" ? value.toLocaleString() : value}
+      </p>
     </div>
   );
 }

@@ -29,7 +29,6 @@ import {
   HiOutlineClipboardCheck,
   HiOutlineCloudUpload,
   HiOutlineKey,
-  HiOutlineChartBar,
   HiOutlineOfficeBuilding,
   HiChevronDoubleLeft,
   HiChevronDoubleRight,
@@ -41,7 +40,7 @@ const COLLAPSE_STORAGE_KEY = "lysp.sidebar.collapsed";
 interface NavItem {
   label: string;
   route: string;
-  permission?: Permission | string;
+  permission?: Permission | string | (Permission | string)[];
   icon: React.ComponentType<{ className?: string }>;
 }
 
@@ -95,8 +94,7 @@ export function Sidebar({ isMobileOpen = false, onMobileClose }: SidebarProps = 
     { label: "FX Rates", route: "/settings/fx-rates", permission: PERMISSIONS.FIRM_READ, icon: HiOutlineSwitchHorizontal },
     { label: "Approval Matrix", route: "/settings/approval-matrix", permission: PERMISSIONS.FIRM_READ, icon: HiOutlineClipboardCheck },
     { label: "Volume Discounts", route: "/settings/volume-discounts", permission: "VOLUME_DISCOUNT_PROGRAM_READ", icon: HiOutlineTrendingDown },
-    { label: "Billing", route: "/settings/billing", permission: PERMISSIONS.BILLING_ACCOUNT_READ, icon: HiReceiptRefund },
-    { label: "Usage & Billing", route: "/settings/usage", permission: PERMISSIONS.USAGE_READ, icon: HiOutlineChartBar },
+    { label: "Billing & Usage", route: "/settings/billing", permission: [PERMISSIONS.BILLING_ACCOUNT_READ, PERMISSIONS.USAGE_READ], icon: HiReceiptRefund },
     { label: "Firm Consumption", route: "/settings/usage/firms", permission: PERMISSIONS.USAGE_CROSS_FIRM_READ, icon: HiOutlineOfficeBuilding },
     { label: "Guardrails", route: "/settings/guardrails", permission: PERMISSIONS.FIRM_READ, icon: HiShieldCheck },
     { label: "Data Room", route: "/settings/data-room", permission: "DATAROOM_READ", icon: HiDatabase },
@@ -168,15 +166,18 @@ export function Sidebar({ isMobileOpen = false, onMobileClose }: SidebarProps = 
     "/clients",
   ]);
 
+  const checkNavPermission = (permission?: Permission | string | (Permission | string)[]) =>
+    Array.isArray(permission) ? permission.some(checkPermission) : checkPermission(permission);
+
   const visibleMainItems = mainNavItems.filter((i) => {
     if (isPartnerOnly) {
       return partnerRoutes.has(i.route);
     }
-    return checkPermission(i.permission);
+    return checkNavPermission(i.permission);
   });
   const visibleSettingsItems = isPartnerOnly
     ? []
-    : settingsNavItems.filter((i) => checkPermission(i.permission));
+    : settingsNavItems.filter((i) => checkNavPermission(i.permission));
 
   return (
     <>
