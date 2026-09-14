@@ -89,7 +89,7 @@ export function InlineEditField({
   }
 
   const sharedClass = multiline
-    ? `flex-1 px-3 py-1.5 text-sm border border-primary/40 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 ${inputClassName}`
+    ? `flex-1 px-3 py-1.5 text-sm border border-primary/40 rounded-[2rem] focus:outline-none focus:ring-2 focus:ring-primary/20 ${inputClassName}`
     : `flex-1 px-3 py-1.5 text-sm border border-primary/40 rounded-full focus:outline-none focus:ring-2 focus:ring-primary/20 ${inputClassName}`;
 
   return (

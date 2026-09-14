@@ -51,7 +51,7 @@ export default function SsoAdminPage() {
         </Button>
       </div>
 
-      <div className="bg-surface border border-border/60 rounded-3xl overflow-hidden shadow-sm">
+      <div className="bg-surface border border-border/60 rounded-[2rem] overflow-hidden shadow-sm">
         <div className="overflow-x-auto rates-scrollable">
           <table className="min-w-full divide-y divide-gray-100 text-xs">
             <thead className="bg-field">

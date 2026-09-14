@@ -185,7 +185,7 @@ export function NotificationBell({
       <div
         ref={panelRef}
         style={{ top: pos.top, right: pos.right }}
-        className="fixed z-[200] w-[360px] max-w-[calc(100vw-2rem)] overflow-hidden rounded-2xl border border-border bg-surface shadow-[0_12px_40px_rgba(0,0,0,0.12)] animate-fade-in"
+        className="fixed z-[200] w-[360px] max-w-[calc(100vw-2rem)] overflow-hidden rounded-[2rem] border border-border bg-surface shadow-[0_12px_40px_rgba(0,0,0,0.12)] animate-fade-in"
       >
         <div className="flex items-center justify-between gap-3 border-b border-border px-4 py-3">
           <div>

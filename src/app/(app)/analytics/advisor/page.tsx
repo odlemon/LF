@@ -134,13 +134,13 @@ export default function AdvisorPage() {
       {/* Conversation */}
       <div
         ref={scrollRef}
-        className="flex-1 min-h-0 overflow-y-auto rounded-2xl border border-border/60 bg-canvas p-6"
+        className="flex-1 min-h-0 overflow-y-auto rounded-[2rem] border border-border/60 bg-canvas p-6"
       >
         {isLoadingHistory ? (
           <div className="flex flex-col gap-3 animate-pulse">
-            <div className="h-16 bg-field rounded-2xl max-w-md" />
-            <div className="h-24 bg-field rounded-2xl max-w-lg self-end" />
-            <div className="h-20 bg-field rounded-2xl max-w-xl" />
+            <div className="h-16 bg-field rounded-[2rem] max-w-md" />
+            <div className="h-24 bg-field rounded-[2rem] max-w-lg self-end" />
+            <div className="h-20 bg-field rounded-[2rem] max-w-xl" />
           </div>
         ) : bubbles.length === 0 ? (
           <div className="h-full flex flex-col items-center justify-center text-center gap-4">

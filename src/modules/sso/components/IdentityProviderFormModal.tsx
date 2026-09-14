@@ -190,7 +190,7 @@ export function IdentityProviderFormModal({
     >
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         {error && (
-          <div className="flex items-start gap-2 p-3.5 bg-danger/5 border border-danger/25 text-danger text-xs font-semibold rounded-2xl leading-relaxed">
+          <div className="flex items-start gap-2 p-3.5 bg-danger/5 border border-danger/25 text-danger text-xs font-semibold rounded-[2rem] leading-relaxed">
             <HiExclamationCircle className="w-4 h-4 shrink-0 mt-px" />
             <span>{error}</span>
           </div>
@@ -198,7 +198,7 @@ export function IdentityProviderFormModal({
 
         {/* Register this on the provider's side. Shown first because it is the step that happens
             outside Lysp, and the one people forget. */}
-        <div className="rounded-2xl border border-border bg-canvas p-4 flex flex-col gap-2">
+        <div className="rounded-[2rem] border border-border bg-canvas p-4 flex flex-col gap-2">
           <span className={labelClassName}>Redirect URI to register with the provider</span>
           <div className="flex items-center gap-2">
             <code className="flex-1 min-w-0 truncate text-[11px] font-mono text-ink/80 bg-surface border border-border rounded-full px-4 py-2">
@@ -267,7 +267,7 @@ export function IdentityProviderFormModal({
         )}
 
         {checked && (
-          <div className="rounded-2xl border border-border bg-canvas p-4 flex flex-col gap-2">
+          <div className="rounded-[2rem] border border-border bg-canvas p-4 flex flex-col gap-2">
             <span className="flex items-center gap-1.5 text-[11px] font-bold text-ink">
               <HiCheckCircle className="w-4 h-4" />
               Provider reachable

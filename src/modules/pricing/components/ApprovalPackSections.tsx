@@ -65,7 +65,7 @@ export function GuardrailStrip({ pack, currency }: GuardrailStripProps) {
 
   return (
     <div
-      className={`rounded-2xl border bg-surface px-5 py-3 flex flex-wrap items-center gap-x-6 gap-y-2 ${
+      className={`rounded-[2rem] border bg-surface px-5 py-3 flex flex-wrap items-center gap-x-6 gap-y-2 ${
         isBelowFloor ? "border-red-200" : "border-border"
       }`}
     >
@@ -88,7 +88,7 @@ export function GuardrailStrip({ pack, currency }: GuardrailStripProps) {
 
 export function ClientContextSection({ pack }: { pack: ApprovalPack }) {
   return (
-    <div className="rounded-2xl border border-border bg-surface px-5 py-3 flex flex-wrap items-center gap-x-6 gap-y-2">
+    <div className="rounded-[2rem] border border-border bg-surface px-5 py-3 flex flex-wrap items-center gap-x-6 gap-y-2">
       {pack.clientTier && (
         <span className="inline-flex items-center px-2.5 py-0.5 rounded-lg text-[10px] font-bold border uppercase tracking-wider bg-field text-ink/70 border-border">
           {pack.clientTier}
@@ -121,7 +121,7 @@ export function ScopeSummarySection({ pack, currency }: { pack: ApprovalPack; cu
   }
 
   return (
-    <div className="rounded-2xl border border-border bg-surface overflow-hidden">
+    <div className="rounded-[2rem] border border-border bg-surface overflow-hidden">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}

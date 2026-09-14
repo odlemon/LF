@@ -198,7 +198,7 @@ export default function FileStoragePage() {
 
       {/* Upload progress bar */}
       {isUploading && (
-        <div className="bg-surface border border-primary/20 rounded-2xl p-4 shadow-sm animate-fade-in">
+        <div className="bg-surface border border-primary/20 rounded-[2rem] p-4 shadow-sm animate-fade-in">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-bold text-ink/65 flex items-center gap-1.5">
               <HiUpload className="w-4 h-4 text-primary animate-bounce" /> Uploading file...
@@ -215,7 +215,7 @@ export default function FileStoragePage() {
       )}
 
       {/* File listing table */}
-      <div className="bg-surface border border-border/60 rounded-3xl overflow-hidden shadow-sm">
+      <div className="bg-surface border border-border/60 rounded-[2rem] overflow-hidden shadow-sm">
         <div className="overflow-x-auto rates-scrollable">
           <table className="min-w-full divide-y divide-gray-100 text-xs">
             <thead className="bg-field">

@@ -105,7 +105,7 @@ export function Select({
 
       {/* Options Dropdown list */}
       {isOpen && (
-        <div className="absolute left-0 right-0 top-full mt-2 bg-surface border border-border rounded-2xl shadow-xl z-50 overflow-hidden max-h-56 overflow-y-auto rates-scrollable animate-fade-in-up">
+        <div className="absolute left-0 right-0 top-full mt-2 bg-surface border border-border rounded-[2rem] shadow-xl z-50 overflow-hidden max-h-56 overflow-y-auto rates-scrollable animate-fade-in-up">
           <div className="py-1">
             {options.length === 0 ? (
               <div className="px-5 py-3 text-xs font-semibold text-ink/60 text-center">

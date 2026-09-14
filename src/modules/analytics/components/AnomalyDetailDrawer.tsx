@@ -63,7 +63,7 @@ export function AnomalyDetailDrawer({ anomaly, onClose, canResolve, onResolve }:
 
         {/* AI insight */}
         {(anomaly.aiDescription || anomaly.aiRootCause) && (
-          <div className="bg-surface border border-border/70 rounded-2xl p-5 flex flex-col gap-3">
+          <div className="bg-surface border border-border/70 rounded-[2rem] p-5 flex flex-col gap-3">
             <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
               AI analysis
             </p>
@@ -82,7 +82,7 @@ export function AnomalyDetailDrawer({ anomaly, onClose, canResolve, onResolve }:
         )}
 
         {/* Facts */}
-        <div className="bg-surface border border-border/70 rounded-2xl p-5">
+        <div className="bg-surface border border-border/70 rounded-[2rem] p-5">
           <DetailRow label="Metric value" value={formatMetric(anomaly.metricValue)} />
           <DetailRow label="Threshold" value={formatMetric(anomaly.thresholdValue)} />
           {practiceAreaName && <DetailRow label="Practice area" value={practiceAreaName} />}
@@ -119,7 +119,7 @@ export function AnomalyDetailDrawer({ anomaly, onClose, canResolve, onResolve }:
 
         {/* Raw context */}
         {anomaly.context && (
-          <div className="bg-field/40 border border-border/60 rounded-2xl p-4">
+          <div className="bg-field/40 border border-border/60 rounded-[2rem] p-4">
             <p className="text-[10px] font-bold uppercase tracking-wider text-ink/60 mb-1.5">
               Context
             </p>
@@ -135,7 +135,7 @@ export function AnomalyDetailDrawer({ anomaly, onClose, canResolve, onResolve }:
         )}
 
         {/* Audit trail */}
-        <div className="bg-surface border border-border/70 rounded-2xl p-5">
+        <div className="bg-surface border border-border/70 rounded-[2rem] p-5">
           <AuditTrailPanel entityUid={anomaly.uid} title="Anomaly activity" maxRows={8} />
         </div>
       </div>

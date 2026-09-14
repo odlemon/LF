@@ -17,15 +17,15 @@ export function PricingWorkspaceSkeleton() {
       </div>
       <div className="flex-1 flex min-h-0">
         <div className="w-full lg:w-[55%] p-6 space-y-4 border-r border-border/60">
-          <div className="h-28 rounded-2xl bg-ink/[0.05] animate-pulse" />
-          <div className="h-28 rounded-2xl bg-ink/[0.05] animate-pulse" />
-          <div className="h-28 rounded-2xl bg-ink/[0.05] animate-pulse" />
+          <div className="h-28 rounded-[2rem] bg-ink/[0.05] animate-pulse" />
+          <div className="h-28 rounded-[2rem] bg-ink/[0.05] animate-pulse" />
+          <div className="h-28 rounded-[2rem] bg-ink/[0.05] animate-pulse" />
         </div>
         <div className="hidden lg:flex flex-1 flex-col p-6 gap-4">
           <div className="h-8 w-40 rounded-md bg-ink/[0.06] animate-pulse" />
           <div className="h-12 w-48 rounded-md bg-ink/[0.08] animate-pulse" />
-          <div className="h-40 rounded-2xl bg-ink/[0.04] animate-pulse" />
-          <div className="h-56 rounded-2xl bg-ink/[0.04] animate-pulse" />
+          <div className="h-40 rounded-[2rem] bg-ink/[0.04] animate-pulse" />
+          <div className="h-56 rounded-[2rem] bg-ink/[0.04] animate-pulse" />
         </div>
       </div>
     </div>

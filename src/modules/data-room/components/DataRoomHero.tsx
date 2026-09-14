@@ -54,7 +54,7 @@ export function DataRoomHero({
   loading: boolean;
 }) {
   if (loading) {
-    return <div className="h-56 rounded-3xl border border-border bg-surface animate-pulse" />;
+    return <div className="h-56 rounded-[2rem] border border-border bg-surface animate-pulse" />;
   }
   if (!summary) return null;
 
@@ -73,7 +73,7 @@ export function DataRoomHero({
   ];
 
   return (
-    <section className="rounded-3xl border border-border bg-surface overflow-hidden">
+    <section className="rounded-[2rem] border border-border bg-surface overflow-hidden">
       <div className="p-6 sm:p-8">
         <div className="flex flex-wrap items-center gap-3">
           <span

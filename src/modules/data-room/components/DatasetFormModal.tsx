@@ -72,7 +72,7 @@ export function DatasetFormModal({ isOpen, onClose, onSave }: DatasetFormModalPr
     <Modal isOpen={isOpen} onClose={onClose} title="New Dataset Batch" size="xl">
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
         {error && (
-          <div className="p-3.5 bg-red-50 border border-red-200/50 text-red-700 text-xs font-bold rounded-2xl">
+          <div className="p-3.5 bg-red-50 border border-red-200/50 text-red-700 text-xs font-bold rounded-[2rem]">
             {error}
           </div>
         )}
@@ -128,7 +128,7 @@ export function DatasetFormModal({ isOpen, onClose, onSave }: DatasetFormModalPr
             rows={3}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full px-5 py-3.5 bg-field border border-border rounded-2xl text-sm font-semibold text-ink placeholder:text-ink/60 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/80 transition-all duration-200 resize-none"
+            className="w-full px-5 py-3.5 bg-field border border-border rounded-[2rem] text-sm font-semibold text-ink placeholder:text-ink/60 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/80 transition-all duration-200 resize-none"
           />
         </div>
 

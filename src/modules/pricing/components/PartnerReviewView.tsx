@@ -105,7 +105,7 @@ export function PartnerReviewView({
 
       <div className="relative flex-1 overflow-y-auto rates-scrollable">
         <div className="max-w-3xl mx-auto px-5 sm:px-8 py-8 sm:py-10">
-          <div className="rounded-[1.75rem] bg-band text-on-primary p-6 sm:p-8 shadow-[0_20px_50px_rgba(10,10,10,0.16)]">
+          <div className="rounded-[2rem] bg-band text-on-primary p-6 sm:p-8 shadow-[0_20px_50px_rgba(10,10,10,0.16)]">
             <div className="flex flex-wrap items-center gap-2">
               <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-on-primary/45">
                 Preferred scenario ·{" "}
@@ -180,7 +180,7 @@ export function PartnerReviewView({
             </div>
           )}
 
-          <div className="mt-5 rounded-2xl border border-border/70 bg-surface overflow-hidden">
+          <div className="mt-5 rounded-[2rem] border border-border/70 bg-surface overflow-hidden">
             <div className="px-5 py-4">
               <ScenarioStageRail status={scenario.status} />
             </div>
@@ -236,7 +236,7 @@ export function PartnerReviewView({
           )}
 
           {scenario.aiReasoning && (
-            <section className="mt-6 rounded-2xl border border-border/70 bg-surface p-5 sm:p-6">
+            <section className="mt-6 rounded-[2rem] border border-border/70 bg-surface p-5 sm:p-6">
               <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
                 Why this price
               </p>
@@ -259,7 +259,7 @@ export function PartnerReviewView({
             />
           </div>
 
-          <section className="mt-6 rounded-2xl border border-border/70 bg-surface overflow-hidden">
+          <section className="mt-6 rounded-[2rem] border border-border/70 bg-surface overflow-hidden">
             <div className="px-5 sm:px-6 py-4 border-b border-border/60">
               <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
                 Fee breakdown

@@ -75,7 +75,7 @@ export function ClientSearchSelect({
       </button>
 
       {isOpen && (
-        <div className="absolute left-0 right-0 top-full mt-2 bg-surface border border-border rounded-2xl shadow-xl z-50 overflow-hidden animate-fade-in-up">
+        <div className="absolute left-0 right-0 top-full mt-2 bg-surface border border-border rounded-[2rem] shadow-xl z-50 overflow-hidden animate-fade-in-up">
           <div className="p-2 border-b border-border">
             <div className="relative">
               <HiSearch className="absolute left-3 top-2.5 w-4 h-4 text-ink/60" />

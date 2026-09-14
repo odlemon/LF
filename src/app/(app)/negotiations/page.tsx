@@ -70,12 +70,12 @@ export default function NegotiationsPage() {
             {[1, 2, 3].map((i) => (
               <div
                 key={i}
-                className="h-24 animate-pulse rounded-2xl border border-border bg-surface"
+                className="h-24 animate-pulse rounded-[2rem] border border-border bg-surface"
               />
             ))}
           </div>
         ) : error && items.length === 0 ? (
-          <div className="rounded-2xl border border-red-200/70 bg-red-50/50 px-5 py-8 text-center">
+          <div className="rounded-[2rem] border border-red-200/70 bg-red-50/50 px-5 py-8 text-center">
             <p className="text-sm text-red-800 dark:text-red-400">{error}</p>
             <Button
               variant="secondary"
@@ -86,7 +86,7 @@ export default function NegotiationsPage() {
             </Button>
           </div>
         ) : items.length === 0 ? (
-          <div className="rounded-[1.5rem] border border-border/70 bg-surface px-5 py-14 text-center">
+          <div className="rounded-[2rem] border border-border/70 bg-surface px-5 py-14 text-center">
             <p className="text-sm font-semibold text-ink">No negotiations yet</p>
             <p className="mx-auto mt-1.5 max-w-sm text-xs leading-relaxed text-ink/60">
               After a partner approves a scenario, open Pricing and choose Send to

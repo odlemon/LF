@@ -190,7 +190,7 @@ export function Navbar({ onMenuClick }: NavbarProps = {}) {
         ref={menuRef}
         role="menu"
         style={{ top: menuPos.top, right: menuPos.right }}
-        className="fixed z-[200] w-64 rounded-2xl border border-border bg-surface py-2.5 shadow-[0_12px_40px_rgba(0,0,0,0.12)] animate-fade-in"
+        className="fixed z-[200] w-64 rounded-[2rem] border border-border bg-surface py-2.5 shadow-[0_12px_40px_rgba(0,0,0,0.12)] animate-fade-in"
       >
         <div className="flex flex-col gap-1 border-b border-border px-4 py-3">
           <span className="text-xs font-semibold leading-tight text-ink">

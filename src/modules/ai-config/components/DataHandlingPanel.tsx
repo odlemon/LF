@@ -51,7 +51,7 @@ export function DataHandlingPanel({ config }: { config: AiProviderConfig | null 
   ];
 
   return (
-    <section className="rounded-2xl border border-border bg-surface">
+    <section className="rounded-[2rem] border border-border bg-surface">
       <header className="border-b border-border px-5 py-4">
         <h2 className="text-sm font-bold text-ink">Data handling</h2>
         <p className="mt-0.5 text-[12px] text-ink/60">

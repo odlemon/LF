@@ -136,7 +136,7 @@ export function FixMappingModal({ isOpen, onClose, document, onSuccess }: FixMap
         </p>
 
         {/* Mappings Table */}
-        <div className="border border-border/80 rounded-2xl overflow-hidden bg-surface shadow-sm shrink-0">
+        <div className="border border-border/80 rounded-[2rem] overflow-hidden bg-surface shadow-sm shrink-0">
           <div className="overflow-x-auto rates-scrollable">
             <table className="min-w-full divide-y divide-gray-100 text-xs">
 

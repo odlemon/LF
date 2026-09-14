@@ -186,14 +186,14 @@ export default function ApprovalsPage() {
             {[1, 2, 3].map((i) => (
               <div
                 key={i}
-                className="h-24 rounded-2xl border border-border bg-surface animate-pulse"
+                className="h-24 rounded-[2rem] border border-border bg-surface animate-pulse"
               />
             ))}
           </div>
         ) : error ? (
           <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
         ) : items.length === 0 ? (
-          <div className="rounded-2xl border border-border/70 bg-surface px-6 py-14 text-center">
+          <div className="rounded-[2rem] border border-border/70 bg-surface px-6 py-14 text-center">
             <p className="text-sm font-semibold text-ink/70">{emptyCopy.title}</p>
             <p className="mt-2 text-xs text-ink/60 max-w-sm mx-auto leading-relaxed">
               {emptyCopy.body}
@@ -215,7 +215,7 @@ export default function ApprovalsPage() {
                         `/pricing-requests/${item.pricingRequestUid}/pricing?review=${item.scenarioUid}`
                       )
                     }
-                    className="w-full text-left rounded-2xl border border-border/70 bg-surface p-5 hover:bg-hover/50 transition-colors cursor-pointer"
+                    className="w-full text-left rounded-[2rem] border border-border/70 bg-surface p-5 hover:bg-hover/50 transition-colors cursor-pointer"
                   >
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
                       <div className="min-w-0">

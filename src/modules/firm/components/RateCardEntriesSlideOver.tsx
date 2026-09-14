@@ -166,7 +166,7 @@ export function RateCardEntriesSlideOver({
                 <FormError message={formError} />
               )}
 
-              <form onSubmit={handleAdd} className="flex flex-col gap-4 bg-field/50 border border-border p-4 rounded-2xl">
+              <form onSubmit={handleAdd} className="flex flex-col gap-4 bg-field/50 border border-border p-4 rounded-[2rem]">
                 <div className="flex flex-col gap-1.5">
                   <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
                     Seniority Level

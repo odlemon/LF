@@ -123,7 +123,7 @@ export function PracticeAreaFormModal({
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Provide a brief summary of the practice area legal domain..."
               rows={3}
-              className="px-5 py-2.5 bg-field border border-border rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface transition-all text-ink"
+              className="px-5 py-2.5 bg-field border border-border rounded-[2rem] text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface transition-all text-ink"
             />
           </div>
 

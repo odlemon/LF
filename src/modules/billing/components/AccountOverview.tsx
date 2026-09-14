@@ -34,7 +34,7 @@ export function AccountOverview({ account, onCreateAdjustment, showAdjustButton 
   return (
     <div className="animate-fade-in-up" style={{ animationDelay: "0ms" }}>
       {/* Hero balance card */}
-      <div className="relative overflow-hidden rounded-[1.75rem] border border-border/60 bg-surface shadow-[0_1px_3px_rgba(0,0,0,0.04),0_8px_40px_rgba(0,0,0,0.06)]">
+      <div className="relative overflow-hidden rounded-[2rem] border border-border/60 bg-surface shadow-[0_1px_3px_rgba(0,0,0,0.04),0_8px_40px_rgba(0,0,0,0.06)]">
         {/* Subtle gradient accent */}
         <div className="pointer-events-none absolute inset-0 opacity-60">
           <div className="absolute -top-32 -right-32 h-64 w-64 rounded-full bg-gradient-to-br from-ink/[0.04] to-transparent blur-3xl" />
@@ -108,7 +108,7 @@ export function AccountOverview({ account, onCreateAdjustment, showAdjustButton 
 
       {/* Secondary stat cards */}
       <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <div className="group relative overflow-hidden rounded-2xl border border-border/60 bg-surface p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)] transition-all hover:shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:border-ink/10">
+        <div className="group relative overflow-hidden rounded-[2rem] border border-border/60 bg-surface p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)] transition-all hover:shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:border-ink/10">
           <div className="absolute inset-0 bg-gradient-to-br from-amber-500/[0.03] to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
           <div className="relative flex items-center justify-between">
             <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">Consumed</p>
@@ -122,7 +122,7 @@ export function AccountOverview({ account, onCreateAdjustment, showAdjustButton 
           <p className="relative mt-1 text-[11px] text-ink/60">credits used</p>
         </div>
 
-        <div className="group relative overflow-hidden rounded-2xl border border-border/60 bg-surface p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)] transition-all hover:shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:border-ink/10">
+        <div className="group relative overflow-hidden rounded-[2rem] border border-border/60 bg-surface p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)] transition-all hover:shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:border-ink/10">
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/[0.03] to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
           <div className="relative flex items-center justify-between">
             <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">Top-ups</p>
@@ -136,7 +136,7 @@ export function AccountOverview({ account, onCreateAdjustment, showAdjustButton 
           <p className="relative mt-1 text-[11px] text-ink/60">credits added</p>
         </div>
 
-        <div className="group relative overflow-hidden rounded-2xl border border-border/60 bg-surface p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)] transition-all hover:shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:border-ink/10">
+        <div className="group relative overflow-hidden rounded-[2rem] border border-border/60 bg-surface p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)] transition-all hover:shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:border-ink/10">
           <div className="absolute inset-0 bg-gradient-to-br from-ink/[0.02] to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
           <div className="relative flex items-center justify-between">
             <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">Unit price</p>

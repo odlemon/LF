@@ -47,7 +47,7 @@ export function DataReadinessCard({ summary }: DataReadinessCardProps) {
   }
 
   return (
-    <div className="bg-surface border border-border/60 rounded-3xl p-6 shadow-sm flex flex-col md:flex-row gap-6 items-center justify-between">
+    <div className="bg-surface border border-border/60 rounded-[2rem] p-6 shadow-sm flex flex-col md:flex-row gap-6 items-center justify-between">
       <div className="flex gap-4 items-start flex-1">
         <div className={`p-4 rounded-2xl ${badgeColor} border shrink-0`}>
           <Icon className="w-8 h-8" />

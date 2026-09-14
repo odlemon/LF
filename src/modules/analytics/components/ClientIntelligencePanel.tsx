@@ -73,7 +73,7 @@ function Metric({
   change: React.ReactNode;
 }) {
   return (
-    <div className="rounded-2xl border border-border bg-field/40 p-4">
+    <div className="rounded-[2rem] border border-border bg-field/40 p-4">
       <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">{label}</p>
       <p className="mt-2 text-xl font-semibold tabular-nums text-ink">{value}</p>
       <p className="mt-1">{change}</p>
@@ -117,11 +117,11 @@ export function ClientIntelligencePanel({ clientProfileUid }: Props) {
 
   if (loading) {
     return (
-      <div className="rounded-2xl border border-border/60 bg-surface p-6 shadow-sm">
+      <div className="rounded-[2rem] border border-border/60 bg-surface p-6 shadow-sm">
         <div className="h-4 w-44 animate-pulse rounded bg-field" />
         <div className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-4">
           {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="h-24 animate-pulse rounded-2xl bg-field/60" />
+            <div key={i} className="h-24 animate-pulse rounded-[2rem] bg-field/60" />
           ))}
         </div>
       </div>
@@ -131,7 +131,7 @@ export function ClientIntelligencePanel({ clientProfileUid }: Props) {
   if (!data) return null;
 
   return (
-    <div className="rounded-2xl border border-border/60 bg-surface p-6 shadow-sm">
+    <div className="rounded-[2rem] border border-border/60 bg-surface p-6 shadow-sm">
       <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2 border-b border-border pb-2">
         <h2 className="text-sm font-bold text-ink">Relationship Intelligence</h2>
         <p className="text-[11px] text-ink/60">

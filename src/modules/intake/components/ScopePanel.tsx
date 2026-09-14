@@ -168,7 +168,7 @@ export function ScopePanel({
               ].map((step, i) => (
                 <div
                   key={step}
-                  className="flex items-center gap-3 rounded-2xl border border-border/80 bg-surface/80 px-4 py-3"
+                  className="flex items-center gap-3 rounded-[2rem] border border-border/80 bg-surface/80 px-4 py-3"
                 >
                   <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ink text-[10px] font-bold text-on-primary tabular-nums">
                     {i + 1}
@@ -290,7 +290,7 @@ export function ScopePanel({
 
         {!readOnly &&
           (showAddPhase ? (
-            <div className="ml-10 mb-6 p-4 border border-border rounded-2xl bg-surface/90 flex flex-col gap-2.5 shadow-sm">
+            <div className="ml-10 mb-6 p-4 border border-border rounded-[2rem] bg-surface/90 flex flex-col gap-2.5 shadow-sm">
               <input
                 type="text"
                 value={phaseName}

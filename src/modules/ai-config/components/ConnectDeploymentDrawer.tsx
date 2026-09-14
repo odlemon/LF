@@ -279,7 +279,7 @@ export function ConnectDeploymentDrawer({
           </div>
         </div>
 
-        <div className="flex items-start gap-2.5 rounded-2xl border border-border bg-canvas p-4">
+        <div className="flex items-start gap-2.5 rounded-[2rem] border border-border bg-canvas p-4">
           <HiOutlineShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-ink/60" />
           <p className="text-[12px] leading-relaxed text-ink/60">
             The credential is encrypted before it is stored and is never returned by the API — not

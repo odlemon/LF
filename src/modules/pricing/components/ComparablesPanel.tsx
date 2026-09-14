@@ -32,7 +32,7 @@ export function ComparablesPanel({ requestUid, scenarioUid }: ComparablesPanelPr
   const { data, isLoading } = useScenarioComparables(requestUid, scenarioUid);
 
   return (
-    <div className="rounded-2xl border border-border bg-surface p-5">
+    <div className="rounded-[2rem] border border-border bg-surface p-5">
       <div className="flex items-baseline justify-between gap-3 mb-1">
         <h4 className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
           Comparable matters

@@ -119,7 +119,7 @@ export function UploadZone({ onUpload, isUploading, progress }: UploadZoneProps)
                 }
               }
         }
-        className={`border-2 border-dashed rounded-3xl p-8 flex flex-col items-center justify-center gap-4 transition-all duration-200 cursor-pointer select-none ${
+        className={`border-2 border-dashed rounded-[2rem] p-8 flex flex-col items-center justify-center gap-4 transition-all duration-200 cursor-pointer select-none ${
           dragActive
             ? "border-primary bg-primary/5 shadow-md shadow-primary/10"
             : selectedFile
@@ -194,13 +194,13 @@ export function UploadZone({ onUpload, isUploading, progress }: UploadZoneProps)
       </div>
 
       {error && (
-        <div className="p-3.5 bg-red-50 border border-red-200/50 text-red-700 text-xs font-bold rounded-2xl animate-fade-in">
+        <div className="p-3.5 bg-red-50 border border-red-200/50 text-red-700 text-xs font-bold rounded-[2rem] animate-fade-in">
           {error}
         </div>
       )}
 
       {success && (
-        <div className="p-3.5 bg-hover border border-border/50 text-ink text-xs font-bold rounded-2xl flex items-center gap-2 animate-fade-in">
+        <div className="p-3.5 bg-hover border border-border/50 text-ink text-xs font-bold rounded-[2rem] flex items-center gap-2 animate-fade-in">
           <HiCheckCircle className="w-5 h-5 text-ink/60 shrink-0" />
           File uploaded successfully! Processing will begin in the background.
         </div>

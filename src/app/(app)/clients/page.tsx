@@ -74,7 +74,7 @@ export default function ClientsPage() {
           }
         />
       ) : (
-        <div className="bg-surface rounded-2xl border border-border/60 overflow-hidden shadow-sm">
+        <div className="bg-surface rounded-[2rem] border border-border/60 overflow-hidden shadow-sm">
           <div className="overflow-x-auto rates-scrollable">
           <table className="w-full min-w-[860px] text-left text-sm border-collapse">
             <thead>

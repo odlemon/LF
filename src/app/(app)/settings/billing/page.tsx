@@ -291,21 +291,21 @@ export default function BillingPage() {
         {activeTab === "overview" && canSeeBillingTab && (
           <>
             {billingError && (
-              <div className="rounded-2xl border border-red-200 bg-red-50/80 p-4 text-sm font-medium text-red-700 animate-fade-in backdrop-blur-sm">
+              <div className="rounded-[2rem] border border-red-200 bg-red-50/80 p-4 text-sm font-medium text-red-700 animate-fade-in backdrop-blur-sm">
                 {billingError}
               </div>
             )}
 
             {billingLoading ? (
               <div className="flex flex-col gap-6">
-                <div className="h-48 bg-field/60 rounded-[1.75rem] animate-pulse" />
+                <div className="h-48 bg-field/60 rounded-[2rem] animate-pulse" />
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
                   {Array.from({ length: 3 }).map((_, i) => (
-                    <div key={i} className="h-28 bg-field/60 rounded-2xl animate-pulse" />
+                    <div key={i} className="h-28 bg-field/60 rounded-[2rem] animate-pulse" />
                   ))}
                 </div>
-                <div className="h-[340px] bg-field/60 rounded-[1.5rem] animate-pulse" />
-                <div className="h-72 bg-field/60 rounded-[1.5rem] animate-pulse" />
+                <div className="h-[340px] bg-field/60 rounded-[2rem] animate-pulse" />
+                <div className="h-72 bg-field/60 rounded-[2rem] animate-pulse" />
               </div>
             ) : account ? (
               <>
@@ -336,24 +336,24 @@ export default function BillingPage() {
         {activeTab === "usage" && canSeeUsageTab && (
           <>
             {usageError && (
-              <div className="rounded-2xl border border-red-200 bg-red-50/80 p-4 text-sm font-medium text-red-700">
+              <div className="rounded-[2rem] border border-red-200 bg-red-50/80 p-4 text-sm font-medium text-red-700">
                 {usageError}
               </div>
             )}
 
             {usageLoading ? (
               <div className="flex flex-col gap-6">
-                <div className="h-40 animate-pulse rounded-[1.5rem] bg-field/60" />
+                <div className="h-40 animate-pulse rounded-[2rem] bg-field/60" />
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-4">
                   {Array.from({ length: 4 }).map((_, i) => (
-                    <div key={i} className="h-24 animate-pulse rounded-2xl bg-field/60" />
+                    <div key={i} className="h-24 animate-pulse rounded-[2rem] bg-field/60" />
                   ))}
                 </div>
-                <div className="h-72 animate-pulse rounded-[1.5rem] bg-field/60" />
+                <div className="h-72 animate-pulse rounded-[2rem] bg-field/60" />
               </div>
             ) : snapshot ? (
               <>
-                <div className="rounded-[1.5rem] border border-border bg-surface p-6">
+                <div className="rounded-[2rem] border border-border bg-surface p-6">
                   <div className="flex flex-wrap items-start justify-between gap-4">
                     <div>
                       <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/60">
@@ -446,7 +446,7 @@ export default function BillingPage() {
                       rows={byUser}
                     />
                   ) : (
-                    <div className="rounded-[1.5rem] border border-border bg-surface p-6">
+                    <div className="rounded-[2rem] border border-border bg-surface p-6">
                       <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/60">
                         By user
                       </p>
@@ -459,7 +459,7 @@ export default function BillingPage() {
                   )}
                 </div>
 
-                <div className="rounded-[1.5rem] border border-border bg-surface p-6">
+                <div className="rounded-[2rem] border border-border bg-surface p-6">
                   <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/60">
                     AI detail
                   </p>
@@ -507,7 +507,7 @@ export default function BillingPage() {
                   )}
                 </div>
 
-                <div className="rounded-[1.5rem] border border-border bg-surface p-6">
+                <div className="rounded-[2rem] border border-border bg-surface p-6">
                   <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/60">
                     Statement line items
                   </p>
@@ -578,7 +578,7 @@ export default function BillingPage() {
 
 function StatCard({ label, value }: { label: string; value: React.ReactNode }) {
   return (
-    <div className="rounded-2xl border border-border bg-surface p-4">
+    <div className="rounded-[2rem] border border-border bg-surface p-4">
       <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">{label}</p>
       <p className="mt-2 text-xl font-semibold tabular-nums text-ink">
         {typeof value === "number" ? value.toLocaleString() : value}

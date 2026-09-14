@@ -86,7 +86,7 @@ export function BatchUploadModal({ isOpen, onClose, onUpload }: BatchUploadModal
     <Modal isOpen={isOpen} onClose={onClose} title="Upload Multiple Files">
       <div className="flex flex-col gap-5">
         {error && (
-          <div className="p-3.5 bg-red-50 border border-red-200/50 text-red-700 text-xs font-bold rounded-2xl">
+          <div className="p-3.5 bg-red-50 border border-red-200/50 text-red-700 text-xs font-bold rounded-[2rem]">
             {error}
           </div>
         )}
@@ -117,7 +117,7 @@ export function BatchUploadModal({ isOpen, onClose, onUpload }: BatchUploadModal
           {selectedFiles.length === 0 ? (
             <div
               onClick={() => fileInputRef.current?.click()}
-              className="border-2 border-dashed border-border hover:border-primary/50 bg-field/20 hover:bg-field p-10 rounded-2xl flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors text-center select-none"
+              className="border-2 border-dashed border-border hover:border-primary/50 bg-field/20 hover:bg-field p-10 rounded-[2rem] flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors text-center select-none"
             >
               <HiDocumentText className="w-8 h-8 text-ink/60" />
               <span className="text-sm font-bold text-ink/65">Select files to upload...</span>

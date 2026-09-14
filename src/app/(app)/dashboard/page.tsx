@@ -46,18 +46,18 @@ export default function DashboardPage() {
         </div>
         <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-6">
           {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="h-24 animate-pulse rounded-2xl bg-field/60" />
+            <div key={i} className="h-24 animate-pulse rounded-[2rem] bg-field/60" />
           ))}
         </div>
         <div className="grid grid-cols-1 gap-4 sm:gap-5 xl:grid-cols-12">
-          <div className="h-64 animate-pulse rounded-[1.5rem] bg-field/60 xl:col-span-7" />
-          <div className="h-64 animate-pulse rounded-[1.5rem] bg-field/60 xl:col-span-5" />
+          <div className="h-64 animate-pulse rounded-[2rem] bg-field/60 xl:col-span-7" />
+          <div className="h-64 animate-pulse rounded-[2rem] bg-field/60 xl:col-span-5" />
         </div>
         <div className="grid grid-cols-1 gap-4 sm:gap-5 xl:grid-cols-12">
-          <div className="h-56 animate-pulse rounded-[1.5rem] bg-field/60 xl:col-span-5" />
-          <div className="h-56 animate-pulse rounded-[1.5rem] bg-field/60 xl:col-span-7" />
+          <div className="h-56 animate-pulse rounded-[2rem] bg-field/60 xl:col-span-5" />
+          <div className="h-56 animate-pulse rounded-[2rem] bg-field/60 xl:col-span-7" />
         </div>
-        <div className="h-72 animate-pulse rounded-[1.5rem] bg-field/60" />
+        <div className="h-72 animate-pulse rounded-[2rem] bg-field/60" />
       </div>
     );
   }
@@ -112,7 +112,7 @@ export default function DashboardPage() {
           <section className="grid grid-cols-1 gap-3 md:grid-cols-2">
             <Link
               href="/negotiations"
-              className="group flex items-start gap-4 rounded-[1.5rem] border border-border/70 bg-surface p-5 transition-colors hover:border-ink/20"
+              className="group flex items-start gap-4 rounded-[2rem] border border-border/70 bg-surface p-5 transition-colors hover:border-ink/20"
             >
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-ink text-canvas">
                 <HiOutlineScale className="h-5 w-5" />
@@ -136,7 +136,7 @@ export default function DashboardPage() {
             </Link>
             <Link
               href="/approvals"
-              className="group flex items-start gap-4 rounded-[1.5rem] border border-border/70 bg-field/80 p-5 transition-colors hover:border-ink/20"
+              className="group flex items-start gap-4 rounded-[2rem] border border-border/70 bg-field/80 p-5 transition-colors hover:border-ink/20"
             >
               <div className="min-w-0 flex-1">
                 <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
@@ -162,7 +162,7 @@ export default function DashboardPage() {
           {kpis.map((kpi, i) => (
             <article
               key={kpi.id}
-              className="rounded-2xl border border-border/70 bg-surface p-4 animate-fade-in-up"
+              className="rounded-[2rem] border border-border/70 bg-surface p-4 animate-fade-in-up"
               style={{ animationDelay: `${i * 35}ms` }}
             >
               <p className="text-[10px] font-bold uppercase leading-tight tracking-[0.11em] text-ink/60">
@@ -192,28 +192,28 @@ export default function DashboardPage() {
             empty axes that look like a firm with no revenue. */}
         {!restricted && (
           <div className="grid grid-cols-1 gap-4 sm:gap-5 xl:grid-cols-12">
-            <section className="rounded-[1.5rem] border border-border/70 bg-surface p-5 sm:p-6 xl:col-span-7">
+            <section className="rounded-[2rem] border border-border/70 bg-surface p-5 sm:p-6 xl:col-span-7">
               <FeesTrendChart data={trend} />
             </section>
-            <section className="rounded-[1.5rem] border border-border/70 bg-surface p-5 sm:p-6 xl:col-span-5">
+            <section className="rounded-[2rem] border border-border/70 bg-surface p-5 sm:p-6 xl:col-span-5">
               <MarginWinRateChart data={trend} />
             </section>
           </div>
         )}
 
         <div className="grid grid-cols-1 gap-4 sm:gap-5 xl:grid-cols-12">
-          <section className={`rounded-[1.5rem] border border-border/70 bg-surface p-5 sm:p-6 ${restricted ? "xl:col-span-12" : "xl:col-span-5"}`}>
+          <section className={`rounded-[2rem] border border-border/70 bg-surface p-5 sm:p-6 ${restricted ? "xl:col-span-12" : "xl:col-span-5"}`}>
             <PipelineStagesChart data={stages} />
           </section>
           {!restricted && (
-            <section className="rounded-[1.5rem] border border-border/70 bg-surface p-5 sm:p-6 xl:col-span-7">
+            <section className="rounded-[2rem] border border-border/70 bg-surface p-5 sm:p-6 xl:col-span-7">
               <PracticeMixChart data={practices} />
             </section>
           )}
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-12">
-          <section className="overflow-hidden rounded-[1.5rem] border border-border/70 bg-surface lg:col-span-8">
+          <section className="overflow-hidden rounded-[2rem] border border-border/70 bg-surface lg:col-span-8">
             <div className="flex items-end justify-between gap-3 border-b border-border/60 px-5 py-4 sm:px-6">
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
@@ -266,7 +266,7 @@ export default function DashboardPage() {
             </div>
           </section>
 
-          <section className="rounded-[1.5rem] border border-border/70 bg-field/70 p-5 sm:p-6 lg:col-span-4">
+          <section className="rounded-[2rem] border border-border/70 bg-field/70 p-5 sm:p-6 lg:col-span-4">
             <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
               This week
             </p>

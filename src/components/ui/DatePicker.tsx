@@ -181,7 +181,7 @@ export function DatePicker({
 
       {/* Calendar Overlay */}
       {isOpen && (
-        <div className="absolute left-0 mt-2 w-72 bg-surface rounded-2xl border border-border shadow-[0_12px_40px_rgba(0,0,0,0.08)] p-4 z-50 transform origin-top animate-fade-in select-none">
+        <div className="absolute left-0 mt-2 w-72 bg-surface rounded-[2rem] border border-border shadow-[0_12px_40px_rgba(0,0,0,0.08)] p-4 z-50 transform origin-top animate-fade-in select-none">
           {/* Header */}
           <div className="flex items-center justify-between mb-4">
             <button

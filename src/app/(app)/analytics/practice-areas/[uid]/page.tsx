@@ -26,7 +26,7 @@ import type { PeriodParams, RateComplianceDto } from "@/modules/analytics/types"
 
 function Stat({ label, value, sub }: { label: string; value: string; sub?: string }) {
   return (
-    <div className="bg-surface border border-border/70 rounded-2xl p-5">
+    <div className="bg-surface border border-border/70 rounded-[2rem] p-5">
       <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">{label}</p>
       <p className="mt-2 text-xl font-bold tabular-nums text-ink tracking-tight">{value}</p>
       {sub && <p className="text-[11px] text-ink/60 mt-1">{sub}</p>}
@@ -154,7 +154,7 @@ export default function PracticeAreaDeepDivePage() {
           </div>
 
           {/* Margin positioning strip */}
-          <div className="bg-surface border border-border/70 rounded-2xl p-5">
+          <div className="bg-surface border border-border/70 rounded-[2rem] p-5">
             <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60 mb-3">
               Positioning
             </p>
@@ -195,7 +195,7 @@ export default function PracticeAreaDeepDivePage() {
 
           {/* Charts */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div className="bg-surface border border-border/70 rounded-2xl p-5">
+            <div className="bg-surface border border-border/70 rounded-[2rem] p-5">
               {metrics.monthlyTrend.length === 0 ? (
                 <EmptyState
                   title="No monthly activity"
@@ -205,7 +205,7 @@ export default function PracticeAreaDeepDivePage() {
                 <FeesMarginTrendChart data={metrics.monthlyTrend} />
               )}
             </div>
-            <div className="bg-surface border border-border/70 rounded-2xl p-5">
+            <div className="bg-surface border border-border/70 rounded-[2rem] p-5">
               {metrics.pricingModelDistribution.length === 0 ? (
                 <EmptyState
                   title="No pricing mix"
@@ -219,7 +219,7 @@ export default function PracticeAreaDeepDivePage() {
 
           {/* Rate card compliance for this practice area (finance view only) */}
           {financeView && compliance && (
-            <div className="bg-surface border border-border/70 rounded-2xl p-5">
+            <div className="bg-surface border border-border/70 rounded-[2rem] p-5">
               <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60 mb-3">
                 Rate card compliance
               </p>
@@ -264,7 +264,7 @@ export default function PracticeAreaDeepDivePage() {
           )}
 
           {/* Clients in this practice area + relationship health */}
-          <div className="bg-surface rounded-2xl border border-border/60 overflow-hidden shadow-sm">
+          <div className="bg-surface rounded-[2rem] border border-border/60 overflow-hidden shadow-sm">
             <div className="px-6 py-4 border-b border-border">
               <h3 className="text-sm font-bold text-ink">Clients in this practice area</h3>
               <p className="text-[11px] text-ink/60 mt-0.5">
@@ -324,7 +324,7 @@ export default function PracticeAreaDeepDivePage() {
 
           {/* Pricing model table */}
           {metrics.pricingModelDistribution.length > 0 && (
-            <div className="bg-surface rounded-2xl border border-border/60 overflow-hidden shadow-sm">
+            <div className="bg-surface rounded-[2rem] border border-border/60 overflow-hidden shadow-sm">
               <div className="overflow-x-auto rates-scrollable">
                 <table className="w-full text-left text-sm border-collapse">
 
@@ -352,7 +352,7 @@ export default function PracticeAreaDeepDivePage() {
           )}
 
           {/* Top matters */}
-          <div className="bg-surface rounded-2xl border border-border/60 overflow-hidden shadow-sm">
+          <div className="bg-surface rounded-[2rem] border border-border/60 overflow-hidden shadow-sm">
             <div className="px-6 py-4 border-b border-border">
               <h3 className="text-sm font-bold text-ink">Top matters</h3>
             </div>

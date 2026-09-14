@@ -68,7 +68,7 @@ export default function RateRecommendationsPage() {
       {error && <Alert variant="error" message={error} />}
 
       {isLoading && !recommendations ? (
-        <div className="h-72 bg-field rounded-2xl animate-pulse" />
+        <div className="h-72 bg-field rounded-[2rem] animate-pulse" />
       ) : !recommendations || recommendations.length === 0 ? (
         <EmptyState
           title="No rate recommendations yet"
@@ -76,7 +76,7 @@ export default function RateRecommendationsPage() {
           icon={<HiLightBulb className="w-5 h-5" />}
         />
       ) : (
-        <div className="bg-surface rounded-2xl border border-border/60 overflow-hidden shadow-sm overflow-x-auto">
+        <div className="bg-surface rounded-[2rem] border border-border/60 overflow-hidden shadow-sm overflow-x-auto">
           <table className="w-full text-left text-sm border-collapse min-w-[980px]">
             <thead>
               <tr className="bg-field/50 text-xs font-bold text-ink/60 border-b border-border">
@@ -140,7 +140,7 @@ export default function RateRecommendationsPage() {
       {recommendations && recommendations.length > 0 && (
         <div className="flex flex-col gap-3">
           {recommendations.map((rec) => (
-            <div key={rec.uid} className="bg-surface border border-border/70 rounded-2xl p-5">
+            <div key={rec.uid} className="bg-surface border border-border/70 rounded-[2rem] p-5">
               <div className="flex items-center gap-2 flex-wrap mb-2">
                 <p className="text-xs font-bold text-ink">
                   {paName(rec.practiceAreaUid)} · {rec.feeEarnerLevelCode}

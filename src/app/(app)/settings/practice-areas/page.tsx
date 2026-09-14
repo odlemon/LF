@@ -76,11 +76,11 @@ export default function PracticeAreasPage() {
 
       {isLoading && areas.length === 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-pulse">
-          <div className="h-32 bg-field rounded-2xl" />
-          <div className="h-32 bg-field rounded-2xl" />
+          <div className="h-32 bg-field rounded-[2rem]" />
+          <div className="h-32 bg-field rounded-[2rem]" />
         </div>
       ) : areas.length === 0 ? (
-        <div className="text-center py-12 bg-surface rounded-2xl border border-border/60 p-8 shadow-sm flex flex-col items-center justify-center gap-3">
+        <div className="text-center py-12 bg-surface rounded-[2rem] border border-border/60 p-8 shadow-sm flex flex-col items-center justify-center gap-3">
           <span className="text-sm text-ink/60">No practice areas registered yet. Click &apos;Add Practice Area&apos; to define one.</span>
         </div>
       ) : (
@@ -88,7 +88,7 @@ export default function PracticeAreasPage() {
           {areas.map((area) => (
             <div
               key={area.uid}
-              className={`bg-surface p-5 rounded-2xl border transition-all duration-200 flex flex-col justify-between gap-4 shadow-sm hover:shadow-md ${
+              className={`bg-surface p-5 rounded-[2rem] border transition-all duration-200 flex flex-col justify-between gap-4 shadow-sm hover:shadow-md ${
                 area.active
                   ? "border-border/60"
                   : "border-border bg-field/50 opacity-60"

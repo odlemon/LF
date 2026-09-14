@@ -61,7 +61,7 @@ export default function FirmDetailsPage() {
     return (
       <div className="p-8 max-w-3xl w-full mx-auto flex flex-col gap-6 animate-pulse">
         <div className="h-8 bg-field rounded-lg w-1/4" />
-        <div className="bg-surface rounded-2xl shadow-sm p-6 border border-border flex flex-col gap-4">
+        <div className="bg-surface rounded-[2rem] shadow-sm p-6 border border-border flex flex-col gap-4">
           <div className="h-6 bg-field rounded-lg w-1/3" />
           <div className="grid grid-cols-2 gap-4">
             <div className="h-10 bg-canvas rounded-lg" />
@@ -120,7 +120,7 @@ export default function FirmDetailsPage() {
     }`;
 
   const textareaStyles = (active: boolean) =>
-    `w-full px-5 py-2.5 border rounded-2xl text-sm font-semibold transition-all duration-200 resize-none ${
+    `w-full px-5 py-2.5 border rounded-[2rem] text-sm font-semibold transition-all duration-200 resize-none ${
       active
         ? "bg-surface border-primary/40 focus:ring-2 focus:ring-primary/20 focus:border-primary text-ink cursor-text"
         : "bg-field/60 border-border/50 text-ink/70 cursor-not-allowed select-none"
@@ -133,7 +133,7 @@ export default function FirmDetailsPage() {
         <p className="text-sm text-ink/60 mt-1">Configure your enterprise firm profile, registration details, and localization parameters.</p>
       </div>
 
-      <div className="bg-surface rounded-2xl shadow-sm border border-border/60 overflow-hidden">
+      <div className="bg-surface rounded-[2rem] shadow-sm border border-border/60 overflow-hidden">
         <div className="p-6 border-b border-border flex items-center justify-between">
           <div className="flex items-center gap-2">
             <h2 className="text-base font-bold text-ink">Firm Profile</h2>

@@ -108,7 +108,7 @@ export function ContractFormModal({ open, onClose, existing, onSaved }: Props) {
     <Modal isOpen={open} onClose={onClose} title={existing ? "Update contract" : "Add contract"} size="xl">
       <form onSubmit={submit} className="flex flex-col gap-4">
         {existing && (
-          <p className="rounded-2xl border border-border bg-field/60 p-3 text-xs text-ink/60">
+          <p className="rounded-[2rem] border border-border bg-field/60 p-3 text-xs text-ink/60">
             Saving supersedes contract{" "}
             <span className="font-semibold">{existing.contractReference}</span> rather than
             editing it, so a period already invoiced keeps the terms it was billed on.

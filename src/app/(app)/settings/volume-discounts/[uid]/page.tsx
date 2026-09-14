@@ -158,7 +158,7 @@ export default function VolumeDiscountDetailPage() {
     return (
       <div className="p-8 max-w-5xl w-full mx-auto flex flex-col gap-6">
         <div className="h-8 bg-field rounded-xl w-64 animate-pulse" />
-        <div className="h-40 bg-field rounded-2xl animate-pulse" />
+        <div className="h-40 bg-field rounded-[2rem] animate-pulse" />
       </div>
     );
   }
@@ -217,20 +217,20 @@ export default function VolumeDiscountDetailPage() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-surface border border-border/70 rounded-2xl p-5">
+        <div className="bg-surface border border-border/70 rounded-[2rem] p-5">
           <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">Cumulative Spend</p>
           <p className="mt-2 text-2xl font-semibold tabular-nums text-ink">
             {formatMoney(dashboard.cumulativeSpend, program.currency)}
           </p>
         </div>
-        <div className="bg-surface border border-border/70 rounded-2xl p-5">
+        <div className="bg-surface border border-border/70 rounded-[2rem] p-5">
           <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">Current Tier</p>
           <p className="mt-2 text-2xl font-semibold tabular-nums text-ink">
             {dashboard.currentTierName || "—"}
           </p>
           <p className="text-xs text-ink/60 mt-1">{dashboard.currentDiscountPct}% discount</p>
         </div>
-        <div className="bg-surface border border-border/70 rounded-2xl p-5">
+        <div className="bg-surface border border-border/70 rounded-[2rem] p-5">
           <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">Next Tier</p>
           <p className="mt-2 text-2xl font-semibold tabular-nums text-ink">
             {dashboard.nextTierName || "—"}
@@ -241,7 +241,7 @@ export default function VolumeDiscountDetailPage() {
               : "Max tier reached"}
           </p>
         </div>
-        <div className="bg-surface border border-border/70 rounded-2xl p-5">
+        <div className="bg-surface border border-border/70 rounded-[2rem] p-5">
           <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">Savings to Date</p>
           <p className="mt-2 text-2xl font-semibold tabular-nums text-emerald-700 dark:text-emerald-400">
             {formatMoney(dashboard.savingsToDate, program.currency)}
@@ -249,7 +249,7 @@ export default function VolumeDiscountDetailPage() {
         </div>
       </div>
 
-      <div className="bg-surface border border-border/60 rounded-2xl p-6">
+      <div className="bg-surface border border-border/60 rounded-[2rem] p-6">
         <h2 className="text-xs font-bold text-ink/80 uppercase tracking-wider mb-2">Program Details</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
           <div>
@@ -265,7 +265,7 @@ export default function VolumeDiscountDetailPage() {
         </div>
       </div>
 
-      <div className="bg-surface border border-border/60 rounded-2xl p-6">
+      <div className="bg-surface border border-border/60 rounded-[2rem] p-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xs font-bold text-ink/80 uppercase tracking-wider">Panel Agreement</h2>
           {!panel && (
@@ -310,7 +310,7 @@ export default function VolumeDiscountDetailPage() {
               </div>
             </div>
 
-            <div className="bg-field/40 rounded-2xl border border-border p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="bg-field/40 rounded-[2rem] border border-border p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
                   <HiOutlineClock className="w-5 h-5" />
@@ -347,7 +347,7 @@ export default function VolumeDiscountDetailPage() {
         )}
       </div>
 
-      <div className="bg-surface border border-border/60 rounded-2xl p-6">
+      <div className="bg-surface border border-border/60 rounded-[2rem] p-6">
         <div className="flex flex-wrap items-baseline justify-between gap-2 mb-1">
           <h2 className="text-xs font-bold text-ink/80 uppercase tracking-wider">Tier Credits</h2>
           {creditsOwed > 0 && (
@@ -407,7 +407,7 @@ export default function VolumeDiscountDetailPage() {
         )}
       </div>
 
-      <div className="bg-surface border border-border/60 rounded-2xl p-6">
+      <div className="bg-surface border border-border/60 rounded-[2rem] p-6">
         <h2 className="text-xs font-bold text-ink/80 uppercase tracking-wider mb-4">Recent Spend</h2>
         {spendRecords.length === 0 ? (
           <p className="text-sm text-ink/60">No spend records yet.</p>

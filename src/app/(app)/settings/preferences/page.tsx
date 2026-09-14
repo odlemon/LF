@@ -82,7 +82,7 @@ export default function FirmPreferencesPage() {
                 <>
                   <Link
                     href="/negotiations"
-                    className="rounded-2xl border border-border/70 bg-surface p-4 transition-colors hover:border-ink/20"
+                    className="rounded-[2rem] border border-border/70 bg-surface p-4 transition-colors hover:border-ink/20"
                   >
                     <p className="text-sm font-semibold text-ink py-1.5 -my-1.5">Negotiations</p>
                     <p className="mt-1 text-xs leading-relaxed text-ink/60">
@@ -91,7 +91,7 @@ export default function FirmPreferencesPage() {
                   </Link>
                   <Link
                     href="/approvals"
-                    className="rounded-2xl border border-border/70 bg-surface p-4 transition-colors hover:border-ink/20"
+                    className="rounded-[2rem] border border-border/70 bg-surface p-4 transition-colors hover:border-ink/20"
                   >
                     <p className="text-sm font-semibold text-ink py-1.5 -my-1.5">Approvals</p>
                     <p className="mt-1 text-xs leading-relaxed text-ink/60">
@@ -100,7 +100,7 @@ export default function FirmPreferencesPage() {
                   </Link>
                   <Link
                     href="/clients"
-                    className="rounded-2xl border border-border/70 bg-surface p-4 transition-colors hover:border-ink/20"
+                    className="rounded-[2rem] border border-border/70 bg-surface p-4 transition-colors hover:border-ink/20"
                   >
                     <p className="text-sm font-semibold text-ink py-1.5 -my-1.5">Clients</p>
                     <p className="mt-1 text-xs leading-relaxed text-ink/60">
@@ -109,7 +109,7 @@ export default function FirmPreferencesPage() {
                   </Link>
                   <Link
                     href="/account"
-                    className="rounded-2xl border border-border/70 bg-field/80 p-4 transition-colors hover:border-ink/20"
+                    className="rounded-[2rem] border border-border/70 bg-field/80 p-4 transition-colors hover:border-ink/20"
                   >
                     <p className="text-sm font-semibold text-ink py-1.5 -my-1.5">Profile</p>
                     <p className="mt-1 text-xs leading-relaxed text-ink/60">
@@ -121,7 +121,7 @@ export default function FirmPreferencesPage() {
               {canFirmSettings && (
                 <Link
                   href="/settings/firm"
-                  className="rounded-2xl border border-border/70 bg-surface p-4 transition-colors hover:border-ink/20 sm:col-span-2"
+                  className="rounded-[2rem] border border-border/70 bg-surface p-4 transition-colors hover:border-ink/20 sm:col-span-2"
                 >
                   <p className="text-sm font-semibold text-ink py-1.5 -my-1.5">
                     Firm configuration

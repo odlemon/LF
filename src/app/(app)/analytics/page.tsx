@@ -126,7 +126,7 @@ export default function AnalyticsFirmHealthPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Link
                 href="/analytics/margin-monitor"
-                className="group flex items-center gap-4 bg-surface border border-border/70 rounded-2xl p-5 hover:border-ink/30 transition-all"
+                className="group flex items-center gap-4 bg-surface border border-border/70 rounded-[2rem] p-5 hover:border-ink/30 transition-all"
               >
                 <div className="w-10 h-10 rounded-xl bg-red-50 text-red-700 flex items-center justify-center shrink-0">
                   <HiShieldExclamation className="w-5 h-5" />
@@ -141,7 +141,7 @@ export default function AnalyticsFirmHealthPage() {
               </Link>
               <Link
                 href="/analytics/rate-compliance"
-                className="group flex items-center gap-4 bg-surface border border-border/70 rounded-2xl p-5 hover:border-ink/30 transition-all"
+                className="group flex items-center gap-4 bg-surface border border-border/70 rounded-[2rem] p-5 hover:border-ink/30 transition-all"
               >
                 <div className="w-10 h-10 rounded-xl bg-field text-ink/70 flex items-center justify-center shrink-0">
                   <HiClipboardCheck className="w-5 h-5" />
@@ -159,7 +159,7 @@ export default function AnalyticsFirmHealthPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
             {/* Practice-area margin list */}
-            <div className="lg:col-span-3 bg-surface border border-border/70 rounded-2xl p-5">
+            <div className="lg:col-span-3 bg-surface border border-border/70 rounded-[2rem] p-5">
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
@@ -228,7 +228,7 @@ export default function AnalyticsFirmHealthPage() {
             </div>
 
             {/* Top clients by revenue */}
-            <div className="lg:col-span-2 bg-surface border border-border/70 rounded-2xl p-5">
+            <div className="lg:col-span-2 bg-surface border border-border/70 rounded-[2rem] p-5">
               <div className="mb-4">
                 <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
                   Client concentration

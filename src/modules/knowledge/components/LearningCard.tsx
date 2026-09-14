@@ -33,7 +33,7 @@ export function LearningCard({
     <button
       type="button"
       onClick={() => onOpen(learning)}
-      className="group w-full text-left rounded-2xl border border-border bg-surface p-5 transition-all hover:border-ink/25 hover:shadow-[0_2px_16px_-8px_rgba(10,10,10,0.28)] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 cursor-pointer"
+      className="group w-full text-left rounded-[2rem] border border-border bg-surface p-5 transition-all hover:border-ink/25 hover:shadow-[0_2px_16px_-8px_rgba(10,10,10,0.28)] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 cursor-pointer"
     >
       <div className="flex items-start gap-3">
         <span

@@ -80,7 +80,7 @@ export default function FxRatesPage() {
 
       {isLoading ? (
         <div className="flex flex-col gap-6 animate-pulse">
-          <div className="h-40 bg-field rounded-2xl" />
+          <div className="h-40 bg-field rounded-[2rem]" />
         </div>
       ) : rates.length === 0 ? (
         <EmptyState
@@ -89,7 +89,7 @@ export default function FxRatesPage() {
           icon={<HiOutlineSwitchHorizontal className="w-5 h-5" />}
         />
       ) : (
-        <div className="bg-surface rounded-2xl border border-border/60 overflow-hidden shadow-sm">
+        <div className="bg-surface rounded-[2rem] border border-border/60 overflow-hidden shadow-sm">
           <div className="overflow-x-auto rates-scrollable">
             <table className="w-full text-left text-sm border-collapse">
 

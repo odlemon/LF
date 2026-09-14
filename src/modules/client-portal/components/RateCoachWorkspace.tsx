@@ -181,7 +181,7 @@ export function RateCoachWorkspace({
               );
             })}
             {lines.length > 0 && open && (onSubmitRates || onApplyRates) && (
-              <div className="rounded-2xl border border-border/70 bg-field/60 px-4 py-3">
+              <div className="rounded-[2rem] border border-border/70 bg-field/60 px-4 py-3">
                 <p className="text-xs font-semibold text-ink/70">
                   Counter ready
                   {projected != null

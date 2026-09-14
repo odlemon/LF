@@ -137,7 +137,7 @@ export function DetectorTuningPanel() {
   };
 
   if (loading) {
-    return <div className="h-40 animate-pulse rounded-2xl bg-field/60" />;
+    return <div className="h-40 animate-pulse rounded-[2rem] bg-field/60" />;
   }
   if (!effectiveness || !thresholds) {
     return null;
@@ -146,7 +146,7 @@ export function DetectorTuningPanel() {
   const byType = new Map(effectiveness.detectors.map((d) => [d.anomalyType, d]));
 
   return (
-    <section className="rounded-2xl border border-border/70 bg-surface p-5">
+    <section className="rounded-[2rem] border border-border/70 bg-surface p-5">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <div>
           <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
@@ -243,7 +243,7 @@ export function DetectorTuningPanel() {
               const stats = byType.get(d.type);
               const enabled = thresholds[d.key] as boolean;
               return (
-                <div key={d.type} className="rounded-2xl border border-border bg-field/30 p-4">
+                <div key={d.type} className="rounded-[2rem] border border-border bg-field/30 p-4">
                   <label className="flex items-center gap-2.5 text-sm font-medium text-ink">
                     <input
                       type="checkbox"

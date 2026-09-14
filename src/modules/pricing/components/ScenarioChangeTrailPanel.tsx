@@ -29,7 +29,7 @@ export function ScenarioChangeTrailPanel({
 
   return (
     <section
-      className={`rounded-2xl border border-border/70 bg-surface overflow-hidden ${className}`}
+      className={`rounded-[2rem] border border-border/70 bg-surface overflow-hidden ${className}`}
     >
       <div
         className={`border-b border-border/60 ${dense ? "px-4 py-3" : "px-5 py-4"}`}

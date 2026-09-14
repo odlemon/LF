@@ -93,7 +93,7 @@ export default function WinRatePage() {
 
           {/* Charts */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div className="bg-surface border border-border/70 rounded-2xl p-5">
+            <div className="bg-surface border border-border/70 rounded-[2rem] p-5">
               <div className="mb-4">
                 <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
                   Outcomes
@@ -112,7 +112,7 @@ export default function WinRatePage() {
                 <WinRateBars data={perf.byPricingModel} />
               )}
             </div>
-            <div className="bg-surface border border-border/70 rounded-2xl p-5">
+            <div className="bg-surface border border-border/70 rounded-[2rem] p-5">
               <div className="mb-4">
                 <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
                   Outcomes
@@ -135,7 +135,7 @@ export default function WinRatePage() {
 
           {/* Tables */}
           {perf.byPricingModel.length > 0 && (
-            <div className="bg-surface rounded-2xl border border-border/60 overflow-hidden shadow-sm">
+            <div className="bg-surface rounded-[2rem] border border-border/60 overflow-hidden shadow-sm">
               <div className="px-6 py-4 border-b border-border">
                 <h3 className="text-sm font-bold text-ink">By pricing model</h3>
               </div>
@@ -144,7 +144,7 @@ export default function WinRatePage() {
           )}
 
           {perf.byPracticeArea.length > 0 && (
-            <div className="bg-surface rounded-2xl border border-border/60 overflow-hidden shadow-sm">
+            <div className="bg-surface rounded-[2rem] border border-border/60 overflow-hidden shadow-sm">
               <div className="px-6 py-4 border-b border-border">
                 <h3 className="text-sm font-bold text-ink">By practice area</h3>
               </div>

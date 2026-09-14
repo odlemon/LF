@@ -154,14 +154,14 @@ export default function PortalNegotiationDetailPage() {
         </div>
         <div className="grid min-h-0 flex-1 lg:grid-cols-12">
           <div className="hidden min-h-0 flex-col gap-3 border-r border-border/60 p-4 sm:p-5 lg:col-span-7 lg:flex">
-            <div className="h-16 w-2/3 animate-pulse rounded-2xl bg-field/60" />
-            <div className="ml-auto h-16 w-1/2 animate-pulse rounded-2xl bg-field/60" />
-            <div className="h-16 w-3/5 animate-pulse rounded-2xl bg-field/60" />
+            <div className="h-16 w-2/3 animate-pulse rounded-[2rem] bg-field/60" />
+            <div className="ml-auto h-16 w-1/2 animate-pulse rounded-[2rem] bg-field/60" />
+            <div className="h-16 w-3/5 animate-pulse rounded-[2rem] bg-field/60" />
           </div>
           <div className="col-span-full flex min-h-0 flex-col gap-3 bg-surface p-4 sm:p-5 lg:col-span-5">
-            <div className="h-40 animate-pulse rounded-2xl bg-field/60" />
-            <div className="h-40 animate-pulse rounded-2xl bg-field/60" />
-            <div className="h-40 animate-pulse rounded-2xl bg-field/60" />
+            <div className="h-40 animate-pulse rounded-[2rem] bg-field/60" />
+            <div className="h-40 animate-pulse rounded-[2rem] bg-field/60" />
+            <div className="h-40 animate-pulse rounded-[2rem] bg-field/60" />
           </div>
         </div>
       </div>
@@ -450,7 +450,7 @@ export default function PortalNegotiationDetailPage() {
                 onChange={(e) => setComment(e.target.value)}
                 rows={2}
                 placeholder="Note to the firm (optional)"
-                className="w-full resize-none rounded-2xl border border-border bg-field px-3 py-2.5 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-primary/15"
+                className="w-full resize-none rounded-[2rem] border border-border bg-field px-3 py-2.5 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-primary/15"
               />
               <div className="flex flex-wrap justify-end gap-2">
                 <Button

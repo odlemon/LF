@@ -86,7 +86,7 @@ export function DatasetsListDrawerContent({
       </div>
 
       {/* Filter Options Bar (Custom selectors!) */}
-      <div className="bg-field/50 border border-border/40 rounded-3xl p-5 shadow-sm flex flex-col sm:flex-row gap-4">
+      <div className="bg-field/50 border border-border/40 rounded-[2rem] p-5 shadow-sm flex flex-col sm:flex-row gap-4">
         <div className="flex-1">
           <Select
             label="Category"
@@ -132,7 +132,7 @@ export function DatasetsListDrawerContent({
       </div>
 
       {/* Main Datasets Grid Table */}
-      <div className="bg-surface border border-border/60 rounded-3xl overflow-hidden shadow-sm shrink-0">
+      <div className="bg-surface border border-border/60 rounded-[2rem] overflow-hidden shadow-sm shrink-0">
         <div className="overflow-x-auto rates-scrollable">
           <table className="min-w-full divide-y divide-gray-100 text-xs">
             <thead className="bg-field">

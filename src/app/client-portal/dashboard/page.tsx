@@ -163,7 +163,7 @@ export default function ClientDashboardPage() {
           ].map((kpi, i) => (
             <article
               key={kpi.label}
-              className="rounded-2xl border border-border/70 bg-surface p-4 sm:p-5 animate-fade-in-up"
+              className="rounded-[2rem] border border-border/70 bg-surface p-4 sm:p-5 animate-fade-in-up"
               style={{ animationDelay: `${i * 40}ms` }}
             >
               <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">
@@ -186,7 +186,7 @@ export default function ClientDashboardPage() {
         </section>
 
         <div className="grid grid-cols-1 gap-5 xl:grid-cols-12">
-          <section className="xl:col-span-7 rounded-[1.5rem] border border-border/70 bg-surface p-5 sm:p-6">
+          <section className="xl:col-span-7 rounded-[2rem] border border-border/70 bg-surface p-5 sm:p-6">
             <div className="flex items-end justify-between gap-3">
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
@@ -202,7 +202,7 @@ export default function ClientDashboardPage() {
             {loading ? (
               <div className="mt-5 space-y-3">
                 {[1, 2].map((i) => (
-                  <div key={i} className="h-24 animate-pulse rounded-2xl bg-field" />
+                  <div key={i} className="h-24 animate-pulse rounded-[2rem] bg-field" />
                 ))}
               </div>
             ) : actionRequired.length === 0 ? (
@@ -225,7 +225,7 @@ export default function ClientDashboardPage() {
                         onClick={() =>
                           router.push(`/client-portal/negotiations/${item.id}`)
                         }
-                        className="group flex w-full flex-col gap-3 rounded-2xl border border-border/60 bg-canvas/50 p-4 text-left transition-all hover:border-ink/20 hover:bg-canvas sm:flex-row sm:items-center"
+                        className="group flex w-full flex-col gap-3 rounded-[2rem] border border-border/60 bg-canvas/50 p-4 text-left transition-all hover:border-ink/20 hover:bg-canvas sm:flex-row sm:items-center"
                       >
                         <div className="min-w-0 flex-1">
                           <div className="flex flex-wrap items-center gap-2">
@@ -261,7 +261,7 @@ export default function ClientDashboardPage() {
           </section>
 
           <section className="xl:col-span-5 flex flex-col gap-5">
-            <div className="rounded-[1.5rem] border border-border/70 bg-surface p-5 sm:p-6">
+            <div className="rounded-[2rem] border border-border/70 bg-surface p-5 sm:p-6">
               <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
                 Portfolio mix
               </p>
@@ -286,7 +286,7 @@ export default function ClientDashboardPage() {
               </div>
             </div>
 
-            <div className="rounded-[1.5rem] border border-border/70 bg-surface p-5 sm:p-6">
+            <div className="rounded-[2rem] border border-border/70 bg-surface p-5 sm:p-6">
               <div className="flex items-center gap-2">
                 <HiOutlineSparkles className="h-4 w-4 text-ink/60" />
                 <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
@@ -307,7 +307,7 @@ export default function ClientDashboardPage() {
           </section>
         </div>
 
-        <section className="overflow-hidden rounded-[1.5rem] border border-border/70 bg-surface">
+        <section className="overflow-hidden rounded-[2rem] border border-border/70 bg-surface">
           <div className="flex items-end justify-between gap-3 border-b border-border/60 px-5 py-4 sm:px-6">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">

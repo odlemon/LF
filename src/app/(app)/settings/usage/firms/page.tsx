@@ -129,13 +129,13 @@ export default function CrossFirmUsagePage() {
         </header>
 
         {error && (
-          <div className="rounded-2xl border border-red-200 bg-red-50/80 p-4 text-sm font-medium text-red-700">
+          <div className="rounded-[2rem] border border-red-200 bg-red-50/80 p-4 text-sm font-medium text-red-700">
             {error}
           </div>
         )}
 
         {isLoading ? (
-          <div className="h-72 animate-pulse rounded-[1.5rem] bg-field/60" />
+          <div className="h-72 animate-pulse rounded-[2rem] bg-field/60" />
         ) : rows.length === 0 ? (
           <EmptyState
             icon={<HiOutlineOfficeBuilding className="h-5.5 w-5.5" />}
@@ -157,7 +157,7 @@ export default function CrossFirmUsagePage() {
               <StatCard label="Active seats" value={totals.seats} />
             </div>
 
-            <div className="rounded-[1.5rem] border border-border bg-surface p-6">
+            <div className="rounded-[2rem] border border-border bg-surface p-6">
               <div className="overflow-x-auto">
                 <table className="w-full min-w-[760px] text-sm">
                   <thead>
@@ -227,7 +227,7 @@ export default function CrossFirmUsagePage() {
             </div>
 
             {selected && (
-              <div className="rounded-[1.5rem] border border-border bg-surface p-6">
+              <div className="rounded-[2rem] border border-border bg-surface p-6">
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/60">
@@ -293,7 +293,7 @@ export default function CrossFirmUsagePage() {
 
 function StatCard({ label, value }: { label: string; value: React.ReactNode }) {
   return (
-    <div className="rounded-2xl border border-border bg-surface p-4">
+    <div className="rounded-[2rem] border border-border bg-surface p-4">
       <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">{label}</p>
       <p className="mt-2 text-xl font-semibold tabular-nums text-ink">
         {typeof value === "number" ? value.toLocaleString() : value}

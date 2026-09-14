@@ -89,7 +89,7 @@ export default function AiConfigPage() {
         </header>
 
         {!loading && !activeProvider && (
-          <div className="flex items-start gap-3 rounded-2xl border border-warning/30 bg-warning/5 p-5">
+          <div className="flex items-start gap-3 rounded-[2rem] border border-warning/30 bg-warning/5 p-5">
             <HiOutlineExclamationCircle className="mt-0.5 h-5 w-5 shrink-0 text-warning" />
             <div>
               <h2 className="text-sm font-bold text-ink">No deployment in use</h2>
@@ -106,7 +106,7 @@ export default function AiConfigPage() {
             {[1, 2].map((i) => (
               <div
                 key={i}
-                className="h-[104px] animate-pulse rounded-2xl border border-border bg-surface"
+                className="h-[104px] animate-pulse rounded-[2rem] border border-border bg-surface"
               />
             ))}
           </div>

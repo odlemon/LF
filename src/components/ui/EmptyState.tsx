@@ -13,7 +13,7 @@ export function EmptyState({ message, title, description, icon }: EmptyStateProp
   const displayDescription = description;
 
   return (
-    <div className="flex flex-col items-center justify-center py-14 px-6 bg-field/20 border border-dashed border-border/80 rounded-2xl text-center">
+    <div className="flex flex-col items-center justify-center py-14 px-6 bg-field/20 border border-dashed border-border/80 rounded-[2rem] text-center">
       <div className="w-12 h-12 rounded-xl bg-field border border-border text-ink/60 flex items-center justify-center mb-3">
         {icon ?? <HiClipboardList className="w-5.5 h-5.5" />}
       </div>

@@ -136,7 +136,7 @@ export default function DemoRequestsPage() {
       {loading ? (
         <div className="flex flex-col gap-3">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="h-24 rounded-2xl border border-border bg-surface animate-pulse" />
+            <div key={i} className="h-24 rounded-[2rem] border border-border bg-surface animate-pulse" />
           ))}
         </div>
       ) : items.length === 0 ? (
@@ -155,7 +155,7 @@ export default function DemoRequestsPage() {
               key={request.uid}
               type="button"
               onClick={() => openRequest(request)}
-              className="text-left bg-surface border border-border/70 rounded-2xl p-5 transition-all hover:border-ink/30 hover:shadow-sm cursor-pointer"
+              className="text-left bg-surface border border-border/70 rounded-[2rem] p-5 transition-all hover:border-ink/30 hover:shadow-sm cursor-pointer"
             >
               <div className="flex items-center gap-2 flex-wrap">
                 <Badge variant={STATUS_VARIANT[request.status] ?? "neutral"}>
@@ -217,7 +217,7 @@ export default function DemoRequestsPage() {
       >
         {selected && (
           <div className="flex flex-col gap-6">
-            <div className="rounded-2xl border border-border bg-surface p-5">
+            <div className="rounded-[2rem] border border-border bg-surface p-5">
               <div className="flex items-center gap-2 flex-wrap">
                 <Badge variant={STATUS_VARIANT[selected.status] ?? "neutral"}>
                   {statusLabel(selected.status)}

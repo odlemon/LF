@@ -189,7 +189,7 @@ export default function MatterLearningsPage() {
 
       {/* Stacks until lg, not sm: with the sidebar open at ~800px the three controls shared about
           550px and the search field collapsed to the width of its own icon. */}
-      <div className="flex flex-col gap-3 rounded-2xl border border-border bg-surface p-3 lg:flex-row lg:items-center">
+      <div className="flex flex-col gap-3 rounded-[2rem] border border-border bg-surface p-3 lg:flex-row lg:items-center">
         <div className="relative min-w-0 flex-1">
           <HiOutlineSearch className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink/60" />
           <input
@@ -255,7 +255,7 @@ export default function MatterLearningsPage() {
       {loading ? (
         <div className="flex flex-col gap-3">
           {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="h-28 animate-pulse rounded-2xl border border-border bg-surface" />
+            <div key={i} className="h-28 animate-pulse rounded-[2rem] border border-border bg-surface" />
           ))}
         </div>
       ) : visible.length === 0 ? (

@@ -63,7 +63,7 @@ export default function ClientMatterHistoryPage() {
           ].map((k, i) => (
             <article
               key={k.label}
-              className="rounded-2xl border border-border/70 bg-surface p-5 animate-fade-in-up"
+              className="rounded-[2rem] border border-border/70 bg-surface p-5 animate-fade-in-up"
               style={{ animationDelay: `${i * 40}ms` }}
             >
               <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">
@@ -76,7 +76,7 @@ export default function ClientMatterHistoryPage() {
           ))}
         </section>
 
-        <section className="overflow-hidden rounded-[1.5rem] border border-border/70 bg-surface shadow-sm">
+        <section className="overflow-hidden rounded-[2rem] border border-border/70 bg-surface shadow-sm">
           {loading ? (
             <div className="space-y-px">
               {[1, 2, 3, 4].map((i) => (

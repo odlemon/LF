@@ -90,7 +90,7 @@ export default function ClientDiscountStatusPage() {
           ].map((k, i) => (
             <article
               key={k.label}
-              className="rounded-2xl border border-border/70 bg-surface p-5 animate-fade-in-up"
+              className="rounded-[2rem] border border-border/70 bg-surface p-5 animate-fade-in-up"
               style={{ animationDelay: `${i * 40}ms` }}
             >
               <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">
@@ -106,7 +106,7 @@ export default function ClientDiscountStatusPage() {
         {loading ? (
           <div className="mt-6 h-40 animate-pulse rounded-xl bg-field" />
         ) : programs.length === 0 ? (
-          <section className="rounded-[1.5rem] border border-border/70 bg-surface p-6 text-center">
+          <section className="rounded-[2rem] border border-border/70 bg-surface p-6 text-center">
             <p className="text-sm text-ink/60">No volume discount programs found for your account.</p>
           </section>
         ) : (
@@ -119,7 +119,7 @@ export default function ClientDiscountStatusPage() {
             return (
               <section
                 key={program.uid}
-                className="rounded-[1.5rem] border border-border/70 bg-surface p-5 sm:p-6"
+                className="rounded-[2rem] border border-border/70 bg-surface p-5 sm:p-6"
               >
                 <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2">
                   <div>

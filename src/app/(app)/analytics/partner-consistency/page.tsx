@@ -92,7 +92,7 @@ export default function PartnerConsistencyPage() {
       {loading && !rows ? (
         <div className="flex flex-col gap-4">
           {Array.from({ length: 3 }).map((_, i) => (
-            <div key={i} className="h-40 bg-field rounded-2xl animate-pulse" />
+            <div key={i} className="h-40 bg-field rounded-[2rem] animate-pulse" />
           ))}
         </div>
       ) : !rows || rows.length === 0 ? (
@@ -104,7 +104,7 @@ export default function PartnerConsistencyPage() {
       ) : (
         <>
           {compared.length === 0 && (
-            <div className="rounded-2xl border border-border bg-field/50 p-4 text-sm text-ink/60">
+            <div className="rounded-[2rem] border border-border bg-field/50 p-4 text-sm text-ink/60">
               No practice area yet has two partners with enough matters to compare. Each row
               below shows who was excluded and why, so the gap is visible rather than silent.
             </div>
@@ -114,7 +114,7 @@ export default function PartnerConsistencyPage() {
             {rows.map((area) => (
               <section
                 key={area.practiceAreaUid}
-                className="bg-surface border border-border/70 rounded-2xl p-5"
+                className="bg-surface border border-border/70 rounded-[2rem] p-5"
               >
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
                   <h2 className="text-base font-semibold text-ink tracking-tight">

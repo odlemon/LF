@@ -83,7 +83,7 @@ export function ConfidenceBreakdown({
             }}
           />
           <div
-            className="absolute z-50 top-full mt-2 left-0 w-80 rounded-2xl border border-border bg-surface p-4 shadow-lg text-left"
+            className="absolute z-50 top-full mt-2 left-0 w-80 rounded-[2rem] border border-border bg-surface p-4 shadow-lg text-left"
             onClick={(e) => e.stopPropagation()}
           >
             <p className="text-xs font-bold text-ink/80">How this is calculated</p>

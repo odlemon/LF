@@ -14,7 +14,7 @@ export function UsageBreakdownTable({ title, caption, rows, emptyMessage }: Prop
   const totalTokens = rows.reduce((sum, r) => sum + r.tokens, 0);
 
   return (
-    <div className="rounded-[1.5rem] border border-border bg-surface p-6">
+    <div className="rounded-[2rem] border border-border bg-surface p-6">
       <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/60">{title}</p>
       {caption && <p className="mt-1.5 text-xs text-ink/60">{caption}</p>}
 

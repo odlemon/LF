@@ -29,7 +29,7 @@ export function AiSuggestPanel({
   const [intent, setIntent] = useState(defaultIntent);
 
   return (
-    <div className="rounded-2xl border border-border/70 bg-surface p-5">
+    <div className="rounded-[2rem] border border-border/70 bg-surface p-5">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">

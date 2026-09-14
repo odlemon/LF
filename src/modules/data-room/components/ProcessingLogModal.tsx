@@ -39,11 +39,11 @@ export function ProcessingLogModal({ isOpen, onClose, documentUid, fileName }: P
         {isLoading ? (
           <div className="flex flex-col gap-4 animate-pulse">
             <div className="h-6 bg-field rounded-lg w-1/3" />
-            <div className="h-20 bg-field rounded-2xl" />
-            <div className="h-40 bg-field rounded-2xl" />
+            <div className="h-20 bg-field rounded-[2rem]" />
+            <div className="h-40 bg-field rounded-[2rem]" />
           </div>
         ) : error ? (
-          <div className="p-3.5 bg-red-50 border border-red-200/50 text-red-700 text-xs font-bold rounded-2xl">
+          <div className="p-3.5 bg-red-50 border border-red-200/50 text-red-700 text-xs font-bold rounded-[2rem]">
             {error}
           </div>
         ) : !logs || logs.length === 0 ? (
@@ -77,17 +77,17 @@ export function ProcessingLogModal({ isOpen, onClose, documentUid, fileName }: P
               <div className="flex flex-col gap-5">
                 {/* Stats row card */}
                 <div className="grid grid-cols-3 gap-3">
-                  <div className="bg-field/50 border border-border rounded-2xl p-4 text-center">
+                  <div className="bg-field/50 border border-border rounded-[2rem] p-4 text-center">
                     <span className="text-[10px] font-bold text-ink/60 uppercase tracking-wider block mb-1">Status</span>
                     <DocumentStatusBadge status={activeAttempt.status} />
                   </div>
-                  <div className="bg-field/50 border border-border rounded-2xl p-4 text-center">
+                  <div className="bg-field/50 border border-border rounded-[2rem] p-4 text-center">
                     <span className="text-[10px] font-bold text-ink/60 uppercase tracking-wider block mb-1">Rows Parsed</span>
                     <span className="text-base font-extrabold text-ink">
                       {activeAttempt.rowsProcessed} / {activeAttempt.rowsRead}
                     </span>
                   </div>
-                  <div className="bg-field/50 border border-border rounded-2xl p-4 text-center">
+                  <div className="bg-field/50 border border-border rounded-[2rem] p-4 text-center">
                     <span className="text-[10px] font-bold text-ink/60 uppercase tracking-wider block mb-1">Rows Failed</span>
                     <span className={`text-base font-extrabold ${activeAttempt.rowsFailed > 0 ? "text-red-600" : "text-ink"} dark:text-red-400`}>
                       {activeAttempt.rowsFailed}
@@ -96,7 +96,7 @@ export function ProcessingLogModal({ isOpen, onClose, documentUid, fileName }: P
                 </div>
 
                 {/* Date & Error Summary */}
-                <div className="flex flex-col gap-2.5 p-4 bg-field border border-border/50 rounded-2xl">
+                <div className="flex flex-col gap-2.5 p-4 bg-field border border-border/50 rounded-[2rem]">
                   <div className="flex items-center gap-2 text-xs text-ink/65">
                     <HiCalendar className="w-4 h-4 text-ink/60" />
                     <span className="font-semibold">
@@ -122,7 +122,7 @@ export function ProcessingLogModal({ isOpen, onClose, documentUid, fileName }: P
                   <span className="text-xs font-bold text-ink/60 uppercase tracking-wider flex items-center gap-1.5">
                     <HiDatabase className="w-4 h-4 text-ink/60" /> Column Mapping Matches
                   </span>
-                  <div className="border border-border/80 rounded-2xl overflow-hidden bg-surface shadow-sm">
+                  <div className="border border-border/80 rounded-[2rem] overflow-hidden bg-surface shadow-sm">
                     <table className="min-w-full divide-y divide-gray-100 text-xs">
                       <thead className="bg-field">
                         <tr>
@@ -164,7 +164,7 @@ export function ProcessingLogModal({ isOpen, onClose, documentUid, fileName }: P
                     <span className="text-xs font-bold text-ink/60 uppercase tracking-wider text-red-700 dark:text-red-400">
                       Row Error Logs ({activeAttempt.rowErrors.length} errors)
                     </span>
-                    <div className="border border-red-100 rounded-2xl overflow-hidden bg-surface shadow-sm max-h-56 overflow-y-auto rates-scrollable pr-1">
+                    <div className="border border-red-100 rounded-[2rem] overflow-hidden bg-surface shadow-sm max-h-56 overflow-y-auto rates-scrollable pr-1">
                       <table className="min-w-full divide-y divide-red-50 text-[11px]">
                         <thead className="bg-red-50/30">
                           <tr>

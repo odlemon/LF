@@ -91,8 +91,8 @@ export default function ApprovalMatrixPage() {
 
       {isLoading && draft.length === 0 ? (
         <div className="flex flex-col gap-4 animate-pulse">
-          <div className="h-24 bg-field rounded-2xl" />
-          <div className="h-24 bg-field rounded-2xl" />
+          <div className="h-24 bg-field rounded-[2rem]" />
+          <div className="h-24 bg-field rounded-[2rem]" />
         </div>
       ) : (
         <>
@@ -100,7 +100,7 @@ export default function ApprovalMatrixPage() {
             {draft.map((stage, index) => (
               <div
                 key={index}
-                className="bg-surface rounded-2xl border border-border/60 shadow-sm p-5 flex flex-col gap-4"
+                className="bg-surface rounded-[2rem] border border-border/60 shadow-sm p-5 flex flex-col gap-4"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
@@ -213,7 +213,7 @@ export default function ApprovalMatrixPage() {
             </Button>
           </div>
 
-          <div className="bg-field/40 border border-border rounded-2xl p-5 flex items-start gap-3">
+          <div className="bg-field/40 border border-border rounded-[2rem] p-5 flex items-start gap-3">
             <HiOutlineClipboardCheck className="w-5 h-5 text-ink/60 shrink-0 mt-0.5" />
             <p className="text-xs text-ink/60 leading-relaxed">
               Every firm starts with a default two-stage matrix (Partner, then Finance) that

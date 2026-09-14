@@ -137,21 +137,21 @@ export default function VolumeDiscountsPage() {
 
       {isLoading ? (
         <div className="flex flex-col gap-6 animate-pulse">
-          <div className="h-40 bg-field rounded-2xl" />
-          <div className="h-32 bg-field rounded-2xl" />
+          <div className="h-40 bg-field rounded-[2rem]" />
+          <div className="h-32 bg-field rounded-[2rem]" />
         </div>
       ) : (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="bg-surface border border-border/70 rounded-2xl p-5">
+            <div className="bg-surface border border-border/70 rounded-[2rem] p-5">
               <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">Active Programs</p>
               <p className="mt-2 text-2xl font-semibold tabular-nums text-ink">{activePrograms.length}</p>
             </div>
-            <div className="bg-surface border border-border/70 rounded-2xl p-5">
+            <div className="bg-surface border border-border/70 rounded-[2rem] p-5">
               <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">Draft Programs</p>
               <p className="mt-2 text-2xl font-semibold tabular-nums text-ink">{draftPrograms.length}</p>
             </div>
-            <div className="bg-surface border border-border/70 rounded-2xl p-5">
+            <div className="bg-surface border border-border/70 rounded-[2rem] p-5">
               <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">Total Savings Issued</p>
               <p className="mt-2 text-2xl font-semibold tabular-nums text-ink">
                 {formatMoney(
@@ -163,7 +163,7 @@ export default function VolumeDiscountsPage() {
           </div>
 
           {activePrograms.length === 0 && draftPrograms.length === 0 ? (
-            <div className="text-center py-16 bg-surface border border-border/60 rounded-2xl p-6">
+            <div className="text-center py-16 bg-surface border border-border/60 rounded-[2rem] p-6">
               <HiOutlineTrendingDown className="w-10 h-10 text-ink/60 mx-auto mb-3" />
               <p className="text-sm text-ink/60">No volume discount programs yet.</p>
               <Button
@@ -176,7 +176,7 @@ export default function VolumeDiscountsPage() {
               </Button>
             </div>
           ) : (
-            <div className="bg-surface rounded-2xl border border-border/60 overflow-hidden shadow-sm">
+            <div className="bg-surface rounded-[2rem] border border-border/60 overflow-hidden shadow-sm">
               <div className="overflow-x-auto rates-scrollable">
                 <table className="w-full text-left text-sm border-collapse">
 

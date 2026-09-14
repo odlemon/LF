@@ -52,7 +52,7 @@ export function SubmitPartnerModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-fade-in">
-      <div className="bg-surface rounded-2xl border border-border shadow-[0_12px_40px_rgba(0,0,0,0.14)] w-full max-w-md p-6 animate-fade-in-up">
+      <div className="bg-surface rounded-[2rem] border border-border shadow-[0_12px_40px_rgba(0,0,0,0.14)] w-full max-w-md p-6 animate-fade-in-up">
         <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
           Partner review
         </p>

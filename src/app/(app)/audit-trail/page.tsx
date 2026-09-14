@@ -138,7 +138,7 @@ function AuditTrailContent() {
       </div>
 
       {/* Filter bar card */}
-      <div className="bg-surface rounded-2xl border border-border/60 p-5 shadow-sm">
+      <div className="bg-surface rounded-[2rem] border border-border/60 p-5 shadow-sm">
         <form onSubmit={handleSearchSubmit} className="flex flex-col gap-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
             
@@ -238,7 +238,7 @@ function AuditTrailContent() {
       </div>
 
       {/* Main Table view */}
-      <div className="bg-surface rounded-2xl border border-border/60 shadow-sm overflow-hidden flex flex-col">
+      <div className="bg-surface rounded-[2rem] border border-border/60 shadow-sm overflow-hidden flex flex-col">
         <div className="overflow-x-auto rates-scrollable">
           <table className="w-full text-left text-sm border-collapse">
             <thead>
@@ -467,8 +467,8 @@ export default function AuditTrailPage() {
         fallback={
           <div className="p-8 max-w-6xl w-full mx-auto flex flex-col gap-6 animate-pulse">
             <div className="h-8 bg-field w-1/4 rounded-lg" />
-            <div className="h-32 bg-field rounded-2xl" />
-            <div className="h-96 bg-field rounded-2xl" />
+            <div className="h-32 bg-field rounded-[2rem]" />
+            <div className="h-96 bg-field rounded-[2rem]" />
           </div>
         }
       >

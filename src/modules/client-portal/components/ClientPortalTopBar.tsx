@@ -111,7 +111,7 @@ export function ClientPortalTopBar({ onMenuClick }: { onMenuClick?: () => void }
         ref={menuRef}
         role="menu"
         style={{ top: menuPos.top, right: menuPos.right }}
-        className="fixed z-[200] w-56 overflow-hidden rounded-2xl border border-border/70 bg-surface py-1.5 shadow-lg animate-fade-in"
+        className="fixed z-[200] w-56 overflow-hidden rounded-[2rem] border border-border/70 bg-surface py-1.5 shadow-lg animate-fade-in"
       >
         <div className="border-b border-border/60 px-3.5 py-2.5 sm:hidden">
           <p className="truncate text-sm font-semibold text-ink">{user?.contactName}</p>

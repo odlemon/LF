@@ -68,7 +68,7 @@ export function DeploymentRow({
 
   return (
     <div
-      className={`rounded-2xl border bg-surface p-5 transition-colors ${
+      className={`rounded-[2rem] border bg-surface p-5 transition-colors ${
         isActive ? "border-ink/30" : "border-border"
       }`}
     >

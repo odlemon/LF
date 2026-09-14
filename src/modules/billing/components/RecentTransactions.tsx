@@ -44,7 +44,7 @@ export function RecentTransactions({
         <h3 className="mt-1 text-base font-semibold tracking-tight text-ink">{title}</h3>
       </div>
       {error ? (
-        <div className="rounded-[1.5rem] border border-border/60 bg-surface p-6 text-center shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
+        <div className="rounded-[2rem] border border-border/60 bg-surface p-6 text-center shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
           <p className="text-sm font-medium text-red-600 dark:text-red-400">{error}</p>
           <button
             onClick={load}

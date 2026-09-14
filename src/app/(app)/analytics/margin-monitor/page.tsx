@@ -139,7 +139,7 @@ export default function MarginMonitorPage() {
       {isLoading && !anomalies ? (
         <div className="flex flex-col gap-3 animate-pulse">
           {[0, 1, 2, 3].map((i) => (
-            <div key={i} className="h-24 bg-field rounded-2xl" />
+            <div key={i} className="h-24 bg-field rounded-[2rem]" />
           ))}
         </div>
       ) : !anomalies || anomalies.length === 0 ? (
@@ -179,7 +179,7 @@ export default function MarginMonitorPage() {
                   key={anomaly.uid}
                   type="button"
                   onClick={() => setSelected(anomaly)}
-                  className={`text-left bg-surface border rounded-2xl p-5 transition-all hover:border-ink/30 hover:shadow-sm cursor-pointer ${
+                  className={`text-left bg-surface border rounded-[2rem] p-5 transition-all hover:border-ink/30 hover:shadow-sm cursor-pointer ${
                     anomaly.severity === "HIGH" && anomaly.status === "OPEN"
                       ? "border-red-200/80"
                       : "border-border/70"

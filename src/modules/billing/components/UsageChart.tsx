@@ -34,7 +34,7 @@ export function UsageChart({ data, loading }: UsageChartProps) {
 
   if (loading) {
     return (
-      <div className="rounded-[1.5rem] border border-border/60 bg-surface p-5 sm:p-6 shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
+      <div className="rounded-[2rem] border border-border/60 bg-surface p-5 sm:p-6 shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
         <div className="h-4 w-32 bg-field/80 rounded animate-pulse mb-1" />
         <div className="h-3 w-48 bg-field/80 rounded animate-pulse mb-6" />
         <div className="h-[260px] bg-field/50 rounded-xl animate-pulse" />
@@ -53,7 +53,7 @@ export function UsageChart({ data, loading }: UsageChartProps) {
   }));
 
   return (
-    <div className="animate-fade-in-up rounded-[1.5rem] border border-border/60 bg-surface shadow-[0_1px_3px_rgba(0,0,0,0.03)]" style={{ animationDelay: "240ms" }}>
+    <div className="animate-fade-in-up rounded-[2rem] border border-border/60 bg-surface shadow-[0_1px_3px_rgba(0,0,0,0.03)]" style={{ animationDelay: "240ms" }}>
       <div className="p-5 sm:p-6 pb-0">
         <div className="mb-1">
           <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">Consumption</p>

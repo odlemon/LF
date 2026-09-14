@@ -50,8 +50,8 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
     return (
       <div className="p-8 max-w-4xl w-full mx-auto flex flex-col gap-6 animate-pulse">
         <div className="h-6 bg-field w-1/4 rounded-lg" />
-        <div className="h-40 bg-field rounded-2xl" />
-        <div className="h-48 bg-field rounded-2xl" />
+        <div className="h-40 bg-field rounded-[2rem]" />
+        <div className="h-48 bg-field rounded-[2rem]" />
       </div>
     );
   }
@@ -139,7 +139,7 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-        <div className="bg-surface rounded-2xl border border-border/60 shadow-sm p-6 lg:col-span-2">
+        <div className="bg-surface rounded-[2rem] border border-border/60 shadow-sm p-6 lg:col-span-2">
           <h2 className="text-sm font-bold text-ink mb-4 pb-2 border-b border-border">
             Client Details
           </h2>
@@ -275,7 +275,7 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
           )}
         </div>
 
-        <div className="bg-surface rounded-2xl border border-border/60 shadow-sm p-6 flex flex-col gap-4">
+        <div className="bg-surface rounded-[2rem] border border-border/60 shadow-sm p-6 flex flex-col gap-4">
           <div className="flex items-center justify-between gap-3 pb-2 border-b border-border">
             <h2 className="text-sm font-bold text-ink">Portal Logins</h2>
             <button
@@ -350,13 +350,13 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
       </div>
 
       {/* Activity History timeline compliance panel */}
-      <div className="bg-surface rounded-2xl border border-border/60 shadow-sm p-6 mt-2">
+      <div className="bg-surface rounded-[2rem] border border-border/60 shadow-sm p-6 mt-2">
         <AuditTrailPanel entityUid={uid} title="Client Account Activity History" />
       </div>
 
       {isInviteModalOpen && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in">
-          <div className="bg-surface rounded-2xl max-w-sm w-full shadow-2xl p-6 relative animate-fade-in-up border border-border z-50">
+          <div className="bg-surface rounded-[2rem] max-w-sm w-full shadow-2xl p-6 relative animate-fade-in-up border border-border z-50">
             <h3 className="text-base font-bold text-ink mb-1 flex items-center gap-2">
               <HiLockOpen className="w-5 h-5 text-primary" />
               Invite Client Contact

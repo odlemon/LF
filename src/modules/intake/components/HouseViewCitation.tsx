@@ -116,7 +116,7 @@ export function HouseViewCitation({ requestUid }: { requestUid: string }) {
         {open && (
           <div className="flex max-h-[45vh] flex-col gap-2.5 overflow-y-auto px-4 pb-4 sm:px-6">
             {positions.map((p) => (
-              <article key={p.uid} className="rounded-2xl border border-border bg-surface p-4 shrink-0">
+              <article key={p.uid} className="rounded-[2rem] border border-border bg-surface p-4 shrink-0">
                 <div className="flex items-start gap-2.5">
                   <span
                     className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full ${

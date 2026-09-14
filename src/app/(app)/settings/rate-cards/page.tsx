@@ -98,8 +98,8 @@ export default function RateCardsPage() {
 
       {isLoading ? (
         <div className="flex flex-col gap-6 animate-pulse">
-          <div className="h-40 bg-field rounded-2xl" />
-          <div className="h-32 bg-field rounded-2xl" />
+          <div className="h-40 bg-field rounded-[2rem]" />
+          <div className="h-32 bg-field rounded-[2rem]" />
         </div>
       ) : (
         <>
@@ -112,7 +112,7 @@ export default function RateCardsPage() {
                 {activeCards.map((card) => (
                   <div
                     key={card.uid}
-                    className="bg-gradient-to-r from-primary/10 to-black/[0.03] border border-ink/25 rounded-2xl p-6 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-6"
+                    className="bg-gradient-to-r from-primary/10 to-black/[0.03] border border-ink/25 rounded-[2rem] p-6 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-6"
                   >
                     <div className="flex items-start gap-4">
                       <div className="w-12 h-12 rounded-xl bg-primary/20 text-ink/70 flex items-center justify-center">
@@ -145,7 +145,7 @@ export default function RateCardsPage() {
                 ))}
               </div>
             ) : (
-              <div className="bg-amber-50/50 border border-amber-200 rounded-2xl p-6 text-center text-sm text-amber-800">
+              <div className="bg-amber-50/50 border border-amber-200 rounded-[2rem] p-6 text-center text-sm text-amber-800">
                 No active rate card currently set{officeFilter !== "ALL" ? " for this office" : ""}. Activating a rate card is required before scoped matters can be computed.
               </div>
             )}
@@ -154,11 +154,11 @@ export default function RateCardsPage() {
           <div>
             <h2 className="text-xs font-bold text-ink/80 uppercase tracking-wider mb-3">Draft Rate Cards</h2>
             {draftCards.length === 0 ? (
-              <div className="text-center py-8 bg-surface border border-border/60 rounded-2xl p-6 text-sm text-ink/60">
+              <div className="text-center py-8 bg-surface border border-border/60 rounded-[2rem] p-6 text-sm text-ink/60">
                 No drafts created. Click &apos;Create Rate Card&apos; to prepare one.
               </div>
             ) : (
-              <div className="bg-surface rounded-2xl border border-border/60 overflow-hidden shadow-sm">
+              <div className="bg-surface rounded-[2rem] border border-border/60 overflow-hidden shadow-sm">
                 <div className="overflow-x-auto rates-scrollable">
                   <table className="w-full text-left text-sm border-collapse">
 
@@ -215,7 +215,7 @@ export default function RateCardsPage() {
           {archivedCards.length > 0 && (
             <div>
               <h2 className="text-xs font-bold text-ink/80 uppercase tracking-wider mb-3">Archived Cards</h2>
-              <div className="bg-surface rounded-2xl border border-border/60 overflow-hidden shadow-sm">
+              <div className="bg-surface rounded-[2rem] border border-border/60 overflow-hidden shadow-sm">
                 <div className="overflow-x-auto rates-scrollable">
                   <table className="w-full text-left text-sm border-collapse">
 

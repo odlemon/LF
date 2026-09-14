@@ -136,9 +136,9 @@ export default function DocumentDetailPage() {
 
       {/* Loading State */}
       {isLoading ? (
-        <div className="h-64 bg-canvas rounded-3xl animate-pulse" />
+        <div className="h-64 bg-canvas rounded-[2rem] animate-pulse" />
       ) : error ? (
-        <div className="p-6 bg-red-50 border border-red-200 text-red-700 rounded-2xl font-semibold flex items-start gap-3">
+        <div className="p-6 bg-red-50 border border-red-200 text-red-700 rounded-[2rem] font-semibold flex items-start gap-3">
           <HiExclamation className="w-5 h-5 shrink-0 mt-0.5" />
           <div>
             <p className="font-bold">Failed to load document</p>
@@ -146,13 +146,13 @@ export default function DocumentDetailPage() {
           </div>
         </div>
       ) : !document ? (
-        <div className="p-6 bg-red-50 border border-red-200 text-red-700 rounded-2xl font-semibold">
+        <div className="p-6 bg-red-50 border border-red-200 text-red-700 rounded-[2rem] font-semibold">
           Document not found.
         </div>
       ) : (
         <>
           {/* Document Metadata Header Card */}
-          <div className="bg-surface border border-border/60 rounded-3xl p-6 shadow-sm">
+          <div className="bg-surface border border-border/60 rounded-[2rem] p-6 shadow-sm">
             <div className="flex flex-col md:flex-row gap-6 justify-between items-start">
               <div className="flex flex-col gap-2 flex-1 min-w-0">
                 <div className="flex items-center gap-2.5 flex-wrap">
@@ -334,7 +334,7 @@ export default function DocumentDetailPage() {
           {/* Tab Content */}
           {activeTab === "mapping" ? (
             /* Column Mapping Section */
-            <div className="bg-surface border border-border/60 rounded-3xl p-6 shadow-sm">
+            <div className="bg-surface border border-border/60 rounded-[2rem] p-6 shadow-sm">
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <h2 className="text-sm font-extrabold text-ink">Column Mapping</h2>
@@ -348,7 +348,7 @@ export default function DocumentDetailPage() {
               </div>
 
               {document.columnMapping && Object.keys(document.columnMapping).length > 0 ? (
-                <div className="border border-border/80 rounded-2xl overflow-hidden">
+                <div className="border border-border/80 rounded-[2rem] overflow-hidden">
                   <table className="min-w-full divide-y divide-gray-100 text-xs">
                     <thead className="bg-field">
                       <tr>
@@ -393,7 +393,7 @@ export default function DocumentDetailPage() {
                   </table>
                 </div>
               ) : (
-                <div className="text-center py-10 text-ink/60 font-semibold flex flex-col items-center gap-2 bg-field/50 rounded-2xl border border-dashed border-border">
+                <div className="text-center py-10 text-ink/60 font-semibold flex flex-col items-center gap-2 bg-field/50 rounded-[2rem] border border-dashed border-border">
                   <HiDatabase className="w-8 h-8 text-gray-300" />
                   No column mapping data available.
                 </div>
@@ -401,7 +401,7 @@ export default function DocumentDetailPage() {
             </div>
           ) : (
             /* Processing Logs Section */
-            <div className="bg-surface border border-border/60 rounded-3xl p-6 shadow-sm">
+            <div className="bg-surface border border-border/60 rounded-[2rem] p-6 shadow-sm">
               <h2 className="text-sm font-extrabold text-ink mb-4">Processing Attempts</h2>
 
               {isLogsLoading ? (
@@ -410,10 +410,10 @@ export default function DocumentDetailPage() {
                     <div className="h-8 w-24 bg-canvas rounded-full" />
                     <div className="h-8 w-24 bg-canvas rounded-full" />
                   </div>
-                  <div className="h-32 bg-canvas rounded-2xl" />
+                  <div className="h-32 bg-canvas rounded-[2rem]" />
                 </div>
               ) : !logs || logs.length === 0 ? (
-                <div className="text-center py-10 text-ink/60 font-semibold flex flex-col items-center gap-2 bg-field/50 rounded-2xl border border-dashed border-border">
+                <div className="text-center py-10 text-ink/60 font-semibold flex flex-col items-center gap-2 bg-field/50 rounded-[2rem] border border-dashed border-border">
                   <HiExclamation className="w-8 h-8 text-gray-300" />
                   No processing attempts logged for this file yet.
                 </div>
@@ -443,13 +443,13 @@ export default function DocumentDetailPage() {
                     <div className="flex flex-col gap-5">
                       {/* Stats Row */}
                       <div className="grid grid-cols-3 gap-3">
-                        <div className="bg-field/50 border border-border rounded-2xl p-4 text-center">
+                        <div className="bg-field/50 border border-border rounded-[2rem] p-4 text-center">
                           <span className="text-[10px] font-bold text-ink/60 uppercase tracking-wider block mb-1">
                             Status
                           </span>
                           <DocumentStatusBadge status={activeAttempt.status} />
                         </div>
-                        <div className="bg-field/50 border border-border rounded-2xl p-4 text-center">
+                        <div className="bg-field/50 border border-border rounded-[2rem] p-4 text-center">
                           <span className="text-[10px] font-bold text-ink/60 uppercase tracking-wider block mb-1">
                             Rows Parsed
                           </span>
@@ -457,7 +457,7 @@ export default function DocumentDetailPage() {
                             {activeAttempt.rowsProcessed} / {activeAttempt.rowsRead}
                           </span>
                         </div>
-                        <div className="bg-field/50 border border-border rounded-2xl p-4 text-center">
+                        <div className="bg-field/50 border border-border rounded-[2rem] p-4 text-center">
                           <span className="text-[10px] font-bold text-ink/60 uppercase tracking-wider block mb-1">
                             Rows Failed
                           </span>
@@ -468,7 +468,7 @@ export default function DocumentDetailPage() {
                       </div>
 
                       {/* Dates & Error Summary */}
-                      <div className="flex flex-col gap-2.5 p-4 bg-field border border-border/50 rounded-2xl">
+                      <div className="flex flex-col gap-2.5 p-4 bg-field border border-border/50 rounded-[2rem]">
                         <div className="flex items-center gap-2 text-xs text-ink/65 flex-wrap">
                           <HiCalendar className="w-4 h-4 text-ink/60" />
                           <span className="font-semibold">
@@ -494,7 +494,7 @@ export default function DocumentDetailPage() {
                         <span className="text-xs font-bold text-ink/60 uppercase tracking-wider flex items-center gap-1.5">
                           <HiDatabase className="w-4 h-4 text-ink/60" /> Column Mapping Used
                         </span>
-                        <div className="border border-border/80 rounded-2xl overflow-hidden bg-surface shadow-sm">
+                        <div className="border border-border/80 rounded-[2rem] overflow-hidden bg-surface shadow-sm">
                           <table className="min-w-full divide-y divide-gray-100 text-xs">
                             <thead className="bg-field">
                               <tr>
@@ -540,7 +540,7 @@ export default function DocumentDetailPage() {
                           <span className="text-xs font-bold text-ink/60 uppercase tracking-wider text-red-700 dark:text-red-400">
                             Row Error Logs ({activeAttempt.rowErrors.length} errors)
                           </span>
-                          <div className="border border-red-100 rounded-2xl overflow-hidden bg-surface shadow-sm max-h-56 overflow-y-auto rates-scrollable pr-1">
+                          <div className="border border-red-100 rounded-[2rem] overflow-hidden bg-surface shadow-sm max-h-56 overflow-y-auto rates-scrollable pr-1">
                             <table className="min-w-full divide-y divide-red-50 text-[11px]">
                               <thead className="bg-red-50/30">
                                 <tr>

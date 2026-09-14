@@ -20,7 +20,7 @@ export function PartnerReturnBanner({
 
   return (
     <aside
-      className={`relative overflow-hidden rounded-2xl border ${
+      className={`relative overflow-hidden rounded-[2rem] border ${
         isCorrection
           ? "border-amber-200/90 bg-gradient-to-br from-amber-50 via-amber-50/40 to-surface dark:border-amber-800/50 dark:from-amber-950/50 dark:via-amber-950/20 dark:to-surface"
           : "border-border/80 bg-gradient-to-br from-field/80 via-surface to-surface"

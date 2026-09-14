@@ -64,11 +64,11 @@ export default function FeeEarnerLevelsPage() {
           <div className="h-16 bg-field rounded-xl" />
         </div>
       ) : levels.length === 0 ? (
-        <div className="text-center py-12 bg-surface rounded-2xl border border-border/60 p-8 shadow-sm flex flex-col items-center justify-center gap-3">
+        <div className="text-center py-12 bg-surface rounded-[2rem] border border-border/60 p-8 shadow-sm flex flex-col items-center justify-center gap-3">
           <span className="text-sm text-ink/60">No levels registered yet. Click &apos;Add Level&apos; to define one.</span>
         </div>
       ) : (
-        <div className="bg-surface rounded-2xl border border-border/60 overflow-hidden shadow-sm">
+        <div className="bg-surface rounded-[2rem] border border-border/60 overflow-hidden shadow-sm">
           <div className="divide-y divide-gray-100">
             {levels.map((level, idx) => (
               <div

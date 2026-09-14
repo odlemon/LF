@@ -74,7 +74,7 @@ export function TaskRow({
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           rows={2}
-          className="w-full px-4 py-2.5 text-sm border border-border rounded-2xl bg-surface focus:outline-none focus:ring-2 focus:ring-primary/20"
+          className="w-full px-4 py-2.5 text-sm border border-border rounded-[2rem] bg-surface focus:outline-none focus:ring-2 focus:ring-primary/20"
         />
         <div className="flex gap-2 flex-wrap items-center">
           <div className="flex-1 min-w-[140px]">

@@ -195,11 +195,11 @@ export default function RolesPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             <div className="lg:col-span-4 flex flex-col gap-3">
               {Array.from({ length: 6 }).map((_, i) => (
-                <div key={i} className="h-28 bg-field/60 rounded-2xl animate-pulse" />
+                <div key={i} className="h-28 bg-field/60 rounded-[2rem] animate-pulse" />
               ))}
             </div>
             <div className="lg:col-span-8">
-              <div className="h-[520px] bg-field/60 rounded-2xl animate-pulse" />
+              <div className="h-[520px] bg-field/60 rounded-[2rem] animate-pulse" />
             </div>
           </div>
         ) : (
@@ -212,7 +212,7 @@ export default function RolesPage() {
               </div>
               <div className="flex flex-col gap-3 overflow-y-auto rates-scrollable max-h-[70vh] pr-1">
                 {roles.length === 0 ? (
-                  <div className="bg-surface rounded-2xl border border-border p-8 text-center text-ink/60 text-xs font-semibold">
+                  <div className="bg-surface rounded-[2rem] border border-border p-8 text-center text-ink/60 text-xs font-semibold">
                     No custom roles registered in this firm.
                   </div>
                 ) : (
@@ -234,7 +234,7 @@ export default function RolesPage() {
                             handleSelectRole(role);
                           }
                         }}
-                        className={`bg-surface rounded-2xl p-5 border transition-all cursor-pointer flex items-start gap-4 relative overflow-hidden select-none group shrink-0 ${
+                        className={`bg-surface rounded-[2rem] p-5 border transition-all cursor-pointer flex items-start gap-4 relative overflow-hidden select-none group shrink-0 ${
                           isSelected
                             ? "border-primary shadow-md ring-2 ring-primary/5"
                             : "border-border/60 hover:border-ink/20 shadow-sm"
@@ -275,7 +275,7 @@ export default function RolesPage() {
             {/* Right Pane: Perm mapping dashboard */}
             <div className="lg:col-span-8">
               {activeRole ? (
-                <div className="bg-surface rounded-2xl shadow-sm border border-border/60 p-6 flex flex-col gap-6">
+                <div className="bg-surface rounded-[2rem] shadow-sm border border-border/60 p-6 flex flex-col gap-6">
                   
                   {/* Dashboard pane header */}
                   <div className="flex items-start justify-between border-b border-border pb-5 gap-4">
@@ -330,7 +330,7 @@ export default function RolesPage() {
                                     handlePermissionToggle(perm.uid);
                                   }
                                 }}
-                                className={`flex items-start justify-between gap-4 p-4.5 rounded-2xl border transition-all duration-200 cursor-pointer select-none group relative ${
+                                className={`flex items-start justify-between gap-4 p-4.5 rounded-[2rem] border transition-all duration-200 cursor-pointer select-none group relative ${
                                   isChecked
                                     ? "bg-primary/[0.01] border-primary/80 shadow-sm"
                                     : "border-border hover:border-ink/20 bg-surface"
@@ -377,7 +377,7 @@ export default function RolesPage() {
 
                 </div>
               ) : (
-                <div className="bg-surface rounded-2xl border border-border/60 p-24 text-center flex flex-col items-center justify-center gap-2">
+                <div className="bg-surface rounded-[2rem] border border-border/60 p-24 text-center flex flex-col items-center justify-center gap-2">
                   <div className="w-12 h-12 bg-primary/10 text-primary rounded-2xl flex items-center justify-center">
                     <HiLockOpen className="w-6 h-6" />
                   </div>
@@ -393,7 +393,7 @@ export default function RolesPage() {
         {/* Modal creator sheet */}
         {isCreateOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/35 backdrop-blur-sm animate-fade-in select-none">
-            <div className="bg-surface rounded-2xl shadow-xl w-full max-w-md border border-border/60 overflow-hidden flex flex-col">
+            <div className="bg-surface rounded-[2rem] shadow-xl w-full max-w-md border border-border/60 overflow-hidden flex flex-col">
               <div className="px-6 py-5 border-b border-border flex items-center justify-between">
                 <h3 className="text-base font-bold text-ink">Create New Firm Role</h3>
                 <button

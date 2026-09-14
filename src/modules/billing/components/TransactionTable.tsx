@@ -15,7 +15,7 @@ interface TransactionTableProps {
 export function TransactionTable({ transactions, loading, onRefresh }: TransactionTableProps) {
   if (loading) {
     return (
-      <div className="rounded-[1.5rem] border border-border/60 bg-surface overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
+      <div className="rounded-[2rem] border border-border/60 bg-surface overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
         <div className="border-b border-border/60 px-5 py-4 sm:px-6">
           <div className="h-4 w-32 bg-field/80 rounded animate-pulse" />
         </div>
@@ -30,7 +30,7 @@ export function TransactionTable({ transactions, loading, onRefresh }: Transacti
 
   if (transactions.length === 0) {
     return (
-      <div className="rounded-[1.5rem] border border-border/60 bg-surface p-10 text-center shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
+      <div className="rounded-[2rem] border border-border/60 bg-surface p-10 text-center shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
         <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-field text-ink/60">
           <HiReceiptRefund className="h-6 w-6" />
         </div>
@@ -86,7 +86,7 @@ export function TransactionTable({ transactions, loading, onRefresh }: Transacti
   };
 
   return (
-    <div className="animate-fade-in-up rounded-[1.5rem] border border-border/60 bg-surface overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.03)]" style={{ animationDelay: "300ms" }}>
+    <div className="animate-fade-in-up rounded-[2rem] border border-border/60 bg-surface overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.03)]" style={{ animationDelay: "300ms" }}>
       {/* Table header */}
       <div className="flex items-center justify-between border-b border-border/60 px-5 py-4 sm:px-6">
         <div>

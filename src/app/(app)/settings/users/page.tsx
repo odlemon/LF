@@ -149,13 +149,13 @@ export default function UsersPage() {
         </div>
 
         {usersLoading ? (
-          <div className="bg-surface rounded-2xl shadow-sm border border-border/50 p-4 flex flex-col gap-3">
+          <div className="bg-surface rounded-[2rem] shadow-sm border border-border/50 p-4 flex flex-col gap-3">
             {Array.from({ length: 6 }).map((_, i) => (
               <div key={i} className="h-14 bg-field/60 rounded-xl animate-pulse" />
             ))}
           </div>
         ) : (
-          <div className="bg-surface rounded-2xl shadow-sm border border-border/50 overflow-hidden">
+          <div className="bg-surface rounded-[2rem] shadow-sm border border-border/50 overflow-hidden">
             <div className="overflow-x-auto rates-scrollable">
               <table className={`w-full text-left border-collapse transition-all duration-300 ${processingUserUid ? "blur-[2px] pointer-events-none select-none opacity-80" : ""}`}>
                 <thead>
@@ -293,7 +293,7 @@ export default function UsersPage() {
 
         {isFormOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm animate-fade-in">
-            <div className="bg-surface rounded-2xl shadow-xl w-full max-w-xl max-h-[90vh] overflow-hidden flex flex-col border border-border/50">
+            <div className="bg-surface rounded-[2rem] shadow-xl w-full max-w-xl max-h-[90vh] overflow-hidden flex flex-col border border-border/50">
               <div className="px-6 py-4.5 border-b border-border flex items-center justify-between">
                 <h3 className="text-lg font-semibold text-ink">
                   {editingUserUid ? "Edit User Details" : "Invite a New User"}
@@ -391,7 +391,7 @@ export default function UsersPage() {
 
         {isRoleModalOpen && activeUser && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm animate-fade-in">
-            <div className="bg-surface rounded-2xl shadow-xl w-full max-w-md border border-border/50 overflow-hidden">
+            <div className="bg-surface rounded-[2rem] shadow-xl w-full max-w-md border border-border/50 overflow-hidden">
               <div className="px-6 py-4.5 border-b border-border flex items-center justify-between">
                 <h3 className="text-lg font-semibold text-ink">
                   Manage User Roles

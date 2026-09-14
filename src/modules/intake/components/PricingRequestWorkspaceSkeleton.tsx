@@ -37,10 +37,10 @@ export function PricingRequestWorkspaceSkeleton() {
             <div className="h-3 w-24 rounded bg-ink/[0.06] animate-pulse" />
             <div className="h-8 w-14 rounded-full bg-ink/[0.05] animate-pulse" />
           </div>
-          <div className="h-36 rounded-2xl bg-ink/[0.04] border border-border/50 animate-pulse" />
-          <div className="h-28 rounded-2xl bg-ink/[0.04] border border-border/50 animate-pulse" />
-          <div className="h-28 rounded-2xl bg-ink/[0.04] border border-border/50 animate-pulse" />
-          <div className="h-20 rounded-2xl bg-ink/[0.04] border border-border/50 animate-pulse" />
+          <div className="h-36 rounded-[2rem] bg-ink/[0.04] border border-border/50 animate-pulse" />
+          <div className="h-28 rounded-[2rem] bg-ink/[0.04] border border-border/50 animate-pulse" />
+          <div className="h-28 rounded-[2rem] bg-ink/[0.04] border border-border/50 animate-pulse" />
+          <div className="h-20 rounded-[2rem] bg-ink/[0.04] border border-border/50 animate-pulse" />
         </div>
       </div>
     </div>

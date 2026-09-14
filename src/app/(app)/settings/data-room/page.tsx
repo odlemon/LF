@@ -104,7 +104,7 @@ export default function DataRoomOverviewPage() {
             </button>
           </div>
 
-          <div className="bg-surface border border-border rounded-2xl overflow-hidden">
+          <div className="bg-surface border border-border rounded-[2rem] overflow-hidden">
             <div className="overflow-x-auto rates-scrollable">
               <table className="min-w-full text-sm">
                 <thead className="bg-field/60 border-b border-border">
@@ -197,10 +197,10 @@ export default function DataRoomOverviewPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
             {isDocsLoading ? (
               Array.from({ length: 3 }).map((_, idx) => (
-                <div key={idx} className="h-24 bg-canvas rounded-2xl animate-pulse" />
+                <div key={idx} className="h-24 bg-canvas rounded-[2rem] animate-pulse" />
               ))
             ) : attentionDocs.length === 0 ? (
-              <div className="md:col-span-2 xl:col-span-3 bg-surface border border-border rounded-2xl px-6 py-8 text-center">
+              <div className="md:col-span-2 xl:col-span-3 bg-surface border border-border rounded-[2rem] px-6 py-8 text-center">
                 <p className="text-sm font-semibold text-ink/70">Every file has been read.</p>
                 <p className="mt-1 text-[13px] text-ink/60">
                   Nothing is waiting on a mapping decision.
@@ -210,7 +210,7 @@ export default function DataRoomOverviewPage() {
               attentionDocs.map((doc) => (
                 <div
                   key={doc.uid}
-                  className="bg-surface border border-border rounded-2xl p-4 hover:border-ink/25 transition-colors flex flex-col gap-3.5"
+                  className="bg-surface border border-border rounded-[2rem] p-4 hover:border-ink/25 transition-colors flex flex-col gap-3.5"
                 >
                   <div className="flex justify-between items-start gap-3">
                     <div className="flex flex-col overflow-hidden">

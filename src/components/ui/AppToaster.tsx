@@ -117,7 +117,7 @@ function ToastCard({
 
   return (
     <div
-      className={`lysp-toast pointer-events-auto flex w-[min(100vw-2rem,22rem)] items-start gap-3 rounded-2xl px-3.5 py-3 ${
+      className={`lysp-toast pointer-events-auto flex w-[min(100vw-2rem,22rem)] items-start gap-3 rounded-[2rem] px-3.5 py-3 ${
         t.visible ? "lysp-toast-enter" : "lysp-toast-leave"
       }`}
       style={{

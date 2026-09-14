@@ -125,7 +125,7 @@ export function AssumptionSection({
 
       {!readOnly &&
         (showForm ? (
-          <div className="mt-5 p-4 border border-border rounded-2xl bg-field/30 flex flex-col gap-2.5">
+          <div className="mt-5 p-4 border border-border rounded-[2rem] bg-field/30 flex flex-col gap-2.5">
             <input
               type="text"
               value={description}

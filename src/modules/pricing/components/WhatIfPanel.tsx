@@ -51,7 +51,7 @@ function StepperControl({
   canInc: boolean;
 }) {
   return (
-    <div className="rounded-2xl border border-border/50 bg-canvas/40 px-4 py-4">
+    <div className="rounded-[2rem] border border-border/50 bg-canvas/40 px-4 py-4">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">
@@ -344,7 +344,7 @@ export function WhatIfPanel({
         </div>
 
         <div className="space-y-2.5">
-          <div className="rounded-2xl border border-border/50 bg-canvas/40 px-4 py-4">
+          <div className="rounded-[2rem] border border-border/50 bg-canvas/40 px-4 py-4">
             <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">
               Name
             </p>
@@ -356,7 +356,7 @@ export function WhatIfPanel({
             />
           </div>
 
-          <div className="rounded-2xl border border-border/50 bg-canvas/40 px-4 py-4">
+          <div className="rounded-[2rem] border border-border/50 bg-canvas/40 px-4 py-4">
             <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">
               Pricing model
             </p>
@@ -391,7 +391,7 @@ export function WhatIfPanel({
           />
 
           {showCap && (
-            <div className="rounded-2xl border border-border/50 bg-canvas/40 px-4 py-4">
+            <div className="rounded-[2rem] border border-border/50 bg-canvas/40 px-4 py-4">
               <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">
                 Fee cap
               </p>

@@ -101,7 +101,7 @@ export function PhaseSection({
       </div>
 
       <div className={`min-w-0 ${isLast ? "pb-1" : "pb-6"}`}>
-        <div className="group/phase rounded-2xl border border-border bg-surface/90 shadow-[0_1px_0_rgba(10,10,10,0.03)] overflow-hidden transition-shadow hover:shadow-[0_8px_28px_rgba(10,10,10,0.05)]">
+        <div className="group/phase rounded-[2rem] border border-border bg-surface/90 shadow-[0_1px_0_rgba(10,10,10,0.03)] overflow-hidden transition-shadow hover:shadow-[0_8px_28px_rgba(10,10,10,0.05)]">
           <div
             className="flex items-center gap-3 px-4 py-3.5 cursor-pointer select-none"
             onClick={() => setExpanded(!expanded)}

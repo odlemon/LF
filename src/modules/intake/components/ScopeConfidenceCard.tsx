@@ -55,7 +55,7 @@ export function ScopeConfidenceCard({
   const pct = Math.round(scope.aiConfidence ?? 0);
 
   return (
-    <div className="relative mb-8 overflow-hidden rounded-3xl border border-border bg-surface">
+    <div className="relative mb-8 overflow-hidden rounded-[2rem] border border-border bg-surface">
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.55]"
         style={{

@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { HiLockClosed, HiXCircle } from "react-icons/hi";
 
 const CARD_CLASS =
-  "w-full max-w-md bg-surface rounded-3xl shadow-[0_12px_40px_rgba(0,0,0,0.03)] border border-border p-8 flex flex-col items-center text-center gap-6";
+  "w-full max-w-md bg-surface rounded-[2rem] shadow-[0_12px_40px_rgba(0,0,0,0.03)] border border-border p-8 flex flex-col items-center text-center gap-6";
 
 function PortalLoginHandler() {
   const { login } = useClientAuth();

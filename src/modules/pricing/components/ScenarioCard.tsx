@@ -42,7 +42,7 @@ export function ScenarioCard({
         }
       }}
       style={{ animationDelay: `${index * 80}ms` }}
-      className={`pricing-scenario-enter group relative w-full text-left overflow-hidden rounded-2xl border transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/30 ${
+      className={`pricing-scenario-enter group relative w-full text-left overflow-hidden rounded-[2rem] border transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/30 ${
         selected
           ? "border-ink/25 bg-surface shadow-[0_20px_50px_-32px_rgba(10,10,10,0.55)]"
           : "border-border/80 bg-surface/70 hover:border-ink/15 hover:bg-surface"

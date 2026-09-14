@@ -36,7 +36,7 @@ export function EntitlementBar({ consumed, entitlement, usagePct, overage }: Pro
   }[band];
 
   return (
-    <div className="rounded-[1.5rem] border border-border bg-surface p-6">
+    <div className="rounded-[2rem] border border-border bg-surface p-6">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <div>
           <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/60">

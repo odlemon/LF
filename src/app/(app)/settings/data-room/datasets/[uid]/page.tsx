@@ -140,13 +140,13 @@ export default function DatasetDetailPage() {
 
       {/* Dataset Summary Stats Header Card */}
       {isDatasetLoading ? (
-        <div className="h-44 bg-canvas rounded-3xl animate-pulse" />
+        <div className="h-44 bg-canvas rounded-[2rem] animate-pulse" />
       ) : !dataset ? (
-        <div className="p-5 bg-red-50 border border-red-200 text-red-700 rounded-2xl font-semibold">
+        <div className="p-5 bg-red-50 border border-red-200 text-red-700 rounded-[2rem] font-semibold">
           Dataset not found.
         </div>
       ) : (
-        <div className="bg-surface border border-border/60 rounded-3xl p-6 shadow-sm flex flex-col md:flex-row gap-6 justify-between items-start">
+        <div className="bg-surface border border-border/60 rounded-[2rem] p-6 shadow-sm flex flex-col md:flex-row gap-6 justify-between items-start">
           <div className="flex flex-col gap-2 flex-1">
             <div className="flex items-center gap-2.5 flex-wrap">
               <h1 className="text-xl font-bold text-ink tracking-tight">{dataset.name}</h1>
@@ -191,7 +191,7 @@ export default function DatasetDetailPage() {
 
       {/* Grid: UploadBoundary (left 1/3) & Documents Table (right 2/3) */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-        <div className="bg-surface border border-border/60 rounded-3xl p-5 shadow-sm flex flex-col gap-4">
+        <div className="bg-surface border border-border/60 rounded-[2rem] p-5 shadow-sm flex flex-col gap-4">
           <h2 className="text-sm font-extrabold text-ink px-1">Upload New Document</h2>
           <UploadZone onUpload={handleSingleUpload} isUploading={isUploading} progress={progress} />
         </div>
@@ -209,7 +209,7 @@ export default function DatasetDetailPage() {
             <span className="text-xs font-semibold text-ink/60">({documents.length} files)</span>
           </div>
 
-          <div className="bg-surface border border-border/60 rounded-3xl overflow-hidden shadow-sm">
+          <div className="bg-surface border border-border/60 rounded-[2rem] overflow-hidden shadow-sm">
             <div className="overflow-x-auto rates-scrollable">
               <table className="min-w-full divide-y divide-gray-100 text-xs">
                 <thead className="bg-field">

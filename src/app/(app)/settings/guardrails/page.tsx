@@ -29,8 +29,8 @@ export default function GuardrailsPage() {
     return (
       <div className="p-8 max-w-5xl w-full mx-auto flex flex-col gap-6 animate-pulse">
         <div className="h-6 bg-field w-1/4 rounded-lg" />
-        <div className="h-48 bg-field rounded-2xl" />
-        <div className="h-32 bg-field rounded-2xl" />
+        <div className="h-48 bg-field rounded-[2rem]" />
+        <div className="h-32 bg-field rounded-[2rem]" />
       </div>
     );
   }
@@ -85,7 +85,7 @@ export default function GuardrailsPage() {
       </div>
 
       {/* Concept Explanation Banner */}
-      <div className="bg-gradient-to-r from-primary/5 via-primary/[0.02] to-transparent border border-primary/10 rounded-2xl p-6 flex items-start gap-4">
+      <div className="bg-gradient-to-r from-primary/5 via-primary/[0.02] to-transparent border border-primary/10 rounded-[2rem] p-6 flex items-start gap-4">
         <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
           <HiShieldCheck className="w-5.5 h-5.5" />
         </div>
@@ -99,7 +99,7 @@ export default function GuardrailsPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
         {/* Policy Configuration Form */}
-        <form onSubmit={handleSave} className="bg-surface rounded-2xl border border-border/60 shadow-sm p-6 lg:col-span-2 flex flex-col gap-6">
+        <form onSubmit={handleSave} className="bg-surface rounded-[2rem] border border-border/60 shadow-sm p-6 lg:col-span-2 flex flex-col gap-6">
           <div className="flex items-center justify-between pb-3 border-b border-border">
             <h2 className="text-sm font-bold text-ink flex items-center gap-1.5">
               <HiShieldCheck className="w-5 h-5 text-primary" />
@@ -136,7 +136,7 @@ export default function GuardrailsPage() {
           </div>
 
           {/* Margin Protection Card */}
-          <div className="p-5 bg-field/40 rounded-2xl border border-border flex flex-col gap-4">
+          <div className="p-5 bg-field/40 rounded-[2rem] border border-border flex flex-col gap-4">
             <h3 className="text-xs font-bold text-ink/90 uppercase tracking-wider flex items-center gap-1.5">
               <span>1. Margin Guardrails</span>
               <span className="text-[9px] font-extrabold text-red-700 bg-red-50 px-2 py-0.5 rounded-lg normal-case">
@@ -167,7 +167,7 @@ export default function GuardrailsPage() {
           </div>
 
           {/* Discount Authority Protection Card */}
-          <div className="p-5 bg-field/40 rounded-2xl border border-border flex flex-col gap-4">
+          <div className="p-5 bg-field/40 rounded-[2rem] border border-border flex flex-col gap-4">
             <h3 className="text-xs font-bold text-ink/90 uppercase tracking-wider flex items-center gap-1.5">
               <span>2. Discount Authority Guardrails</span>
               <span className="text-[9px] font-extrabold text-primary bg-primary/5 px-2 py-0.5 rounded-lg normal-case">
@@ -226,7 +226,7 @@ export default function GuardrailsPage() {
                 Live Escalation Path Simulation
               </span>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                <div className="p-3.5 bg-hover/20 border border-border rounded-2xl flex flex-col gap-1">
+                <div className="p-3.5 bg-hover/20 border border-border rounded-[2rem] flex flex-col gap-1">
                   <span className="text-[9px] font-extrabold text-ink/80 bg-hover self-start px-2 py-0.5 rounded-lg uppercase tracking-wider">
                     Auto-Approve
                   </span>
@@ -234,7 +234,7 @@ export default function GuardrailsPage() {
                   <span className="text-[10px] text-ink/60 leading-normal mt-0.5">Cleared instantly without additional oversight.</span>
                 </div>
                 
-                <div className="p-3.5 bg-amber-50/20 border border-amber-100 rounded-2xl flex flex-col gap-1">
+                <div className="p-3.5 bg-amber-50/20 border border-amber-100 rounded-[2rem] flex flex-col gap-1">
                   <span className="text-[9px] font-extrabold text-amber-700 bg-amber-50 self-start px-2 py-0.5 rounded-lg uppercase tracking-wider">
                     Partner Sign-Off
                   </span>
@@ -242,7 +242,7 @@ export default function GuardrailsPage() {
                   <span className="text-[10px] text-ink/60 leading-normal mt-0.5">Requires partner authorization to onboard.</span>
                 </div>
 
-                <div className="p-3.5 bg-purple-50/20 border border-purple-100 rounded-2xl flex flex-col gap-1">
+                <div className="p-3.5 bg-purple-50/20 border border-purple-100 rounded-[2rem] flex flex-col gap-1">
                   <span className="text-[9px] font-extrabold text-purple-700 bg-purple-50 self-start px-2 py-0.5 rounded-lg uppercase tracking-wider">
                     Committee Review
                   </span>
@@ -299,7 +299,7 @@ export default function GuardrailsPage() {
         </form>
 
         {/* Real-time Simulator Panel */}
-        <div className="bg-surface rounded-2xl border border-border/60 shadow-sm p-6 flex flex-col gap-4">
+        <div className="bg-surface rounded-[2rem] border border-border/60 shadow-sm p-6 flex flex-col gap-4">
           <h3 className="text-xs font-bold text-ink/80 uppercase tracking-wider">
             Real-time Policy Simulator
           </h3>
@@ -323,7 +323,7 @@ export default function GuardrailsPage() {
 
             <div className="flex flex-col gap-3">
               {/* Reject card */}
-              <div className="p-4 bg-red-50/40 border border-red-100/60 rounded-2xl flex gap-3">
+              <div className="p-4 bg-red-50/40 border border-red-100/60 rounded-[2rem] flex gap-3">
                 <HiXCircle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
                 <div className="flex flex-col gap-0.5">
                   <span className="text-[10px] font-extrabold text-red-800 uppercase tracking-wide dark:text-red-400">Auto-Reject Zone</span>
@@ -335,7 +335,7 @@ export default function GuardrailsPage() {
               </div>
 
               {/* Warning card */}
-              <div className="p-4 bg-amber-50/40 border border-amber-100/60 rounded-2xl flex gap-3">
+              <div className="p-4 bg-amber-50/40 border border-amber-100/60 rounded-[2rem] flex gap-3">
                 <HiExclamation className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
                 <div className="flex flex-col gap-0.5">
                   <span className="text-[10px] font-extrabold text-amber-800 uppercase tracking-wide dark:text-amber-400">Partner Oversight Zone</span>
@@ -347,7 +347,7 @@ export default function GuardrailsPage() {
               </div>
 
               {/* Safe card */}
-              <div className="p-4 bg-hover/40 border border-border/60 rounded-2xl flex gap-3">
+              <div className="p-4 bg-hover/40 border border-border/60 rounded-[2rem] flex gap-3">
                 <HiCheckCircle className="w-5 h-5 text-ink/60 shrink-0 mt-0.5" />
                 <div className="flex flex-col gap-0.5">
                   <span className="text-[10px] font-extrabold text-ink uppercase tracking-wide">Safe Approval Zone</span>

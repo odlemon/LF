@@ -161,7 +161,7 @@ export function ConflictsCheckGate({
         )}
 
         {hasHistory && (
-          <div className="bg-surface rounded-2xl border border-border/60 shadow-sm p-5 flex flex-col gap-4">
+          <div className="bg-surface rounded-[2rem] border border-border/60 shadow-sm p-5 flex flex-col gap-4">
             <p className="text-xs font-bold uppercase tracking-wider text-ink/60">
               Submitted parties
             </p>
@@ -226,7 +226,7 @@ export function ConflictsCheckGate({
         )}
 
         {check.status === "PENDING_REVIEW" && canClear && (
-          <div className="bg-surface rounded-2xl border border-border/60 shadow-sm p-5 flex flex-col gap-4">
+          <div className="bg-surface rounded-[2rem] border border-border/60 shadow-sm p-5 flex flex-col gap-4">
             <p className="text-xs font-bold uppercase tracking-wider text-ink/60">
               Partner decision
             </p>
@@ -257,7 +257,7 @@ export function ConflictsCheckGate({
         )}
 
         {canSubmit && (
-          <div className="bg-surface rounded-2xl border border-border/60 shadow-sm p-5 flex flex-col gap-4">
+          <div className="bg-surface rounded-[2rem] border border-border/60 shadow-sm p-5 flex flex-col gap-4">
             <p className="text-xs font-bold uppercase tracking-wider text-ink/60">
               {check.status === "FLAGGED" ? "Revise parties and re-run" : "Parties"}
             </p>

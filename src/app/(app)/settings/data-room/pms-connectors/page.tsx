@@ -100,7 +100,7 @@ export default function PmsConnectorsPage() {
 
       {/* Named-vendor integrations are a later phase; the generic REST connector
           is the one that actually runs today. */}
-      <div className="bg-field/50 border border-border/50 rounded-3xl p-5">
+      <div className="bg-field/50 border border-border/50 rounded-[2rem] p-5">
         <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
           Coming next
         </p>
@@ -125,7 +125,7 @@ export default function PmsConnectorsPage() {
         </div>
       </div>
 
-      <div className="bg-surface border border-border/60 rounded-3xl overflow-hidden shadow-sm">
+      <div className="bg-surface border border-border/60 rounded-[2rem] overflow-hidden shadow-sm">
         <div className="overflow-x-auto rates-scrollable">
           <table className="min-w-full divide-y divide-gray-100 text-xs">
             <thead className="bg-field">

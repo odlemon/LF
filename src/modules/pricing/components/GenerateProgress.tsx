@@ -104,7 +104,7 @@ export function GenerateProgress({
         </ol>
 
         {/* Live current execution card */}
-        <div className="shrink-0 relative overflow-hidden rounded-2xl border border-border/70 bg-surface mb-4">
+        <div className="shrink-0 relative overflow-hidden rounded-[2rem] border border-border/70 bg-surface mb-4">
           <div className="pricing-exec-sheen pointer-events-none absolute inset-0" />
           <div className="relative px-4 py-4">
             <div className="flex items-start justify-between gap-3">
@@ -145,7 +145,7 @@ export function GenerateProgress({
           </div>
         </div>
 
-        <div className="flex-1 min-h-0 flex flex-col rounded-2xl border border-border/70 bg-surface overflow-hidden">
+        <div className="flex-1 min-h-0 flex flex-col rounded-[2rem] border border-border/70 bg-surface overflow-hidden">
           <div className="shrink-0 flex items-center justify-between px-4 py-3 border-b border-border/60">
             <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
               Activity

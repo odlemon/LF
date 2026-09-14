@@ -104,7 +104,7 @@ export function RecordsBrowser() {
       />
 
       {/* Filter Bars Section */}
-      <div className="bg-field/50 border border-border/40 rounded-3xl p-5 shadow-sm">
+      <div className="bg-field/50 border border-border/40 rounded-[2rem] p-5 shadow-sm">
         {activeTab === "past-matters" && (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
             <div className="flex flex-col gap-1">
@@ -342,12 +342,12 @@ export function RecordsBrowser() {
 
       {/* Main Records Table Grid */}
       {error && (
-        <div className="p-3.5 bg-red-50 border border-red-200/50 text-red-700 text-xs font-bold rounded-2xl">
+        <div className="p-3.5 bg-red-50 border border-red-200/50 text-red-700 text-xs font-bold rounded-[2rem]">
           {error}
         </div>
       )}
 
-      <div className="bg-surface border border-border/60 rounded-3xl overflow-hidden shadow-sm shrink-0">
+      <div className="bg-surface border border-border/60 rounded-[2rem] overflow-hidden shadow-sm shrink-0">
         <div className="overflow-x-auto rates-scrollable">
           <table className="min-w-full divide-y divide-gray-100 text-xs">
             <thead className="bg-field">

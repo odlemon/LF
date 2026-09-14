@@ -25,7 +25,7 @@ export function KpiCard({ label, value, caption, delta, deltaValue, invert = fal
   const isGood = invert ? !isUp : isUp;
 
   return (
-    <div className="bg-surface border border-border/70 rounded-2xl p-5 flex flex-col gap-2 min-w-0">
+    <div className="bg-surface border border-border/70 rounded-[2rem] p-5 flex flex-col gap-2 min-w-0">
       <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60 truncate">
         {label}
       </p>
@@ -62,11 +62,11 @@ export function PageSkeleton() {
     <div className="flex flex-col gap-6 animate-pulse">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         {[0, 1, 2, 3, 4].map((i) => (
-          <div key={i} className="h-28 bg-field rounded-2xl" />
+          <div key={i} className="h-28 bg-field rounded-[2rem]" />
         ))}
       </div>
-      <div className="h-64 bg-field rounded-2xl" />
-      <div className="h-48 bg-field rounded-2xl" />
+      <div className="h-64 bg-field rounded-[2rem]" />
+      <div className="h-48 bg-field rounded-[2rem]" />
     </div>
   );
 }

@@ -51,8 +51,8 @@ export default function RateCompliancePage() {
 
       {isLoading && !compliance ? (
         <div className="flex flex-col gap-6 animate-pulse">
-          <div className="h-56 bg-field rounded-2xl" />
-          <div className="h-64 bg-field rounded-2xl" />
+          <div className="h-56 bg-field rounded-[2rem]" />
+          <div className="h-64 bg-field rounded-[2rem]" />
         </div>
       ) : compliance && !compliance.activeRateCardPresent ? (
         <EmptyState
@@ -63,7 +63,7 @@ export default function RateCompliancePage() {
       ) : compliance ? (
         <>
           {/* Headline */}
-          <div className="bg-surface border border-border/70 rounded-2xl p-6 flex flex-col md:flex-row items-center gap-8">
+          <div className="bg-surface border border-border/70 rounded-[2rem] p-6 flex flex-col md:flex-row items-center gap-8">
             <ComplianceDonut pct={compliance.compliantPct} />
             <div className="flex-1 min-w-0">
               <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
@@ -105,7 +105,7 @@ export default function RateCompliancePage() {
           </div>
 
           {/* By level */}
-          <div className="bg-surface rounded-2xl border border-border/60 overflow-hidden shadow-sm">
+          <div className="bg-surface rounded-[2rem] border border-border/60 overflow-hidden shadow-sm">
             <div className="px-6 py-4 border-b border-border">
               <h3 className="text-sm font-bold text-ink">Discrepancies by fee earner level</h3>
             </div>
