@@ -45,11 +45,6 @@ const CUSTOMERS: CustomerLogo[] = [
     src: "/images/customers/latham-watkins.svg",
   },
   {
-    name: "Freshfields",
-    href: "https://www.freshfields.com/",
-    src: "/images/customers/freshfields.svg",
-  },
-  {
     name: "Norton Rose Fulbright",
     href: "https://www.nortonrosefulbright.com/",
     src: "/images/customers/norton-rose.svg",
