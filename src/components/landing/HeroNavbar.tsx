@@ -139,6 +139,14 @@ export function HeroNavbar({ variant = "default" }: HeroNavbarProps) {
           className="relative z-10 flex shrink-0 items-center gap-2"
           onClick={() => setIsMenuOpen(false)}
         >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={onDark ? "/images/logo/lysp-mark-white.png" : "/images/logo/lysp-mark-black.png"}
+            alt=""
+            width={512}
+            height={512}
+            className="h-6 w-6 sm:h-7 sm:w-7 object-contain"
+          />
           <span className="text-[17px] sm:text-lg font-semibold tracking-tight">Lysp</span>
         </Link>
 

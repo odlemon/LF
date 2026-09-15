@@ -8,37 +8,34 @@ type PlatformLogoProps = {
   size?: number;
 };
 
+/** Natural width:height ratio of the cropped lockup asset (370x568). */
+const LOCKUP_ASPECT = 370 / 568;
+
 /**
- * Icon-only Lysp mark (no "Lysp" wordmark in the chrome).
- * Monochrome in both themes: black mark on light, white mark on dark. The green
- * mark is deliberately not used in platform chrome — the app's palette is ink and
- * paper, and an accent-coloured logo was the only thing breaking that.
- * Light → black mark (multiply blends out the white lockup BG).
- * Dark → white mark (screen blends out the black lockup BG).
+ * The full Lysp lockup — mark and "LYSP" wordmark together, exactly as designed, never
+ * cropped. Monochrome in both themes: black lockup on light, white lockup on dark.
+ * The green mark is deliberately not used in platform chrome — the app's palette is ink
+ * and paper, and an accent-coloured logo was the only thing breaking that.
+ *
+ * `size` sets the rendered height; width follows the lockup's own aspect ratio so nothing
+ * is stretched or letterboxed. Both source PNGs are already tightly cropped to the mark +
+ * wordmark with transparent backgrounds, so this renders them directly with no crop trick.
  */
 export function PlatformLogo({ className = "", size = 40 }: PlatformLogoProps) {
   const { theme } = useTheme();
   const isDark = theme === "dark";
 
   const src = isDark
-    ? "/images/logo/lysp-logo-bw-white.png"
-    : "/images/logo/lysp-logo-bw.png";
+    ? "/images/logo/lysp-lockup-white.png"
+    : "/images/logo/lysp-lockup-black.png";
 
   return (
     <span
-      className={`relative inline-flex shrink-0 overflow-hidden ${className}`}
-      style={{ width: size, height: size }}
+      className={`relative inline-flex shrink-0 ${className}`}
+      style={{ width: size * LOCKUP_ASPECT, height: size }}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={src}
-        alt="Lysp"
-        width={1024}
-        height={1024}
-        className={`absolute left-1/2 top-0 h-[168%] w-[168%] max-w-none -translate-x-1/2 object-cover object-top ${
-          isDark ? "mix-blend-screen" : "mix-blend-multiply"
-        }`}
-      />
+      <img src={src} alt="Lysp" width={370} height={568} className="h-full w-full object-contain" />
     </span>
   );
 }
