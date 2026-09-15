@@ -181,7 +181,7 @@ export function PricingSection() {
           title={
             <>
               One credit.
-              <span className="text-[#0a0a0a]/60"> One clear price.</span>
+              <span className="text-[#0a0a0a]/60"> Four things it buys.</span>
             </>
           }
           description="No seats. No opaque tiers. You buy credits; Lysp spends them when your firm prices, negotiates, and reports. Your rate card is custom - this is the public reference."
@@ -386,6 +386,14 @@ export function PricingSection() {
                     {formatUsd(estimate.low)} to {formatUsd(estimate.high)}
                   </span>
                 </p>
+                <p className="relative mt-3 text-[12.5px] text-white/45 leading-relaxed">
+                  Weigh this against realization lift and recovered fee leakage, not against
+                  the bill alone —{" "}
+                  <Link href="/roi-calculator" className="text-white/80 underline underline-offset-2 hover:text-white">
+                    size that for your own matter volume
+                  </Link>
+                  .
+                </p>
 
                 <div className="relative mt-8 space-y-3 border-t border-white/10 pt-6 text-[13px]">
                   <div className="flex justify-between">
@@ -401,6 +409,14 @@ export function PricingSection() {
                   <div className="flex justify-between">
                     <span className="text-white/45">Negotiations (est.)</span>
                     <span className="font-semibold tabular-nums">{estimate.negotiations}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-white/45">Fee scenarios (est.)</span>
+                    <span className="font-semibold tabular-nums">{estimate.scenarios}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-white/45">Analytics digests</span>
+                    <span className="font-semibold tabular-nums">{estimate.analytics}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-white/45">Seat fees</span>
