@@ -53,6 +53,17 @@ export function Tabs<T extends string>({
     });
   };
 
+  // The ResizeObserver below is set up once on mount and lives for the component's whole
+  // lifetime, so a callback that closes over `measure` directly would keep calling the
+  // mount-time version forever — permanently targeting whichever tab was active on mount.
+  // It fired on nearly every click (switching tabs changes the content below, which resizes
+  // this container) and kept resetting the indicator back to the first tab a beat after the
+  // real click handler had already moved it — a visible flicker between the two positions.
+  // Routing every re-measure through a ref that's updated on each render keeps every caller,
+  // including long-lived observers, reading the current tab's position.
+  const measureRef = useRef(measure);
+  measureRef.current = measure;
+
   useEffect(() => {
     measure();
     // A tab bar mounted inside a modal or drawer that is still animating in (opacity/scale
@@ -60,8 +71,8 @@ export function Tabs<T extends string>({
     // parked wherever it was first — and wrongly — measured, never catching up to the actual
     // active tab. Re-measure a frame later and again once a typical entrance transition would
     // have finished; a correct measurement re-applied is a harmless no-op.
-    const raf = requestAnimationFrame(measure);
-    const timeout = setTimeout(measure, 350);
+    const raf = requestAnimationFrame(() => measureRef.current());
+    const timeout = setTimeout(() => measureRef.current(), 350);
     return () => {
       cancelAnimationFrame(raf);
       clearTimeout(timeout);
@@ -72,10 +83,9 @@ export function Tabs<T extends string>({
   useEffect(() => {
     const container = containerRef.current;
     if (!container || typeof ResizeObserver === "undefined") return;
-    const observer = new ResizeObserver(measure);
+    const observer = new ResizeObserver(() => measureRef.current());
     observer.observe(container);
     return () => observer.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

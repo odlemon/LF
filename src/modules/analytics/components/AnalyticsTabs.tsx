@@ -66,16 +66,20 @@ export function AnalyticsTabs() {
     setIndicator({ left: el.offsetLeft, top: el.offsetTop, width: el.offsetWidth, height: el.offsetHeight });
   };
 
+  // A long-lived ResizeObserver below must never call back into a stale closure bound to
+  // whatever route was active when it was created — see Tabs.tsx for the flicker that causes.
+  const measureRef = useRef(measure);
+  measureRef.current = measure;
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(measure, [activeRoute, visible.length]);
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container || typeof ResizeObserver === "undefined") return;
-    const observer = new ResizeObserver(measure);
+    const observer = new ResizeObserver(() => measureRef.current());
     observer.observe(container);
     return () => observer.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
