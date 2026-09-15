@@ -11,10 +11,7 @@ import { EmptyState } from "@/components/ui/EmptyState";
 import * as negotiationApi from "@/modules/negotiation/api";
 import { NegotiationStatusBadge } from "@/modules/negotiation/components/NegotiationStatusBadge";
 import type { NegotiationListItem } from "@/modules/negotiation/types";
-import {
-  formatMoney,
-  negotiationStatusLabel,
-} from "@/modules/negotiation/utils";
+import { formatMoney } from "@/modules/negotiation/utils";
 import {
   PortalAtmosphere,
   PortalPageHeader,
@@ -156,10 +153,7 @@ export default function NegotiationsPage() {
                       </td>
                       <td className="px-6 py-4.5 text-ink/70">{item.clientName || "Client"}</td>
                       <td className="px-6 py-4.5">
-                        <div className="flex flex-col gap-1">
-                          <NegotiationStatusBadge status={item.status} />
-                          <span className="text-[11px] text-ink/50">{negotiationStatusLabel(item.status)}</span>
-                        </div>
+                        <NegotiationStatusBadge status={item.status} />
                       </td>
                       <td className="px-6 py-4.5 text-ink/70 tabular-nums">
                         {item.currentRound != null ? item.currentRound : "—"}
