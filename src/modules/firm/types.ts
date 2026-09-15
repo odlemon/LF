@@ -58,6 +58,7 @@ export interface ExchangeRate {
   quoteCurrency: string;
   rate: number;
   asOfDate: string;
+  source: "MANUAL" | "ECB";
 }
 
 export interface CreateExchangeRateCommand {

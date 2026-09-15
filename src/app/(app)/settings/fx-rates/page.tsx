@@ -5,9 +5,10 @@ import { useFxRates } from "@/modules/firm/hooks/useFirm";
 import { Button } from "@/components/ui/Button";
 import { FxRateFormModal } from "@/modules/firm/components/FxRateFormModal";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { Badge } from "@/components/ui/Badge";
 import { ExchangeRate } from "@/modules/firm/types";
 import toast from "react-hot-toast";
-import { HiPlus, HiOutlineSwitchHorizontal, HiPencil, HiTrash } from "react-icons/hi";
+import { HiPlus, HiOutlineSwitchHorizontal, HiPencil, HiTrash, HiInformationCircle } from "react-icons/hi";
 import { Alert } from "@/components/ui/Alert";
 
 export default function FxRatesPage() {
@@ -74,6 +75,16 @@ export default function FxRatesPage() {
         </Button>
       </div>
 
+      <div className="flex items-start gap-2.5 rounded-[2rem] border border-border/60 bg-field/40 px-5 py-4 text-xs font-medium text-ink/70">
+        <HiInformationCircle className="w-4 h-4 text-ink/40 shrink-0 mt-0.5" />
+        <span>
+          Rates marked <Badge variant="info" className="mx-0.5 align-middle">ECB</Badge> are fetched
+          automatically every day from the European Central Bank&apos;s reference rates. Add a rate for
+          a given day to override the automatic value for that day, or for a currency pair not covered
+          above.
+        </span>
+      </div>
+
       {error && (
         <Alert variant="error" message={error} />
       )}
@@ -98,6 +109,7 @@ export default function FxRatesPage() {
                   <th className="px-6 py-4">Pair</th>
                   <th className="px-6 py-4">Rate</th>
                   <th className="px-6 py-4">As of</th>
+                  <th className="px-6 py-4">Source</th>
                   <th className="px-6 py-4 text-right">Actions</th>
                 </tr>
               </thead>
@@ -116,6 +128,11 @@ export default function FxRatesPage() {
                       1 {rate.baseCurrency} = {rate.rate} {rate.quoteCurrency}
                     </td>
                     <td className="px-6 py-4 text-xs font-medium text-ink/70">{rate.asOfDate}</td>
+                    <td className="px-6 py-4">
+                      <Badge variant={rate.source === "ECB" ? "info" : "neutral"}>
+                        {rate.source === "ECB" ? "ECB" : "Manual"}
+                      </Badge>
+                    </td>
                     <td className="px-6 py-4 text-right">
                       <div className="flex items-center justify-end gap-2.5">
                         <button
