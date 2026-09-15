@@ -308,7 +308,7 @@ export function WorkflowSection() {
                       <span className="text-[10px] text-gray-400 font-bold uppercase block">Rate Management</span>
                       <div className="flex items-center gap-2 mt-1">
                         <span className="bg-emerald-50 text-emerald-700 text-[10px] font-bold px-2 py-0.5 rounded border border-emerald-100">
-                          GBP Anchor
+                          USD Anchor
                         </span>
                         <span className="text-[10px] text-amber-600 font-bold">3 Notifications</span>
                       </div>

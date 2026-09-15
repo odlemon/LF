@@ -104,7 +104,7 @@ export function PracticeAreasSection() {
         <div className="flex flex-col xl:flex-row xl:items-end xl:justify-between gap-6 sm:gap-8 xl:gap-16">
           <SectionHeader
             tone="dark"
-            eyebrow="Chambers of practice"
+            eyebrow="Practice areas"
             title={
               <>
                 Every practice prices differently.

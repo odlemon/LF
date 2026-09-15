@@ -10,8 +10,8 @@ import { ExchangeRate } from "@/modules/firm/types";
 import { FormError } from "@/components/ui/FormError";
 
 const CURRENCY_OPTIONS = [
-  { value: "GBP", label: "GBP (£)" },
   { value: "USD", label: "USD ($)" },
+  { value: "GBP", label: "GBP (£)" },
   { value: "EUR", label: "EUR (€)" },
   { value: "ZAR", label: "ZAR (R)" },
   { value: "AUD", label: "AUD ($)" },
@@ -27,8 +27,8 @@ interface FxRateFormModalProps {
 }
 
 export function FxRateFormModal({ isOpen, onClose, editingRate, onSave }: FxRateFormModalProps) {
-  const [baseCurrency, setBaseCurrency] = useState("USD");
-  const [quoteCurrency, setQuoteCurrency] = useState("GBP");
+  const [baseCurrency, setBaseCurrency] = useState("GBP");
+  const [quoteCurrency, setQuoteCurrency] = useState("USD");
   const [rate, setRate] = useState("");
   const [asOfDate, setAsOfDate] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -41,8 +41,8 @@ export function FxRateFormModal({ isOpen, onClose, editingRate, onSave }: FxRate
       setRate(String(editingRate.rate));
       setAsOfDate(editingRate.asOfDate);
     } else {
-      setBaseCurrency("USD");
-      setQuoteCurrency("GBP");
+      setBaseCurrency("GBP");
+      setQuoteCurrency("USD");
       setRate("");
       setAsOfDate("");
     }
