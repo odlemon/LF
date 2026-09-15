@@ -5,7 +5,6 @@ import { Alert } from "@/components/ui/Alert";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { usePermission } from "@/hooks/usePermission";
 import { PERMISSIONS } from "@/lib/utils/permissions";
-import { AnalyticsTabs } from "@/modules/analytics/components/AnalyticsTabs";
 import { PeriodFilter, defaultPeriod } from "@/modules/analytics/components/PeriodFilter";
 import { analyticsApi } from "@/lib/api/modules/analytics.api";
 import { HiOutlineScale } from "react-icons/hi";
@@ -58,7 +57,7 @@ export default function PartnerConsistencyPage() {
 
   if (!allowed) {
     return (
-      <div className="p-8 max-w-7xl w-full mx-auto">
+      <div className="flex flex-col gap-8">
         <EmptyState
           icon={<HiOutlineScale className="w-5 h-5" />}
           title="Not available"
@@ -71,7 +70,7 @@ export default function PartnerConsistencyPage() {
   const compared = (rows ?? []).filter((r) => r.comparisonDrawn);
 
   return (
-    <div className="p-8 max-w-7xl w-full mx-auto flex flex-col gap-8">
+    <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-5">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
           <div>
@@ -84,7 +83,6 @@ export default function PartnerConsistencyPage() {
           </div>
           <PeriodFilter period={period} onChange={setPeriod} />
         </div>
-        <AnalyticsTabs />
       </div>
 
       {error && <Alert variant="error" message={error} />}

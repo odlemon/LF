@@ -11,7 +11,6 @@ import {
   useRateRecommendations,
   usePracticeAreas,
 } from "@/modules/analytics/hooks/useAnalytics";
-import { AnalyticsTabs } from "@/modules/analytics/components/AnalyticsTabs";
 import { ConfidenceBadge, PricingPowerBadge } from "@/modules/analytics/components/badges";
 import { formatRate, formatNumber, formatDateTime } from "@/modules/analytics/utils/format";
 
@@ -28,8 +27,7 @@ export default function RateRecommendationsPage() {
 
   if (!canRead) {
     return (
-      <div className="p-8 max-w-6xl w-full mx-auto flex flex-col gap-8">
-        <AnalyticsTabs />
+      <div className="flex flex-col gap-8">
         <Alert
           variant="warning"
           message="Rate recommendations require RATE_RECOMMENDATION_READ access."
@@ -48,7 +46,7 @@ export default function RateRecommendationsPage() {
   ];
 
   return (
-    <div className="p-8 max-w-7xl w-full mx-auto flex flex-col gap-8">
+    <div className="flex flex-col gap-8">
       {/* Header */}
       <div className="flex flex-col gap-5">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
@@ -62,7 +60,6 @@ export default function RateRecommendationsPage() {
             <Select options={paOptions} value={practiceAreaUid} onChange={setPracticeAreaUid} />
           </div>
         </div>
-        <AnalyticsTabs />
       </div>
 
       {error && <Alert variant="error" message={error} />}

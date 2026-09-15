@@ -100,7 +100,7 @@ export default function PracticeAreaDeepDivePage() {
     metrics && priorWinRate != null ? metrics.winRatePct - priorWinRate : null;
 
   return (
-    <div className="p-8 max-w-7xl w-full mx-auto flex flex-col gap-8">
+    <div className="flex flex-col gap-8">
       {/* Header */}
       <div className="flex flex-col gap-5">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">

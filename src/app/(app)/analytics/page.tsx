@@ -15,7 +15,6 @@ import {
 import { PeriodFilter, defaultPeriod } from "@/modules/analytics/components/PeriodFilter";
 import { AnalyticsExportButtons } from "@/modules/analytics/components/AnalyticsExportButtons";
 import { KpiCard, PageSkeleton } from "@/modules/analytics/components/KpiCard";
-import { AnalyticsTabs } from "@/modules/analytics/components/AnalyticsTabs";
 import {
   formatMoney,
   formatPct,
@@ -47,7 +46,7 @@ export default function AnalyticsFirmHealthPage() {
   const prior = summary?.priorPeriod ?? null;
 
   return (
-    <div className="px-5 py-8 sm:px-8 max-w-[1400px] w-full mx-auto flex flex-col gap-8">
+    <div className="flex flex-col gap-8">
       {/* Header */}
       <div className="flex flex-col gap-5">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
@@ -63,7 +62,6 @@ export default function AnalyticsFirmHealthPage() {
             <AnalyticsExportButtons period={period} />
           </div>
         </div>
-        <AnalyticsTabs />
       </div>
 
       {error && <Alert variant="error" message={error} />}

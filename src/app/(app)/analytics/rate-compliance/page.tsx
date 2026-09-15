@@ -10,7 +10,6 @@ import { usePermission } from "@/hooks/usePermission";
 import { PERMISSIONS } from "@/lib/utils/permissions";
 import { useRateCompliance, useRateComplianceLines } from "@/modules/analytics/hooks/useAnalytics";
 import { PeriodFilter, defaultPeriod } from "@/modules/analytics/components/PeriodFilter";
-import { AnalyticsTabs } from "@/modules/analytics/components/AnalyticsTabs";
 import { ComplianceDonut } from "@/modules/analytics/components/charts";
 import { formatNumber, formatPct, formatMoney, formatDelta } from "@/modules/analytics/utils/format";
 import type { PeriodParams } from "@/modules/analytics/types";
@@ -36,8 +35,7 @@ export default function RateCompliancePage() {
 
   if (!financeView) {
     return (
-      <div className="p-8 max-w-6xl w-full mx-auto flex flex-col gap-8">
-        <AnalyticsTabs />
+      <div className="flex flex-col gap-8">
         <Alert
           variant="warning"
           message="Rate compliance requires finance analytics access (ANALYTICS_FINANCE_VIEW)."
@@ -47,7 +45,7 @@ export default function RateCompliancePage() {
   }
 
   return (
-    <div className="p-8 max-w-7xl w-full mx-auto flex flex-col gap-8">
+    <div className="flex flex-col gap-8">
       {/* Header */}
       <div className="flex flex-col gap-5">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
@@ -59,7 +57,6 @@ export default function RateCompliancePage() {
           </div>
           <PeriodFilter period={period} onChange={setPeriod} />
         </div>
-        <AnalyticsTabs />
       </div>
 
       {error && <Alert variant="error" message={error} />}

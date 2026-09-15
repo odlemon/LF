@@ -14,7 +14,6 @@ import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { useAdvisorChat, AdvisorBubble } from "@/modules/analytics/hooks/useAdvisorChat";
-import { AnalyticsTabs } from "@/modules/analytics/components/AnalyticsTabs";
 import { MarkdownContent } from "@/modules/intake/components/MarkdownContent";
 
 const SUGGESTIONS = [
@@ -105,7 +104,7 @@ export default function AdvisorPage() {
   };
 
   return (
-    <div className="p-8 max-w-4xl w-full mx-auto flex flex-col gap-6 h-[calc(100vh-4rem)]">
+    <div className="mx-auto flex h-[calc(100vh-11.75rem)] w-full max-w-4xl flex-col gap-6">
       {/* Header */}
       <div className="flex flex-col gap-5 shrink-0">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
@@ -122,7 +121,6 @@ export default function AdvisorPage() {
             </Button>
           )}
         </div>
-        <AnalyticsTabs />
       </div>
 
       {error && (

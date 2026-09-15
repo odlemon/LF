@@ -15,7 +15,6 @@ import {
   usePracticeAreas,
   useClients,
 } from "@/modules/analytics/hooks/useAnalytics";
-import { AnalyticsTabs } from "@/modules/analytics/components/AnalyticsTabs";
 import { DetectorTuningPanel } from "@/modules/analytics/components/DetectorTuningPanel";
 import { SeverityBadge, AnomalyStatusBadge } from "@/modules/analytics/components/badges";
 import { AnomalyDetailDrawer } from "@/modules/analytics/components/AnomalyDetailDrawer";
@@ -86,8 +85,7 @@ export default function MarginMonitorPage() {
 
   if (!financeView) {
     return (
-      <div className="p-8 max-w-6xl w-full mx-auto flex flex-col gap-8">
-        <AnalyticsTabs />
+      <div className="flex flex-col gap-8">
         <Alert
           variant="warning"
           message="The Margin Monitor requires finance analytics access (ANALYTICS_FINANCE_VIEW)."
@@ -108,7 +106,7 @@ export default function MarginMonitorPage() {
   const openLow = openList.filter((a) => a.severity === "LOW").length;
 
   return (
-    <div className="p-8 max-w-7xl w-full mx-auto flex flex-col gap-8">
+    <div className="flex flex-col gap-8">
       {/* Header */}
       <div className="flex flex-col gap-5">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
@@ -123,7 +121,6 @@ export default function MarginMonitorPage() {
             Refresh
           </Button>
         </div>
-        <AnalyticsTabs />
       </div>
 
       {/* Filters, at the top: what's worth reading below depends on these. */}

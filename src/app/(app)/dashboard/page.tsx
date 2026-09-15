@@ -248,7 +248,7 @@ export default function DashboardPage() {
                         <p className="mt-0.5 text-[11px] text-ink/60">{m.client}</p>
                       </td>
                       <td className="px-3 py-3.5">
-                        <span className="inline-flex rounded-md bg-field px-2 py-1 text-[11px] font-semibold text-ink/65">
+                        <span className="inline-flex rounded-full bg-field px-2.5 py-1 text-[11px] font-semibold text-ink/65">
                           {m.stage}
                         </span>
                       </td>

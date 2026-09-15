@@ -35,7 +35,7 @@ export function PlatformLogo({ className = "", size = 40 }: PlatformLogoProps) {
         alt="Lysp"
         width={1024}
         height={1024}
-        className={`absolute left-1/2 top-0 h-[175%] w-[175%] max-w-none -translate-x-1/2 object-cover object-top ${
+        className={`absolute left-1/2 top-0 h-[168%] w-[168%] max-w-none -translate-x-1/2 object-cover object-top ${
           isDark ? "mix-blend-screen" : "mix-blend-multiply"
         }`}
       />

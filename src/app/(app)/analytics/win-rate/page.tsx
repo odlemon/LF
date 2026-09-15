@@ -6,7 +6,6 @@ import { Alert } from "@/components/ui/Alert";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { useProposalPerformance, useWinRate } from "@/modules/analytics/hooks/useAnalytics";
 import { PeriodFilter, defaultPeriod } from "@/modules/analytics/components/PeriodFilter";
-import { AnalyticsTabs } from "@/modules/analytics/components/AnalyticsTabs";
 import { KpiCard, PageSkeleton } from "@/modules/analytics/components/KpiCard";
 import { WinRateBars } from "@/modules/analytics/components/charts";
 import {
@@ -63,7 +62,7 @@ export default function WinRatePage() {
   const { data: byPracticeArea, error: byPracticeAreaError } = useWinRate("PRACTICE_AREA", period);
 
   return (
-    <div className="p-8 max-w-7xl w-full mx-auto flex flex-col gap-8">
+    <div className="flex flex-col gap-8">
       {/* Header */}
       <div className="flex flex-col gap-5">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
@@ -75,7 +74,6 @@ export default function WinRatePage() {
           </div>
           <PeriodFilter period={period} onChange={setPeriod} />
         </div>
-        <AnalyticsTabs />
       </div>
 
       {(error || byPricingModelError || byPracticeAreaError) && (
