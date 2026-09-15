@@ -18,9 +18,9 @@ const TONE_STYLES: Record<string, { chip: string; label: string }> = {
 
 function money(value: number | null): string {
   if (value === null) return "—";
-  if (Math.abs(value) >= 1_000_000) return `£${(value / 1_000_000).toFixed(1)}m`;
-  if (Math.abs(value) >= 1_000) return `£${(value / 1_000).toFixed(0)}k`;
-  return `£${value.toFixed(0)}`;
+  if (Math.abs(value) >= 1_000_000) return `$${(value / 1_000_000).toFixed(1)}m`;
+  if (Math.abs(value) >= 1_000) return `$${(value / 1_000).toFixed(0)}k`;
+  return `$${value.toFixed(0)}`;
 }
 
 function pct(value: number | null, digits = 1): string {

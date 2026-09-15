@@ -115,13 +115,13 @@ export function FeesTrendChart({ data }: { data: TrendPoint[] }) {
               tickLine={false}
               tick={{ fill: MUTED, fontSize: 11, fontWeight: 600 }}
               width={42}
-              tickFormatter={(v) => `£${v / 1000}k`}
+              tickFormatter={(v) => `$${v / 1000}k`}
             />
             <Tooltip
               content={(props) => (
                 <ChartTooltip
                   {...props}
-                  formatter={(e) => `£${Number(e.value ?? 0).toLocaleString()}k`}
+                  formatter={(e) => `$${Number(e.value ?? 0).toLocaleString()}k`}
                 />
               )}
             />
@@ -150,7 +150,7 @@ export function FeesTrendChart({ data }: { data: TrendPoint[] }) {
           </AreaChart>
         </ResponsiveContainer>
       </div>
-      <p className="mt-2 text-[11px] text-ink/60">Values in £000s · hover for detail</p>
+      <p className="mt-2 text-[11px] text-ink/60">Values in $000s · hover for detail</p>
     </div>
   );
 }
@@ -281,7 +281,7 @@ export function PipelineStagesChart({ data }: { data: StagePoint[] }) {
                   {...props}
                   formatter={(e) =>
                     e.dataKey === "value"
-                      ? `£${Number(e.value ?? 0).toLocaleString()}k`
+                      ? `$${Number(e.value ?? 0).toLocaleString()}k`
                       : `${e.value} matters`
                   }
                 />
@@ -336,7 +336,7 @@ export function PracticeMixChart({ data }: { data: PracticePoint[] }) {
               tickLine={false}
               tick={{ fill: MUTED, fontSize: 11, fontWeight: 600 }}
               width={42}
-              tickFormatter={(v) => `£${v / 1000}k`}
+              tickFormatter={(v) => `$${v / 1000}k`}
             />
             <Tooltip
               cursor={{ fill: FIELD }}
@@ -345,7 +345,7 @@ export function PracticeMixChart({ data }: { data: PracticePoint[] }) {
                   {...props}
                   formatter={(e) =>
                     e.dataKey === "fees"
-                      ? `£${Number(e.value ?? 0).toLocaleString()}k`
+                      ? `$${Number(e.value ?? 0).toLocaleString()}k`
                       : `${e.value} matters`
                   }
                 />

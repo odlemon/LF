@@ -107,7 +107,7 @@ export function FeesMarginTrendChart({ data }: { data: MonthlyPoint[] }) {
               tickLine={false}
               tick={{ fill: MUTED, fontSize: 11, fontWeight: 600 }}
               width={44}
-              tickFormatter={(v) => `£${v}k`}
+              tickFormatter={(v) => `$${v}k`}
             />
             <YAxis
               yAxisId="margin"
@@ -126,7 +126,7 @@ export function FeesMarginTrendChart({ data }: { data: MonthlyPoint[] }) {
                   payload={props.payload ? [...props.payload] : undefined}
                   formatter={(e) =>
                     e.dataKey === "feeTotalK"
-                      ? `£${Number(e.value ?? 0).toLocaleString()}k`
+                      ? `$${Number(e.value ?? 0).toLocaleString()}k`
                       : `${Number(e.value ?? 0).toFixed(1)}%`
                   }
                 />
@@ -154,7 +154,7 @@ export function FeesMarginTrendChart({ data }: { data: MonthlyPoint[] }) {
           </ComposedChart>
         </ResponsiveContainer>
       </div>
-      <p className="mt-2 text-[11px] text-ink/60">Bars in £000s · dashed line = margin %</p>
+      <p className="mt-2 text-[11px] text-ink/60">Bars in $000s · dashed line = margin %</p>
     </div>
   );
 }

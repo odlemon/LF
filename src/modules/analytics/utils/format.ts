@@ -1,7 +1,7 @@
 /**
  * Analytics display formatting.
  * The firm platform renders money in GBP by default (matches dashboard charts'
- * £ axis labels and the volume-discount pages' en-GB currency formatting).
+ * $ axis labels and the volume-discount pages' en-GB currency formatting).
  */
 
 export function formatMoney(value: number | null | undefined, compact = false): string {
@@ -21,7 +21,7 @@ export function formatMoney(value: number | null | undefined, compact = false): 
       maximumFractionDigits: 0,
     }).format(value);
   } catch {
-    return `£${Number(value).toLocaleString()}`;
+    return `$${Number(value).toLocaleString()}`;
   }
 }
 
@@ -36,7 +36,7 @@ export function formatRate(value: number | null | undefined): string {
       maximumFractionDigits: 2,
     }).format(value);
   } catch {
-    return `£${Number(value).toFixed(2)}`;
+    return `$${Number(value).toFixed(2)}`;
   }
 }
 
