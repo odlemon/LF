@@ -50,14 +50,16 @@ async function quicksand(weight: 500 | 700) {
 }
 
 export default async function Image() {
-  const [photo, medium, bold] = await Promise.all([
+  const [photo, logo, medium, bold] = await Promise.all([
     readFile(path.join(process.cwd(), "public/videos/golden-hour-poster.jpg")),
+    readFile(path.join(process.cwd(), "public/images/logo/lysp-mark-white.png")),
     quicksand(500),
     quicksand(700),
   ]);
 
   // Satori has no Buffer; a data URI is the reliable way to hand it a local image.
   const src = `data:image/jpeg;base64,${photo.toString("base64")}`;
+  const logoSrc = `data:image/png;base64,${logo.toString("base64")}`;
   const fonts = [bold, medium].filter((f) => f !== null);
   const face = fonts.length ? "Quicksand" : undefined;
 
@@ -116,24 +118,8 @@ export default async function Image() {
           }}
         >
           <div style={{ display: "flex", alignItems: "center" }}>
-            <div
-              style={{
-                fontSize: 27,
-                fontWeight: 700,
-                letterSpacing: 7,
-                color: "#ffffff",
-              }}
-            >
-              LYSP
-            </div>
-            <div
-              style={{
-                width: 46,
-                height: 2,
-                marginLeft: 20,
-                backgroundColor: "rgba(255,255,255,0.42)",
-              }}
-            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={logoSrc} alt="" width={44} height={44} style={{ display: "block" }} />
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", maxWidth: 566 }}>
