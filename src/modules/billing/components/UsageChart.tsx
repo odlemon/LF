@@ -25,7 +25,7 @@ const FEATURE_COLORS: Record<string, string> = {
 
 export function UsageChart({ data, loading }: UsageChartProps) {
   const formatCredits = (value: number) => {
-    return new Intl.NumberFormat("en-GB", {
+    return new Intl.NumberFormat("en-US", {
       style: "decimal",
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,

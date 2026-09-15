@@ -12,7 +12,7 @@ interface Props {
 }
 
 export function EngagementPackDocument({ pack, section = "letter" }: Props) {
-  const currency = pack.currency || "GBP";
+  const currency = pack.currency || "USD";
   const lines = pack.rateSchedule || [];
 
   if (section === "schedule") {

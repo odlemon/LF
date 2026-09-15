@@ -57,7 +57,7 @@ export default function ClientDiscountStatusPage() {
 
   const formatMoney = (value: number, currency: string) => {
     try {
-      return new Intl.NumberFormat("en-GB", {
+      return new Intl.NumberFormat("en-US", {
         style: "currency",
         currency,
       }).format(value);
@@ -71,7 +71,7 @@ export default function ClientDiscountStatusPage() {
     [dashboards]
   );
 
-  const currency = programs[0]?.currency || "GBP";
+  const currency = programs[0]?.currency || "USD";
 
   return (
     <PortalAtmosphere>

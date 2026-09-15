@@ -44,7 +44,7 @@ export default function ClientMatterHistoryPage() {
 
   const agreed = items.filter((i) => i.status === "CLIENT_APPROVED");
   const agreedValue = agreed.reduce((s, i) => s + (Number(i.latestGrossFees) || 0), 0);
-  const currency = items[0]?.currency || "GBP";
+  const currency = items[0]?.currency || "USD";
 
   return (
     <PortalAtmosphere>

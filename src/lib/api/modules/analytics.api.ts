@@ -463,7 +463,7 @@ export const analyticsApi = {
     return {
       negotiationUid: d.negotiationUid,
       practiceAreaUid: d.practiceAreaUid ?? null,
-      currency: d.currency || "GBP",
+      currency: d.currency || "USD",
       clientMatterCount: d.clientMatterCount ?? null,
       practiceAreaMatterCount: d.practiceAreaMatterCount ?? null,
       note: d.note || "",

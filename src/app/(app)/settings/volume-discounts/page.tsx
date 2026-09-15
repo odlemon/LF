@@ -89,7 +89,7 @@ export default function VolumeDiscountsPage() {
 
   const formatMoney = (value: number, currency: string) => {
     try {
-      return new Intl.NumberFormat("en-GB", {
+      return new Intl.NumberFormat("en-US", {
         style: "currency",
         currency,
       }).format(value);
@@ -104,7 +104,7 @@ export default function VolumeDiscountsPage() {
     // renders "Invalid Date".
     const parsed = new Date(date.includes("T") ? date : date + "T00:00:00");
     if (Number.isNaN(parsed.getTime())) return "—";
-    return parsed.toLocaleDateString("en-GB", {
+    return parsed.toLocaleDateString("en-US", {
       day: "numeric",
       month: "short",
       year: "numeric",
@@ -156,7 +156,7 @@ export default function VolumeDiscountsPage() {
               <p className="mt-2 text-2xl font-semibold tabular-nums text-ink">
                 {formatMoney(
                   Object.values(dashboards).reduce((sum, d) => sum + d.savingsToDate, 0),
-                  "GBP"
+                  "USD"
                 )}
               </p>
             </div>

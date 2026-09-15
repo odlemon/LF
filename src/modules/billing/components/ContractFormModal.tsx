@@ -38,7 +38,7 @@ export function ContractFormModal({ open, onClose, existing, onSaved }: Props) {
     contractReference: "",
     contractType: "COMMERCIAL" as ContractType,
     billable: true,
-    currency: "GBP",
+    currency: "USD",
     periodStart: "",
     periodEnd: "",
     renewalDate: "",
@@ -56,7 +56,7 @@ export function ContractFormModal({ open, onClose, existing, onSaved }: Props) {
       contractReference: existing?.contractReference ?? "",
       contractType: (existing?.contractType as ContractType) ?? "COMMERCIAL",
       billable: existing?.billable ?? true,
-      currency: existing?.currency ?? "GBP",
+      currency: existing?.currency ?? "USD",
       periodStart: existing?.periodStart ?? `${year}-01-01`,
       periodEnd: existing?.periodEnd ?? `${year}-12-31`,
       renewalDate: existing?.renewalDate ?? "",
@@ -85,7 +85,7 @@ export function ContractFormModal({ open, onClose, existing, onSaved }: Props) {
         contractReference: form.contractReference.trim(),
         contractType: form.contractType,
         billable: form.billable,
-        currency: form.currency.trim() || "GBP",
+        currency: form.currency.trim() || "USD",
         periodStart: form.periodStart,
         periodEnd: form.periodEnd,
         renewalDate: form.renewalDate || null,
@@ -176,7 +176,7 @@ export function ContractFormModal({ open, onClose, existing, onSaved }: Props) {
               type="text"
               value={form.currency}
               onChange={(e) => setForm({ ...form, currency: e.target.value.toUpperCase() })}
-              placeholder="GBP"
+              placeholder="USD"
               className={fieldClassName}
             />
           </Field>

@@ -170,7 +170,7 @@ export default function PortalNegotiationsPage() {
                     </div>
                     <div className="text-right">
                       <p className="text-lg font-semibold tabular-nums text-ink">
-                        {formatMoney(item.latestGrossFees, item.currency || "GBP")}
+                        {formatMoney(item.latestGrossFees, item.currency || "USD")}
                       </p>
                       <p className="mt-1 inline-flex items-center gap-1 text-[11px] font-semibold text-primary">
                         <HiOutlineSparkles className="h-3.5 w-3.5" />

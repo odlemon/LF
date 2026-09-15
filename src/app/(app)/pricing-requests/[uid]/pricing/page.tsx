@@ -29,9 +29,9 @@ import { isAwaitingDecision } from "@/modules/pricing/types";
 
 function formatMoney(amount: number, currency: string) {
   try {
-    return new Intl.NumberFormat("en-GB", {
+    return new Intl.NumberFormat("en-US", {
       style: "currency",
-      currency: currency || "GBP",
+      currency: currency || "USD",
       maximumFractionDigits: 0,
     }).format(amount);
   } catch {
@@ -173,7 +173,7 @@ export default function PricingWorkspacePage() {
     );
   }
 
-  const currency = workspace.scenarios[0]?.currency || "GBP";
+  const currency = workspace.scenarios[0]?.currency || "USD";
   const lowestFee =
     workspace.scenarios.length > 0
       ? Math.min(...workspace.scenarios.map((s) => Number(s.grossFees) || 0))

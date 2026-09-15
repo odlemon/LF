@@ -11,7 +11,7 @@ interface UsageSummaryProps {
 
 export function UsageSummary({ data, loading }: UsageSummaryProps) {
   const formatCredits = (value: number) => {
-    return new Intl.NumberFormat("en-GB", {
+    return new Intl.NumberFormat("en-US", {
       style: "decimal",
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,

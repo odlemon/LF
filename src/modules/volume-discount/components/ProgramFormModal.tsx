@@ -27,7 +27,7 @@ const emptyTier = (sortOrder: number): TierCommand => ({
 
 export function ProgramFormModal({ isOpen, onClose, onSave, clients }: ProgramFormModalProps) {
   const [clientProfileUid, setClientProfileUid] = useState("");
-  const [currency, setCurrency] = useState("GBP");
+  const [currency, setCurrency] = useState("USD");
   const [periodStart, setPeriodStart] = useState("");
   const [periodEnd, setPeriodEnd] = useState("");
   const [tiers, setTiers] = useState<TierCommand[]>([emptyTier(0)]);
@@ -36,7 +36,7 @@ export function ProgramFormModal({ isOpen, onClose, onSave, clients }: ProgramFo
 
   useEffect(() => {
     setClientProfileUid("");
-    setCurrency("GBP");
+    setCurrency("USD");
     setPeriodStart("");
     setPeriodEnd("");
     setTiers([emptyTier(0)]);

@@ -103,9 +103,9 @@ function linesToDraft(lines: PricingScenarioLine[]): DraftLine[] {
 
 function formatMoney(amount: number, currency: string) {
   try {
-    return new Intl.NumberFormat("en-GB", {
+    return new Intl.NumberFormat("en-US", {
       style: "currency",
-      currency: currency || "GBP",
+      currency: currency || "USD",
       maximumFractionDigits: 0,
     }).format(amount);
   } catch {
@@ -397,7 +397,7 @@ export function WhatIfPanel({
               </p>
               <div className="mt-2 flex items-baseline gap-1.5">
                 <span className="text-sm text-ink/60">
-                  {scenario.currency || "GBP"}
+                  {scenario.currency || "USD"}
                 </span>
                 <input
                   type="number"

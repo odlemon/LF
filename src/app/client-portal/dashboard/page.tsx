@@ -51,7 +51,7 @@ export default function ClientDashboardPage() {
     void load();
   }, [load]);
 
-  const currency = items[0]?.currency || "GBP";
+  const currency = items[0]?.currency || "USD";
   const open = useMemo(() => items.filter((i) => isOpenStatus(i.status)), [items]);
   const agreed = useMemo(
     () => items.filter((i) => i.status === "CLIENT_APPROVED"),
@@ -82,7 +82,7 @@ export default function ClientDashboardPage() {
     (user?.contactName || "").split(/[\s@]/)[0] ||
     (user?.email || "").split("@")[0] ||
     "there";
-  const today = new Intl.DateTimeFormat("en-GB", {
+  const today = new Intl.DateTimeFormat("en-US", {
     weekday: "long",
     day: "numeric",
     month: "long",

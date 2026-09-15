@@ -45,7 +45,7 @@ export function AuditTrailPanel({
     if (diffDays === 1) return "Yesterday";
     if (diffDays < 30) return `${diffDays} days ago`;
     
-    return d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+    return d.toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" });
   };
 
   // Determine if we exceed maxRows

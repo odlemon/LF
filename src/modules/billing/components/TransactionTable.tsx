@@ -143,11 +143,11 @@ export function TransactionTable({ transactions, loading, onRefresh }: Transacti
                     tx.type === "TOPUP" ? "text-emerald-700" : tx.type === "USAGE" ? "text-ink/80" : "text-ink/60"
                   }`}>
                     {tx.type === "TOPUP" ? "+" : tx.type === "USAGE" ? "−" : ""}
-                    {Math.abs(tx.amount).toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    {Math.abs(tx.amount).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     <span className="ml-1 text-[10px] font-medium text-ink/60">cr</span>
                   </td>
                   <td className="px-3 py-3.5 text-xs font-semibold tabular-nums text-right text-ink/60 sm:px-6">
-                    {tx.balanceAfter.toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    {tx.balanceAfter.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     <span className="ml-1 text-[10px] font-medium text-ink/60">cr</span>
                   </td>
                 </tr>

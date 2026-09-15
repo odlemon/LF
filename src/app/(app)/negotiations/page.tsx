@@ -119,7 +119,7 @@ export default function NegotiationsPage() {
                   </p>
                 </div>
                 <p className="shrink-0 text-[15px] font-semibold tabular-nums tracking-tight text-ink">
-                  {formatMoney(item.latestGrossFees, item.currency || "GBP")}
+                  {formatMoney(item.latestGrossFees, item.currency || "USD")}
                 </p>
               </button>
             ))}

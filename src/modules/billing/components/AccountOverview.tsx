@@ -13,7 +13,7 @@ interface AccountOverviewProps {
 
 export function AccountOverview({ account, onCreateAdjustment, showAdjustButton }: AccountOverviewProps) {
   const formatCredits = (value: number) => {
-    return new Intl.NumberFormat("en-GB", {
+    return new Intl.NumberFormat("en-US", {
       style: "decimal",
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,

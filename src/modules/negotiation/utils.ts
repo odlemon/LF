@@ -6,13 +6,13 @@ import type {
   RateLevelDraft,
 } from "./types";
 
-export function formatMoney(amount: number | null | undefined, currency = "GBP") {
+export function formatMoney(amount: number | null | undefined, currency = "USD") {
   const n = Number(amount);
   if (!Number.isFinite(n)) return "—";
   try {
-    return new Intl.NumberFormat("en-GB", {
+    return new Intl.NumberFormat("en-US", {
       style: "currency",
-      currency: currency || "GBP",
+      currency: currency || "USD",
       maximumFractionDigits: 0,
     }).format(n);
   } catch {
@@ -20,13 +20,13 @@ export function formatMoney(amount: number | null | undefined, currency = "GBP")
   }
 }
 
-export function formatRate(amount: number | null | undefined, currency = "GBP") {
+export function formatRate(amount: number | null | undefined, currency = "USD") {
   const n = Number(amount);
   if (!Number.isFinite(n)) return "—";
   try {
-    return new Intl.NumberFormat("en-GB", {
+    return new Intl.NumberFormat("en-US", {
       style: "currency",
-      currency: currency || "GBP",
+      currency: currency || "USD",
       maximumFractionDigits: 0,
     }).format(n);
   } catch {

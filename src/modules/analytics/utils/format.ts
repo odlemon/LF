@@ -1,23 +1,23 @@
 /**
  * Analytics display formatting.
- * The firm platform renders money in GBP by default (matches dashboard charts'
- * $ axis labels and the volume-discount pages' en-GB currency formatting).
+ * The firm platform renders money in USD by default (matches dashboard charts'
+ * $ axis labels and the volume-discount pages' en-US currency formatting).
  */
 
 export function formatMoney(value: number | null | undefined, compact = false): string {
   if (value == null) return "—";
   try {
     if (compact) {
-      return new Intl.NumberFormat("en-GB", {
+      return new Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: "GBP",
+        currency: "USD",
         notation: "compact",
         maximumFractionDigits: 1,
       }).format(value);
     }
-    return new Intl.NumberFormat("en-GB", {
+    return new Intl.NumberFormat("en-US", {
       style: "currency",
-      currency: "GBP",
+      currency: "USD",
       maximumFractionDigits: 0,
     }).format(value);
   } catch {
@@ -29,9 +29,9 @@ export function formatMoney(value: number | null | undefined, compact = false): 
 export function formatRate(value: number | null | undefined): string {
   if (value == null) return "—";
   try {
-    return new Intl.NumberFormat("en-GB", {
+    return new Intl.NumberFormat("en-US", {
       style: "currency",
-      currency: "GBP",
+      currency: "USD",
       minimumFractionDigits: 0,
       maximumFractionDigits: 2,
     }).format(value);
@@ -48,7 +48,7 @@ export function formatPct(value: number | null | undefined, digits = 1): string 
 
 export function formatNumber(value: number | null | undefined): string {
   if (value == null || Number.isNaN(value)) return "—";
-  return new Intl.NumberFormat("en-GB").format(value);
+  return new Intl.NumberFormat("en-US").format(value);
 }
 
 export function formatDays(value: number | null | undefined): string {
@@ -67,14 +67,14 @@ export function formatMonth(month: string): string {
   if (!month) return "";
   const parsed = new Date(`${month}-01T00:00:00`);
   if (isNaN(parsed.getTime())) return month;
-  return parsed.toLocaleDateString("en-GB", { month: "short", year: "2-digit" });
+  return parsed.toLocaleDateString("en-US", { month: "short", year: "2-digit" });
 }
 
 export function formatDateTime(dateString: string | null | undefined): string {
   if (!dateString) return "—";
   const date = new Date(dateString);
   if (isNaN(date.getTime())) return dateString;
-  return date.toLocaleDateString("en-GB", {
+  return date.toLocaleDateString("en-US", {
     day: "numeric",
     month: "short",
     year: "numeric",

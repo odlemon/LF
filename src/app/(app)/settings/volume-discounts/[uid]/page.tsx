@@ -132,7 +132,7 @@ export default function VolumeDiscountDetailPage() {
 
   const formatMoney = (value: number, currency: string) => {
     try {
-      return new Intl.NumberFormat("en-GB", {
+      return new Intl.NumberFormat("en-US", {
         style: "currency",
         currency,
       }).format(value);
@@ -147,7 +147,7 @@ export default function VolumeDiscountDetailPage() {
     if (!date) return "—";
     const parsed = new Date(date.includes("T") ? date : date + "T00:00:00");
     if (Number.isNaN(parsed.getTime())) return "—";
-    return parsed.toLocaleDateString("en-GB", {
+    return parsed.toLocaleDateString("en-US", {
       day: "numeric",
       month: "short",
       year: "numeric",

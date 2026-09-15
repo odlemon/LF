@@ -6,9 +6,9 @@ import { useScenarioComparables } from "../hooks/useScenarioComparables";
 function formatMoney(amount: number | null, currency: string | null | undefined) {
   if (amount == null) return "—";
   try {
-    return new Intl.NumberFormat("en-GB", {
+    return new Intl.NumberFormat("en-US", {
       style: "currency",
-      currency: currency || "GBP",
+      currency: currency || "USD",
       maximumFractionDigits: 0,
     }).format(amount);
   } catch {

@@ -21,7 +21,7 @@ export function RateCardFormModal({
   onSave,
 }: RateCardFormModalProps) {
   const [name, setName] = useState("");
-  const [currency, setCurrency] = useState("GBP");
+  const [currency, setCurrency] = useState("USD");
   const [effectiveDate, setEffectiveDate] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
   const [officeCode, setOfficeCode] = useState("");
@@ -30,7 +30,7 @@ export function RateCardFormModal({
 
   useEffect(() => {
     setName("");
-    setCurrency("GBP");
+    setCurrency("USD");
     setEffectiveDate("");
     setExpiryDate("");
     setOfficeCode("");

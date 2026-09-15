@@ -19,9 +19,9 @@ import { isAwaitingDecision } from "../types";
 
 function formatMoney(amount: number, currency: string) {
   try {
-    return new Intl.NumberFormat("en-GB", {
+    return new Intl.NumberFormat("en-US", {
       style: "currency",
-      currency: currency || "GBP",
+      currency: currency || "USD",
       maximumFractionDigits: 0,
     }).format(amount);
   } catch {

@@ -132,7 +132,7 @@ export default function NegotiationDetailPage() {
   const agreed = detail?.status === "CLIENT_APPROVED";
   const canAcceptClient =
     open && lastClient != null && last?.party === "CLIENT";
-  const currency = detail?.currency || "GBP";
+  const currency = detail?.currency || "USD";
 
   const selectOffer = (roundId: string) => {
     if (mode === "counter") return;

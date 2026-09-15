@@ -95,7 +95,7 @@ export default function PortalNegotiationDetailPage() {
     return offers.find((o) => o.id === selectedRoundId) || offers[offers.length - 1];
   }, [offers, selectedRoundId]);
   const open = isOpenStatus(detail?.status);
-  const currency = detail?.currency || "GBP";
+  const currency = detail?.currency || "USD";
 
   const selectOffer = (roundId: string) => {
     if (counterMode) return;

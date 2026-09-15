@@ -21,7 +21,7 @@ export default function DashboardPage() {
   const { user } = useAuth();
   const firstName = user?.firstName || "there";
   const greeting = greetingForHour(new Date().getHours());
-  const today = new Intl.DateTimeFormat("en-GB", {
+  const today = new Intl.DateTimeFormat("en-US", {
     weekday: "long",
     day: "numeric",
     month: "long",

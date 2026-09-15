@@ -19,7 +19,7 @@ function money(value: number | null | undefined, currency: string): string {
   if (value === null || value === undefined) return "—";
   return new Intl.NumberFormat(undefined, {
     style: "currency",
-    currency: currency || "GBP",
+    currency: currency || "USD",
     maximumFractionDigits: 0,
   }).format(value);
 }

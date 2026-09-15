@@ -198,7 +198,7 @@ export function EngagementPackWorkspace({
               <p className="mx-auto mb-4 max-w-[720px] text-center text-xs font-medium text-ink/60 print:hidden">
                 You acknowledged this engagement
                 {pack.acknowledgedAt
-                  ? ` on ${new Date(pack.acknowledgedAt).toLocaleString("en-GB")}`
+                  ? ` on ${new Date(pack.acknowledgedAt).toLocaleString("en-US")}`
                   : ""}
                 .
               </p>

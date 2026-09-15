@@ -17,7 +17,7 @@ interface AddSpendModalProps {
   defaultCurrency?: string;
 }
 
-export function AddSpendModal({ isOpen, onClose, onSave, defaultCurrency = "GBP" }: AddSpendModalProps) {
+export function AddSpendModal({ isOpen, onClose, onSave, defaultCurrency = "USD" }: AddSpendModalProps) {
   const [invoiceReference, setInvoiceReference] = useState("");
   const [amount, setAmount] = useState("");
   const [currency, setCurrency] = useState(defaultCurrency);
