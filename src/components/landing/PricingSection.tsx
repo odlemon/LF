@@ -65,6 +65,7 @@ const PLAIN_EXAMPLES = [
     action: "Pull an analytics digest",
     detail: "Realization & leakage",
     credits: ACTION_COST.analytics,
+    unpriced: true,
   },
 ];
 
@@ -239,9 +240,11 @@ export function PricingSection() {
                       <p className="text-[13px] text-[#0a0a0a]/60">
                         {item.credits} credit{item.credits === 1 ? "" : "s"}
                       </p>
-                      <p className="text-2xl font-semibold tabular-nums tracking-tight transition-transform duration-300 group-hover/cell:-translate-y-0.5">
-                        {formatUsd(dollars)}
-                      </p>
+                      {!item.unpriced && (
+                        <p className="text-2xl font-semibold tabular-nums tracking-tight transition-transform duration-300 group-hover/cell:-translate-y-0.5">
+                          {formatUsd(dollars)}
+                        </p>
+                      )}
                     </div>
                   </div>
                 );
