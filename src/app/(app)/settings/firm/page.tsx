@@ -19,6 +19,16 @@ const COUNTRIES = [
   { code: "CA", name: "Canada" },
 ];
 
+// Some firm records were seeded with a spelled-out country name rather than this page's ISO
+// code, which leaves the Select unmatched ("Choose option...") and would blank the field out
+// on the next save. Accept either shape when loading a firm's stored value.
+function toIsoCountry(value: string): string {
+  const match = COUNTRIES.find(
+    (c) => c.code.toLowerCase() === value.trim().toLowerCase() || c.name.toLowerCase() === value.trim().toLowerCase()
+  );
+  return match?.code ?? value;
+}
+
 const TIMEZONES = [
   "Europe/London",
   "America/New_York",
@@ -35,8 +45,8 @@ export default function FirmDetailsPage() {
   const [isEditing, setIsEditing] = useState(false);
 
   const [name, setName] = useState("");
-  const [country, setCountry] = useState("GB");
-  const [timezone, setTimezone] = useState("Europe/London");
+  const [country, setCountry] = useState("US");
+  const [timezone, setTimezone] = useState("America/New_York");
   const [registrationNumber, setRegistrationNumber] = useState("");
   const [taxId, setTaxId] = useState("");
   const [address, setAddress] = useState("");
@@ -47,7 +57,7 @@ export default function FirmDetailsPage() {
   useEffect(() => {
     if (firm) {
       setName(firm.name);
-      setCountry(firm.country);
+      setCountry(toIsoCountry(firm.country));
       setTimezone(firm.timezone);
       setRegistrationNumber(firm.registrationNumber || "");
       setTaxId(firm.taxId || "");
@@ -159,7 +169,7 @@ export default function FirmDetailsPage() {
                 setIsEditing(false);
                 if (firm) {
                   setName(firm.name);
-                  setCountry(firm.country);
+                  setCountry(toIsoCountry(firm.country));
                   setTimezone(firm.timezone);
                   setRegistrationNumber(firm.registrationNumber || "");
                   setTaxId(firm.taxId || "");
@@ -300,7 +310,7 @@ export default function FirmDetailsPage() {
                 setIsEditing(false);
                 if (firm) {
                   setName(firm.name);
-                  setCountry(firm.country);
+                  setCountry(toIsoCountry(firm.country));
                   setTimezone(firm.timezone);
                   setRegistrationNumber(firm.registrationNumber || "");
                   setTaxId(firm.taxId || "");

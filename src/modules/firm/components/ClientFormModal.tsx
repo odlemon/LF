@@ -15,6 +15,23 @@ interface ClientFormModalProps {
   client?: ClientProfile | null;
 }
 
+// Older seed data stores the country as a spelled-out name rather than the ISO code this
+// Select's options use; without this, editing one of those clients shows "Choose option..."
+// and re-saving silently blanks a country that was already set.
+const COUNTRY_NAME_TO_ISO: Record<string, string> = {
+  "united kingdom": "GB",
+  "united states": "US",
+  "united states of america": "US",
+  "germany": "DE",
+  "france": "FR",
+  "south africa": "ZA",
+  "australia": "AU",
+};
+
+function toIsoCountry(value: string): string {
+  return COUNTRY_NAME_TO_ISO[value.trim().toLowerCase()] ?? value;
+}
+
 export function ClientFormModal({
   isOpen,
   onClose,
@@ -26,7 +43,7 @@ export function ClientFormModal({
   const [tier, setTier] = useState<"STANDARD" | "PREFERRED" | "STRATEGIC">("STANDARD");
   const [contactName, setContactName] = useState("");
   const [contactEmail, setContactEmail] = useState("");
-  const [country, setCountry] = useState("GB");
+  const [country, setCountry] = useState("US");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [modalError, setModalError] = useState<string | null>(null);
 
@@ -37,14 +54,14 @@ export function ClientFormModal({
       setTier(client.tier);
       setContactName(client.contactName);
       setContactEmail(client.contactEmail);
-      setCountry(client.country);
+      setCountry(toIsoCountry(client.country));
     } else {
       setName("");
       setType("CORPORATE");
       setTier("STANDARD");
       setContactName("");
       setContactEmail("");
-      setCountry("GB");
+      setCountry("US");
     }
     setModalError(null);
   }, [client, isOpen]);
