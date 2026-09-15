@@ -15,8 +15,6 @@ import {
 import { ChatPanel } from "@/modules/intake/components/ChatPanel";
 import { ScopePanel } from "@/modules/intake/components/ScopePanel";
 import { HouseViewCitation } from "@/modules/intake/components/HouseViewCitation";
-import { ConflictsCheckGate } from "@/modules/conflicts/components/ConflictsCheckGate";
-import { useConflictCheck } from "@/modules/conflicts/hooks/useConflictCheck";
 import { ChatModeBadge } from "@/modules/intake/components/IntakeStatusBadge";
 import { PricingRequestWorkspaceSkeleton } from "@/modules/intake/components/PricingRequestWorkspaceSkeleton";
 import {
@@ -103,11 +101,6 @@ function PricingRequestWorkspaceLoaded({
     },
     [rememberScope, setScope]
   );
-
-  const conflictCheck = useConflictCheck(uid);
-  const conflictStatus = conflictCheck.view?.check.status;
-  const conflictsCleared = conflictStatus === "CLEARED" || conflictStatus === "WAIVED";
-  const showConflictsGate = conflictCheck.isLoading || !conflictsCleared;
 
   const attachmentHook = useAttachments(uid, initialAttachments, setAttachments);
   const scopeHook = useScope(uid, initialScope, handleScopeChange, (updated) =>
@@ -387,22 +380,12 @@ function PricingRequestWorkspaceLoaded({
         </div>
       </Modal>
 
-      {showConflictsGate ? (
-        <ConflictsCheckGate
-          clientName={clientName}
-          view={conflictCheck.view}
-          isLoading={conflictCheck.isLoading}
-          error={conflictCheck.error}
-          runCheck={conflictCheck.runCheck}
-          clearCheck={conflictCheck.clearCheck}
-        />
-      ) : (
       <div className="relative flex flex-1 overflow-hidden min-h-0 bg-canvas">
         <div
-          className={`flex min-h-0 h-full transition-[width,flex,padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          className={`flex flex-col min-h-0 h-full transition-[width,flex,padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
             scopeOpen
               ? "w-full md:w-1/2 md:border-r md:border-border"
-              : "w-full justify-center px-4 sm:px-8"
+              : "w-full items-center px-4 sm:px-8"
           }`}
         >
           {/* Above the conversation: what the firm already believed, before the agent spoke. */}
@@ -477,7 +460,6 @@ function PricingRequestWorkspaceLoaded({
           </span>
         </button>
       </div>
-      )}
     </div>
   );
 }

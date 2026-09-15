@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { HiScale } from "react-icons/hi";
 import { Alert } from "@/components/ui/Alert";
 import { EmptyState } from "@/components/ui/EmptyState";
-import { useProposalPerformance } from "@/modules/analytics/hooks/useAnalytics";
+import { useProposalPerformance, useWinRate } from "@/modules/analytics/hooks/useAnalytics";
 import { PeriodFilter, defaultPeriod } from "@/modules/analytics/components/PeriodFilter";
 import { AnalyticsTabs } from "@/modules/analytics/components/AnalyticsTabs";
 import { KpiCard, PageSkeleton } from "@/modules/analytics/components/KpiCard";
@@ -55,6 +55,12 @@ function WinRateTable({ rows, labelFor }: { rows: WinRateRow[]; labelFor?: (v: s
 export default function WinRatePage() {
   const [period, setPeriod] = useState<PeriodParams>(() => defaultPeriod());
   const { data: perf, isLoading, error } = useProposalPerformance(period);
+  // proposal-performance's byPricingModel/byPracticeArea are scoped to proposals SENT in the
+  // window, which silently excludes anything sent earlier but closed inside it - these two use
+  // the dimension endpoint instead, scoped to when each proposal actually CLOSED (matches every
+  // other win-rate figure on the platform).
+  const { data: byPricingModel, error: byPricingModelError } = useWinRate("PRICING_MODEL", period);
+  const { data: byPracticeArea, error: byPracticeAreaError } = useWinRate("PRACTICE_AREA", period);
 
   return (
     <div className="p-8 max-w-7xl w-full mx-auto flex flex-col gap-8">
@@ -72,7 +78,9 @@ export default function WinRatePage() {
         <AnalyticsTabs />
       </div>
 
-      {error && <Alert variant="error" message={error} />}
+      {(error || byPricingModelError || byPracticeAreaError) && (
+        <Alert variant="error" message={error || byPricingModelError || byPracticeAreaError || ""} />
+      )}
 
       {isLoading && !perf ? (
         <PageSkeleton />
@@ -102,14 +110,14 @@ export default function WinRatePage() {
                   Win rate by pricing model
                 </h3>
               </div>
-              {perf.byPricingModel.length === 0 ? (
+              {(byPricingModel ?? []).length === 0 ? (
                 <EmptyState
                   title="No closed proposals"
                   description="Send proposals to clients and record their decisions to see win rate by pricing model."
                   icon={<HiScale className="w-5 h-5" />}
                 />
               ) : (
-                <WinRateBars data={perf.byPricingModel} />
+                <WinRateBars data={byPricingModel ?? []} />
               )}
             </div>
             <div className="bg-surface border border-border/70 rounded-[2rem] p-5">
@@ -121,34 +129,34 @@ export default function WinRatePage() {
                   Win rate by practice area
                 </h3>
               </div>
-              {perf.byPracticeArea.length === 0 ? (
+              {(byPracticeArea ?? []).length === 0 ? (
                 <EmptyState
                   title="No closed proposals"
                   description="Send proposals to clients and record their decisions to see win rate by practice area."
                   icon={<HiScale className="w-5 h-5" />}
                 />
               ) : (
-                <WinRateBars data={perf.byPracticeArea} />
+                <WinRateBars data={byPracticeArea ?? []} />
               )}
             </div>
           </div>
 
           {/* Tables */}
-          {perf.byPricingModel.length > 0 && (
+          {(byPricingModel?.length ?? 0) > 0 && (
             <div className="bg-surface rounded-[2rem] border border-border/60 overflow-hidden shadow-sm">
               <div className="px-6 py-4 border-b border-border">
                 <h3 className="text-sm font-bold text-ink">By pricing model</h3>
               </div>
-              <WinRateTable rows={perf.byPricingModel} labelFor={formatPricingModel} />
+              <WinRateTable rows={byPricingModel ?? []} labelFor={formatPricingModel} />
             </div>
           )}
 
-          {perf.byPracticeArea.length > 0 && (
+          {(byPracticeArea?.length ?? 0) > 0 && (
             <div className="bg-surface rounded-[2rem] border border-border/60 overflow-hidden shadow-sm">
               <div className="px-6 py-4 border-b border-border">
                 <h3 className="text-sm font-bold text-ink">By practice area</h3>
               </div>
-              <WinRateTable rows={perf.byPracticeArea} />
+              <WinRateTable rows={byPracticeArea ?? []} />
             </div>
           )}
         </>

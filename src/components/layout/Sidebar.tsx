@@ -125,8 +125,21 @@ export function Sidebar({ isMobileOpen = false, onMobileClose }: SidebarProps = 
     },
   ];
 
+  // A route that is itself a sub-path of a sibling (e.g. PMS Connectors under Data Room) must
+  // be the ONLY one that lights up. Picking independently per item let both match at once;
+  // this picks the single longest (most specific) matching route across every nav item first.
+  const allNavRoutes = [
+    ...mainNavItems.map((i) => i.route),
+    ...settingsNavGroups.flatMap((g) => g.items.map((i) => i.route)),
+  ];
+  const activeRoute = allNavRoutes.reduce<string | null>((best, route) => {
+    const matches = pathname === route || pathname.startsWith(route + "/");
+    if (!matches) return best;
+    return best === null || route.length > best.length ? route : best;
+  }, null);
+
   const renderItem = (item: NavItem) => {
-    const isActive = pathname === item.route || pathname.startsWith(item.route + "/");
+    const isActive = item.route === activeRoute;
     const Icon = item.icon;
 
     return (

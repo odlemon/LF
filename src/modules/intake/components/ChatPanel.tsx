@@ -113,7 +113,7 @@ export function ChatPanel({
   return (
     <div
       className={`flex flex-col min-h-0 h-full w-full transition-[max-width] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-        layout === "split" ? "max-w-none" : "max-w-3xl"
+        layout === "split" ? "max-w-none" : "max-w-3xl mx-auto"
       }`}
     >
       <div className="flex-1 overflow-y-auto rates-scrollable px-4 py-5 min-h-0">

@@ -67,6 +67,15 @@ export function RateCardEntriesSlideOver({
     }
   };
 
+  const handleDelete = async (entryUid: string) => {
+    setFormError(null);
+    try {
+      await deleteEntry(entryUid);
+    } catch (err: any) {
+      setFormError(err.message || "Failed to remove rate entry.");
+    }
+  };
+
   const getLevelName = (uid: string) => {
     return levels.find((l) => l.uid === uid)?.name || uid;
   };
@@ -139,9 +148,9 @@ export function RateCardEntriesSlideOver({
                           {!isCardReadOnly && (
                             <td className="px-4 py-3 text-center">
                               <button
-                                onClick={() => deleteEntry(entry.uid)}
+                                onClick={() => handleDelete(entry.uid)}
                                 aria-label="Delete rate card entry"
-                                className="text-red-500 hover:text-red-700 p-1 rounded-full hover:bg-red-50 transition-colors"
+                                className="text-ink/50 hover:text-danger p-1 rounded-full hover:bg-danger/10 transition-colors"
                               >
                                 <HiTrash className="w-4 h-4" />
                               </button>

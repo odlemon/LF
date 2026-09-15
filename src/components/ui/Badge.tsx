@@ -29,13 +29,14 @@ const VARIANT_STYLES: Record<BadgeVariant, string> = {
 /**
  * Canonical status/label pill, extracted from the dominant ad-hoc pattern already
  * repeated across pricing requests, negotiations, approvals, analytics and data-room:
- * rounded-lg (not the pill radius interactive controls use — a badge is a label, not
- * a control), text-[10px] font-bold uppercase tracking-wider, bordered.
+ * rounded-full — matching Button's pill radius, so a badge and a control read as the
+ * same design language rather than two competing radius scales — text-[10px]
+ * font-bold uppercase tracking-wider, bordered.
  */
 export function Badge({ variant = "neutral", children, className = "" }: BadgeProps) {
   return (
     <span
-      className={`inline-flex items-center px-2.5 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wider border ${VARIANT_STYLES[variant]} ${className}`}
+      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider border ${VARIANT_STYLES[variant]} ${className}`}
     >
       {children}
     </span>
