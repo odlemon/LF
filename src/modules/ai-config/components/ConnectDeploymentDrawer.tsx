@@ -4,7 +4,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { HiEye, HiEyeOff, HiOutlineShieldCheck } from "react-icons/hi";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
-import { Drawer } from "@/components/ui/Drawer";
+import { Modal } from "@/components/ui/Modal";
 import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import { useSaveProvider } from "../hooks/useAiConfig";
@@ -147,7 +147,7 @@ export function ConnectDeploymentDrawer({
   };
 
   return (
-    <Drawer
+    <Modal
       isOpen={isOpen}
       onClose={onClose}
       title={existing ? "Edit deployment" : "Connect a deployment"}
@@ -296,6 +296,6 @@ export function ConnectDeploymentDrawer({
           </Button>
         </div>
       </form>
-    </Drawer>
+    </Modal>
   );
 }

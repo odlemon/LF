@@ -5,13 +5,15 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { PermissionGate } from "@/components/shared/PermissionGate";
 import { Alert } from "@/components/ui/Alert";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { Badge } from "@/components/ui/Badge";
 import { Pagination } from "@/components/ui/Pagination";
 import { Modal } from "@/components/ui/Modal";
 import { Select } from "@/components/ui/Select";
 import { DatePicker } from "@/components/ui/DatePicker";
 import { useAuditTrail } from "@/modules/audit-trail/hooks/useAuditTrail";
 import { AuditEvent, ACTION_LABEL_MAP } from "@/modules/audit-trail/types";
-import { HiClipboardCopy, HiEye, HiClipboardList } from "react-icons/hi";
+import { HiClipboardCopy, HiEye, HiClipboardList, HiOutlineFilter, HiOutlineDownload, HiX } from "react-icons/hi";
+import { auditApi } from "@/lib/api/modules/audit.api";
 import toast from "react-hot-toast";
 
 // Static Resource options
@@ -45,30 +47,21 @@ function AuditTrailContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  // Load initial entityUid from searchParams if present
-  const initialEntityUid = searchParams.get("entityUid") || "";
+  // Arriving from another page's "view full history" link (e.g. a client or rate card's
+  // activity panel) pre-filters to that one record. There's no manual entity-ID box any more
+  // (AT1) — this is read from the URL only, so the filter stays live but not hand-typeable.
+  const filterEntityUid = searchParams.get("entityUid") || "";
 
-  // Gated filters state
-  const [entityUidInput, setEntityUidInput] = useState(initialEntityUid);
-  const [filterEntityUid, setFilterEntityUid] = useState(initialEntityUid);
   const [actionType, setActionType] = useState("ALL");
   const [resourceName, setResourceName] = useState("ALL");
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
   const [page, setPage] = useState(0);
+  const [isExporting, setIsExporting] = useState(false);
 
   // Detail Modal state
   const [selectedEvent, setSelectedEvent] = useState<AuditEvent | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // Sync state if URL query changes
-  useEffect(() => {
-    const urlUid = searchParams.get("entityUid") || "";
-    if (urlUid) {
-      setEntityUidInput(urlUid);
-      setFilterEntityUid(urlUid);
-    }
-  }, [searchParams]);
 
   // Hook query parameters
   const currentFilters = {
@@ -81,22 +74,59 @@ function AuditTrailContent() {
 
   const { events, pagination, isLoading, refetch } = useAuditTrail(currentFilters, page);
 
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setFilterEntityUid(entityUidInput);
-    setPage(0);
-  };
-
   const handleClearFilters = () => {
-    setEntityUidInput("");
-    setFilterEntityUid("");
     setActionType("ALL");
     setResourceName("ALL");
     setDateFrom("");
     setDateTo("");
     setPage(0);
-    // Clear URL query params
+    // Also drops a ?entityUid= from a deep link, if any.
     router.replace("/audit-trail");
+  };
+
+  const handleExport = async () => {
+    setIsExporting(true);
+    try {
+      const response = await auditApi.listEvents(currentFilters, 0, 2000);
+      const rows = response.content || [];
+      if (rows.length === 0) {
+        toast.error("Nothing to export for the current filters.");
+        return;
+      }
+      const escape = (v: string) => `"${v.replace(/"/g, '""')}"`;
+      const header = ["When", "Who", "Action", "Resource", "Description", "Entity UID"];
+      const lines = rows.map((e) =>
+        [
+          formatDate(e.createdAt, true),
+          e.actorName,
+          ACTION_LABEL_MAP[e.actionType] || e.actionType,
+          e.resourceName,
+          e.resourceDescription || "",
+          e.entityUid || "",
+        ]
+          .map((v) => escape(String(v)))
+          .join(",")
+      );
+      const csv = [header.map(escape).join(","), ...lines].join("\n");
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `audit-trail-${new Date().toISOString().slice(0, 10)}.csv`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      toast.success(
+        rows.length >= 2000
+          ? "Exported the first 2,000 matching records. Narrow the filters to export the rest."
+          : `Exported ${rows.length} record${rows.length === 1 ? "" : "s"}.`
+      );
+    } catch (err: any) {
+      toast.error(err.response?.data?.message || err.message || "Export failed.");
+    } finally {
+      setIsExporting(false);
+    }
   };
 
   const copyToClipboard = (text: string, label: string) => {
@@ -135,26 +165,35 @@ function AuditTrailContent() {
             A complete record of all actions taken in your firm.
           </p>
         </div>
+        <button
+          type="button"
+          onClick={handleExport}
+          disabled={isExporting}
+          className="inline-flex items-center gap-1.5 self-start px-4 py-2 text-xs font-bold text-ink/70 bg-field hover:bg-canvas hover:text-ink rounded-full border border-border/50 transition-all cursor-pointer disabled:opacity-50 lg:self-center"
+        >
+          <HiOutlineDownload className="w-4 h-4" />
+          {isExporting ? "Exporting..." : "Export CSV"}
+        </button>
       </div>
+
+      {filterEntityUid && (
+        <div className="flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-semibold text-ink/80 self-start">
+          Filtered to one record
+          <button
+            type="button"
+            onClick={handleClearFilters}
+            aria-label="Clear entity filter"
+            className="text-ink/60 hover:text-ink transition-colors"
+          >
+            <HiX className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      )}
 
       {/* Filter bar card */}
       <div className="bg-surface rounded-[2rem] border border-border/60 p-5 shadow-sm">
-        <form onSubmit={handleSearchSubmit} className="flex flex-col gap-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
-            
-            {/* Search by Entity ID */}
-            <div className="flex flex-col gap-1.5 lg:col-span-1">
-              <label className="text-[10px] font-extrabold text-ink/60 uppercase tracking-widest">
-                Entity ID
-              </label>
-              <input aria-label="Entity ID"
-                type="text"
-                value={entityUidInput}
-                onChange={(e) => setEntityUidInput(e.target.value)}
-                placeholder="Entity ID"
-                className="w-full px-5 py-2.5 bg-field border border-border rounded-full text-xs focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-surface text-ink transition-all font-semibold"
-              />
-            </div>
+        <div className="flex flex-col gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
 
             {/* Action Type */}
             <div className="flex flex-col gap-1.5 lg:col-span-1">
@@ -218,23 +257,19 @@ function AuditTrailContent() {
 
           </div>
 
-          {/* Form helper action triggers */}
-          <div className="flex items-center justify-end gap-3 pt-3 border-t border-border/60 shrink-0">
+          {/* Filters above apply live; nothing left to gate behind a submit. */}
+          <div className="flex items-center justify-end pt-3 border-t border-border/60 shrink-0">
             <button
               onClick={handleClearFilters}
               type="button"
-              className="px-4 py-2 text-xs font-bold text-ink/70 bg-field hover:bg-canvas hover:text-ink rounded-full border border-border/50 transition-all cursor-pointer"
+              aria-label="Clear filters"
+              title="Clear filters"
+              className="p-2.5 rounded-full border border-border/50 bg-field hover:bg-canvas text-ink/60 hover:text-ink transition-all"
             >
-              Clear Filters
-            </button>
-            <button
-              type="submit"
-              className="px-5 py-2 text-xs font-bold bg-primary text-on-primary hover:bg-primary-hover rounded-xl shadow-md shadow-primary/10 transition-all cursor-pointer"
-            >
-              Apply Search
+              <HiOutlineFilter className="w-4 h-4" />
             </button>
           </div>
-        </form>
+        </div>
       </div>
 
       {/* Main Table view */}
@@ -248,7 +283,6 @@ function AuditTrailContent() {
                 <th className="px-6 py-4.5">Action</th>
                 <th className="px-6 py-4.5">Resource</th>
                 <th className="px-6 py-4.5">Description</th>
-                <th className="px-6 py-4.5">Entity</th>
                 <th className="px-6 py-4.5 text-center w-14"></th>
               </tr>
             </thead>
@@ -262,13 +296,12 @@ function AuditTrailContent() {
                     <td className="px-6 py-5.5"><div className="h-5 bg-canvas rounded-lg w-16" /></td>
                     <td className="px-6 py-5.5"><div className="h-3.5 bg-canvas rounded-lg w-28" /></td>
                     <td className="px-6 py-5.5"><div className="h-3.5 bg-canvas rounded-lg w-44" /></td>
-                    <td className="px-6 py-5.5"><div className="h-3.5 bg-canvas rounded-lg w-20" /></td>
                     <td className="px-6 py-5.5"><div className="h-7 bg-canvas rounded-lg w-7 mx-auto" /></td>
                   </tr>
                 ))
               ) : events.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="px-6 py-12">
+                  <td colSpan={6} className="px-6 py-12">
                     <EmptyState message="No audit events found for the selected filters." />
                   </td>
                 </tr>
@@ -287,46 +320,25 @@ function AuditTrailContent() {
                         {event.actorName}
                       </td>
                       <td className="px-6 py-4.5">
-                        <span className={`inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold border uppercase tracking-wide whitespace-nowrap ${
-                          event.actionType === "CREATE" || event.actionType === "APPROVE" || event.actionType === "ACTIVATE"
-                            ? "bg-hover text-ink/80 border-border"
-                            : event.actionType === "DELETE" || event.actionType === "REJECT"
-                            ? "bg-red-50 text-red-700 border-red-100"
-                            : event.actionType === "DEACTIVATE"
-                            ? "bg-yellow-50 text-yellow-700 border-yellow-100"
-                            : "bg-blue-50 text-blue-700 border-blue-100"
-                        }`}>
+                        <Badge
+                          variant={
+                            event.actionType === "CREATE" || event.actionType === "APPROVE" || event.actionType === "ACTIVATE"
+                              ? "neutral"
+                              : event.actionType === "DELETE" || event.actionType === "REJECT"
+                              ? "error"
+                              : event.actionType === "DEACTIVATE"
+                              ? "warning"
+                              : "info"
+                          }
+                        >
                           {humanAction}
-                        </span>
+                        </Badge>
                       </td>
                       <td className="px-6 py-4.5 font-semibold text-ink/90 whitespace-nowrap text-xs">
                         {event.resourceName}
                       </td>
                       <td className="px-6 py-4.5 text-xs text-ink/65 max-w-xs truncate leading-normal">
                         {event.resourceDescription}
-                      </td>
-                      <td className="px-6 py-4.5">
-                        {event.entityUid ? (
-                          <div className="flex items-center gap-1.5">
-                            <span className="font-mono text-xs text-ink/60 shrink-0">
-                              {event.entityUid.substring(0, 10)}...
-                            </span>
-                            {/* These rendered at 22x22, which fails WCAG 2.2 AA target size
-                                (24x24 minimum) and is genuinely hard to hit on a phone. Sized
-                                to a real target; the icon inside stays small. */}
-                            <button
-                              type="button"
-                              onClick={() => copyToClipboard(event.entityUid!, "Entity ID")}
-                              className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-ink/60 transition-colors hover:bg-primary/5 hover:text-primary cursor-pointer"
-                              title="Copy Full Entity ID"
-                              aria-label="Copy the full entity ID"
-                            >
-                              <HiClipboardCopy className="h-3.5 w-3.5" />
-                            </button>
-                          </div>
-                        ) : (
-                          <span className="text-ink/60">-</span>
-                        )}
                       </td>
                       <td className="px-6 py-4.5 text-center">
                         <button
@@ -398,9 +410,20 @@ function AuditTrailContent() {
 
               <div className="flex flex-col gap-0.5 border-t border-border/60 pt-3">
                 <span className="font-extrabold text-ink/60 uppercase tracking-wide text-[10px]">Action Type</span>
-                <span className="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold border uppercase tracking-wide self-start mt-1 bg-blue-50 text-blue-700 border-blue-100">
+                <Badge
+                  variant={
+                    selectedEvent.actionType === "CREATE" || selectedEvent.actionType === "APPROVE" || selectedEvent.actionType === "ACTIVATE"
+                      ? "neutral"
+                      : selectedEvent.actionType === "DELETE" || selectedEvent.actionType === "REJECT"
+                      ? "error"
+                      : selectedEvent.actionType === "DEACTIVATE"
+                      ? "warning"
+                      : "info"
+                  }
+                  className="self-start mt-1"
+                >
                   {ACTION_LABEL_MAP[selectedEvent.actionType] || selectedEvent.actionType}
-                </span>
+                </Badge>
               </div>
               <div className="flex flex-col gap-0.5 border-t border-border/60 pt-3">
                 <span className="font-extrabold text-ink/60 uppercase tracking-wide text-[10px]">Resource Type</span>

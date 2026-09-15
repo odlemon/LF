@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useDatasets } from "@/modules/data-room/hooks/useDataRoom";
 import { DatasetStatusBadge } from "@/modules/data-room/components/DocumentStatusBadge";
+import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Pagination } from "@/components/ui/Pagination";
 import { Select } from "@/components/ui/Select";
@@ -175,9 +176,7 @@ export function DatasetsListDrawerContent({
                       </button>
                     </td>
                     <td className="px-5 py-4">
-                      <span className="px-2 py-0.5 border border-border/80 rounded bg-field text-ink/60 font-bold text-[10px] uppercase">
-                        {dataset.category}
-                      </span>
+                      <Badge>{dataset.category}</Badge>
                     </td>
                     <td className="px-5 py-4 text-ink/90">{dataset.sourceSystem || "Manual Upload"}</td>
                     <td className="px-5 py-4 text-ink">

@@ -1,9 +1,8 @@
 "use client";
 
 import React from "react";
-import { HiOutlineExclamationCircle } from "react-icons/hi";
 import type { AiProviderConfig } from "../types";
-import { deploymentKind, endpointLabel, governedBy } from "../lib/deployment";
+import { endpointLabel, governedBy } from "../lib/deployment";
 
 /**
  * What leaves the firm, where it goes, and whose contract governs it.
@@ -17,7 +16,6 @@ export function DataHandlingPanel({ config }: { config: AiProviderConfig | null 
   if (!config) {
     return null;
   }
-  const kind = deploymentKind(config);
   const host = endpointLabel(config);
 
   const rows: { label: string; value: React.ReactNode }[] = [
@@ -69,18 +67,6 @@ export function DataHandlingPanel({ config }: { config: AiProviderConfig | null 
           </div>
         ))}
       </dl>
-
-      {kind === "MANAGED" && (
-        <div className="flex items-start gap-2.5 border-t border-border bg-warning/5 px-5 py-4">
-          <HiOutlineExclamationCircle className="mt-0.5 h-4 w-4 shrink-0 text-warning" />
-          <p className="text-[12px] leading-relaxed text-ink/65">
-            This firm is on Lysp&apos;s managed capacity. That is fine for evaluation, but client
-            matter text is reaching the vendor under Lysp&apos;s commercial terms rather than the
-            firm&apos;s own. Connect an Azure OpenAI resource or a private endpoint before pricing
-            live client work.
-          </p>
-        </div>
-      )}
     </section>
   );
 }

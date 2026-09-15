@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { HiOutlineExclamationCircle, HiPlus, HiRefresh } from "react-icons/hi";
+import { HiOutlineExclamationCircle, HiPlus } from "react-icons/hi";
 import { PermissionGate } from "@/components/shared/PermissionGate";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
@@ -70,17 +70,8 @@ export default function AiConfigPage() {
         <header className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div className="min-w-0">
             <h1 className="text-2xl font-bold tracking-tight text-ink">AI configuration</h1>
-            <p className="mt-1 max-w-2xl text-sm leading-relaxed text-ink/60">
-              Where Lysp sends a pricing request to be reasoned about. Point it at your own Azure
-              OpenAI resource or private gateway and the matter text never leaves your tenant. One
-              deployment serves the firm at a time.
-            </p>
           </div>
           <div className="flex shrink-0 items-center gap-2">
-            <Button variant="secondary" onClick={refreshAll}>
-              <HiRefresh className="h-4 w-4" />
-              Refresh
-            </Button>
             <Button variant="primary" onClick={connect}>
               <HiPlus className="h-4 w-4" />
               Connect a deployment

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { usePmsConnectors, useDatasets } from "@/modules/data-room/hooks/useDataRoom";
 import { PmsConnectorFormModal } from "@/modules/data-room/components/PmsConnectorFormModal";
 import { Button } from "@/components/ui/Button";
+import { Badge } from "@/components/ui/Badge";
 import toast from "react-hot-toast";
 import { HiPlus, HiCloudUpload, HiLightningBolt, HiCheckCircle, HiXCircle, HiClock } from "react-icons/hi";
 
@@ -100,21 +101,21 @@ export default function PmsConnectorsPage() {
 
       {/* Named-vendor integrations are a later phase; the generic REST connector
           is the one that actually runs today. */}
-      <div className="bg-field/50 border border-border/50 rounded-[2rem] p-5">
+      <div className="bg-surface border border-border/60 rounded-[2rem] p-5 shadow-sm">
         <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
           Coming next
         </p>
         <h2 className="mt-1.5 text-sm font-bold text-ink">Native practice-management integrations</h2>
-        <p className="mt-1 text-xs text-ink/60 max-w-2xl leading-relaxed">
+        <p className="mt-1 text-xs text-ink/80 max-w-2xl leading-relaxed">
           Direct, credentialed connectors for the systems most firms run on. Until these
-          ship, the same data can be synced today through the Generic REST connector or
+          ship, the same data can be synced today through the generic connector above or
           imported as a file.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           {["Aderant", "Elite 3E", "Intapp", "SAP", "NetDocuments"].map((name) => (
             <span
               key={name}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border/70 bg-surface text-[11px] font-semibold text-ink/60"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border/70 bg-field text-[11px] font-semibold text-ink/80"
             >
               {name}
               <span className="text-[9px] font-bold uppercase tracking-wider text-ink/60">
@@ -159,9 +160,7 @@ export default function PmsConnectorsPage() {
                   <tr key={c.uid} className="hover:bg-field/30 transition-colors">
                     <td className="px-5 py-4 text-ink font-extrabold">{c.displayName}</td>
                     <td className="px-5 py-4">
-                      <span className="px-2 py-0.5 border border-border/80 rounded bg-field text-ink/60 font-bold text-[10px] uppercase">
-                        {c.systemType.replace("_", " ")}
-                      </span>
+                      <Badge>{c.systemType.replace("_", " ")}</Badge>
                     </td>
                     <td className="px-5 py-4 text-ink/65 max-w-[220px] truncate">{c.baseUrl}</td>
                     <td className="px-5 py-4 text-ink/65">Every {c.syncIntervalHours}h</td>

@@ -8,6 +8,7 @@ import {
 } from "@/modules/data-room/hooks/useDataRoom";
 import { DataRoomHero } from "@/modules/data-room/components/DataRoomHero";
 import { DocumentStatusBadge, DatasetStatusBadge } from "@/modules/data-room/components/DocumentStatusBadge";
+import { Badge } from "@/components/ui/Badge";
 import { DatasetFormModal } from "@/modules/data-room/components/DatasetFormModal";
 import { FixMappingModal } from "@/modules/data-room/components/FixMappingModal";
 import { ProcessingLogModal } from "@/modules/data-room/components/ProcessingLogModal";
@@ -156,9 +157,7 @@ export default function DataRoomOverviewPage() {
                           </button>
                         </td>
                         <td className="px-5 py-4">
-                          <span className="px-2 py-0.5 border border-border rounded-lg bg-field text-ink/60 font-bold text-[10px] uppercase tracking-wider">
-                            {String(dataset.category).replace(/_/g, " ")}
-                          </span>
+                          <Badge>{String(dataset.category).replace(/_/g, " ")}</Badge>
                         </td>
                         <td className="px-5 py-4 tabular-nums text-ink/70">
                           {dataset.processedDocuments} / {dataset.totalDocuments}
