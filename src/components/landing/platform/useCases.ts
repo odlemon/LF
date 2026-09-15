@@ -87,7 +87,7 @@ export const USE_CASES: UseCase[] = [
       {
         n: "04",
         title: "Why it matters",
-        body: "Most margin erosion in elite work happens after the first fee, in the scramble to keep the relationship. This is how you keep the relationship without giving the firm away.",
+        body: "Most margin erosion in complex work happens after the first fee, in the scramble to keep the relationship. This is how you keep the relationship without giving the firm away.",
       },
     ],
   },
@@ -151,7 +151,7 @@ export const USE_CASES: UseCase[] = [
       {
         n: "04",
         title: "Why it matters",
-        body: "Elite firms do not lose money in one dramatic deal. They lose it in quiet patterns. This is how you see the pattern in time.",
+        body: "Leading firms do not lose money in one dramatic deal. They lose it in quiet patterns. This is how you see the pattern in time.",
       },
     ],
   },

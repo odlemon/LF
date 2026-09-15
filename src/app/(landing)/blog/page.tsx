@@ -6,7 +6,7 @@ import { BlogPageContent } from "@/components/landing/company/BlogPageContent";
 export const metadata: Metadata = {
   title: "Blog | Lysp",
   description:
-    "Notes on pricing intelligence for elite law firms: fee setting, negotiation, volume economics, and security.",
+    "Notes on pricing intelligence for leading law firms: fee setting, negotiation, volume economics, and security.",
 };
 
 export default function BlogPage() {

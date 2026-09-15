@@ -168,7 +168,7 @@ function BookDemoModal({
           <div className="py-4 text-center">
             <HiCheckCircle className="mx-auto h-12 w-12 text-[#0a0a0a]" aria-hidden />
             <h2 id="book-demo-title" className="mt-5 text-2xl font-semibold tracking-tight">
-              Thank you — that is with us.
+              Thank you. That is with us.
             </h2>
             <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-[#0a0a0a]/60">
               Someone from Lysp will be in touch at{" "}

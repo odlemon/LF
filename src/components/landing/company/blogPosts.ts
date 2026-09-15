@@ -10,7 +10,7 @@ export type BlogPost = {
 export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "from-rfp-to-accepted-fee",
-    title: "From RFP to accepted fee: why pricing still breaks in elite firms",
+    title: "From RFP to accepted fee: why pricing still breaks in leading firms",
     excerpt:
       "The work is rigorous. The fee process often is not. How scattered rate cards, email counters, and late realization reviews create leakage.",
     category: "Pricing ops",

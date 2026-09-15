@@ -76,7 +76,7 @@ export function FooterSection() {
               className="h-14 w-14 object-contain"
             />
             <h2 className="mt-5 text-balance text-2xl sm:text-3xl lg:text-[2.35rem] font-semibold leading-[1.12] tracking-tight">
-              Pricing intelligence for elite law firms.
+              Pricing intelligence for leading law firms.
             </h2>
             <p className="mt-4 text-[15px] text-white/45 leading-relaxed max-w-md">
               Price, negotiate, and measure realization on one usage-based platform built for

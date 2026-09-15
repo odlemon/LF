@@ -25,14 +25,9 @@ const CUSTOMERS: CustomerLogo[] = [
     src: "/images/customers/bakerhostetler.svg",
   },
   {
-    name: "Clifford Chance",
-    href: "https://www.cliffordchance.com/",
-    src: "/images/customers/clifford-chance.svg",
-  },
-  {
-    name: "Linklaters",
-    href: "https://www.linklaters.com/",
-    src: "/images/customers/linklaters.svg",
+    name: "Cullen and Dykman LLP",
+    href: "https://www.cullenllp.com/",
+    src: "/images/customers/cullen-dykman.svg",
   },
   {
     name: "DLA Piper",
@@ -53,11 +48,6 @@ const CUSTOMERS: CustomerLogo[] = [
     name: "Freshfields",
     href: "https://www.freshfields.com/",
     src: "/images/customers/freshfields.svg",
-  },
-  {
-    name: "Kirkland & Ellis",
-    href: "https://www.kirkland.com/",
-    src: "/images/customers/kirkland.svg",
   },
   {
     name: "Norton Rose Fulbright",

@@ -152,9 +152,9 @@ function PlatformIntro({ compact = false }: { compact?: boolean }) {
                 : "text-[1.85rem] sm:text-4xl"
             }`}
           >
-            How elite firms use Lysp
+            How leading firms use Lysp.{" "}
             <span className="block text-white/45 mt-1.5 sm:mt-2">
-              from RFP to accepted fee.
+              From RFP to accepted fee.
             </span>
           </h2>
         </div>

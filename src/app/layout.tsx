@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     default: "Lysp",
     template: "%s | Lysp",
   },
-  description: "Pricing intelligence for elite law firms.",
+  description: "Pricing intelligence for leading law firms.",
 };
 
 export default function RootLayout({

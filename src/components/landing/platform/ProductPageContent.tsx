@@ -128,7 +128,7 @@ export function ProductPageContent() {
                 <span className="text-[#0a0a0a]/60"> for the desks that own the fee.</span>
               </>
             }
-            description="When elite firms price well, they win better work and keep more of it. Lysp is the commercial system behind that: pricing, negotiation, volume, and visibility in one place."
+            description="When leading firms price well, they win better work and keep more of it. Lysp is the commercial system behind that: pricing, negotiation, volume, and visibility in one place."
             className="max-w-3xl"
           >
             <div className="mt-8 flex flex-wrap items-center gap-3">

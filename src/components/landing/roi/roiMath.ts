@@ -117,7 +117,7 @@ export const FIRM_PROFILES: Record<
   },
   balanced: {
     label: "Typical",
-    line: "Normal elite commercial pushback on a share of matters.",
+    line: "Normal commercial pushback on a share of matters.",
     recoverableShare: 0.55,
     realizationLiftPts: 6,
     negotiateShare: 0.3,

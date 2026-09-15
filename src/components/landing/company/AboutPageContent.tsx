@@ -89,7 +89,7 @@ export function AboutPageContent() {
           <PageHeroHeader
             tone="dark"
             eyebrow="About"
-            title="Pricing intelligence for elite law firms."
+            title="Pricing intelligence for leading law firms."
             description="We are building the commercial system firms deserve: from RFP to accepted fee."
           >
             <div className="mt-10 flex flex-wrap gap-3">
@@ -118,7 +118,7 @@ export function AboutPageContent() {
           <SectionHeader
             eyebrow="Mission"
             title="Make firm pricing as rigorous as the work it prices."
-            description="Elite firms win on judgment, relationships, and execution. Pricing should reflect that same discipline - grounded in matter history, constrained by OCGs and rate cards, and visible to the people accountable for margin. Lysp exists so commercial decisions stop living in inboxes and start living in a system firms can trust."
+            description="Leading firms win on judgment, relationships, and execution. Pricing should reflect that same discipline, grounded in matter history, constrained by OCGs and rate cards, and visible to the people accountable for margin. Lysp exists so commercial decisions stop living in inboxes and start living in a system firms can trust."
             className="max-w-3xl"
           />
         </div>

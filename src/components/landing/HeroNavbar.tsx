@@ -52,7 +52,7 @@ const NAV_ITEMS: NavItem[] = [
     children: [
       {
         label: "Blog",
-        description: "Notes on pricing intelligence for elite firms",
+        description: "Notes on pricing intelligence for leading firms",
         href: "/blog",
       },
       {

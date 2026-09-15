@@ -12,7 +12,7 @@ const quicksand = Quicksand({
 const SITE_URL = process.env.NEXT_PUBLIC_LANDING_URL ?? "https://lysp.ai";
 
 /** What a shared link says about Lysp. */
-const SHARE_TITLE = "Pricing intelligence for elite law firms";
+const SHARE_TITLE = "Pricing intelligence for leading law firms";
 const SHARE_DESCRIPTION =
   "The firms that win the most work price it better than anyone else. Lysp is how they do it.";
 
@@ -22,10 +22,10 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   // A plain string still runs through the root layout's "%s | Lysp" template, so this must
   // not repeat the brand name itself -- it previously did, producing "Lysp - Pricing
-  // intelligence for elite law firms | Lysp" in the tab.
-  title: "Pricing intelligence for elite law firms",
+  // intelligence for leading law firms | Lysp" in the tab.
+  title: "Pricing intelligence for leading law firms",
   description:
-    "Pricing intelligence for elite law firms. Consolidate billing, rate, and matter data to improve realization and revenue predictability.",
+    "Pricing intelligence for leading law firms. Consolidate billing, rate, and matter data to improve realization and revenue predictability.",
   openGraph: {
     type: "website",
     siteName: "Lysp",

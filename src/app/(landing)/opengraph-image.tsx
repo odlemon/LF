@@ -12,11 +12,11 @@ import path from "node:path";
  * card and the page a visitor lands on are visibly the same product. Reusing that asset also
  * means no new licence and no second image to keep in sync.
  */
-export const alt = "Lysp — pricing intelligence for elite law firms";
+export const alt = "Lysp: pricing intelligence for leading law firms";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const TITLE = "Pricing intelligence for elite law firms";
+const TITLE = "Pricing intelligence for leading law firms";
 const BODY =
   "The firms that win the most work price it better than anyone else. Lysp is how they do it.";
 

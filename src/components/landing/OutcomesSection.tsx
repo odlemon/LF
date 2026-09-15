@@ -7,14 +7,19 @@ import { MARKETING_SHELL, SectionHeader } from "@/components/landing/editorial";
 import { useBookDemo } from "@/components/landing/BookDemoModal";
 
 /**
- * Single generalized large-matter scenario for elite commercial firms.
+ * Single generalized large-matter scenario for leading commercial firms.
  * Anchored in public industry patterns (Am Law realization ~78%, rising write-offs,
  * multi-day manual quote cycles) without interactive scenario pickers.
+ *
+ * heldPerMatter is the residual leak that remains even with Lysp - realizationLift
+ * recovers 6 of the 7 points of leakRate, leaving about 1 point ($24k of $2.4M) on
+ * the table. It must stay lower than leakPerMatter, not equal to it.
  */
 const SCENARIO = {
   matterFee: "$2.4M",
   matterLabel: "Typical large commercial matter",
   leakPerMatter: "$168k",
+  heldPerMatter: "$24k",
   leakRate: "7%",
   firmMatters: 40,
   firmAnnual: "$6.7M",
@@ -41,7 +46,7 @@ export function OutcomesSection() {
               <span className="text-[#0a0a0a]/60"> is a seven-figure story.</span>
             </>
           }
-          description="Am Law 100 overall realization sits near 78%, and most firms still expect write-offs to climb. Here is what that looks like on one common large matter - then across a year of them."
+          description="Am Law 100 overall realization sits near 78%, and most firms still expect write-offs to climb. Here is what that looks like on one common large matter, then across a year of them."
         />
 
         <div className="mt-12 sm:mt-16 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-5">
@@ -76,7 +81,7 @@ export function OutcomesSection() {
                   </p>
                 </div>
                 <p className="text-2xl sm:text-3xl font-semibold tabular-nums">
-                  {SCENARIO.leakPerMatter}
+                  {SCENARIO.heldPerMatter}
                 </p>
               </div>
             </div>
@@ -119,7 +124,7 @@ export function OutcomesSection() {
               Across the firm year
             </p>
             <p className="relative mt-3 max-w-md text-[15px] text-white/55 leading-relaxed">
-              {SCENARIO.firmMatters} matters at this scale - a normal large-matter book for an elite
+              {SCENARIO.firmMatters} matters at this scale, a normal large-matter book for a leading
               commercial practice.
             </p>
 
@@ -127,7 +132,7 @@ export function OutcomesSection() {
               {SCENARIO.firmAnnual}
             </p>
             <p className="relative mt-3 text-[14px] text-white/45">
-              Annualized fee integrity on the large-matter book - not chatbot minutes.
+              Annualized fee integrity across the large-matter book.
             </p>
 
             <div className="relative mt-10 flex flex-wrap gap-1.5">
@@ -149,7 +154,7 @@ export function OutcomesSection() {
           <div>
             <p className="text-3xl sm:text-4xl font-semibold tracking-tight tabular-nums">78%</p>
             <p className="mt-2 text-[13px] text-[#0a0a0a]/60 leading-relaxed">
-              Am Law 100 overall realization - flat even as rates climb.{" "}
+              Am Law 100 overall realization, flat even as rates climb.{" "}
               <span className="text-[#0a0a0a]/60">Law.com FY2025</span>
             </p>
           </div>
@@ -163,14 +168,14 @@ export function OutcomesSection() {
           <div>
             <p className="text-3xl sm:text-4xl font-semibold tracking-tight tabular-nums">Hours</p>
             <p className="mt-2 text-[13px] text-[#0a0a0a]/60 leading-relaxed">
-              Not days - to a priced proposal, while the opportunity is still warm.
+              To a priced proposal, while the opportunity is still warm.
             </p>
           </div>
         </div>
 
         <div className="mt-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
           <p className="text-[12px] text-[#0a0a0a]/60 max-w-xl leading-relaxed">
-            Illustrative for a typical elite large-matter book. In a demo we run the same math on
+            Illustrative for a typical large-matter book. In a demo we run the same math on
             your last twenty deals.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 self-start sm:self-auto">

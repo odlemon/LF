@@ -258,7 +258,7 @@ export function ContactPageContent() {
                 </button>
                 {sent ? (
                   <p className="text-[13px] text-[#0a0a0a]/60">
-                    Thank you — that is with us. We will reply to{" "}
+                    Thank you. That is with us. We will reply to{" "}
                     <span className="font-semibold text-[#0a0a0a]">{email}</span> shortly.
                   </p>
                 ) : null}

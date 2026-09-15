@@ -21,12 +21,11 @@ export function HeroSection() {
       <div className="relative z-10 flex min-h-[100svh] flex-col justify-end px-5 sm:px-8 lg:px-12 pb-[max(4rem,env(safe-area-inset-bottom))] pt-[max(7rem,calc(env(safe-area-inset-top)+4rem))]">
         <div className="mx-auto w-full max-w-4xl text-center flex flex-col items-center gap-5 sm:gap-6">
           <h1 className="text-balance text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[4.25rem] font-bold leading-[1.05] tracking-tight text-[#fefefc]">
-            Pricing intelligence
-            <span className="block mt-1 sm:mt-2">for elite law firms</span>
+            The firms that win the most work price it better than anyone else. Lysp is how they do it.
           </h1>
 
           <p className="text-base sm:text-lg md:text-xl text-white/70 max-w-2xl leading-relaxed font-medium">
-            The firms that win the most work price it better than anyone else. Lysp is how they do it.
+            Pricing intelligence for leading law firms
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 pt-2">

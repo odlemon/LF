@@ -393,7 +393,7 @@ export function RoiCalculatorPage() {
               {
                 n: "02",
                 title: "More of what you bill, collected",
-                body: `Realization rises by about ${inputs.realizationLiftPts} points on your fee volume when scopes, rates, and write-down pressure are clearer before the engagement starts. Capped at elite-firm levels.`,
+                body: `Realization rises by about ${inputs.realizationLiftPts} points on your fee volume when scopes, rates, and write-down pressure are clearer before the engagement starts. Capped at leading-firm levels.`,
                 value: result.realizationGain,
               },
               {
@@ -485,7 +485,7 @@ export function RoiCalculatorPage() {
           <div className="mt-5 space-y-4 text-[15px] text-[#0a0a0a]/60 leading-relaxed">
             <p>
               Fee volume is matters times typical fee. We start from a 7% underpricing baseline
-              (common when elite work is priced without firm comps) and recover only the share that
+              (common when complex work is priced without firm comps) and recover only the share that
               matches your intensity setting.
             </p>
             <p>

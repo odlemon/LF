@@ -388,7 +388,7 @@ export function PricingSection() {
                 </p>
                 <p className="relative mt-3 text-[12.5px] text-white/45 leading-relaxed">
                   Weigh this against realization lift and recovered fee leakage, not against
-                  the bill alone —{" "}
+                  the bill alone.{" "}
                   <Link href="/roi-calculator" className="text-white/80 underline underline-offset-2 hover:text-white">
                     size that for your own matter volume
                   </Link>
