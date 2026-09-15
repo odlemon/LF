@@ -55,9 +55,9 @@ const CUSTOMERS: CustomerLogo[] = [
     src: "/images/customers/norton-rose.svg",
   },
   {
-    name: "Allen & Overy",
-    href: "https://www.aoshearman.com/",
-    src: "/images/customers/allen-overy.svg",
+    name: "Bird & Bird",
+    href: "https://www.twobirds.com/",
+    src: "/images/customers/bird-bird.svg",
   },
 ];
 
