@@ -136,18 +136,17 @@ export function HeroNavbar({ variant = "default" }: HeroNavbarProps) {
         {/* Brand */}
         <Link
           href="/"
-          className="relative z-10 flex shrink-0 items-center gap-2"
+          className="relative z-10 flex shrink-0 items-center"
           onClick={() => setIsMenuOpen(false)}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={onDark ? "/images/logo/lysp-mark-white.png" : "/images/logo/lysp-mark-black.png"}
-            alt=""
-            width={512}
-            height={512}
-            className="h-6 w-6 sm:h-7 sm:w-7 object-contain"
+            src={onDark ? "/images/logo/lysp-lockup-white.png" : "/images/logo/lysp-lockup-black.png"}
+            alt="Lysp"
+            width={370}
+            height={568}
+            className="h-9 sm:h-10 w-auto object-contain"
           />
-          <span className="text-[17px] sm:text-lg font-semibold tracking-tight">Lysp</span>
         </Link>
 
         {/* Center nav - Legora pattern */}
