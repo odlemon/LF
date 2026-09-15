@@ -177,7 +177,7 @@ export default function BillingPage() {
         }}
       />
 
-      <div className="relative mx-auto flex w-full max-w-[1200px] flex-col gap-6 px-5 pt-8 sm:gap-7 sm:px-8 sm:pt-10">
+      <div className="relative mx-auto flex w-full max-w-[1400px] flex-col gap-6 px-5 pt-8 sm:gap-7 sm:px-8 sm:pt-10">
         {/* Header */}
         <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between animate-fade-in-up">
           <div>

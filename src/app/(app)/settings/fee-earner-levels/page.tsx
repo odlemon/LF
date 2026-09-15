@@ -50,7 +50,7 @@ export default function FeeEarnerLevelsPage() {
   };
 
   return (
-    <div className="p-8 max-w-4xl w-full mx-auto flex flex-col gap-6">
+    <div className="px-5 py-8 sm:px-8 max-w-[1400px] w-full mx-auto flex flex-col gap-6">
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-ink tracking-tight">Fee Earner Levels</h1>

@@ -29,7 +29,6 @@ import {
   HiOutlineClipboardCheck,
   HiOutlineCloudUpload,
   HiOutlineKey,
-  HiOutlineOfficeBuilding,
   HiOutlineIdentification,
   HiChevronDoubleLeft,
   HiChevronDoubleRight,
@@ -104,7 +103,6 @@ export function Sidebar({ isMobileOpen = false, onMobileClose }: SidebarProps = 
       items: [
         { label: "Billing & Usage", route: "/settings/billing", permission: [PERMISSIONS.BILLING_ACCOUNT_READ, PERMISSIONS.USAGE_READ], icon: HiReceiptRefund },
         { label: "Volume Discounts", route: "/settings/volume-discounts", permission: "VOLUME_DISCOUNT_PROGRAM_READ", icon: HiOutlineTrendingDown },
-        { label: "Firm Consumption", route: "/settings/usage/firms", permission: PERMISSIONS.USAGE_CROSS_FIRM_READ, icon: HiOutlineOfficeBuilding },
       ],
     },
     {

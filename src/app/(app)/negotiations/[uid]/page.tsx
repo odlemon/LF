@@ -233,12 +233,12 @@ export default function NegotiationDetailPage() {
       </div>
 
       {agreed && (
-        <div className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-b border-emerald-200 bg-emerald-50 px-4 py-3 dark:border-emerald-900/50 dark:bg-emerald-950/30 sm:px-5">
+        <div className="relative z-10 flex shrink-0 flex-wrap items-center justify-between gap-3 bg-ink px-4 py-3 text-canvas shadow-[0_4px_14px_rgba(0,0,0,0.18)] sm:px-5">
           <div className="min-w-0">
-            <p className="text-sm font-semibold tracking-tight text-emerald-900 dark:text-emerald-300">
+            <p className="text-sm font-semibold tracking-tight">
               Rates agreed: issue engagement pack
             </p>
-            <p className="mt-0.5 text-xs text-emerald-800/70 dark:text-emerald-300/60">
+            <p className="mt-0.5 text-xs text-canvas/55">
               {pack
                 ? pack.status === "ACKNOWLEDGED"
                   ? "Client has acknowledged the engagement letter."
@@ -250,6 +250,7 @@ export default function NegotiationDetailPage() {
           </div>
           <Button
             variant="cta"
+            className="!bg-canvas !text-ink hover:!bg-canvas/90"
             onClick={() => window.open(`/negotiations/${uid}/engagement-pack`, "_blank", "noopener,noreferrer")}
           >
             {pack ? "Open engagement pack" : "Generate engagement pack"}

@@ -33,24 +33,28 @@ export default function VolumeDiscountsPage() {
   const [page, setPage] = useState(0);
 
   const load = useCallback(async () => {
+    setIsLoading(true);
     try {
       const data = await volumeDiscountApi.listPrograms();
       setPrograms(data);
       setError(null);
-      // Show the table as soon as the programmes are known. Each row's spend figures arrive
-      // after, together, rather than the whole page waiting on one request per programme in
-      // turn — which grew with the number of programmes and left the page blank meanwhile.
-      setIsLoading(false);
 
-      const results = await Promise.allSettled(
-        data.map((p) => volumeDiscountApi.getDashboard(p.uid)),
-      );
+      // Wait for the dashboards and client names together, and only then show the table -
+      // rows that render immediately with dashes and fill in a moment later read as a glitch,
+      // not as fast loading.
+      const [dashboardResults, clientData] = await Promise.all([
+        Promise.allSettled(data.map((p) => volumeDiscountApi.getDashboard(p.uid))),
+        listClients().catch(() => [] as ClientProfile[]),
+      ]);
+
       const dashboardMap: Record<string, VolumeDiscountDashboard> = {};
-      results.forEach((result, i) => {
+      dashboardResults.forEach((result, i) => {
         // A dashboard can legitimately fail for a draft programme; the row still belongs here.
         if (result.status === "fulfilled") dashboardMap[data[i].uid] = result.value;
       });
       setDashboards(dashboardMap);
+      setClients(clientData);
+      setClientsLoaded(true);
     } catch (err: any) {
       setError(err.response?.data?.message || err.message || "Failed to load programs");
     } finally {
@@ -59,24 +63,7 @@ export default function VolumeDiscountsPage() {
   }, []);
 
   useEffect(() => {
-    let isActive = true;
-
-    async function doLoad() {
-      await load();
-      try {
-        const clientData = await listClients();
-        if (isActive) setClients(clientData);
-      } catch {
-        // client names are best-effort for display
-      } finally {
-        if (isActive) setClientsLoaded(true);
-      }
-    }
-
-    void doLoad();
-    return () => {
-      isActive = false;
-    };
+    void load();
   }, [load]);
 
   // The table renders before the client list has arrived. Until it does, show nothing rather
@@ -123,7 +110,7 @@ export default function VolumeDiscountsPage() {
   const pagePrograms = programs.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE);
 
   return (
-    <div className="p-8 max-w-6xl w-full mx-auto flex flex-col gap-8">
+    <div className="px-5 py-8 sm:px-8 max-w-[1400px] w-full mx-auto flex flex-col gap-8">
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-ink tracking-tight">Volume Discounts</h1>

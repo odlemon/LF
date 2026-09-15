@@ -90,7 +90,7 @@ export default function NegotiationsPage() {
 
   return (
     <PortalAtmosphere>
-      <div className="mx-auto w-full max-w-6xl space-y-6 px-5 py-6 sm:px-8 sm:py-8 animate-fade-in">
+      <div className="mx-auto w-full max-w-[1400px] space-y-6 px-5 py-6 sm:px-8 sm:py-8 animate-fade-in">
         <PortalPageHeader
           eyebrow="Commercial"
           title="Negotiations"

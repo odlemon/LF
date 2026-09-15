@@ -27,7 +27,8 @@ const TABS: TabDef[] = [
     route: "/analytics/partner-consistency",
     permission: PERMISSIONS.PARTNER_CONSISTENCY_READ,
   },
-  { label: "Advisor", route: "/analytics/advisor" },
+  // Hidden from the tab bar for now, per request — the page itself is untouched.
+  // { label: "Advisor", route: "/analytics/advisor" },
 ];
 
 /** Secondary navigation across the analytics pages (role-aware). */

@@ -66,10 +66,8 @@ export function PeriodFilter({ period, onChange, className = "" }: PeriodFilterP
   const presetValue = activePreset?.value ?? (period.from || period.to ? "CUSTOM" : "LAST_12_MONTHS");
 
   return (
-    <div
-      className={`flex flex-wrap items-end gap-3 bg-surface border border-border/60 rounded-[2rem] px-4 py-3 shadow-sm ${className}`}
-    >
-      <div className="w-44">
+    <div className={`flex flex-wrap items-center gap-2 ${className}`}>
+      <div className="w-40">
         <Select
           options={PRESET_OPTIONS}
           value={presetValue}
@@ -82,24 +80,19 @@ export function PeriodFilter({ period, onChange, className = "" }: PeriodFilterP
           }}
         />
       </div>
-      <div className="w-40">
-        <label className="text-[10px] font-bold text-ink/60 uppercase tracking-wider pl-1 block mb-1.5">
-          From
-        </label>
+      <div className="w-36">
         <DatePicker
           value={period.from}
           onChange={(value) => onChange({ ...period, from: value || undefined })}
-          placeholder="Start date..."
+          placeholder="From"
         />
       </div>
-      <div className="w-40">
-        <label className="text-[10px] font-bold text-ink/60 uppercase tracking-wider pl-1 block mb-1.5">
-          To
-        </label>
+      <span className="text-ink/40 text-xs">–</span>
+      <div className="w-36">
         <DatePicker
           value={period.to}
           onChange={(value) => onChange({ ...period, to: value || undefined })}
-          placeholder="End date..."
+          placeholder="To"
         />
       </div>
     </div>

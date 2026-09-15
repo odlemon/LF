@@ -4,6 +4,7 @@ import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { PermissionGate } from "@/components/shared/PermissionGate";
 import { Alert } from "@/components/ui/Alert";
+import { Button } from "@/components/ui/Button";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Badge } from "@/components/ui/Badge";
 import { Pagination } from "@/components/ui/Pagination";
@@ -154,7 +155,7 @@ function AuditTrailContent() {
   };
 
   return (
-    <div className="p-8 max-w-6xl w-full mx-auto flex flex-col gap-6 animate-fade-in">
+    <div className="px-5 py-8 sm:px-8 max-w-[1400px] w-full mx-auto flex flex-col gap-6 animate-fade-in">
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-ink tracking-tight flex items-center gap-2">
@@ -165,15 +166,15 @@ function AuditTrailContent() {
             A complete record of all actions taken in your firm.
           </p>
         </div>
-        <button
-          type="button"
+        <Button
+          variant="primary"
           onClick={handleExport}
           disabled={isExporting}
-          className="inline-flex items-center gap-1.5 self-start px-4 py-2 text-xs font-bold text-ink/70 bg-field hover:bg-canvas hover:text-ink rounded-full border border-border/50 transition-all cursor-pointer disabled:opacity-50 lg:self-center"
+          className="self-start text-xs lg:self-center"
         >
           <HiOutlineDownload className="w-4 h-4" />
           {isExporting ? "Exporting..." : "Export CSV"}
-        </button>
+        </Button>
       </div>
 
       {filterEntityUid && (
@@ -478,17 +479,19 @@ export default function AuditTrailPage() {
     <PermissionGate
       permission="AUDIT_READ"
       fallback={
-        <div className="p-8 max-w-3xl w-full mx-auto">
-          <Alert
-            variant="error"
-            message="You do not have permission to view the audit trail."
-          />
+        <div className="px-5 py-8 sm:px-8 max-w-[1400px] w-full mx-auto">
+          <div className="mx-auto w-full max-w-3xl">
+            <Alert
+              variant="error"
+              message="You do not have permission to view the audit trail."
+            />
+          </div>
         </div>
       }
     >
       <Suspense
         fallback={
-          <div className="p-8 max-w-6xl w-full mx-auto flex flex-col gap-6 animate-pulse">
+          <div className="px-5 py-8 sm:px-8 max-w-[1400px] w-full mx-auto flex flex-col gap-6 animate-pulse">
             <div className="h-8 bg-field w-1/4 rounded-lg" />
             <div className="h-32 bg-field rounded-[2rem]" />
             <div className="h-96 bg-field rounded-[2rem]" />

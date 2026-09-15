@@ -47,10 +47,10 @@ export default function AnalyticsFirmHealthPage() {
   const prior = summary?.priorPeriod ?? null;
 
   return (
-    <div className="p-8 max-w-7xl w-full mx-auto flex flex-col gap-8">
+    <div className="px-5 py-8 sm:px-8 max-w-[1400px] w-full mx-auto flex flex-col gap-8">
       {/* Header */}
       <div className="flex flex-col gap-5">
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
           <div>
             <h1 className="text-2xl font-bold text-ink tracking-tight">Analytics</h1>
             <p className="text-sm text-ink/60 mt-1">
@@ -59,6 +59,7 @@ export default function AnalyticsFirmHealthPage() {
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <PeriodFilter period={period} onChange={setPeriod} />
+            <span className="hidden h-6 w-px bg-border sm:block" />
             <AnalyticsExportButtons period={period} />
           </div>
         </div>

@@ -27,18 +27,22 @@ export default function GuardrailsPage() {
 
   if (isLoading && !guardrails) {
     return (
-      <div className="p-8 max-w-5xl w-full mx-auto flex flex-col gap-6 animate-pulse">
-        <div className="h-6 bg-field w-1/4 rounded-lg" />
-        <div className="h-48 bg-field rounded-[2rem]" />
-        <div className="h-32 bg-field rounded-[2rem]" />
+      <div className="px-5 py-8 sm:px-8 max-w-[1400px] w-full mx-auto">
+        <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 animate-pulse">
+          <div className="h-6 bg-field w-1/4 rounded-lg" />
+          <div className="h-48 bg-field rounded-[2rem]" />
+          <div className="h-32 bg-field rounded-[2rem]" />
+        </div>
       </div>
     );
   }
 
   if (error && !guardrails) {
     return (
-      <div className="p-8 max-w-5xl w-full mx-auto">
-        <Alert variant="error" message={error} />
+      <div className="px-5 py-8 sm:px-8 max-w-[1400px] w-full mx-auto">
+        <div className="mx-auto w-full max-w-5xl">
+          <Alert variant="error" message={error} />
+        </div>
       </div>
     );
   }
@@ -76,7 +80,8 @@ export default function GuardrailsPage() {
     }`;
 
   return (
-    <div className="p-8 max-w-5xl w-full mx-auto flex flex-col gap-6">
+    <div className="px-5 py-8 sm:px-8 max-w-[1400px] w-full mx-auto">
+    <div className="mx-auto w-full max-w-5xl flex flex-col gap-6">
       <div>
         <h1 className="text-2xl font-bold text-ink tracking-tight">Pricing Guardrails</h1>
         <p className="text-sm text-ink/60 mt-1">
@@ -361,6 +366,7 @@ export default function GuardrailsPage() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

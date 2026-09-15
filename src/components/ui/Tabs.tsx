@@ -53,8 +53,21 @@ export function Tabs<T extends string>({
     });
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(measure, [activeId, tabs]);
+  useEffect(() => {
+    measure();
+    // A tab bar mounted inside a modal or drawer that is still animating in (opacity/scale
+    // transition) can report a stale layout on this first measurement, leaving the indicator
+    // parked wherever it was first — and wrongly — measured, never catching up to the actual
+    // active tab. Re-measure a frame later and again once a typical entrance transition would
+    // have finished; a correct measurement re-applied is a harmless no-op.
+    const raf = requestAnimationFrame(measure);
+    const timeout = setTimeout(measure, 350);
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(timeout);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeId, tabs]);
 
   useEffect(() => {
     const container = containerRef.current;

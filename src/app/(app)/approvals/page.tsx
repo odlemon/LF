@@ -114,7 +114,7 @@ export default function ApprovalsPage() {
   };
 
   return (
-    <div className="p-8 max-w-6xl w-full mx-auto flex flex-col gap-6">
+    <div className="px-5 py-8 sm:px-8 max-w-[1400px] w-full mx-auto flex flex-col gap-6">
       <div>
         <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
           {isPartner ? "Your desk" : "Firm queue"}

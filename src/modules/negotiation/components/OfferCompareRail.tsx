@@ -150,7 +150,7 @@ export function OfferCompareRail({
               aria-selected={selectedCard}
               data-offer-id={offer.id}
               onClick={() => onSelect(offer.id)}
-              className={`snap-start shrink-0 w-[11.5rem] rounded-[2rem] border px-3.5 py-3 text-left transition-all ${
+              className={`snap-start shrink-0 w-[11.5rem] rounded-2xl border px-3.5 py-3 text-left transition-all ${
                 selectedCard
                   ? "border-ink bg-ink text-canvas shadow-[0_8px_24px_rgba(10,10,10,0.12)]"
                   : "border-border/70 bg-surface text-ink hover:border-ink/25 hover:bg-field/40"

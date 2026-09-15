@@ -166,7 +166,7 @@ export default function RolesPage() {
 
   return (
     <PermissionGate permission={PERMISSIONS.ROLE_READ}>
-      <div className="p-8 max-w-6xl w-full mx-auto flex flex-col gap-6 animate-fade-in select-none">
+      <div className="px-5 py-8 sm:px-8 max-w-[1400px] w-full mx-auto flex flex-col gap-6 animate-fade-in select-none">
         
         {/* Page Header */}
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 border-b border-border pb-6 shrink-0">

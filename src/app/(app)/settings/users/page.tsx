@@ -132,7 +132,7 @@ export default function UsersPage() {
 
   return (
     <PermissionGate permission={PERMISSIONS.USER_READ}>
-      <div className="p-6 space-y-6">
+      <div className="px-5 py-8 sm:px-8 max-w-[1400px] w-full mx-auto space-y-6">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-ink">Users</h1>

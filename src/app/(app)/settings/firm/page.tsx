@@ -69,15 +69,17 @@ export default function FirmDetailsPage() {
 
   if (isLoading && !firm) {
     return (
-      <div className="p-8 max-w-3xl w-full mx-auto flex flex-col gap-6 animate-pulse">
-        <div className="h-8 bg-field rounded-lg w-1/4" />
-        <div className="bg-surface rounded-[2rem] shadow-sm p-6 border border-border flex flex-col gap-4">
-          <div className="h-6 bg-field rounded-lg w-1/3" />
-          <div className="grid grid-cols-2 gap-4">
-            <div className="h-10 bg-canvas rounded-lg" />
-            <div className="h-10 bg-canvas rounded-lg" />
+      <div className="px-5 py-8 sm:px-8 max-w-[1400px] w-full mx-auto">
+        <div className="mx-auto flex w-full max-w-3xl flex-col gap-6 animate-pulse">
+          <div className="h-8 bg-field rounded-lg w-1/4" />
+          <div className="bg-surface rounded-[2rem] shadow-sm p-6 border border-border flex flex-col gap-4">
+            <div className="h-6 bg-field rounded-lg w-1/3" />
+            <div className="grid grid-cols-2 gap-4">
+              <div className="h-10 bg-canvas rounded-lg" />
+              <div className="h-10 bg-canvas rounded-lg" />
+            </div>
+            <div className="h-20 bg-canvas rounded-lg" />
           </div>
-          <div className="h-20 bg-canvas rounded-lg" />
         </div>
       </div>
     );
@@ -85,8 +87,10 @@ export default function FirmDetailsPage() {
 
   if (error && !firm) {
     return (
-      <div className="p-8 max-w-3xl w-full mx-auto">
-        <Alert variant="error" message={error} />
+      <div className="px-5 py-8 sm:px-8 max-w-[1400px] w-full mx-auto">
+        <div className="mx-auto w-full max-w-3xl">
+          <Alert variant="error" message={error} />
+        </div>
       </div>
     );
   }
@@ -137,7 +141,8 @@ export default function FirmDetailsPage() {
     }`;
 
   return (
-    <div className="p-8 max-w-3xl w-full mx-auto flex flex-col gap-6">
+    <div className="px-5 py-8 sm:px-8 max-w-[1400px] w-full mx-auto">
+    <div className="mx-auto w-full max-w-3xl flex flex-col gap-6">
       <div>
         <h1 className="text-2xl font-bold text-ink tracking-tight">Firm Settings</h1>
         <p className="text-sm text-ink/60 mt-1">Configure your enterprise firm profile, registration details, and localization parameters.</p>
@@ -329,6 +334,7 @@ export default function FirmDetailsPage() {
           </div>
         </form>
       </div>
+    </div>
     </div>
   );
 }

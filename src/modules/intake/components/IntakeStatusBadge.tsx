@@ -9,7 +9,7 @@ const STATUS_CONFIG: Record<
   DRAFT: { variant: "neutral", label: "Draft" },
   IN_PROGRESS: { variant: "info", label: "In Progress" },
   SCOPE_GENERATED: { variant: "warning", label: "Scope Ready" },
-  SCOPE_CONFIRMED: { variant: "success", label: "Scope Confirmed" },
+  SCOPE_CONFIRMED: { variant: "success", label: "Confirmed" },
   CANCELLED: { variant: "error", label: "Cancelled" },
 };
 

@@ -61,12 +61,15 @@ export default function AiConfigPage() {
     <PermissionGate
       permission="AI_CONFIG_READ"
       fallback={
-        <div className="mx-auto w-full max-w-5xl p-8">
-          <Alert variant="error" message="You do not have permission to view AI configuration." />
+        <div className="px-5 py-8 sm:px-8 max-w-[1400px] w-full mx-auto">
+          <div className="mx-auto w-full max-w-5xl">
+            <Alert variant="error" message="You do not have permission to view AI configuration." />
+          </div>
         </div>
       }
     >
-      <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 p-4 sm:p-8">
+      <div className="px-5 py-4 sm:px-8 sm:py-8 max-w-[1400px] w-full mx-auto">
+      <div className="mx-auto flex w-full max-w-5xl flex-col gap-6">
         <header className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div className="min-w-0">
             <h1 className="text-2xl font-bold tracking-tight text-ink">AI configuration</h1>
@@ -161,6 +164,7 @@ export default function AiConfigPage() {
             onSuccess={refreshAll}
           />
         )}
+      </div>
       </div>
     </PermissionGate>
   );
