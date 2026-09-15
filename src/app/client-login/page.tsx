@@ -28,8 +28,14 @@ function ClientLoginForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
     setError(null);
+
+    if (!email.trim() || !password) {
+      setError("Please enter your email and password.");
+      return;
+    }
+
+    setIsLoading(true);
     try {
       await login({ email, password });
       router.push("/client-portal/dashboard");

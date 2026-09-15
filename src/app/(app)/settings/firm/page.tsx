@@ -254,7 +254,7 @@ export default function FirmDetailsPage() {
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 disabled={!isEditing}
                 className={inputStyles(isEditing)}
-                placeholder="+44 20 7946 0958"
+                placeholder="+1 (212) 555-0100"
               />
             </div>
 

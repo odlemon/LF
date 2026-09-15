@@ -105,9 +105,21 @@ function BookDemoModal({
 
   if (!isOpen) return null;
 
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+
+    if (!fullName.trim() || !workEmail.trim() || !firmName.trim()) {
+      setError("Please fill in your name, work email, and firm before sending.");
+      return;
+    }
+    if (!EMAIL_RE.test(workEmail.trim())) {
+      setError("That email address doesn't look right. Please check it and try again.");
+      return;
+    }
+
     setSubmitting(true);
     try {
       const ack = await demoRequestApi.submit({
@@ -300,7 +312,7 @@ function BookDemoModal({
                     className={FIELD}
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    placeholder="+44 20 7000 0000"
+                    placeholder="+1 (212) 555-0100"
                     autoComplete="tel"
                     maxLength={40}
                     disabled={submitting}
