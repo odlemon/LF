@@ -216,7 +216,10 @@ export function WinRateBars({ data }: { data: WinRateRow[] }) {
     .sort((a, b) => b.winRateNum - a.winRateNum);
 
   return (
-    <div className="w-full" style={{ minHeight: Math.max(140, points.length * 44) }}>
+    // Recharts' ResponsiveContainer sizes itself from the parent's resolved height - min-height
+    // alone on a plain block div (no flex participation, no ancestor with a definite height)
+    // never resolves to one, so it silently rendered a zero-height chart. A real `height` does.
+    <div className="w-full" style={{ height: Math.max(140, points.length * 44) }}>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={points} layout="vertical" margin={{ top: 0, right: 28, left: 4, bottom: 0 }}>
           <CartesianGrid stroke={GRID} horizontal={false} />
