@@ -33,7 +33,6 @@ import {
   HiOutlineIdentification,
   HiChevronDoubleLeft,
   HiChevronDoubleRight,
-  HiOutlineInboxIn,
 } from "react-icons/hi";
 
 const COLLAPSE_STORAGE_KEY = "lysp.sidebar.collapsed";
@@ -85,7 +84,6 @@ export function Sidebar({ isMobileOpen = false, onMobileClose }: SidebarProps = 
     { label: "Negotiations", route: "/negotiations", permission: PERMISSIONS.NEGOTIATION_READ, icon: HiScale },
     { label: "Analytics", route: "/analytics", permission: PERMISSIONS.ANALYTICS_READ, icon: HiChartBar },
     { label: "Clients", route: "/clients", permission: PERMISSIONS.CLIENT_READ, icon: HiUserGroup },
-    { label: "Demo Requests", route: "/settings/demo-requests", permission: PERMISSIONS.DEMO_REQUEST_READ, icon: HiOutlineInboxIn },
   ];
 
   const settingsNavGroups: { heading: string; items: NavItem[] }[] = [
