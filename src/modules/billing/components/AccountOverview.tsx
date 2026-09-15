@@ -3,15 +3,13 @@
 import React from "react";
 import type { CreditAccount } from "@/modules/billing/types";
 import { useCountUp } from "@/modules/billing/hooks/useCountUp";
-import { HiTrendingUp, HiTrendingDown, HiOutlineReceiptRefund } from "react-icons/hi";
+import { HiTrendingUp, HiTrendingDown } from "react-icons/hi";
 
 interface AccountOverviewProps {
   account: CreditAccount;
-  onCreateAdjustment?: () => void;
-  showAdjustButton?: boolean;
 }
 
-export function AccountOverview({ account, onCreateAdjustment, showAdjustButton }: AccountOverviewProps) {
+export function AccountOverview({ account }: AccountOverviewProps) {
   const formatCredits = (value: number) => {
     return new Intl.NumberFormat("en-US", {
       style: "decimal",
@@ -91,18 +89,6 @@ export function AccountOverview({ account, onCreateAdjustment, showAdjustButton 
             </div>
           </div>
 
-          {/* Right: Actions */}
-          <div className="flex items-center gap-3">
-            {showAdjustButton && (
-              <button
-                onClick={onCreateAdjustment}
-                className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-xs font-semibold text-on-primary shadow-lg shadow-ink/10 transition-all hover:bg-primary-hover hover:shadow-xl hover:shadow-ink/15 cursor-pointer"
-              >
-                <HiOutlineReceiptRefund className="h-4 w-4 transition-transform group-hover:-rotate-12" />
-                Adjust credits
-              </button>
-            )}
-          </div>
         </div>
       </div>
 
