@@ -2,9 +2,14 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import { HiOutlineClipboardCheck } from "react-icons/hi";
 import { useAuth } from "@/hooks/useAuth";
 import { apiClient } from "@/lib/api/client";
-import { Tabs } from "@/components/ui/Tabs";
+import { FilterBar } from "@/components/ui/FilterBar";
+import { TableSkeleton } from "@/components/ui/TableSkeleton";
+import { Pagination } from "@/components/ui/Pagination";
+import { EmptyState } from "@/components/ui/EmptyState";
+import { Alert } from "@/components/ui/Alert";
 import { ScenarioStatusBadge } from "@/modules/pricing/components/ScenarioStatusBadge";
 
 type ApprovalItem = {
@@ -26,30 +31,16 @@ type ApprovalItem = {
   decidedByEmail?: string | null;
 };
 
-type FilterTab =
-  | "all"
-  | "pending"
-  | "APPROVED"
-  | "REJECTED"
-  | "RETURNED_FOR_CORRECTION";
-
-/**
- * "Pending" is every stage still awaiting a decision, not just the first one.
- *
- * This tab used to filter on PENDING_PARTNER alone. With a two-stage matrix that silently
- * dropped anything sitting at Finance out of the queue meant to surface it — the totals did
- * not even add up (293 items, 292 across the tabs), and a firm working from this list would
- * never have actioned a finance sign-off.
- */
-const PENDING_STATUSES = ["PENDING_PARTNER", "PENDING_FINANCE"] as const;
-
-const TABS: { id: FilterTab; label: string }[] = [
-  { id: "all", label: "All" },
-  { id: "pending", label: "Pending" },
-  { id: "RETURNED_FOR_CORRECTION", label: "Returned" },
-  { id: "APPROVED", label: "Approved" },
-  { id: "REJECTED", label: "Rejected" },
+const STATUS_OPTIONS = [
+  { value: "PENDING", label: "Pending (any stage)" },
+  { value: "PENDING_PARTNER", label: "Pending partner" },
+  { value: "PENDING_FINANCE", label: "Pending finance" },
+  { value: "RETURNED_FOR_CORRECTION", label: "Returned for correction" },
+  { value: "APPROVED", label: "Approved" },
+  { value: "REJECTED", label: "Rejected" },
 ];
+
+const PAGE_SIZE = 10;
 
 function formatMoney(amount: number, currency: string) {
   try {
@@ -67,18 +58,19 @@ export default function ApprovalsPage() {
   const router = useRouter();
   const { user } = useAuth();
   const [items, setItems] = useState<ApprovalItem[]>([]);
-  const [tab, setTab] = useState<FilterTab>("all");
+  const [status, setStatus] = useState("");
+  const [search, setSearch] = useState("");
+  const [dateFrom, setDateFrom] = useState("");
+  const [dateTo, setDateTo] = useState("");
+  const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const load = useCallback(async (status: FilterTab) => {
+  const load = useCallback(async (statusFilter: string) => {
     setLoading(true);
     setError(null);
     try {
-      // The API understands "PENDING" as every stage still awaiting a decision, so one
-      // request covers the matrix. Fetching per stage and merging doubled the load on what
-      // load testing showed was the slowest endpoint on the platform.
-      const params = status === "all" ? {} : { status: status === "pending" ? "PENDING" : status };
+      const params = statusFilter ? { status: statusFilter } : {};
       const res = await apiClient.get<ApprovalItem[]>("/api/v1/pricing-approvals", { params });
       setItems(Array.isArray(res.data) ? res.data : []);
     } catch {
@@ -90,179 +82,148 @@ export default function ApprovalsPage() {
   }, []);
 
   useEffect(() => {
-    void load(tab);
-  }, [load, tab]);
+    void load(status);
+  }, [load, status]);
 
   const isPartner =
     (user?.roles || []).includes("PARTNER") &&
     !(user?.roles || []).includes("SUPER_ADMIN") &&
     !(user?.roles || []).includes("ADMIN");
 
-  const counts = useMemo(() => {
-    // Soft counts only meaningful on "all" load; otherwise show list length for active tab
-    if (tab !== "all") {
-      return { [tab]: items.length } as Record<string, number>;
-    }
-    const map: Record<string, number> = { all: items.length };
-    for (const item of items) {
-      map[item.status] = (map[item.status] || 0) + 1;
-      if ((PENDING_STATUSES as readonly string[]).includes(item.status)) {
-        map.pending = (map.pending || 0) + 1;
+  const filtered = useMemo(() => {
+    const term = search.trim().toLowerCase();
+    return items.filter((item) => {
+      if (term && !item.matterTitle?.toLowerCase().includes(term) && !item.scenarioName?.toLowerCase().includes(term)) {
+        return false;
       }
-    }
-    return map;
-  }, [items, tab]);
+      if (dateFrom && (!item.submittedAt || item.submittedAt < dateFrom)) return false;
+      if (dateTo && (!item.submittedAt || item.submittedAt > `${dateTo}T23:59:59`)) return false;
+      return true;
+    });
+  }, [items, search, dateFrom, dateTo]);
 
-  const emptyCopy =
-    tab === "pending"
-      ? {
-          title: "Nothing waiting",
-          body: "When a preferred scenario is submitted to you, it lands here.",
-        }
-      : tab === "APPROVED"
-        ? {
-            title: "No approvals yet",
-            body: "Scenarios you approve will show up in this list.",
-          }
-        : tab === "REJECTED"
-          ? {
-              title: "No rejections",
-              body: "Rejected scenarios assigned to you will appear here.",
-            }
-          : tab === "RETURNED_FOR_CORRECTION"
-            ? {
-                title: "Nothing returned",
-                body: "Items you sent back for correction show here until resubmitted.",
-              }
-            : {
-                title: "No approval history",
-                body: "Assigned scenarios — pending, returned, approved, or rejected — will appear here.",
-              };
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const pageItems = filtered.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE);
+
+  const handleClear = () => {
+    setStatus("");
+    setSearch("");
+    setDateFrom("");
+    setDateTo("");
+    setPage(0);
+  };
 
   return (
-    <div className="relative min-h-full">
-      <div
-        className="pointer-events-none absolute inset-0 opacity-40"
-        style={{
-          background:
-            "radial-gradient(ellipse 60% 40% at 20% 0%, rgba(10,10,10,0.04), transparent 55%)",
+    <div className="p-8 max-w-6xl w-full mx-auto flex flex-col gap-6">
+      <div>
+        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
+          {isPartner ? "Your desk" : "Firm queue"}
+        </p>
+        <h1 className="mt-1 text-2xl font-bold text-ink tracking-tight">Approvals</h1>
+        <p className="text-sm text-ink/60 mt-1 max-w-xl">
+          {isPartner
+            ? "Everything assigned to you — pending review, returned for correction, approved, and rejected."
+            : "Firm-wide partner reviews across every status."}
+        </p>
+      </div>
+
+      <FilterBar
+        search={{ value: search, onChange: (v) => { setSearch(v); setPage(0); }, placeholder: "Search matter or scenario..." }}
+        status={{
+          value: status,
+          onChange: (v) => { setStatus(v); setPage(0); },
+          options: STATUS_OPTIONS,
+          placeholder: "All statuses",
         }}
+        dateFrom={{ value: dateFrom, onChange: (v) => { setDateFrom(v); setPage(0); } }}
+        dateTo={{ value: dateTo, onChange: (v) => { setDateTo(v); setPage(0); } }}
+        onClear={handleClear}
       />
-      <div className="relative p-5 sm:p-8 max-w-4xl mx-auto w-full flex flex-col gap-6 animate-fade-in">
-        <header>
-          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
-            {isPartner ? "Your desk" : "Firm queue"}
-          </p>
-          <h1 className="mt-2 text-2xl sm:text-3xl font-semibold tracking-tight text-ink">
-            Approvals
-          </h1>
-          <p className="mt-2 text-sm text-ink/60 max-w-xl leading-relaxed">
-            {isPartner
-              ? "Everything assigned to you — pending review, returned for correction, approved, and rejected."
-              : "Firm-wide partner reviews across every status."}
-          </p>
-        </header>
 
-        <Tabs
-          tabs={TABS.map((t) => {
-            const count =
-              t.id === "all"
-                ? tab === "all"
-                  ? items.length
-                  : counts.all
-                : tab === "all"
-                  ? counts[t.id] || 0
-                  : tab === t.id
-                    ? items.length
-                    : undefined;
-            return { ...t, count };
-          })}
-          activeId={tab}
-          onChange={setTab}
-        />
+      {error && <Alert variant="error" message={error} />}
 
-        {loading ? (
-          <div className="space-y-3">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="h-24 rounded-[2rem] border border-border bg-surface animate-pulse"
-              />
-            ))}
-          </div>
-        ) : error ? (
-          <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
-        ) : items.length === 0 ? (
-          <div className="rounded-[2rem] border border-border/70 bg-surface px-6 py-14 text-center">
-            <p className="text-sm font-semibold text-ink/70">{emptyCopy.title}</p>
-            <p className="mt-2 text-xs text-ink/60 max-w-sm mx-auto leading-relaxed">
-              {emptyCopy.body}
-            </p>
-          </div>
-        ) : (
-          <ul className="space-y-3">
-            {items.map((item) => {
-              const note =
-                item.status === "RETURNED_FOR_CORRECTION"
-                  ? item.returnComment || item.decisionComment
-                  : item.decisionComment;
-              return (
-                <li key={item.scenarioUid}>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      router.push(
-                        `/pricing-requests/${item.pricingRequestUid}/pricing?review=${item.scenarioUid}`
-                      )
-                    }
-                    className="w-full text-left rounded-[2rem] border border-border/70 bg-surface p-5 hover:bg-hover/50 transition-colors cursor-pointer"
-                  >
-                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
-                      <div className="min-w-0">
-                        <div className="flex flex-wrap items-center gap-2 mb-1.5">
-                          <ScenarioStatusBadge status={item.status} size="sm" />
-                          {!isPartner && item.assignedPartnerName && (
-                            <span className="text-[11px] text-ink/60">
-                              → {item.assignedPartnerName}
-                            </span>
-                          )}
-                        </div>
-                        <p className="text-sm font-semibold text-ink tracking-tight">
-                          {item.matterTitle}
-                        </p>
-                        <p className="mt-1 text-xs text-ink/60">
-                          {item.scenarioName} ·{" "}
-                          {item.pricingModel?.replace(/_/g, " ")}
-                        </p>
-                        <p className="mt-2 text-[11px] text-ink/60">
-                          From {item.submittedByEmail || "team"}
-                          {item.submittedAt
-                            ? ` · submitted ${new Date(item.submittedAt).toLocaleString()}`
-                            : ""}
-                          {item.decidedAt
-                            ? ` · decided ${new Date(item.decidedAt).toLocaleString()}`
-                            : ""}
-                        </p>
+      <div className="bg-surface rounded-[2rem] border border-border/60 shadow-sm overflow-hidden flex flex-col">
+        <div className="overflow-x-auto rates-scrollable">
+          <table className="w-full text-left text-sm border-collapse">
+            <thead>
+              <tr className="bg-field/60 text-xs font-bold text-ink/60 border-b border-border">
+                <th className="px-6 py-4.5">Matter</th>
+                <th className="px-6 py-4.5">Scenario</th>
+                <th className="px-6 py-4.5">Status</th>
+                {!isPartner && <th className="px-6 py-4.5">Partner</th>}
+                <th className="px-6 py-4.5">Submitted</th>
+                <th className="px-6 py-4.5 text-right">Fees</th>
+                <th className="px-6 py-4.5 text-right">Margin</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-border/60">
+              {loading ? (
+                <TableSkeleton columnWidths={isPartner ? ["w-40", "w-28", "w-20", "w-24", "w-16", "w-16"] : ["w-40", "w-28", "w-20", "w-24", "w-24", "w-16", "w-16"]} />
+              ) : pageItems.length === 0 ? (
+                <tr>
+                  <td colSpan={isPartner ? 6 : 7} className="px-6 py-10">
+                    <EmptyState
+                      title="Nothing here"
+                      description="Assigned scenarios — pending, returned, approved, or rejected — will appear here."
+                      icon={<HiOutlineClipboardCheck className="w-5 h-5" />}
+                    />
+                  </td>
+                </tr>
+              ) : (
+                pageItems.map((item) => {
+                  const note =
+                    item.status === "RETURNED_FOR_CORRECTION"
+                      ? item.returnComment || item.decisionComment
+                      : item.decisionComment;
+                  return (
+                    <tr
+                      key={item.scenarioUid}
+                      onClick={() =>
+                        router.push(`/pricing-requests/${item.pricingRequestUid}/pricing?review=${item.scenarioUid}`)
+                      }
+                      className="hover:bg-field/20 text-ink/90 transition-colors cursor-pointer align-top"
+                    >
+                      <td className="px-6 py-4.5">
+                        <p className="font-semibold text-ink">{item.matterTitle}</p>
                         {note && (
-                          <p className="mt-2 text-[12px] text-ink/60 line-clamp-2 leading-relaxed border-l-2 border-ink/15 pl-2.5">
-                            {note}
-                          </p>
+                          <p className="mt-1 text-[11px] text-ink/60 line-clamp-1 max-w-xs">{note}</p>
                         )}
-                      </div>
-                      <div className="sm:text-right shrink-0">
-                        <p className="text-base font-semibold text-ink tabular-nums">
-                          {formatMoney(Number(item.grossFees), item.currency)}
-                        </p>
-                        <p className="mt-1 text-[11px] font-semibold text-ink/60 tabular-nums">
-                          {Number(item.marginPct).toFixed(1)}% margin
-                        </p>
-                      </div>
-                    </div>
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
+                      </td>
+                      <td className="px-6 py-4.5 text-ink/70 text-xs">
+                        {item.scenarioName}
+                        <br />
+                        <span className="text-ink/50">{item.pricingModel?.replace(/_/g, " ")}</span>
+                      </td>
+                      <td className="px-6 py-4.5"><ScenarioStatusBadge status={item.status} size="sm" /></td>
+                      {!isPartner && (
+                        <td className="px-6 py-4.5 text-ink/70 text-xs">{item.assignedPartnerName || "—"}</td>
+                      )}
+                      <td className="px-6 py-4.5 text-ink/60 text-xs">
+                        {item.submittedByEmail || "team"}
+                        {item.submittedAt && (
+                          <>
+                            <br />
+                            {new Date(item.submittedAt).toLocaleDateString()}
+                          </>
+                        )}
+                      </td>
+                      <td className="px-6 py-4.5 text-right font-semibold tabular-nums">
+                        {formatMoney(Number(item.grossFees), item.currency)}
+                      </td>
+                      <td className="px-6 py-4.5 text-right text-ink/70 tabular-nums">
+                        {Number(item.marginPct).toFixed(1)}%
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
+            </tbody>
+          </table>
+        </div>
+        {!loading && pageItems.length > 0 && (
+          <div className="px-6 pb-2 shrink-0">
+            <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
+          </div>
         )}
       </div>
     </div>

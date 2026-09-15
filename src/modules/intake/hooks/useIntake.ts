@@ -21,32 +21,13 @@ import {
 } from "../types";
 import { PaginatedResponse } from "@/types/api";
 
-export type ListFilterTab = "all" | "in_progress" | "scope_confirmed" | "cancelled";
-
-function filterByTab(requests: PricingRequest[], tab: ListFilterTab): PricingRequest[] {
-  if (tab === "all") return requests;
-  if (tab === "in_progress") {
-    return requests.filter(
-      (r) => r.status === "DRAFT" || r.status === "IN_PROGRESS"
-    );
-  }
-  if (tab === "scope_confirmed") {
-    return requests.filter((r) => r.status === "SCOPE_CONFIRMED");
-  }
-  if (tab === "cancelled") {
-    return requests.filter((r) => r.status === "CANCELLED");
-  }
-  return requests;
-}
-
-function tabToApiStatus(tab: ListFilterTab): PricingRequestStatus | undefined {
-  if (tab === "scope_confirmed") return "SCOPE_CONFIRMED";
-  if (tab === "cancelled") return "CANCELLED";
-  if (tab === "in_progress") return undefined;
-  return undefined;
-}
-
-export function usePricingRequests(tab: ListFilterTab = "all", page: number = 0) {
+/**
+ * Filters directly on the real PricingRequestStatus enum (server-side, via the paginated
+ * endpoint) rather than the old synthetic tab buckets - which combined DRAFT+IN_PROGRESS into
+ * one "in_progress" tab and had no tab at all for SCOPE_GENERATED, silently hiding it from
+ * every filter except "All".
+ */
+export function usePricingRequests(status?: PricingRequestStatus, page: number = 0, search?: string) {
   const [requests, setRequests] = useState<PricingRequest[]>([]);
   const [pagination, setPagination] = useState<Omit<PaginatedResponse<PricingRequest>, "content">>({
     totalElements: 0,
@@ -61,13 +42,17 @@ export function usePricingRequests(tab: ListFilterTab = "all", page: number = 0)
     setIsLoading(true);
     setError(null);
     try {
-      const apiStatus = tabToApiStatus(tab);
-      const data = await intakeApi.listRequests({
-        status: apiStatus,
-        page,
-        size: tab === "in_progress" ? 50 : 20,
-      });
-      const filtered = filterByTab(data.content, tab);
+      const data = await intakeApi.listRequests({ status, page, size: 20 });
+      // The endpoint has no full-text search of its own yet - filtering the current page
+      // client-side is a real, if page-scoped, improvement over no search at all.
+      const term = search?.trim().toLowerCase();
+      const filtered = term
+        ? data.content.filter(
+            (r) =>
+              r.matterTitle?.toLowerCase().includes(term) ||
+              r.clientName?.toLowerCase().includes(term)
+          )
+        : data.content;
       setRequests(filtered);
       setPagination({
         totalElements: data.totalElements,
@@ -80,7 +65,7 @@ export function usePricingRequests(tab: ListFilterTab = "all", page: number = 0)
     } finally {
       setIsLoading(false);
     }
-  }, [tab, page]);
+  }, [status, page, search]);
 
   useEffect(() => {
     fetchRequests();

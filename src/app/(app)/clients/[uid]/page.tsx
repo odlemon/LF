@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any, react-hooks/set-state-in-effect */
 "use client";
 
-import React, { useState, useEffect, use } from "react";
+import React, { useState, use } from "react";
 import { useClientDetail } from "@/modules/firm/hooks/useFirm";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { HiArrowLeft, HiMail, HiUser, HiPlus, HiLockOpen, HiCheck, HiX, HiPencil, HiLink } from "react-icons/hi";
-import { Select } from "@/components/ui/Select";
 import { AuditTrailPanel } from "@/components/shared/AuditTrailPanel";
 import { ClientIntelligencePanel } from "@/modules/analytics/components/ClientIntelligencePanel";
 import { ClientTierBadge } from "@/modules/firm/components/ClientTierBadge";
+import { ClientFormModal } from "@/modules/firm/components/ClientFormModal";
 
 interface ClientDetailPageProps {
   params: Promise<{ uid: string }>;
@@ -21,30 +21,12 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
   const { uid } = use(params);
   const { client, portalUsers, isLoading, error, updateClient, invitePortalUser } = useClientDetail(uid);
 
-  const [isEditingProfile, setIsEditingProfile] = useState(false);
-  const [name, setName] = useState("");
-  const [type, setType] = useState<any>("CORPORATE");
-  const [tier, setTier] = useState<any>("STANDARD");
-  const [contactName, setContactName] = useState("");
-  const [contactEmail, setContactEmail] = useState("");
-  const [country, setCountry] = useState("GB");
-  const [isSavingProfile, setIsSavingProfile] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
   const [inviteName, setInviteName] = useState("");
   const [inviteEmail, setInviteEmail] = useState("");
   const [isInvitingUser, setIsInvitingUser] = useState(false);
-
-  useEffect(() => {
-    if (client) {
-      setName(client.name);
-      setType(client.type);
-      setTier(client.tier);
-      setContactName(client.contactName);
-      setContactEmail(client.contactEmail);
-      setCountry(client.country);
-    }
-  }, [client]);
 
   if (isLoading) {
     return (
@@ -64,28 +46,13 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
     );
   }
 
-  const handleUpdateProfile = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name.trim() || !contactName.trim() || !contactEmail.trim()) {
-      toast.error("Required fields cannot be empty.");
-      return;
-    }
-    setIsSavingProfile(true);
+  const handleSaveProfile = async (data: any) => {
     try {
-      await updateClient({
-        name,
-        type,
-        tier,
-        contactName,
-        contactEmail,
-        country,
-      });
+      await updateClient(data);
       toast.success("Client profile updated.");
-      setIsEditingProfile(false);
+      setIsEditModalOpen(false);
     } catch (err: any) {
-      toast.error(err.message || "Failed to update profile.");
-    } finally {
-      setIsSavingProfile(false);
+      throw err;
     }
   };
 
@@ -129,12 +96,10 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
               </span>
             </div>
           </div>
-          {!isEditingProfile && (
-            <Button variant="secondary" onClick={() => setIsEditingProfile(true)}>
-              <HiPencil className="w-4 h-4" />
-              Edit Profile
-            </Button>
-          )}
+          <Button variant="secondary" onClick={() => setIsEditModalOpen(true)}>
+            <HiPencil className="w-4 h-4" />
+            Edit Profile
+          </Button>
         </div>
       </div>
 
@@ -144,135 +109,35 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
             Client Details
           </h2>
 
-          {isEditingProfile ? (
-            <form onSubmit={handleUpdateProfile} className="flex flex-col gap-4">
-              <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
-                  Client Name
-                </label>
-                <input aria-label="Client Name"
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="px-5 py-2.5 bg-field border border-border rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface transition-all text-ink"
-                  required
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
-                    Type
-                  </label>
-                  <Select
-                    value={type}
-                    onChange={(val) => setType(val as any)}
-                    options={[
-                      { value: "CORPORATE", label: "Corporate" },
-                      { value: "INDIVIDUAL", label: "Individual" },
-                      { value: "GOVERNMENT", label: "Government" },
-                      { value: "FINANCIAL_INSTITUTION", label: "Financial Institution" },
-                    ]}
-                  />
-                </div>
-
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
-                    Tier
-                  </label>
-                  <Select
-                    value={tier}
-                    onChange={(val) => setTier(val as any)}
-                    options={[
-                      { value: "STANDARD", label: "Standard" },
-                      { value: "PREFERRED", label: "Preferred" },
-                      { value: "STRATEGIC", label: "Strategic" },
-                    ]}
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
-                    Contact Name
-                  </label>
-                  <input aria-label="Contact Name"
-                    type="text"
-                    value={contactName}
-                    onChange={(e) => setContactName(e.target.value)}
-                    className="px-5 py-2.5 bg-field border border-border rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface transition-all text-ink"
-                    required
-                  />
-                </div>
-
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
-                    Country (ISO)
-                  </label>
-                  <Select
-                    value={country}
-                    onChange={setCountry}
-                    options={[
-                      { value: "GB", label: "United Kingdom (GB)" },
-                      { value: "US", label: "United States (US)" },
-                      { value: "DE", label: "Germany (DE)" },
-                      { value: "FR", label: "France (FR)" },
-                      { value: "ZA", label: "South Africa (ZA)" },
-                      { value: "AU", label: "Australia (AU)" },
-                    ]}
-                  />
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
-                  Contact Email
-                </label>
-                <input aria-label="Contact Email"
-                  type="email"
-                  value={contactEmail}
-                  onChange={(e) => setContactEmail(e.target.value)}
-                  className="px-5 py-2.5 bg-field border border-border rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface transition-all text-ink"
-                  required
-                />
-              </div>
-
-              <div className="flex justify-end gap-3 mt-4 pt-4 border-t border-border">
-                <Button
-                  type="button"
-                  variant="secondary"
-                  onClick={() => setIsEditingProfile(false)}
-                  disabled={isSavingProfile}
-                >
-                  Cancel
-                </Button>
-                <Button type="submit" variant="primary" loading={isSavingProfile}>
-                  Save Details
-                </Button>
-              </div>
-            </form>
-          ) : (
-            <div className="grid grid-cols-2 gap-y-5 text-sm text-ink">
-              <div className="flex flex-col gap-0.5">
-                <span className="text-xs font-bold text-ink/60 uppercase tracking-wider">Primary Contact</span>
-                <span className="font-semibold text-ink">{client.contactName}</span>
-              </div>
-              
-              <div className="flex flex-col gap-0.5">
-                <span className="text-xs font-bold text-ink/60 uppercase tracking-wider">Country</span>
-                <span className="font-semibold text-ink">{client.country}</span>
-              </div>
-
-              <div className="flex flex-col gap-0.5 col-span-2">
-                <span className="text-xs font-bold text-ink/60 uppercase tracking-wider">Contact Email</span>
-                <span className="font-medium text-ink/80 flex items-center gap-1.5">
-                  <HiMail className="w-4 h-4 text-ink/60" />
-                  {client.contactEmail}
-                </span>
-              </div>
+          <div className="grid grid-cols-2 gap-x-6 gap-y-5 text-sm text-ink">
+            <div className="flex flex-col gap-0.5">
+              <span className="text-xs font-bold text-ink/60 uppercase tracking-wider">Type</span>
+              <span className="font-semibold text-ink capitalize">{client.type.toLowerCase().replace("_", " ")}</span>
             </div>
-          )}
+
+            <div className="flex flex-col gap-0.5">
+              <span className="text-xs font-bold text-ink/60 uppercase tracking-wider">Tier</span>
+              <ClientTierBadge tier={client.tier} />
+            </div>
+
+            <div className="flex flex-col gap-0.5">
+              <span className="text-xs font-bold text-ink/60 uppercase tracking-wider">Primary Contact</span>
+              <span className="font-semibold text-ink">{client.contactName}</span>
+            </div>
+
+            <div className="flex flex-col gap-0.5">
+              <span className="text-xs font-bold text-ink/60 uppercase tracking-wider">Country</span>
+              <span className="font-semibold text-ink">{client.country}</span>
+            </div>
+
+            <div className="flex flex-col gap-0.5 col-span-2">
+              <span className="text-xs font-bold text-ink/60 uppercase tracking-wider">Contact Email</span>
+              <span className="font-medium text-ink/80 flex items-center gap-1.5">
+                <HiMail className="w-4 h-4 text-ink/60" />
+                {client.contactEmail}
+              </span>
+            </div>
+          </div>
         </div>
 
         <div className="bg-surface rounded-[2rem] border border-border/60 shadow-sm p-6 flex flex-col gap-4">
@@ -411,6 +276,13 @@ export default function ClientDetailPage({ params }: ClientDetailPageProps) {
           </div>
         </div>
       )}
+
+      <ClientFormModal
+        isOpen={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}
+        onSave={handleSaveProfile}
+        client={client}
+      />
     </div>
   );
 }

@@ -1,21 +1,32 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useClients } from "@/modules/firm/hooks/useFirm";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { TableSkeleton } from "@/components/ui/TableSkeleton";
+import { Pagination } from "@/components/ui/Pagination";
 import { ClientFormModal } from "@/modules/firm/components/ClientFormModal";
 import { ClientTierBadge } from "@/modules/firm/components/ClientTierBadge";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { HiPlus, HiSearch, HiExternalLink } from "react-icons/hi";
 
+const PAGE_SIZE = 10;
+
 export default function ClientsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const { clients, isLoading, error, createClient } = useClients({ query: searchQuery });
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [page, setPage] = useState(0);
+
+  const totalPages = Math.max(1, Math.ceil(clients.length / PAGE_SIZE));
+  const pageClients = useMemo(
+    () => clients.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE),
+    [clients, page]
+  );
 
   const handleSave = async (data: any) => {
     try {
@@ -49,7 +60,7 @@ export default function ClientsPage() {
         <input
           type="text"
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={(e) => { setSearchQuery(e.target.value); setPage(0); }}
           aria-label="Search clients"
           placeholder="Search clients by name, contact or email..."
           className="w-full pl-11 pr-5 py-2.5 bg-surface border border-border rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-ink shadow-sm"
@@ -58,13 +69,7 @@ export default function ClientsPage() {
 
       {error && <Alert variant="error" message={error} />}
 
-      {isLoading ? (
-        <div className="flex flex-col gap-3 animate-pulse">
-          <div className="h-16 bg-field rounded-xl" />
-          <div className="h-16 bg-field rounded-xl" />
-          <div className="h-16 bg-field rounded-xl" />
-        </div>
-      ) : clients.length === 0 ? (
+      {!isLoading && clients.length === 0 ? (
         <EmptyState
           title={searchQuery ? "No clients match your search" : "No clients registered yet"}
           description={
@@ -74,7 +79,7 @@ export default function ClientsPage() {
           }
         />
       ) : (
-        <div className="bg-surface rounded-[2rem] border border-border/60 overflow-hidden shadow-sm">
+        <div className="bg-surface rounded-[2rem] border border-border/60 overflow-hidden shadow-sm flex flex-col">
           <div className="overflow-x-auto rates-scrollable">
           <table className="w-full min-w-[860px] text-left text-sm border-collapse">
             <thead>
@@ -88,7 +93,9 @@ export default function ClientsPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-border/60">
-              {clients.map((client) => (
+              {isLoading && clients.length === 0 ? (
+                <TableSkeleton columnWidths={["w-32", "w-16", "w-20", "w-28", "w-16", "w-20"]} />
+              ) : pageClients.map((client) => (
                 <tr key={client.uid} className="hover:bg-field/50 text-ink transition-colors">
                   <td className="px-6 py-4 font-bold">
                     <Link
@@ -125,6 +132,11 @@ export default function ClientsPage() {
             </tbody>
           </table>
           </div>
+          {!isLoading && pageClients.length > 0 && (
+            <div className="px-6 pb-2 shrink-0">
+              <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
+            </div>
+          )}
         </div>
       )}
 

@@ -15,9 +15,13 @@ import { PanelAgreementFormModal } from "@/modules/volume-discount/components/Pa
 import { SecondmentUsageModal } from "@/modules/volume-discount/components/SecondmentUsageModal";
 import type { PanelAgreement, CreatePanelAgreementCommand } from "@/modules/volume-discount/types";
 import { Button } from "@/components/ui/Button";
+import { Badge } from "@/components/ui/Badge";
+import { Pagination } from "@/components/ui/Pagination";
 import toast from "react-hot-toast";
 import { HiOutlinePlus, HiOutlineCheckCircle, HiOutlineShieldCheck, HiOutlineClock } from "react-icons/hi";
 import { Alert } from "@/components/ui/Alert";
+
+const ROWS_PAGE_SIZE = 10;
 
 export default function VolumeDiscountDetailPage() {
   const params = useParams();
@@ -34,6 +38,8 @@ export default function VolumeDiscountDetailPage() {
   const [panel, setPanel] = useState<PanelAgreement | null>(null);
   const [isPanelFormOpen, setIsPanelFormOpen] = useState(false);
   const [isSecondmentOpen, setIsSecondmentOpen] = useState(false);
+  const [crossingsPage, setCrossingsPage] = useState(0);
+  const [spendPage, setSpendPage] = useState(0);
 
   useEffect(() => {
     let isActive = true;
@@ -129,6 +135,16 @@ export default function VolumeDiscountDetailPage() {
   const creditsOwed = crossings
     .filter((c) => c.adjustmentStatus === "PENDING")
     .reduce((sum, c) => sum + c.retroactiveAdjustmentAmount, 0);
+  const crossingsTotalPages = Math.max(1, Math.ceil(crossings.length / ROWS_PAGE_SIZE));
+  const pageCrossings = crossings.slice(
+    crossingsPage * ROWS_PAGE_SIZE,
+    crossingsPage * ROWS_PAGE_SIZE + ROWS_PAGE_SIZE
+  );
+  const spendTotalPages = Math.max(1, Math.ceil(spendRecords.length / ROWS_PAGE_SIZE));
+  const pageSpendRecords = spendRecords.slice(
+    spendPage * ROWS_PAGE_SIZE,
+    spendPage * ROWS_PAGE_SIZE + ROWS_PAGE_SIZE
+  );
 
   const formatMoney = (value: number, currency: string) => {
     try {
@@ -177,17 +193,9 @@ export default function VolumeDiscountDetailPage() {
         <div>
           <div className="flex items-center gap-3">
             <h1 className="text-2xl font-bold text-ink tracking-tight">Volume Discount Program</h1>
-            <span
-              className={`inline-flex items-center px-2.5 py-0.5 rounded-lg text-[10px] font-bold border uppercase tracking-wider ${
-                program.status === "ACTIVE"
-                  ? "bg-emerald-50 text-emerald-700 border-emerald-200"
-                  : program.status === "DRAFT"
-                  ? "bg-amber-50 text-amber-700 border-amber-200"
-                  : "bg-gray-50 text-gray-600 border-gray-200"
-              }`}
-            >
+            <Badge variant={program.status === "ACTIVE" ? "success" : program.status === "DRAFT" ? "warning" : "neutral"}>
               {program.status}
-            </span>
+            </Badge>
           </div>
           <p className="text-sm text-ink/60 mt-1">
             Client: {clientName || program.clientProfileUid} • {program.currency}
@@ -297,16 +305,10 @@ export default function VolumeDiscountDetailPage() {
               </div>
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">MFN Status</p>
-                <span
-                  className={`inline-flex items-center gap-1 mt-1 px-2.5 py-0.5 rounded-lg text-[10px] font-bold border uppercase tracking-wider ${
-                    panel.mfnEnabled
-                      ? "bg-emerald-50 text-emerald-700 border-emerald-200"
-                      : "bg-gray-50 text-gray-600 border-gray-200"
-                  }`}
-                >
+                <Badge variant={panel.mfnEnabled ? "success" : "neutral"} className="mt-1 gap-1">
                   <HiOutlineShieldCheck className="w-3.5 h-3.5" />
                   {panel.mfnEnabled ? "Enabled" : "Not enabled"}
-                </span>
+                </Badge>
               </div>
             </div>
 
@@ -369,40 +371,45 @@ export default function VolumeDiscountDetailPage() {
             No tier has been crossed yet, so no credit is owed.
           </p>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm border-collapse">
-              <thead>
-                <tr className="bg-field/50 text-xs font-bold text-ink/60 border-b border-border">
-                  <th className="px-4 py-3">Date</th>
-                  <th className="px-4 py-3">Upgrade</th>
-                  <th className="px-4 py-3">Spend at Upgrade</th>
-                  <th className="px-4 py-3">Credit</th>
-                  <th className="px-4 py-3">Status</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-100/60">
-                {crossings.map((crossing) => (
-                  <tr key={crossing.eventUid} className="text-ink">
-                    <td className="px-4 py-3">{formatDate(crossing.occurredAt)}</td>
-                    <td className="px-4 py-3">
-                      {crossing.fromTierName ? `${crossing.fromTierName} → ` : ""}
-                      <span className="font-semibold">{crossing.toTierName}</span>
-                    </td>
-                    <td className="px-4 py-3 tabular-nums text-ink/70">
-                      {formatMoney(crossing.cumulativeSpendAtChange, program.currency)}
-                    </td>
-                    <td className="px-4 py-3 tabular-nums font-semibold">
-                      {formatMoney(crossing.retroactiveAdjustmentAmount, program.currency)}
-                    </td>
-                    <td className="px-4 py-3">
-                      <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-field text-ink/70 border border-border uppercase tracking-wider">
-                        {crossing.adjustmentStatus || "—"}
-                      </span>
-                    </td>
+          <div className="flex flex-col">
+            <div className="overflow-x-auto rates-scrollable">
+              <table className="w-full text-left text-sm border-collapse">
+                <thead>
+                  <tr className="bg-field/50 text-xs font-bold text-ink/60 border-b border-border">
+                    <th className="px-4 py-3">Date</th>
+                    <th className="px-4 py-3">Upgrade</th>
+                    <th className="px-4 py-3">Spend at Upgrade</th>
+                    <th className="px-4 py-3">Credit</th>
+                    <th className="px-4 py-3">Status</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-gray-100/60">
+                  {pageCrossings.map((crossing) => (
+                    <tr key={crossing.eventUid} className="text-ink">
+                      <td className="px-4 py-3">{formatDate(crossing.occurredAt)}</td>
+                      <td className="px-4 py-3">
+                        {crossing.fromTierName ? `${crossing.fromTierName} → ` : ""}
+                        <span className="font-semibold">{crossing.toTierName}</span>
+                      </td>
+                      <td className="px-4 py-3 tabular-nums text-ink/70">
+                        {formatMoney(crossing.cumulativeSpendAtChange, program.currency)}
+                      </td>
+                      <td className="px-4 py-3 tabular-nums font-semibold">
+                        {formatMoney(crossing.retroactiveAdjustmentAmount, program.currency)}
+                      </td>
+                      <td className="px-4 py-3">
+                        <Badge>{crossing.adjustmentStatus || "—"}</Badge>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            {crossings.length > ROWS_PAGE_SIZE && (
+              <div className="pt-2">
+                <Pagination currentPage={crossingsPage} totalPages={crossingsTotalPages} onPageChange={setCrossingsPage} />
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -412,31 +419,36 @@ export default function VolumeDiscountDetailPage() {
         {spendRecords.length === 0 ? (
           <p className="text-sm text-ink/60">No spend records yet.</p>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm border-collapse">
-              <thead>
-                <tr className="bg-field/50 text-xs font-bold text-ink/60 border-b border-border">
-                  <th className="px-4 py-3">Date</th>
-                  <th className="px-4 py-3">Invoice</th>
-                  <th className="px-4 py-3">Amount</th>
-                  <th className="px-4 py-3">Source</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-100/60">
-                {spendRecords.slice(0, 20).map((record) => (
-                  <tr key={record.uid} className="text-ink">
-                    <td className="px-4 py-3">{formatDate(record.spendDate)}</td>
-                    <td className="px-4 py-3">{record.invoiceReference || "—"}</td>
-                    <td className="px-4 py-3 tabular-nums">{formatMoney(record.amount, record.currency)}</td>
-                    <td className="px-4 py-3">
-                      <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-field text-ink/70 border border-border uppercase tracking-wider">
-                        {record.source}
-                      </span>
-                    </td>
+          <div className="flex flex-col">
+            <div className="overflow-x-auto rates-scrollable">
+              <table className="w-full text-left text-sm border-collapse">
+                <thead>
+                  <tr className="bg-field/50 text-xs font-bold text-ink/60 border-b border-border">
+                    <th className="px-4 py-3">Date</th>
+                    <th className="px-4 py-3">Invoice</th>
+                    <th className="px-4 py-3">Amount</th>
+                    <th className="px-4 py-3">Source</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-gray-100/60">
+                  {pageSpendRecords.map((record) => (
+                    <tr key={record.uid} className="text-ink">
+                      <td className="px-4 py-3">{formatDate(record.spendDate)}</td>
+                      <td className="px-4 py-3">{record.invoiceReference || "—"}</td>
+                      <td className="px-4 py-3 tabular-nums">{formatMoney(record.amount, record.currency)}</td>
+                      <td className="px-4 py-3">
+                        <Badge>{record.source}</Badge>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            {spendRecords.length > ROWS_PAGE_SIZE && (
+              <div className="pt-2">
+                <Pagination currentPage={spendPage} totalPages={spendTotalPages} onPageChange={setSpendPage} />
+              </div>
+            )}
           </div>
         )}
       </div>

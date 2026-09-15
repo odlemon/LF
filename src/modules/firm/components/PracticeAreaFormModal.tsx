@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { PracticeArea } from "../types";
 import { HiX } from "react-icons/hi";
 import { FormError } from "@/components/ui/FormError";
+import { Textarea } from "@/components/ui/Input";
 
 interface PracticeAreaFormModalProps {
   isOpen: boolean;
@@ -118,12 +119,11 @@ export function PracticeAreaFormModal({
             <label className="text-xs font-semibold text-ink/80 uppercase tracking-wider">
               Description
             </label>
-            <textarea aria-label="Description"
+            <Textarea aria-label="Description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Provide a brief summary of the practice area legal domain..."
               rows={3}
-              className="px-5 py-2.5 bg-field border border-border rounded-[2rem] text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface transition-all text-ink"
             />
           </div>
 

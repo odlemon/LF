@@ -214,11 +214,11 @@ export default function ApprovalMatrixPage() {
           </div>
 
           <div className="bg-field/40 border border-border rounded-[2rem] p-5 flex items-start gap-3">
-            <HiOutlineClipboardCheck className="w-5 h-5 text-ink/60 shrink-0 mt-0.5" />
-            <p className="text-xs text-ink/60 leading-relaxed">
+            <HiOutlineClipboardCheck className="w-5 h-5 text-ink/50 shrink-0 mt-0.5" />
+            <p className="text-xs text-ink/80 leading-relaxed">
               Every firm starts with a default two-stage matrix (Partner, then Finance) that
               matches the approval flow already shown on the pricing workspace. Reconfiguring
-              is additive — existing scenarios already mid-approval are unaffected.
+              is additive: existing scenarios already mid-approval are unaffected.
             </p>
           </div>
         </>

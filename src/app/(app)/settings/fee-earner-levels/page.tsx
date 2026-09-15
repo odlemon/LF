@@ -1,19 +1,32 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useFeeEarnerLevels } from "@/modules/firm/hooks/useFirm";
 import { Button } from "@/components/ui/Button";
+import { Badge } from "@/components/ui/Badge";
+import { TableSkeleton } from "@/components/ui/TableSkeleton";
+import { Pagination } from "@/components/ui/Pagination";
+import { EmptyState } from "@/components/ui/EmptyState";
 import { FeeEarnerLevelFormModal } from "@/modules/firm/components/FeeEarnerLevelFormModal";
 import type { FeeEarnerLevel } from "@/modules/firm/types";
 import toast from "react-hot-toast";
-import { HiPlus, HiScale } from "react-icons/hi";
+import { HiPlus, HiPencil, HiOutlineScale } from "react-icons/hi";
 import { Alert } from "@/components/ui/Alert";
+
+const PAGE_SIZE = 10;
 
 export default function FeeEarnerLevelsPage() {
   const { levels, isLoading, error, createLevel, updateLevel } = useFeeEarnerLevels();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editing, setEditing] = useState<FeeEarnerLevel | null>(null);
+  const [page, setPage] = useState(0);
+
+  const totalPages = Math.max(1, Math.ceil(levels.length / PAGE_SIZE));
+  const pageLevels = useMemo(
+    () => levels.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE),
+    [levels, page]
+  );
 
   const handleSave = async (data: { name: string; code: string; sortOrder: number; costRate: number | null }) => {
     try {
@@ -53,71 +66,78 @@ export default function FeeEarnerLevelsPage() {
         </Button>
       </div>
 
-      {error && (
-        <Alert variant="error" message={error} />
-      )}
+      {error && <Alert variant="error" message={error} />}
 
-      {isLoading && levels.length === 0 ? (
-        <div className="flex flex-col gap-3 animate-pulse">
-          <div className="h-16 bg-field rounded-xl" />
-          <div className="h-16 bg-field rounded-xl" />
-          <div className="h-16 bg-field rounded-xl" />
+      <div className="bg-surface rounded-[2rem] border border-border/60 shadow-sm overflow-hidden flex flex-col">
+        <div className="overflow-x-auto rates-scrollable">
+          <table className="w-full text-left text-sm border-collapse">
+            <thead>
+              <tr className="bg-field/60 text-xs font-bold text-ink/60 border-b border-border">
+                <th className="px-6 py-4.5">Rank</th>
+                <th className="px-6 py-4.5">Name</th>
+                <th className="px-6 py-4.5">Code</th>
+                <th className="px-6 py-4.5">Cost rate</th>
+                <th className="px-6 py-4.5 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-border/60">
+              {isLoading && levels.length === 0 ? (
+                <TableSkeleton columnWidths={["w-10", "w-32", "w-16", "w-20", "w-16"]} />
+              ) : pageLevels.length === 0 ? (
+                <tr>
+                  <td colSpan={5} className="px-6 py-10">
+                    <EmptyState
+                      title="No levels registered"
+                      description="Click 'Add Level' to define the first seniority ranking for lawyers in the firm."
+                      icon={<HiOutlineScale className="w-5 h-5" />}
+                    />
+                  </td>
+                </tr>
+              ) : (
+                pageLevels.map((level, idx) => {
+                  const globalRank = page * PAGE_SIZE + idx;
+                  return (
+                    <tr key={level.uid} className="hover:bg-field/20 text-ink/90 transition-colors">
+                      <td className="px-6 py-4.5">
+                        <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-xs">
+                          {level.sortOrder}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4.5 font-semibold text-ink">
+                        <div className="flex items-center gap-2">
+                          {level.name}
+                          {globalRank === 0 && <Badge variant="primary">Highest seniority</Badge>}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4.5">
+                        <Badge>{level.code}</Badge>
+                      </td>
+                      <td className="px-6 py-4.5 text-ink/70 tabular-nums">
+                        {level.costRate != null ? `${level.costRate}/h` : "—"}
+                      </td>
+                      <td className="px-6 py-4.5 text-right">
+                        <button
+                          type="button"
+                          onClick={() => openEdit(level)}
+                          className="p-2 text-ink/60 hover:text-ink hover:bg-hover rounded-full transition-all"
+                          aria-label="Edit"
+                        >
+                          <HiPencil className="w-4 h-4" />
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
+            </tbody>
+          </table>
         </div>
-      ) : levels.length === 0 ? (
-        <div className="text-center py-12 bg-surface rounded-[2rem] border border-border/60 p-8 shadow-sm flex flex-col items-center justify-center gap-3">
-          <span className="text-sm text-ink/60">No levels registered yet. Click &apos;Add Level&apos; to define one.</span>
-        </div>
-      ) : (
-        <div className="bg-surface rounded-[2rem] border border-border/60 overflow-hidden shadow-sm">
-          <div className="divide-y divide-gray-100">
-            {levels.map((level, idx) => (
-              <div
-                key={level.uid}
-                className="p-5 flex items-center justify-between hover:bg-field/50 transition-colors"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center font-bold text-sm">
-                    {level.sortOrder}
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-bold text-ink leading-tight">
-                      {level.name}
-                    </h3>
-                    <span className="text-[10px] font-bold text-ink/60 uppercase tracking-wider block mt-1">
-                      Code: {level.code}
-                      {level.costRate != null && (
-                        <span className="ml-2 text-ink/60">· cost {level.costRate}/h</span>
-                      )}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-6">
-                  {/* Existing levels predate cost rates, so they need a way to acquire one -
-                      otherwise margin stays an estimate on every firm already using Lysp. */}
-                  <button
-                    type="button"
-                    onClick={() => openEdit(level)}
-                    className="text-xs font-semibold text-ink/60 hover:text-ink transition-colors cursor-pointer px-2 py-1.5 -my-1.5 rounded"
-                  >
-                    Edit
-                  </button>
-                  <span className="text-xs text-ink/60 font-medium flex items-center gap-1.5 bg-field px-3 py-1.5 rounded-lg border border-border">
-                    <HiScale className="w-3.5 h-3.5 text-ink/60" />
-                    Rank #{idx + 1}
-                  </span>
-                  
-                  {idx === 0 && (
-                    <span className="text-[10px] font-bold text-ink/80 bg-hover px-2 py-0.5 rounded uppercase tracking-wide border border-border">
-                      Highest Seniority
-                    </span>
-                  )}
-                </div>
-              </div>
-            ))}
+        {!isLoading && pageLevels.length > 0 && (
+          <div className="px-6 pb-2 shrink-0">
+            <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
           </div>
-        </div>
-      )}
+        )}
+      </div>
 
       <FeeEarnerLevelFormModal
         isOpen={isModalOpen}

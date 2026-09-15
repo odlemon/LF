@@ -242,12 +242,6 @@ export function RateCardEntriesSlideOver({
             <AuditTrailPanel entityUid={rateCard.uid} title="Rate Card Activity History" />
           </div>
         </div>
-
-        <div className="p-6 border-t border-border bg-field flex justify-end">
-          <Button variant="secondary" className="px-6" onClick={onClose}>
-            Done
-          </Button>
-        </div>
       </div>
     </div>
   );
