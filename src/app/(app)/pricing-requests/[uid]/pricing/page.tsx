@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { HiArrowLeft } from "react-icons/hi";
 import { Button } from "@/components/ui/Button";
@@ -23,6 +24,8 @@ import {
 } from "@/modules/pricing/components/ScenarioStatusBadge";
 import { SubmitPartnerModal } from "@/modules/pricing/components/SubmitPartnerModal";
 import { SendToClientModal } from "@/modules/negotiation/components/SendToClientModal";
+import * as negotiationApi from "@/modules/negotiation/api";
+import type { NegotiationListItem } from "@/modules/negotiation/types";
 import { usePricingWorkspace } from "@/modules/pricing/hooks/usePricingWorkspace";
 import { PRICING_MODEL_LABELS } from "@/modules/pricing/types";
 import { isAwaitingDecision } from "@/modules/pricing/types";
@@ -61,8 +64,30 @@ export default function PricingWorkspacePage() {
   const [decision, setDecision] = useState<"approve" | "reject" | "return" | null>(
     null
   );
+  const [negotiations, setNegotiations] = useState<NegotiationListItem[]>([]);
 
   const workspace = usePricingWorkspace(uid);
+
+  // Lets the "send to client" controls below hide themselves for a scenario that already has
+  // one, instead of letting the click through to the backend's "a negotiation already exists
+  // for this scenario" error.
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const list = await negotiationApi.listNegotiations();
+        if (!cancelled) setNegotiations(list);
+      } catch {
+        /* best-effort — a failed fetch just leaves the send button enabled as before */
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [uid]);
+
+  const negotiationForScenario = (scenarioId: string | undefined | null) =>
+    scenarioId ? negotiations.find((n) => n.scenarioUid === scenarioId) : undefined;
 
   const roles = user?.roles || [];
   const isPartnerOnly =
@@ -151,10 +176,11 @@ export default function PricingWorkspacePage() {
             }
           }}
           onSendToClient={
-            review.status === "APPROVED"
+            review.status === "APPROVED" && !negotiationForScenario(review.id)
               ? () => setSendOpen(true)
               : undefined
           }
+          existingNegotiationId={negotiationForScenario(review.id)?.id}
         />
         <SendToClientModal
           open={sendOpen}
@@ -204,7 +230,8 @@ export default function PricingWorkspacePage() {
     (preferred.status === "DRAFT" ||
       preferred.status === "RETURNED_FOR_CORRECTION" ||
       isAwaitingDecision(preferred.status));
-  const canSendToClient = !!preferred && preferred.status === "APPROVED";
+  const existingNegotiation = negotiationForScenario(preferred?.id);
+  const canSendToClient = !!preferred && preferred.status === "APPROVED" && !existingNegotiation;
 
   // Names the stage it is actually at. Saying "partner review" while a scenario sits at
   // finance is how the second stage came to look like a dead end in the first place.
@@ -228,8 +255,10 @@ export default function PricingWorkspacePage() {
             ? ` · will go back to ${preferred.assignedPartnerName}`
             : ""
         }`
-      : canSendToClient
-        ? "Partner approved — send the rate card to the client to start negotiation"
+      : existingNegotiation
+        ? "Rates sent to the client, negotiation in progress"
+        : canSendToClient
+          ? "Partner approved: send the rate card to the client to start negotiation"
     : preferred
       ? scenarioStatusMeta(preferred.status).hint ||
         scenarioStatusMeta(preferred.status).label
@@ -328,23 +357,33 @@ export default function PricingWorkspacePage() {
                 </p>
               )}
           </div>
-          {canSendToClient && preferred && (
+          {(canSendToClient || existingNegotiation) && preferred && (
             <div className="border-t border-border/60 bg-gradient-to-r from-field/40 via-surface to-surface px-6 py-3 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
               <div className="min-w-0">
                 <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
                   Next step
                 </p>
                 <p className="mt-0.5 text-sm font-semibold text-ink tracking-tight">
-                  Send approved rates to {clientName}
+                  {existingNegotiation
+                    ? `Rates already sent to ${clientName}`
+                    : `Send approved rates to ${clientName}`}
                 </p>
               </div>
-              <Button
-                variant="cta"
-                className="shrink-0"
-                onClick={() => setSendOpen(true)}
-              >
-                Send to client
-              </Button>
+              {existingNegotiation ? (
+                <Link href={`/negotiations/${existingNegotiation.id}`}>
+                  <Button variant="cta" className="shrink-0">
+                    View negotiation
+                  </Button>
+                </Link>
+              ) : (
+                <Button
+                  variant="cta"
+                  className="shrink-0"
+                  onClick={() => setSendOpen(true)}
+                >
+                  Send to client
+                </Button>
+              )}
             </div>
           )}
         </div>

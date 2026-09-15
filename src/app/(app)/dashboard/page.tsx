@@ -266,7 +266,7 @@ export default function DashboardPage() {
             </div>
           </section>
 
-          <section className="rounded-[2rem] border border-border/70 bg-field/70 p-5 sm:p-6 lg:col-span-4">
+          <section className="rounded-[2rem] border border-border/70 bg-surface p-5 sm:p-6 lg:col-span-4">
             <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
               This week
             </p>

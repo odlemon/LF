@@ -14,7 +14,6 @@ import { Textarea } from "@/components/ui/Input";
 import { AuditTrailPanel } from "@/components/shared/AuditTrailPanel";
 import * as negotiationApi from "@/modules/negotiation/api";
 import { FirmAdvisorWorkspace } from "@/modules/negotiation/components/FirmAdvisorWorkspace";
-import { EngagementPackWorkspace } from "@/modules/negotiation/components/EngagementPackWorkspace";
 import { NegotiationRoundTimeline } from "@/modules/negotiation/components/NegotiationRoundTimeline";
 import { NegotiationStatusBadge } from "@/modules/negotiation/components/NegotiationStatusBadge";
 import { OfferCompareRail } from "@/modules/negotiation/components/OfferCompareRail";
@@ -55,7 +54,6 @@ export default function NegotiationDetailPage() {
   const [rail, setRail] = useState<RailTab>("rates");
   const [mobilePane, setMobilePane] = useState<"advisor" | "rates">("advisor");
   const [selectedRoundId, setSelectedRoundId] = useState<string | null>(null);
-  const [packOpen, setPackOpen] = useState(false);
   const [pack, setPack] = useState<EngagementPack | null>(null);
   const [rateIntelligence, setRateIntelligence] =
     useState<NegotiationRateIntelligence | null>(null);
@@ -235,25 +233,24 @@ export default function NegotiationDetailPage() {
       </div>
 
       {agreed && (
-        <div className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-b border-border/60 bg-ink px-4 py-3 text-canvas sm:px-5">
+        <div className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-b border-emerald-200 bg-emerald-50 px-4 py-3 dark:border-emerald-900/50 dark:bg-emerald-950/30 sm:px-5">
           <div className="min-w-0">
-            <p className="text-sm font-semibold tracking-tight">
-              Rates agreed — issue engagement pack
+            <p className="text-sm font-semibold tracking-tight text-emerald-900 dark:text-emerald-300">
+              Rates agreed: issue engagement pack
             </p>
-            <p className="mt-0.5 text-xs text-canvas/55">
+            <p className="mt-0.5 text-xs text-emerald-800/70 dark:text-emerald-300/60">
               {pack
                 ? pack.status === "ACKNOWLEDGED"
                   ? "Client has acknowledged the engagement letter."
                   : pack.status === "SENT"
-                    ? "Pack sent — awaiting client acknowledgment."
+                    ? "Pack sent, awaiting client acknowledgment."
                     : "Draft ready to review and send."
                 : "Generate a letter and annexed fee schedule from the locked rates."}
             </p>
           </div>
           <Button
             variant="cta"
-            className="!bg-canvas !text-ink hover:!bg-canvas/90"
-            onClick={() => setPackOpen(true)}
+            onClick={() => window.open(`/negotiations/${uid}/engagement-pack`, "_blank", "noopener,noreferrer")}
           >
             {pack ? "Open engagement pack" : "Generate engagement pack"}
           </Button>
@@ -630,16 +627,6 @@ export default function NegotiationDetailPage() {
           )}
         </section>
       </div>
-
-      <EngagementPackWorkspace
-        negotiationUid={uid}
-        open={packOpen}
-        onClose={() => {
-          setPackOpen(false);
-          void load({ silent: true });
-        }}
-        mode="firm"
-      />
     </div>
   );
 }

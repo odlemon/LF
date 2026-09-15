@@ -46,6 +46,7 @@ export interface NegotiationRound {
 
 export interface NegotiationListItem {
   id: string;
+  scenarioUid?: string | null;
   matterTitle?: string | null;
   clientName?: string | null;
   status: NegotiationStatus | string;

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { DecisionModal } from "./DecisionModal";
 import { PartnerReturnBanner } from "./PartnerReturnBanner";
@@ -46,6 +47,9 @@ interface PartnerReviewViewProps {
   onBack: () => void;
   /** When approved, partner can open the send-to-client flow. */
   onSendToClient?: () => void;
+  /** Set when a negotiation already exists for this scenario — shows a link to it instead of
+   * a "Send to client" button that would just fail with "a negotiation already exists". */
+  existingNegotiationId?: string | null;
 }
 
 export function PartnerReviewView({
@@ -56,6 +60,7 @@ export function PartnerReviewView({
   onDecide,
   onBack,
   onSendToClient,
+  existingNegotiationId,
 }: PartnerReviewViewProps) {
   const [decision, setDecision] = useState<"approve" | "reject" | "return" | null>(
     null
@@ -70,7 +75,7 @@ export function PartnerReviewView({
   }
 
   const pending = isAwaitingDecision(scenario.status);
-  const canSend = scenario.status === "APPROVED" && !!onSendToClient;
+  const showNextStep = scenario.status === "APPROVED" && (!!onSendToClient || !!existingNegotiationId);
 
   // Sum of the priced lines, for the rounding note above.
   const lineTotal = (scenario.lines ?? []).reduce(
@@ -184,27 +189,38 @@ export function PartnerReviewView({
             <div className="px-5 py-4">
               <ScenarioStageRail status={scenario.status} />
             </div>
-            {canSend && (
+            {showNextStep && (
               <div className="border-t border-border/60 bg-gradient-to-r from-field/50 via-surface to-surface px-5 py-4 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
                 <div className="min-w-0">
                   <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
                     Next step
                   </p>
                   <p className="mt-1 text-sm font-semibold text-ink tracking-tight">
-                    Send approved rates to {clientName}
+                    {existingNegotiationId
+                      ? `Rates already sent to ${clientName}`
+                      : `Send approved rates to ${clientName}`}
                   </p>
                   <p className="mt-0.5 text-xs text-ink/60 leading-relaxed">
-                    Opens negotiation on the portal — no need to pick the client
-                    again.
+                    {existingNegotiationId
+                      ? "A negotiation is already open for this scenario."
+                      : "Opens negotiation on the portal, no need to pick the client again."}
                   </p>
                 </div>
-                <Button
-                  variant="cta"
-                  className="shrink-0 self-stretch sm:self-auto"
-                  onClick={onSendToClient}
-                >
-                  Send to client
-                </Button>
+                {existingNegotiationId ? (
+                  <Link href={`/negotiations/${existingNegotiationId}`}>
+                    <Button variant="cta" className="shrink-0 self-stretch sm:self-auto">
+                      View negotiation
+                    </Button>
+                  </Link>
+                ) : (
+                  <Button
+                    variant="cta"
+                    className="shrink-0 self-stretch sm:self-auto"
+                    onClick={onSendToClient}
+                  >
+                    Send to client
+                  </Button>
+                )}
               </div>
             )}
           </div>
@@ -306,7 +322,7 @@ export function PartnerReviewView({
         </div>
       </div>
 
-      {(pending || !canSend) && (
+      {(pending || !showNextStep) && (
         <div className="relative shrink-0 border-t border-border bg-surface/95 backdrop-blur-sm px-6 py-3.5 flex flex-wrap items-center justify-between gap-3">
           <p className="text-xs text-ink/60 max-w-md">
             {pending
