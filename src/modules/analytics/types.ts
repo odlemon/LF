@@ -164,6 +164,16 @@ export interface LevelCompliance {
   avgDeltaPct: number | null;
 }
 
+export interface RateComplianceLineDto {
+  source: "SCENARIO" | "NEGOTIATION" | string;
+  pricingRequestUid: string | null;
+  matterTitle: string;
+  hourlyRate: number;
+  cardRate: number;
+  deltaPct: number;
+  occurredAt: string | null;
+}
+
 export interface RateComplianceDto {
   activeRateCardPresent: boolean;
   rateCardUid: string | null;

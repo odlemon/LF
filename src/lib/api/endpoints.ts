@@ -231,6 +231,7 @@ export const ENDPOINTS = {
     CLIENT: (clientProfileUid: string) => `/api/v1/analytics/clients/${clientProfileUid}`,
     MATTER: (uid: string) => `/api/v1/analytics/matters/${uid}`,
     RATE_COMPLIANCE: "/api/v1/analytics/rate-compliance",
+    RATE_COMPLIANCE_LINES: "/api/v1/analytics/rate-compliance/lines",
     RATE_RECOMMENDATIONS: "/api/v1/analytics/rate-recommendations",
     ANOMALIES: "/api/v1/analytics/anomalies",
     ANOMALY: (uid: string) => `/api/v1/analytics/anomalies/${uid}`,

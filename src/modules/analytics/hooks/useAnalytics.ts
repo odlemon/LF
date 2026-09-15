@@ -12,6 +12,7 @@ import type {
   WinRateDimension,
   ProposalPerformanceDto,
   RateComplianceDto,
+  RateComplianceLineDto,
   RateRecommendationResponse,
   AnomalyFlagResponse,
   AnomalyListParams,
@@ -120,6 +121,22 @@ export function useRateCompliance(
   return useAsync(
     () => analyticsApi.getRateCompliance(period, practiceAreaUid),
     [period.from ?? "", period.to ?? "", practiceAreaUid ?? ""]
+  );
+}
+
+/** Fetches only once a level is picked for drill-down; `levelCode: null` returns an empty,
+ * already-settled result rather than calling the API. */
+export function useRateComplianceLines(
+  levelCode: string | null,
+  period: PeriodParams = {},
+  practiceAreaUid?: string
+): AsyncState<RateComplianceLineDto[]> {
+  return useAsync(
+    () =>
+      levelCode
+        ? analyticsApi.getRateComplianceLines(levelCode, period, practiceAreaUid)
+        : Promise.resolve([]),
+    [levelCode ?? "", period.from ?? "", period.to ?? "", practiceAreaUid ?? ""]
   );
 }
 

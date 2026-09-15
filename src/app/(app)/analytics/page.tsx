@@ -3,16 +3,9 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import {
-  HiChevronRight,
-  HiOutlineTrendingUp,
-  HiShieldExclamation,
-  HiClipboardCheck,
-} from "react-icons/hi";
+import { HiChevronRight, HiOutlineTrendingUp } from "react-icons/hi";
 import { Alert } from "@/components/ui/Alert";
 import { EmptyState } from "@/components/ui/EmptyState";
-import { usePermission } from "@/hooks/usePermission";
-import { PERMISSIONS } from "@/lib/utils/permissions";
 import { useAnalyticsScope } from "@/modules/analytics/useAnalyticsScope";
 import {
   useFirmSummary,
@@ -45,7 +38,6 @@ export default function AnalyticsFirmHealthPage() {
   }, [crmRestricted, router]);
 
   const [period, setPeriod] = useState<PeriodParams>(() => defaultPeriod());
-  const financeView = usePermission(PERMISSIONS.ANALYTICS_FINANCE_VIEW);
 
   const { data: summary, isLoading, error } = useFirmSummary(period);
   const { data: paRows, isLoading: paLoading } = usePracticeAreaMarginRows(period);
@@ -62,7 +54,7 @@ export default function AnalyticsFirmHealthPage() {
           <div>
             <h1 className="text-2xl font-bold text-ink tracking-tight">Analytics</h1>
             <p className="text-sm text-ink/60 mt-1">
-              Pricing intelligence across the firm — revenue, margin, win rate and cycle time.
+              Pricing intelligence across the firm: revenue, margin, win rate and cycle time.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
@@ -120,42 +112,6 @@ export default function AnalyticsFirmHealthPage() {
               deltaValue={prior?.mattersPricedDeltaPct}
             />
           </div>
-
-          {/* Finance-only quick links */}
-          {financeView && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Link
-                href="/analytics/margin-monitor"
-                className="group flex items-center gap-4 bg-surface border border-border/70 rounded-[2rem] p-5 hover:border-ink/30 transition-all"
-              >
-                <div className="w-10 h-10 rounded-xl bg-red-50 text-red-700 flex items-center justify-center shrink-0">
-                  <HiShieldExclamation className="w-5 h-5" />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-sm font-bold text-ink">Margin Monitor</p>
-                  <p className="text-xs text-ink/60 mt-0.5">
-                    AI-flagged pricing anomalies needing review
-                  </p>
-                </div>
-                <HiChevronRight className="w-4 h-4 text-ink/60 group-hover:text-ink group-hover:translate-x-0.5 transition-all" />
-              </Link>
-              <Link
-                href="/analytics/rate-compliance"
-                className="group flex items-center gap-4 bg-surface border border-border/70 rounded-[2rem] p-5 hover:border-ink/30 transition-all"
-              >
-                <div className="w-10 h-10 rounded-xl bg-field text-ink/70 flex items-center justify-center shrink-0">
-                  <HiClipboardCheck className="w-5 h-5" />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-sm font-bold text-ink">Rate Compliance</p>
-                  <p className="text-xs text-ink/60 mt-0.5">
-                    Proposed rates vs the active rate card
-                  </p>
-                </div>
-                <HiChevronRight className="w-4 h-4 text-ink/60 group-hover:text-ink group-hover:translate-x-0.5 transition-all" />
-              </Link>
-            </div>
-          )}
 
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
             {/* Practice-area margin list */}

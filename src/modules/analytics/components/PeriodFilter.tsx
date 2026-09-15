@@ -66,7 +66,9 @@ export function PeriodFilter({ period, onChange, className = "" }: PeriodFilterP
   const presetValue = activePreset?.value ?? (period.from || period.to ? "CUSTOM" : "LAST_12_MONTHS");
 
   return (
-    <div className={`flex flex-wrap items-end gap-3 ${className}`}>
+    <div
+      className={`flex flex-wrap items-end gap-3 bg-surface border border-border/60 rounded-[2rem] px-4 py-3 shadow-sm ${className}`}
+    >
       <div className="w-44">
         <Select
           options={PRESET_OPTIONS}

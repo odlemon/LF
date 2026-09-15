@@ -9,6 +9,7 @@ import type {
   WinRateDimension,
   ProposalPerformanceDto,
   RateComplianceDto,
+  RateComplianceLineDto,
   ClientMetricsDto,
   MatterDetailDto,
   AnomalyFlagResponse,
@@ -649,6 +650,30 @@ export const analyticsApi = {
       params: query,
     });
     return normalizeRateCompliance(res.data);
+  },
+
+  getRateComplianceLines: async (
+    levelCode: string,
+    params: PeriodParams = {},
+    practiceAreaUid?: string
+  ): Promise<RateComplianceLineDto[]> => {
+    const query: Record<string, string> = { ...buildPeriodQuery(params), levelCode };
+    if (practiceAreaUid) query.practiceAreaUid = practiceAreaUid;
+    const res = await apiClient.get(ENDPOINTS.ANALYTICS.RATE_COMPLIANCE_LINES, {
+      params: query,
+    });
+    return asList(res.data, (raw) => {
+      const p = (raw ?? {}) as Record<string, unknown>;
+      return {
+        source: String(p.source ?? ""),
+        pricingRequestUid: p.pricingRequestUid != null ? String(p.pricingRequestUid) : null,
+        matterTitle: String(p.matterTitle ?? "Untitled matter"),
+        hourlyRate: num(p.hourlyRate),
+        cardRate: num(p.cardRate),
+        deltaPct: num(p.deltaPct),
+        occurredAt: p.occurredAt != null ? String(p.occurredAt) : null,
+      };
+    });
   },
 
   getRateRecommendations: async (

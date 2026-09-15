@@ -5,7 +5,9 @@ import { HiShieldExclamation, HiRefresh } from "react-icons/hi";
 import { Alert } from "@/components/ui/Alert";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Select } from "@/components/ui/Select";
+import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { HiOutlineFilter } from "react-icons/hi";
 import { usePermission } from "@/hooks/usePermission";
 import { PERMISSIONS } from "@/lib/utils/permissions";
 import {
@@ -28,6 +30,7 @@ import type {
 } from "@/modules/analytics/types";
 
 const ALL = "ALL";
+const DEFAULT_STATUS = "OPEN";
 
 const SEVERITY_OPTIONS = [
   { value: ALL, label: "All severities" },
@@ -59,8 +62,14 @@ export default function MarginMonitorPage() {
   const canResolve = usePermission(PERMISSIONS.ANOMALY_RESOLVE);
 
   const [severity, setSeverity] = useState<string>(ALL);
-  const [status, setStatus] = useState<string>("OPEN");
+  const [status, setStatus] = useState<string>(DEFAULT_STATUS);
   const [anomalyType, setAnomalyType] = useState<string>(ALL);
+
+  const handleClearFilters = () => {
+    setSeverity(ALL);
+    setStatus(DEFAULT_STATUS);
+    setAnomalyType(ALL);
+  };
 
   const params: AnomalyListParams = {
     severity: severity !== ALL ? (severity as AnomalySeverity) : undefined,
@@ -106,7 +115,7 @@ export default function MarginMonitorPage() {
           <div>
             <h1 className="text-2xl font-bold text-ink tracking-tight">Margin Monitor</h1>
             <p className="text-sm text-ink/60 mt-1">
-              AI-flagged pricing anomalies — review, resolve or mark as valid exceptions.
+              AI-flagged pricing anomalies: review, resolve or mark as valid exceptions.
             </p>
           </div>
           <Button variant="secondary" onClick={refetch} disabled={isLoading}>
@@ -117,22 +126,44 @@ export default function MarginMonitorPage() {
         <AnalyticsTabs />
       </div>
 
+      {/* Filters, at the top: what's worth reading below depends on these. */}
+      <div className="bg-surface rounded-[2rem] border border-border/60 p-5 shadow-sm">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+          <div className="flex flex-col gap-1.5">
+            <label className="text-[10px] font-extrabold text-ink/60 uppercase tracking-widest pl-1">
+              Severity
+            </label>
+            <Select options={SEVERITY_OPTIONS} value={severity} onChange={setSeverity} />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label className="text-[10px] font-extrabold text-ink/60 uppercase tracking-widest pl-1">
+              Status
+            </label>
+            <Select options={STATUS_OPTIONS} value={status} onChange={setStatus} />
+          </div>
+          <div className="flex flex-col gap-1.5 sm:col-span-2 lg:col-span-1">
+            <label className="text-[10px] font-extrabold text-ink/60 uppercase tracking-widest pl-1">
+              Anomaly type
+            </label>
+            <Select options={TYPE_OPTIONS} value={anomalyType} onChange={setAnomalyType} />
+          </div>
+          <div className="flex justify-end">
+            <button
+              type="button"
+              onClick={handleClearFilters}
+              aria-label="Clear filters"
+              title="Clear filters"
+              className="p-2.5 rounded-full border border-border/50 bg-field hover:bg-canvas text-ink/60 hover:text-ink transition-all"
+            >
+              <HiOutlineFilter className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      </div>
+
       {/* Detector performance sits above the queue: whether these flags are worth reading
           is the first question, and the answer changes how you read what follows. */}
       <DetectorTuningPanel />
-
-      {/* Filters */}
-      <div className="flex flex-wrap gap-3">
-        <div className="w-44">
-          <Select options={SEVERITY_OPTIONS} value={severity} onChange={setSeverity} />
-        </div>
-        <div className="w-44">
-          <Select options={STATUS_OPTIONS} value={status} onChange={setStatus} />
-        </div>
-        <div className="w-56">
-          <Select options={TYPE_OPTIONS} value={anomalyType} onChange={setAnomalyType} />
-        </div>
-      </div>
 
       {error && <Alert variant="error" message={error} />}
 
@@ -147,7 +178,7 @@ export default function MarginMonitorPage() {
           title="No anomalies found"
           description={
             status === "OPEN"
-              ? "Nothing flagged right now — pricing looks healthy for these filters."
+              ? "Nothing flagged right now: pricing looks healthy for these filters."
               : "No anomalies match the current filters."
           }
           icon={<HiShieldExclamation className="w-5 h-5" />}
