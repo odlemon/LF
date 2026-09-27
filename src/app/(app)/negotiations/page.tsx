@@ -118,7 +118,7 @@ export default function NegotiationsPage() {
 
         <div className="bg-surface rounded-[2rem] border border-border/60 shadow-sm overflow-hidden flex flex-col">
           <div className="overflow-x-auto rates-scrollable">
-            <table className="w-full text-left text-sm border-collapse">
+            <table className="w-full min-w-[860px] text-left text-sm border-collapse">
               <thead>
                 <tr className="bg-field/60 text-xs font-bold text-ink/60 border-b border-border">
                   <th className="px-6 py-4.5">Matter</th>

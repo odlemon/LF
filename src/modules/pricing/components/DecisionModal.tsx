@@ -49,9 +49,14 @@ export function DecisionModal({
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           rows={3}
-          className="w-full rounded-xl border border-border bg-field px-3 py-2.5 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-primary/15 resize-none"
+          className={`w-full rounded-xl border bg-field px-3 py-2.5 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-primary/15 resize-none ${
+            requireComment && !comment.trim() ? "border-red-300 dark:border-red-800" : "border-border"
+          }`}
           placeholder="Add a short note…"
         />
+        {requireComment && !comment.trim() && (
+          <p className="mt-1.5 text-xs text-red-600 dark:text-red-400">A comment is required.</p>
+        )}
         <div className="mt-6 flex justify-end gap-2">
           <Button variant="secondary" onClick={onClose} disabled={loading}>
             Cancel

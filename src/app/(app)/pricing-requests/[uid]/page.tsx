@@ -47,6 +47,8 @@ interface LoadedWorkspaceProps {
   initialAttachments: IntakeAttachment[];
   initialScope: MatterScope | null;
   initialScopeGenerated: boolean;
+  scopeError: string | null;
+  onRetryScope: () => void;
   setScope: (scope: MatterScope | null) => void;
   setScopeGenerated: (value: boolean) => void;
   setRequest: (request: PricingRequest) => void;
@@ -62,6 +64,8 @@ function PricingRequestWorkspaceLoaded({
   initialAttachments,
   initialScope,
   initialScopeGenerated,
+  scopeError,
+  onRetryScope,
   setScope,
   setScopeGenerated,
   setRequest,
@@ -420,6 +424,8 @@ function PricingRequestWorkspaceLoaded({
           <ScopePanel
             scope={panelScope}
             scopeGenerated={scopeGenerated}
+            scopeError={scopeGenerated ? null : scopeError}
+            onRetryScope={onRetryScope}
             chatMode={displayChatMode}
             feeEarnerLevels={feeEarnerLevels}
             practiceAreas={practiceAreas}
@@ -477,8 +483,10 @@ export default function PricingRequestWorkspacePage() {
     attachments,
     scope,
     scopeGenerated,
+    scopeError,
     isLoading,
     error,
+    refetch,
     setScope,
     setScopeGenerated,
     setRequest,
@@ -510,6 +518,8 @@ export default function PricingRequestWorkspacePage() {
       initialAttachments={attachments}
       initialScope={scope}
       initialScopeGenerated={scopeGenerated}
+      scopeError={scopeError}
+      onRetryScope={refetch}
       setScope={setScope}
       setScopeGenerated={setScopeGenerated}
       setRequest={setRequest}

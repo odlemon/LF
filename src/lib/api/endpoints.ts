@@ -127,6 +127,7 @@ export const ENDPOINTS = {
     INVITE: "/api/v1/users/invite",
     DETAIL: (uid: string) => `/api/v1/users/${uid}`,
     DEACTIVATE: (uid: string) => `/api/v1/users/${uid}/deactivate`,
+    RESET_PASSWORD: (uid: string) => `/api/v1/auth/password-reset/admin/${uid}`,
     ASSIGN_ROLE: (userUid: string, roleUid: string) => `/api/v1/users/${userUid}/roles/${roleUid}`,
     REMOVE_ROLE: (userUid: string, roleUid: string) => `/api/v1/users/${userUid}/roles/${roleUid}`,
   },

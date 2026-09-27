@@ -109,6 +109,30 @@ export function useUsers() {
     }
   };
 
+  const resetPassword = async (uid: string) => {
+    setIsLoading(true);
+    try {
+      await usersApi.resetPassword(uid);
+      toast.success("A password reset link has been sent.");
+    } catch (err: unknown) {
+      let msg = "Failed to send the reset link";
+      const errorObj = err as Record<string, unknown>;
+      if (errorObj && typeof errorObj === "object" && "response" in errorObj) {
+        const responseObj = errorObj.response as Record<string, unknown>;
+        if (responseObj && typeof responseObj === "object" && "data" in responseObj) {
+          const dataObj = responseObj.data as Record<string, unknown>;
+          if (dataObj && typeof dataObj === "object" && "message" in dataObj) {
+            msg = String(dataObj.message);
+          }
+        }
+      }
+      toast.error(msg);
+      throw err;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const removeUser = async (uid: string) => {
     setIsLoading(true);
     try {
@@ -198,6 +222,7 @@ export function useUsers() {
     addUser,
     editUser,
     toggleDeactivation,
+    resetPassword,
     removeUser,
     assignRole,
     revokeRole,

@@ -30,6 +30,27 @@ import { usePricingWorkspace } from "@/modules/pricing/hooks/usePricingWorkspace
 import { PRICING_MODEL_LABELS } from "@/modules/pricing/types";
 import { isAwaitingDecision } from "@/modules/pricing/types";
 
+/**
+ * The negotiation existing is not the same as it being active - it may have closed. Read the
+ * real status instead of assuming "a negotiation exists" means "still in progress" (that read
+ * once showed "negotiation in progress" on a negotiation the client had already withdrawn).
+ */
+function negotiationStageHint(status: string): string {
+  switch (status) {
+    case "SENT":
+    case "NEGOTIATING":
+      return "Rates sent to the client, negotiation in progress";
+    case "CLIENT_APPROVED":
+      return "Client accepted the rates";
+    case "CLIENT_REJECTED":
+      return "Client rejected the rates";
+    case "WITHDRAWN":
+      return "Negotiation withdrawn";
+    default:
+      return "See the negotiation for its current status";
+  }
+}
+
 function formatMoney(amount: number, currency: string) {
   try {
     return new Intl.NumberFormat("en-US", {
@@ -256,7 +277,7 @@ export default function PricingWorkspacePage() {
             : ""
         }`
       : existingNegotiation
-        ? "Rates sent to the client, negotiation in progress"
+        ? negotiationStageHint(existingNegotiation.status)
         : canSendToClient
           ? "Partner approved: send the rate card to the client to start negotiation"
     : preferred

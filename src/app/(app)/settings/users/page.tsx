@@ -19,6 +19,7 @@ import {
   HiX,
   HiCheck,
   HiUser,
+  HiKey,
 } from "react-icons/hi";
 
 interface UserFormState {
@@ -35,6 +36,7 @@ export default function UsersPage() {
     addUser,
     editUser,
     toggleDeactivation,
+    resetPassword,
     removeUser,
     assignRole,
     revokeRole,
@@ -56,7 +58,7 @@ export default function UsersPage() {
   const [activeUserUid, setActiveUserUid] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [processingUserUid, setProcessingUserUid] = useState<string | null>(null);
-  const [processingAction, setProcessingAction] = useState<"deactivate" | "delete" | null>(null);
+  const [processingAction, setProcessingAction] = useState<"deactivate" | "delete" | "reset" | null>(null);
 
   const openAddModal = () => {
     setEditingUserUid(null);
@@ -102,6 +104,19 @@ export default function UsersPage() {
     setProcessingAction("deactivate");
     try {
       await toggleDeactivation(uid);
+    } finally {
+      setProcessingUserUid(null);
+      setProcessingAction(null);
+    }
+  };
+
+  const handleResetPassword = async (uid: string) => {
+    setProcessingUserUid(uid);
+    setProcessingAction("reset");
+    try {
+      await resetPassword(uid);
+    } catch {
+      // resetPassword already toasts the error; nothing further to do here.
     } finally {
       setProcessingUserUid(null);
       setProcessingAction(null);
@@ -231,6 +246,18 @@ export default function UsersPage() {
                               className="inline-flex items-center justify-center p-1.5 text-ink/60 hover:text-primary hover:bg-primary/5 rounded-full transition-all cursor-pointer"
                             >
                               <HiPencil className="w-4.5 h-4.5" />
+                            </button>
+                            <button
+                              onClick={() => handleResetPassword(user.uid)}
+                              aria-label="Send password reset link"
+                              title="Send password reset link"
+                              className="inline-flex items-center justify-center p-1.5 text-ink/60 hover:text-primary hover:bg-primary/5 rounded-full transition-all cursor-pointer"
+                            >
+                              {processingUserUid === user.uid && processingAction === "reset" ? (
+                                <div className="w-4.5 h-4.5 animate-spin rounded-full border-2 border-primary/20 border-b-primary" />
+                              ) : (
+                                <HiKey className="w-4.5 h-4.5" />
+                              )}
                             </button>
                             <button
                               disabled={currentUser?.id === user.uid}

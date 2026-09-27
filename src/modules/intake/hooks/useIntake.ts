@@ -96,6 +96,7 @@ export function useRequestWorkspace(uid: string) {
   const [scopeGenerated, setScopeGenerated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [scopeError, setScopeError] = useState<string | null>(null);
 
   const fetchAll = useCallback(async () => {
     if (!uid) return;
@@ -122,11 +123,21 @@ export function useRequestWorkspace(uid: string) {
                 .catch(() => "Unknown client")
             : Promise.resolve("");
 
+      let scopeFetchError: string | null = null;
       const [msgs, atts, scopeResult, resolvedClientName] = await Promise.all([
         intakeApi.getMessages(uid),
         intakeApi.listAttachments(uid),
         wantsScope
-          ? intakeApi.getScope(uid).catch(() => null)
+          ? intakeApi.getScope(uid).catch((err: any) => {
+              // A 404 means no scope exists yet, the normal pre-generation state. Anything
+              // else (a 500 from bad data, a network failure) is a real failure the scope
+              // panel needs to show as an error, not silently read as "not generated yet".
+              if (err?.response?.status !== 404) {
+                scopeFetchError =
+                  err.response?.data?.message || err.message || "Failed to load the generated scope";
+              }
+              return null;
+            })
           : Promise.resolve(null),
         clientPromise,
       ]);
@@ -138,9 +149,11 @@ export function useRequestWorkspace(uid: string) {
       if (scopeResult?.phases?.length) {
         setScope(scopeResult);
         setScopeGenerated(true);
+        setScopeError(null);
       } else {
         setScope(null);
         setScopeGenerated(Boolean(req.scopeGenerated));
+        setScopeError(scopeFetchError);
       }
     } catch (err: any) {
       setError(err.response?.data?.message || err.message || "Failed to load request");
@@ -162,6 +175,7 @@ export function useRequestWorkspace(uid: string) {
     setAttachments,
     scope,
     setScope,
+    scopeError,
     scopeGenerated,
     setScopeGenerated,
     isLoading,

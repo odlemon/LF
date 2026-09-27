@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { HiPlus, HiChevronDoubleRight } from "react-icons/hi";
+import { HiPlus, HiChevronDoubleRight, HiOutlineExclamation } from "react-icons/hi";
 import {
   MatterScope,
   ChatMode,
@@ -22,6 +22,9 @@ import { ScopeProgressStepId } from "../constants/scopeProgress";
 interface ScopePanelProps {
   scope: MatterScope | null;
   scopeGenerated: boolean;
+  /** Set when the scope failed to load (a real error), distinct from no scope existing yet. */
+  scopeError?: string | null;
+  onRetryScope?: () => void;
   chatMode?: ChatMode;
   feeEarnerLevels: FeeEarnerLevel[];
   practiceAreas?: PracticeArea[];
@@ -43,6 +46,8 @@ interface ScopePanelProps {
 export function ScopePanel({
   scope,
   scopeGenerated,
+  scopeError = null,
+  onRetryScope,
   chatMode,
   feeEarnerLevels,
   practiceAreas = [],
@@ -104,6 +109,51 @@ export function ScopePanel({
           activeStep={buildProgressStep ?? "listening"}
           statusLabel={buildProgressLabel ?? undefined}
         />
+      </div>
+    );
+  }
+
+  if (scopeError) {
+    return (
+      <div className="flex-1 flex flex-col min-h-0 relative overflow-hidden">
+        <div className="relative px-6 py-4 border-b border-border/60 shrink-0 flex items-center justify-between gap-3">
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink/60">
+              Matter scope
+            </p>
+            <p className="text-sm text-red-600 dark:text-red-400 mt-0.5">Couldn&apos;t load the scope</p>
+          </div>
+          {onCollapse && (
+            <button
+              type="button"
+              onClick={onCollapse}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-[11px] font-semibold text-ink/60 hover:text-ink hover:bg-hover border border-transparent hover:border-border transition-colors"
+              aria-label="Collapse scope panel"
+              title="Collapse scope"
+            >
+              <HiChevronDoubleRight className="w-4 h-4" />
+              Hide
+            </button>
+          )}
+        </div>
+        <div className="relative flex-1 flex flex-col items-center justify-center p-8 text-center">
+          <div className="w-full max-w-sm">
+            <HiOutlineExclamation className="mx-auto h-8 w-8 text-red-500" />
+            <h3 className="mt-3 text-xl font-semibold text-ink tracking-tight">
+              Couldn&apos;t load the scope
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-ink/60">
+              This matter may already have a generated scope, but something went wrong
+              reading it back. This is not the same as no scope existing yet &mdash; check
+              with support if this keeps happening.
+            </p>
+            {onRetryScope && (
+              <Button variant="secondary" className="mt-6" onClick={onRetryScope}>
+                Try again
+              </Button>
+            )}
+          </div>
+        </div>
       </div>
     );
   }

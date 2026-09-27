@@ -37,6 +37,11 @@ export const usersApi = {
     return response.data;
   },
 
+  resetPassword: async (uid: string) => {
+    const response = await apiClient.post(ENDPOINTS.USERS.RESET_PASSWORD(uid));
+    return response.data;
+  },
+
   assignRoleToUser: async (userUid: string, roleUid: string) => {
     const response = await apiClient.post(ENDPOINTS.USERS.ASSIGN_ROLE(userUid, roleUid));
     return response.data;
