@@ -285,6 +285,7 @@ function PricingRequestWorkspaceLoaded({
   }, [chat.scopeBuildActive, scopeGenerated]);
 
   const [confirmScopeOpen, setConfirmScopeOpen] = useState(false);
+  const [confirmReopenScopeOpen, setConfirmReopenScopeOpen] = useState(false);
 
   // The workspace layout names the tab after the section, which makes every open matter read
   // "Pricing requests". Partners routinely have three of these side by side.
@@ -304,6 +305,18 @@ function PricingRequestWorkspaceLoaded({
     } catch (err: unknown) {
       const e = err as { response?: { data?: { message?: string } }; message?: string };
       toast.error(e.response?.data?.message || e.message || "Failed to confirm scope");
+    }
+  };
+
+  const handleReopenScope = async () => {
+    setConfirmReopenScopeOpen(false);
+    try {
+      await scopeHook.resetScope();
+      chat.setChatMode("SCOPE_GENERATED");
+      toast.success("Scope reopened for revision");
+    } catch (err: unknown) {
+      const e = err as { response?: { data?: { message?: string } }; message?: string };
+      toast.error(e.response?.data?.message || e.message || "Could not reopen scope");
     }
   };
 
@@ -341,12 +354,17 @@ function PricingRequestWorkspaceLoaded({
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           <ChatModeBadge chatMode={displayChatMode} />
           {isConfirmed && (
-            <Button
-              variant="cta"
-              onClick={() => router.push(`/pricing-requests/${uid}/pricing`)}
-            >
-              Continue to pricing
-            </Button>
+            <>
+              <Button variant="secondary" onClick={() => setConfirmReopenScopeOpen(true)}>
+                Revise scope
+              </Button>
+              <Button
+                variant="cta"
+                onClick={() => router.push(`/pricing-requests/${uid}/pricing`)}
+              >
+                Continue to pricing
+              </Button>
+            </>
           )}
           {showConfirmScope && (
             <Button
@@ -370,8 +388,10 @@ function PricingRequestWorkspaceLoaded({
       >
         <div className="flex flex-col gap-5">
           <p className="text-sm text-ink/70 leading-relaxed">
-            This locks the work plan and opens pricing. You can still ask questions in chat
-            afterwards, but the phases and hours become the basis for every fee scenario.
+            Review every phase, task, assumption, and exclusion before confirming. The phases and hours become the basis for every fee scenario.
+          </p>
+          <p className="text-xs text-ink/60">
+            Current scope: {scopeHook.scope?.phases?.length ?? 0} phases and {scopeHook.scope?.phases?.reduce((sum, phase) => sum + (phase.tasks?.length ?? 0), 0) ?? 0} tasks.
           </p>
           <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3">
             <Button variant="secondary" onClick={() => setConfirmScopeOpen(false)}>
@@ -379,6 +399,27 @@ function PricingRequestWorkspaceLoaded({
             </Button>
             <Button variant="cta" onClick={handleConfirmScope} loading={scopeHook.isConfirming}>
               Confirm scope
+            </Button>
+          </div>
+        </div>
+      </Modal>
+
+      <Modal
+        isOpen={confirmReopenScopeOpen}
+        onClose={() => setConfirmReopenScopeOpen(false)}
+        title="Revise this scope?"
+        size="md"
+      >
+        <div className="flex flex-col gap-5">
+          <p className="text-sm text-ink/70 leading-relaxed">
+            The scope can be reopened before pricing scenarios exist. If a scenario has already been created, Lysp will keep the scope locked so that quote remains tied to the work it priced.
+          </p>
+          <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3">
+            <Button variant="secondary" onClick={() => setConfirmReopenScopeOpen(false)}>
+              Keep confirmed
+            </Button>
+            <Button variant="cta" onClick={handleReopenScope} loading={scopeHook.isResetting}>
+              Reopen scope
             </Button>
           </div>
         </div>

@@ -25,10 +25,10 @@ export function MustChangePasswordBanner() {
           </div>
         </div>
         <Link
-          href="/client-portal/settings#security"
+          href="/client-login/forgot"
           className="rounded-full bg-ink px-3.5 py-1.5 text-xs font-semibold text-canvas hover:opacity-90"
         >
-          Change password
+          Email me a reset link
         </Link>
       </div>
     </div>

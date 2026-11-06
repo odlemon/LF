@@ -33,6 +33,8 @@ export function EngagementPackWorkspace({
   const [acting, setActing] = useState(false);
   const [section, setSection] = useState<"letter" | "schedule">("letter");
   const [missing, setMissing] = useState(false);
+  const [governingLaw, setGoverningLaw] = useState("");
+  const [firmAddress, setFirmAddress] = useState("");
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -43,6 +45,8 @@ export function EngagementPackWorkspace({
           ? await negotiationApi.getEngagementPack(negotiationUid)
           : await negotiationApi.getPortalEngagementPack(negotiationUid);
       setPack(p);
+      setGoverningLaw(p.governingLaw || "");
+      setFirmAddress(p.firmAddress || "");
     } catch {
       setPack(null);
       setMissing(true);
@@ -62,6 +66,8 @@ export function EngagementPackWorkspace({
     try {
       const p = await negotiationApi.generateEngagementPack(negotiationUid);
       setPack(p);
+      setGoverningLaw(p.governingLaw || "");
+      setFirmAddress(p.firmAddress || "");
       setMissing(false);
       toast.success(
         pack ? "Engagement pack regenerated" : "Engagement pack generated"
@@ -79,7 +85,39 @@ export function EngagementPackWorkspace({
     }
   };
 
+  const reviewedTermsAreCurrent = Boolean(
+    pack?.termsReviewedAt &&
+      governingLaw.trim() === pack.governingLaw &&
+      firmAddress.trim() === pack.firmAddress,
+  );
+
+  const saveReviewedTerms = async () => {
+    setActing(true);
+    try {
+      const p = await negotiationApi.updateEngagementPackTerms(negotiationUid, {
+        governingLaw: governingLaw.trim(),
+        firmAddress: firmAddress.trim(),
+      });
+      setPack(p);
+      setGoverningLaw(p.governingLaw || "");
+      setFirmAddress(p.firmAddress || "");
+      toast.success("Engagement terms saved as reviewed");
+    } catch (err: unknown) {
+      const e = err as {
+        response?: { data?: { message?: string } };
+        message?: string;
+      };
+      toast.error(e.response?.data?.message || e.message || "Could not save reviewed terms");
+    } finally {
+      setActing(false);
+    }
+  };
+
   const send = async () => {
+    if (!reviewedTermsAreCurrent) {
+      toast.error("Review and save the governing law and firm address before sending");
+      return;
+    }
     setActing(true);
     try {
       const p = await negotiationApi.sendEngagementPack(negotiationUid);
@@ -143,7 +181,7 @@ export function EngagementPackWorkspace({
               <Button variant="secondary" loading={acting} onClick={generate}>
                 Regenerate
               </Button>
-              <Button variant="cta" loading={acting} onClick={send}>
+              <Button variant="cta" loading={acting} disabled={!reviewedTermsAreCurrent} onClick={send}>
                 Send to client
               </Button>
             </>
@@ -185,6 +223,53 @@ export function EngagementPackWorkspace({
             onChange={setSection}
           />
         </div>
+      )}
+
+      {mode === "firm" && pack?.status === "DRAFT" && (
+        <section className="shrink-0 border-b border-border/60 bg-surface px-4 py-4 sm:px-6 print:hidden">
+          <div className="mx-auto grid max-w-[900px] gap-3 sm:grid-cols-2">
+            <div className="sm:col-span-2">
+              <p className="text-sm font-semibold text-ink">Review the engagement terms before sending</p>
+              <p className="mt-1 text-xs leading-relaxed text-ink/60">
+                The governing law below applies to this engagement letter. Check it separately from the law governing the transaction documents. Confirm the firm office address shown in the letter as well.
+              </p>
+            </div>
+            <label className="text-xs font-semibold text-ink/70">
+              Governing law
+              <input
+                value={governingLaw}
+                onChange={(e) => setGoverningLaw(e.target.value)}
+                maxLength={200}
+                placeholder="For example, England and Wales"
+                className="mt-1.5 h-10 w-full rounded-xl border border-border bg-field px-3 text-sm font-normal text-ink outline-none focus:ring-2 focus:ring-primary/15"
+              />
+            </label>
+            <label className="text-xs font-semibold text-ink/70">
+              Firm office address in the letter
+              <input
+                value={firmAddress}
+                onChange={(e) => setFirmAddress(e.target.value)}
+                maxLength={2000}
+                className="mt-1.5 h-10 w-full rounded-xl border border-border bg-field px-3 text-sm font-normal text-ink outline-none focus:ring-2 focus:ring-primary/15"
+              />
+            </label>
+            <div className="sm:col-span-2 flex flex-wrap items-center justify-between gap-3">
+              <p className="text-xs text-ink/55">
+                {pack.termsReviewedAt
+                  ? `Reviewed${pack.termsReviewedByEmail ? ` by ${pack.termsReviewedByEmail}` : ""} on ${new Date(pack.termsReviewedAt).toLocaleString()}. Save again after changing either field.`
+                  : "Save the reviewed values to enable sending."}
+              </p>
+              <Button
+                variant="secondary"
+                loading={acting}
+                disabled={!governingLaw.trim() || !firmAddress.trim()}
+                onClick={saveReviewedTerms}
+              >
+                Save reviewed terms
+              </Button>
+            </div>
+          </div>
+        </section>
       )}
 
       <div className="min-h-0 flex-1 overflow-y-auto bg-[linear-gradient(180deg,#e8e4dc_0%,#d9d4cb_100%)] px-3 py-6 sm:px-6 sm:py-10 print:bg-white print:p-0">

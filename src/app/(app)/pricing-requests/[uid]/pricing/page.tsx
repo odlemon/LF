@@ -207,6 +207,7 @@ export default function PricingWorkspacePage() {
           open={sendOpen}
           requestUid={uid}
           scenarioUid={review.id}
+          scenarioCurrency={review.currency}
           defaultClientProfileUid={request?.clientProfileUid}
           matterTitle={matterTitle}
           clientName={clientName}
@@ -555,6 +556,7 @@ export default function PricingWorkspacePage() {
           open={sendOpen}
           requestUid={uid}
           scenarioUid={preferred.id}
+          scenarioCurrency={preferred.currency}
           defaultClientProfileUid={request?.clientProfileUid}
           matterTitle={matterTitle}
           clientName={clientName}

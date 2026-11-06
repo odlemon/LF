@@ -11,6 +11,7 @@ interface SendToClientModalProps {
   open: boolean;
   requestUid: string;
   scenarioUid: string;
+  scenarioCurrency?: string | null;
   /** Locked to the pricing request’s client — no re-pick. */
   defaultClientProfileUid?: string | null;
   matterTitle?: string;
@@ -23,6 +24,7 @@ export function SendToClientModal({
   open,
   requestUid,
   scenarioUid,
+  scenarioCurrency,
   defaultClientProfileUid,
   matterTitle,
   clientName,
@@ -33,12 +35,14 @@ export function SendToClientModal({
   const [coverMessage, setCoverMessage] = useState("");
   const [resolving, setResolving] = useState(false);
   const [sending, setSending] = useState(false);
+  const [currencyConfirmed, setCurrencyConfirmed] = useState(false);
 
   useEffect(() => {
     if (!open) return;
     setCoverMessage(
       `Please review the proposed rates for ${matterTitle || "this matter"}.`
     );
+    setCurrencyConfirmed(false);
     setPortalEmail(null);
     if (!defaultClientProfileUid) return;
 
@@ -62,7 +66,8 @@ export function SendToClientModal({
   if (!open) return null;
 
   const lockedName = clientName || "this client";
-  const canSend = !!defaultClientProfileUid;
+  const hasScenarioCurrency = Boolean(scenarioCurrency?.trim());
+  const canSend = !!defaultClientProfileUid && hasScenarioCurrency && currencyConfirmed;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-fade-in">
@@ -92,10 +97,32 @@ export function SendToClientModal({
 
         {!canSend && (
           <p className="mt-4 text-xs text-red-600 dark:text-red-400">
-            This pricing request has no client linked. Fix the request before
-            sending.
+            {!defaultClientProfileUid
+              ? "This pricing request has no client linked. Fix the request before sending."
+              : "Confirm the quote currency below before sending."}
           </p>
         )}
+
+        <div className="mt-4 rounded-xl border border-amber-300/70 bg-amber-50 px-4 py-3 text-amber-950">
+          <p className="text-sm font-semibold">
+            Quote currency: {scenarioCurrency || "Not set"}
+          </p>
+          <p className="mt-1 text-xs leading-relaxed text-amber-900/80">
+            {hasScenarioCurrency
+              ? "This comes from the selected office's active rate card. Check it against the matter and the currency agreed with the client before sending."
+              : "This pricing scenario has no currency. Update the selected office or scenario before sending the proposal."}
+          </p>
+          <label className="mt-3 flex cursor-pointer items-start gap-2 text-xs leading-relaxed">
+            <input
+              type="checkbox"
+              checked={currencyConfirmed}
+              disabled={!hasScenarioCurrency}
+              onChange={(e) => setCurrencyConfirmed(e.target.checked)}
+              className="mt-0.5 h-4 w-4 accent-ink"
+            />
+            <span>I confirm this is the intended quote currency for this client.</span>
+          </label>
+        </div>
 
         <div className="mt-4">
           <label className="block text-[11px] font-semibold text-ink/60 mb-1.5">
@@ -127,6 +154,7 @@ export function SendToClientModal({
                   {
                     clientProfileUid: defaultClientProfileUid,
                     coverMessage: coverMessage || undefined,
+                    quoteCurrencyConfirmed: currencyConfirmed,
                   }
                 );
                 toast.success(`Proposal sent to ${lockedName}`);

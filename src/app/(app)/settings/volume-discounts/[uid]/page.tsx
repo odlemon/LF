@@ -132,9 +132,7 @@ export default function VolumeDiscountDetailPage() {
   const crossings = [...(dashboard?.tierCrossings ?? [])].sort((a, b) =>
     b.occurredAt.localeCompare(a.occurredAt),
   );
-  const creditsOwed = crossings
-    .filter((c) => c.adjustmentStatus === "PENDING")
-    .reduce((sum, c) => sum + c.retroactiveAdjustmentAmount, 0);
+  const creditsOwed = dashboard?.pendingCreditAmount ?? 0;
   const crossingsTotalPages = Math.max(1, Math.ceil(crossings.length / ROWS_PAGE_SIZE));
   const pageCrossings = crossings.slice(
     crossingsPage * ROWS_PAGE_SIZE,
@@ -250,10 +248,11 @@ export default function VolumeDiscountDetailPage() {
           </p>
         </div>
         <div className="bg-surface border border-border/70 rounded-[2rem] p-5">
-          <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">Savings to Date</p>
+          <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">Credits Issued</p>
           <p className="mt-2 text-2xl font-semibold tabular-nums text-emerald-700 dark:text-emerald-400">
-            {formatMoney(dashboard.savingsToDate, program.currency)}
+            {formatMoney(dashboard.issuedCreditAmount, program.currency)}
           </p>
+          <p className="mt-1 text-xs text-ink/55">Posted credits only. Pending tier adjustments are listed below.</p>
         </div>
       </div>
 

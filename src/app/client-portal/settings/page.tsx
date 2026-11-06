@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/Button";
@@ -105,10 +106,12 @@ export default function ClientSettingsPage() {
             Security
           </p>
           {user?.mustChangePassword && (
-            <p className="mt-2 rounded-xl border border-amber-200/80 bg-amber-50 px-3.5 py-2.5 text-xs text-amber-950">
-              Your account requires a password update before you continue using a temporary
-              credential.
-            </p>
+            <div className="mt-2 rounded-xl border border-amber-200/80 bg-amber-50 px-3.5 py-2.5 text-xs text-amber-950">
+              <p>Your account requires a password update before you continue using a temporary credential.</p>
+              <Link className="mt-1 inline-block font-semibold underline underline-offset-2" href="/client-login/forgot">
+                If you do not know the temporary password, email yourself a reset link.
+              </Link>
+            </div>
           )}
           <p className="mt-2 text-sm text-ink/60">
             Change the password for <span className="font-semibold text-ink">{user?.email}</span>.

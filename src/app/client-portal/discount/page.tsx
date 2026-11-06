@@ -66,8 +66,8 @@ export default function ClientDiscountStatusPage() {
     }
   };
 
-  const totalSavings = useMemo(
-    () => Object.values(dashboards).reduce((sum, d) => sum + d.savingsToDate, 0),
+  const totalCreditsIssued = useMemo(
+    () => Object.values(dashboards).reduce((sum, d) => sum + d.issuedCreditAmount, 0),
     [dashboards]
   );
 
@@ -79,13 +79,13 @@ export default function ClientDiscountStatusPage() {
         <PortalPageHeader
           eyebrow="Discount status"
           title="Volume discount position"
-          description="Your active discount programs, tier progress, and savings to date."
+          description="Your active discount programs, tier progress, credits issued, and pending credits."
         />
 
         <section className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           {[
             { label: "Active programs", value: String(programs.filter((p) => p.status === "ACTIVE").length) },
-            { label: "Total savings", value: formatMoney(totalSavings, currency) },
+            { label: "Total credits issued", value: formatMoney(totalCreditsIssued, currency) },
             { label: "Current tier", value: dashboards[programs[0]?.uid]?.currentTierName || "—" },
           ].map((k, i) => (
             <article
@@ -174,11 +174,16 @@ export default function ClientDiscountStatusPage() {
                     )}
                     <div className="pt-2 border-t border-border/50">
                       <p className="text-xs text-ink/60">
-                        Savings to date:{" "}
+                        Credits issued:{" "}
                         <span className="font-semibold text-emerald-700 dark:text-emerald-400">
-                          {formatMoney(dashboard.savingsToDate, program.currency)}
+                          {formatMoney(dashboard.issuedCreditAmount, program.currency)}
                         </span>
                       </p>
+                      {dashboard.pendingCreditAmount > 0 && (
+                        <p className="mt-1 text-xs text-amber-700 dark:text-amber-400">
+                          {formatMoney(dashboard.pendingCreditAmount, program.currency)} in credits pending issuance
+                        </p>
+                      )}
                     </div>
                   </div>
                 )}

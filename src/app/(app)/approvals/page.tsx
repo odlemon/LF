@@ -89,6 +89,9 @@ export default function ApprovalsPage() {
     (user?.roles || []).includes("PARTNER") &&
     !(user?.roles || []).includes("SUPER_ADMIN") &&
     !(user?.roles || []).includes("ADMIN");
+  const isAdmin =
+    (user?.roles || []).includes("SUPER_ADMIN") ||
+    (user?.roles || []).includes("ADMIN");
 
   const filtered = useMemo(() => {
     const term = search.trim().toLowerCase();
@@ -117,13 +120,15 @@ export default function ApprovalsPage() {
     <div className="px-5 py-8 sm:px-8 max-w-[1400px] w-full mx-auto flex flex-col gap-6">
       <div>
         <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/60">
-          {isPartner ? "Your desk" : "Firm queue"}
+          {isPartner ? "Your desk" : isAdmin ? "Firm queue" : "Your review queue"}
         </p>
         <h1 className="mt-1 text-2xl font-bold text-ink tracking-tight">Approvals</h1>
         <p className="text-sm text-ink/60 mt-1 max-w-xl">
           {isPartner
-            ? "Everything assigned to you — pending review, returned for correction, approved, and rejected."
-            : "Firm-wide partner reviews across every status."}
+            ? "Partner reviews assigned to you, including pending and completed decisions."
+            : isAdmin
+              ? "Firm-wide partner reviews across every status."
+              : "Items assigned to you or awaiting a workflow stage you can approve."}
         </p>
       </div>
 
@@ -164,7 +169,7 @@ export default function ApprovalsPage() {
                   <td colSpan={isPartner ? 6 : 7} className="px-6 py-10">
                     <EmptyState
                       title="Nothing here"
-                      description="Assigned scenarios — pending, returned, approved, or rejected — will appear here."
+                      description="Assigned scenarios and work at a stage you can approve will appear here."
                       icon={<HiOutlineClipboardCheck className="w-5 h-5" />}
                     />
                   </td>

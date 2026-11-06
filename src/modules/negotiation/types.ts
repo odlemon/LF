@@ -107,6 +107,7 @@ export interface SendToClientCommand {
   responseDeadline?: string | null;
   portalUserPassword?: string | null;
   portalUserName?: string | null;
+  quoteCurrencyConfirmed?: boolean;
 }
 
 export interface NegotiationAiSuggest {
@@ -153,6 +154,8 @@ export interface EngagementPack {
   firmName?: string | null;
   firmAddress?: string | null;
   governingLaw?: string | null;
+  termsReviewedAt?: string | null;
+  termsReviewedByEmail?: string | null;
   scopeSummary?: string | null;
   currency?: string | null;
   agreedGrossFees?: number | null;

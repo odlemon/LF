@@ -148,10 +148,10 @@ export default function VolumeDiscountsPage() {
               <p className="mt-2 text-2xl font-semibold tabular-nums text-ink">{draftPrograms.length}</p>
             </div>
             <div className="bg-surface border border-border/70 rounded-[2rem] p-5">
-              <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">Total Savings Issued</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60">Total Credits Issued</p>
               <p className="mt-2 text-2xl font-semibold tabular-nums text-ink">
                 {formatMoney(
-                  Object.values(dashboards).reduce((sum, d) => sum + d.savingsToDate, 0),
+                  Object.values(dashboards).reduce((sum, d) => sum + d.issuedCreditAmount, 0),
                   "USD"
                 )}
               </p>
@@ -184,7 +184,7 @@ export default function VolumeDiscountsPage() {
                   <th className="px-6 py-4.5">Status</th>
                   <th className="px-6 py-4.5">Cumulative Spend</th>
                   <th className="px-6 py-4.5">Current Tier</th>
-                  <th className="px-6 py-4.5">Savings</th>
+                  <th className="px-6 py-4.5">Credits Issued</th>
                   <th className="px-6 py-4.5 text-right">Actions</th>
                 </tr>
               </thead>
@@ -231,7 +231,7 @@ export default function VolumeDiscountsPage() {
                           {dashboard?.currentTierName || "—"}
                         </td>
                         <td className="px-6 py-4.5 tabular-nums text-emerald-700 font-medium dark:text-emerald-400">
-                          {dashboard ? formatMoney(dashboard.savingsToDate, program.currency) : "—"}
+                          {dashboard ? formatMoney(dashboard.issuedCreditAmount, program.currency) : "—"}
                         </td>
                         <td className="px-6 py-4.5 text-right">
                           <Button

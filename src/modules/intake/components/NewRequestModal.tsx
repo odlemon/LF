@@ -174,17 +174,22 @@ export function NewRequestModal({ isOpen, onClose, onCreate }: NewRequestModalPr
         />
 
         {offices.length > 0 && (
-          <Select
-            label="Office"
-            value={officeCode}
-            onChange={setOfficeCode}
-            placeholder="Firm default"
-            disabled={isSubmitting || clientsLoading}
-            options={[
-              { value: "", label: "Firm default" },
-              ...offices.map((o) => ({ value: o, label: o })),
-            ]}
-          />
+          <div>
+            <Select
+              label="Office"
+              value={officeCode}
+              onChange={setOfficeCode}
+              placeholder="Firm default"
+              disabled={isSubmitting || clientsLoading}
+              options={[
+                { value: "", label: "Firm default" },
+                ...offices.map((o) => ({ value: o, label: o })),
+              ]}
+            />
+            <p className="mt-1.5 px-1 text-[11px] leading-relaxed text-ink/55">
+              The office selects the rate card and quote currency. The sending step will ask you to confirm that currency with the client.
+            </p>
+          </div>
         )}
 
         <div className="flex justify-end gap-3 pt-2">

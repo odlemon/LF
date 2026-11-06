@@ -66,6 +66,8 @@ export interface VolumeDiscountDashboard {
   nextThreshold?: number;
   nextDiscountPct?: number;
   savingsToDate: number;
+  issuedCreditAmount: number;
+  pendingCreditAmount: number;
   totalSpendRecords: number;
   /** True when spend already qualifies for a tier not yet booked as a TierChangeEvent. */
   tierChangePending: boolean;

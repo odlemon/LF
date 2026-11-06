@@ -184,6 +184,17 @@ export async function generateEngagementPack(
   return res.data;
 }
 
+export async function updateEngagementPackTerms(
+  uid: string,
+  command: { governingLaw: string; firmAddress: string },
+): Promise<import("./types").EngagementPack> {
+  const res = await apiClient.put<import("./types").EngagementPack>(
+    ENDPOINTS.NEGOTIATIONS.ENGAGEMENT_PACK(uid),
+    command,
+  );
+  return res.data;
+}
+
 export async function getEngagementPack(
   uid: string
 ): Promise<import("./types").EngagementPack> {

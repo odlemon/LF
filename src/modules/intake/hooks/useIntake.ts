@@ -258,6 +258,7 @@ export function useScope(
   const [scope, setScope] = useState<MatterScope | null>(initialScope);
   const [isLoading, setIsLoading] = useState(false);
   const [isConfirming, setIsConfirming] = useState(false);
+  const [isResetting, setIsResetting] = useState(false);
 
   useEffect(() => {
     setScope(initialScope);
@@ -425,10 +426,23 @@ export function useScope(
     }
   }, [uid, onRequestUpdate]);
 
+  const resetScope = useCallback(async () => {
+    setIsResetting(true);
+    try {
+      const updated = await intakeApi.resetScope(uid);
+      onRequestUpdate?.(updated);
+      await reloadScope();
+      return updated;
+    } finally {
+      setIsResetting(false);
+    }
+  }, [uid, onRequestUpdate, reloadScope]);
+
   return {
     scope,
     isLoading,
     isConfirming,
+    isResetting,
     updatePhase,
     addPhase,
     deletePhase,
@@ -438,6 +452,7 @@ export function useScope(
     addAssumption,
     deleteAssumption,
     confirmScope,
+    resetScope,
     reloadScope,
     setScope: updateScopeState,
   };
