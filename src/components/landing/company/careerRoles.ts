@@ -50,7 +50,7 @@ export const CAREER_ROLES: CareerRole[] = [
       "Adaptability across technologies and an interest in learning unfamiliar systems quickly.",
     ],
     facts: [
-      { label: "Salary", value: "$110,000 to $125,000 per year" },
+      { label: "Base salary", value: "$110,000 to $125,000 per year, plus bonus" },
       { label: "Equity", value: "0.05% to 0.35%" },
       { label: "Location", value: "Remote and location flexible" },
       {
@@ -63,7 +63,7 @@ export const CAREER_ROLES: CareerRole[] = [
       },
       {
         label: "Work authorization",
-        value: "Lysp does not sponsor visas",
+        value: "Must be authorized to work in the U.S. Lysp does not sponsor visas.",
       },
       { label: "Technology", value: "Java, Postgres, Azure, and LLM systems" },
       { label: "Benefits", value: "Medical coverage and 401(k) benefits" },
@@ -153,7 +153,10 @@ export const CAREER_ROLES: CareerRole[] = [
         label: "Work arrangement",
         value: "Three days each week at customer offices and two days remote",
       },
-      { label: "Work authorization", value: "Lysp does not sponsor visas" },
+      {
+        label: "Work authorization",
+        value: "Must be authorized to work in the U.S. Lysp does not sponsor visas.",
+      },
       { label: "Benefits", value: "Medical coverage and 401(k) benefits" },
     ],
     companyOverview:

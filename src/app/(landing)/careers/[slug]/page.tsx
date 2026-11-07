@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import { HeroNavbar } from "@/components/landing/HeroNavbar";
 import { FooterSection } from "@/components/landing/FooterSection";
@@ -16,10 +16,15 @@ function getRoleShareDescription(role: CareerRole) {
   const location = role.facts?.find((fact) => fact.label === "Location")?.value;
   const inPerson = role.facts?.find((fact) => fact.label === "In person")?.value;
   const workArrangement = role.facts?.find((fact) => fact.label === "Work arrangement")?.value;
+  const hasBonus = /\bplus bonus\b/i.test(baseSalary ?? "");
   const cleanCompensation = (value: string) =>
-    value.replace(/ per year/g, "").replace(", including base and commission", "");
+    value
+      .replace(/ per year/g, "")
+      .replace(/,?\s*plus bonus/i, "")
+      .replace(", including base and commission", "");
   const compensation = [
     baseSalary ? `${cleanCompensation(baseSalary)} base` : null,
+    hasBonus ? "plus bonus" : null,
     onTargetEarnings ? `${cleanCompensation(onTargetEarnings)} OTE` : null,
     salary ? `${cleanCompensation(salary)} salary` : null,
     equity ? `${equity} equity` : null,
@@ -42,15 +47,22 @@ export function generateStaticParams() {
   return CAREER_ROLES.map((role) => ({ slug: role.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: PageProps,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
   const { slug } = await params;
   const role = getCareerRole(slug);
   if (!role) return { title: { absolute: "Role not found | Lysp" } };
 
+  const parentMetadata = await parent;
+  const sharedOpenGraphImages = parentMetadata.openGraph?.images ?? [];
+  const sharedTwitterImages = parentMetadata.twitter?.images?.length
+    ? parentMetadata.twitter.images
+    : sharedOpenGraphImages;
   const shareTitle = `${role.title} at Lysp`;
   const shareDescription = getRoleShareDescription(role);
   const roleUrl = `${SITE_URL}/careers/${role.slug}`;
-  const shareImage = `${SITE_URL}/opengraph-image.png`;
 
   return {
     title: { absolute: shareTitle },
@@ -62,13 +74,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: shareTitle,
       description: shareDescription,
       url: roleUrl,
-      images: [{ url: shareImage, width: 1200, height: 630, alt: `${role.title} at Lysp` }],
+      images: sharedOpenGraphImages,
     },
     twitter: {
       card: "summary_large_image",
       title: shareTitle,
       description: shareDescription,
-      images: [shareImage],
+      images: sharedTwitterImages,
     },
   };
 }
