@@ -76,6 +76,11 @@ const NAV_ITEMS: NavItem[] = [
         href: "/about",
       },
       {
+        label: "Careers",
+        description: "Work on the commercial layer of legal practice",
+        href: "/careers",
+      },
+      {
         label: "Contact",
         description: "Sales, support, and general inquiries",
         href: "/contact",

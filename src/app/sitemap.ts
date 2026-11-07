@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { BLOG_POSTS } from "@/components/landing/company/blogPosts";
+import { CAREER_ROLES } from "@/components/landing/company/careerRoles";
 
 const SITE_URL = process.env.NEXT_PUBLIC_LANDING_URL ?? "https://lysp.ai";
 
@@ -13,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/product`, changeFrequency: "monthly", priority: 0.9 },
     { url: `${SITE_URL}/security`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${SITE_URL}/about`, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE_URL}/careers`, changeFrequency: "monthly", priority: 0.5 },
     { url: `${SITE_URL}/contact`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/roi-calculator`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/blog`, changeFrequency: "weekly", priority: 0.7 },
@@ -25,5 +27,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   }));
 
-  return [...staticRoutes, ...blogRoutes];
+  const careerRoutes: MetadataRoute.Sitemap = CAREER_ROLES.map((role) => ({
+    url: `${SITE_URL}/careers/${role.slug}`,
+    changeFrequency: "monthly",
+    priority: 0.5,
+  }));
+
+  return [...staticRoutes, ...careerRoutes, ...blogRoutes];
 }
