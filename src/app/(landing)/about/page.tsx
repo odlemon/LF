@@ -6,7 +6,7 @@ import { AboutPageContent } from "@/components/landing/company/AboutPageContent"
 export const metadata: Metadata = {
   title: "About | Lysp",
   description:
-    "Lysp builds pricing intelligence for leading law firms: scope, price, propose, negotiate, and measure realization on one platform.",
+    "Lysp is building pricing intelligence for leading law firms: scope, price, propose, negotiate, and measure realization on one platform.",
 };
 
 export default function AboutPage() {

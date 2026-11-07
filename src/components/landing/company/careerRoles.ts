@@ -19,50 +19,6 @@ export type CareerRole = {
 
 export const CAREER_ROLES: CareerRole[] = [
   {
-    slug: "founding-account-executive",
-    title: "Founding Account Executive",
-    team: "Go to market",
-    employmentType: "Full time",
-    summary:
-      "Build Lysp's first repeatable sales motion and help leading law firms improve how they scope, price, and negotiate legal work.",
-    overview:
-      "You will work directly with firm leaders, pricing teams, and partners to understand how they run commercial decisions today. You will shape our go to market approach while owning conversations from first discovery through close.",
-    applicationQuestion:
-      "Tell us about a deal you personally sourced or closed. What was the customer, what was the deal size, and what did you do to move it forward?",
-    applicationPlaceholder:
-      "Share a specific example, your role in the sale, and the outcome.",
-    responsibilities: [
-      "Build relationships with law firm leaders and turn early conversations into qualified opportunities.",
-      "Lead thoughtful discovery and product demonstrations with partners, pricing teams, and finance leaders.",
-      "Own the sales process from first meeting through proposal, negotiation, and close.",
-      "Develop the messaging, pipeline habits, and feedback loops that shape Lysp's early go to market motion.",
-    ],
-    qualifications: [
-      "Experience owning B2B software sales from discovery to close.",
-      "A record of building trust with senior buyers and managing considered sales cycles.",
-      "Clear communication and strong follow through across a growing pipeline.",
-      "Curiosity about legal services, professional services, pricing, or workflow software.",
-    ],
-    interviewProcess: [
-      {
-        title: "Conversation with a founder",
-        description: "A first conversation to get to know each other and discuss the role and Lysp.",
-      },
-      {
-        title: "Sales experience discussion",
-        description: "Talk through your sales approach, pipeline, customer relationships, and examples of deals you have owned.",
-      },
-      {
-        title: "Customer conversation exercise",
-        description: "Work through a short discovery and product conversation based on a law firm's pricing needs.",
-      },
-      {
-        title: "Final conversation",
-        description: "Meet with the team to discuss expectations, working style, and next steps.",
-      },
-    ],
-  },
-  {
     slug: "founding-engineer",
     title: "Founding Engineer",
     team: "Product and Engineering",
@@ -113,7 +69,7 @@ export const CAREER_ROLES: CareerRole[] = [
       { label: "Benefits", value: "Medical coverage and 401(k) benefits" },
     ],
     companyOverview:
-      "Lysp builds legal pricing intelligence software for law firms. The platform helps teams scope legal work, price matters, approve fees, negotiate with clients, and understand financial outcomes. More than 15 law firms across the US and UK trust Lysp, including:",
+      "Lysp is building legal pricing intelligence software for law firms. The platform helps teams scope legal work, price matters, approve fees, negotiate with clients, and understand financial outcomes. More than 15 law firms across the US and UK trust Lysp, including:",
     customers: [
       "Reed Smith",
       "Dentons",
@@ -201,7 +157,7 @@ export const CAREER_ROLES: CareerRole[] = [
       { label: "Benefits", value: "Medical coverage and 401(k) benefits" },
     ],
     companyOverview:
-      "Lysp builds legal pricing intelligence software for law firms. The platform helps teams scope legal work, price matters, approve fees, negotiate with clients, and understand financial outcomes. More than 15 law firms across the US and UK trust Lysp, including:",
+      "Lysp is building legal pricing intelligence software for law firms. The platform helps teams scope legal work, price matters, approve fees, negotiate with clients, and understand financial outcomes. More than 15 law firms across the US and UK trust Lysp, including:",
     customers: [
       "Reed Smith",
       "Dentons",
