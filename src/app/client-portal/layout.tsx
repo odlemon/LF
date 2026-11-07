@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { Quicksand } from "next/font/google";
 import { ClientAuthProvider } from "@/context/ClientAuthContext";
+import { quicksand } from "@/lib/fonts";
 import { ThemeProvider, platformRootClass, useTheme, PLATFORM_THEME_VARS } from "@/context/ThemeContext";
 import { useClientAuth } from "@/hooks/useClientAuth";
 import { ClientSidebar } from "@/components/layout/ClientSidebar";
@@ -11,11 +11,6 @@ import { AppToaster } from "@/components/ui/AppToaster";
 import { ClientPortalTopBar } from "@/modules/client-portal/components/ClientPortalTopBar";
 import { MustChangePasswordBanner } from "@/modules/client-portal/components/MustChangePasswordBanner";
 import { ConnectionBanner } from "@/components/layout/ConnectionBanner";
-
-const quicksand = Quicksand({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
 
 function ClientShell({ children }: { children: React.ReactNode }) {
   const { theme } = useTheme();

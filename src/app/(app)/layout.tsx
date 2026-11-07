@@ -2,19 +2,14 @@
 
 import React, { useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { Quicksand } from "next/font/google";
 import { AuthProvider } from "@/context/AuthContext";
+import { quicksand } from "@/lib/fonts";
 import { ThemeProvider, platformRootClass, useTheme, PLATFORM_THEME_VARS } from "@/context/ThemeContext";
 import { useAuth } from "@/hooks/useAuth";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Navbar } from "@/components/layout/Navbar";
 import { AppToaster } from "@/components/ui/AppToaster";
 import { ConnectionBanner } from "@/components/layout/ConnectionBanner";
-
-const quicksand = Quicksand({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
 
 function FirmShell({ children }: { children: React.ReactNode }) {
   const { theme } = useTheme();

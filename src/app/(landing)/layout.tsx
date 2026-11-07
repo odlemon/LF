@@ -1,13 +1,8 @@
 import type { Metadata } from "next";
-import { Quicksand } from "next/font/google";
 import { preload } from "react-dom";
 import { BookDemoProvider } from "@/components/landing/BookDemoModal";
+import { quicksand } from "@/lib/fonts";
 import "../globals.css";
-
-const quicksand = Quicksand({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
 
 const SITE_URL = process.env.NEXT_PUBLIC_LANDING_URL ?? "https://lysp.ai";
 

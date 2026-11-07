@@ -1,11 +1,6 @@
 import type { Metadata } from "next";
-import { Quicksand } from "next/font/google";
 import { preload } from "react-dom";
-
-const quicksand = Quicksand({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
+import { quicksand } from "@/lib/fonts";
 
 export const metadata: Metadata = {
   // The root layout applies a "%s | Lysp" template, so naming the product here too
