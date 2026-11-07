@@ -8,9 +8,12 @@ import type { CareerRole } from "@/components/landing/company/careerRoles";
 import { MARKETING_SHELL, PageHeroHeader } from "@/components/landing/editorial";
 
 const MAX_RESUME_BYTES = 10 * 1024 * 1024;
+const MIN_RESPONSE_LENGTH = 100;
+const MAX_RESPONSE_LENGTH = 4000;
 
 export function CareerApplicationForm({ role }: { role: CareerRole }) {
   const [resumeName, setResumeName] = useState("");
+  const [responseText, setResponseText] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [uploadProgress, setUploadProgress] = useState<number | null>(null);
@@ -38,14 +41,21 @@ export function CareerApplicationForm({ role }: { role: CareerRole }) {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError("");
+    const form = event.currentTarget;
+    const answer = String(new FormData(form).get("response") ?? "").trim();
+    if (answer.length < MIN_RESPONSE_LENGTH) {
+      setError(`Please provide at least ${MIN_RESPONSE_LENGTH} characters about your experience.`);
+      return;
+    }
     setIsSubmitting(true);
     setUploadProgress(0);
-    const form = event.currentTarget;
 
     try {
       const formData = new FormData(form);
       formData.set("role", role.slug);
+      formData.set("response", answer);
       await apiClient.post("/api/v1/careers/applications", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
         onUploadProgress: (event) => {
           setUploadProgress(
             event.total ? Math.min(100, Math.round((event.loaded * 100) / event.total)) : null
@@ -55,6 +65,7 @@ export function CareerApplicationForm({ role }: { role: CareerRole }) {
       setSubmitted(true);
       form.reset();
       setResumeName("");
+      setResponseText("");
     } catch (submitError) {
       const apiMessage = (submitError as {
         response?: { data?: { message?: string } };
@@ -123,14 +134,23 @@ export function CareerApplicationForm({ role }: { role: CareerRole }) {
                   </span>
                   <textarea
                     required
-                    minLength={10}
-                    maxLength={4000}
+                    minLength={MIN_RESPONSE_LENGTH}
+                    maxLength={MAX_RESPONSE_LENGTH}
                     name="response"
                     rows={6}
+                    value={responseText}
+                    aria-describedby="application-response-help"
+                    aria-invalid={responseText.trim().length > 0 && responseText.trim().length < MIN_RESPONSE_LENGTH}
+                    onChange={(event) => {
+                      setResponseText(event.target.value);
+                      setError("");
+                    }}
                     className="mt-3 w-full resize-y rounded-xl border border-black/15 bg-transparent px-4 py-3 text-[15px] leading-relaxed outline-none transition-colors focus-visible:border-[#0a0a0a] focus-visible:ring-4 focus-visible:ring-[#0a0a0a]/10"
                     placeholder={role.applicationPlaceholder}
                   />
-                  <span className="mt-2 block text-[12px] text-[#0a0a0a]/45">Required. Up to 4,000 characters.</span>
+                  <span id="application-response-help" className="mt-2 block text-[12px] text-[#0a0a0a]/55" aria-live="polite">
+                    At least {MIN_RESPONSE_LENGTH} characters required. {responseText.length}/{MAX_RESPONSE_LENGTH} characters.
+                  </span>
                 </label>
 
                 <div>
