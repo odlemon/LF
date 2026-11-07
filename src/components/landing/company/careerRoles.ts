@@ -142,24 +142,16 @@ export const CAREER_ROLES: CareerRole[] = [
     ],
     interviewProcess: [
       {
-        title: "Conversation with a founder",
+        title: "Conversation with one of the co-founders (30 minutes)",
         description: "Get to know each other, discuss what you want to build, and learn about Lysp and the role.",
       },
       {
-        title: "Systems design and cloud architecture",
-        description: "Discuss backend design, Azure architecture, infrastructure, reliability, security, and product tradeoffs.",
+        title: "Technical session (2 hours)",
+        description: "A combined discussion and working session covering systems design, Azure and cloud architecture, product design, LLM orchestration and memory, and a practical debugging scenario.",
       },
       {
-        title: "AI product design discussion",
-        description: "Explore how you would design and implement an LLM workflow, including agent orchestration, memory, tool use, and evaluation.",
-      },
-      {
-        title: "Debugging session",
-        description: "Work through a realistic service issue and explain how you investigate, communicate, and resolve it.",
-      },
-      {
-        title: "Paid work task",
-        description: "Complete a small, clearly scoped feature implementation or debugging task. Lysp will pay you for this work.",
+        title: "Paid practical task (a few hours, with up to 24 hours to complete)",
+        description: "Complete a small, clearly scoped feature or debugging task. We will agree the scope and timing with you in advance, and Lysp will pay you for the work.",
       },
     ],
   },
