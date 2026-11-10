@@ -17,7 +17,9 @@ export type CareerRole = {
   interviewProcess?: { title: string; description: string }[];
 };
 
-export const CAREER_ROLES: CareerRole[] = [
+export const CAREER_ROLES: CareerRole[] = [];
+/*
+export const ARCHIVED_CAREER_ROLES: CareerRole[] = [
   {
     slug: "founding-engineer",
     title: "Founding Engineer",
@@ -205,6 +207,7 @@ export const CAREER_ROLES: CareerRole[] = [
     ],
   },
 ];
+*/
 
 export function getCareerRole(slug: string) {
   return CAREER_ROLES.find((role) => role.slug === slug);

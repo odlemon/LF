@@ -159,7 +159,9 @@ export function CareersPageContent() {
             />
             </div>
             <p className="text-[12px] font-semibold uppercase tracking-[0.18em] text-[#0a0a0a]/45 lg:col-span-5 lg:justify-self-end lg:pb-2">
-              2 roles open
+              {CAREER_ROLES.length === 0
+                ? "No open roles at this time"
+                : `${CAREER_ROLES.length} roles open`}
             </p>
           </div>
           <div className="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-2">
